@@ -236,10 +236,10 @@ constructor must run these steps:
 
 <h4 id="urlutils-members"><span class="secno">4.3.2 </span><a href="#urlutils"><code>URLUtils</code></a> members</h4>
 
-<p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code> attribute must run these
-steps:
+<p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code></dfn> attribute must run
+these steps:
 
-</dfn><ol>
+<ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return
  <a href="#concept-url-input" title="concept-url-input">input</a>.
 
@@ -285,11 +285,11 @@ run these steps:
 
 <p class="XXX">origin
 
-<p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code> attribute must
-return <span title="concept-url-scheme">scheme</span> and
+<p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
+must return <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
 "<code title="">:</code>" concatenated.
 
-</dfn><p class="note">In case the <a href="#invalid-flag">invalid flag</a> is set this will cause
+<p class="note">In case the <a href="#invalid-flag">invalid flag</a> is set this will cause
 it to return "<code title="">:</code>".
 
 <p>Setting the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute must
@@ -303,10 +303,10 @@ run these steps:
  <b title="">scheme start</b> as <i title="">override</i>.
 </ol>
 
-<p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code> attribute must run these
-steps:
+<p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
+these steps:
 
-</dfn><ol>
+<ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
 
  <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
@@ -328,10 +328,10 @@ steps:
  <i title="">input</i> and <b title="">host</b> as <i title="">override</i>.
 </ol>
 
-<p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code> attribute must
-return <span title="concept-url-host">host</span>.
+<p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
+must return <span title="concept-url-host">host</span>.
 
-</dfn><p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
+<p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
 run these steps:
 
 <ol>
@@ -342,10 +342,10 @@ run these steps:
  <i title="">input</i> and <b title="">hostname</b> as <i title="">override</i>.
 </ol>
 
-<p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code> attribute must return
-<span title="concept-url-port">port</span>.
+<p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must return
+<a href="#concept-url-port" title="concept-url-port">port</a>.
 
-</dfn><p>Setting the <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute must run these
+<p>Setting the <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute must run these
 steps:
 
 <ol>
@@ -358,10 +358,10 @@ steps:
 
 <p class="XXX">pathname
 
-<p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code> attribute must run
-these steps:
+<p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
+run these steps:
 
-</dfn><ol>
+<ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
  <span title="concept-url-query">query</span> is either the empty string or
  "<code title="">?</code>", return the empty string.
@@ -384,10 +384,10 @@ these steps:
  <i title="">override</i>.
 </ol>
 
-<p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code> attribute must run
+<p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute must run
 these steps:
 
-</dfn><ol>
+<ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
  <span title="concept-url-fragment">fragment</span> is either the empty string
  or "<code title="">#</code>", return the empty string.
