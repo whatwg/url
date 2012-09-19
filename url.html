@@ -79,7 +79,10 @@ not appear in all uppercase letters in this specification.
 
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
-<p class="XXX">
+<p>The <dfn id="space-character" title="space character">space characters</dfn>, for the
+purposes of this specification, are U+0020 SPACE, U+0009 CHARACTER
+TABULATION (tab), U+000A LINE FEED (LF), U+000C FORM FEED (FF), and
+U+000D CARRIAGE RETURN (CR).
 
 
 
@@ -97,12 +100,12 @@ not appear in all uppercase letters in this specification.
 <p>A <dfn id="concept-url" title="concept-url">URL</dfn> identifies a resource. It consists of
 the following components:
 <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn>,
-<dfn id="userinfo">userinfo</dfn>,
-<dfn id="host">host</dfn>,
+<dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn>,
+<dfn id="concept-url-host" title="concept-url-host">host</dfn>,
 <dfn id="concept-url-port" title="concept-url-port">port</dfn>,
-<dfn id="path">path</dfn>,
-<dfn id="query">query</dfn>, and
-<dfn id="fragment">fragment</dfn>.
+<dfn id="concept-url-path" title="concept-url-path">path</dfn>,
+<dfn id="concept-url-query" title="concept-url-query">query</dfn>, and
+<dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn>.
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
 <dfn id="invalid-flag">invalid flag</dfn>, <dfn id="hierarchical-flag">hierarchical flag</dfn>,
@@ -149,7 +152,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <a href="#concept-url" title="concept-url">URL</a>.
 
  <li><p>If <i title="">encoding</i> is not set, set it to
- <a href="http://encoding.spec.whatwg.org/#utf-8"><code class="external" data-anolis-spec="encoding">utf-8</code></a>.
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Set <var title="">url</var>'s
  <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> to
@@ -253,11 +256,11 @@ these steps:
   <ol>
    <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
 
-   <li><p>If <span title="concept-url-userinfo">userinfo</span> is not the
-   empty string, append <span title="concept-url-userinfo">userinfo</span> and
+   <li><p>If <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> is not the
+   empty string, append <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> and
    "<code title="">@</code>" concatenated to <var title="">output</var>.
 
-   <li><p>Append <span title="concept-url-host">host</span> to
+   <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a> to
    <var title="">output</var>.
 
    <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is not
@@ -268,8 +271,8 @@ these steps:
 
  <li><p class="XXX">path
 
- <li><p>Append <span title="concept-url-query">query</span> and
- <span title="concept-url-fragment">fragment</span> concatenated to
+ <li><p>Append <a href="#concept-url-query" title="concept-url-query">query</a> and
+ <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> concatenated to
  <var title="">output</var>, and then return <var title="">output</var>.
 </ol>
 
@@ -310,9 +313,9 @@ these steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
 
  <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
- return <span title="concept-url-host">host</span>.
+ return <a href="#concept-url-host" title="concept-url-host">host</a>.
 
- <li><p>Return <span title="concept-url-host">host</span>,
+ <li><p>Return <a href="#concept-url-host" title="concept-url-host">host</a>,
  "<code title="">:</code>", and <a href="#concept-url-port" title="concept-url-port">port</a>
  concatenated.
 </ol>
@@ -329,7 +332,7 @@ steps:
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
-must return <span title="concept-url-host">host</span>.
+must return <a href="#concept-url-host" title="concept-url-host">host</a>.
 
 <p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
 run these steps:
@@ -363,10 +366,10 @@ run these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
- <span title="concept-url-query">query</span> is either the empty string or
+ <a href="#concept-url-query" title="concept-url-query">query</a> is either the empty string or
  "<code title="">?</code>", return the empty string.
 
- <li><p>Return <span title="concept-url-query">query</span>.
+ <li><p>Return <a href="#concept-url-query" title="concept-url-query">query</a>.
 </ol>
 
 <p>Setting the <a href="#dom-url-search"><code title="dom-URL-search">search</code></a> attribute must run
@@ -389,10 +392,10 @@ these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
- <span title="concept-url-fragment">fragment</span> is either the empty string
+ <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is either the empty string
  or "<code title="">#</code>", return the empty string.
 
- <li><p>Return <span title="concept-url-fragment">fragment</span>.
+ <li><p>Return <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 </ol>
 
 <p>Setting the <a href="#dom-url-hash"><code title="dom-URL-hash">hash</code></a> attribute must run these
@@ -419,3 +422,6 @@ steps:
 </dl></div>
 
 
+
+
+<script id="head" src="http://www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
