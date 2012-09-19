@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
+<title>URL Standard</title>
+<link href="//www.whatwg.org/style/specification" rel="stylesheet">
+<link href="//www.whatwg.org/images/icon" rel="icon">
+
+<div class="head">
+
+<h1>URL</h1>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-september-2012">Living Standard — Last Updated 19 September 2012</h2>
+
+<dl>
+ <dt>This Version:
+ <dd><a href="//url.spec.whatwg.org/">http://url.spec.whatwg.org/</a>
+
+ <dt>Participate:</dt>
+ <dd>Send feedback to
+  <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
+  <!--(<a href=XXX>archives</a>)--> or
+  <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WebAppsWG&amp;component=URL">file a bug</a>
+  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WebAppsWG&amp;component=URL&amp;resolution=---">open bugs</a>)
+ <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+
+ <dt>Version History:
+ <dd><a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a></dd>
+
+ <dt>Editor:
+ <dd class="h-card vcard"><a class="u-url url p-name fn" href="http://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+  &lt;<a class="u-email email " href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
+</dl>
+
+<script async="" src="//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js"></script>
+
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+To the extent possible under law, the editors have waived all copyright and
+related or neighboring rights to this work. In addition, as of
+19 September 2012, the editors have made this specification available
+under the
+<a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
+which is available at
+http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
+
+</div>
+
+
+
+<h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
+
+<!--begin-toc-->
+<ol class="toc">
+ <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
+ <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
+ <li><a href="#host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</a></li>
+ <li><a href="#urls"><span class="secno">4 </span>URLs</a>
+  <ol>
+   <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
+   <li><a href="#creating"><span class="secno">4.2 </span>Creating</a></li>
+   <li><a href="#api"><span class="secno">4.3 </span>API</a>
+    <ol>
+     <li><a href="#constructor"><span class="secno">4.3.1 </span>Constructor</a></li>
+     <li><a href="#urlutils-members"><span class="secno">4.3.2 </span><code>URLUtils</code> members</a></ol></ol></li>
+ <li><a class="no-num" href="#references">References</a></ol>
+<!--end-toc-->
+
+
+
+<h2 id="conformance"><span class="secno">1 </span>Conformance</h2>
+<p>All diagrams, examples, and notes in this specification are
+non-normative, as are all sections explicitly marked non-normative.
+Everything else in this specification is normative.
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+"OPTIONAL" in the normative parts of this specification are to be
+interpreted as described in RFC2119. For readability, these words do
+not appear in all uppercase letters in this specification.
+<a href="#refsRFC2119">[RFC2119]</a>
+
+
+
+<h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
+
+<p class="XXX">
+
+
+
+<h2 id="host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</h2>
+
+<ul class="XXX">
+ <li>Normalize IPv6 addresses
+ <li>IDNA2003 vs IDNA2008 (and also UTS #46)
+</ul>
+
+
+
+<h2 id="urls"><span class="secno">4 </span>URLs</h2>
+
+<p>A <dfn id="concept-url" title="concept-url">URL</dfn> identifies a resource. It consists of
+the following components:
+<dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn>,
+<dfn id="userinfo">userinfo</dfn>,
+<dfn id="host">host</dfn>,
+<dfn id="concept-url-port" title="concept-url-port">port</dfn>,
+<dfn id="path">path</dfn>,
+<dfn id="query">query</dfn>, and
+<dfn id="fragment">fragment</dfn>.
+
+<p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
+<dfn id="invalid-flag">invalid flag</dfn>, <dfn id="hierarchical-flag">hierarchical flag</dfn>,
+<dfn id="concept-url-input" title="concept-url-input">input</dfn>,
+<dfn id="concept-url-base" title="concept-url-base">base URL</dfn>,
+and <dfn id="concept-url-query-encoding" title="concept-url-query-encoding">query encoding</dfn>.
+
+
+<p>An <dfn id="hierarchical-scheme">hierarchical scheme</dfn> is a
+<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> listed in the first column of
+the following table. It has an associated default
+<a href="#concept-url-port" title="concept-url-port">port</a> listed in the second column on the
+same row.
+
+<table>
+ <tr><th><a href="#concept-url-scheme" title="concept-url-scheme">Scheme</a>
+     <th><a href="#concept-url-port" title="concept-url-port">Port</a>
+ <tr><td>"<code title="">ftp</code>"<td>21
+ <tr><td>"<code title="">gopher</code><td>70
+ <tr><td>"<code title="">http</code>"<td>80
+ <tr><td>"<code title="">https</code>"<td>443
+ <tr><td>"<code title="">ws</code>"<td>80
+ <tr><td>"<code title="">wss</code>"<td>443
+</table>
+
+
+
+<h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
+
+<p class="XXX">
+
+
+
+<h3 id="creating"><span class="secno">4.2 </span>Creating</h3>
+
+<p>To <dfn id="concept-url-create" title="concept-url-create">create</dfn> a
+<a href="#concept-url" title="concept-url">URL</a> from a string <i title="">input</i>,
+optionally with a <a href="#concept-url" title="concept-url">URL</a> <i title="">base</i>
+and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<i title="">encoding</i>, run these steps:
+
+<ol>
+ <li><p>Let <var title="">url</var> be a new
+ <a href="#concept-url" title="concept-url">URL</a>.
+
+ <li><p>If <i title="">encoding</i> is not set, set it to
+ <a href="http://encoding.spec.whatwg.org/#utf-8"><code class="external" data-anolis-spec="encoding">utf-8</code></a>.
+
+ <li><p>Set <var title="">url</var>'s
+ <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> to
+ <i title="">encoding</i>.
+
+ <li><p>If <i title="">base</i> is not set, set it to null.
+
+ <li><p>Set <var title="">url</var>'s
+ <a href="#concept-url-base" title="concept-url-base">base URL</a> to <i title="">base</i>.
+
+ <li><p>Set <var title="">url</var>'s
+ <a href="#concept-url-input" title="concept-url-input">input</a> to <var title="">input</var>.
+
+ <li><p>Remove any leading and trailing <span>space characters</span> from
+ <var title="">input</var>.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">input</var>.
+
+ <li><p>Return <var title="">url</var>.
+</ol>
+
+<p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
+<a href="#concept-url-parse" title="concept-url-parse">parse</a> algorithm. To
+<dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <i title="">input</i>,
+optionally with an override state <i title="">override</i>, run these steps:
+
+<ol class="XXX">
+
+</ol>
+
+
+
+<h3 id="api"><span class="secno">4.3 </span>API</h3>
+
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional DOMString <var title="">baseUrl</var>)]
+interface <dfn id="url">URL</dfn> {
+
+};
+<a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
+
+[NoInterfaceObject]
+interface <dfn id="urlutils">URLUtils</dfn> {
+  stringifier attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  readonly attribute DOMString <span title="dom-URL-origin">origin</span>;
+
+           attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
+           attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+           attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+           attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+           attribute DOMString <span title="dom-URL-pathname">pathname</span>;
+           attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
+           attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+}</pre>
+
+<p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
+<a href="#concept-url" title="concept-url">URL</a>. Thus <a href="#url"><code>URL</code></a> represents a
+<a href="#concept-url" title="concept-url">URL</a>.
+
+<p class="note">The <a href="#url"><code>URL</code></a> object and
+<a href="#concept-url" title="concept-url">URL</a> share the same name because nothing else
+makes much sense and when it comes down to it almost nobody cares.
+
+
+<h4 id="constructor"><span class="secno">4.3.1 </span>Constructor</h4>
+
+<p>The
+<dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var> [, <var title="">baseUrl</var>])</code></dfn>
+constructor must run these steps:
+
+<ol>
+ <li><p>Let <var title="">base</var> be null.
+
+ <li><p>If <var title="">baseUrl</var> is not omitted,
+ <a href="#concept-url-create" title="concept-url-create">create</a> a
+ <a href="#concept-url" title="concept-url">URL</a> from <var title="">baseUrl</var> and set
+ <var title="">base</var> to the result of that algorithm.
+
+ <li><p><a href="#concept-url-create" title="concept-url-create">Create</a> a
+ <a href="#concept-url" title="concept-url">URL</a> from <var title="">url</var> with
+ <var title="">base</var> as <i title="">base</i>, associate it with a new
+ <a href="#url"><code>URL</code></a> object, and then return that <a href="#url"><code>URL</code></a> object.
+</ol>
+
+
+<h4 id="urlutils-members"><span class="secno">4.3.2 </span><a href="#urlutils"><code>URLUtils</code></a> members</h4>
+
+<p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code> attribute must run these
+steps:
+
+</dfn><ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return
+ <a href="#concept-url-input" title="concept-url-input">input</a>.
+
+ <li><p>Let <var title="">output</var> be
+ <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and "<code title="">:</code>"
+ concatenated.
+
+ <li>
+  <p>If the <a href="#hierarchical-flag">hierarchical flag</a> is set:
+
+  <ol>
+   <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
+
+   <li><p>If <span title="concept-url-userinfo">userinfo</span> is not the
+   empty string, append <span title="concept-url-userinfo">userinfo</span> and
+   "<code title="">@</code>" concatenated to <var title="">output</var>.
+
+   <li><p>Append <span title="concept-url-host">host</span> to
+   <var title="">output</var>.
+
+   <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is not
+   the empty string, append "<code title="">:</code>" and
+   <a href="#concept-url-port" title="concept-url-port">port</a> concatenated to
+   <var title="">output</var>.
+  </ol>
+
+ <li><p class="XXX">path
+
+ <li><p>Append <span title="concept-url-query">query</span> and
+ <span title="concept-url-fragment">fragment</span> concatenated to
+ <var title="">output</var>, and then return <var title="">output</var>.
+</ol>
+
+<p>Setting the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p class="XXX">clear
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
+ <i title="">input</i>
+</ol>
+
+<p class="XXX">origin
+
+<p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code> attribute must
+return <span title="concept-url-scheme">scheme</span> and
+"<code title="">:</code>" concatenated.
+
+</dfn><p class="note">In case the <a href="#invalid-flag">invalid flag</a> is set this will cause
+it to return "<code title="">:</code>".
+
+<p>Setting the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, terminate these steps.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value and
+ "<code title="">:</code>" concatenated as <i title="">input</i> and
+ <b title="">scheme start</b> as <i title="">override</i>.
+</ol>
+
+<p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code> attribute must run these
+steps:
+
+</dfn><ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
+
+ <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
+ return <span title="concept-url-host">host</span>.
+
+ <li><p>Return <span title="concept-url-host">host</span>,
+ "<code title="">:</code>", and <a href="#concept-url-port" title="concept-url-port">port</a>
+ concatenated.
+</ol>
+
+<p>Setting the <a href="#dom-url-host"><code title="dom-URL-host">host</code></a> attribute must run these
+steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
+ <i title="">input</i> and <b title="">host</b> as <i title="">override</i>.
+</ol>
+
+<p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code> attribute must
+return <span title="concept-url-host">host</span>.
+
+</dfn><p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
+ <i title="">input</i> and <b title="">hostname</b> as <i title="">override</i>.
+</ol>
+
+<p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code> attribute must return
+<span title="concept-url-port">port</span>.
+
+</dfn><p>Setting the <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute must run these
+steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
+ <i title="">input</i> and <b title="">port</b> as <i title="">override</i>.
+</ol>
+
+<p class="XXX">pathname
+
+<p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code> attribute must run
+these steps:
+
+</dfn><ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
+ <span title="concept-url-query">query</span> is either the empty string or
+ "<code title="">?</code>", return the empty string.
+
+ <li><p>Return <span title="concept-url-query">query</span>.
+</ol>
+
+<p>Setting the <a href="#dom-url-search"><code title="dom-URL-search">search</code></a> attribute must run
+these steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+
+ <li><p>Let <var title="">input</var> be the given value with a single leading
+ "<code title="">?</code>" removed, if any.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with
+ <var title="">input</var> as <i title="">input</i> and <b title="">query</b> as
+ <i title="">override</i>.
+</ol>
+
+<p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code> attribute must run
+these steps:
+
+</dfn><ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
+ <span title="concept-url-fragment">fragment</span> is either the empty string
+ or "<code title="">#</code>", return the empty string.
+
+ <li><p>Return <span title="concept-url-fragment">fragment</span>.
+</ol>
+
+<p>Setting the <a href="#dom-url-hash"><code title="dom-URL-hash">hash</code></a> attribute must run these
+steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+
+ <li><p>Let <var title="">input</var> be the given value with a single leading
+ "<code title="">#</code>" removed, if any.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with
+ <var title="">input</var> as <i title="">input</i> and <b title="">fragment</b> as
+ <i title="">override</i>.
+</ol>
+
+
+
+<h2 class="no-num" id="references">References</h2>
+<div id="anolis-references"><dl><dt id="refsRFC2119">[RFC2119]
+<dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
+
+</dl></div>
+
+
