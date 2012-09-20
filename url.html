@@ -117,6 +117,60 @@ the following components:
 <dfn id="concept-url-base" title="concept-url-base">base URL</dfn>,
 and <dfn id="concept-url-query-encoding" title="concept-url-query-encoding">query encoding</dfn>.
 
+<p>To make a code point <var title="">c</var> <dfn id="percent-escaped">percent escaped</dfn>, run
+these steps:
+
+<ol>
+ <li><p>If <var title="">c</var> is greater than U+0020 and less than U+007F,
+ and is not one of '<code title="">"</code>', "<code title="">#</code>",
+ "<code title="">&lt;</code>", "<code title="">&gt;</code>", "<code title="">?</code>",
+ and "<code title="">`</code>", return <var title="">c</var>.
+
+ <li><p>If <var title="">c</var> is in the range U+D800 through to U+DFFF, set
+ <var title="">c</var> to U+FFFD.
+
+ <li><p>Let <var title="">bytes</var> be the result of running
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on <var title="">c</var> using
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as encoding.
+
+ <li><p>Replace each byte in <var title="">bytes</var> with a string consisting
+ of "<code title="">%</code>" followed by a double-digit, uppercase,
+ hexadecimal representation of byte, and then return them concatenated, in
+ the same order.
+</ol>
+
+<p>To make a code point <var title="">c</var> <dfn id="query-percent-escaped">query percent escaped</dfn>,
+run these steps:
+
+<ol>
+ <li><p>If <var title="">c</var> is greater than U+0020 and less than U+007F,
+ and is not one of '<code title="">"</code>', "<code title="">#</code>",
+ "<code title="">&lt;</code>", "<code title="">&gt;</code>", and
+ "<code title="">`</code>", return <var title="">c</var>.
+
+ <li><p>If <var title="">c</var> is in the range U+D800 through to U+DFFF, set
+ <var title="">c</var> to U+FFFD.
+
+ <li>
+  <p>Let <var title="">bytes</var> be the result of running
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on <var title="">c</var> using
+  <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> as encoding.
+
+  <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
+  emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
+  0x3F byte instead and do not terminate the algorithm.
+
+ <li><p>Replace each byte in <var title="">bytes</var> with a string consisting
+ of "<code title="">%</code>" followed by a double-digit, uppercase,
+ hexadecimal representation of byte, and then return them concatenated, in
+ the same order.
+</ol>
+
+<p class="note">Compared to <a href="#percent-escaped">percent escaped</a> this algorithm does
+not escape "<code title="">?</code>" and takes the
+<a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> into account.
+
+
 
 <p>An <dfn id="hierarchical-scheme">hierarchical scheme</dfn> is a
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> listed in the first column of
@@ -366,7 +420,7 @@ steps:
        <li><p>Set the <var title="">@ flag</var>.
 
        <li><p>Append each code point in <var title="">buffer</var>,
-       <span>percent escaped</span>, to
+       <a href="#percent-escaped">percent escaped</a>, to
        <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>
 
        <li><p>Set <var title="">buffer</var> to the empty string.
@@ -460,7 +514,7 @@ steps:
 
      <li><p>Otherwise, if <var title="">c</var> is not the
      <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var>,
-     <span>percent escaped</span>, to the only string in
+     <a href="#percent-escaped">percent escaped</a>, to the only string in
      <a href="#concept-url-path" title="concept-url-path">path</a>.
     </ol>
 
@@ -512,7 +566,7 @@ steps:
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title="">c</var>, <span>percent escaped</span>, to
+     U+000D, append <var title="">c</var>, <a href="#percent-escaped">percent escaped</a>, to
      <var title="">buffer</var>.
     </ol>
 
@@ -525,13 +579,13 @@ steps:
      "<code title="">#</code>", and state to <b title="">fragment</b>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title="">c</var>, <span>query percent escaped</span>,
+     U+000D, append <var title="">c</var>, <a href="#query-percent-escaped">query percent escaped</a>,
      to <a href="#concept-url-query" title="concept-url-query">query</a>.
     </ol>
 
    <dt><b title="">fragment</b>
    <dd><p>If <var title="">c</var> is none of U+0009, U+000A, and U+000D,
-   append <var title="">c</var>, <span>percent escaped</span>, to
+   append <var title="">c</var>, <a href="#percent-escaped">percent escaped</a>, to
    <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
   </dl>
 </ol>
@@ -651,6 +705,7 @@ the <a href="#concept-url" title="concept-url">URL</a>'s
 
 <p class="note">It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature.
+<a class="informative" href="#refsHTML">[HTML]</a>
 
 <p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
 must return <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
@@ -784,7 +839,10 @@ otherwise.
 
 
 <h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsORIGIN">[ORIGIN]
+<div id="anolis-references"><dl><dt id="refsHTML">[HTML]
+<dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
+
+<dt id="refsORIGIN">[ORIGIN]
 <dd><cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.
 
 <dt id="refsRFC2119">[RFC2119]

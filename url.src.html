@@ -104,6 +104,60 @@ the following components:
 <dfn title=concept-url-base>base URL</dfn>,
 and <dfn title=concept-url-query-encoding>query encoding</dfn>.
 
+<p>To make a code point <var title>c</var> <dfn>percent escaped</dfn>, run
+these steps:
+
+<ol>
+ <li><p>If <var title>c</var> is greater than U+0020 and less than U+007F,
+ and is not one of '<code title>"</code>', "<code title>#</code>",
+ "<code title>&lt;</code>", "<code title>></code>", "<code title>?</code>",
+ and "<code title>`</code>", return <var title>c</var>.
+
+ <li><p>If <var title>c</var> is in the range U+D800 through to U+DFFF, set
+ <var title>c</var> to U+FFFD.
+
+ <li><p>Let <var title>bytes</var> be the result of running
+ <span data-anolis-spec=encoding>encode</span> on <var title>c</var> using
+ <span data-anolis-spec=encoding>utf-8</span> as encoding.
+
+ <li><p>Replace each byte in <var title>bytes</var> with a string consisting
+ of "<code title>%</code>" followed by a double-digit, uppercase,
+ hexadecimal representation of byte, and then return them concatenated, in
+ the same order.
+</ol>
+
+<p>To make a code point <var title>c</var> <dfn>query percent escaped</dfn>,
+run these steps:
+
+<ol>
+ <li><p>If <var title>c</var> is greater than U+0020 and less than U+007F,
+ and is not one of '<code title>"</code>', "<code title>#</code>",
+ "<code title>&lt;</code>", "<code title>></code>", and
+ "<code title>`</code>", return <var title>c</var>.
+
+ <li><p>If <var title>c</var> is in the range U+D800 through to U+DFFF, set
+ <var title>c</var> to U+FFFD.
+
+ <li>
+  <p>Let <var title>bytes</var> be the result of running
+  <span data-anolis-spec=encoding>encode</span> on <var title>c</var> using
+  <span title=concept-url-query-encoding>query encoding</span> as encoding.
+
+  <p>Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
+  emits an <span data-anolis-spec=encoding>encoder error</span>, emit a
+  0x3F byte instead and do not terminate the algorithm.
+
+ <li><p>Replace each byte in <var title>bytes</var> with a string consisting
+ of "<code title>%</code>" followed by a double-digit, uppercase,
+ hexadecimal representation of byte, and then return them concatenated, in
+ the same order.
+</ol>
+
+<p class=note>Compared to <span>percent escaped</span> this algorithm does
+not escape "<code title>?</code>" and takes the
+<span title=concept-url-query-encoding>query encoding</span> into account.
+
+
 
 <p>An <dfn>hierarchical scheme</dfn> is a
 <span title=concept-url-scheme>scheme</span> listed in the first column of
@@ -638,6 +692,7 @@ the <span title=concept-url>URL</span>'s
 
 <p class=note>It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature.
+<span data-anolis-ref class=informative>HTML</span>
 
 <p>The <dfn title=dom-URL-protocol><code>protocol</code></dfn> attribute
 must return <span title=concept-url-scheme>scheme</span> and
