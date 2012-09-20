@@ -444,8 +444,92 @@ steps:
      <li><p>Otherwise, <span>mark invalid</span>.
     </ol>
 
-   <dt class="XXX">
-  </dt></dl>
+   <dt><b title="">path</b>
+   <dd>
+    <ol>
+     <li><p>Append an empty string to
+     <a href="#concept-url-path" title="concept-url-path">path</a>.
+
+     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
+     is "<code title="">#</code>", set <var title="">state</var> to
+     <b title="">fragment</b>.
+
+     <li><p>Otherwise, if <var title="">c</var> is not the
+     <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var>,
+     <span>percent escaped</span>, to the only string in
+     <a href="#concept-url-path" title="concept-url-path">path</a>.
+    </ol>
+
+   <dt><b title="">hierarchical path start</b>
+   <dd><p>Set <var title="">state</var> to <b title="">hierarchical path</b> and
+   if <var title="">c</var> is neither "<code title="">/</code>" nor
+   "<code title="">\</code>", rerun this state machine for <var title="">c</var>.
+
+   <dt><b title="">hierarchical path</b>
+   <dd>
+    <ol>
+     <li>
+      <p>If either <var title="">c</var> is one of
+      <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
+      "<code title="">\</code>", or <var title="">override</var> is not given and
+      <var title="">c</var> is "<code title="">?</code>" or
+      "<code title="">#</code>", run these substeps:
+      <ol>
+       <li><p>If <var title="">buffer</var> is "<code title="">..</code>" and
+       <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
+       "<code title="">/</code>", and "<code title="">\</code>", set the last
+       string in <a href="#concept-url-path" title="concept-url-path">path</a> to the empty
+       string.
+
+       <li><p>Otherwise, if <var title="">buffer</var> is
+       "<code title="">..</code>", remove the last string from
+       <a href="#concept-url-path" title="concept-url-path">path</a>.
+
+       <li><p>Otherwise, if <var title="">buffer</var> is
+       "<code title="">.</code>" and <var title="">c</var> is one of
+       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
+       "<code title="">\</code>", append an empty string to
+       <a href="#concept-url-path" title="concept-url-path">path</a>.
+
+       <li><p>Otherwise, if <var title="">buffer</var> is not
+       "<code title="">.</code>", append <var title="">buffer</var> to
+       <a href="#concept-url-path" title="concept-url-path">path</a>.
+
+       <li><p>Set <var title="">buffer</var> to the empty string.
+
+       <li><p>If <var title="">c</var> is "<code title="">?</code>", set
+       <a href="#concept-url-query" title="concept-url-query">query</a> to "<code title="">?</code>",
+       and <var title="">state</var> to <b title="">query</b>.
+
+       <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+       <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+       "<code title="">#</code>", and <var title="">state</var> to
+       <b title="">fragment</b>.
+      </ol>
+
+     <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
+     U+000D, append <var title="">c</var>, <span>percent escaped</span>, to
+     <var title="">buffer</var>.
+    </ol>
+
+   <dt><b title="">query</b>
+   <dd>
+    <ol>
+     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
+     is "<code title="">#</code>", set
+     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+     "<code title="">#</code>", and state to <b title="">fragment</b>.
+
+     <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
+     U+000D, append <var title="">c</var>, <span>percent escaped</span>, to
+     <a href="#concept-url-query" title="concept-url-query">query</a>.
+    </ol>
+
+   <dt><b title="">fragment</b>
+   <dd><p>If <var title="">c</var> is none of U+0009, U+000A, and U+000D,
+   append <var title="">c</var>, <span>percent escaped</span>, to
+   <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
+  </dl>
 </ol>
 
 
