@@ -58,7 +58,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
     <ol>
      <li><a href="#constructor"><span class="secno">4.3.1 </span>Constructor</a></li>
      <li><a href="#urlutils-members"><span class="secno">4.3.2 </span><code>URLUtils</code> members</a></ol></ol></li>
- <li><a class="no-num" href="#references">References</a></ol>
+ <li><a class="no-num" href="#references">References</a></li>
+ <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
 
 
@@ -536,7 +537,7 @@ steps:
 
 <h3 id="api"><span class="secno">4.3 </span>API</h3>
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional DOMString <var title="">baseUrl</var>)]
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString)? <var title="">base</var> = null)]
 interface <dfn id="url">URL</dfn> {
 
 };
@@ -568,19 +569,18 @@ makes much sense and when it comes down to it almost nobody cares.
 <h4 id="constructor"><span class="secno">4.3.1 </span>Constructor</h4>
 
 <p>The
-<dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var> [, <var title="">baseUrl</var>])</code></dfn>
+<dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var> [, <var title="">base</var>])</code></dfn>
 constructor must run these steps:
 
 <ol>
- <li><p>Let <var title="">base</var> be null.
-
- <li><p>If <var title="">baseUrl</var> is not omitted,
+ <li><p>If <var title="">base</var> is a string,
  <a href="#concept-url-create" title="concept-url-create">create</a> a
- <a href="#concept-url" title="concept-url">URL</a> from <var title="">baseUrl</var> and set
+ <a href="#concept-url" title="concept-url">URL</a> from <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
- <li><p class="XXX">Throw if <var title="">base</var> is either invalid or not
- hierarchical?
+ <li><p>If <var title="">base</var> is not null and its
+ <a href="#invalid-flag">invalid flag</a> is set, throw a
+ "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
 
  <li><p><a href="#concept-url-create" title="concept-url-create">Create</a> a
  <a href="#concept-url" title="concept-url">URL</a> from <var title="">url</var> with
@@ -773,6 +773,11 @@ steps:
 
 </dl></div>
 
+
+
+<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+<p>Thanks to Simon Pieters for being awesome!
 
 
 
