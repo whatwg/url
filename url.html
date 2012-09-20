@@ -193,7 +193,8 @@ steps:
  <li>
   <p>Run the following state machine by switching on <var title="">state</var>
   for each code point in <var title="">input</var>, and then once more with the
-  <dfn id="eof-code-point">EOF code point</dfn>. Let the code point be <var title="">c</var>.
+  conceptual <dfn id="eof-code-point">EOF code point</dfn>. Let the code point be
+  <var title="">c</var>.
 
   <dl class="switch">
    <dt><b title="">scheme start</b>
@@ -209,7 +210,7 @@ steps:
      to <b title="">no scheme</b>, and rerun this state machine for
      <var title="">c</var>.
 
-     <li><p>Otherwise, terminate these algorithm.
+     <li><p>Otherwise, terminate this algorithm.
     </ol>
 
    <dt><b title="">scheme</b>
@@ -227,9 +228,11 @@ steps:
       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
       <var title="">buffer</var>, <var title="">buffer</var> to the empty string,
       and then run these substeps:
+      <!-- XXX hierarchical flag -->
 
       <ol>
-       <li><p>If <var title="">override</var> is given, terminate these steps.
+       <li><p>If <var title="">override</var> is given,
+       terminate this algorithm.
 
        <li><p>Otherwise, if the <a href="#hierarchical-flag">hierarchical flag</a> is set,
        <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
@@ -247,9 +250,106 @@ steps:
      <li><p>Otherwise, set <var title="">state</var> to <b title="">no scheme</b>
      and start over (from the first code point in <var title="">input</var>).
     </ol>
-  </dl>
 
- <li class="XXX">Not complete yet.
+   <dt><b title="">no scheme</b>
+   <dd>
+    <p>If <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
+    <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
+    <a href="#hierarchical-flag">hierarchical flag</a> is set, <span>mark invalid</span>.
+
+    <p>Otherwise, set <var title="">state</var> to <b title="">hierarchical</b>,
+    and rerun this state machine for <var title="">c</var>.
+    <!-- XXX hierarchical flag -->
+
+   <dt><b title="">hierarchical</b>
+   <dd>
+    <p>Let <var title="">base</var> be
+    <a href="#concept-url-base" title="concept-url-base">base URL</a>, then, based on
+    <var title="">c</var>:
+    <dl class="switch">
+     <dt><a href="#eof-code-point">EOF code point</a>
+     <dd>
+      <p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+      <a href="#concept-url-host" title="concept-url-host">host</a> to
+      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+      <a href="#concept-url-port" title="concept-url-port">port</a> to
+      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+      <a href="#concept-url-path" title="concept-url-path">path</a> to
+      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
+      <a href="#concept-url-query" title="concept-url-query">query</a> to
+      <var title="">base</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>,
+      and then terminate these steps.
+
+     <dt>"<code title="">/</code>"
+     <dt>"<code title="">\</code>"
+     <dd>
+      <p>If the code point in <var title="">input</var> after
+      <var title="">c</var> is either "<code title="">/</code>" or
+      "<code title="">\</code>", set
+      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+      and <var title="">state</var> to <b title="">authority start</b>.
+
+      <p>Otherwise, set
+      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+      <a href="#concept-url-host" title="concept-url-host">host</a> to
+      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+      <a href="#concept-url-port" title="concept-url-port">port</a> to
+      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+      <var title="">state</var> to <b title="">hierarchical path start</b>,
+      and rerun this state machine for <var title="">c</var>.
+
+     <dt>"<code title="">?</code>"
+     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+     <a href="#concept-url-host" title="concept-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+     <a href="#concept-url-port" title="concept-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+     <a href="#concept-url-path" title="concept-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
+     <a href="#concept-url-query" title="concept-url-query">query</a> to "<code title="">?</code>",
+     and <var title="">state</var> to <b title="">query</b>.
+
+     <dt>"<code title="">#</code>"
+     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+     <a href="#concept-url-host" title="concept-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+     <a href="#concept-url-port" title="concept-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+     <a href="#concept-url-path" title="concept-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
+     <a href="#concept-url-query" title="concept-url-query">query</a> to
+     <var title="">base</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>,
+     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+     "<code title="">#</code>", and <var title="">state</var> to
+     <b title="">fragment</b>.
+
+     <dt>Otherwise
+     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+     <a href="#concept-url-host" title="concept-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+     <a href="#concept-url-port" title="concept-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+     <a href="#concept-url-path" title="concept-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
+     remove <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
+     <var title="">state</var> to <b title="">hierarchical path start</b>,
+     and rerun this state machine for <var title="">c</var>.
+    </dl>
+
+   <dt><b title="">authority start</b>
+   <dd><p>If <var title="">c</var> is neither "<code title="">/</code>" nor
+   "<code title="">\</code>", set <var title="">state</var> to
+   <b title="">authority</b>, and rerun this state machine for
+   <var title="">c</var>.
+
+   <dt class="XXX">
+  </dt></dl>
 </ol>
 
 

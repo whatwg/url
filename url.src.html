@@ -181,7 +181,8 @@ steps:
  <li>
   <p>Run the following state machine by switching on <var title>state</var>
   for each code point in <var title>input</var>, and then once more with the
-  <dfn>EOF code point</dfn>. Let the code point be <var title>c</var>.
+  conceptual <dfn>EOF code point</dfn>. Let the code point be
+  <var title>c</var>.
 
   <dl class=switch>
    <dt><b title>scheme start</b>
@@ -197,7 +198,7 @@ steps:
      to <b title>no scheme</b>, and rerun this state machine for
      <var title>c</var>.
 
-     <li><p>Otherwise, terminate these algorithm.
+     <li><p>Otherwise, terminate this algorithm.
     </ol>
 
    <dt><b title>scheme</b>
@@ -215,9 +216,11 @@ steps:
       <span title=concept-url-scheme>scheme</span> to
       <var title>buffer</var>, <var title>buffer</var> to the empty string,
       and then run these substeps:
+      <!-- XXX hierarchical flag -->
 
       <ol>
-       <li><p>If <var title>override</var> is given, terminate these steps.
+       <li><p>If <var title>override</var> is given,
+       terminate this algorithm.
 
        <li><p>Otherwise, if the <span>hierarchical flag</span> is set,
        <span title=concept-url-base>base URL</span> is not null and
@@ -235,9 +238,106 @@ steps:
      <li><p>Otherwise, set <var title>state</var> to <b title>no scheme</b>
      and start over (from the first code point in <var title>input</var>).
     </ol>
-  </dl>
 
- <li class=XXX>Not complete yet.
+   <dt><b title>no scheme</b>
+   <dd>
+    <p>If <span title=concept-url-base>base URL</span> is not null and
+    <span title=concept-url-base>base URL</span>'s
+    <span>hierarchical flag</span> is set, <span>mark invalid</span>.
+
+    <p>Otherwise, set <var title>state</var> to <b title>hierarchical</b>,
+    and rerun this state machine for <var title>c</var>.
+    <!-- XXX hierarchical flag -->
+
+   <dt><b title>hierarchical</b>
+   <dd>
+    <p>Let <var title>base</var> be
+    <span title=concept-url-base>base URL</span>, then, based on
+    <var title>c</var>:
+    <dl class=switch>
+     <dt><span>EOF code point</span>
+     <dd>
+      <p>Set <span title=concept-url-scheme>scheme</span> to
+      <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+      <span title=concept-url-host>host</span> to
+      <var title>base</var>'s <span title=concept-url-host>host</span>,
+      <span title=concept-url-port>port</span> to
+      <var title>base</var>'s <span title=concept-url-port>port</span>,
+      <span title=concept-url-path>path</span> to
+      <var title>base</var>'s <span title=concept-url-path>path</span>,
+      <span title=concept-url-query>query</span> to
+      <var title>base</var>'s <span title=concept-url-query>query</span>,
+      and then terminate these steps.
+
+     <dt>"<code title>/</code>"
+     <dt>"<code title>\</code>"
+     <dd>
+      <p>If the code point in <var title>input</var> after
+      <var title>c</var> is either "<code title>/</code>" or
+      "<code title>\</code>", set
+      <span title=concept-url-scheme>scheme</span> to
+      <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+      and <var title>state</var> to <b title>authority start</b>.
+
+      <p>Otherwise, set
+      <span title=concept-url-scheme>scheme</span> to
+      <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+      <span title=concept-url-host>host</span> to
+      <var title>base</var>'s <span title=concept-url-host>host</span>,
+      <span title=concept-url-port>port</span> to
+      <var title>base</var>'s <span title=concept-url-port>port</span>,
+      <var title>state</var> to <b title>hierarchical path start</b>,
+      and rerun this state machine for <var title>c</var>.
+
+     <dt>"<code title>?</code>"
+     <dd><p>Set <span title=concept-url-scheme>scheme</span> to
+     <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+     <span title=concept-url-host>host</span> to
+     <var title>base</var>'s <span title=concept-url-host>host</span>,
+     <span title=concept-url-port>port</span> to
+     <var title>base</var>'s <span title=concept-url-port>port</span>,
+     <span title=concept-url-path>path</span> to
+     <var title>base</var>'s <span title=concept-url-path>path</span>,
+     <span title=concept-url-query>query</span> to "<code title>?</code>",
+     and <var title>state</var> to <b title>query</b>.
+
+     <dt>"<code title>#</code>"
+     <dd><p>Set <span title=concept-url-scheme>scheme</span> to
+     <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+     <span title=concept-url-host>host</span> to
+     <var title>base</var>'s <span title=concept-url-host>host</span>,
+     <span title=concept-url-port>port</span> to
+     <var title>base</var>'s <span title=concept-url-port>port</span>,
+     <span title=concept-url-path>path</span> to
+     <var title>base</var>'s <span title=concept-url-path>path</span>,
+     <span title=concept-url-query>query</span> to
+     <var title>base</var>'s <span title=concept-url-query>query</span>,
+     <span title=concept-url-fragment>fragment</span> to
+     "<code title>#</code>", and <var title>state</var> to
+     <b title>fragment</b>.
+
+     <dt>Otherwise
+     <dd><p>Set <span title=concept-url-scheme>scheme</span> to
+     <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+     <span title=concept-url-host>host</span> to
+     <var title>base</var>'s <span title=concept-url-host>host</span>,
+     <span title=concept-url-port>port</span> to
+     <var title>base</var>'s <span title=concept-url-port>port</span>,
+     <span title=concept-url-path>path</span> to
+     <var title>base</var>'s <span title=concept-url-path>path</span>, then
+     remove <span title=concept-url-path>path</span>'s last string, set
+     <var title>state</var> to <b title>hierarchical path start</b>,
+     and rerun this state machine for <var title>c</var>.
+    </dl>
+
+   <dt><b title>authority start</b>
+   <dd><p>If <var title>c</var> is neither "<code title>/</code>" nor
+   "<code title>\</code>", set <var title>state</var> to
+   <b title>authority</b>, and rerun this state machine for
+   <var title>c</var>.
+
+   <dt class=XXX>
+  </dl>
 </ol>
 
 
