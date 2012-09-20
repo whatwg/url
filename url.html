@@ -80,6 +80,9 @@ not appear in all uppercase letters in this specification.
 
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
+<p><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#code-point">Code point</a> is not cross-referenced
+throughout the specification for brevity. A string is a list of code points.
+
 <p>The <dfn id="space-character" title="space character">space characters</dfn>, for the
 purposes of this specification, are U+0020 SPACE, U+0009 CHARACTER
 TABULATION (tab), U+000A LINE FEED (LF), U+000C FORM FEED (FF), and
@@ -188,7 +191,7 @@ steps:
 
  <li><p>Let <var title="">buffer</var> be the empty string.
 
- <li><p>Let the <var title="">@ flag</var> and <var title="">[] flag</var> be
+ <li><p>Let the <var title="">@ flag</var> and the <var title="">[] flag</var> be
  unset.
 
  <li>
@@ -356,7 +359,7 @@ steps:
      <dt>"<code title="">@</code>"
      <dd>
       <ol>
-       <li><p>If <var title="">@ flag</var> is set, append
+       <li><p>If the <var title="">@ flag</var> is set, append
        "<code title="">%40</code>" to
        <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>.
 
@@ -386,7 +389,7 @@ steps:
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is "<code title="">:</code>" and
-     <var title="">[] flag</var> is unset, set
+     the <var title="">[] flag</var> is unset, set
      <a href="#concept-url-host" title="concept-url-host">host</a> to <var title="">buffer</var>,
      <!-- XXX host normalize -->
      <var title="">buffer</var> to the empty string, <var title="">state</var>
@@ -522,8 +525,8 @@ steps:
      "<code title="">#</code>", and state to <b title="">fragment</b>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title="">c</var>, <span>percent escaped</span>, to
-     <a href="#concept-url-query" title="concept-url-query">query</a>.
+     U+000D, append <var title="">c</var>, <span>query percent escaped</span>,
+     to <a href="#concept-url-query" title="concept-url-query">query</a>.
     </ol>
 
    <dt><b title="">fragment</b>
@@ -546,7 +549,7 @@ interface <dfn id="url">URL</dfn> {
 [NoInterfaceObject]
 interface <dfn id="urlutils">URLUtils</dfn> {
   stringifier attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;
-  readonly attribute DOMString <span title="dom-URL-origin">origin</span>;
+  readonly attribute DOMString <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
            attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
            attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
@@ -555,6 +558,8 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <span title="dom-URL-pathname">pathname</span>;
            attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+
+  readonly attribute boolean <a href="#dom-url-isinvalid" title="dom-URL-isInvalid">isInvalid</a>;
 }</pre>
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
@@ -638,7 +643,14 @@ run these steps:
  <i title="">input</i>
 </ol>
 
-<p class="XXX">origin
+<p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
+return the <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-6.1">Unicode serialization</a> of
+the <a href="#concept-url" title="concept-url">URL</a>'s
+<a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-4">origin</a>.
+<a href="#refsORIGIN">[ORIGIN]</a>
+
+<p class="note">It returns the Unicode rather than the ASCII serialization for
+compatibility with HTML's <code>MessageEvent</code> feature.
 
 <p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
 must return <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
@@ -765,10 +777,17 @@ steps:
  <i title="">override</i>.
 </ol>
 
+<p>The <dfn id="dom-url-isinvalid" title="dom-URL-isInvalid"><code>isInvalid</code></dfn> attribute
+must return true if the <a href="#invalid-flag">invalid flag</a> is set, or false
+otherwise.
+
 
 
 <h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsRFC2119">[RFC2119]
+<div id="anolis-references"><dl><dt id="refsORIGIN">[ORIGIN]
+<dd><cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.
+
+<dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
 </dl></div>
