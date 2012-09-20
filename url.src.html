@@ -336,6 +336,102 @@ steps:
    <b title>authority</b>, and rerun this state machine for
    <var title>c</var>.
 
+   <dt><b title>authority</b>
+   <dd>
+    <p>Based on <var title>c</var>:
+    <dl class=switch>
+     <dt>"<code title>@</code>"
+     <dd>
+      <ol>
+       <li><p>If <var title>@ flag</var> is set, append
+       "<code title>%40</code>" to
+       <span title=concept-url-userinfo>userinfo</span>.
+
+       <li><p>Set the <var title>@ flag</var>.
+
+       <li><p>Append each code point in <var title>buffer</var>,
+       <span>percent escaped</span>, to
+       <span title=concept-url-userinfo>userinfo</span>
+
+       <li><p>Set <var title>buffer</var> to the empty string.
+      </ol>
+     <dt><span>EOF code point</span>
+     <dt>"<code title>/</code>"
+     <dt>"<code title>\</code>"
+     <dt>"<code title>?</code>"
+     <dt>"<code title>#</code>"
+     <dd><p>Rerun this state machine for all code points in
+     <var title>buffer</var>, set <var title>buffer</var> to the empty
+     string, and <var title>state</var> to <b title>host</b>.
+
+     <dt>Otherwise
+     <dd><p>Append <var title>c</var> to <var title>buffer</var>.
+    </dl>
+
+   <dt><b title>host</b>
+   <dt><b title>hostname</b>
+   <dd>
+    <ol>
+     <li><p>If <var title>c</var> is "<code title>:</code>" and
+     <var title>[] flag</var> is unset, set
+     <span title=concept-url-host>host</span> to <var title>buffer</var>,
+     <!-- XXX host normalize -->
+     <var title>buffer</var> to the empty string, <var title>state</var>
+     to <b title>port</b>, and then only if <var title>override</var> is
+     <b title>hostname</b>, terminate these steps.
+
+     <li><p>Otherwise, if <var title>c</var> is one of
+     <span>EOF code point</span>, "<code title>/</code>",
+     "<code title>\</code>", "<code title>?</code>", or
+     "<code title>#</code>", set
+     <span title=concept-url-host>host</span> to <var title>buffer</var>,
+     <!-- XXX host normalize -->
+     <var title>buffer</var> to the empty string, <var title>state</var>
+     to <b title>hierarchical path start</b>, and then only if
+     <var title>override</var> is given, terminate these steps, or otherwise
+     rerun this state machine for <var title>c</var>.
+
+     <li>
+      <p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
+      U+000D, run these substeps:
+
+      <ol>
+       <li><p>If <var title>c</var> is "<code title>[</code>", set the
+       <var title>[] flag</var>.
+
+       <li><p>If <var title>c</var> is "<code title>]</code>", unset the
+       <var title>[] flag</var>.
+
+       <li><p>Append <var title>c</var> to <var title>buffer</var>.
+      </ol>
+    </ol>
+
+   <dt><b title>port</b>
+   <dd>
+    <ol>
+     <li><p>If <var title>c</var> is in the range U+0030 through to U+0039,
+     append <var title>c</var> to <var title>buffer</var>.
+
+     <li>
+      <p>Otherwise, if <var title>c</var> is one of
+      <span>EOF code point</span>, "<code title>/</code>",
+      "<code title>\</code>", "<code title>?</code>", or
+      "<code title>#</code>", or <var title>override</var> is given, run
+      these substeps:
+      <ol>
+       <li><p class=XXX>parse buffer and set port
+
+       <li><p>If <var title>override</var> is given, terminate this
+       algorithm.
+
+       <li><p>Set <var title>buffer</var> to the empty string,
+       <var title>state</var> to <b title>hierarchical path start</b>, and
+       rerun this state machine for <var title>c</var>.
+      </ol>
+
+     <li><p>Otherwise, <span>mark invalid</span>.
+    </ol>
+
    <dt class=XXX>
   </dl>
 </ol>
@@ -386,6 +482,9 @@ constructor must run these steps:
  <span title=concept-url-create>create</span> a
  <span title=concept-url>URL</span> from <var title>baseUrl</var> and set
  <var title>base</var> to the result of that algorithm.
+
+ <li><p class=XXX>Throw if <var title>base</var> is either invalid or not
+ hierarchical?
 
  <li><p><span title=concept-url-create>Create</span> a
  <span title=concept-url>URL</span> from <var title>url</var> with
