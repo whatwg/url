@@ -154,7 +154,8 @@ and an <span data-anolis-spec=encoding>encoding</span>
  <li><p>Set <var title>url</var>'s
  <span title=concept-url-input>input</span> to <var title>input</var>.
 
- <li><p>Remove any leading and trailing <span>space characters</span> from
+ <li><p>Remove any leading and trailing
+ <span title="space character">space characters</span> from
  <var title>input</var>.
 
  <li><p><span title=concept-url-parse>Parse</span> <var title>input</var>.
@@ -164,11 +165,79 @@ and an <span data-anolis-spec=encoding>encoding</span>
 
 <p>A <span title=concept-url>URL</span> also has an associated
 <span title=concept-url-parse>parse</span> algorithm. To
-<dfn title=concept-url-parse>parse</dfn> a string <i title>input</i>,
-optionally with an override state <i title>override</i>, run these steps:
+<dfn title=concept-url-parse>parse</dfn> a string <var title>input</var>,
+optionally with an override state <var title>override</var>, run these
+steps:
 
-<ol class=XXX>
+<ol>
+ <li><p>Let <var title>state</var> be <var title>override</var> if given, or
+ <b title>scheme start</b> otherwise.
 
+ <li><p>Let <var title>buffer</var> be the empty string.
+
+ <li><p>Let the <var title>@ flag</var> and <var title>[] flag</var> be
+ unset.
+
+ <li>
+  <p>Run the following state machine by switching on <var title>state</var>
+  for each code point in <var title>input</var>, and then once more with the
+  <dfn>EOF code point</dfn>. Let the code point be <var title>c</var>.
+
+  <dl class=switch>
+   <dt><b title>scheme start</b>
+   <dd>
+    <ol>
+     <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
+     is in the range U+0041 through to U+005A or U+0061 through to U+007A,
+     append <var title>c</var>, lowercased, to <var title>buffer</var>, and
+     set <var title>state</var> to <b title>scheme</b>.
+
+     <li><p>Otherwise, if <var title>override</var> is not given, set
+     <var title>buffer</var> to the empty string, set <var title>state</var>
+     to <b title>no scheme</b>, and rerun this state machine for
+     <var title>c</var>.
+
+     <li><p>Otherwise, terminate these algorithm.
+    </ol>
+
+   <dt><b title>scheme</b>
+   <dd>
+    <ol>
+     <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
+     is in the range U+0030 through to U+0039, U+0041 through to U+005A,
+     U+0061 through to U+007A, or <var title>c</var> is
+     "<code title>+</code>", "<code title>-</code>", or
+     "<code title>.</code>", append <var title>c</var>, lowercased, to
+     <var title>buffer</var>.
+
+     <li>
+      <p>Otherwise, if <var title>c</var> is "<code title>:</code>", set
+      <span title=concept-url-scheme>scheme</span> to
+      <var title>buffer</var>, <var title>buffer</var> to the empty string,
+      and then run these substeps:
+
+      <ol>
+       <li><p>If <var title>override</var> is given, terminate these steps.
+
+       <li><p>Otherwise, if the <span>hierarchical flag</span> is set,
+       <span title=concept-url-base>base URL</span> is not null and
+       <span title=concept-url-base>base URL</span>'s
+       <span title=concept-url-scheme>scheme</span> is equal to
+       <span title=concept-url-scheme>scheme</span>, set
+       <var title>state</var> to <b title>hierarchical</b>.
+
+       <li><p>Otherwise, if the <span>hierarchical flag</span> is set, set
+       <var title>state</var> to <b title>authority start</b>.
+
+       <li><p>Otherwise, set <var title>state</var> to <b title>path</b>.
+      </ol>
+
+     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme</b>
+     and start over (from the first code point in <var title>input</var>).
+    </ol>
+  </dl>
+
+ <li class=XXX>Not complete yet.
 </ol>
 
 

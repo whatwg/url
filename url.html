@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-september-2012">Living Standard — Last Updated 19 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-september-2012">Living Standard — Last Updated 20 September 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -33,7 +33,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 September 2012, the editors have made this specification available
+20 September 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -166,7 +166,8 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <li><p>Set <var title="">url</var>'s
  <a href="#concept-url-input" title="concept-url-input">input</a> to <var title="">input</var>.
 
- <li><p>Remove any leading and trailing <span>space characters</span> from
+ <li><p>Remove any leading and trailing
+ <a href="#space-character" title="space character">space characters</a> from
  <var title="">input</var>.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">input</var>.
@@ -176,11 +177,79 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
 <a href="#concept-url-parse" title="concept-url-parse">parse</a> algorithm. To
-<dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <i title="">input</i>,
-optionally with an override state <i title="">override</i>, run these steps:
+<dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <var title="">input</var>,
+optionally with an override state <var title="">override</var>, run these
+steps:
 
-<ol class="XXX">
+<ol>
+ <li><p>Let <var title="">state</var> be <var title="">override</var> if given, or
+ <b title="">scheme start</b> otherwise.
 
+ <li><p>Let <var title="">buffer</var> be the empty string.
+
+ <li><p>Let the <var title="">@ flag</var> and <var title="">[] flag</var> be
+ unset.
+
+ <li>
+  <p>Run the following state machine by switching on <var title="">state</var>
+  for each code point in <var title="">input</var>, and then once more with the
+  <dfn id="eof-code-point">EOF code point</dfn>. Let the code point be <var title="">c</var>.
+
+  <dl class="switch">
+   <dt><b title="">scheme start</b>
+   <dd>
+    <ol>
+     <li><p>If <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a> and
+     is in the range U+0041 through to U+005A or U+0061 through to U+007A,
+     append <var title="">c</var>, lowercased, to <var title="">buffer</var>, and
+     set <var title="">state</var> to <b title="">scheme</b>.
+
+     <li><p>Otherwise, if <var title="">override</var> is not given, set
+     <var title="">buffer</var> to the empty string, set <var title="">state</var>
+     to <b title="">no scheme</b>, and rerun this state machine for
+     <var title="">c</var>.
+
+     <li><p>Otherwise, terminate these algorithm.
+    </ol>
+
+   <dt><b title="">scheme</b>
+   <dd>
+    <ol>
+     <li><p>If <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a> and
+     is in the range U+0030 through to U+0039, U+0041 through to U+005A,
+     U+0061 through to U+007A, or <var title="">c</var> is
+     "<code title="">+</code>", "<code title="">-</code>", or
+     "<code title="">.</code>", append <var title="">c</var>, lowercased, to
+     <var title="">buffer</var>.
+
+     <li>
+      <p>Otherwise, if <var title="">c</var> is "<code title="">:</code>", set
+      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+      <var title="">buffer</var>, <var title="">buffer</var> to the empty string,
+      and then run these substeps:
+
+      <ol>
+       <li><p>If <var title="">override</var> is given, terminate these steps.
+
+       <li><p>Otherwise, if the <a href="#hierarchical-flag">hierarchical flag</a> is set,
+       <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
+       <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
+       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is equal to
+       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, set
+       <var title="">state</var> to <b title="">hierarchical</b>.
+
+       <li><p>Otherwise, if the <a href="#hierarchical-flag">hierarchical flag</a> is set, set
+       <var title="">state</var> to <b title="">authority start</b>.
+
+       <li><p>Otherwise, set <var title="">state</var> to <b title="">path</b>.
+      </ol>
+
+     <li><p>Otherwise, set <var title="">state</var> to <b title="">no scheme</b>
+     and start over (from the first code point in <var title="">input</var>).
+    </ol>
+  </dl>
+
+ <li class="XXX">Not complete yet.
 </ol>
 
 
