@@ -207,14 +207,14 @@ and an <span data-anolis-spec=encoding>encoding</span>
  <li><p>Let <var title>url</var> be a new
  <span title=concept-url>URL</span>.
 
- <li><p>If <i title>encoding</i> is not set, set it to
+ <li><p>If <i title>encoding</i> is not given, set it to
  <span data-anolis-spec=encoding>utf-8</span>.
 
  <li><p>Set <var title>url</var>'s
  <span title=concept-url-query-encoding>query encoding</span> to
  <i title>encoding</i>.
 
- <li><p>If <i title>base</i> is not set, set it to null.
+ <li><p>If <i title>base</i> is not given, set it to null.
 
  <li><p>Set <var title>url</var>'s
  <span title=concept-url-base>base URL</span> to <i title>base</i>.
@@ -284,13 +284,16 @@ steps:
       <span title=concept-url-scheme>scheme</span> to
       <var title>buffer</var>, <var title>buffer</var> to the empty string,
       and then run these substeps:
-      <!-- XXX hierarchical flag -->
 
       <ol>
        <li><p>If <var title>override</var> is given,
        terminate this algorithm.
 
-       <li><p>Otherwise, if the <span>hierarchical flag</span> is set,
+       <li><p>If <span title=concept-url-scheme>scheme</span> is
+       an <span>hierarchical scheme</span>, set the
+       <span>hierarchical flag</span>.
+
+       <li><p>If the <span>hierarchical flag</span> is set,
        <span title=concept-url-base>base URL</span> is not null and
        <span title=concept-url-base>base URL</span>'s
        <span title=concept-url-scheme>scheme</span> is equal to
@@ -311,17 +314,24 @@ steps:
    <dd>
     <p>If <span title=concept-url-base>base URL</span> is not null and
     <span title=concept-url-base>base URL</span>'s
-    <span>hierarchical flag</span> is set, <span>mark invalid</span>.
+    <span title=concept-url-scheme>scheme</span> is not an
+    <span>hierarchical scheme</span>, <span>mark invalid</span>.
+
+    <p class=note>You do not want to check
+    <span title=concept-url-base>base URL</span>'s
+    <span>hierarchical flag</span> here, as the
+    <span title=concept-url-scheme>scheme</span> itself can have been
+    changed to something non-sensical through the
+    <code title=dom-URL-protocol>protocol</code> attribute.
 
     <p>Otherwise, set <var title>state</var> to <b title>hierarchical</b>,
     and rerun this state machine for <var title>c</var>.
-    <!-- XXX hierarchical flag -->
 
    <dt><b title>hierarchical</b>
    <dd>
     <p>Let <var title>base</var> be
-    <span title=concept-url-base>base URL</span>, then, based on
-    <var title>c</var>:
+    <span title=concept-url-base>base URL</span>, set the
+    <span>hierarchical flag</span>, and then, based on <var title>c</var>:
     <dl class=switch>
      <dt><span>EOF code point</span>
      <dd>
@@ -742,7 +752,7 @@ steps:
 
 <ol>
  <li><p>If the <span>invalid flag</span> is set, or the
- <span>hierarchical flag</span> is not set, terminate these steps.
+ <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parse>Parse</span> with the given value as
  <i title>input</i> and <b title>host</b> as <i title>override</i>.
@@ -756,7 +766,7 @@ run these steps:
 
 <ol>
  <li><p>If the <span>invalid flag</span> is set, or the
- <span>hierarchical flag</span> is not set, terminate these steps.
+ <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parse>Parse</span> with the given value as
  <i title>input</i> and <b title>hostname</b> as <i title>override</i>.
@@ -770,7 +780,7 @@ steps:
 
 <ol>
  <li><p>If the <span>invalid flag</span> is set, or the
- <span>hierarchical flag</span> is not set, terminate these steps.
+ <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parse>Parse</span> with the given value as
  <i title>input</i> and <b title>port</b> as <i title>override</i>.
@@ -794,7 +804,7 @@ these steps:
 
 <ol>
  <li><p>If the <span>invalid flag</span> is set, or the
- <span>hierarchical flag</span> is not set, terminate these steps.
+ <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>?</code>" removed, if any.
@@ -820,7 +830,7 @@ steps:
 
 <ol>
  <li><p>If the <span>invalid flag</span> is set, or the
- <span>hierarchical flag</span> is not set, terminate these steps.
+ <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.

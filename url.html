@@ -221,14 +221,14 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <li><p>Let <var title="">url</var> be a new
  <a href="#concept-url" title="concept-url">URL</a>.
 
- <li><p>If <i title="">encoding</i> is not set, set it to
+ <li><p>If <i title="">encoding</i> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Set <var title="">url</var>'s
  <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> to
  <i title="">encoding</i>.
 
- <li><p>If <i title="">base</i> is not set, set it to null.
+ <li><p>If <i title="">base</i> is not given, set it to null.
 
  <li><p>Set <var title="">url</var>'s
  <a href="#concept-url-base" title="concept-url-base">base URL</a> to <i title="">base</i>.
@@ -298,13 +298,16 @@ steps:
       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
       <var title="">buffer</var>, <var title="">buffer</var> to the empty string,
       and then run these substeps:
-      <!-- XXX hierarchical flag -->
 
       <ol>
        <li><p>If <var title="">override</var> is given,
        terminate this algorithm.
 
-       <li><p>Otherwise, if the <a href="#hierarchical-flag">hierarchical flag</a> is set,
+       <li><p>If <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
+       an <a href="#hierarchical-scheme">hierarchical scheme</a>, set the
+       <a href="#hierarchical-flag">hierarchical flag</a>.
+
+       <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is set,
        <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
        <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is equal to
@@ -325,17 +328,24 @@ steps:
    <dd>
     <p>If <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
     <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
-    <a href="#hierarchical-flag">hierarchical flag</a> is set, <span>mark invalid</span>.
+    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not an
+    <a href="#hierarchical-scheme">hierarchical scheme</a>, <span>mark invalid</span>.
+
+    <p class="note">You do not want to check
+    <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
+    <a href="#hierarchical-flag">hierarchical flag</a> here, as the
+    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> itself can have been
+    changed to something non-sensical through the
+    <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
 
     <p>Otherwise, set <var title="">state</var> to <b title="">hierarchical</b>,
     and rerun this state machine for <var title="">c</var>.
-    <!-- XXX hierarchical flag -->
 
    <dt><b title="">hierarchical</b>
    <dd>
     <p>Let <var title="">base</var> be
-    <a href="#concept-url-base" title="concept-url-base">base URL</a>, then, based on
-    <var title="">c</var>:
+    <a href="#concept-url-base" title="concept-url-base">base URL</a>, set the
+    <a href="#hierarchical-flag">hierarchical flag</a>, and then, based on <var title="">c</var>:
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
      <dd>
@@ -756,7 +766,7 @@ steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
- <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
  <i title="">input</i> and <b title="">host</b> as <i title="">override</i>.
@@ -770,7 +780,7 @@ run these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
- <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
  <i title="">input</i> and <b title="">hostname</b> as <i title="">override</i>.
@@ -784,7 +794,7 @@ steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
- <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
  <i title="">input</i> and <b title="">port</b> as <i title="">override</i>.
@@ -808,7 +818,7 @@ these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
- <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
@@ -834,7 +844,7 @@ steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
- <a href="#hierarchical-flag">hierarchical flag</a> is not set, terminate these steps.
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">#</code>" removed, if any.
