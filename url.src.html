@@ -115,6 +115,18 @@ the following components:
 <dfn title=concept-url-base>base URL</dfn>,
 and <dfn title=concept-url-query-encoding>query encoding</dfn>.
 
+<p>To <dfn>clear</dfn> a <span title=concept-url>URL</span>, set its
+<span title=concept-url-scheme>scheme</span>,
+<span title=concept-url-userinfo>userinfo</span>,
+<span title=concept-url-host>host</span>,
+<span title=concept-url-port>port</span>,
+<span title=concept-url-query>query</span>, and
+<span title=concept-url-fragment>fragment</span> to the empty string, and
+its <span title=concept-url-path>path</span> to the empty list.
+
+<p>To <dfn>invalidate</dfn> a <span title=concept-url>URL</span>,
+<span>clear</span> it, and then set its <span>invalid flag</span>.
+
 <p>To make a code point <var title>c</var> <dfn>percent escaped</dfn>, run
 these steps:
 
@@ -206,6 +218,8 @@ and an <span data-anolis-spec=encoding>encoding</span>
 <ol>
  <li><p>Let <var title>url</var> be a new
  <span title=concept-url>URL</span>.
+
+ <li><p><span>Clear</span> <var title>url</var>.
 
  <li><p>If <i title>encoding</i> is not given, set it to
  <span data-anolis-spec=encoding>utf-8</span>.
@@ -315,7 +329,7 @@ steps:
     <p>If <span title=concept-url-base>base URL</span> is not null and
     <span title=concept-url-base>base URL</span>'s
     <span title=concept-url-scheme>scheme</span> is not an
-    <span>hierarchical scheme</span>, <span>mark invalid</span>.
+    <span>hierarchical scheme</span>, <span>invalidate</span>.
 
     <p class=note>You do not want to check
     <span title=concept-url-base>base URL</span>'s
@@ -507,7 +521,7 @@ steps:
        rerun this state machine for <var title>c</var>.
       </ol>
 
-     <li><p>Otherwise, <span>mark invalid</span>.
+     <li><p>Otherwise, <span>invalidate</span>.
     </ol>
 
    <dt><b title>path</b>
@@ -699,10 +713,10 @@ these steps:
 run these steps:
 
 <ol>
- <li><p class=XXX>clear
+ <li><p><span>Clear</span>.
 
  <li><p><span title=concept-url-parse>Parse</span> with the given value as
- <i title>input</i>
+ <i title>input</i>.
 </ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute must

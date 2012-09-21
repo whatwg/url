@@ -129,6 +129,18 @@ the following components:
 <dfn id="concept-url-base" title="concept-url-base">base URL</dfn>,
 and <dfn id="concept-url-query-encoding" title="concept-url-query-encoding">query encoding</dfn>.
 
+<p>To <dfn id="clear">clear</dfn> a <a href="#concept-url" title="concept-url">URL</a>, set its
+<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+<a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>,
+<a href="#concept-url-host" title="concept-url-host">host</a>,
+<a href="#concept-url-port" title="concept-url-port">port</a>,
+<a href="#concept-url-query" title="concept-url-query">query</a>, and
+<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string, and
+its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
+
+<p>To <dfn id="invalidate">invalidate</dfn> a <a href="#concept-url" title="concept-url">URL</a>,
+<a href="#clear">clear</a> it, and then set its <a href="#invalid-flag">invalid flag</a>.
+
 <p>To make a code point <var title="">c</var> <dfn id="percent-escaped">percent escaped</dfn>, run
 these steps:
 
@@ -220,6 +232,8 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
 <ol>
  <li><p>Let <var title="">url</var> be a new
  <a href="#concept-url" title="concept-url">URL</a>.
+
+ <li><p><a href="#clear">Clear</a> <var title="">url</var>.
 
  <li><p>If <i title="">encoding</i> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
@@ -329,7 +343,7 @@ steps:
     <p>If <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
     <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not an
-    <a href="#hierarchical-scheme">hierarchical scheme</a>, <span>mark invalid</span>.
+    <a href="#hierarchical-scheme">hierarchical scheme</a>, <a href="#invalidate">invalidate</a>.
 
     <p class="note">You do not want to check
     <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
@@ -521,7 +535,7 @@ steps:
        rerun this state machine for <var title="">c</var>.
       </ol>
 
-     <li><p>Otherwise, <span>mark invalid</span>.
+     <li><p>Otherwise, <a href="#invalidate">invalidate</a>.
     </ol>
 
    <dt><b title="">path</b>
@@ -713,10 +727,10 @@ these steps:
 run these steps:
 
 <ol>
- <li><p class="XXX">clear
+ <li><p><a href="#clear">Clear</a>.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i>
+ <i title="">input</i>.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
