@@ -51,6 +51,34 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 
 
+<h2 class=no-num>Goals</h2>
+
+<p>The URL standard sets out to make URLs throughout the web platform fully
+predictable and interoperable. This is the plan:
+
+<ul>
+ <li><p>Take the algorithms from RFC 3986 and RFC 3987 and align them with
+ existing implementations. (E.g. spaces, other "illegal" code points, query
+ encoding, equality, canonicalization, are all concepts not entirely shared,
+ or defined.) URL parsing needs to become as solid as HTML parsing.
+ <span data-anolis-ref>RFC3986</span>
+ <span data-anolis-ref>RFC3987</span>
+
+ <li><p>Call them URLs. URI and IRI are just confusing. In practice a single
+ algorithm is used for both so keeping them distinct is not serving anyone.
+ URL also easily wins the search result popularity contest.
+
+ <li><p>Define URL's existing JavaScript API in full detail and add
+ enhancements to make it easier to work with. Add a new <code>URL</code>
+ object as well for URL manipulation without usage of HTML elements. (Useful
+ for Web Workers.)
+</ul>
+
+<p class=note>As the editor learns more about the subject matter the goals
+might increase in scope somewhat.
+
+
+
 <h2 class=no-num>Issues</h2>
 
 <ul class=XXX>
@@ -867,7 +895,10 @@ otherwise.
 
 <h2 class=no-num>Acknowledgments</h2>
 
-<p>Thanks to Simon Pieters for being awesome!
+<p>Thanks to
+Alexandre Morgaut, and
+Simon Pieters
+for being awesome!
 
 
 

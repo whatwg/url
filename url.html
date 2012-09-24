@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-september-2012">Living Standard — Last Updated 21 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-september-2012">Living Standard — Last Updated 24 September 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -33,7 +33,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-21 September 2012, the editors have made this specification available
+24 September 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -47,6 +47,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <!--begin-toc-->
 <ol class="toc">
+ <li><a class="no-num" href="#goals">Goals</a></li>
  <li><a class="no-num" href="#issues">Issues</a></li>
  <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
  <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
@@ -62,6 +63,34 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
+
+
+
+<h2 class="no-num" id="goals">Goals</h2>
+
+<p>The URL standard sets out to make URLs throughout the web platform fully
+predictable and interoperable. This is the plan:
+
+<ul>
+ <li><p>Take the algorithms from RFC 3986 and RFC 3987 and align them with
+ existing implementations. (E.g. spaces, other "illegal" code points, query
+ encoding, equality, canonicalization, are all concepts not entirely shared,
+ or defined.) URL parsing needs to become as solid as HTML parsing.
+ <a href="#refsRFC3986">[RFC3986]</a>
+ <a href="#refsRFC3987">[RFC3987]</a>
+
+ <li><p>Call them URLs. URI and IRI are just confusing. In practice a single
+ algorithm is used for both so keeping them distinct is not serving anyone.
+ URL also easily wins the search result popularity contest.
+
+ <li><p>Define URL's existing JavaScript API in full detail and add
+ enhancements to make it easier to work with. Add a new <a href="#url"><code>URL</code></a>
+ object as well for URL manipulation without usage of HTML elements. (Useful
+ for Web Workers.)
+</ul>
+
+<p class="note">As the editor learns more about the subject matter the goals
+might increase in scope somewhat.
 
 
 
@@ -884,13 +913,22 @@ otherwise.
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
+<dt id="refsRFC3986">[RFC3986]
+<dd><cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, Tim Berners-Lee, Roy Fielding and Larry Masinter. IETF.
+
+<dt id="refsRFC3987">[RFC3987]
+<dd><cite><a href="http://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a></cite>, Martin Dürst and Michel Suignard. IETF.
+
 </dl></div>
 
 
 
 <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-<p>Thanks to Simon Pieters for being awesome!
+<p>Thanks to
+Alexandre Morgaut, and
+Simon Pieters
+for being awesome!
 
 
 
