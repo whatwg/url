@@ -666,7 +666,7 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-search>search</span>;
            attribute DOMString <span title=dom-URL-hash>hash</span>;
 
-  readonly attribute boolean <span title=dom-URL-isInvalid>isInvalid</span>;
+  readonly attribute boolean <span title=dom-URL-valid>valid</span>;
 }</pre>
 
 <p>Any object implementing <code>URLUtils</code> represents a
@@ -885,8 +885,8 @@ steps:
  <i title>override</i>.
 </ol>
 
-<p>The <dfn title=dom-URL-isInvalid><code>isInvalid</code></dfn> attribute
-must return true if the <span>invalid flag</span> is set, or false
+<p>The <dfn title=dom-URL-valid><code>valid</code></dfn> attribute
+must return false if the <span>invalid flag</span> is set, or true
 otherwise.
 
 

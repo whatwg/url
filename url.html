@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-september-2012">Living Standard — Last Updated 25 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2012">Living Standard — Last Updated 26 September 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -33,7 +33,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 September 2012, the editors have made this specification available
+26 September 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -681,7 +681,7 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 
-  readonly attribute boolean <a href="#dom-url-isinvalid" title="dom-URL-isInvalid">isInvalid</a>;
+  readonly attribute boolean <a href="#dom-url-valid" title="dom-URL-valid">valid</a>;
 }</pre>
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
@@ -900,8 +900,8 @@ steps:
  <i title="">override</i>.
 </ol>
 
-<p>The <dfn id="dom-url-isinvalid" title="dom-URL-isInvalid"><code>isInvalid</code></dfn> attribute
-must return true if the <a href="#invalid-flag">invalid flag</a> is set, or false
+<p>The <dfn id="dom-url-valid" title="dom-URL-valid"><code>valid</code></dfn> attribute
+must return false if the <a href="#invalid-flag">invalid flag</a> is set, or true
 otherwise.
 
 
