@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-september-2012">Living Standard — Last Updated 26 September 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-september-2012">Living Standard — Last Updated 27 September 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -33,7 +33,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-26 September 2012, the editors have made this specification available
+27 September 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -677,7 +677,7 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
            attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
            attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
-           attribute DOMString <span title="dom-URL-pathname">pathname</span>;
+           attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
            attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 
@@ -746,9 +746,14 @@ these steps:
    the empty string, append "<code title="">:</code>" and
    <a href="#concept-url-port" title="concept-url-port">port</a> concatenated to
    <var title="">output</var>.
+
+   <li><p>Append "<code title="">/</code>" concatenated with the strings in
+   <a href="#concept-url-path" title="concept-url-path">path</a> (including empty strings),
+   separated from each other by "<code title="">/</code>".
   </ol>
 
- <li><p class="XXX">path
+ <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, append
+ <a href="#concept-url-path" title="concept-url-path">path</a>'s only string (if any).
 
  <li><p>Append <a href="#concept-url-query" title="concept-url-query">query</a> and
  <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> concatenated to
@@ -846,7 +851,33 @@ steps:
  <i title="">input</i> and <b title="">port</b> as <i title="">override</i>.
 </ol>
 
-<p class="XXX">pathname
+<p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute
+must run these steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
+
+ <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, return
+ <a href="#concept-url-path" title="concept-url-path">path</a>'s only string.
+
+ <li><p>Return "<code title="">/</code>" concatenated with the strings in
+ <a href="#concept-url-path" title="concept-url-path">path</a> (including empty strings),
+ separated from each other by "<code title="">/</code>".
+</ol>
+
+<p>Setting the <a href="#dom-url-pathname"><code title="dom-URL-pathname">pathname</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
+ <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
+
+ <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
+
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
+ <i title="">input</i> and <b title="">hierarchical path start</b> as
+ <i title="">override</i>.
+</ol>
 
 <p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
 run these steps:

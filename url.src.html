@@ -731,9 +731,14 @@ these steps:
    the empty string, append "<code title>:</code>" and
    <span title=concept-url-port>port</span> concatenated to
    <var title>output</var>.
+
+   <li><p>Append "<code title>/</code>" concatenated with the strings in
+   <span title=concept-url-path>path</span> (including empty strings),
+   separated from each other by "<code title>/</code>".
   </ol>
 
- <li><p class=XXX>path
+ <li><p>If the <span>hierarchical flag</span> is unset, append
+ <span title=concept-url-path>path</span>'s only string (if any).
 
  <li><p>Append <span title=concept-url-query>query</span> and
  <span title=concept-url-fragment>fragment</span> concatenated to
@@ -831,7 +836,33 @@ steps:
  <i title>input</i> and <b title>port</b> as <i title>override</i>.
 </ol>
 
-<p class=XXX>pathname
+<p>The <dfn title=dom-URL-pathname><code>pathname</code></dfn> attribute
+must run these steps:
+
+<ol>
+ <li><p>If the <span>invalid flag</span> is set, return the empty string.
+
+ <li><p>If the <span>hierarchical flag</span> is unset, return
+ <span title=concept-url-path>path</span>'s only string.
+
+ <li><p>Return "<code title>/</code>" concatenated with the strings in
+ <span title=concept-url-path>path</span> (including empty strings),
+ separated from each other by "<code title>/</code>".
+</ol>
+
+<p>Setting the <code title=dom-URL-pathname>pathname</code> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <span>invalid flag</span> is set, or the
+ <span>hierarchical flag</span> is unset, terminate these steps.
+
+ <li><p>Set <span title=concept-url-path>path</span> to the empty list.
+
+ <li><p><span title=concept-url-parse>Parse</span> with the given value as
+ <i title>input</i> and <b title>hierarchical path start</b> as
+ <i title>override</i>.
+</ol>
 
 <p>The <dfn title=dom-URL-search><code>search</code></dfn> attribute must
 run these steps:
