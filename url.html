@@ -122,13 +122,8 @@ not appear in all uppercase letters in this specification.
 
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
-<p><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#code-point">Code point</a> is not cross-referenced
-throughout the specification for brevity. A string is a list of code points.
-
-<p>The <dfn id="space-character" title="space character">space characters</dfn>, for the
-purposes of this specification, are U+0020 SPACE, U+0009 CHARACTER
-TABULATION (tab), U+000A LINE FEED (LF), U+000C FORM FEED (FF), and
-U+000D CARRIAGE RETURN (CR).
+<p>Some terms used in this specification are defined in the
+Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 
 
@@ -281,7 +276,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <a href="#concept-url-input" title="concept-url-input">input</a> to <var title="">input</var>.
 
  <li><p>Remove any leading and trailing
- <a href="#space-character" title="space character">space characters</a> from
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> from
  <var title="">input</var>.
 
  <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">input</var>.
@@ -938,7 +933,10 @@ otherwise.
 
 
 <h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsHTML">[HTML]
+<div id="anolis-references"><dl><dt id="refsENCODING">[ENCODING]
+<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Standard</a></cite>, Anne van Kesteren. WHATWG.
+
+<dt id="refsHTML">[HTML]
 <dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsORIGIN">[ORIGIN]
