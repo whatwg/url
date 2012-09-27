@@ -55,7 +55,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#urls"><span class="secno">4 </span>URLs</a>
   <ol>
    <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
-   <li><a href="#creating"><span class="secno">4.2 </span>Creating</a></li>
+   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></li>
    <li><a href="#api"><span class="secno">4.3 </span>API</a>
     <ol>
      <li><a href="#constructor"><span class="secno">4.3.1 </span>Constructor</a></li>
@@ -246,10 +246,9 @@ same row.
 
 
 
-<h3 id="creating"><span class="secno">4.2 </span>Creating</h3>
+<h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
 
-<p>To <dfn id="concept-url-create" title="concept-url-create">create</dfn> a
-<a href="#concept-url" title="concept-url">URL</a> from a string <i title="">input</i>,
+<p>To <dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <i title="">input</i>,
 optionally with a <a href="#concept-url" title="concept-url">URL</a> <i title="">base</i>
 and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <i title="">encoding</i>, run these steps:
@@ -279,16 +278,17 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> from
  <var title="">input</var>.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">input</var>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a>
+ <var title="">input</var>.
 
  <li><p>Return <var title="">url</var>.
 </ol>
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
-<a href="#concept-url-parse" title="concept-url-parse">parse</a> algorithm. To
-<dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <var title="">input</var>,
-optionally with an override state <var title="">override</var>, run these
-steps:
+<a href="#concept-url-interpret" title="concept-url-interpret">interpret</a> algorithm. To
+<dfn id="concept-url-interpret" title="concept-url-interpret">interpret</dfn> a string
+<var title="">input</var>, optionally with an override state
+<var title="">override</var>, run these steps:
 
 <ol>
  <li><p>Let <var title="">state</var> be <var title="">override</var> if given, or
@@ -696,16 +696,14 @@ constructor must run these steps:
 
 <ol>
  <li><p>If <var title="">base</var> is a string,
- <a href="#concept-url-create" title="concept-url-create">create</a> a
- <a href="#concept-url" title="concept-url">URL</a> from <var title="">base</var> and set
+ <a href="#concept-url-parse" title="concept-url-parse">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
  <li><p>If <var title="">base</var> is not null and its
  <a href="#invalid-flag">invalid flag</a> is set, throw a
  "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
 
- <li><p><a href="#concept-url-create" title="concept-url-create">Create</a> a
- <a href="#concept-url" title="concept-url">URL</a> from <var title="">url</var> with
+ <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">url</var> with
  <var title="">base</var> as <i title="">base</i>, associate it with a new
  <a href="#url"><code>URL</code></a> object, and then return that <a href="#url"><code>URL</code></a> object.
 </ol>
@@ -761,8 +759,8 @@ run these steps:
 <ol>
  <li><p><a href="#clear">Clear</a>.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value as <i title="">input</i>.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
@@ -788,9 +786,9 @@ run these steps:
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, terminate these steps.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value and
- "<code title="">:</code>" concatenated as <i title="">input</i> and
- <b title="">scheme start</b> as <i title="">override</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value and "<code title="">:</code>" concatenated as <i title="">input</i>
+ and <b title="">scheme start</b> as <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
@@ -814,8 +812,9 @@ steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i> and <b title="">host</b> as <i title="">override</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value as <i title="">input</i> and <b title="">host</b> as
+ <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
@@ -828,8 +827,9 @@ run these steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i> and <b title="">hostname</b> as <i title="">override</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value as <i title="">input</i> and <b title="">hostname</b> as
+ <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must return
@@ -842,8 +842,9 @@ steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i> and <b title="">port</b> as <i title="">override</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value as <i title="">input</i> and <b title="">port</b> as
+ <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute
@@ -869,9 +870,9 @@ run these steps:
 
  <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with the given value as
- <i title="">input</i> and <b title="">hierarchical path start</b> as
- <i title="">override</i>.
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ given value as <i title="">input</i> and <b title="">hierarchical path start</b>
+ as <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
@@ -895,7 +896,7 @@ these steps:
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with
  <var title="">input</var> as <i title="">input</i> and <b title="">query</b> as
  <i title="">override</i>.
 </ol>
@@ -921,7 +922,7 @@ steps:
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">#</code>" removed, if any.
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> with
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with
  <var title="">input</var> as <i title="">input</i> and <b title="">fragment</b> as
  <i title="">override</i>.
 </ol>
