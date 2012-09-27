@@ -759,8 +759,12 @@ run these steps:
 <ol>
  <li><p><a href="#clear">Clear</a>.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
- given value as <i title="">input</i>.
+ <li><p>Set <a href="#concept-url-input" title="concept-url-input">input</a> to the given value.
+
+ <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a>
+ <a href="#concept-url-input" title="concept-url-input">input</a>, with any leading and trailing
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> removed, as
+ <i title="">input</i>.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
