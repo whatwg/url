@@ -344,8 +344,9 @@ and an <span data-anolis-spec=encoding>encoding</span>
        <li><p>Otherwise, set <var title>state</var> to <b title>path</b>.
       </ol>
 
-     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme</b>
-     and start over (from the first code point in <var title>input</var>).
+     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme</b>,
+     <var title>buffer</var> to the empty string, and start over (from the
+     first code point in <var title>input</var>).
     </ol>
 
    <dt><b title>no scheme</b>
