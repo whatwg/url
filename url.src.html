@@ -660,10 +660,18 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-port>port</span>;
            attribute DOMString <span title=dom-URL-pathname>pathname</span>;
            attribute DOMString <span title=dom-URL-search>search</span>;
+  readonly attribute <span>URLQuery</span> <span title=dom-URL-query>query</span>;
            attribute DOMString <span title=dom-URL-hash>hash</span>;
 
   readonly attribute boolean <span title=dom-URL-valid>valid</span>;
-}</pre>
+};
+
+interface <dfn>URLQuery</dfn> {
+  DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
+  sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
+  void <span title=dom-URLQuery-set>set</span>(DOMString name, (sequence&lt;DOMString> or DOMString) <var title>value</var>);
+  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>);
+};</pre>
 
 <p>Any object implementing <code>URLUtils</code> represents a
 <span title=concept-url>URL</span>. Thus <code>URL</code> represents a
@@ -891,6 +899,8 @@ these steps:
  <i title>override</i>.
 </ol>
 
+<p class=XXX>The <dfn title=dom-URL-query><code>query</code></dfn> ...
+
 <p>The <dfn title=dom-URL-hash><code>hash</code></dfn> attribute must run
 these steps:
 
@@ -932,9 +942,11 @@ otherwise.
 
 <p>Thanks to
 Alexandre Morgaut,
+Erik Arvidsson,
 Glenn Maynard,
-James Graham, and
-Simon Pieters
+James Graham,
+Simon Pieters, and
+Tab Atkins
 for being awesome!
 
 
