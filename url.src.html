@@ -641,7 +641,7 @@ and an <span data-anolis-spec=encoding>encoding</span>
 
 
 
-<h3>API</h3>
+<h2>API</h2>
 
 <pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString)? <var title>base</var> = null)]
 interface <dfn>URL</dfn> {
@@ -663,25 +663,21 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-hash>hash</span>;
 
   readonly attribute boolean <span title=dom-URL-valid>valid</span>;
-};
-
-interface <dfn>URLQuery</dfn> {
-  DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
-  sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-set>set</span>(DOMString name, (sequence&lt;DOMString> or DOMString) <var title>value</var>);
-  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>);
 };</pre>
 
 <p>Any object implementing <code>URLUtils</code> represents a
 <span title=concept-url>URL</span>. Thus <code>URL</code> represents a
 <span title=concept-url>URL</span>.
 
+<p>Any object implementing <code>URLUtils</code> also has one associated
+<code>URLQuery</code> object.
+
 <p class=note>The <code>URL</code> object and
 <span title=concept-url>URL</span> share the same name because nothing else
 makes much sense and when it comes down to it almost nobody cares.
 
 
-<h4>Constructor</h4>
+<h3>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
 <dfn title=dom-URL><code>URL(<var title>url</var> [, <var title>base</var>])</code></dfn>
@@ -702,7 +698,10 @@ constructor must run these steps:
 </ol>
 
 
-<h4><code>URLUtils</code> members</h4>
+<h3>Interface <code title>URLUtils</code></h3>
+
+<p class=note>The <code>URLUtils</code> interface is not exposed on the
+global object. It augments other interfaces, such as <code>URL</code>.
 
 <p>The <dfn title=dom-URL-href><code>href</code></dfn> attribute must run
 these steps:
@@ -898,7 +897,8 @@ these steps:
  <i title>override</i>.
 </ol>
 
-<p class=XXX>The <dfn title=dom-URL-query><code>query</code></dfn> ...
+<p>The <dfn title=dom-URL-query><code>query</code></dfn> attribute must
+return the associated <code>URLQuery</code> object.
 
 <p>The <dfn title=dom-URL-hash><code>hash</code></dfn> attribute must run
 these steps:
@@ -929,6 +929,18 @@ steps:
 <p>The <dfn title=dom-URL-valid><code>valid</code></dfn> attribute
 must return false if the <span>invalid flag</span> is set, or true
 otherwise.
+
+
+<h3>Interface <code title>URLQuery</code></h3>
+
+<pre class=idl>interface <dfn>URLQuery</dfn> {
+  DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
+  sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
+  void <span title=dom-URLQuery-set>set</span>(DOMString name, (sequence&lt;DOMString> or DOMString) <var title>value</var>);
+  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>);
+};</pre>
+
+<p class=XXX>...
 
 
 

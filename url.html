@@ -6,7 +6,7 @@
 <div class="head">
 
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-october-2012">Living Standard — Last Updated 17 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-october-2012">Living Standard — Last Updated 19 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -33,7 +33,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-17 October 2012, the editors have made this specification available
+19 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -55,11 +55,12 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#urls"><span class="secno">4 </span>URLs</a>
   <ol>
    <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
-   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></li>
-   <li><a href="#api"><span class="secno">4.3 </span>API</a>
-    <ol>
-     <li><a href="#constructor"><span class="secno">4.3.1 </span>Constructor</a></li>
-     <li><a href="#urlutils-members"><span class="secno">4.3.2 </span><code>URLUtils</code> members</a></ol></ol></li>
+   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></ol></li>
+ <li><a href="#api"><span class="secno">5 </span>API</a>
+  <ol>
+   <li><a href="#constructors"><span class="secno">5.1 </span>Constructors</a></li>
+   <li><a href="#interface-urlutils"><span class="secno">5.2 </span>Interface <code title="">URLUtils</code></a></li>
+   <li><a href="#interface-urlquery"><span class="secno">5.3 </span>Interface <code title="">URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -656,7 +657,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
 
 
 
-<h3 id="api"><span class="secno">4.3 </span>API</h3>
+<h2 id="api"><span class="secno">5 </span>API</h2>
 
 <pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString)? <var title="">base</var> = null)]
 interface <dfn id="url">URL</dfn> {
@@ -678,25 +679,21 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 
   readonly attribute boolean <a href="#dom-url-valid" title="dom-URL-valid">valid</a>;
-};
-
-interface <dfn id="urlquery">URLQuery</dfn> {
-  DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
-  sequence&lt;DOMString&gt; <span title="dom-URLQuery-getAll">getAll</span>(DOMString <var title="">name</var>);
-  void <span title="dom-URLQuery-set">set</span>(DOMString name, (sequence&lt;DOMString&gt; or DOMString) <var title="">value</var>);
-  void <span title="dom-URLQuery-delete">delete</span>(DOMString <var title="">name</var>);
 };</pre>
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
 <a href="#concept-url" title="concept-url">URL</a>. Thus <a href="#url"><code>URL</code></a> represents a
 <a href="#concept-url" title="concept-url">URL</a>.
 
+<p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> also has one associated
+<a href="#urlquery"><code>URLQuery</code></a> object.
+
 <p class="note">The <a href="#url"><code>URL</code></a> object and
 <a href="#concept-url" title="concept-url">URL</a> share the same name because nothing else
 makes much sense and when it comes down to it almost nobody cares.
 
 
-<h4 id="constructor"><span class="secno">4.3.1 </span>Constructor</h4>
+<h3 id="constructors"><span class="secno">5.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
 <dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var> [, <var title="">base</var>])</code></dfn>
@@ -717,7 +714,10 @@ constructor must run these steps:
 </ol>
 
 
-<h4 id="urlutils-members"><span class="secno">4.3.2 </span><a href="#urlutils"><code>URLUtils</code></a> members</h4>
+<h3 id="interface-urlutils"><span class="secno">5.2 </span>Interface <code title="">URLUtils</code></h3>
+
+<p class="note">The <a href="#urlutils"><code>URLUtils</code></a> interface is not exposed on the
+global object. It augments other interfaces, such as <a href="#url"><code>URL</code></a>.
 
 <p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code></dfn> attribute must run
 these steps:
@@ -913,7 +913,8 @@ these steps:
  <i title="">override</i>.
 </ol>
 
-<p class="XXX">The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> ...
+<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
+return the associated <a href="#urlquery"><code>URLQuery</code></a> object.
 
 <p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute must run
 these steps:
@@ -944,6 +945,18 @@ steps:
 <p>The <dfn id="dom-url-valid" title="dom-URL-valid"><code>valid</code></dfn> attribute
 must return false if the <a href="#invalid-flag">invalid flag</a> is set, or true
 otherwise.
+
+
+<h3 id="interface-urlquery"><span class="secno">5.3 </span>Interface <code title="">URLQuery</code></h3>
+
+<pre class="idl">interface <dfn id="urlquery">URLQuery</dfn> {
+  DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
+  sequence&lt;DOMString&gt; <span title="dom-URLQuery-getAll">getAll</span>(DOMString <var title="">name</var>);
+  void <span title="dom-URLQuery-set">set</span>(DOMString name, (sequence&lt;DOMString&gt; or DOMString) <var title="">value</var>);
+  void <span title="dom-URLQuery-delete">delete</span>(DOMString <var title="">name</var>);
+};</pre>
+
+<p class="XXX">...
 
 
 
