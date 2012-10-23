@@ -5,8 +5,9 @@
 
 <div class="head">
 
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-october-2012">Living Standard — Last Updated 22 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-october-2012">Living Standard — Last Updated 23 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -15,7 +16,7 @@
  <dt>Participate:</dt>
  <dd>Send feedback to
   <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
-  <!--(<a href=XXX>archives</a>)--> or
+  (<a href="http://www.whatwg.org/mailing-list#specs">archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
  <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
@@ -33,7 +34,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-22 October 2012, the editors have made this specification available
+23 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -130,6 +131,8 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <h2 id="host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</h2>
 
+<p>A <dfn id="concept-host" title="concept-host">host</dfn> is <span class="XXX">...</span>
+
 <ul class="XXX">
  <li>Normalize IPv6 addresses
  <li>IDNA2003 vs IDNA2008 (and also UTS #46)
@@ -139,33 +142,117 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <h2 id="urls"><span class="secno">4 </span>URLs</h2>
 
-<p>A <dfn id="concept-url" title="concept-url">URL</dfn> identifies a resource. It consists of
-the following components:
-<dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn>,
-<dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn>,
-<dfn id="concept-url-host" title="concept-url-host">host</dfn>,
-<dfn id="concept-url-port" title="concept-url-port">port</dfn>,
-<dfn id="concept-url-path" title="concept-url-path">path</dfn>,
-<dfn id="concept-url-query" title="concept-url-query">query</dfn>, and
-<dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn>.
+<p>An <dfn id="hierarchical-scheme">hierarchical scheme</dfn> is a
+<a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> listed in the first column of
+the following table. It has an associated default
+<a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> listed in the second column on the
+same row.
 
-<p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
+<table>
+ <tr><th><a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">Scheme</a>
+     <th><a href="#concept-parsed-url-port" title="concept-parsed-url-port">Port</a>
+ <tr><td>"<code title="">ftp</code>"<td>21
+ <tr><td>"<code title="">gopher</code>"<td>70
+ <tr><td>"<code title="">http</code>"<td>80
+ <tr><td>"<code title="">https</code>"<td>443
+ <tr><td>"<code title="">ws</code>"<td>80
+ <tr><td>"<code title="">wss</code>"<td>443
+</table>
+
+
+<h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
+
+<p class="XXX">This is not finished, but feedback on this sketch is welcome.
+
+<p>A <dfn id="concept-url" title="concept-url">URL</dfn> is a string that identifies a
+resource. A <a href="#concept-url" title="concept-url">URL</a> is either a
+<a href="#concept-relative-url" title="concept-relative-url">relative URL</a> or an
+<a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a>.
+
+<p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> is a
+<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, followed by
+"<code title="">:</code>", followed by
+<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
+followed by a <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
+
+<p>The syntax of <dfn id="concept-url-scheme-data" title="concept-url-scheme-data">scheme data</dfn>
+depends on the <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and is typically
+defined alongside it. For an <a href="#hierarchical-scheme">hierarchical scheme</a>,
+<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a> is a
+<a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>.
+
+<p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is <span class="XXX">...</span>
+
+<p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is either a
+<a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
+<a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
+<a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>, a
+<a href="#concept-url-query" title="concept-url-query">query</a>, or a
+<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>. A
+<a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative to a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> with an
+<a href="#hierarchical-scheme">hierarchical scheme</a>.
+
+<p>A <dfn id="concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL is
+"<code title="">//</code>", optionally followed by
+<span title="concept-url-userinfo">userinfo</span> and "<code title="">@</code>",
+followed by a <span title="concept-host">host</span>, optionally followed
+by "<code title="">:</code>" and a <span title="concept-url-port">port</span>,
+optionally followed by a
+<span title="concept-absolute-path-relative-url">absolute-path-relative URL</span>,
+and finally optionally followed by a
+<span title="concept-url-query">query</span>.
+
+</dfn><p>A <dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn> is
+<span class="XXX">...</span>
+<!-- "a userinfo" could use better phrasing -->
+
+<p>A <dfn id="concept-url-port" title="concept-url-port">port</dfn> is <span class="XXX">...</span>
+
+<p>An <dfn id="concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</dfn>
+is "<code title="">/</code>", followed by a
+<a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>.
+
+<p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is
+<span class="XXX">...</span>
+
+<p>A <dfn id="concept-url-query" title="concept-url-query">query</dfn> is "<code title="">?</code>",
+followed by <span class="XXX">...</span>
+
+<p>A <dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn> is
+"<code title="">#</code>", followed by <span class="XXX">...</span>
+
+
+<h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
+
+<p>A <dfn id="concept-parsed-url" title="concept-parsed-url">parsed URL</dfn> consists of the
+following components:
+<dfn id="concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</dfn>,
+<dfn id="concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</dfn>,
+<dfn id="concept-parsed-url-host" title="concept-parsed-url-host">host</dfn>,
+<dfn id="concept-parsed-url-port" title="concept-parsed-url-port">port</dfn>,
+<dfn id="concept-parsed-url-path" title="concept-parsed-url-path">path</dfn>,
+<dfn id="concept-parsed-url-query" title="concept-parsed-url-query">query</dfn>, and
+<dfn id="concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</dfn>.
+
+<p>A <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
 <dfn id="invalid-flag">invalid flag</dfn>, <dfn id="hierarchical-flag">hierarchical flag</dfn>,
-<dfn id="concept-url-input" title="concept-url-input">input</dfn>,
-<dfn id="concept-url-base" title="concept-url-base">base URL</dfn>,
-and <dfn id="concept-url-query-encoding" title="concept-url-query-encoding">query encoding</dfn>.
+<dfn id="concept-parsed-url-input" title="concept-parsed-url-input">input</dfn>,
+<dfn id="concept-parsed-url-base" title="concept-parsed-url-base">base URL</dfn>,
+and <dfn id="concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</dfn>.
 
-<p>To <dfn id="clear">clear</dfn> a <a href="#concept-url" title="concept-url">URL</a>, set its
-<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-<a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>,
-<a href="#concept-url-host" title="concept-url-host">host</a>,
-<a href="#concept-url-port" title="concept-url-port">port</a>,
-<a href="#concept-url-query" title="concept-url-query">query</a>, and
-<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string, and
-its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
+<p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
+set its <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+<a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a>,
+<a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+<a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
+<a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a>, and
+<a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to the empty string, and
+its <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to the empty list.
 
-<p>To <dfn id="invalidate">invalidate</dfn> a <a href="#concept-url" title="concept-url">URL</a>,
-<a href="#clear">clear</a> it, and then set its <a href="#invalid-flag">invalid flag</a>.
+<p>To <dfn id="invalidate">invalidate</dfn> a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, <a href="#clear">clear</a> it, and
+then set its <a href="#invalid-flag">invalid flag</a>.
 
 <p>To make a code point <var title="">c</var> <dfn id="percent-escaped">percent escaped</dfn>, run
 these steps:
@@ -204,7 +291,7 @@ run these steps:
  <li>
   <p>Let <var title="">bytes</var> be the result of running
   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on <var title="">c</var> using
-  <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> as encoding.
+  <a href="#concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</a> as encoding.
 
   <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
   emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
@@ -218,45 +305,17 @@ run these steps:
 
 <p class="note">Compared to <a href="#percent-escaped">percent escaped</a> this algorithm does
 not escape "<code title="">?</code>" and takes the
-<a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> into account.
+<a href="#concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</a> into account.
 
 
-
-<p>An <dfn id="hierarchical-scheme">hierarchical scheme</dfn> is a
-<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> listed in the first column of
-the following table. It has an associated default
-<a href="#concept-url-port" title="concept-url-port">port</a> listed in the second column on the
-same row.
-
-<table>
- <tr><th><a href="#concept-url-scheme" title="concept-url-scheme">Scheme</a>
-     <th><a href="#concept-url-port" title="concept-url-port">Port</a>
- <tr><td>"<code title="">ftp</code>"<td>21
- <tr><td>"<code title="">gopher</code>"<td>70
- <tr><td>"<code title="">http</code>"<td>80
- <tr><td>"<code title="">https</code>"<td>443
- <tr><td>"<code title="">ws</code>"<td>80
- <tr><td>"<code title="">wss</code>"<td>443
-</table>
-
-
-
-<h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
-
-<p class="XXX">
-
-
-
-<h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
-
-<p>To <dfn id="concept-url-parse" title="concept-url-parse">parse</dfn> a string <i title="">input</i>,
-optionally with a <a href="#concept-url" title="concept-url">URL</a> <i title="">base</i>
-and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<p>To <dfn id="concept-parsed-url-parse" title="concept-parsed-url-parse">parse</dfn> a string <i title="">input</i>,
+optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
+<i title="">base</i>, and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <i title="">encoding</i>, run these steps:
 
 <ol>
  <li><p>Let <var title="">url</var> be a new
- <a href="#concept-url" title="concept-url">URL</a>.
+ <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
 
  <li><p><a href="#clear">Clear</a> <var title="">url</var>.
 
@@ -264,30 +323,30 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Set <var title="">url</var>'s
- <a href="#concept-url-query-encoding" title="concept-url-query-encoding">query encoding</a> to
+ <a href="#concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</a> to
  <i title="">encoding</i>.
 
  <li><p>If <i title="">base</i> is not given, set it to null.
 
  <li><p>Set <var title="">url</var>'s
- <a href="#concept-url-base" title="concept-url-base">base URL</a> to <i title="">base</i>.
+ <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> to <i title="">base</i>.
 
  <li><p>Set <var title="">url</var>'s
- <a href="#concept-url-input" title="concept-url-input">input</a> to <var title="">input</var>.
+ <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a> to <var title="">input</var>.
 
  <li><p>Remove any leading and trailing
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> from
  <var title="">input</var>.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a>
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
  <var title="">input</var>.
 
  <li><p>Return <var title="">url</var>.
 </ol>
 
-<p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
-<a href="#concept-url-interpret" title="concept-url-interpret">interpret</a> algorithm. To
-<dfn id="concept-url-interpret" title="concept-url-interpret">interpret</dfn> a string
+<p>A <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
+<a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">interpret</a> algorithm. To
+<dfn id="concept-parsed-url-interpret" title="concept-parsed-url-interpret">interpret</dfn> a string
 <var title="">input</var>, optionally with an override state
 <var title="">override</var>, run these steps:
 
@@ -335,7 +394,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
 
      <li>
       <p>Otherwise, if <var title="">c</var> is "<code title="">:</code>", set
-      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
+      <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
       <var title="">buffer</var>, <var title="">buffer</var> to the empty string,
       and then run these substeps:
 
@@ -343,15 +402,15 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
        <li><p>If <var title="">override</var> is given,
        terminate this algorithm.
 
-       <li><p>If <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
+       <li><p>If <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is
        an <a href="#hierarchical-scheme">hierarchical scheme</a>, set the
        <a href="#hierarchical-flag">hierarchical flag</a>.
 
        <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is set,
-       <a href="#concept-url-base" title="concept-url-base">base URL</a> is not null and
-       <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
-       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is equal to
-       <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, set
+       <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> is not null and
+       <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
+       <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is equal to
+       <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>, set
        <var title="">state</var> to <b title="">hierarchical</b>.
 
        <li><p>Otherwise, if the <a href="#hierarchical-flag">hierarchical flag</a> is set, set
@@ -367,15 +426,15 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
 
    <dt><b title="">no scheme</b>
    <dd>
-    <p>If <a href="#concept-url-base" title="concept-url-base">base URL</a> is null, or
-    <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
-    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not an
+    <p>If <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> is null, or
+    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
+    <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is not an
     <a href="#hierarchical-scheme">hierarchical scheme</a>, <a href="#invalidate">invalidate</a>.
 
     <p class="note">You do not want to check
-    <a href="#concept-url-base" title="concept-url-base">base URL</a>'s
+    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
     <a href="#hierarchical-flag">hierarchical flag</a> here, as the
-    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> itself can have been
+    <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> itself can have been
     changed to something non-sensical through the
     <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
 
@@ -385,21 +444,21 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
    <dt><b title="">hierarchical</b>
    <dd>
     <p>Let <var title="">base</var> be
-    <a href="#concept-url-base" title="concept-url-base">base URL</a>, set the
+    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>, set the
     <a href="#hierarchical-flag">hierarchical flag</a>, and then, based on <var title="">c</var>:
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
      <dd>
-      <p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-      <a href="#concept-url-host" title="concept-url-host">host</a> to
-      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-      <a href="#concept-url-port" title="concept-url-port">port</a> to
-      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-      <a href="#concept-url-path" title="concept-url-path">path</a> to
-      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
-      <a href="#concept-url-query" title="concept-url-query">query</a> to
-      <var title="">base</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>,
+      <p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+      <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+      <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
+      <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>,
+      <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a>,
       and then terminate these steps.
 
      <dt>"<code title="">/</code>"
@@ -408,57 +467,57 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
       <p>If the code point in <var title="">input</var> after
       <var title="">c</var> is either "<code title="">/</code>" or
       "<code title="">\</code>", set
-      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+      <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
       and <var title="">state</var> to <b title="">authority start</b>.
 
       <p>Otherwise, set
-      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-      <a href="#concept-url-host" title="concept-url-host">host</a> to
-      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-      <a href="#concept-url-port" title="concept-url-port">port</a> to
-      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+      <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+      <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+      <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
+      <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
       <var title="">state</var> to <b title="">hierarchical path start</b>,
       and rerun this state machine for <var title="">c</var>.
 
      <dt>"<code title="">?</code>"
-     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-     <a href="#concept-url-host" title="concept-url-host">host</a> to
-     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-     <a href="#concept-url-port" title="concept-url-port">port</a> to
-     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-     <a href="#concept-url-path" title="concept-url-path">path</a> to
-     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
-     <a href="#concept-url-query" title="concept-url-query">query</a> to "<code title="">?</code>",
+     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+     <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>,
+     <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> to "<code title="">?</code>",
      and <var title="">state</var> to <b title="">query</b>.
 
      <dt>"<code title="">#</code>"
-     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-     <a href="#concept-url-host" title="concept-url-host">host</a> to
-     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-     <a href="#concept-url-port" title="concept-url-port">port</a> to
-     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-     <a href="#concept-url-path" title="concept-url-path">path</a> to
-     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
-     <a href="#concept-url-query" title="concept-url-query">query</a> to
-     <var title="">base</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>,
-     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+     <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>,
+     <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a>,
+     <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
      "<code title="">#</code>", and <var title="">state</var> to
      <b title="">fragment</b>.
 
      <dt>Otherwise
-     <dd><p>Set <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-     <a href="#concept-url-host" title="concept-url-host">host</a> to
-     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-     <a href="#concept-url-port" title="concept-url-port">port</a> to
-     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-     <a href="#concept-url-path" title="concept-url-path">path</a> to
-     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
-     remove <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
+     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
+     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+     <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to
+     <var title="">base</var>'s <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>, then
+     remove <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>'s last string, set
      <var title="">state</var> to <b title="">hierarchical path start</b>,
      and rerun this state machine for <var title="">c</var>.
     </dl>
@@ -478,13 +537,13 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
       <ol>
        <li><p>If the <var title="">@ flag</var> is set, append
        "<code title="">%40</code>" to
-       <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>.
+       <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a>.
 
        <li><p>Set the <var title="">@ flag</var>.
 
        <li><p>Append each code point in <var title="">buffer</var>,
        <a href="#percent-escaped">percent escaped</a>, to
-       <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>
+       <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a>
 
        <li><p>Set <var title="">buffer</var> to the empty string.
       </ol>
@@ -507,7 +566,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
     <ol>
      <li><p>If <var title="">c</var> is "<code title="">:</code>" and
      the <var title="">[] flag</var> is unset, set
-     <a href="#concept-url-host" title="concept-url-host">host</a> to <var title="">buffer</var>,
+     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to <var title="">buffer</var>,
      <!-- XXX host normalize -->
      <var title="">buffer</var> to the empty string, <var title="">state</var>
      to <b title="">port</b>, and then only if <var title="">override</var> is
@@ -517,7 +576,7 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
      <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>",
      "<code title="">\</code>", "<code title="">?</code>", or
      "<code title="">#</code>", set
-     <a href="#concept-url-host" title="concept-url-host">host</a> to <var title="">buffer</var>,
+     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to <var title="">buffer</var>,
      <!-- XXX host normalize -->
      <var title="">buffer</var> to the empty string, <var title="">state</var>
      to <b title="">hierarchical path start</b>, and then only if
@@ -569,18 +628,18 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
    <dd>
     <ol>
      <li><p>Append an empty string to
-     <a href="#concept-url-path" title="concept-url-path">path</a>.
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
 
      <li><p>If <var title="">override</var> is not given and <var title="">c</var>
      is "<code title="">#</code>", set
-     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+     <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
      "<code title="">#</code>" and <var title="">state</var> to
      <b title="">fragment</b>.
 
      <li><p>Otherwise, if <var title="">c</var> is not the
      <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var>,
      <a href="#percent-escaped">percent escaped</a>, to the only string in
-     <a href="#concept-url-path" title="concept-url-path">path</a>.
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
     </ol>
 
    <dt><b title="">hierarchical path start</b>
@@ -601,31 +660,31 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
        <li><p>If <var title="">buffer</var> is "<code title="">..</code>" and
        <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
        "<code title="">/</code>", and "<code title="">\</code>", set the last
-       string in <a href="#concept-url-path" title="concept-url-path">path</a> to the empty
+       string in <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to the empty
        string.
 
        <li><p>Otherwise, if <var title="">buffer</var> is
        "<code title="">..</code>", remove the last string from
-       <a href="#concept-url-path" title="concept-url-path">path</a>.
+       <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
 
        <li><p>Otherwise, if <var title="">buffer</var> is
        "<code title="">.</code>" and <var title="">c</var> is one of
        <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
        "<code title="">\</code>", append an empty string to
-       <a href="#concept-url-path" title="concept-url-path">path</a>.
+       <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
 
        <li><p>Otherwise, if <var title="">buffer</var> is not
        "<code title="">.</code>", append <var title="">buffer</var> to
-       <a href="#concept-url-path" title="concept-url-path">path</a>.
+       <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
 
        <li><p>Set <var title="">buffer</var> to the empty string.
 
        <li><p>If <var title="">c</var> is "<code title="">?</code>", set
-       <a href="#concept-url-query" title="concept-url-query">query</a> to "<code title="">?</code>",
+       <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> to "<code title="">?</code>",
        and <var title="">state</var> to <b title="">query</b>.
 
        <li><p>If <var title="">c</var> is "<code title="">#</code>", set
-       <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+       <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
        "<code title="">#</code>", and <var title="">state</var> to
        <b title="">fragment</b>.
       </ol>
@@ -640,18 +699,18 @@ and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spe
     <ol>
      <li><p>If <var title="">override</var> is not given and <var title="">c</var>
      is "<code title="">#</code>", set
-     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
+     <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
      "<code title="">#</code>", and state to <b title="">fragment</b>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
      U+000D, append <var title="">c</var>, <a href="#query-percent-escaped">query percent escaped</a>,
-     to <a href="#concept-url-query" title="concept-url-query">query</a>.
+     to <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a>.
     </ol>
 
    <dt><b title="">fragment</b>
    <dd><p>If <var title="">c</var> is none of U+0009, U+000A, and U+000D,
    append <var title="">c</var>, <a href="#percent-escaped">percent escaped</a>, to
-   <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
+   <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
   </dl>
 </ol>
 
@@ -682,15 +741,15 @@ interface <dfn id="urlutils">URLUtils</dfn> {
 };</pre>
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
-<a href="#concept-url" title="concept-url">URL</a>. Thus <a href="#url"><code>URL</code></a> represents a
-<a href="#concept-url" title="concept-url">URL</a>.
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>. Thus <a href="#url"><code>URL</code></a>
+represents a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> also has one associated
 <a href="#urlquery"><code>URLQuery</code></a> object.
 
 <p class="note">The <a href="#url"><code>URL</code></a> object and
-<a href="#concept-url" title="concept-url">URL</a> share the same name because nothing else
-makes much sense and when it comes down to it almost nobody cares.
+<a href="#concept-url" title="concept-url">URL</a> share the same name, because calling the
+exposed object <code title="">ParsedURL</code> would be ugly.
 
 
 <h3 id="constructors"><span class="secno">5.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
@@ -701,14 +760,14 @@ constructor must run these steps:
 
 <ol>
  <li><p>If <var title="">base</var> is a string,
- <a href="#concept-url-parse" title="concept-url-parse">parse</a> <var title="">base</var> and set
+ <a href="#concept-parsed-url-parse" title="concept-parsed-url-parse">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
  <li><p>If <var title="">base</var> is not null and its
  <a href="#invalid-flag">invalid flag</a> is set, throw a
  "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
 
- <li><p><a href="#concept-url-parse" title="concept-url-parse">Parse</a> <var title="">url</var> with
+ <li><p><a href="#concept-parsed-url-parse" title="concept-parsed-url-parse">Parse</a> <var title="">url</var> with
  <var title="">base</var> as <i title="">base</i>, associate it with a new
  <a href="#url"><code>URL</code></a> object, and then return that <a href="#url"><code>URL</code></a> object.
 </ol>
@@ -724,10 +783,10 @@ these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return
- <a href="#concept-url-input" title="concept-url-input">input</a>.
+ <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>.
 
  <li><p>Let <var title="">output</var> be
- <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and "<code title="">:</code>"
+ <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> and "<code title="">:</code>"
  concatenated.
 
  <li>
@@ -736,28 +795,28 @@ these steps:
   <ol>
    <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
 
-   <li><p>If <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> is not the
-   empty string, append <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> and
+   <li><p>If <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> is not the
+   empty string, append <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> and
    "<code title="">@</code>" concatenated to <var title="">output</var>.
 
-   <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a> to
+   <li><p>Append <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
    <var title="">output</var>.
 
-   <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is not
+   <li><p>If <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> is not
    the empty string, append "<code title="">:</code>" and
-   <a href="#concept-url-port" title="concept-url-port">port</a> concatenated to
+   <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> concatenated to
    <var title="">output</var>.
 
    <li><p>Append "<code title="">/</code>" concatenated with the strings in
-   <a href="#concept-url-path" title="concept-url-path">path</a> (including empty strings),
+   <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> (including empty strings),
    separated from each other by "<code title="">/</code>".
   </ol>
 
  <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, append
- <a href="#concept-url-path" title="concept-url-path">path</a>'s only string (if any).
+ <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>'s only string (if any).
 
- <li><p>Append <a href="#concept-url-query" title="concept-url-query">query</a> and
- <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> concatenated to
+ <li><p>Append <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> and
+ <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> concatenated to
  <var title="">output</var>, and then return <var title="">output</var>.
 </ol>
 
@@ -767,17 +826,17 @@ run these steps:
 <ol>
  <li><p><a href="#clear">Clear</a>.
 
- <li><p>Set <a href="#concept-url-input" title="concept-url-input">input</a> to the given value.
+ <li><p>Set <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a> to the given value.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a>
- <a href="#concept-url-input" title="concept-url-input">input</a>, with any leading and trailing
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
+ <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>, with any leading and trailing
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> removed, as
  <i title="">input</i>.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
 return the <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-6.1">Unicode serialization</a> of
-the <a href="#concept-url" title="concept-url">URL</a>'s
+the <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
 <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-4">origin</a>.
 <a href="#refsORIGIN">[ORIGIN]</a>
 
@@ -786,7 +845,7 @@ compatibility with HTML's <code>MessageEvent</code> feature.
 <a class="informative" href="#refsHTML">[HTML]</a>
 
 <p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
-must return <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
+must return <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> and
 "<code title="">:</code>" concatenated.
 
 <p class="note">In case the <a href="#invalid-flag">invalid flag</a> is set this will cause
@@ -798,7 +857,7 @@ run these steps:
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, terminate these steps.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
  given value and "<code title="">:</code>" concatenated as <i title="">input</i>
  and <b title="">scheme start</b> as <i title="">override</i>.
 </ol>
@@ -809,11 +868,11 @@ these steps:
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
 
- <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
- return <a href="#concept-url-host" title="concept-url-host">host</a>.
+ <li><p>If <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> is the empty string,
+ return <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>.
 
- <li><p>Return <a href="#concept-url-host" title="concept-url-host">host</a>,
- "<code title="">:</code>", and <a href="#concept-url-port" title="concept-url-port">port</a>
+ <li><p>Return <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
+ "<code title="">:</code>", and <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>
  concatenated.
 </ol>
 
@@ -824,13 +883,13 @@ steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
  given value as <i title="">input</i> and <b title="">host</b> as
  <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
-must return <a href="#concept-url-host" title="concept-url-host">host</a>.
+must return <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>.
 
 <p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
 run these steps:
@@ -839,13 +898,13 @@ run these steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
  given value as <i title="">input</i> and <b title="">hostname</b> as
  <i title="">override</i>.
 </ol>
 
 <p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must return
-<a href="#concept-url-port" title="concept-url-port">port</a>.
+<a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>.
 
 <p>Setting the <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute must run these
 steps:
@@ -854,7 +913,7 @@ steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
  given value as <i title="">input</i> and <b title="">port</b> as
  <i title="">override</i>.
 </ol>
@@ -866,10 +925,10 @@ must run these steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, return the empty string.
 
  <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, return
- <a href="#concept-url-path" title="concept-url-path">path</a>'s only string.
+ <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>'s only string.
 
  <li><p>Return "<code title="">/</code>" concatenated with the strings in
- <a href="#concept-url-path" title="concept-url-path">path</a> (including empty strings),
+ <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> (including empty strings),
  separated from each other by "<code title="">/</code>".
 </ol>
 
@@ -880,9 +939,9 @@ run these steps:
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or the
  <a href="#hierarchical-flag">hierarchical flag</a> is unset, terminate these steps.
 
- <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
+ <li><p>Set <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> to the empty list.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with the
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
  given value as <i title="">input</i> and <b title="">hierarchical path start</b>
  as <i title="">override</i>.
 </ol>
@@ -892,10 +951,10 @@ run these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
- <a href="#concept-url-query" title="concept-url-query">query</a> is either the empty string or
+ <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> is either the empty string or
  "<code title="">?</code>", return the empty string.
 
- <li><p>Return <a href="#concept-url-query" title="concept-url-query">query</a>.
+ <li><p>Return <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a>.
 </ol>
 
 <p>Setting the <a href="#dom-url-search"><code title="dom-URL-search">search</code></a> attribute must run
@@ -908,7 +967,7 @@ these steps:
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with
  <var title="">input</var> as <i title="">input</i> and <b title="">query</b> as
  <i title="">override</i>.
 </ol>
@@ -921,10 +980,10 @@ these steps:
 
 <ol>
  <li><p>If the <a href="#invalid-flag">invalid flag</a> is set, or
- <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is either the empty string
+ <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> is either the empty string
  or "<code title="">#</code>", return the empty string.
 
- <li><p>Return <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
+ <li><p>Return <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
 </ol>
 
 <p>Setting the <a href="#dom-url-hash"><code title="dom-URL-hash">hash</code></a> attribute must run these
@@ -937,7 +996,7 @@ steps:
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">#</code>" removed, if any.
 
- <li><p><a href="#concept-url-interpret" title="concept-url-interpret">Interpret</a> with
+ <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with
  <var title="">input</var> as <i title="">input</i> and <b title="">fragment</b> as
  <i title="">override</i>.
 </ol>
