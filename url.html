@@ -74,17 +74,17 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 predictable and interoperable. This is the plan:
 
 <ul>
- <li><p>Take the algorithms from RFC 3986 and RFC 3987 and align them with
- existing implementations. (E.g. spaces, other "illegal" code points, query
- encoding, equality, canonicalization, are all concepts not entirely shared,
- or defined.) URL parsing needs to become as solid as HTML parsing.
+ <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
+ obsolete them in the process. (E.g. spaces, other "illegal" code points,
+ query encoding, equality, canonicalization, are all concepts not entirely
+ shared, or defined.) URL parsing needs to become as solid as HTML parsing.
  <a href="#refsRFC3986">[RFC3986]</a>
  <a href="#refsRFC3987">[RFC3987]</a>
 
  <li><p>Standardize on the term URL. URI and IRI are just confusing. In
  practice a single algorithm is used for both so keeping them distinct is
- not serving anyone. URL also easily wins the search result popularity
- contest.
+ not helping anyone. URL also easily wins the
+ <a href="http://www.googlefight.com/index.php?word1=url&amp;word2=uri">search result popularity contest</a>.
 
  <li><p>Define URL's existing JavaScript API in full detail and add
  enhancements to make it easier to work with. Add a new <a href="#url"><code>URL</code></a>
@@ -186,9 +186,7 @@ defined alongside it. For an <a href="#hierarchical-scheme">hierarchical scheme<
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is either a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
-<a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>, a
-<a href="#concept-url-query" title="concept-url-query">query</a>, or a
-<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>. A
+or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>. A
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative to a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> with an
 <a href="#hierarchical-scheme">hierarchical scheme</a>.
@@ -198,10 +196,10 @@ defined alongside it. For an <a href="#hierarchical-scheme">hierarchical scheme<
 <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> and "<code title="">@</code>",
 followed by a <a href="#concept-host" title="concept-host">host</a>, optionally followed
 by "<code title="">:</code>" and a <a href="#concept-url-port" title="concept-url-port">port</a>,
-optionally followed by a
+and finally optionally followed by either an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
-and finally optionally followed by a
-<a href="#concept-url-query" title="concept-url-query">query</a>.
+a <a href="#concept-url-query" title="concept-url-query">query</a>, or a
+<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 
 <p>A <dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn> is
 <span class="XXX">...</span>
@@ -214,7 +212,9 @@ is "<code title="">/</code>", followed by a
 <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>.
 
 <p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is
-<span class="XXX">...</span>
+optionally <span class="XXX">...</span>, optionally followed by a
+<a href="#concept-url-query" title="concept-url-query">query</a>, optionally followed by a
+<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 
 <p>A <dfn id="concept-url-query" title="concept-url-query">query</dfn> is "<code title="">?</code>",
 followed by <span class="XXX">...</span>
