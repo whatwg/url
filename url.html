@@ -57,7 +57,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#urls"><span class="secno">4 </span>URLs</a>
   <ol>
    <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
-   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></ol></li>
+   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></li>
+   <li><a href="#serializing"><span class="secno">4.3 </span>Serializing</a></ol></li>
  <li><a href="#api"><span class="secno">5 </span>API</a>
   <ol>
    <li><a href="#constructors"><span class="secno">5.1 </span>Constructors</a></li>
@@ -79,8 +80,8 @@ predictable and interoperable. This is the plan:
  obsolete them in the process. (E.g. spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
- <a href="#refsRFC3986">[RFC3986]</a>
- <a href="#refsRFC3987">[RFC3987]</a>
+ <a class="informative" href="#refsRFC3986">[RFC3986]</a>
+ <a class="informative" href="#refsRFC3987">[RFC3987]</a>
 
  <li><p>Standardize on the term URL. URI and IRI are just confusing. In
  practice a single algorithm is used for both so keeping them distinct is
@@ -128,6 +129,15 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
+<p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are code points that are
+<a href="#ascii-digits">ASCII digits</a> or are either in the range U+0041 to U+0046 or in
+the range U+0061 to U+0066.
+
+<p>The <dfn id="ascii-alpha">ASCII alpha</dfn> are code points in the range U+0041 to U+005A
+or in the range U+0061 to U+007A.
+
+<p>The <dfn id="ascii-alphanumeric">ASCII alphanumeric</dfn> are code points that are
+<a href="#ascii-digits">ASCII digits</a> or <a href="#ascii-alpha">ASCII alpha</a>.
 
 
 <h2 id="host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</h2>
@@ -184,7 +194,12 @@ defined alongside it. For an <a href="#hierarchical-scheme">hierarchical scheme<
 <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a> is a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>.
 
-<p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is <span class="XXX">...</span>
+<p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is one
+<a href="#ascii-alpha">ASCII alpha</a>, optionally followed by
+<a href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code title="">+</code>",
+"<code title="">-</code>", or "<code title="">.</code>". A
+<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> must be registered
+<span class="XXX">...</span>.
 
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is either a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
@@ -222,8 +237,17 @@ optionally <span class="XXX">...</span>, optionally followed by a
 followed by <span class="XXX">...</span>
 
 <p>A <dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn> is
-"<code title="">#</code>", followed by any code point that is not one of
-U+0009, U+000A, and U+000D.
+"<code title="">#</code>", followed by any <a href="#url-unit">URL unit</a> that is not
+one of U+0009, U+000A, and U+000D.
+
+<p>A <dfn id="url-unit">URL unit</dfn> is either any code point that is not
+"<code title="">%</code>", or a <a href="#url-byte">URL byte</a>. A <dfn id="url-byte">URL byte</dfn>
+is "<code title="">%</code>", followed by two <a href="#ascii-hex-digits">ASCII hex digits</a>.
+
+<p class="note">For maximum robustness, sequences of
+<a href="#url-byte" title="URL byte">URL bytes</a>, after conversion to bytes, ought to
+not cause <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit a
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder-error">decoder error</a>.
 
 
 <h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
@@ -316,7 +340,7 @@ Either as dedicated branches in the parsing section or as an exercise to the
 reader by mixing parsing with the constraints of the writing section into a
 single algorithm.
 
-<p>To <dfn id="concept-parsed-url-parse" title="concept-parsed-url-parse">parse</dfn> a string <i title="">input</i>,
+<p>To <dfn id="concept-url-parser" title="concept-url-parser">parse</dfn> a string <i title="">input</i>,
 optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
 <i title="">base</i>, and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <i title="">encoding</i>, run these steps:
@@ -722,6 +746,57 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
   </dl>
 </ol>
 
+<h3 id="serializing"><span class="secno">4.3 </span>Serializing</h3>
+
+<p class="note">The serializing algorithms assume a <span>parsed URL</span>'s
+<a href="#fatal-error-flag">fatal error flag</a> is not set.
+
+<p>To <dfn id="concept-url-serializer" title="concept-url-serializer">serialize</dfn> a
+<span>parsed URL</span>, return the result of
+<a href="#concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serializing it without fragment</a>
+concatenated with <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
+
+<p>To
+<dfn id="concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serialize without fragment</dfn>
+a <span>parsed URL</span>, run these steps:
+<!-- better wording anyone?! -->
+
+<ol>
+ <li><p>Let <var title="">output</var> be
+ <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> and
+ "<code title="">:</code>" concatenated.
+
+ <li>
+  <p>If the <a href="#hierarchical-flag">hierarchical flag</a> is set:
+
+  <ol>
+   <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
+
+   <li><p>If <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> is not
+   the empty string, append
+   <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> and
+   "<code title="">@</code>" concatenated to <var title="">output</var>.
+
+   <li><p>Append <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+   <var title="">output</var>.
+
+   <li><p>If <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> is not
+   the empty string, append "<code title="">:</code>" and
+   <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> concatenated to
+   <var title="">output</var>.
+
+   <li><p>Append "<code title="">/</code>" concatenated with the strings in
+   <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> (including empty strings),
+   separated from each other by "<code title="">/</code>".
+  </ol>
+
+ <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, append
+ <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>'s only string (if any).
+
+ <li><p>Append <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> to
+ <var title="">output</var>, and then return <var title="">output</var>.
+</ol>
+
 
 
 <h2 id="api"><span class="secno">5 </span>API</h2>
@@ -766,14 +841,14 @@ constructor must run these steps:
 
 <ol>
  <li><p>If <var title="">base</var> is a string,
- <a href="#concept-parsed-url-parse" title="concept-parsed-url-parse">parse</a> <var title="">base</var> and set
+ <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
  <li><p>If <var title="">base</var> is not null and its
  <a href="#fatal-error-flag">fatal error flag</a> is set, throw a
  "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
 
- <li><p><a href="#concept-parsed-url-parse" title="concept-parsed-url-parse">Parse</a> <var title="">url</var> with
+ <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">url</var> with
  <var title="">base</var> as <i title="">base</i>, associate it with a new
  <a href="#url"><code>URL</code></a> object, and then return that <a href="#url"><code>URL</code></a> object.
 </ol>
@@ -791,39 +866,7 @@ these steps:
  <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, return
  <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>.
 
- <li><p>Let <var title="">output</var> be
- <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> and "<code title="">:</code>"
- concatenated.
-
- <li>
-  <p>If the <a href="#hierarchical-flag">hierarchical flag</a> is set:
-
-  <ol>
-   <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
-
-   <li><p>If <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> is not the
-   empty string, append <a href="#concept-parsed-url-userinfo" title="concept-parsed-url-userinfo">userinfo</a> and
-   "<code title="">@</code>" concatenated to <var title="">output</var>.
-
-   <li><p>Append <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
-   <var title="">output</var>.
-
-   <li><p>If <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> is not
-   the empty string, append "<code title="">:</code>" and
-   <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> concatenated to
-   <var title="">output</var>.
-
-   <li><p>Append "<code title="">/</code>" concatenated with the strings in
-   <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a> (including empty strings),
-   separated from each other by "<code title="">/</code>".
-  </ol>
-
- <li><p>If the <a href="#hierarchical-flag">hierarchical flag</a> is unset, append
- <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>'s only string (if any).
-
- <li><p>Append <a href="#concept-parsed-url-query" title="concept-parsed-url-query">query</a> and
- <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> concatenated to
- <var title="">output</var>, and then return <var title="">output</var>.
+ <li><p>Return the <a href="#concept-url-serializer" title="concept-url-serializer">serialization</a>.
 </ol>
 
 <p>Setting the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute must
@@ -1035,10 +1078,10 @@ steps:
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
 
 <dt id="refsRFC3986">[RFC3986]
-<dd><cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, Tim Berners-Lee, Roy Fielding and Larry Masinter. IETF.
+<dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, Tim Berners-Lee, Roy Fielding and Larry Masinter. IETF.
 
 <dt id="refsRFC3987">[RFC3987]
-<dd><cite><a href="http://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a></cite>, Martin Dürst and Michel Suignard. IETF.
+<dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a></cite>, Martin Dürst and Michel Suignard. IETF.
 
 </dl></div>
 

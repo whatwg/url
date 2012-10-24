@@ -63,8 +63,8 @@ predictable and interoperable. This is the plan:
  obsolete them in the process. (E.g. spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
- <span data-anolis-ref>RFC3986</span>
- <span data-anolis-ref>RFC3987</span>
+ <span data-anolis-ref class=informative>RFC3986</span>
+ <span data-anolis-ref class=informative>RFC3987</span>
 
  <li><p>Standardize on the term URL. URI and IRI are just confusing. In
  practice a single algorithm is used for both so keeping them distinct is
@@ -112,6 +112,15 @@ Encoding Standard. <span data-anolis-ref>ENCODING</span>
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
+<p>The <dfn>ASCII hex digits</dfn> are code points that are
+<span>ASCII digits</span> or are either in the range U+0041 to U+0046 or in
+the range U+0061 to U+0066.
+
+<p>The <dfn>ASCII alpha</dfn> are code points in the range U+0041 to U+005A
+or in the range U+0061 to U+007A.
+
+<p>The <dfn>ASCII alphanumeric</dfn> are code points that are
+<span>ASCII digits</span> or <span>ASCII alpha</span>.
 
 
 <h2>Host names and IP addresses</h2>
@@ -168,7 +177,12 @@ defined alongside it. For an <span>hierarchical scheme</span>,
 <span title=concept-url-scheme-data>scheme data</span> is a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>.
 
-<p>A <dfn title=concept-url-scheme>scheme</dfn> is <span class=XXX>...</span>
+<p>A <dfn title=concept-url-scheme>scheme</dfn> is one
+<span>ASCII alpha</span>, optionally followed by
+<span>ASCII alphanumeric</span>, "<code title>+</code>",
+"<code title>-</code>", or "<code title>.</code>". A
+<span title=concept-url-scheme>scheme</span> must be registered
+<span class=XXX>...</span>.
 
 <p>A <dfn title=concept-relative-url>relative URL</dfn> is either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
@@ -206,8 +220,17 @@ optionally <span class=XXX>...</span>, optionally followed by a
 followed by <span class=XXX>...</span>
 
 <p>A <dfn title=concept-url-fragment>fragment</dfn> is
-"<code title>#</code>", followed by any code point that is not one of
-U+0009, U+000A, and U+000D.
+"<code title>#</code>", followed by any <span>URL unit</span> that is not
+one of U+0009, U+000A, and U+000D.
+
+<p>A <dfn>URL unit</dfn> is either any code point that is not
+"<code title>%</code>", or a <span>URL byte</span>. A <dfn>URL byte</dfn>
+is "<code title>%</code>", followed by two <span>ASCII hex digits</span>.
+
+<p class=note>For maximum robustness, sequences of
+<span title="URL byte">URL bytes</span>, after conversion to bytes, ought to
+not cause <span data-anolis-spec=encoding>utf-8 decode</span> to emit a
+<span data-anolis-spec=encoding>decoder error</span>.
 
 
 <h3>Parsing</h3>
@@ -300,7 +323,7 @@ Either as dedicated branches in the parsing section or as an exercise to the
 reader by mixing parsing with the constraints of the writing section into a
 single algorithm.
 
-<p>To <dfn title=concept-parsed-url-parse>parse</dfn> a string <i title>input</i>,
+<p>To <dfn title=concept-url-parser>parse</dfn> a string <i title>input</i>,
 optionally with a <span title=concept-parsed-url>parsed URL</span>
 <i title>base</i>, and an <span data-anolis-spec=encoding>encoding</span>
 <i title>encoding</i>, run these steps:
@@ -706,6 +729,57 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
   </dl>
 </ol>
 
+<h3>Serializing</h3>
+
+<p class=note>The serializing algorithms assume a <span>parsed URL</span>'s
+<span>fatal error flag</span> is not set.
+
+<p>To <dfn title=concept-url-serializer>serialize</dfn> a
+<span>parsed URL</span>, return the result of
+<span title=concept-url-serializer-without-fragment>serializing it without fragment</span>
+concatenated with <span title=concept-parsed-url-fragment>fragment</span>.
+
+<p>To
+<dfn title=concept-url-serializer-without-fragment>serialize without fragment</dfn>
+a <span>parsed URL</span>, run these steps:
+<!-- better wording anyone?! -->
+
+<ol>
+ <li><p>Let <var title>output</var> be
+ <span title=concept-parsed-url-scheme>scheme</span> and
+ "<code title>:</code>" concatenated.
+
+ <li>
+  <p>If the <span>hierarchical flag</span> is set:
+
+  <ol>
+   <li><p>Append "<code title>//</code>" to <var title>output</var>.
+
+   <li><p>If <span title=concept-parsed-url-userinfo>userinfo</span> is not
+   the empty string, append
+   <span title=concept-parsed-url-userinfo>userinfo</span> and
+   "<code title>@</code>" concatenated to <var title>output</var>.
+
+   <li><p>Append <span title=concept-parsed-url-host>host</span> to
+   <var title>output</var>.
+
+   <li><p>If <span title=concept-parsed-url-port>port</span> is not
+   the empty string, append "<code title>:</code>" and
+   <span title=concept-parsed-url-port>port</span> concatenated to
+   <var title>output</var>.
+
+   <li><p>Append "<code title>/</code>" concatenated with the strings in
+   <span title=concept-parsed-url-path>path</span> (including empty strings),
+   separated from each other by "<code title>/</code>".
+  </ol>
+
+ <li><p>If the <span>hierarchical flag</span> is unset, append
+ <span title=concept-parsed-url-path>path</span>'s only string (if any).
+
+ <li><p>Append <span title=concept-parsed-url-query>query</span> to
+ <var title>output</var>, and then return <var title>output</var>.
+</ol>
+
 
 
 <h2>API</h2>
@@ -750,14 +824,14 @@ constructor must run these steps:
 
 <ol>
  <li><p>If <var title>base</var> is a string,
- <span title=concept-parsed-url-parse>parse</span> <var title>base</var> and set
+ <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
  <li><p>If <var title>base</var> is not null and its
  <span>fatal error flag</span> is set, throw a
  "<code data-anolis-spec=dom>InvalidStateError</code>".
 
- <li><p><span title=concept-parsed-url-parse>Parse</span> <var title>url</var> with
+ <li><p><span title=concept-url-parser>Parse</span> <var title>url</var> with
  <var title>base</var> as <i title>base</i>, associate it with a new
  <code>URL</code> object, and then return that <code>URL</code> object.
 </ol>
@@ -775,39 +849,7 @@ these steps:
  <li><p>If the <span>fatal error flag</span> is set, return
  <span title=concept-parsed-url-input>input</span>.
 
- <li><p>Let <var title>output</var> be
- <span title=concept-parsed-url-scheme>scheme</span> and "<code title>:</code>"
- concatenated.
-
- <li>
-  <p>If the <span>hierarchical flag</span> is set:
-
-  <ol>
-   <li><p>Append "<code title>//</code>" to <var title>output</var>.
-
-   <li><p>If <span title=concept-parsed-url-userinfo>userinfo</span> is not the
-   empty string, append <span title=concept-parsed-url-userinfo>userinfo</span> and
-   "<code title>@</code>" concatenated to <var title>output</var>.
-
-   <li><p>Append <span title=concept-parsed-url-host>host</span> to
-   <var title>output</var>.
-
-   <li><p>If <span title=concept-parsed-url-port>port</span> is not
-   the empty string, append "<code title>:</code>" and
-   <span title=concept-parsed-url-port>port</span> concatenated to
-   <var title>output</var>.
-
-   <li><p>Append "<code title>/</code>" concatenated with the strings in
-   <span title=concept-parsed-url-path>path</span> (including empty strings),
-   separated from each other by "<code title>/</code>".
-  </ol>
-
- <li><p>If the <span>hierarchical flag</span> is unset, append
- <span title=concept-parsed-url-path>path</span>'s only string (if any).
-
- <li><p>Append <span title=concept-parsed-url-query>query</span> and
- <span title=concept-parsed-url-fragment>fragment</span> concatenated to
- <var title>output</var>, and then return <var title>output</var>.
+ <li><p>Return the <span title=concept-url-serializer>serialization</span>.
 </ol>
 
 <p>Setting the <code title=dom-URL-href>href</code> attribute must
