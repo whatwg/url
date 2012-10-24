@@ -220,7 +220,7 @@ following components:
 <dfn title=concept-parsed-url-fragment>fragment</dfn>.
 
 <p>A <span title=concept-parsed-url>parsed URL</span> also has an associated
-<dfn>invalid flag</dfn>, <dfn>hierarchical flag</dfn>,
+<dfn>fatal error flag</dfn>, <dfn>hierarchical flag</dfn>,
 <dfn title=concept-parsed-url-input>input</dfn>,
 <dfn title=concept-parsed-url-base>base URL</dfn>,
 and <dfn title=concept-parsed-url-query-encoding>query encoding</dfn>.
@@ -236,7 +236,7 @@ its <span title=concept-parsed-url-path>path</span> to the empty list.
 
 <p>To <dfn>invalidate</dfn> a
 <span title=concept-parsed-url>parsed URL</span>, <span>clear</span> it, and
-then set its <span>invalid flag</span>.
+then set its <span>fatal error flag</span>.
 
 <p>To make a code point <var title>c</var> <dfn>percent escaped</dfn>, run
 these steps:
@@ -725,8 +725,6 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-search>search</span>;
   readonly attribute <span>URLQuery</span> <span title=dom-URL-query>query</span>;
            attribute DOMString <span title=dom-URL-hash>hash</span>;
-
-  readonly attribute boolean <span title=dom-URL-valid>valid</span>;
 };</pre>
 
 <p>Any object implementing <code>URLUtils</code> represents a
@@ -753,7 +751,7 @@ constructor must run these steps:
  <var title>base</var> to the result of that algorithm.
 
  <li><p>If <var title>base</var> is not null and its
- <span>invalid flag</span> is set, throw a
+ <span>fatal error flag</span> is set, throw a
  "<code data-anolis-spec=dom>InvalidStateError</code>".
 
  <li><p><span title=concept-parsed-url-parse>Parse</span> <var title>url</var> with
@@ -771,7 +769,7 @@ global object. It augments other interfaces, such as <code>URL</code>.
 these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, return
+ <li><p>If the <span>fatal error flag</span> is set, return
  <span title=concept-parsed-url-input>input</span>.
 
  <li><p>Let <var title>output</var> be
@@ -837,14 +835,14 @@ compatibility with HTML's <code>MessageEvent</code> feature.
 must return <span title=concept-parsed-url-scheme>scheme</span> and
 "<code title>:</code>" concatenated.
 
-<p class=note>In case the <span>invalid flag</span> is set this will cause
-it to return "<code title>:</code>".
+<p class=note>In case the <span>fatal error flag</span> is set this will
+cause it to return "<code title>:</code>".
 
 <p>Setting the <code title=dom-URL-protocol>protocol</code> attribute must
 run these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, terminate these steps.
+ <li><p>If the <span>fatal error flag</span> is set, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
  given value and "<code title>:</code>" concatenated as <i title>input</i>
@@ -855,7 +853,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, return the empty string.
+ <li><p>If the <span>fatal error flag</span> is set, return the empty string.
 
  <li><p>If <span title=concept-parsed-url-port>port</span> is the empty string,
  return <span title=concept-parsed-url-host>host</span>.
@@ -869,7 +867,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
@@ -884,7 +882,7 @@ must return <span title=concept-parsed-url-host>host</span>.
 run these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
@@ -899,7 +897,7 @@ run these steps:
 steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
@@ -911,7 +909,7 @@ steps:
 must run these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, return the empty string.
+ <li><p>If the <span>fatal error flag</span> is set, return the empty string.
 
  <li><p>If the <span>hierarchical flag</span> is unset, return
  <span title=concept-parsed-url-path>path</span>'s only string.
@@ -925,7 +923,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-parsed-url-path>path</span> to the empty list.
@@ -939,7 +937,7 @@ run these steps:
 run these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or
+ <li><p>If the <span>fatal error flag</span> is set, or
  <span title=concept-parsed-url-query>query</span> is either the empty string or
  "<code title>?</code>", return the empty string.
 
@@ -950,7 +948,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
@@ -968,7 +966,7 @@ return the associated <code>URLQuery</code> object.
 these steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or
+ <li><p>If the <span>fatal error</span> is set, or
  <span title=concept-parsed-url-fragment>fragment</span> is either the empty string
  or "<code title>#</code>", return the empty string.
 
@@ -979,7 +977,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If the <span>invalid flag</span> is set, or the
+ <li><p>If the <span>fatal error</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
@@ -989,10 +987,6 @@ steps:
  <var title>input</var> as <i title>input</i> and <b title>fragment</b> as
  <i title>override</i>.
 </ol>
-
-<p>The <dfn title=dom-URL-valid><code>valid</code></dfn> attribute
-must return false if the <span>invalid flag</span> is set, or true
-otherwise.
 
 
 <h3>Interface <code title>URLQuery</code></h3>
