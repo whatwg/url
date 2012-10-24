@@ -24,7 +24,8 @@
  <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
- <dd><a href=https://github.com/whatwg/url/commits>https://github.com/whatwg/url/commits</a></dd>
+ <dd><a href=https://github.com/whatwg/url/commits>https://github.com/whatwg/url/commits</a>
+ <dd><a href="https://twitter.com/urlstandard">@urlstandard</a>
 
  <dt>Editor:
  <dd class="h-card vcard"><a class="u-url url p-name fn" lang="nl" href="http://annevankesteren.nl/">Anne van Kesteren</a>
@@ -109,6 +110,8 @@ not appear in all uppercase letters in this specification.
 <p>Some terms used in this specification are defined in the
 Encoding Standard. <span data-anolis-ref>ENCODING</span>
 
+<p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
+
 
 
 <h2>Host names and IP addresses</h2>
@@ -151,13 +154,13 @@ same row.
 
 <p>A <span title=concept-url>URL</span> must be either a
 <span title=concept-relative-url>relative URL</span> or an
-<span title=concept-absolute-url>absolute URL</span>.
+<span title=concept-absolute-url>absolute URL</span>, optionally followed by
+a <span title=concept-url-fragment>fragment</span>.
 
 <p>An <dfn title=concept-absolute-url>absolute URL</dfn> is a
 <span title=concept-url-scheme>scheme</span>, followed by
 "<code title>:</code>", followed by
-<span title=concept-url-scheme-data>scheme data</span>,
-followed by a <span title=concept-url-fragment>fragment</span>.
+<span title=concept-url-scheme-data>scheme data</span>.
 
 <p>The syntax of <dfn title=concept-url-scheme-data>scheme data</dfn>
 depends on the <span title=concept-url-scheme>scheme</span> and is typically
@@ -180,16 +183,16 @@ or a <span title=concept-path-relative-url>path-relative URL</span>. A
 <span title=concept-url-userinfo>userinfo</span> and "<code title>@</code>",
 followed by a <span title=concept-host>host</span>, optionally followed
 by "<code title>:</code>" and a <span title=concept-url-port>port</span>,
-and finally optionally followed by either an
-<span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
-a <span title=concept-url-query>query</span>, or a
-<span title=concept-url-fragment>fragment</span>.
+optionally followed by either an
+<span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>
+or a <span title=concept-url-query>query</span>.
 
 <p>A <dfn title=concept-url-userinfo>userinfo</dfn> is
 <span class=XXX>...</span>
 <!-- "a userinfo" could use better phrasing -->
 
-<p>A <dfn title=concept-url-port>port</dfn> is <span class=XXX>...</span>
+<p>A <dfn title=concept-url-port>port</dfn> is zero or more
+<span>ASCII digits</span>.
 
 <p>An <dfn title=concept-absolute-path-relative-url>absolute-path-relative URL</dfn>
 is "<code title>/</code>", followed by a
@@ -197,14 +200,14 @@ is "<code title>/</code>", followed by a
 
 <p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> is
 optionally <span class=XXX>...</span>, optionally followed by a
-<span title=concept-url-query>query</span>, optionally followed by a
-<span title=concept-url-fragment>fragment</span>.
+<span title=concept-url-query>query</span>.
 
 <p>A <dfn title=concept-url-query>query</dfn> is "<code title>?</code>",
 followed by <span class=XXX>...</span>
 
 <p>A <dfn title=concept-url-fragment>fragment</dfn> is
-"<code title>#</code>", followed by <span class=XXX>...</span>
+"<code title>#</code>", followed by any code point that is not one of
+U+0009, U+000A, and U+000D.
 
 
 <h3>Parsing</h3>
@@ -698,7 +701,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
 
    <dt><b title>fragment</b>
    <dd><p>If <var title>c</var> is none of U+0009, U+000A, and U+000D,
-   append <var title>c</var>, <span>percent escaped</span>, to
+   append <var title>c</var> to
    <span title=concept-parsed-url-fragment>fragment</span>.
   </dl>
 </ol>
