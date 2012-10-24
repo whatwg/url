@@ -367,7 +367,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
 
 <ol>
  <li><p>Let <var title>state</var> be <var title>override</var> if given, or
- <b title>scheme start</b> otherwise.
+ <b title>scheme start state</b> otherwise.
 
  <li><p>Let <var title>buffer</var> be the empty string.
 
@@ -381,23 +381,23 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
   code point be <var title>c</var>.
 
   <dl class=switch>
-   <dt><b title>scheme start</b>
+   <dt><b title>scheme start state</b>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
      is in the range U+0041 through to U+005A or U+0061 through to U+007A,
      append <var title>c</var>, lowercased, to <var title>buffer</var>, and
-     set <var title>state</var> to <b title>scheme</b>.
+     set <var title>state</var> to <b title>scheme state</b>.
 
      <li><p>Otherwise, if <var title>override</var> is not given, set
      <var title>buffer</var> to the empty string, set <var title>state</var>
-     to <b title>no scheme</b>, and rerun this state machine for
+     to <b title>no scheme state</b>, and rerun this state machine for
      <var title>c</var>.
 
      <li><p>Otherwise, terminate this algorithm.
     </ol>
 
-   <dt><b title>scheme</b>
+   <dt><b title>scheme state</b>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
@@ -425,20 +425,20 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
        <span title=concept-parsed-url-base>base URL</span>'s
        <span title=concept-parsed-url-scheme>scheme</span> is equal to
        <span title=concept-parsed-url-scheme>scheme</span>, set
-       <var title>state</var> to <b title>relative</b>.
+       <var title>state</var> to <b title>relative state</b>.
 
        <li><p>Otherwise, if the <span>relative flag</span> is set, set
-       <var title>state</var> to <b title>authority start</b>.
+       <var title>state</var> to <b title>authority start state</b>.
 
-       <li><p>Otherwise, set <var title>state</var> to <b title>path</b>.
+       <li><p>Otherwise, set <var title>state</var> to <b title>path state</b>.
       </ol>
 
-     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme</b>,
+     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme state</b>,
      <var title>buffer</var> to the empty string, and start over (from the
      first code point in <var title>input</var>).
     </ol>
 
-   <dt><b title>no scheme</b>
+   <dt><b title>no scheme state</b>
    <dd>
     <p>If <span title=concept-parsed-url-base>base URL</span> is null, or
     <span title=concept-parsed-url-base>base URL</span>'s
@@ -452,10 +452,10 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
     changed to something non-sensical through the
     <code title=dom-URL-protocol>protocol</code> attribute.
 
-    <p>Otherwise, set <var title>state</var> to <b title>relative</b>,
+    <p>Otherwise, set <var title>state</var> to <b title>relative state</b>,
     and rerun this state machine for <var title>c</var>.
 
-   <dt><b title>relative</b>
+   <dt><b title>relative state</b>
    <dd>
     <p>Let <var title>base</var> be
     <span title=concept-parsed-url-base>base URL</span>, set the
@@ -483,7 +483,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       "<code title>\</code>", set
       <span title=concept-parsed-url-scheme>scheme</span> to
       <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-      and <var title>state</var> to <b title>authority start</b>.
+      and <var title>state</var> to <b title>authority start state</b>.
 
       <p>Otherwise, set
       <span title=concept-parsed-url-scheme>scheme</span> to
@@ -492,7 +492,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
       <span title=concept-parsed-url-port>port</span> to
       <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
-      <var title>state</var> to <b title>relative path start</b>,
+      <var title>state</var> to <b title>relative path start state</b>,
       and rerun this state machine for <var title>c</var>.
 
      <dt>"<code title>?</code>"
@@ -505,7 +505,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-path>path</span> to
      <var title>base</var>'s <span title=concept-parsed-url-path>path</span>,
      <span title=concept-parsed-url-query>query</span> to "<code title>?</code>",
-     and <var title>state</var> to <b title>query</b>.
+     and <var title>state</var> to <b title>query state</b>.
 
      <dt>"<code title>#</code>"
      <dd><p>Set <span title=concept-parsed-url-scheme>scheme</span> to
@@ -520,7 +520,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <var title>base</var>'s <span title=concept-parsed-url-query>query</span>,
      <span title=concept-parsed-url-fragment>fragment</span> to
      "<code title>#</code>", and <var title>state</var> to
-     <b title>fragment</b>.
+     <b title>fragment state</b>.
 
      <dt>Otherwise
      <dd><p>Set <span title=concept-parsed-url-scheme>scheme</span> to
@@ -532,17 +532,17 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-path>path</span> to
      <var title>base</var>'s <span title=concept-parsed-url-path>path</span>, then
      remove <span title=concept-parsed-url-path>path</span>'s last string, set
-     <var title>state</var> to <b title>relative path start</b>,
+     <var title>state</var> to <b title>relative path start state</b>,
      and rerun this state machine for <var title>c</var>.
     </dl>
 
-   <dt><b title>authority start</b>
+   <dt><b title>authority start state</b>
    <dd><p>If <var title>c</var> is neither "<code title>/</code>" nor
    "<code title>\</code>", set <var title>state</var> to
-   <b title>authority</b>, and rerun this state machine for
+   <b title>authority state</b>, and rerun this state machine for
    <var title>c</var>.
 
-   <dt><b title>authority</b>
+   <dt><b title>authority state</b>
    <dd>
     <p>Based on <var title>c</var>:
     <dl class=switch>
@@ -568,14 +568,14 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <dt>"<code title>#</code>"
      <dd><p>Rerun this state machine for all code points in
      <var title>buffer</var>, set <var title>buffer</var> to the empty
-     string, and <var title>state</var> to <b title>host</b>.
+     string, and <var title>state</var> to <b title>host state</b>.
 
      <dt>Otherwise
      <dd><p>Append <var title>c</var> to <var title>buffer</var>.
     </dl>
 
-   <dt><b title>host</b>
-   <dt><b title>hostname</b>
+   <dt><b title>host state</b>
+   <dt><b title>hostname state</b>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is "<code title>:</code>" and
@@ -583,8 +583,8 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-host>host</span> to <var title>buffer</var>,
      <!-- XXX host normalize -->
      <var title>buffer</var> to the empty string, <var title>state</var>
-     to <b title>port</b>, and then only if <var title>override</var> is
-     <b title>hostname</b>, terminate these steps.
+     to <b title>port state</b>, and then only if <var title>override</var> is
+     <b title>hostname state</b>, terminate these steps.
 
      <li><p>Otherwise, if <var title>c</var> is one of
      <span>EOF code point</span>, "<code title>/</code>",
@@ -593,7 +593,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-host>host</span> to <var title>buffer</var>,
      <!-- XXX host normalize -->
      <var title>buffer</var> to the empty string, <var title>state</var>
-     to <b title>relative path start</b>, and then only if
+     to <b title>relative path start state</b>, and then only if
      <var title>override</var> is given, terminate these steps, or otherwise
      rerun this state machine for <var title>c</var>.
 
@@ -612,7 +612,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       </ol>
     </ol>
 
-   <dt><b title>port</b>
+   <dt><b title>port state</b>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is in the range U+0030 through to U+0039,
@@ -631,14 +631,14 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
        algorithm.
 
        <li><p>Set <var title>buffer</var> to the empty string,
-       <var title>state</var> to <b title>relative path start</b>, and
+       <var title>state</var> to <b title>relative path start state</b>, and
        rerun this state machine for <var title>c</var>.
       </ol>
 
      <li><p>Otherwise, <span>invalidate</span>.
     </ol>
 
-   <dt><b title>path</b>
+   <dt><b title>path state</b>
    <dd>
     <ol>
      <li><p>Append an empty string to
@@ -648,7 +648,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      is "<code title>#</code>", set
      <span title=concept-parsed-url-fragment>fragment</span> to
      "<code title>#</code>" and <var title>state</var> to
-     <b title>fragment</b>.
+     <b title>fragment state</b>.
 
      <li><p>Otherwise, if <var title>c</var> is not the
      <span>EOF code point</span>, append <var title>c</var>,
@@ -656,12 +656,12 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-path>path</span>.
     </ol>
 
-   <dt><b title>relative path start</b>
-   <dd><p>Set <var title>state</var> to <b title>relative path</b> and
+   <dt><b title>relative path start state</b>
+   <dd><p>Set <var title>state</var> to <b title>relative path state</b> and
    if <var title>c</var> is neither "<code title>/</code>" nor
    "<code title>\</code>", rerun this state machine for <var title>c</var>.
 
-   <dt><b title>relative path</b>
+   <dt><b title>relative path state</b>
    <dd>
     <ol>
      <li>
@@ -695,12 +695,12 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
 
        <li><p>If <var title>c</var> is "<code title>?</code>", set
        <span title=concept-parsed-url-query>query</span> to "<code title>?</code>",
-       and <var title>state</var> to <b title>query</b>.
+       and <var title>state</var> to <b title>query state</b>.
 
        <li><p>If <var title>c</var> is "<code title>#</code>", set
        <span title=concept-parsed-url-fragment>fragment</span> to
        "<code title>#</code>", and <var title>state</var> to
-       <b title>fragment</b>.
+       <b title>fragment state</b>.
       </ol>
 
      <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
@@ -708,20 +708,20 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <var title>buffer</var>.
     </ol>
 
-   <dt><b title>query</b>
+   <dt><b title>query state</b>
    <dd>
     <ol>
      <li><p>If <var title>override</var> is not given and <var title>c</var>
      is "<code title>#</code>", set
      <span title=concept-parsed-url-fragment>fragment</span> to
-     "<code title>#</code>", and state to <b title>fragment</b>.
+     "<code title>#</code>", and state to <b title>fragment state</b>.
 
      <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
      U+000D, append <var title>c</var>, <span>query percent escaped</span>,
      to <span title=concept-parsed-url-query>query</span>.
     </ol>
 
-   <dt><b title>fragment</b>
+   <dt><b title>fragment state</b>
    <dd><p>If <var title>c</var> is none of U+0009, U+000A, and U+000D,
    append <var title>c</var> to
    <span title=concept-parsed-url-fragment>fragment</span>.
@@ -890,7 +890,7 @@ run these steps:
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
  given value and "<code title>:</code>" concatenated as <i title>input</i>
- and <b title>scheme start</b> as <i title>override</i>.
+ and <b title>scheme start state</b> as <i title>override</i>.
 </ol>
 
 <p>The <dfn title=dom-URL-host><code>host</code></dfn> attribute must run
@@ -915,7 +915,7 @@ steps:
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
- given value as <i title>input</i> and <b title>host</b> as
+ given value as <i title>input</i> and <b title>host state</b> as
  <i title>override</i>.
 </ol>
 
@@ -930,7 +930,7 @@ run these steps:
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
- given value as <i title>input</i> and <b title>hostname</b> as
+ given value as <i title>input</i> and <b title>hostname state</b> as
  <i title>override</i>.
 </ol>
 
@@ -945,7 +945,7 @@ steps:
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
- given value as <i title>input</i> and <b title>port</b> as
+ given value as <i title>input</i> and <b title>port state</b> as
  <i title>override</i>.
 </ol>
 
@@ -973,7 +973,7 @@ run these steps:
  <li><p>Set <span title=concept-parsed-url-path>path</span> to the empty list.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
- given value as <i title>input</i> and <b title>relative path start</b>
+ given value as <i title>input</i> and <b title>relative path start state</b>
  as <i title>override</i>.
 </ol>
 
@@ -999,7 +999,7 @@ these steps:
  "<code title>?</code>" removed, if any.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with
- <var title>input</var> as <i title>input</i> and <b title>query</b> as
+ <var title>input</var> as <i title>input</i> and <b title>query state</b> as
  <i title>override</i>.
 </ol>
 
@@ -1028,7 +1028,7 @@ steps:
  "<code title>#</code>" removed, if any.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with
- <var title>input</var> as <i title>input</i> and <b title>fragment</b> as
+ <var title>input</var> as <i title>input</i> and <b title>fragment state</b> as
  <i title>override</i>.
 </ol>
 
