@@ -84,8 +84,6 @@ might increase in scope somewhat.
 <h2 class=no-num>Issues</h2>
 
 <ul class=XXX>
- <li>Do we need to handle data URLs so they can cause the invalid flag to be
- set?
  <li>File URLs need to be special cased somehow as they behave as
  URLs with the hierarchical flag set, but have no port (and rarely a host).
 </ul>
@@ -126,6 +124,9 @@ Encoding Standard. <span data-anolis-ref>ENCODING</span>
 
 <h2>URLs</h2>
 
+<p>A <dfn title=concept-url>URL</dfn> is a string that represents an
+identifier.
+
 <p>An <dfn>hierarchical scheme</dfn> is a
 <span title=concept-parsed-url-scheme>scheme</span> listed in the first column of
 the following table. It has an associated default
@@ -148,8 +149,7 @@ same row.
 
 <p class=XXX>This is not finished, but feedback on this sketch is welcome.
 
-<p>A <dfn title=concept-url>URL</dfn> is a string that identifies a
-resource. A <span title=concept-url>URL</span> is either a
+<p>A <span title=concept-url>URL</span> must be either a
 <span title=concept-relative-url>relative URL</span> or an
 <span title=concept-absolute-url>absolute URL</span>.
 
@@ -291,6 +291,11 @@ run these steps:
 not escape "<code title>?</code>" and takes the
 <span title=concept-parsed-url-query-encoding>query encoding</span> into account.
 
+
+<p class=XXX>We will probably add the ability to halt on the first error.
+Either as dedicated branches in the parsing section or as an exercise to the
+reader by having him mix parsing with the constraints of the writing section
+into a single algorithm.
 
 <p>To <dfn title=concept-parsed-url-parse>parse</dfn> a string <i title>input</i>,
 optionally with a <span title=concept-parsed-url>parsed URL</span>
@@ -732,7 +737,7 @@ represents a <span title=concept-parsed-url>parsed URL</span>.
 <code>URLQuery</code> object.
 
 <p class=note>The <code>URL</code> object and
-<span title=concept-url>URL</span> share the same name, because calling the
+<span title=concept-url>URL</span> share the same name, because naming the
 exposed object <code title>ParsedURL</code> would be ugly.
 
 

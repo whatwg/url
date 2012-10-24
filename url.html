@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-october-2012">Living Standard — Last Updated 23 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2012">Living Standard — Last Updated 24 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -34,7 +34,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 October 2012, the editors have made this specification available
+24 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -100,8 +100,6 @@ might increase in scope somewhat.
 <h2 class="no-num" id="issues">Issues</h2>
 
 <ul class="XXX">
- <li>Do we need to handle data URLs so they can cause the invalid flag to be
- set?
  <li>File URLs need to be special cased somehow as they behave as
  URLs with the hierarchical flag set, but have no port (and rarely a host).
 </ul>
@@ -142,6 +140,9 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <h2 id="urls"><span class="secno">4 </span>URLs</h2>
 
+<p>A <dfn id="concept-url" title="concept-url">URL</dfn> is a string that represents an
+identifier.
+
 <p>An <dfn id="hierarchical-scheme">hierarchical scheme</dfn> is a
 <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> listed in the first column of
 the following table. It has an associated default
@@ -164,8 +165,7 @@ same row.
 
 <p class="XXX">This is not finished, but feedback on this sketch is welcome.
 
-<p>A <dfn id="concept-url" title="concept-url">URL</dfn> is a string that identifies a
-resource. A <a href="#concept-url" title="concept-url">URL</a> is either a
+<p>A <a href="#concept-url" title="concept-url">URL</a> must be either a
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> or an
 <a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a>.
 
@@ -307,6 +307,11 @@ run these steps:
 not escape "<code title="">?</code>" and takes the
 <a href="#concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</a> into account.
 
+
+<p class="XXX">We will probably add the ability to halt on the first error.
+Either as dedicated branches in the parsing section or as an exercise to the
+reader by having him mix parsing with the constraints of the writing section
+into a single algorithm.
 
 <p>To <dfn id="concept-parsed-url-parse" title="concept-parsed-url-parse">parse</dfn> a string <i title="">input</i>,
 optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
@@ -748,7 +753,7 @@ represents a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL
 <a href="#urlquery"><code>URLQuery</code></a> object.
 
 <p class="note">The <a href="#url"><code>URL</code></a> object and
-<a href="#concept-url" title="concept-url">URL</a> share the same name, because calling the
+<a href="#concept-url" title="concept-url">URL</a> share the same name, because naming the
 exposed object <code title="">ParsedURL</code> would be ugly.
 
 
