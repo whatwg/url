@@ -112,15 +112,14 @@ Encoding Standard. <span data-anolis-ref>ENCODING</span>
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
-<p>The <dfn>ASCII hex digits</dfn> are code points that are
-<span>ASCII digits</span> or are either in the range U+0041 to U+0046 or in
-the range U+0061 to U+0066.
+<p>The <dfn>ASCII hex digits</dfn> are <span>ASCII digits</span> or are
+code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
 
 <p>The <dfn>ASCII alpha</dfn> are code points in the range U+0041 to U+005A
 or in the range U+0061 to U+007A.
 
-<p>The <dfn>ASCII alphanumeric</dfn> are code points that are
-<span>ASCII digits</span> or <span>ASCII alpha</span>.
+<p>The <dfn>ASCII alphanumeric</dfn> are <span>ASCII digits</span> or
+<span>ASCII alpha</span>.
 
 
 <h2>Host names and IP addresses</h2>
@@ -178,7 +177,7 @@ defined alongside it. For a <span>relative scheme</span>,
 <span title=concept-scheme-relative-url>scheme-relative URL</span>.
 
 <p>A <dfn title=concept-url-scheme>scheme</dfn> is one
-<span>ASCII alpha</span>, optionally followed by
+<span>ASCII alpha</span>, followed by zero or more of
 <span>ASCII alphanumeric</span>, "<code title>+</code>",
 "<code title>-</code>", or "<code title>.</code>". A
 <span title=concept-url-scheme>scheme</span> must be registered
@@ -730,17 +729,19 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
 
 <h3>Serializing</h3>
 
-<p class=note>The serializing algorithms assume a <span>parsed URL</span>'s
+<p class=note>The serializing algorithms assume a
+<span title=concept-parsed-url>parsed URL</span>'s
 <span>fatal error flag</span> is not set.
 
 <p>To <dfn title=concept-url-serializer>serialize</dfn> a
-<span>parsed URL</span>, return the result of
+<span title=concept-parsed-url>parsed URL</span>, return the result of
 <span title=concept-url-serializer-without-fragment>serializing it without fragment</span>
-concatenated with <span title=concept-parsed-url-fragment>fragment</span>.
+concatenated with its
+<span title=concept-parsed-url-fragment>fragment</span>.
 
 <p>To
 <dfn title=concept-url-serializer-without-fragment>serialize without fragment</dfn>
-a <span>parsed URL</span>, run these steps:
+a <span title=concept-parsed-url>parsed URL</span>, run these steps:
 <!-- better wording anyone?! -->
 
 <ol>
@@ -783,7 +784,7 @@ a <span>parsed URL</span>, run these steps:
 
 <h2>API</h2>
 
-<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString)? <var title>base</var> = null)]
+<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var>)]
 interface <dfn>URL</dfn> {
 };
 <span>URL</span> implements <span>URLUtils</span>;
@@ -818,21 +819,22 @@ exposed object <code title>ParsedURL</code> would be ugly.
 <h3>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
-<dfn title=dom-URL><code>URL(<var title>url</var> [, <var title>base</var>])</code></dfn>
+<dfn title=dom-URL><code>URL(<var title>url</var>, <var title>base</var>)</code></dfn>
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title>base</var> is a string,
+ <li><p>If <var title>base</var> is given and is a string,
  <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
- <li><p>If <var title>base</var> is not null and its
+ <li><p>If <var title>base</var> is given and its
  <span>fatal error flag</span> is set, throw a
  "<code data-anolis-spec=dom>InvalidStateError</code>".
 
- <li><p><span title=concept-url-parser>Parse</span> <var title>url</var> with
- <var title>base</var> as <i title>base</i>, associate it with a new
- <code>URL</code> object, and then return that <code>URL</code> object.
+ <li><p><span title=concept-url-parser>Parse</span> <var title>url</var>
+ with <var title>base</var> as <i title>base</i>, if <i title>base</i> is
+ given, associate it with a new <code>URL</code> object, and then return
+ that <code>URL</code> object.
 </ol>
 
 

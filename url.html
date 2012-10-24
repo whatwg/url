@@ -129,15 +129,14 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
-<p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are code points that are
-<a href="#ascii-digits">ASCII digits</a> or are either in the range U+0041 to U+0046 or in
-the range U+0061 to U+0066.
+<p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are <a href="#ascii-digits">ASCII digits</a> or are
+code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
 
 <p>The <dfn id="ascii-alpha">ASCII alpha</dfn> are code points in the range U+0041 to U+005A
 or in the range U+0061 to U+007A.
 
-<p>The <dfn id="ascii-alphanumeric">ASCII alphanumeric</dfn> are code points that are
-<a href="#ascii-digits">ASCII digits</a> or <a href="#ascii-alpha">ASCII alpha</a>.
+<p>The <dfn id="ascii-alphanumeric">ASCII alphanumeric</dfn> are <a href="#ascii-digits">ASCII digits</a> or
+<a href="#ascii-alpha">ASCII alpha</a>.
 
 
 <h2 id="host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</h2>
@@ -195,7 +194,7 @@ defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>.
 
 <p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is one
-<a href="#ascii-alpha">ASCII alpha</a>, optionally followed by
+<a href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of
 <a href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code title="">+</code>",
 "<code title="">-</code>", or "<code title="">.</code>". A
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> must be registered
@@ -747,17 +746,19 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
 
 <h3 id="serializing"><span class="secno">4.3 </span>Serializing</h3>
 
-<p class="note">The serializing algorithms assume a <span>parsed URL</span>'s
+<p class="note">The serializing algorithms assume a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
 <a href="#fatal-error-flag">fatal error flag</a> is not set.
 
 <p>To <dfn id="concept-url-serializer" title="concept-url-serializer">serialize</dfn> a
-<span>parsed URL</span>, return the result of
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, return the result of
 <a href="#concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serializing it without fragment</a>
-concatenated with <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
+concatenated with its
+<a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
 
 <p>To
 <dfn id="concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serialize without fragment</dfn>
-a <span>parsed URL</span>, run these steps:
+a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run these steps:
 <!-- better wording anyone?! -->
 
 <ol>
@@ -800,7 +801,7 @@ a <span>parsed URL</span>, run these steps:
 
 <h2 id="api"><span class="secno">5 </span>API</h2>
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString)? <var title="">base</var> = null)]
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString) <var title="">base</var>)]
 interface <dfn id="url">URL</dfn> {
 };
 <a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
@@ -835,21 +836,22 @@ exposed object <code title="">ParsedURL</code> would be ugly.
 <h3 id="constructors"><span class="secno">5.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
-<dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var> [, <var title="">base</var>])</code></dfn>
+<dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var>, <var title="">base</var>)</code></dfn>
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title="">base</var> is a string,
+ <li><p>If <var title="">base</var> is given and is a string,
  <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
- <li><p>If <var title="">base</var> is not null and its
+ <li><p>If <var title="">base</var> is given and its
  <a href="#fatal-error-flag">fatal error flag</a> is set, throw a
  "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">url</var> with
- <var title="">base</var> as <i title="">base</i>, associate it with a new
- <a href="#url"><code>URL</code></a> object, and then return that <a href="#url"><code>URL</code></a> object.
+ <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">url</var>
+ with <var title="">base</var> as <i title="">base</i>, if <i title="">base</i> is
+ given, associate it with a new <a href="#url"><code>URL</code></a> object, and then return
+ that <a href="#url"><code>URL</code></a> object.
 </ol>
 
 
