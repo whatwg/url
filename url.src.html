@@ -294,8 +294,8 @@ not escape "<code title>?</code>" and takes the
 
 <p class=XXX>We will probably add the ability to halt on the first error.
 Either as dedicated branches in the parsing section or as an exercise to the
-reader by having him mix parsing with the constraints of the writing section
-into a single algorithm.
+reader by mixing parsing with the constraints of the writing section into a
+single algorithm.
 
 <p>To <dfn title=concept-parsed-url-parse>parse</dfn> a string <i title>input</i>,
 optionally with a <span title=concept-parsed-url>parsed URL</span>
@@ -966,7 +966,7 @@ return the associated <code>URLQuery</code> object.
 these steps:
 
 <ol>
- <li><p>If the <span>fatal error</span> is set, or
+ <li><p>If the <span>fatal error flag</span> is set, or
  <span title=concept-parsed-url-fragment>fragment</span> is either the empty string
  or "<code title>#</code>", return the empty string.
 
@@ -977,7 +977,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If the <span>fatal error</span> is set, or the
+ <li><p>If the <span>fatal error flag</span> is set, or the
  <span>hierarchical flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
@@ -1016,6 +1016,7 @@ Erik Arvidsson,
 Glenn Maynard,
 Ian Hickson,
 James Graham,
+James Manger,
 Michael™ Smith,
 Simon Pieters,
 Tab Atkins
