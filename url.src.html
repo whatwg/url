@@ -86,7 +86,7 @@ might increase in scope somewhat.
 
 <ul class=XXX>
  <li>File URLs need to be special cased somehow as they behave as
- URLs with the hierarchical flag set, but have no port (and rarely a host).
+ URLs with the relative flag set, but have no port (and rarely a host).
 </ul>
 
 
@@ -139,7 +139,7 @@ or in the range U+0061 to U+007A.
 <p>A <dfn title=concept-url>URL</dfn> is a string that represents an
 identifier.
 
-<p>An <dfn>hierarchical scheme</dfn> is a
+<p>A <dfn>relative scheme</dfn> is a
 <span title=concept-parsed-url-scheme>scheme</span> listed in the first column of
 the following table. It has an associated default
 <span title=concept-parsed-url-port>port</span> listed in the second column on the
@@ -173,7 +173,7 @@ a <span title=concept-url-fragment>fragment</span>.
 
 <p>The syntax of <dfn title=concept-url-scheme-data>scheme data</dfn>
 depends on the <span title=concept-url-scheme>scheme</span> and is typically
-defined alongside it. For an <span>hierarchical scheme</span>,
+defined alongside it. For a <span>relative scheme</span>,
 <span title=concept-url-scheme-data>scheme data</span> is a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>.
 
@@ -189,8 +189,8 @@ defined alongside it. For an <span>hierarchical scheme</span>,
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span>. A
 <span title=concept-relative-url>relative URL</span> must be relative to a
-<span title=concept-parsed-url>parsed URL</span> with an
-<span>hierarchical scheme</span>.
+<span title=concept-parsed-url>parsed URL</span> with a
+<span>relative scheme</span>.
 
 <p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> is
 "<code title>//</code>", optionally followed by
@@ -246,7 +246,7 @@ following components:
 <dfn title=concept-parsed-url-fragment>fragment</dfn>.
 
 <p>A <span title=concept-parsed-url>parsed URL</span> also has an associated
-<dfn>fatal error flag</dfn>, <dfn>hierarchical flag</dfn>,
+<dfn>fatal error flag</dfn>, <dfn>relative flag</dfn>,
 <dfn title=concept-parsed-url-input>input</dfn>,
 <dfn title=concept-parsed-url-base>base URL</dfn>,
 and <dfn title=concept-parsed-url-query-encoding>query encoding</dfn>.
@@ -377,8 +377,8 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
  <li>
   <p>Run the following state machine by switching on <var title>state</var>
   for each code point in <var title>input</var>, and then once more with the
-  conceptual <dfn>EOF code point</dfn>. Let the code point be
-  <var title>c</var>.
+  conceptual <dfn>EOF code point</dfn> (signifies end-of-input). Let the
+  code point be <var title>c</var>.
 
   <dl class=switch>
    <dt><b title>scheme start</b>
@@ -418,17 +418,16 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
        terminate this algorithm.
 
        <li><p>If <span title=concept-parsed-url-scheme>scheme</span> is
-       an <span>hierarchical scheme</span>, set the
-       <span>hierarchical flag</span>.
+       a <span>relative scheme</span>, set the <span>relative flag</span>.
 
-       <li><p>If the <span>hierarchical flag</span> is set,
+       <li><p>If the <span>relative flag</span> is set,
        <span title=concept-parsed-url-base>base URL</span> is not null and
        <span title=concept-parsed-url-base>base URL</span>'s
        <span title=concept-parsed-url-scheme>scheme</span> is equal to
        <span title=concept-parsed-url-scheme>scheme</span>, set
-       <var title>state</var> to <b title>hierarchical</b>.
+       <var title>state</var> to <b title>relative</b>.
 
-       <li><p>Otherwise, if the <span>hierarchical flag</span> is set, set
+       <li><p>Otherwise, if the <span>relative flag</span> is set, set
        <var title>state</var> to <b title>authority start</b>.
 
        <li><p>Otherwise, set <var title>state</var> to <b title>path</b>.
@@ -443,24 +442,24 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
    <dd>
     <p>If <span title=concept-parsed-url-base>base URL</span> is null, or
     <span title=concept-parsed-url-base>base URL</span>'s
-    <span title=concept-parsed-url-scheme>scheme</span> is not an
-    <span>hierarchical scheme</span>, <span>invalidate</span>.
+    <span title=concept-parsed-url-scheme>scheme</span> is not a
+    <span>relative scheme</span>, <span>invalidate</span>.
 
     <p class=note>You do not want to check
     <span title=concept-parsed-url-base>base URL</span>'s
-    <span>hierarchical flag</span> here, as the
+    <span>relative flag</span> here, as the
     <span title=concept-parsed-url-scheme>scheme</span> itself can have been
     changed to something non-sensical through the
     <code title=dom-URL-protocol>protocol</code> attribute.
 
-    <p>Otherwise, set <var title>state</var> to <b title>hierarchical</b>,
+    <p>Otherwise, set <var title>state</var> to <b title>relative</b>,
     and rerun this state machine for <var title>c</var>.
 
-   <dt><b title>hierarchical</b>
+   <dt><b title>relative</b>
    <dd>
     <p>Let <var title>base</var> be
     <span title=concept-parsed-url-base>base URL</span>, set the
-    <span>hierarchical flag</span>, and then, based on <var title>c</var>:
+    <span>relative flag</span>, and then, based on <var title>c</var>:
     <dl class=switch>
      <dt><span>EOF code point</span>
      <dd>
@@ -493,7 +492,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
       <span title=concept-parsed-url-port>port</span> to
       <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
-      <var title>state</var> to <b title>hierarchical path start</b>,
+      <var title>state</var> to <b title>relative path start</b>,
       and rerun this state machine for <var title>c</var>.
 
      <dt>"<code title>?</code>"
@@ -533,7 +532,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-path>path</span> to
      <var title>base</var>'s <span title=concept-parsed-url-path>path</span>, then
      remove <span title=concept-parsed-url-path>path</span>'s last string, set
-     <var title>state</var> to <b title>hierarchical path start</b>,
+     <var title>state</var> to <b title>relative path start</b>,
      and rerun this state machine for <var title>c</var>.
     </dl>
 
@@ -594,7 +593,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-host>host</span> to <var title>buffer</var>,
      <!-- XXX host normalize -->
      <var title>buffer</var> to the empty string, <var title>state</var>
-     to <b title>hierarchical path start</b>, and then only if
+     to <b title>relative path start</b>, and then only if
      <var title>override</var> is given, terminate these steps, or otherwise
      rerun this state machine for <var title>c</var>.
 
@@ -632,7 +631,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
        algorithm.
 
        <li><p>Set <var title>buffer</var> to the empty string,
-       <var title>state</var> to <b title>hierarchical path start</b>, and
+       <var title>state</var> to <b title>relative path start</b>, and
        rerun this state machine for <var title>c</var>.
       </ol>
 
@@ -657,12 +656,12 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <span title=concept-parsed-url-path>path</span>.
     </ol>
 
-   <dt><b title>hierarchical path start</b>
-   <dd><p>Set <var title>state</var> to <b title>hierarchical path</b> and
+   <dt><b title>relative path start</b>
+   <dd><p>Set <var title>state</var> to <b title>relative path</b> and
    if <var title>c</var> is neither "<code title>/</code>" nor
    "<code title>\</code>", rerun this state machine for <var title>c</var>.
 
-   <dt><b title>hierarchical path</b>
+   <dt><b title>relative path</b>
    <dd>
     <ol>
      <li>
@@ -750,7 +749,7 @@ a <span>parsed URL</span>, run these steps:
  "<code title>:</code>" concatenated.
 
  <li>
-  <p>If the <span>hierarchical flag</span> is set:
+  <p>If the <span>relative flag</span> is set:
 
   <ol>
    <li><p>Append "<code title>//</code>" to <var title>output</var>.
@@ -773,7 +772,7 @@ a <span>parsed URL</span>, run these steps:
    separated from each other by "<code title>/</code>".
   </ol>
 
- <li><p>If the <span>hierarchical flag</span> is unset, append
+ <li><p>If the <span>relative flag</span> is unset, append
  <span title=concept-parsed-url-path>path</span>'s only string (if any).
 
  <li><p>Append <span title=concept-parsed-url-query>query</span> to
@@ -913,7 +912,7 @@ steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
  given value as <i title>input</i> and <b title>host</b> as
@@ -928,7 +927,7 @@ run these steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
  given value as <i title>input</i> and <b title>hostname</b> as
@@ -943,7 +942,7 @@ steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
  given value as <i title>input</i> and <b title>port</b> as
@@ -956,7 +955,7 @@ must run these steps:
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, return the empty string.
 
- <li><p>If the <span>hierarchical flag</span> is unset, return
+ <li><p>If the <span>relative flag</span> is unset, return
  <span title=concept-parsed-url-path>path</span>'s only string.
 
  <li><p>Return "<code title>/</code>" concatenated with the strings in
@@ -969,12 +968,12 @@ run these steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-parsed-url-path>path</span> to the empty list.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span> with the
- given value as <i title>input</i> and <b title>hierarchical path start</b>
+ given value as <i title>input</i> and <b title>relative path start</b>
  as <i title>override</i>.
 </ol>
 
@@ -994,7 +993,7 @@ these steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>?</code>" removed, if any.
@@ -1023,7 +1022,7 @@ steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>hierarchical flag</span> is unset, terminate these steps.
+ <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.
@@ -1058,6 +1057,7 @@ steps:
 Adam Barth,
 Alexandre Morgaut,
 Erik Arvidsson,
+Gavin Carothers,
 Glenn Maynard,
 Ian Hickson,
 James Graham,
