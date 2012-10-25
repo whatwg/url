@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2012">Living Standard — Last Updated 24 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-october-2012">Living Standard — Last Updated 25 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 October 2012, the editors have made this specification available
+25 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -175,8 +175,6 @@ same row.
 
 <h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
 
-<p class="XXX">This is not finished, but feedback on this sketch is welcome.
-
 <p>A <a href="#concept-url" title="concept-url">URL</a> must be either a
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> or an
 <a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a>, optionally followed by
@@ -187,12 +185,6 @@ a <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 "<code title="">:</code>", followed by
 <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
 
-<p>The syntax of <dfn id="concept-url-scheme-data" title="concept-url-scheme-data">scheme data</dfn>
-depends on the <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and is typically
-defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
-<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a> is a
-<a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>.
-
 <p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is one
 <a href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of
 <a href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code title="">+</code>",
@@ -200,10 +192,21 @@ defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> must be registered
 <span class="XXX">...</span>.
 
+<p>The syntax of <dfn id="concept-url-scheme-data" title="concept-url-scheme-data">scheme data</dfn>
+depends on the <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and is typically
+defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
+<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a> is a
+<a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>. For
+other <a href="#concept-url-scheme" title="concept-url-scheme">schemes</a>, specifications or
+standards must define <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>
+either literally as or as a subset of one or more <a href="#url-units">URL units</a>
+not starting with a "<code title="">?</code>".
+
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is either a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
-or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>. A
+or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a> that
+does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>. A
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative to a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> with a
 <a href="#relative-scheme">relative scheme</a>.
@@ -217,31 +220,85 @@ optionally followed by either an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>
 or a <a href="#concept-url-query" title="concept-url-query">query</a>.
 
-<p>A <dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn> is
-<span class="XXX">...</span>
-<!-- "a userinfo" could use better phrasing -->
+<p>A <dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn> is zero or more
+<a href="#url-units">URL units</a>, excluding "<code title="">/</code>",
+"<code title="">?</code>", and "<code title="">@</code>".
 
 <p>A <dfn id="concept-url-port" title="concept-url-port">port</dfn> is zero or more
 <a href="#ascii-digits">ASCII digits</a>.
 
-<p>An <dfn id="concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</dfn>
+<p>An
+<dfn id="concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</dfn>
 is "<code title="">/</code>", followed by a
-<a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a>.
+<a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a> that does not
+start with a "<code title="">/</code>".
 
-<p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is
-optionally <span class="XXX">...</span>, optionally followed by a
+<p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is zero or
+more <span title="path segment">path segments</span> separated from each
+other by a <code title="">/</code>, optionally followed by a
 <a href="#concept-url-query" title="concept-url-query">query</a>.
 
+<p>A <span>path segment</span> is zero or more <a href="#url-units">URL units</a>,
+excluding "<code title="">/</code>" and "<code title="">?</code>".
+
 <p>A <dfn id="concept-url-query" title="concept-url-query">query</dfn> is "<code title="">?</code>",
-followed by <span class="XXX">...</span>
+followed by zero or more <a href="#url-units">URL units</a>.
 
 <p>A <dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn> is
-"<code title="">#</code>", followed by any <a href="#url-unit">URL unit</a> that is not
-one of U+0009, U+000A, and U+000D.
+"<code title="">#</code>", followed by zero or more <a href="#url-units">URL units</a>.
 
-<p>A <dfn id="url-unit">URL unit</dfn> is either any code point that is not
-"<code title="">%</code>", or a <a href="#url-byte">URL byte</a>. A <dfn id="url-byte">URL byte</dfn>
-is "<code title="">%</code>", followed by two <a href="#ascii-hex-digits">ASCII hex digits</a>.
+<p>The <dfn id="url-units">URL units</dfn> are <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
+"<code title="">!</code>",<!-- 0x21, sub-delims -->
+"<code title="">$</code>",<!-- 0x24, sub-delims -->
+"<code title="">&amp;</code>",<!-- 0x26, sub-delims -->
+"<code title="">'</code>",<!-- 0x27, sub-delims -->
+"<code title="">(</code>",<!-- 0x28, sub-delims -->
+"<code title="">)</code>",<!-- 0x29, sub-delims -->
+"<code title="">*</code>",<!-- 0x2A, sub-delims -->
+"<code title="">+</code>",<!-- 0x2B, sub-delims -->
+"<code title="">,</code>",<!-- 0x2C, sub-delims -->
+"<code title="">-</code>",<!-- 0x2D, iunreserved -->
+"<code title="">.</code>",<!-- 0x2E, iunreserved -->
+"<code title="">/</code>",<!-- 0x2F, iquery/ifragment -->
+"<code title="">:</code>",<!-- 0x3A, ipchar -->
+"<code title="">;</code>",<!-- 0x3B, sub-delims -->
+"<code title="">=</code>",<!-- 0x3D, sub-delims -->
+"<code title="">?</code>",<!-- 0x3F, iquery/ifragment -->
+"<code title="">@</code>",<!-- 0x40, ipchar -->
+"<code title="">_</code>",<!-- 0x5F, iunreserved -->
+"<code title="">~</code>",<!-- 0x7E, iunreserved -->,
+any code point in the ranges
+U+00A0 to U+D7FF,
+U+E000 to <!--U+F8FF,
+U+F900 to -->U+FDCF,
+U+FDF0 to U+FFEF,
+U+10000 to U+1FFFD,
+U+20000 to U+2FFFD,
+U+30000 to U+3FFFD,
+U+40000 to U+4FFFD,
+U+50000 to U+5FFFD,
+U+60000 to U+6FFFD,
+U+70000 to U+7FFFD,
+U+80000 to U+8FFFD,
+U+90000 to U+9FFFD,
+U+A0000 to U+AFFFD,
+U+B0000 to U+BFFFD,
+U+C0000 to U+CFFFD,
+U+D0000 to U+DFFFD,
+U+E1000 to U+EFFFD,
+U+F0000 to U+FFFFD,
+U+100000 to U+10FFFD,
+and <a href="#url-byte" title="URL byte">URL bytes</a>.
+<!-- XXX there is a mismatch with
+     http://www.whatwg.org/specs/web-apps/current-work/#preprocessing-the-input-stream
+     I think they should match, need advice -->
+
+<p class="note">Code points higher than U+009F will be converted to
+<a href="#url-byte" title="URL byte">URL bytes</a> by the
+<a href="#concept-url-parser" title="concept-url-parser">parser</a>.
+
+<p>The <dfn id="url-byte">URL byte</dfn> is "<code title="">%</code>", followed by two
+<a href="#ascii-hex-digits">ASCII hex digits</a>.
 
 <p class="note">For maximum robustness, sequences of
 <a href="#url-byte" title="URL byte">URL bytes</a>, after conversion to bytes, ought to
