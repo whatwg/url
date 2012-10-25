@@ -188,7 +188,7 @@ a <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 <p>A <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn> is one
 <a href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of
 <a href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code title="">+</code>",
-"<code title="">-</code>", or "<code title="">.</code>". A
+"<code title="">-</code>", and "<code title="">.</code>". A
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> must be registered
 <span class="XXX">...</span>.
 
@@ -200,13 +200,14 @@ defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
 other <a href="#concept-url-scheme" title="concept-url-scheme">schemes</a>, specifications or
 standards must define <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>
 either literally as or as a subset of one or more <a href="#url-units">URL units</a>
-not starting with a "<code title="">?</code>".
+that do not start with a "<code title="">?</code>".
 
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is either a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
 or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a> that
-does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>. A
+does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, followed
+by "<code title="">:</code>". A
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative to a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> with a
 <a href="#relative-scheme">relative scheme</a>.
@@ -266,8 +267,8 @@ followed by zero or more <a href="#url-units">URL units</a>.
 "<code title="">?</code>",<!-- 0x3F, iquery/ifragment -->
 "<code title="">@</code>",<!-- 0x40, ipchar -->
 "<code title="">_</code>",<!-- 0x5F, iunreserved -->
-"<code title="">~</code>",<!-- 0x7E, iunreserved -->,
-any code point in the ranges
+"<code title="">~</code>",<!-- 0x7E, iunreserved -->
+code points in the ranges
 U+00A0 to U+D7FF,
 U+E000 to <!--U+F8FF,
 U+F900 to -->U+FDCF,

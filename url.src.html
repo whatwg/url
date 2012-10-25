@@ -171,7 +171,7 @@ a <span title=concept-url-fragment>fragment</span>.
 <p>A <dfn title=concept-url-scheme>scheme</dfn> is one
 <span>ASCII alpha</span>, followed by zero or more of
 <span>ASCII alphanumeric</span>, "<code title>+</code>",
-"<code title>-</code>", or "<code title>.</code>". A
+"<code title>-</code>", and "<code title>.</code>". A
 <span title=concept-url-scheme>scheme</span> must be registered
 <span class=XXX>...</span>.
 
@@ -183,13 +183,14 @@ defined alongside it. For a <span>relative scheme</span>,
 other <span title=concept-url-scheme>schemes</span>, specifications or
 standards must define <span title=concept-url-scheme-data>scheme data</span>
 either literally as or as a subset of one or more <span>URL units</span>
-not starting with a "<code title>?</code>".
+that do not start with a "<code title>?</code>".
 
 <p>A <dfn title=concept-relative-url>relative URL</dfn> is either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span> that
-does not start with a <span title=concept-url-scheme>scheme</span>. A
+does not start with a <span title=concept-url-scheme>scheme</span>, followed
+by "<code title>:</code>". A
 <span title=concept-relative-url>relative URL</span> must be relative to a
 <span title=concept-parsed-url>parsed URL</span> with a
 <span>relative scheme</span>.
@@ -249,8 +250,8 @@ followed by zero or more <span>URL units</span>.
 "<code title>?</code>",<!-- 0x3F, iquery/ifragment -->
 "<code title>@</code>",<!-- 0x40, ipchar -->
 "<code title>_</code>",<!-- 0x5F, iunreserved -->
-"<code title>~</code>",<!-- 0x7E, iunreserved -->,
-any code point in the ranges
+"<code title>~</code>",<!-- 0x7E, iunreserved -->
+code points in the ranges
 U+00A0 to U+D7FF,
 U+E000 to <!--U+F8FF,
 U+F900 to -->U+FDCF,
