@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-october-2012">Living Standard — Last Updated 25 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-october-2012">Living Standard — Last Updated 26 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 October 2012, the editors have made this specification available
+26 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -104,6 +104,7 @@ might increase in scope somewhat.
 <ul class="XXX">
  <li>File URLs need to be special cased somehow as they behave as
  URLs with the relative flag set, but have no port (and rarely a host).
+ <!-- http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Sep/0305.html -->
 </ul>
 
 
@@ -151,6 +152,9 @@ or in the range U+0061 to U+007A.
 
 
 <h2 id="urls"><span class="secno">4 </span>URLs</h2>
+
+<!-- History behind URL as term:
+     http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
 <p>A <dfn id="concept-url" title="concept-url">URL</dfn> is a string that represents an
 identifier.
@@ -236,7 +240,7 @@ start with a "<code title="">/</code>".
 
 <p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is zero or
 more <a href="#path-segment" title="path segment">path segments</a> separated from each
-other by a <code title="">/</code>, optionally followed by a
+other by a "<code title="">/</code>", optionally followed by a
 <a href="#concept-url-query" title="concept-url-query">query</a>.
 
 <p>A <dfn id="path-segment">path segment</dfn> is zero or more <a href="#url-units">URL units</a>,
@@ -289,22 +293,23 @@ U+D0000 to U+DFFFD,
 U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD,
-and <a href="#url-byte" title="URL byte">URL bytes</a>.
+and <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>.
 <!-- XXX there is a mismatch with
      http://www.whatwg.org/specs/web-apps/current-work/#preprocessing-the-input-stream
      I think they should match, need advice -->
 
 <p class="note">Code points higher than U+009F will be converted to
-<a href="#url-byte" title="URL byte">URL bytes</a> by the
+<a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a> by the
 <a href="#concept-url-parser" title="concept-url-parser">parser</a>.
 
-<p>The <dfn id="url-byte">URL byte</dfn> is "<code title="">%</code>", followed by two
+<p>A <dfn id="url-encoded-byte">URL-encoded byte</dfn> is "<code title="">%</code>", followed by two
 <a href="#ascii-hex-digits">ASCII hex digits</a>.
 
 <p class="note">For maximum robustness, sequences of
-<a href="#url-byte" title="URL byte">URL bytes</a>, after conversion to bytes, ought to
-not cause <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit a
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder-error">decoder error</a>.
+<a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>, after conversion to
+bytes, ought to not cause
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit one or more
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder-error" title="decoder error">decoder errors</a>.
 
 
 <h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
@@ -347,9 +352,6 @@ these steps:
  "<code title="">&lt;</code>", "<code title="">&gt;</code>", "<code title="">?</code>",
  and "<code title="">`</code>", return <var title="">c</var>.
 
- <li><p>If <var title="">c</var> is in the range U+D800 through to U+DFFF, set
- <var title="">c</var> to U+FFFD.
-
  <li><p>Let <var title="">bytes</var> be the result of running
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on <var title="">c</var> using
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as encoding.
@@ -368,9 +370,6 @@ run these steps:
  and is not one of '<code title="">"</code>', "<code title="">#</code>",
  "<code title="">&lt;</code>", "<code title="">&gt;</code>", and
  "<code title="">`</code>", return <var title="">c</var>.
-
- <li><p>If <var title="">c</var> is in the range U+D800 through to U+DFFF, set
- <var title="">c</var> to U+FFFD.
 
  <li>
   <p>Let <var title="">bytes</var> be the result of running
@@ -424,7 +423,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
  <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a> to <var title="">input</var>.
 
  <li><p>Remove any leading and trailing
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> from
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
  <var title="">input</var>.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
@@ -859,6 +858,9 @@ a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run t
 
 <h2 id="api"><span class="secno">5 </span>API</h2>
 
+<!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
+     s/DOMString/UTFString -->
+
 <pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString) <var title="">base</var>)]
 interface <dfn id="url">URL</dfn> {
 };
@@ -938,7 +940,7 @@ run these steps:
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
  <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>, with any leading and trailing
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#space-characters">space characters</a> removed, as
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> removed, as
  <i title="">input</i>.
 </ol>
 

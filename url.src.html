@@ -87,6 +87,7 @@ might increase in scope somewhat.
 <ul class=XXX>
  <li>File URLs need to be special cased somehow as they behave as
  URLs with the relative flag set, but have no port (and rarely a host).
+ <!-- http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Sep/0305.html -->
 </ul>
 
 
@@ -134,6 +135,9 @@ or in the range U+0061 to U+007A.
 
 
 <h2>URLs</h2>
+
+<!-- History behind URL as term:
+     http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
 <p>A <dfn title=concept-url>URL</dfn> is a string that represents an
 identifier.
@@ -219,7 +223,7 @@ start with a "<code title>/</code>".
 
 <p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> is zero or
 more <span title="path segment">path segments</span> separated from each
-other by a <code title>/</code>, optionally followed by a
+other by a "<code title>/</code>", optionally followed by a
 <span title=concept-url-query>query</span>.
 
 <p>A <dfn>path segment</dfn> is zero or more <span>URL units</span>,
@@ -272,22 +276,23 @@ U+D0000 to U+DFFFD,
 U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD,
-and <span title="URL byte">URL bytes</span>.
+and <span title="URL-encoded byte">URL-encoded bytes</span>.
 <!-- XXX there is a mismatch with
      http://www.whatwg.org/specs/web-apps/current-work/#preprocessing-the-input-stream
      I think they should match, need advice -->
 
 <p class=note>Code points higher than U+009F will be converted to
-<span title="URL byte">URL bytes</span> by the
+<span title="URL-encoded byte">URL-encoded bytes</span> by the
 <span title=concept-url-parser>parser</span>.
 
-<p>The <dfn>URL byte</dfn> is "<code title>%</code>", followed by two
+<p>A <dfn>URL-encoded byte</dfn> is "<code title>%</code>", followed by two
 <span>ASCII hex digits</span>.
 
 <p class=note>For maximum robustness, sequences of
-<span title="URL byte">URL bytes</span>, after conversion to bytes, ought to
-not cause <span data-anolis-spec=encoding>utf-8 decode</span> to emit a
-<span data-anolis-spec=encoding>decoder error</span>.
+<span title="URL-encoded byte">URL-encoded bytes</span>, after conversion to
+bytes, ought to not cause
+<span data-anolis-spec=encoding>utf-8 decode</span> to emit one or more
+<span data-anolis-spec=encoding title="decoder error">decoder errors</span>.
 
 
 <h3>Parsing</h3>
@@ -330,9 +335,6 @@ these steps:
  "<code title>&lt;</code>", "<code title>></code>", "<code title>?</code>",
  and "<code title>`</code>", return <var title>c</var>.
 
- <li><p>If <var title>c</var> is in the range U+D800 through to U+DFFF, set
- <var title>c</var> to U+FFFD.
-
  <li><p>Let <var title>bytes</var> be the result of running
  <span data-anolis-spec=encoding>encode</span> on <var title>c</var> using
  <span data-anolis-spec=encoding>utf-8</span> as encoding.
@@ -351,9 +353,6 @@ run these steps:
  and is not one of '<code title>"</code>', "<code title>#</code>",
  "<code title>&lt;</code>", "<code title>></code>", and
  "<code title>`</code>", return <var title>c</var>.
-
- <li><p>If <var title>c</var> is in the range U+D800 through to U+DFFF, set
- <var title>c</var> to U+FFFD.
 
  <li>
   <p>Let <var title>bytes</var> be the result of running
@@ -407,7 +406,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
  <span title=concept-parsed-url-input>input</span> to <var title>input</var>.
 
  <li><p>Remove any leading and trailing
- <span data-anolis-spec=encoding>space characters</span> from
+ <span data-anolis-spec=encoding>ASCII whitespace</span> from
  <var title>input</var>.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span>
@@ -842,6 +841,9 @@ a <span title=concept-parsed-url>parsed URL</span>, run these steps:
 
 <h2>API</h2>
 
+<!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
+     s/DOMString/UTFString -->
+
 <pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var>)]
 interface <dfn>URL</dfn> {
 };
@@ -921,7 +923,7 @@ run these steps:
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span>
  <span title=concept-parsed-url-input>input</span>, with any leading and trailing
- <span data-anolis-spec=encoding>space characters</span> removed, as
+ <span data-anolis-spec=encoding>ASCII whitespace</span> removed, as
  <i title>input</i>.
 </ol>
 
