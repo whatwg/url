@@ -503,12 +503,36 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
        <li><p>Otherwise, if the <a href="#relative-flag">relative flag</a> is set, set
        <var title="">state</var> to <b title="">authority start state</b>.
 
-       <li><p>Otherwise, set <var title="">state</var> to <b title="">path state</b>.
+       <li><p>Otherwise, set <var title="">state</var> to
+       <b title="">scheme data state</b>.
       </ol>
 
      <li><p>Otherwise, set <var title="">state</var> to <b title="">no scheme state</b>,
      <var title="">buffer</var> to the empty string, and start over (from the
      first code point in <var title="">input</var>).
+    </ol>
+
+   <dt><b title="">scheme data state</b>
+   <dd>
+    <ol>
+     <li>
+      <p>Append an empty string to
+      <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
+
+      <p class="note"><a href="#concept-parsed-url-path" title="concept-parsed-url-path">Path</a> is
+      reused here to keep <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
+      simple.
+
+     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
+     is "<code title="">#</code>", set
+     <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
+     "<code title="">#</code>" and <var title="">state</var> to
+     <b title="">fragment state</b>.
+
+     <li><p>Otherwise, if <var title="">c</var> is none of
+     <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
+     append <var title="">c</var> to the only string in
+     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
     </ol>
 
    <dt><b title="">no scheme state</b>
@@ -711,24 +735,6 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      <li><p>Otherwise, <a href="#invalidate">invalidate</a>.
     </ol>
 
-   <dt><b title="">path state</b>
-   <dd>
-    <ol>
-     <li><p>Append an empty string to
-     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
-
-     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
-     is "<code title="">#</code>", set
-     <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a> to
-     "<code title="">#</code>" and <var title="">state</var> to
-     <b title="">fragment state</b>.
-
-     <li><p>Otherwise, if <var title="">c</var> is not the
-     <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var>,
-     <a href="#percent-escaped">percent escaped</a>, to the only string in
-     <a href="#concept-parsed-url-path" title="concept-parsed-url-path">path</a>.
-    </ol>
-
    <dt><b title="">relative path start state</b>
    <dd><p>Set <var title="">state</var> to <b title="">relative path state</b> and
    if <var title="">c</var> is neither "<code title="">/</code>" nor
@@ -795,8 +801,8 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
     </ol>
 
    <dt><b title="">fragment state</b>
-   <dd><p>If <var title="">c</var> is none of U+0009, U+000A, and U+000D,
-   append <var title="">c</var> to
+   <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
+   U+0009, U+000A, and U+000D, append <var title="">c</var> to
    <a href="#concept-parsed-url-fragment" title="concept-parsed-url-fragment">fragment</a>.
   </dl>
 </ol>
