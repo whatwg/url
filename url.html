@@ -175,22 +175,24 @@ representation of <var title="">byte</var>.
 <p>A <dfn id="concept-url" title="concept-url">URL</dfn> is a string that represents an
 identifier.
 
-<p>A <dfn id="relative-scheme">relative scheme</dfn> is a
-<a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> listed in the first column of
-the following table. It has an associated default
-<a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> listed in the second column on the
-same row.
+<p>A <dfn id="relative-scheme">relative scheme</dfn> is a scheme listed in the first column of
+the following table. It typically has an associated default port listed in
+the second column on the same row.
 
 <table>
- <tr><th><a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">Scheme</a>
-     <th><a href="#concept-parsed-url-port" title="concept-parsed-url-port">Port</a>
+ <tr><th>scheme
+     <th>port
  <tr><td>"<code title="">ftp</code>"<td>21
+ <tr><td>"<code title="">file</code>"<td>
  <tr><td>"<code title="">gopher</code>"<td>70
  <tr><td>"<code title="">http</code>"<td>80
  <tr><td>"<code title="">https</code>"<td>443
  <tr><td>"<code title="">ws</code>"<td>80
  <tr><td>"<code title="">wss</code>"<td>443
 </table>
+
+<!-- XXX should scheme/port be cross-referenced? If so, to where? This
+     concept is useful in both "Writing" and "Parsing". -->
 
 
 <h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
@@ -515,7 +517,12 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
        <li><p>If <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is
        a <a href="#relative-scheme">relative scheme</a>, set the <a href="#relative-flag">relative flag</a>.
 
-       <li><p>If the <a href="#relative-flag">relative flag</a> is set,
+       <li><p>If <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is
+       "<code title="">file</code>", set <var title="">state</var> to
+       <b title="">relative state</b>.
+       <!-- not combined with the subsequent step for clarity -->
+
+       <li><p>Otherwise, if the <a href="#relative-flag">relative flag</a> is set,
        <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> is not null and
        <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
        <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is equal to
@@ -579,13 +586,16 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
    <dd>
     <p>Let <var title="">base</var> be
     <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>, set the
-    <a href="#relative-flag">relative flag</a>, and then, based on <var title="">c</var>:
+    <a href="#relative-flag">relative flag</a>, set
+    <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
+    <var title="">base</var>'s
+    <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>, and then, based on
+    <var title="">c</var>:
+
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
      <dd>
-      <p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-      <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+      <p>Set <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
       <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
       <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
       <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
@@ -600,15 +610,25 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      <dd>
       <p>If the code point in <var title="">input</var> after
       <var title="">c</var> is either "<code title="">/</code>" or
-      "<code title="">\</code>", set
-      <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-      and <var title="">state</var> to <b title="">authority start state</b>.
+      "<code title="">\</code>", run these steps:
 
-      <p>Otherwise, set
-      <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-      <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-      <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+      <ol>
+       <li><p>If <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> is
+       "<code title="">file</code>" set <var title="">state</var> to
+       <b title="">host state</b>.
+
+       <li><p>Otherwise set <var title="">state</var> to
+       <b title="">authority start state</b>.
+
+       <li>
+        <p>Skip the code point after <var title="">c</var> when running this
+        state machine again.
+
+        <p class="note">In other words, skipping the code point determined to
+        be either "<code title="">/</code>" or "<code title="">\</code>".
+      </ol>
+
+      <p>Otherwise, set <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
       <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
       <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
       <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
@@ -616,9 +636,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
       and rerun this state machine for <var title="">c</var>.
 
      <dt>"<code title="">?</code>"
-     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <dd><p>Set <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
      <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
@@ -628,9 +646,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      and <var title="">state</var> to <b title="">query state</b>.
 
      <dt>"<code title="">#</code>"
-     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <dd><p>Set <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
      <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,
@@ -643,9 +659,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      <b title="">fragment state</b>.
 
      <dt>Otherwise
-     <dd><p>Set <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a> to
-     <var title="">base</var>'s <a href="#concept-parsed-url-scheme" title="concept-parsed-url-scheme">scheme</a>,
-     <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
+     <dd><p>Set <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-host" title="concept-parsed-url-host">host</a>,
      <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a> to
      <var title="">base</var>'s <a href="#concept-parsed-url-port" title="concept-parsed-url-port">port</a>,

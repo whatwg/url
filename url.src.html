@@ -158,22 +158,24 @@ representation of <var title>byte</var>.
 <p>A <dfn title=concept-url>URL</dfn> is a string that represents an
 identifier.
 
-<p>A <dfn>relative scheme</dfn> is a
-<span title=concept-parsed-url-scheme>scheme</span> listed in the first column of
-the following table. It has an associated default
-<span title=concept-parsed-url-port>port</span> listed in the second column on the
-same row.
+<p>A <dfn>relative scheme</dfn> is a scheme listed in the first column of
+the following table. It typically has an associated default port listed in
+the second column on the same row.
 
 <table>
- <tr><th><span title=concept-parsed-url-scheme>Scheme</span>
-     <th><span title=concept-parsed-url-port>Port</span>
+ <tr><th>scheme
+     <th>port
  <tr><td>"<code title>ftp</code>"<td>21
+ <tr><td>"<code title>file</code>"<td>
  <tr><td>"<code title>gopher</code>"<td>70
  <tr><td>"<code title>http</code>"<td>80
  <tr><td>"<code title>https</code>"<td>443
  <tr><td>"<code title>ws</code>"<td>80
  <tr><td>"<code title>wss</code>"<td>443
 </table>
+
+<!-- XXX should scheme/port be cross-referenced? If so, to where? This
+     concept is useful in both "Writing" and "Parsing". -->
 
 
 <h3>Writing</h3>
@@ -498,7 +500,12 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
        <li><p>If <span title=concept-parsed-url-scheme>scheme</span> is
        a <span>relative scheme</span>, set the <span>relative flag</span>.
 
-       <li><p>If the <span>relative flag</span> is set,
+       <li><p>If <span title=concept-parsed-url-scheme>scheme</span> is
+       "<code title>file</code>", set <var title>state</var> to
+       <b title>relative state</b>.
+       <!-- not combined with the subsequent step for clarity -->
+
+       <li><p>Otherwise, if the <span>relative flag</span> is set,
        <span title=concept-parsed-url-base>base URL</span> is not null and
        <span title=concept-parsed-url-base>base URL</span>'s
        <span title=concept-parsed-url-scheme>scheme</span> is equal to
@@ -562,13 +569,16 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
    <dd>
     <p>Let <var title>base</var> be
     <span title=concept-parsed-url-base>base URL</span>, set the
-    <span>relative flag</span>, and then, based on <var title>c</var>:
+    <span>relative flag</span>, set
+    <span title=concept-parsed-url-scheme>scheme</span> to
+    <var title>base</var>'s
+    <span title=concept-parsed-url-scheme>scheme</span>, and then, based on
+    <var title>c</var>:
+
     <dl class=switch>
      <dt><span>EOF code point</span>
      <dd>
-      <p>Set <span title=concept-parsed-url-scheme>scheme</span> to
-      <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-      <span title=concept-parsed-url-host>host</span> to
+      <p>Set <span title=concept-parsed-url-host>host</span> to
       <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
       <span title=concept-parsed-url-port>port</span> to
       <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
@@ -583,15 +593,25 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <dd>
       <p>If the code point in <var title>input</var> after
       <var title>c</var> is either "<code title>/</code>" or
-      "<code title>\</code>", set
-      <span title=concept-parsed-url-scheme>scheme</span> to
-      <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-      and <var title>state</var> to <b title>authority start state</b>.
+      "<code title>\</code>", run these steps:
 
-      <p>Otherwise, set
-      <span title=concept-parsed-url-scheme>scheme</span> to
-      <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-      <span title=concept-parsed-url-host>host</span> to
+      <ol>
+       <li><p>If <span title=concept-parsed-url-scheme>scheme</span> is
+       "<code title>file</code>" set <var title>state</var> to
+       <b title>host state</b>.
+
+       <li><p>Otherwise set <var title>state</var> to
+       <b title>authority start state</b>.
+
+       <li>
+        <p>Skip the code point after <var title>c</var> when running this
+        state machine again.
+
+        <p class=note>In other words, skipping the code point determined to
+        be either "<code title>/</code>" or "<code title>\</code>".
+      </ol>
+
+      <p>Otherwise, set <span title=concept-parsed-url-host>host</span> to
       <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
       <span title=concept-parsed-url-port>port</span> to
       <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
@@ -599,9 +619,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       and rerun this state machine for <var title>c</var>.
 
      <dt>"<code title>?</code>"
-     <dd><p>Set <span title=concept-parsed-url-scheme>scheme</span> to
-     <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-     <span title=concept-parsed-url-host>host</span> to
+     <dd><p>Set <span title=concept-parsed-url-host>host</span> to
      <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
      <span title=concept-parsed-url-port>port</span> to
      <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
@@ -611,9 +629,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      and <var title>state</var> to <b title>query state</b>.
 
      <dt>"<code title>#</code>"
-     <dd><p>Set <span title=concept-parsed-url-scheme>scheme</span> to
-     <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-     <span title=concept-parsed-url-host>host</span> to
+     <dd><p>Set <span title=concept-parsed-url-host>host</span> to
      <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
      <span title=concept-parsed-url-port>port</span> to
      <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
@@ -626,9 +642,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <b title>fragment state</b>.
 
      <dt>Otherwise
-     <dd><p>Set <span title=concept-parsed-url-scheme>scheme</span> to
-     <var title>base</var>'s <span title=concept-parsed-url-scheme>scheme</span>,
-     <span title=concept-parsed-url-host>host</span> to
+     <dd><p>Set <span title=concept-parsed-url-host>host</span> to
      <var title>base</var>'s <span title=concept-parsed-url-host>host</span>,
      <span title=concept-parsed-url-port>port</span> to
      <var title>base</var>'s <span title=concept-parsed-url-port>port</span>,
