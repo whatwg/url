@@ -361,6 +361,8 @@ all code points greater than U+007E,
 and
 "<code title>`</code>". <!-- 0x60 -->
 
+<!-- we could inline handling of the EOF code point, U+0009, U+000A, and
+     U+000D potentially; have them return the empty string -->
 <p>To <dfn>URL escape</dfn> a <var title>code point</var>, using an
 <var title>escape set</var>, and an optional
 <var title>encoding override</var>, run these steps:
@@ -905,6 +907,20 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-hash>hash</span>;
 };</pre>
 
+<!-- Ideas:
+           attribute DOMString user;
+           attribute DOMString password; // or maybe userinfo instead?
+           attribute DOMString effectiveTLD; // see http://publicsuffix.org/
+           attribute DOMString basename; // last segment of path (Simon Sapin)
+           sequence<DOMString> getPath();
+           void setPath(DOMString segments...);
+
+     Maybe also a way of comparing URLs? Or maybe rather a way to normalize
+     a URL in a way that makes string comparison work better.
+
+     Working with relative paths is another thing we could improve. E.g. a
+     relPathname setter that would resolve the given value against pathname. -->
+
 <p>Any object implementing <code>URLUtils</code> represents a
 <span title=concept-parsed-url>parsed URL</span>. Thus <code>URL</code>
 represents a <span title=concept-parsed-url>parsed URL</span>.
@@ -1167,6 +1183,7 @@ Ian Hickson,
 James Graham,
 James Manger,
 Michael™ Smith,
+Rodney Rehm,
 Simon Pieters,
 Tab Atkins
 for being awesome!

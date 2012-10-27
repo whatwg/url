@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-october-2012">Living Standard — Last Updated 26 October 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-october-2012">Living Standard — Last Updated 27 October 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-26 October 2012, the editors have made this specification available
+27 October 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -378,6 +378,8 @@ all code points greater than U+007E,
 and
 "<code title="">`</code>". <!-- 0x60 -->
 
+<!-- we could inline handling of the EOF code point, U+0009, U+000A, and
+     U+000D potentially; have them return the empty string -->
 <p>To <dfn id="url-escape">URL escape</dfn> a <var title="">code point</var>, using an
 <var title="">escape set</var>, and an optional
 <var title="">encoding override</var>, run these steps:
@@ -922,6 +924,20 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
 
+<!-- Ideas:
+           attribute DOMString user;
+           attribute DOMString password; // or maybe userinfo instead?
+           attribute DOMString effectiveTLD; // see http://publicsuffix.org/
+           attribute DOMString basename; // last segment of path (Simon Sapin)
+           sequence<DOMString> getPath();
+           void setPath(DOMString segments...);
+
+     Maybe also a way of comparing URLs? Or maybe rather a way to normalize
+     a URL in a way that makes string comparison work better.
+
+     Working with relative paths is another thing we could improve. E.g. a
+     relPathname setter that would resolve the given value against pathname. -->
+
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> represents a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>. Thus <a href="#url"><code>URL</code></a>
 represents a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
@@ -1202,6 +1218,7 @@ Ian Hickson,
 James Graham,
 James Manger,
 Michael™ Smith,
+Rodney Rehm,
 Simon Pieters,
 Tab Atkins
 for being awesome!
