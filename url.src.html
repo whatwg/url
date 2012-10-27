@@ -910,7 +910,6 @@ interface <dfn>URLUtils</dfn> {
 <!-- Ideas:
            attribute DOMString user;
            attribute DOMString password; // or maybe userinfo instead?
-           attribute DOMString effectiveTLD; // see http://publicsuffix.org/
            attribute DOMString basename; // last segment of path (Simon Sapin)
            sequence<DOMString> getPath();
            void setPath(DOMString segments...);
@@ -919,7 +918,11 @@ interface <dfn>URLUtils</dfn> {
      a URL in a way that makes string comparison work better.
 
      Working with relative paths is another thing we could improve. E.g. a
-     relPathname setter that would resolve the given value against pathname. -->
+     relPathname setter that would resolve the given value against pathname.
+
+     Could make manipulation of host easier by exposing the labels similarly
+     to the proposal for path segments above. (Should never expose
+     effective TLD as it's evil.) -->
 
 <p>Any object implementing <code>URLUtils</code> represents a
 <span title=concept-parsed-url>parsed URL</span>. Thus <code>URL</code>
@@ -1141,7 +1144,8 @@ steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or the
- <span>relative flag</span> is unset, terminate these steps.
+ <span title=concept-parsed-url-scheme>scheme</span> is
+ "<code title>javascript</code>", terminate these steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.
