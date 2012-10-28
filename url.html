@@ -52,7 +52,11 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a class="no-num" href="#goals">Goals</a></li>
  <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
  <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
- <li><a href="#host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</a></li>
+ <li><a href="#hosts-and-ip-addresses"><span class="secno">3 </span>Hosts and IP addresses</a>
+  <ol>
+   <li><a href="#host-writing"><span class="secno">3.1 </span>Writing</a></li>
+   <li><a href="#host-parsing"><span class="secno">3.2 </span>Parsing</a></li>
+   <li><a href="#host-serializing"><span class="secno">3.3 </span>Serializing</a></ol></li>
  <li><a href="#urls"><span class="secno">4 </span>URLs</a>
   <ol>
    <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
@@ -129,6 +133,11 @@ or in the range U+0061 to U+007A.
 <a href="#ascii-alpha">ASCII alpha</a>.
 
 
+<p>The <dfn id="domain-label-separators">domain label separators</dfn> are the code points
+U+002E, U+3002, U+FF0E, and U+FF61.
+<!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
+
+
 <p>A <dfn id="url-encoded-byte">URL-encoded byte</dfn> is "<code title="">%</code>", followed by two
 <a href="#ascii-hex-digits">ASCII hex digits</a>.
 
@@ -145,14 +154,62 @@ representation of <var title="">byte</var>.
 
 
 
-<h2 id="host-names-and-ip-addresses"><span class="secno">3 </span>Host names and IP addresses</h2>
+<h2 id="hosts-and-ip-addresses"><span class="secno">3 </span>Hosts and IP addresses</h2>
 
-<p>A <dfn id="concept-host" title="concept-host">host</dfn> is <span class="XXX">...</span>
+<p>A <dfn id="concept-host" title="concept-host">host</dfn> is a string that represents a
+network address, either in the form of a
+<a href="#concept-domain" title="concept-domain">domain</a> or an
+<a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>.
 
-<ul class="XXX">
- <li>Normalize IPv6 addresses
- <li>IDNA2003 vs IDNA2008 (and also UTS #46)
-</ul>
+<p class="note">This is a slightly more generic definition of
+<a href="#concept-host" title="concept-host">host</a> than its traditional meaning for the
+sake of convenience.
+<!-- "convenience's sake" as The Economist would write it is ugly -->
+
+<p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
+more <dfn id="concept-domain-label" title="concept-domain-label">domain labels</dfn>.
+
+<p class="XXX">An <dfn id="concept-ipv6" title="concept-ipv6">IPv6 address</dfn> is ...
+
+
+<h3 id="host-writing"><span class="secno">3.1 </span>Writing</h3>
+
+<p>A <a href="#concept-domain" title="concept-domain">domain</a> must be one or more
+<a href="#concept-domain-label" title="concept-domain-label">domain labels</a> separated from each
+other by a
+<a href="#domain-label-separators" title="domain label separators">domain label separator</a>,
+optionally followed by a
+<a href="#domain-label-separators" title="domain label separators">domain label separator</a>.
+<!-- if a domain has 4 labels, no trailing dot, and each label consists only
+     of ASCII digits it's IPv4 because the last label of a domain cannot
+     start with an ASCII digit -->
+
+<p class="XXX">An <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> must ...
+
+
+<h3 id="host-parsing"><span class="secno">3.2 </span>Parsing</h3>
+
+<p class="XXX">IDNA2003 vs IDNA2008 (and also UTS #46)
+
+<p>A <dfn id="concept-parsed-host" title="concept-parsed-host">parsed host</dfn> consists either of a
+<a href="#concept-parsed-domain" title="concept-parsed-domain">parsed domain</a> or a
+<a href="#concept-parsed-ipv6" title="concept-parsed-ipv6">parsed IPv6 address</a>.
+
+<p>A <dfn id="concept-parsed-domain" title="concept-parsed-domain">parsed domain</dfn> consists of a list
+of <dfn id="concept-parsed-domain-label" title="concept-parsed-domain-label">labels</dfn> and a
+<dfn id="trailing-dot-flag">trailing dot flag</dfn>.
+
+<p>A <dfn id="concept-parsed-ipv6" title="concept-parsed-ipv6">parsed IPv6 address</dfn> consists of an
+ordered set of eight 16-bit integers.
+
+<p classxxx="">To <dfn id="concept-host-parser" title="concept-host-parser">parse</dfn> ...
+
+
+<h3 id="host-serializing"><span class="secno">3.3 </span>Serializing</h3>
+
+<p class="XXX">Normalize IPv6 addresses
+<!-- Safari/Gecko/Opera do not do this. Chrome does. I would prefer aligning
+     with Chrome as we normalize domains too. -->
 
 
 

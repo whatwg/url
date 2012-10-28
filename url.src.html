@@ -113,6 +113,11 @@ or in the range U+0061 to U+007A.
 <span>ASCII alpha</span>.
 
 
+<p>The <dfn>domain label separators</dfn> are the code points
+U+002E, U+3002, U+FF0E, and U+FF61.
+<!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
+
+
 <p>A <dfn>URL-encoded byte</dfn> is "<code title>%</code>", followed by two
 <span>ASCII hex digits</span>.
 
@@ -129,14 +134,62 @@ representation of <var title>byte</var>.
 
 
 
-<h2>Host names and IP addresses</h2>
+<h2>Hosts and IP addresses</h2>
 
-<p>A <dfn title=concept-host>host</dfn> is <span class=XXX>...</span>
+<p>A <dfn title=concept-host>host</dfn> is a string that represents a
+network address, either in the form of a
+<span title=concept-domain>domain</span> or an
+<span title=concept-ipv6>IPv6 address</span>.
 
-<ul class=XXX>
- <li>Normalize IPv6 addresses
- <li>IDNA2003 vs IDNA2008 (and also UTS #46)
-</ul>
+<p class=note>This is a slightly more generic definition of
+<span title=concept-host>host</span> than its traditional meaning for the
+sake of convenience.
+<!-- "convenience's sake" as The Economist would write it is ugly -->
+
+<p>A <dfn title=concept-domain>domain</dfn> is an ordered list of one or
+more <dfn title=concept-domain-label>domain labels</dfn>.
+
+<p class=XXX>An <dfn title=concept-ipv6>IPv6 address</dfn> is ...
+
+
+<h3 id=host-writing>Writing</h3>
+
+<p>A <span title=concept-domain>domain</span> must be one or more
+<span title=concept-domain-label>domain labels</span> separated from each
+other by a
+<span title="domain label separators">domain label separator</span>,
+optionally followed by a
+<span title="domain label separators">domain label separator</span>.
+<!-- if a domain has 4 labels, no trailing dot, and each label consists only
+     of ASCII digits it's IPv4 because the last label of a domain cannot
+     start with an ASCII digit -->
+
+<p class=XXX>An <span title=concept-ipv6>IPv6 address</span> must ...
+
+
+<h3 id=host-parsing>Parsing</h3>
+
+<p class=XXX>IDNA2003 vs IDNA2008 (and also UTS #46)
+
+<p>A <dfn title=concept-parsed-host>parsed host</dfn> consists either of a
+<span title=concept-parsed-domain>parsed domain</span> or a
+<span title=concept-parsed-ipv6>parsed IPv6 address</span>.
+
+<p>A <dfn title=concept-parsed-domain>parsed domain</dfn> consists of a list
+of <dfn title=concept-parsed-domain-label>labels</dfn> and a
+<dfn>trailing dot flag</dfn>.
+
+<p>A <dfn title=concept-parsed-ipv6>parsed IPv6 address</dfn> consists of an
+ordered set of eight 16-bit integers.
+
+<p classXXX>To <dfn title=concept-host-parser>parse</dfn> ...
+
+
+<h3 id=host-serializing>Serializing</h3>
+
+<p class=XXX>Normalize IPv6 addresses
+<!-- Safari/Gecko/Opera do not do this. Chrome does. I would prefer aligning
+     with Chrome as we normalize domains too. -->
 
 
 
