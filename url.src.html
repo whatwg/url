@@ -82,16 +82,6 @@ might increase in scope somewhat.
 
 
 
-<h2 class=no-num>Issues</h2>
-
-<ul class=XXX>
- <li>File URLs need to be special cased somehow as they behave as
- URLs with the relative flag set, but have no port (and rarely a host).
- <!-- http://lists.w3.org/Archives/Public/public-whatwg-archive/2012Sep/0305.html -->
-</ul>
-
-
-
 <h2>Conformance</h2>
 <p>All diagrams, examples, and notes in this specification are
 non-normative, as are all sections explicitly marked non-normative.
@@ -586,7 +576,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       <var title>base</var>'s <span title=concept-parsed-url-path>path</span>,
       <span title=concept-parsed-url-query>query</span> to
       <var title>base</var>'s <span title=concept-parsed-url-query>query</span>,
-      and then terminate these steps.
+      and then terminate this algorithm.
 
      <dt>"<code title>/</code>"
      <dt>"<code title>\</code>"
@@ -696,24 +686,40 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
    <dt><b title>hostname state</b>
    <dd>
     <ol>
-     <li><p>If <var title>c</var> is "<code title>:</code>" and
-     the <var title>[] flag</var> is unset, set
-     <span title=concept-parsed-url-host>host</span> to <var title>buffer</var>,
-     <!-- XXX host normalize -->
-     <var title>buffer</var> to the empty string, <var title>state</var>
-     to <b title>port state</b>, and then only if <var title>override</var> is
-     <b title>hostname state</b>, terminate these steps.
+     <li>
+      <p>If <var title>c</var> is "<code title>:</code>" and the
+      <var title>[] flag</var> is unset, run these substeps:
 
-     <li><p>Otherwise, if <var title>c</var> is one of
-     <span>EOF code point</span>, "<code title>/</code>",
-     "<code title>\</code>", "<code title>?</code>", or
-     "<code title>#</code>", set
-     <span title=concept-parsed-url-host>host</span> to <var title>buffer</var>,
-     <!-- XXX host normalize -->
-     <var title>buffer</var> to the empty string, <var title>state</var>
-     to <b title>relative path start state</b>, and then only if
-     <var title>override</var> is given, terminate these steps, or otherwise
-     rerun this state machine for <var title>c</var>.
+      <ol>
+       <li><p>If <span title=concept-parsed-url-scheme>scheme</span> is
+       "<code title>file</code>", <span>invalidate</span>.
+
+       <li><p>Set <span title=concept-parsed-url-host>host</span> to
+       <var title>buffer</var>,<!-- XXX host normalize -->
+       <var title>buffer</var> to the empty string,
+       and <var title>state</var> to <b title>port state</b>.
+
+       <li><p>If <var title>override</var> is <b title>hostname state</b>,
+       terminate this algorithm.
+      </ol>
+
+     <li>
+      <p>Otherwise, if <var title>c</var> is one of
+      <span>EOF code point</span>, "<code title>/</code>",
+      "<code title>\</code>", "<code title>?</code>", and
+      "<code title>#</code>", run these substeps:
+
+      <ol>
+       <li><p>Set <span title=concept-parsed-url-host>host</span> to
+       <var title>buffer</var>,<!-- XXX host normalize -->
+       <var title>buffer</var> to the empty string,
+       and <var title>state</var> to <b title>relative path start state</b>.
+
+       <li><p>If <var title>override</var> is given, terminate this
+       algorithm.
+
+       <li><p>Otherwise, rerun this state machine for <var title>c</var>.
+      </ol>
 
      <li>
       <p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
@@ -739,7 +745,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
      <li>
       <p>Otherwise, if <var title>c</var> is one of
       <span>EOF code point</span>, "<code title>/</code>",
-      "<code title>\</code>", "<code title>?</code>", or
+      "<code title>\</code>", "<code title>?</code>", and
       "<code title>#</code>", or <var title>override</var> is given, run
       these substeps:
       <ol>
@@ -768,7 +774,7 @@ optionally with a <span title=concept-parsed-url>parsed URL</span>
       <p>If either <var title>c</var> is one of
       <span>EOF code point</span>, "<code title>/</code>", and
       "<code title>\</code>", or <var title>override</var> is not given and
-      <var title>c</var> is "<code title>?</code>" or
+      <var title>c</var> is one of "<code title>?</code>" and
       "<code title>#</code>", run these substeps:
       <ol>
        <li><p>If <var title>buffer</var> is "<code title>..</code>" and
@@ -1193,6 +1199,7 @@ steps:
 <p>Thanks to
 Adam Barth,
 Alexandre Morgaut,
+Boris Zbarsky,
 David Sheets,
 Erik Arvidsson,
 Gavin Carothers,
