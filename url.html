@@ -228,13 +228,16 @@ followed by a <a href="#concept-url-fragment" title="concept-url-fragment">fragm
 
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is a
 <a href="#concept-url" title="concept-url">URL</a> that is relative to a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> (named the base URL),
-provided the<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> has a
-<a href="#relative-scheme">relative scheme</a> (otherwise
-<a href="#concept-url-parser" title="concept-url-parser">parsing</a> results in a fatal error).
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>. Such a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> is a
+<dfn id="concept-base-url" title="concept-base-url">base URL</dfn>. If the
+<a href="#concept-base-url" title="concept-base-url">base URL</a> has no
+<a href="#relative-scheme">relative scheme</a>, <a href="#concept-url-parser" title="concept-url-parser">parsing</a>
+the <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> results in a
+fatal error.
 
 <p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> stands on its own
-and can serve as base URL.
+and is therefore a potential <a href="#concept-base-url" title="concept-base-url">base URL</a>.
 
 <p>Provided there are no fatal errors,
 <a href="#concept-url-parser" title="concept-url-parser">parsing</a> and
@@ -405,8 +408,6 @@ and <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>.
 <p>Aside from the components mentioned earlier, a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
 <dfn id="fatal-error-flag">fatal error flag</dfn>, <dfn id="relative-flag">relative flag</dfn>,
-<dfn id="concept-parsed-url-input" title="concept-parsed-url-input">input</dfn>,
-<dfn id="concept-parsed-url-base" title="concept-parsed-url-base">base URL</dfn>,
 and <dfn id="concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</dfn>.
 
 <p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
@@ -490,10 +491,11 @@ Either as dedicated branches in the parsing section or as an exercise to the
 reader by mixing parsing with the constraints of the writing section into a
 single algorithm.
 
-<p>To <dfn id="concept-url-parser" title="concept-url-parser">parse</dfn> a string <i title="">input</i>,
-optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
-<i title="">base</i>, and an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
-<i title="">encoding override</i>, run these steps:
+<p>To <dfn id="concept-url-parser" title="concept-url-parser">parse</dfn> a string
+<var title="">input</var>, optionally with a
+<a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>, and an
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<var title="">encoding override</var>, run these steps:
 
 <ol>
  <li><p>Let <var title="">url</var> be a new
@@ -501,40 +503,35 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
 
  <li><p><a href="#clear">Clear</a> <var title="">url</var>.
 
- <li><p>If <i title="">encoding</i> is not given, set it to
+ <li><p>If <var title="">encoding override</var> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Set <var title="">url</var>'s
  <a href="#concept-parsed-url-query-encoding" title="concept-parsed-url-query-encoding">query encoding</a> to
- <i title="">encoding override</i>.
+ <var title="">encoding override</var>.
 
- <li><p>If <i title="">base</i> is not given, set it to null.
-
- <li><p>Set <var title="">url</var>'s
- <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> to <i title="">base</i>.
-
- <li><p>Set <var title="">url</var>'s
- <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a> to <var title="">input</var>.
+ <li><p>If <var title="">base</var> is not given, set it to null.
 
  <li><p>Remove any leading and trailing
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
  <var title="">input</var>.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
- <var title="">input</var>.
+ <var title="">input</var> using <a href="#concept-base-url" title="concept-base-url">base URL</a>
+ <var title="">base</var>, if <var title="">base</var> is non-null.
 
  <li><p>Return <var title="">url</var>.
 </ol>
 
-<p>A <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
-<a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">interpret</a> algorithm. To
-<dfn id="concept-parsed-url-interpret" title="concept-parsed-url-interpret">interpret</dfn> a string
-<var title="">input</var>, optionally with an override state
-<var title="">override</var>, run these steps:
+<p>To <dfn id="concept-parsed-url-interpret" title="concept-parsed-url-interpret">interpret</dfn> a string
+<var title="">input</var>, optionally with a
+<a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>, and
+optionally with optionally with a state override
+<var title="">state override</var>, run these steps:
 
 <ol>
- <li><p>Let <var title="">state</var> be <var title="">override</var> if given, or
- <b title="">scheme start state</b> otherwise.
+ <li><p>Let <var title="">state</var> be <var title="">state override</var>
+ if given, or <b title="">scheme start state</b> otherwise.
 
  <li><p>Let <var title="">buffer</var> be the empty string.
 
@@ -556,7 +553,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      append <var title="">c</var>, lowercased, to <var title="">buffer</var>, and
      set <var title="">state</var> to <b title="">scheme state</b>.
 
-     <li><p>Otherwise, if <var title="">override</var> is not given, set
+     <li><p>Otherwise, if <var title="">state override</var> is not given, set
      <var title="">buffer</var> to the empty string, set <var title="">state</var>
      to <b title="">no scheme state</b>, and rerun this state machine for
      <var title="">c</var>.
@@ -581,7 +578,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
       and then run these substeps:
 
       <ol>
-       <li><p>If <var title="">override</var> is given,
+       <li><p>If <var title="">state override</var> is given,
        terminate this algorithm.
 
        <li><p>If <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
@@ -593,8 +590,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
        <!-- not combined with the subsequent step for clarity -->
 
        <li><p>Otherwise, if the <a href="#relative-flag">relative flag</a> is set,
-       <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> is not null and
-       <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
+       <var title="">base</var> is not null and <var title="">base</var>'s
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is equal to
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, set
        <var title="">state</var> to <b title="">relative state</b>.
@@ -614,7 +610,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
    <dt><b title="">scheme data state</b>
    <dd>
     <ol>
-     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
+     <li><p>If <var title="">state override</var> is not given and <var title="">c</var>
      is "<code title="">#</code>", set
      <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
      "<code title="">#</code>" and <var title="">state</var> to
@@ -633,28 +629,24 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
 
    <dt><b title="">no scheme state</b>
    <dd>
-    <p>If <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a> is null, or
-    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
+    <p>If <var title="">base</var> is null, or <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
     <a href="#relative-scheme">relative scheme</a>, <a href="#invalidate">invalidate</a>.
 
-    <p class="note">You do not want to check
-    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>'s
+    <p class="note">You do not want to check <var title="">base</var>'s
     <a href="#relative-flag">relative flag</a> here, as the
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> itself can have been
     changed to something non-sensical through the
     <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
+    <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
     <p>Otherwise, set <var title="">state</var> to <b title="">relative state</b>,
     and rerun this state machine for <var title="">c</var>.
 
    <dt><b title="">relative state</b>
    <dd>
-    <p>Let <var title="">base</var> be
-    <a href="#concept-parsed-url-base" title="concept-parsed-url-base">base URL</a>, set the
-    <a href="#relative-flag">relative flag</a>, set
-    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-    <var title="">base</var>'s
+    <p>Set the <a href="#relative-flag">relative flag</a>, set
+    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, and then, based on
     <var title="">c</var>:
 
@@ -792,7 +784,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
        <var title="">buffer</var> to the empty string,
        and <var title="">state</var> to <b title="">port state</b>.
 
-       <li><p>If <var title="">override</var> is <b title="">hostname state</b>,
+       <li><p>If <var title="">state override</var> is <b title="">hostname state</b>,
        terminate this algorithm.
       </ol>
 
@@ -808,7 +800,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
        <var title="">buffer</var> to the empty string,
        and <var title="">state</var> to <b title="">relative path start state</b>.
 
-       <li><p>If <var title="">override</var> is given, terminate this
+       <li><p>If <var title="">state override</var> is given, terminate this
        algorithm.
 
        <li><p>Otherwise, rerun this state machine for <var title="">c</var>.
@@ -839,12 +831,12 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
       <p>Otherwise, if <var title="">c</var> is one of
       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>",
       "<code title="">\</code>", "<code title="">?</code>", and
-      "<code title="">#</code>", or <var title="">override</var> is given, run
+      "<code title="">#</code>", or <var title="">state override</var> is given, run
       these substeps:
       <ol>
        <li><p class="XXX">parse buffer and set port
 
-       <li><p>If <var title="">override</var> is given, terminate this
+       <li><p>If <var title="">state override</var> is given, terminate this
        algorithm.
 
        <li><p>Set <var title="">buffer</var> to the empty string,
@@ -866,7 +858,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
      <li>
       <p>If either <var title="">c</var> is one of
       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
-      "<code title="">\</code>", or <var title="">override</var> is not given and
+      "<code title="">\</code>", or <var title="">state override</var> is not given and
       <var title="">c</var> is one of "<code title="">?</code>" and
       "<code title="">#</code>", run these substeps:
       <ol>
@@ -911,7 +903,7 @@ optionally with a <a href="#concept-parsed-url" title="concept-parsed-url">parse
    <dt><b title="">query state</b>
    <dd>
     <ol>
-     <li><p>If <var title="">override</var> is not given and <var title="">c</var>
+     <li><p>If <var title="">state override</var> is not given and <var title="">c</var>
      is "<code title="">#</code>", set
      <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
      "<code title="">#</code>", and state to <b title="">fragment state</b>.
@@ -1041,8 +1033,10 @@ interface <dfn id="urlutils">URLUtils</dfn> {
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>. Thus <a href="#url"><code>URL</code></a>
 represents a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
 
-<p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> also has one associated
-<a href="#urlquery"><code>URLQuery</code></a> object.
+<p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
+<a href="#urlquery"><code>URLQuery</code></a> object, an associated
+<a href="#concept-base-url" title="concept-base-url">base URL</a>, and an associated
+<b title="">input</b>.
 
 <p class="note">The <a href="#url"><code>URL</code></a> object and
 <a href="#concept-url" title="concept-url">URL</a> share the same name, because naming the
@@ -1056,18 +1050,26 @@ exposed object <code title="">ParsedURL</code> would be ugly.
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title="">base</var> is given and is a string,
+ <li><p>If <var title="">base</var> is not given, set it to
+ "<code title="">about:blank</code>".
+ <!-- URLUtils needs an associated base URL -->
+
+ <li><p>If <var title="">base</var> is a string,
  <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
- <li><p>If <var title="">base</var> is given and its
- <a href="#fatal-error-flag">fatal error flag</a> is set, throw a
- "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>".
+ <li><p>If <var title="">base</var> is a
+ <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> and its
+ <a href="#fatal-error-flag">fatal error flag</a> is set,
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
+ "<a href="http://dom.spec.whatwg.org/#invalidstateerror"><code class="external" data-anolis-spec="dom">InvalidStateError</code></a>" exception.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">url</var>
- with <var title="">base</var> as <i title="">base</i>, if <i title="">base</i> is
- given, associate it with a new <a href="#url"><code>URL</code></a> object, and then return
- that <a href="#url"><code>URL</code></a> object.
+ using <var title="">base</var>, and associate the result with a new
+ <a href="#url"><code>URL</code></a> object, associate <var title="">base</var> with the new
+ object as its <a href="#concept-base-url" title="concept-base-url">base URL</a>, associate
+ <var title="">url</var> with the new object as its <b title="">input</b>, and
+ then return that <a href="#url"><code>URL</code></a> object.
 </ol>
 
 
@@ -1080,8 +1082,8 @@ global object. It augments other interfaces, such as <a href="#url"><code>URL</c
 these steps:
 
 <ol>
- <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, return
- <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>.
+ <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, return the associated
+ <b title="">input</b>.
 
  <li><p>Return the <a href="#concept-url-serializer" title="concept-url-serializer">serialization</a>.
 </ol>
@@ -1092,12 +1094,13 @@ run these steps:
 <ol>
  <li><p><a href="#clear">Clear</a>.
 
- <li><p>Set <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a> to the given value.
+ <li><p>Set the associated <b title="">input</b> to the given value.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a>
- <a href="#concept-parsed-url-input" title="concept-parsed-url-input">input</a>, with any leading and trailing
+ <b title="">input</b>, with any leading and trailing
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> removed, as
- <i title="">input</i>.
+ <var title="">input</var> and the associated
+ <a href="#concept-base-url" title="concept-base-url">base URL</a> as <var title="">base</var>.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
@@ -1124,8 +1127,8 @@ run these steps:
  <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, terminate these steps.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
- given value and "<code title="">:</code>" concatenated as <i title="">input</i>
- and <b title="">scheme start state</b> as <i title="">override</i>.
+ given value and "<code title="">:</code>" concatenated as <var title="">input</var>
+ and <b title="">scheme start state</b> as <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
@@ -1150,8 +1153,8 @@ steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
- given value as <i title="">input</i> and <b title="">host state</b> as
- <i title="">override</i>.
+ given value as <var title="">input</var> and <b title="">host state</b> as
+ <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
@@ -1165,8 +1168,8 @@ run these steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
- given value as <i title="">input</i> and <b title="">hostname state</b> as
- <i title="">override</i>.
+ given value as <var title="">input</var> and <b title="">hostname state</b> as
+ <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must return
@@ -1180,8 +1183,8 @@ steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
- given value as <i title="">input</i> and <b title="">port state</b> as
- <i title="">override</i>.
+ given value as <var title="">input</var> and <b title="">port state</b> as
+ <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute
@@ -1208,8 +1211,8 @@ run these steps:
  <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with the
- given value as <i title="">input</i> and <b title="">relative path start state</b>
- as <i title="">override</i>.
+ given value as <var title="">input</var> and <b title="">relative path start state</b>
+ as <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
@@ -1234,8 +1237,8 @@ these steps:
  "<code title="">?</code>" removed, if any.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with
- <var title="">input</var> as <i title="">input</i> and <b title="">query state</b> as
- <i title="">override</i>.
+ <var title="">input</var> as <var title="">input</var> and <b title="">query state</b> as
+ <var title="">state override</var>.
 </ol>
 
 <p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
@@ -1264,8 +1267,8 @@ steps:
  "<code title="">#</code>" removed, if any.
 
  <li><p><a href="#concept-parsed-url-interpret" title="concept-parsed-url-interpret">Interpret</a> with
- <var title="">input</var> as <i title="">input</i> and <b title="">fragment state</b> as
- <i title="">override</i>.
+ <var title="">input</var> as <var title="">input</var> and <b title="">fragment state</b> as
+ <var title="">state override</var>.
 </ol>
 
 
