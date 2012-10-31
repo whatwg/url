@@ -258,10 +258,13 @@ same row.
 
 <h3>Writing</h3>
 
+<!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
+
 <p>A <span title=concept-url>URL</span> must be either a
 <span title=concept-relative-url>relative URL</span> or an
 <span title=concept-absolute-url>absolute URL</span>, optionally followed by
-a <span title=concept-url-fragment>fragment</span>.
+"<code title>#</code>" and a
+<span title=concept-url-fragment>fragment</span>.
 
 <p>An <span title=concept-absolute-url>absolute URL</span> is a
 <span title=concept-url-scheme>scheme</span>, followed by
@@ -283,16 +286,16 @@ defined alongside it. For a <span>relative scheme</span>,
 other <span title=concept-url-scheme>schemes</span>, specifications or
 standards must define <span title=concept-url-scheme-data>scheme data</span>
 either literally as or as a subset of one or more <span>URL units</span>
-that do not start with a "<code title>?</code>".
+that do not start with "<code title>?</code>".
 
 <p>A <span title=concept-relative-url>relative URL</span> is either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span> that
-does not start with a <span title=concept-url-scheme>scheme</span>, followed
-by "<code title>:</code>". A
+does not start with a <span title=concept-url-scheme>scheme</span> and
+"<code title>:</code>". A
 <span title=concept-relative-url>relative URL</span> must be relative to a
-<span title=concept-parsed-url>parsed URL</span> with a
+<span title=concept-base-url>base URL</span> with a
 <span>relative scheme</span>.
 
 <p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> is
@@ -302,7 +305,7 @@ followed by a <span title=concept-host>host</span>, optionally followed
 by "<code title>:</code>" and a <span title=concept-url-port>port</span>,
 optionally followed by either an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>
-or a <span title=concept-url-query>query</span>.
+or a "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
 <p>A <span title=concept-url-userinfo>userinfo</span> is zero or more
 <span>URL units</span>, excluding "<code title>/</code>",
@@ -315,21 +318,21 @@ or a <span title=concept-url-query>query</span>.
 <dfn title=concept-absolute-path-relative-url>absolute-path-relative URL</dfn>
 is "<code title>/</code>", followed by a
 <span title=concept-path-relative-url>path-relative URL</span> that does not
-start with a "<code title>/</code>".
+start with "<code title>/</code>".
 
 <p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> is zero or
 more <span title="path segment">path segments</span> separated from each
 other by a "<code title>/</code>", optionally followed by a
-<span title=concept-url-query>query</span>.
+"<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
 <p>A <dfn>path segment</dfn> is zero or more <span>URL units</span>,
 excluding "<code title>/</code>" and "<code title>?</code>".
 
-<p>A <span title=concept-url-query>query</span> is "<code title>?</code>",
-followed by zero or more <span>URL units</span>.
+<p>A <span title=concept-url-query>query</span> is zero or more
+<span>URL units</span>.
 
-<p>A <span title=concept-url-fragment>fragment</span> is
-"<code title>#</code>", followed by zero or more <span>URL units</span>.
+<p>A <span title=concept-url-fragment>fragment</span> is zero or more
+<span>URL units</span>.
 
 <p>The <dfn>URL units</dfn> are <span>ASCII alphanumeric</span>,
 "<code title>!</code>",<!-- 0x21, sub-delims -->
@@ -393,10 +396,10 @@ and <span title="URL-encoded byte">URL-encoded bytes</span>.
 set its <span title=concept-url-scheme>scheme</span>,
 <span title=concept-url-scheme-data>scheme data</span>,
 <span title=concept-url-userinfo>userinfo</span>,
-<span title=concept-url-host>host</span>,
-<span title=concept-url-port>port</span>,
-<span title=concept-url-query>query</span>, and
-<span title=concept-url-fragment>fragment</span> to the empty string, and
+<span title=concept-url-host>host</span>, and
+<span title=concept-url-port>port</span> to the empty string,
+<span title=concept-url-query>query</span> and
+<span title=concept-url-fragment>fragment</span> to null, and
 its <span title=concept-url-path>path</span> to the empty list.
 
 <p>To <dfn>invalidate</dfn> a
@@ -479,20 +482,15 @@ single algorithm.
 
  <li><p><span>Clear</span> <var title>url</var>.
 
- <li><p>If <var title>encoding override</var> is not given, set it to
- <span data-anolis-spec=encoding>utf-8</span>.
-
- <li><p>If <var title>base</var> is not given, set it to null.
-
  <li><p>Remove any leading and trailing
  <span data-anolis-spec=encoding>ASCII whitespace</span> from
  <var title>input</var>.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span>
  <var title>input</var> using <span title=concept-base-url>base URL</span>
- <var title>base</var>, if <var title>base</var> is non-null, and
+ <var title>base</var>, if given, and
  <span data-anolis-spec=encoding>encoding</span>
- <var title>encoding override</var>.
+ <var title>encoding override</var>, if given.
 
  <li><p>Return <var title>url</var>.
 </ol>
@@ -507,6 +505,11 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 <ol>
  <li><p>Let <var title>state</var> be <var title>state override</var>
  if given, or <b title>scheme start state</b> otherwise.
+
+ <li><p>If <var title>base</var> is not given, set it to null.
+
+ <li><p>If <var title>encoding override</var> is not given, set it to
+ <span data-anolis-spec=encoding>utf-8</span>.
 
  <li><p>Let <var title>buffer</var> be the empty string.
 
@@ -588,7 +591,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
      <li><p>If <var title>state override</var> is not given and <var title>c</var>
      is "<code title>#</code>", set
      <span title=concept-url-fragment>fragment</span> to
-     "<code title>#</code>" and <var title>state</var> to
+     the empty string and <var title>state</var> to
      <b title>fragment state</b>.
 
      <li>
@@ -675,7 +678,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
      <var title>base</var>'s <span title=concept-url-port>port</span>,
      <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>,
-     <span title=concept-url-query>query</span> to "<code title>?</code>",
+     <span title=concept-url-query>query</span> to the empty string,
      and <var title>state</var> to <b title>query state</b>.
 
      <dt>"<code title>#</code>"
@@ -687,9 +690,8 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
      <var title>base</var>'s <span title=concept-url-path>path</span>,
      <span title=concept-url-query>query</span> to
      <var title>base</var>'s <span title=concept-url-query>query</span>,
-     <span title=concept-url-fragment>fragment</span> to
-     "<code title>#</code>", and <var title>state</var> to
-     <b title>fragment state</b>.
+     <span title=concept-url-fragment>fragment</span> to the empty string,
+     and <var title>state</var> to <b title>fragment state</b>.
 
      <dt>Otherwise
      <dd><p>Set <span title=concept-url-host>host</span> to
@@ -860,13 +862,12 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
        <li><p>Set <var title>buffer</var> to the empty string.
 
        <li><p>If <var title>c</var> is "<code title>?</code>", set
-       <span title=concept-url-query>query</span> to "<code title>?</code>",
+       <span title=concept-url-query>query</span> to the empty string,
        and <var title>state</var> to <b title>query state</b>.
 
        <li><p>If <var title>c</var> is "<code title>#</code>", set
-       <span title=concept-url-fragment>fragment</span> to
-       "<code title>#</code>", and <var title>state</var> to
-       <b title>fragment state</b>.
+       <span title=concept-url-fragment>fragment</span> to the empty string,
+       and <var title>state</var> to <b title>fragment state</b>.
       </ol>
 
      <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
@@ -880,8 +881,8 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
     <ol>
      <li><p>If <var title>state override</var> is not given and <var title>c</var>
      is "<code title>#</code>", set
-     <span title=concept-url-fragment>fragment</span> to
-     "<code title>#</code>", and state to <b title>fragment state</b>.
+     <span title=concept-url-fragment>fragment</span> to the empty string,
+     and state to <b title>fragment state</b>.
 
      <li>
       <p>Otherwise, if <var title>c</var> is none of
@@ -893,6 +894,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
       <p class=XXX>Only use <var title>encoding override</var> for
       http/https/file rather than for all relative schemes?
+      <!-- http://simon.html5.org/test/url/url-encoding.html -->
     </ol>
 
    <dt><b title>fragment state</b>
@@ -912,10 +914,18 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 <span>fatal error flag</span> is not set.
 
 <p>To <dfn title=concept-url-serializer>serialize</dfn> a
-<span title=concept-parsed-url>parsed URL</span>, return the result of
-<span title=concept-url-serializer-without-fragment>serializing it without fragment</span>
-concatenated with its
-<span title=concept-url-fragment>fragment</span>.
+<span title=concept-parsed-url>parsed URL</span>, run these steps:
+
+<ol>
+ <li><p>Let <var title>output</var> be the result of
+ <span title=concept-url-serializer-without-fragment>serializing without fragment</span>.
+
+ <li><p>If <span title=concept-url-fragment>fragment</span> is non-null,
+ append "<code title>#</code>" concatenated with
+ <span title=concept-url-fragment>fragment</span> to <var title>output</var>.
+
+ <li><p>Return <var title>output</var>.
+</ol>
 
 <p>To
 <dfn title=concept-url-serializer-without-fragment>serialize without fragment</dfn>
@@ -935,27 +945,31 @@ a <span title=concept-parsed-url>parsed URL</span>, run these steps:
 
    <li><p>If <span title=concept-url-userinfo>userinfo</span> is not
    the empty string, append
-   <span title=concept-url-userinfo>userinfo</span> and
-   "<code title>@</code>" concatenated to <var title>output</var>.
+   <span title=concept-url-userinfo>userinfo</span> concatenated with
+   "<code title>@</code>" to <var title>output</var>.
 
    <li><p>Append <span title=concept-url-host>host</span> to
    <var title>output</var>.
 
    <li><p>If <span title=concept-url-port>port</span> is not
-   the empty string, append "<code title>:</code>" and
-   <span title=concept-url-port>port</span> concatenated to
-   <var title>output</var>.
+   the empty string, append "<code title>:</code>" concatenated with
+   <span title=concept-url-port>port</span> to <var title>output</var>.
 
    <li><p>Append "<code title>/</code>" concatenated with the strings in
    <span title=concept-url-path>path</span> (including empty strings),
-   separated from each other by "<code title>/</code>".
+   separated from each other by "<code title>/</code>" to
+   <var title>output</var>.
+
+   <li><p>If <span title=concept-url-query>query</span> is non-null, append
+   "<code title>?</code>" concatenated with
+   <span title=concept-url-query>query</span> to <var title>output</var>.
   </ol>
 
- <li><p>If the <span>relative flag</span> is unset, append
- <span title=concept-url-path>path</span>'s only string (if any).
+ <li><p>Otherwise, if the <span>relative flag</span> is unset, append
+ <span title=concept-url-scheme-data>scheme data</span> to
+ <var title>output</var>.
 
- <li><p>Append <span title=concept-url-query>query</span> to
- <var title>output</var>, and then return <var title>output</var>.
+ <li><p>Return <var title>output</var>.
 </ol>
 
 
@@ -1195,10 +1209,11 @@ run these steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or
- <span title=concept-url-query>query</span> is either the empty string or
- "<code title>?</code>", return the empty string.
+ <span title=concept-url-query>query</span> is either null or
+ the empty string, return the empty string.
 
- <li><p>Return <span title=concept-url-query>query</span>.
+ <li><p>Return "<code title>?</code>" concatenated with
+ <span title=concept-url-query>query</span>.
 </ol>
 
 <p>Setting the <code title=dom-URL-search>search</code> attribute must run
@@ -1208,8 +1223,14 @@ these steps:
  <li><p>If the <span>fatal error flag</span> is set, or the
  <span>relative flag</span> is unset, terminate these steps.
 
+ <li><p>If the given value is the empty string, set
+ <span title=concept-url-query>query</span> to null, and terminate these
+ steps.
+
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>?</code>" removed, if any.
+
+ <li><p>Set <span title=concept-url-query>query</span> to the empty string.
 
  <li><p><span title=concept-parsed-url-interpret>Interpret</span>
  <var title>input</var> with <b title>query state</b> as
@@ -1225,10 +1246,11 @@ these steps:
 
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, or
- <span title=concept-url-fragment>fragment</span> is either the empty string
- or "<code title>#</code>", return the empty string.
+ <span title=concept-url-fragment>fragment</span> is either null or
+ the empty string, return the empty string.
 
- <li><p>Return <span title=concept-url-fragment>fragment</span>.
+ <li><p>Return "<code title>#</code>" concatenated with
+ <span title=concept-url-fragment>fragment</span>.
 </ol>
 
 <p>Setting the <code title=dom-URL-hash>hash</code> attribute must run these
@@ -1239,11 +1261,18 @@ steps:
  <span title=concept-url-scheme>scheme</span> is
  "<code title>javascript</code>", terminate these steps.
 
+ <li><p>If the given value is the empty string, set
+ <span title=concept-url-fragment>fragment</span> to null, and terminate
+ these steps.
+
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span> with
- <var title>input</var> as <var title>input</var> and <b title>fragment state</b> as
+ <li><p>Set <span title=concept-url-fragment>fragment</span> to
+ the empty string.
+
+ <li><p><span title=concept-parsed-url-interpret>Interpret</span>
+ <var title>input</var> with <b title>fragment state</b> as
  <var title>state override</var>.
 </ol>
 
@@ -1276,6 +1305,7 @@ David Sheets,
 Erik Arvidsson,
 Gavin Carothers,
 Glenn Maynard,
+Henri Sivonen,
 Ian Hickson,
 James Graham,
 James Manger,
@@ -1283,7 +1313,8 @@ Mathias Bynens,
 Michael™ Smith,
 Rodney Rehm,
 Simon Pieters,
-Tab Atkins
+Tab Atkins, and
+Tantek Çelik
 for being awesome!
 
 <!-- http://dvcs.w3.org/hg/url/raw-file/feb258fa6ab5/Overview.html -->
