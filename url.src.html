@@ -402,7 +402,7 @@ set its <span title=concept-url-scheme>scheme</span>,
 <span title=concept-url-fragment>fragment</span> to null, and
 its <span title=concept-url-path>path</span> to the empty list.
 
-<p>To <dfn>invalidate</dfn> a
+<p>To <dfn>neuter</dfn> a
 <span title=concept-parsed-url>parsed URL</span>, <span>clear</span> it, and
 then set its <span>fatal error flag</span>.
 
@@ -465,44 +465,36 @@ and
  then return them concatenated, in the same order.
 </ol>
 
-<p class=XXX>We will probably add the ability to halt on the first error.
-Either as dedicated branches in the parsing section or as an exercise to the
-reader by mixing parsing with the constraints of the writing section into a
-single algorithm.
+<p class=XXX>Add the ability to halt on the first conformance error.
 
 <p>To <dfn title=concept-url-parser>parse</dfn> a string
-<var title>input</var>, optionally with a
-<span title=concept-base-url>base URL</span> <var title>base</var>, and an
-<span data-anolis-spec=encoding>encoding</span>
-<var title>encoding override</var>, run these steps:
-
-<ol>
- <li><p>Let <var title>url</var> be a new
- <span title=concept-parsed-url>parsed URL</span>.
-
- <li><p><span>Clear</span> <var title>url</var>.
-
- <li><p>Remove any leading and trailing
- <span data-anolis-spec=encoding>ASCII whitespace</span> from
- <var title>input</var>.
-
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- <var title>input</var> using <span title=concept-base-url>base URL</span>
- <var title>base</var>, if given, and
- <span data-anolis-spec=encoding>encoding</span>
- <var title>encoding override</var>, if given.
-
- <li><p>Return <var title>url</var>.
-</ol>
-
-<p>To <dfn title=concept-parsed-url-interpret>interpret</dfn> a string
-<var title>input</var>, optionally with a state override
-<var title>state override</var>, optionally with a
-<span title=concept-base-url>base URL</span> <var title>base</var>, and
+<var title>input</var>, optionally with a optionally with a
+<span title=concept-base-url>base URL</span> <var title>base</var>,
 optionally with an <span data-anolis-spec=encoding>encoding</span>
-<var title>encoding override</var>, run these steps:
+<var title>encoding override</var>, optionally with an
+<span title=concept-parsed-url>parsed URL</span> <var title>url</var>, and
+if <var title>url</var> is given, optionally with a state override
+<var title>state override</var>, run these steps:
+
+<p class=note>The <var title>url</var> and <var title>state override</var>
+arguments can be used for API manipulation of a
+<span title=concept-parsed-url>parsed URL</span>.
 
 <ol>
+ <li>
+  <p>If <var title>url</var> is not given:
+
+  <ol>
+   <li><p>Set <var title>url</var> to a new
+   <span title=concept-parsed-url>parsed URL</span>.
+
+   <li><p><span>Clear</span> <var title>url</var>.
+
+   <li><p>Remove any leading and trailing
+   <span data-anolis-spec=encoding>ASCII whitespace</span> from
+   <var title>input</var>.
+  </ol>
+
  <li><p>Let <var title>state</var> be <var title>state override</var>
  if given, or <b title>scheme start state</b> otherwise.
 
@@ -517,9 +509,10 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
  unset.
 
  <li>
-  <p>Run the following state machine by switching on <var title>state</var>
+  <p>Run the following state machine by switching on <var title>state</var>,
   for each code point in <var title>input</var>, and then once more with the
-  conceptual <dfn>EOF code point</dfn> (signifies end-of-input). Let the
+  conceptual <dfn>EOF code point</dfn> (signifies end-of-input), as long as
+  <var title>url</var>'s <span>fatal error flag</span> is not set. Let the
   code point be <var title>c</var>.
 
   <dl class=switch>
@@ -551,7 +544,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
      <li>
       <p>Otherwise, if <var title>c</var> is "<code title>:</code>", set
-      <span title=concept-url-scheme>scheme</span> to
+      <var title>url</var>'s <span title=concept-url-scheme>scheme</span> to
       <var title>buffer</var>, <var title>buffer</var> to the empty string,
       and then run these substeps:
 
@@ -559,22 +552,27 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
        <li><p>If <var title>state override</var> is given,
        terminate this algorithm.
 
-       <li><p>If <span title=concept-url-scheme>scheme</span> is
-       a <span>relative scheme</span>, set the <span>relative flag</span>.
+       <li><p>If <var title>url</var>'s
+       <span title=concept-url-scheme>scheme</span> is
+       a <span>relative scheme</span>, set <var title>url</var>'s
+       <span>relative flag</span>.
 
-       <li><p>If <span title=concept-url-scheme>scheme</span> is
+       <li><p>If <var title>url</var>'s
+       <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>", set <var title>state</var> to
        <b title>relative state</b>.
        <!-- not combined with the subsequent step for clarity -->
 
-       <li><p>Otherwise, if the <span>relative flag</span> is set,
-       <var title>base</var> is not null and <var title>base</var>'s
+       <li><p>Otherwise, if <var title>url</var>'s
+       <span>relative flag</span> is set, <var title>base</var> is not null
+       and <var title>base</var>'s
        <span title=concept-url-scheme>scheme</span> is equal to
-       <span title=concept-url-scheme>scheme</span>, set
-       <var title>state</var> to <b title>relative state</b>.
+       <var title>url</var>'s <span title=concept-url-scheme>scheme</span>,
+       set <var title>state</var> to <b title>relative state</b>.
 
-       <li><p>Otherwise, if the <span>relative flag</span> is set, set
-       <var title>state</var> to <b title>authority start state</b>.
+       <li><p>Otherwise, if <var title>url</var>'s
+       <span>relative flag</span> is set, set <var title>state</var> to
+       <b title>authority start state</b>.
 
        <li><p>Otherwise, set <var title>state</var> to
        <b title>scheme data state</b>.
@@ -589,7 +587,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
    <dd>
     <ol>
      <li><p>If <var title>state override</var> is not given and <var title>c</var>
-     is "<code title>#</code>", set
+     is "<code title>#</code>", set <var title>url</var>'s
      <span title=concept-url-fragment>fragment</span> to
      the empty string and <var title>state</var> to
      <b title>fragment state</b>.
@@ -599,6 +597,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
       <span>EOF code point</span>, U+0009, U+000A, and U+000D,
       <span>URL escape</span> <var title>c</var> using the
       <span>URL simple escape set</span> and append the result to
+      <var title>url</var>'s
       <span title=concept-url-scheme-data>scheme data</span>.
 
       <p class=note><span title=concept-url-path>Path</span> could be reused
@@ -609,7 +608,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
    <dd>
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
-    <span>relative scheme</span>, <span>invalidate</span>.
+    <span>relative scheme</span>, <span>neuter</span> <var title>url</var>.
 
     <p class=note>You do not want to check <var title>base</var>'s
     <span>relative flag</span> here, as the
@@ -623,21 +622,21 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
    <dt><b title>relative state</b>
    <dd>
-    <p>Set the <span>relative flag</span>, set
-    <span title=concept-url-scheme>scheme</span> to <var title>base</var>'s
-    <span title=concept-url-scheme>scheme</span>, and then, based on
-    <var title>c</var>:
+    <p>Set <var title>url</var>'s <span>relative flag</span>, set
+    <var title>url</var>'s <span title=concept-url-scheme>scheme</span> to
+    <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
+    and then, based on <var title>c</var>:
 
     <dl class=switch>
      <dt><span>EOF code point</span>
      <dd>
-      <p>Set <span title=concept-url-host>host</span> to
-      <var title>base</var>'s <span title=concept-url-host>host</span>,
-      <span title=concept-url-port>port</span> to
+      <p>Set <var title>url</var>'s <span title=concept-url-host>host</span>
+      to <var title>base</var>'s <span title=concept-url-host>host</span>,
+      <var title>url</var>'s <span title=concept-url-port>port</span> to
       <var title>base</var>'s <span title=concept-url-port>port</span>,
-      <span title=concept-url-path>path</span> to
+      <var title>url</var>'s <span title=concept-url-path>path</span> to
       <var title>base</var>'s <span title=concept-url-path>path</span>,
-      <span title=concept-url-query>query</span> to
+      <var title>url</var>'s <span title=concept-url-query>query</span> to
       <var title>base</var>'s <span title=concept-url-query>query</span>,
       and then terminate this algorithm.
 
@@ -649,7 +648,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
       "<code title>\</code>", run these steps:
 
       <ol>
-       <li><p>If <span title=concept-url-scheme>scheme</span> is
+       <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>" set <var title>state</var> to
        <b title>host state</b>.
 
@@ -664,43 +663,47 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
         be either "<code title>/</code>" or "<code title>\</code>".
       </ol>
 
-      <p>Otherwise, set <span title=concept-url-host>host</span> to
+      <p>Otherwise, set
+      <var title>url</var>'s <span title=concept-url-host>host</span> to
       <var title>base</var>'s <span title=concept-url-host>host</span>,
-      <span title=concept-url-port>port</span> to
+      <var title>url</var>'s <span title=concept-url-port>port</span> to
       <var title>base</var>'s <span title=concept-url-port>port</span>,
       <var title>state</var> to <b title>relative path start state</b>,
       and rerun this state machine for <var title>c</var>.
 
      <dt>"<code title>?</code>"
-     <dd><p>Set <span title=concept-url-host>host</span> to
+     <dd><p>Set
+     <var title>url</var>'s <span title=concept-url-host>host</span> to
      <var title>base</var>'s <span title=concept-url-host>host</span>,
-     <span title=concept-url-port>port</span> to
+     <var title>url</var>'s <span title=concept-url-port>port</span> to
      <var title>base</var>'s <span title=concept-url-port>port</span>,
-     <span title=concept-url-path>path</span> to
+     <var title>url</var>'s <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>,
-     <span title=concept-url-query>query</span> to the empty string,
+     <var title>url</var>'s <span title=concept-url-query>query</span> to the empty string,
      and <var title>state</var> to <b title>query state</b>.
 
      <dt>"<code title>#</code>"
-     <dd><p>Set <span title=concept-url-host>host</span> to
+     <dd><p>Set
+     <var title>url</var>'s <span title=concept-url-host>host</span> to
      <var title>base</var>'s <span title=concept-url-host>host</span>,
-     <span title=concept-url-port>port</span> to
+     <var title>url</var>'s <span title=concept-url-port>port</span> to
      <var title>base</var>'s <span title=concept-url-port>port</span>,
-     <span title=concept-url-path>path</span> to
+     <var title>url</var>'s <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>,
-     <span title=concept-url-query>query</span> to
+     <var title>url</var>'s <span title=concept-url-query>query</span> to
      <var title>base</var>'s <span title=concept-url-query>query</span>,
-     <span title=concept-url-fragment>fragment</span> to the empty string,
+     <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
      and <var title>state</var> to <b title>fragment state</b>.
 
      <dt>Otherwise
-     <dd><p>Set <span title=concept-url-host>host</span> to
+     <dd><p>Set
+     <var title>url</var>'s <span title=concept-url-host>host</span> to
      <var title>base</var>'s <span title=concept-url-host>host</span>,
-     <span title=concept-url-port>port</span> to
+     <var title>url</var>'s <span title=concept-url-port>port</span> to
      <var title>base</var>'s <span title=concept-url-port>port</span>,
-     <span title=concept-url-path>path</span> to
+     <var title>url</var>'s <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>, then
-     remove <span title=concept-url-path>path</span>'s last string, set
+     remove <var title>url</var>'s <span title=concept-url-path>path</span>'s last string, set
      <var title>state</var> to <b title>relative path start state</b>,
      and rerun this state machine for <var title>c</var>.
     </dl>
@@ -719,7 +722,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
      <dd>
       <ol>
        <li><p>If the <var title>@ flag</var> is set, append
-       "<code title>%40</code>" to
+       "<code title>%40</code>" to <var title>url</var>'s
        <span title=concept-url-userinfo>userinfo</span>.
 
        <li><p>Set the <var title>@ flag</var>.
@@ -727,7 +730,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
        <li><p>For each code point in <var title>buffer</var>,
        <span>URL escape</span> it using the
        <span>URL default escape set</span>, and append the result to
-       <span title=concept-url-userinfo>userinfo</span>
+       <var title>url</var>'s <span title=concept-url-userinfo>userinfo</span>.
 
        <li><p>Set <var title>buffer</var> to the empty string.
       </ol>
@@ -753,10 +756,10 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
       <var title>[] flag</var> is unset, run these substeps:
 
       <ol>
-       <li><p>If <span title=concept-url-scheme>scheme</span> is
-       "<code title>file</code>", <span>invalidate</span>.
+       <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
+       "<code title>file</code>", <span>neuter</span> <var title>url</var>.
 
-       <li><p>Set <span title=concept-url-host>host</span> to
+       <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>buffer</var>,<!-- XXX host normalize -->
        <var title>buffer</var> to the empty string,
        and <var title>state</var> to <b title>port state</b>.
@@ -772,7 +775,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
       "<code title>#</code>", run these substeps:
 
       <ol>
-       <li><p>Set <span title=concept-url-host>host</span> to
+       <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>buffer</var>,<!-- XXX host normalize -->
        <var title>buffer</var> to the empty string,
        and <var title>state</var> to <b title>relative path start state</b>.
@@ -821,7 +824,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
        rerun this state machine for <var title>c</var>.
       </ol>
 
-     <li><p>Otherwise, <span>invalidate</span>.
+     <li><p>Otherwise, <span>neuter</span> <var title>url</var>.
     </ol>
 
    <dt><b title>relative path start state</b>
@@ -842,31 +845,31 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
        <li><p>If <var title>buffer</var> is "<code title>..</code>" and
        <var title>c</var> is one of <span>EOF code point</span>,
        "<code title>/</code>", and "<code title>\</code>", set the last
-       string in <span title=concept-url-path>path</span> to the empty
+       string in <var title>url</var>'s <span title=concept-url-path>path</span> to the empty
        string.
 
        <li><p>Otherwise, if <var title>buffer</var> is
        "<code title>..</code>", remove the last string from
-       <span title=concept-url-path>path</span>.
+       <var title>url</var>'s <span title=concept-url-path>path</span>.
 
        <li><p>Otherwise, if <var title>buffer</var> is
        "<code title>.</code>" and <var title>c</var> is one of
        <span>EOF code point</span>, "<code title>/</code>", and
        "<code title>\</code>", append an empty string to
-       <span title=concept-url-path>path</span>.
+       <var title>url</var>'s <span title=concept-url-path>path</span>.
 
        <li><p>Otherwise, if <var title>buffer</var> is not
        "<code title>.</code>", append <var title>buffer</var> to
-       <span title=concept-url-path>path</span>.
+       <var title>url</var>'s <span title=concept-url-path>path</span>.
 
        <li><p>Set <var title>buffer</var> to the empty string.
 
        <li><p>If <var title>c</var> is "<code title>?</code>", set
-       <span title=concept-url-query>query</span> to the empty string,
+       <var title>url</var>'s <span title=concept-url-query>query</span> to the empty string,
        and <var title>state</var> to <b title>query state</b>.
 
        <li><p>If <var title>c</var> is "<code title>#</code>", set
-       <span title=concept-url-fragment>fragment</span> to the empty string,
+       <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
        and <var title>state</var> to <b title>fragment state</b>.
       </ol>
 
@@ -881,7 +884,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
     <ol>
      <li><p>If <var title>state override</var> is not given and <var title>c</var>
      is "<code title>#</code>", set
-     <span title=concept-url-fragment>fragment</span> to the empty string,
+     <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
      and state to <b title>fragment state</b>.
 
      <li>
@@ -890,7 +893,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
       <span>URL escape</span> <var title>c</var> using the
       <span>URL query escape set</span> and
       <var title>encoding override</var>, and append the result to
-      <span title=concept-url-query>query</span>.
+      <var title>url</var>'s <span title=concept-url-query>query</span>.
 
       <p class=XXX>Only use <var title>encoding override</var> for
       http/https/file rather than for all relative schemes?
@@ -901,10 +904,12 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
    <dd><p>If <var title>c</var> is none of <span>EOF code point</span>,
    U+0009, U+000A, and U+000D, <span>URL escape</span> <var title>c</var>
    using the <span title>URL simple escape set</span> and append the result
-   to <span title=concept-url-fragment>fragment</span>.
+   to <var title>url</var>'s <span title=concept-url-fragment>fragment</span>.
    <!-- if people complain about this do not forget that results may differ
         depending on whether or not a relative scheme is in play -->
   </dl>
+
+ <li><p>Return <var title>url</var>.
 </ol>
 
 <h3>Serializing</h3>
@@ -1016,16 +1021,15 @@ interface <dfn>URLUtils</dfn> {
      to the proposal for path segments above. (Should never expose
      effective TLD as it's evil.) -->
 
-<p>Any object implementing <code>URLUtils</code> represents a
-<span title=concept-parsed-url>parsed URL</span>. Thus <code>URL</code>
-represents a <span title=concept-parsed-url>parsed URL</span>.
-
 <p>Any object implementing <code>URLUtils</code> has an associated
-<code>URLQuery</code> object, <span title=concept-base-url>base URL</span>
-<b title>base</b>, <b title>input</b>, and <b title>query encoding</b>.
+<code>URLQuery</code> object,
+<span title=concept-parsed-url>parsed URL</span> <b title>url</b>,
+<span title=concept-base-url>base URL</span> <b title>base</b>,
+<b title>input</b>, and <b title>query encoding</b>.
 Unless stated otherwise, <b title>query encoding</b> is
-<span data-anolis-spec=encoding>utf-8</span>. The others are always set on
-creation.
+<span data-anolis-spec=encoding>utf-8</span>. The others must be set on
+creation by the specification using <code>URLUtils</code>.
+<!-- standard > specification -->
 
 <p class=note>The associated <b title>query encoding</b> is a legacy concept
 only relevant for HTML. <span data-anolis-ref class=informative>HTML</span>
@@ -1046,18 +1050,16 @@ constructor must run these steps:
  <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
- <li><p>If <var title>base</var> is a
- <span title=concept-parsed-url>parsed URL</span> and its
- <span>fatal error flag</span> is set,
+ <li><p>If <var title>base</var>'s <span>fatal error flag</span> is set,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>url</var>
- using <var title>base</var>, and associate the result with a new
- <code>URL</code> object, associate <var title>base</var> with the new
- object as its <b title>base</b>, associate
- <var title>url</var> with the new object as its <b title>input</b>, and
- then return the new object.
+ with <span title=concept-base-url>base URL</span> <var title>base</var>,
+ and associate the result with a new <code>URL</code> object as its
+ <b title>url</b>, associate <var title>base</var> with the new object as
+ its <b title>base</b>, associate <var title>url</var> with the new object
+ as its <b title>input</b>, and then return the new object.
 </ol>
 
 
@@ -1084,12 +1086,12 @@ run these steps:
 
  <li><p>Set the associated <b title>input</b> to the given value.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- <b title>input</b>, with any leading and trailing
- <span data-anolis-spec=encoding>ASCII whitespace</span> removed, as
- <var title>input</var> and the associated
- <span title=concept-base-url>base URL</span> as <var title>base</var>, and
- <b title>query encoding</b> as <var title>encoding override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> <b title>input</b>,
+ with any leading and trailing
+ <span data-anolis-spec=encoding>ASCII whitespace</span> removed, with the
+ associated <b title>url</b> as <var title>url</var>,
+ <b title>base</b> as <var title>base</var>, and <b title>query encoding</b>
+ as <var title>encoding override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute must
@@ -1115,9 +1117,10 @@ run these steps:
 <ol>
  <li><p>If the <span>fatal error flag</span> is set, terminate these steps.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span> the
- given value and "<code title>:</code>" concatenated with
- <b title>scheme start state</b> as <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> the given value and
+ "<code title>:</code>" concatenated with the associated <b title>url</b> as
+ <var title>url</var> and <b title>scheme start state</b> as
+ <var title>state override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-host><code>host</code></dfn> attribute must run
@@ -1141,9 +1144,9 @@ steps:
  <li><p>If the <span>fatal error flag</span> is set, or the
  <span>relative flag</span> is unset, terminate these steps.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- the given value with <b title>host state</b> as
- <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> the given value with the
+ associated <b title>url</b> as <var title>url</var>, and
+ <b title>host state</b> as <var title>state override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-hostname><code>hostname</code></dfn> attribute
@@ -1156,9 +1159,9 @@ run these steps:
  <li><p>If the <span>fatal error flag</span> is set, or the
  <span>relative flag</span> is unset, terminate these steps.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- the given value with <b title>hostname state</b> as
- <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> the given value with the
+ associated <b title>url</b> as <var title>url</var>, and
+ <b title>hostname state</b> as <var title>state override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-port><code>port</code></dfn> attribute must return
@@ -1171,9 +1174,9 @@ steps:
  <li><p>If the <span>fatal error flag</span> is set, or the
  <span>relative flag</span> is unset, terminate these steps.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- the given value with <b title>port state</b> as
- <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> the given value with the
+ associated <b title>url</b> as <var title>url</var>, and
+ <b title>port state</b> as <var title>state override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-pathname><code>pathname</code></dfn> attribute
@@ -1199,9 +1202,9 @@ run these steps:
 
  <li><p>Set <span title=concept-url-path>path</span> to the empty list.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- the given value with <b title>relative path start state</b> as
- <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span>the given value with the
+ associated <b title>url</b> as <var title>url</var>, and
+ <b title>relative path start state</b> as <var title>state override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-search><code>search</code></dfn> attribute must
@@ -1232,10 +1235,10 @@ these steps:
 
  <li><p>Set <span title=concept-url-query>query</span> to the empty string.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- <var title>input</var> with <b title>query state</b> as
- <var title>state override</var>, and <b title>query encoding</b> as
- <var title>encoding override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
+ with the associated <b title>url</b> as <var title>url</var>,
+ <b title>query state</b> as <var title>state override</var>, and the
+ associated <b title>query encoding</b> as <var title>encoding override</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-query><code>query</code></dfn> attribute must
@@ -1271,9 +1274,9 @@ steps:
  <li><p>Set <span title=concept-url-fragment>fragment</span> to
  the empty string.
 
- <li><p><span title=concept-parsed-url-interpret>Interpret</span>
- <var title>input</var> with <b title>fragment state</b> as
- <var title>state override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
+ with the associated <b title>url</b> as <var title>url</var>, and
+ <b title>fragment state</b> as <var title>state override</var>.
 </ol>
 
 
