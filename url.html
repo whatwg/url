@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-november-2012">Living Standard — Last Updated 1 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-november-2012">Living Standard — Last Updated 3 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 November 2012, the editors have made this specification available
+3 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -204,12 +204,17 @@ ordered set of eight 16-bit integers.
 
 <p classxxx="">To <dfn id="concept-host-parser" title="concept-host-parser">parse</dfn> ...
 
+<!-- http://tools.ietf.org/html/rfc4291 -->
+
 
 <h3 id="host-serializing"><span class="secno">3.3 </span>Serializing</h3>
 
 <p class="XXX">Normalize IPv6 addresses
 <!-- Safari/Gecko/Opera do not do this. Chrome does. I would prefer aligning
-     with Chrome as we normalize domains too. -->
+     with Chrome as we normalize domains too.
+
+     http://tools.ietf.org/html/rfc5952#section-4 has recommendations, but
+     no algorithm. -->
 
 
 
@@ -528,12 +533,32 @@ arguments can be used for API manipulation of a
  <li><p>Let the <var title="">@ flag</var> and the <var title="">[] flag</var> be
  unset.
 
+ <li><p>Append a conceptual <dfn id="eof-code-point">EOF code point</dfn>
+ (to signify end-of-input) to <var title="">input</var>.
+
+ <li><p>Let <var title="">pointer</var> be a pointer to first code point in
+ <var title="">input</var>.
+
  <li>
-  <p>Run the following state machine by switching on <var title="">state</var>,
-  for each code point in <var title="">input</var>, and then once more with the
-  conceptual <dfn id="eof-code-point">EOF code point</dfn> (signifies end-of-input), as long as
-  <var title="">url</var>'s <a href="#fatal-error-flag">fatal error flag</a> is not set. Let the
-  code point be <var title="">c</var>.
+  <p>Keep running the following state machine by switching on
+  <var title="">state</var>, increasing <var title="">pointer</var> by one after
+  each time it is run, as long as
+  <var title="">url</var>'s <a href="#fatal-error-flag">fatal error flag</a> is not set and as
+  long as <var title="">pointer</var> does not point past the end of
+  <var title="">input</var>.
+
+  <p>Let <var title="">c</var> be the code point to which
+  <var title="">pointer</var> points.
+
+  <p>Let <var title="">remaining</var> be the substring starting after
+  <var title="">pointer</var> in <var title="">input</var>.
+
+  <p class="example">If <var title="">input</var> is
+  "<code title="">mailto:example@example</code>" (omitting the
+  <a href="#eof-code-point">EOF code point</a> here) and <var title="">pointer</var> points to
+  "<code title="">@</code>", <var title="">remaining</var> is
+  "<code title="">example</code>" (again omitting the
+  <a href="#eof-code-point">EOF code point</a>).
 
   <dl class="switch">
    <dt><b title="">scheme start state</b>
@@ -546,8 +571,8 @@ arguments can be used for API manipulation of a
 
      <li><p>Otherwise, if <var title="">state override</var> is not given, set
      <var title="">buffer</var> to the empty string, set <var title="">state</var>
-     to <b title="">no scheme state</b>, and rerun this state machine for
-     <var title="">c</var>.
+     to <b title="">no scheme state</b>, and decrease <var title="">pointer</var>
+     by one.
 
      <li><p>Otherwise, terminate this algorithm.
     </ol>
@@ -616,7 +641,7 @@ arguments can be used for API manipulation of a
       <p>Otherwise, if <var title="">c</var> is none of
       <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
       <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-      <a href="#url-simple-escape-set">URL simple escape set</a> and append the result to
+      <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
       <var title="">url</var>'s
       <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
 
@@ -638,7 +663,7 @@ arguments can be used for API manipulation of a
     <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
     <p>Otherwise, set <var title="">state</var> to <b title="">relative state</b>,
-    and rerun this state machine for <var title="">c</var>.
+    and decrease <var title="">pointer</var> by one.
 
    <dt><b title="">relative state</b>
    <dd>
@@ -663,24 +688,18 @@ arguments can be used for API manipulation of a
      <dt>"<code title="">/</code>"
      <dt>"<code title="">\</code>"
      <dd>
-      <p>If the code point in <var title="">input</var> after
-      <var title="">c</var> is either "<code title="">/</code>" or
-      "<code title="">\</code>", run these steps:
+      <p>If <var title="">remaining</var> starts with either
+      "<code title="">/</code>" or "<code title="">\</code>", increase
+      <var title="">pointer</var> by one, and run these steps:
 
       <ol>
        <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
        "<code title="">file</code>" set <var title="">state</var> to
        <b title="">host state</b>.
+       <!-- XXX file -->
 
        <li><p>Otherwise set <var title="">state</var> to
        <b title="">authority start state</b>.
-
-       <li>
-        <p>Skip the code point after <var title="">c</var> when running this
-        state machine again.
-
-        <p class="note">In other words, skipping the code point determined to
-        be either "<code title="">/</code>" or "<code title="">\</code>".
       </ol>
 
       <p>Otherwise, set
@@ -689,7 +708,7 @@ arguments can be used for API manipulation of a
       <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
       <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
       <var title="">state</var> to <b title="">relative path start state</b>,
-      and rerun this state machine for <var title="">c</var>.
+      and decrease <var title="">pointer</var> by one.
 
      <dt>"<code title="">?</code>"
      <dd><p>Set
@@ -725,14 +744,13 @@ arguments can be used for API manipulation of a
      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
      remove <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
      <var title="">state</var> to <b title="">relative path start state</b>,
-     and rerun this state machine for <var title="">c</var>.
+     and decrease <var title="">pointer</var> by one.
     </dl>
 
    <dt><b title="">authority start state</b>
    <dd><p>If <var title="">c</var> is neither "<code title="">/</code>" nor
    "<code title="">\</code>", set <var title="">state</var> to
-   <b title="">authority state</b>, and rerun this state machine for
-   <var title="">c</var>.
+   <b title="">authority state</b>, and decrease <var title="">pointer</var> by one.
 
    <dt><b title="">authority state</b>
    <dd>
@@ -759,9 +777,9 @@ arguments can be used for API manipulation of a
      <dt>"<code title="">\</code>"
      <dt>"<code title="">?</code>"
      <dt>"<code title="">#</code>"
-     <dd><p>Rerun this state machine for all code points in
-     <var title="">buffer</var>, set <var title="">buffer</var> to the empty
-     string, and <var title="">state</var> to <b title="">host state</b>.
+     <dd><p>Set <var title="">buffer</var> to the empty string,
+     <var title="">state</var> to <b title="">host state</b>, and
+     <var title="">pointer</var> to the first code point in <var title="">input</var>.
 
      <dt>Otherwise
      <dd><p>Append <var title="">c</var> to <var title="">buffer</var>.
@@ -803,7 +821,7 @@ arguments can be used for API manipulation of a
        <li><p>If <var title="">state override</var> is given, terminate this
        algorithm.
 
-       <li><p>Otherwise, rerun this state machine for <var title="">c</var>.
+       <li><p>Otherwise, decrease <var title="">pointer</var> by one.
       </ol>
 
      <li>
@@ -841,7 +859,7 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title="">buffer</var> to the empty string,
        <var title="">state</var> to <b title="">relative path start state</b>, and
-       rerun this state machine for <var title="">c</var>.
+       decrease <var title="">pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, <a href="#neuter">neuter</a> <var title="">url</var>.
@@ -850,7 +868,7 @@ arguments can be used for API manipulation of a
    <dt><b title="">relative path start state</b>
    <dd><p>Set <var title="">state</var> to <b title="">relative path state</b> and
    if <var title="">c</var> is neither "<code title="">/</code>" nor
-   "<code title="">\</code>", rerun this state machine for <var title="">c</var>.
+   "<code title="">\</code>", decrease <var title="">pointer</var> by one.
 
    <dt><b title="">relative path state</b>
    <dd>
@@ -893,9 +911,15 @@ arguments can be used for API manipulation of a
        and <var title="">state</var> to <b title="">fragment state</b>.
       </ol>
 
+     <li><p>Otherwise, if <var title="">c</var> is "<code title="">%</code>" and
+     <var title="">remaining</var> starts with either "<code title="">2E</code>"
+     or "<code title="">2e</code>", increase <var title="">pointer</var> by two,
+     and append "<code title="">.</code>" to <var title="">buffer</var>.
+     <!-- Chrome unescapes more here; Safari does nothing -->
+
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
      U+000D, <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-     <a href="#url-default-escape-set">URL default escape set</a> and append the result to
+     <a href="#url-default-escape-set">URL default escape set</a>, and append the result to
      <var title="">buffer</var>.
     </ol>
 
@@ -923,7 +947,7 @@ arguments can be used for API manipulation of a
    <dt><b title="">fragment state</b>
    <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
    U+0009, U+000A, and U+000D, <a href="#url-escape">URL escape</a> <var title="">c</var>
-   using the <span title="">URL simple escape set</span> and append the result
+   using the <span title="">URL simple escape set</span>, and append the result
    to <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
    <!-- if people complain about this do not forget that results may differ
         depending on whether or not a relative scheme is in play -->
