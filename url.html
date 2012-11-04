@@ -753,10 +753,10 @@ arguments can be used for API manipulation of a
 
    <dt><b title="">authority state</b>
    <dd>
-    <p>Based on <var title="">c</var>:
-    <dl class="switch">
-     <dt>"<code title="">@</code>"
-     <dd>
+    <ol>
+     <li>
+      <p>If <var title="">c</var> is <code title="">@</code>", run these substeps:
+
       <ol>
        <li><p>If the <var title="">@ flag</var> is set, append
        "<code title="">%40</code>" to <var title="">url</var>'s
@@ -771,18 +771,17 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title="">buffer</var> to the empty string.
       </ol>
-     <dt><a href="#eof-code-point">EOF code point</a>
-     <dt>"<code title="">/</code>"
-     <dt>"<code title="">\</code>"
-     <dt>"<code title="">?</code>"
-     <dt>"<code title="">#</code>"
-     <dd><p>Set <var title="">buffer</var> to the empty string,
-     <var title="">state</var> to <b title="">host state</b>, and
-     <var title="">pointer</var> to the first code point in <var title="">input</var>.
 
-     <dt>Otherwise
-     <dd><p>Append <var title="">c</var> to <var title="">buffer</var>.
-    </dl>
+     <li><p>If <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
+     "<code title="">/</code>", "<code title="">\</code>", "<code title="">?</code>",
+     and "<code title="">#</code>", decrease <var title="">pointer</var> by the
+     number of code points in <var title="">buffer</var>, set
+     <var title="">buffer</var> to the empty string, and
+     <var title="">state</var> to <b title="">host state</b>.
+
+     <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
+     U+000D, append <var title="">c</var> to <var title="">buffer</var>.
+    </ol>
 
    <dt><b title="">file host state</b>
    <dd>
