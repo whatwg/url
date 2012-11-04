@@ -29,10 +29,10 @@
 
  <dt>Editor:
  <dd class="h-card vcard"><a class="u-url url p-name fn" lang="nl" href="http://annevankesteren.nl/">Anne van Kesteren</a>
-  &lt;<a class="u-email email " href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>>
+  &lt;<a class="u-email email" href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>>
 </dl>
 
-<script src=//dvcs.w3.org/hg/quirks-mode/raw-file/tip/file-bug.js async></script>
+<script src=//resources.whatwg.org/file-bug.js async></script>
 
 <p class=copyright><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>
 To the extent possible under law, the editors have waived all copyright and
@@ -675,8 +675,7 @@ arguments can be used for API manipulation of a
       <ol>
        <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>" set <var title>state</var> to
-       <b title>host state</b>.
-       <!-- XXX file -->
+       <b title>file host state</b>.
 
        <li><p>Otherwise set <var title>state</var> to
        <b title>authority start state</b>.
@@ -765,6 +764,36 @@ arguments can be used for API manipulation of a
      <dd><p>Append <var title>c</var> to <var title>buffer</var>.
     </dl>
 
+   <dt><b title>file host state</b>
+   <dd>
+    <ol>
+     <li>
+      <p>If <var title>c</var> is one of <span>EOF code point</span>,
+      "<code title>/</code>", "<code title>\</code>", "<code title>?</code>",
+      and "<code title>#</code>", decrease <var title>pointer</var> by one,
+      and run these substeps:
+
+      <ol>
+       <li>
+        <p>If <var title>buffer</var> consists of two code points, of
+        which the first is an <span>ASCII letter</span> and the second is
+        either "<code title>:</code>" or "<code title>|</code>", set state
+        to <b title>relative path state</b>.
+
+        <p class=note>This is a quirk for parsing Windows drive letters and
+        therefore <var title>buffer</var> is not reset here.
+
+       <li><p>Otherwise, set
+       <var title>url</var>'s <span title=concept-url-host>host</span> to
+       <var title>buffer</var>,<!-- XXX host normalize -->
+       <var title>buffer</var> to the empty string,
+       and <var title>state</var> to <b title>relative path start state</b>.
+      </ol>
+
+     <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
+     U+000D, append <var title>c</var> to <var title>buffer</var>.
+    </ol>
+
    <dt><b title>host state</b>
    <dt><b title>hostname state</b>
    <dd>
@@ -774,9 +803,6 @@ arguments can be used for API manipulation of a
       <var title>[] flag</var> is unset, run these substeps:
 
       <ol>
-       <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
-       "<code title>file</code>", <span>neuter</span> <var title>url</var>.
-
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>buffer</var>,<!-- XXX host normalize -->
        <var title>buffer</var> to the empty string,
@@ -790,7 +816,8 @@ arguments can be used for API manipulation of a
       <p>Otherwise, if <var title>c</var> is one of
       <span>EOF code point</span>, "<code title>/</code>",
       "<code title>\</code>", "<code title>?</code>", and
-      "<code title>#</code>", run these substeps:
+      "<code title>#</code>", decrease <var title>pointer</var> by one, and
+      run these substeps:
 
       <ol>
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
@@ -800,8 +827,6 @@ arguments can be used for API manipulation of a
 
        <li><p>If <var title>state override</var> is given, terminate this
        algorithm.
-
-       <li><p>Otherwise, decrease <var title>pointer</var> by one.
       </ol>
 
      <li>
@@ -876,9 +901,25 @@ arguments can be used for API manipulation of a
        "<code title>\</code>", append an empty string to
        <var title>url</var>'s <span title=concept-url-path>path</span>.
 
-       <li><p>Otherwise, if <var title>buffer</var> is not
-       "<code title>.</code>", append <var title>buffer</var> to
-       <var title>url</var>'s <span title=concept-url-path>path</span>.
+       <li>
+        <p>Otherwise, if <var title>buffer</var> is not
+        "<code title>.</code>", run these inner substeps:
+
+        <ol>
+         <li>
+          <p>If <span title=concept-url-scheme>scheme</span> is
+          "<code title>file</code>", <span title=concept-url-path>path</span>
+          is the empty list, <var title>buffer</var> consists of two
+          code points, of which the first is an <span>ASCII letter</span>,
+          and the second is either "<code title>:</code>" or
+          "<code title>|</code>", replace the second code point in
+          <var title>buffer</var> with "<code title>:</code>".
+
+          <p class=note>Windows drive letters are beautiful, no?
+
+         <li><p>Append <var title>buffer</var> to
+         <var title>url</var>'s <span title=concept-url-path>path</span>.
+        </ol>
 
        <li><p>Set <var title>buffer</var> to the empty string.
 
@@ -1195,8 +1236,10 @@ run these steps:
 steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
- <span>relative flag</span> is unset, terminate these steps.
+ <li><p>If the <span>fatal error flag</span> is set, the
+ <span>relative flag</span> is unset, or
+ <span title=concept-url-scheme>scheme</span> is "<code title>file</code>",
+ terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with the
  associated <b title>url</b> as <var title>url</var>, and
