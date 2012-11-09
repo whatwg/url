@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-november-2012">Living Standard — Last Updated 4 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-november-2012">Living Standard — Last Updated 9 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-4 November 2012, the editors have made this specification available
+9 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -75,8 +75,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h2 class="no-num" id="goals">Goals</h2>
 
-<p>The URL standard sets out to make URLs throughout the web platform fully
-predictable and interoperable. This is the plan:
+<p>The URL standard sets out to make URLs fully predictable and
+interoperable. This is the plan:
 
 <ul>
  <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
@@ -155,6 +155,10 @@ representation of <var title="">byte</var>.
 
 
 <h2 id="hosts-and-ip-addresses"><span class="secno">3 </span>Hosts and IP addresses</h2>
+
+<!-- Punycode:
+     http://tools.ietf.org/html/rfc3492
+     http://mothereff.in/punycode -->
 
 <p>A <dfn id="concept-host" title="concept-host">host</dfn> is a string that represents a
 network address, either in the form of a
@@ -473,8 +477,8 @@ and
 
  <li>
   <p>Let <var title="">bytes</var> be the result of running
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on <var title="">c</var> using
-  <var title="">encoding</var> as
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on
+  <var title="">code point</var> using <var title="">encoding</var> as
   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>.
 
   <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
@@ -493,7 +497,7 @@ and
 <p class="XXX">Add the ability to halt on the first conformance error.
 
 <p>To <dfn id="concept-url-parser" title="concept-url-parser">parse</dfn> a string
-<var title="">input</var>, optionally with a optionally with a
+<var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var title="">encoding override</var>, optionally with an
@@ -653,7 +657,8 @@ arguments can be used for API manipulation of a
    <dd>
     <p>If <var title="">base</var> is null, or <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
-    <a href="#relative-scheme">relative scheme</a>, <a href="#neuter">neuter</a> <var title="">url</var>.
+    <a href="#relative-scheme">relative scheme</a>, <a href="#neuter">neuter</a> <var title="">url</var>,
+    and then return <var title="">url</var>.
 
     <p class="note">You do not want to check <var title="">base</var>'s
     <a href="#relative-flag">relative flag</a> here, as the
@@ -694,7 +699,7 @@ arguments can be used for API manipulation of a
 
       <ol>
        <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
-       "<code title="">file</code>" set <var title="">state</var> to
+       "<code title="">file</code>", set <var title="">state</var> to
        <b title="">file host state</b>.
 
        <li><p>Otherwise set <var title="">state</var> to
@@ -886,7 +891,8 @@ arguments can be used for API manipulation of a
        decrease <var title="">pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, <a href="#neuter">neuter</a> <var title="">url</var>.
+     <li><p>Otherwise, <a href="#neuter">neuter</a> <var title="">url</var>, and then
+     return <var title="">url</var>.
     </ol>
 
    <dt><b title="">relative path start state</b>
@@ -926,8 +932,8 @@ arguments can be used for API manipulation of a
 
         <ol>
          <li>
-          <p>If <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
-          "<code title="">file</code>", <a href="#concept-url-path" title="concept-url-path">path</a>
+          <p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
+          "<code title="">file</code>", <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>
           is the empty list, <var title="">buffer</var> consists of two
           code points, of which the first is an <a href="#ascii-alpha">ASCII alpha</a>,
           and the second is either "<code title="">:</code>" or
@@ -1140,7 +1146,7 @@ constructor must run these steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">url</var>
  with <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
- and associate the result with a new <a href="#url"><code>URL</code></a> object as its
+ and then associate the result with a new <a href="#url"><code>URL</code></a> object as its
  <b title="">url</b>, associate <var title="">base</var> with the new object as
  its <b title="">base</b>, associate <var title="">url</var> with the new object
  as its <b title="">input</b>, and then return the new object.
@@ -1170,12 +1176,10 @@ run these steps:
 
  <li><p>Set the associated <b title="">input</b> to the given value.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <b title="">input</b>,
- with any leading and trailing
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> removed, with the
- associated <b title="">url</b> as <var title="">url</var>,
- <b title="">base</b> as <var title="">base</var>, and <b title="">query encoding</b>
- as <var title="">encoding override</var>.
+ <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <b title="">input</b>
+ with <a href="#concept-base-url" title="concept-base-url">base URL</a> <b title="">base</b> and
+ <b title="">query encoding</b> as <var title="">encoding override</var>, and then
+ set <b title="">url</b> to the result.
 </ol>
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must

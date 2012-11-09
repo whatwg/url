@@ -55,8 +55,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h2 class=no-num>Goals</h2>
 
-<p>The URL standard sets out to make URLs throughout the web platform fully
-predictable and interoperable. This is the plan:
+<p>The URL standard sets out to make URLs fully predictable and
+interoperable. This is the plan:
 
 <ul>
  <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
@@ -135,6 +135,10 @@ representation of <var title>byte</var>.
 
 
 <h2>Hosts and IP addresses</h2>
+
+<!-- Punycode:
+     http://tools.ietf.org/html/rfc3492
+     http://mothereff.in/punycode -->
 
 <p>A <dfn title=concept-host>host</dfn> is a string that represents a
 network address, either in the form of a
@@ -453,8 +457,8 @@ and
 
  <li>
   <p>Let <var title>bytes</var> be the result of running
-  <span data-anolis-spec=encoding>encode</span> on <var title>c</var> using
-  <var title>encoding</var> as
+  <span data-anolis-spec=encoding>encode</span> on
+  <var title>code point</var> using <var title>encoding</var> as
   <span data-anolis-spec=encoding>encoding</span>.
 
   <p>Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
@@ -473,7 +477,7 @@ and
 <p class=XXX>Add the ability to halt on the first conformance error.
 
 <p>To <dfn title=concept-url-parser>parse</dfn> a string
-<var title>input</var>, optionally with a optionally with a
+<var title>input</var>, optionally with a
 <span title=concept-base-url>base URL</span> <var title>base</var>,
 optionally with an <span data-anolis-spec=encoding>encoding</span>
 <var title>encoding override</var>, optionally with an
@@ -633,7 +637,8 @@ arguments can be used for API manipulation of a
    <dd>
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
-    <span>relative scheme</span>, <span>neuter</span> <var title>url</var>.
+    <span>relative scheme</span>, <span>neuter</span> <var title>url</var>,
+    and then return <var title>url</var>.
 
     <p class=note>You do not want to check <var title>base</var>'s
     <span>relative flag</span> here, as the
@@ -674,7 +679,7 @@ arguments can be used for API manipulation of a
 
       <ol>
        <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
-       "<code title>file</code>" set <var title>state</var> to
+       "<code title>file</code>", set <var title>state</var> to
        <b title>file host state</b>.
 
        <li><p>Otherwise set <var title>state</var> to
@@ -866,7 +871,8 @@ arguments can be used for API manipulation of a
        decrease <var title>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, <span>neuter</span> <var title>url</var>.
+     <li><p>Otherwise, <span>neuter</span> <var title>url</var>, and then
+     return <var title>url</var>.
     </ol>
 
    <dt><b title>relative path start state</b>
@@ -906,8 +912,8 @@ arguments can be used for API manipulation of a
 
         <ol>
          <li>
-          <p>If <span title=concept-url-scheme>scheme</span> is
-          "<code title>file</code>", <span title=concept-url-path>path</span>
+          <p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
+          "<code title>file</code>", <var title>url</var>'s <span title=concept-url-path>path</span>
           is the empty list, <var title>buffer</var> consists of two
           code points, of which the first is an <span>ASCII alpha</span>,
           and the second is either "<code title>:</code>" or
@@ -1120,7 +1126,7 @@ constructor must run these steps:
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>url</var>
  with <span title=concept-base-url>base URL</span> <var title>base</var>,
- and associate the result with a new <code>URL</code> object as its
+ and then associate the result with a new <code>URL</code> object as its
  <b title>url</b>, associate <var title>base</var> with the new object as
  its <b title>base</b>, associate <var title>url</var> with the new object
  as its <b title>input</b>, and then return the new object.
@@ -1150,12 +1156,10 @@ run these steps:
 
  <li><p>Set the associated <b title>input</b> to the given value.
 
- <li><p><span title=concept-url-parser>Parse</span> <b title>input</b>,
- with any leading and trailing
- <span data-anolis-spec=encoding>ASCII whitespace</span> removed, with the
- associated <b title>url</b> as <var title>url</var>,
- <b title>base</b> as <var title>base</var>, and <b title>query encoding</b>
- as <var title>encoding override</var>.
+ <li><p><span title=concept-url-parser>Parse</span> <b title>input</b>
+ with <span title=concept-base-url>base URL</span> <b title>base</b> and
+ <b title>query encoding</b> as <var title>encoding override</var>, and then
+ set <b title>url</b> to the result.
 </ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute must
