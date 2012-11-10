@@ -3,11 +3,11 @@
 <meta charset=utf-8>
 <title>URL Standard</title>
 <link rel=stylesheet href=//www.whatwg.org/style/specification>
-<link rel=icon href=//www.whatwg.org/images/icon>
+<link rel=icon href=//resources.whatwg.org/logo-url.svg>
 
 <div class=head>
 
-<p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//www.whatwg.org/images/logo></a></p>
+<p><a class=logo href=//www.whatwg.org/><img alt=WHATWG src=//resources.whatwg.org/logo-url.svg width=100 height=100></a></p>
 <h1>URL</h1>
 <h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE: 01 Jan 1901]</h2>
 
@@ -621,16 +621,12 @@ arguments can be used for API manipulation of a
      the empty string and <var title>state</var> to
      <b title>fragment state</b>.
 
-     <li>
-      <p>Otherwise, if <var title>c</var> is none of
-      <span>EOF code point</span>, U+0009, U+000A, and U+000D,
-      <span>URL escape</span> <var title>c</var> using the
-      <span>URL simple escape set</span>, and append the result to
-      <var title>url</var>'s
-      <span title=concept-url-scheme-data>scheme data</span>.
-
-      <p class=note><span title=concept-url-path>Path</span> could be reused
-      here to keep <span title=concept-parsed-url>parsed URL</span> simple.
+     <li><p>Otherwise, if <var title>c</var> is none of
+     <span>EOF code point</span>, U+0009, U+000A, and U+000D,
+     <span>URL escape</span> <var title>c</var> using the
+     <span>URL simple escape set</span>, and append the result to
+     <var title>url</var>'s
+     <span title=concept-url-scheme-data>scheme data</span>.
     </ol>
 
    <dt><b title>no scheme state</b>

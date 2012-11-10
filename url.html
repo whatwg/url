@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 <title>URL Standard</title>
 <link href="//www.whatwg.org/style/specification" rel="stylesheet">
-<link href="//www.whatwg.org/images/icon" rel="icon">
+<link href="//resources.whatwg.org/logo-url.svg" rel="icon">
 
 <div class="head">
 
-<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" src="//www.whatwg.org/images/logo"></a></p>
+<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-november-2012">Living Standard — Last Updated 9 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-november-2012">Living Standard — Last Updated 10 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-9 November 2012, the editors have made this specification available
+10 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -641,16 +641,12 @@ arguments can be used for API manipulation of a
      the empty string and <var title="">state</var> to
      <b title="">fragment state</b>.
 
-     <li>
-      <p>Otherwise, if <var title="">c</var> is none of
-      <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-      <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-      <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
-      <var title="">url</var>'s
-      <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
-
-      <p class="note"><a href="#concept-url-path" title="concept-url-path">Path</a> could be reused
-      here to keep <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> simple.
+     <li><p>Otherwise, if <var title="">c</var> is none of
+     <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
+     <a href="#url-escape">URL escape</a> <var title="">c</var> using the
+     <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
+     <var title="">url</var>'s
+     <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
     </ol>
 
    <dt><b title="">no scheme state</b>
