@@ -248,20 +248,21 @@ is named a <dfn title=concept-parsed-url>parsed URL</dfn>. The components a
 
 <p>A <dfn>relative scheme</dfn> is a
 <span title=concept-url-scheme>scheme</span> listed in the first column of
-the following table. It typically has an associated default
-<span title=concept-url-port>port</span> listed in the second column on the
-same row.
+the following table. A <dfn>default port</dfn> is a
+<span>relative scheme</span>'s optional corresponding
+<span title=concept-url-port>port</span> and is listed in the second column
+on the same row.
 
 <table>
  <tr><th><span title=concept-url-scheme>scheme</span>
      <th><span title=concept-url-port>port</span>
- <tr><td>"<code title>ftp</code>"<td>21
+ <tr><td>"<code title>ftp</code>"<td>"<code title>21</code>"
  <tr><td>"<code title>file</code>"<td>
- <tr><td>"<code title>gopher</code>"<td>70
- <tr><td>"<code title>http</code>"<td>80
- <tr><td>"<code title>https</code>"<td>443
- <tr><td>"<code title>ws</code>"<td>80
- <tr><td>"<code title>wss</code>"<td>443
+ <tr><td>"<code title>gopher</code>"<td>"<code title>70</code>"
+ <tr><td>"<code title>http</code>"<td>"<code title>80</code>"
+ <tr><td>"<code title>https</code>"<td>"<code title>443</code>"
+ <tr><td>"<code title>ws</code>"<td>"<code title>80</code>"
+ <tr><td>"<code title>wss</code>"<td>"<code title>443</code>"
 </table>
 
 
@@ -548,8 +549,7 @@ arguments can be used for API manipulation of a
    <dt><b title>scheme start state</b>
    <dd>
     <ol>
-     <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
-     is in the range U+0041 through to U+005A or U+0061 through to U+007A,
+     <li><p>If <var title>c</var> is an <span>ASCII alpha</span>,
      append <var title>c</var>, lowercased, to <var title>buffer</var>, and
      set <var title>state</var> to <b title>scheme state</b>.
 
@@ -564,9 +564,7 @@ arguments can be used for API manipulation of a
    <dt><b title>scheme state</b>
    <dd>
     <ol>
-     <li><p>If <var title>c</var> is not the <span>EOF code point</span> and
-     is in the range U+0030 through to U+0039, U+0041 through to U+005A,
-     U+0061 through to U+007A, or <var title>c</var> is
+     <li><p>If <var title>c</var> is an <span>ASCII alphanumeric</span>,
      "<code title>+</code>", "<code title>-</code>", or
      "<code title>.</code>", append <var title>c</var>, lowercased, to
      <var title>buffer</var>.
@@ -847,7 +845,7 @@ arguments can be used for API manipulation of a
    <dt><b title>port state</b>
    <dd>
     <ol>
-     <li><p>If <var title>c</var> is in the range U+0030 through to U+0039,
+     <li><p>If <var title>c</var> is an <span>ASCII digit</span>,
      append <var title>c</var> to <var title>buffer</var>.
 
      <li>
@@ -857,7 +855,16 @@ arguments can be used for API manipulation of a
       "<code title>#</code>", or <var title>state override</var> is given, run
       these substeps:
       <ol>
-       <li><p class=XXX>parse buffer and set port
+       <li><p>Remove any leading U+0030 code points from
+       <var title>buffer</var>.
+
+       <li><p>If <var title>buffer</var> is equal to
+       <var title>url</var>'s <span title=concept-url-scheme>scheme</span>'s
+       <span>default port</span>, set <var title>buffer</var> to the empty
+       string.
+
+       <li><p>Set <var title>url</var>'s
+       <span title=concept-url-port>port</span> to <var title>buffer</var>.
 
        <li><p>If <var title>state override</var> is given, terminate this
        algorithm.
