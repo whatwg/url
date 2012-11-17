@@ -434,26 +434,29 @@ then set its <span>fatal error flag</span>.
 <p>The <dfn>URL simple escape set</dfn> are all code points less than
 U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
 
-<p>The <dfn>URL default escape set</dfn> are
-all code points less than U+0021,
-all code points greater than U+007E,
+<p>The <dfn>URL query escape set</dfn> is the
+<span>URL simple escape set</span> and code points U+0020,
 '<code title>"</code>', <!-- 0x22 -->
 "<code title>#</code>", <!-- 0x23 -->
 "<code title>&lt;</code>", <!-- 0x3C -->
 "<code title>></code>", <!-- 0x3E -->
-"<code title>?</code>", <!-- 0x3F -->
 and
 "<code title>`</code>". <!-- 0x60 -->
 
-<p>The <dfn>URL query escape set</dfn> are
-all code points less than U+0021,
-all code points greater than U+007E,
-'<code title>"</code>', <!-- 0x22 -->
-"<code title>#</code>", <!-- 0x23 -->
-"<code title>&lt;</code>", <!-- 0x3C -->
-"<code title>></code>", <!-- 0x3E -->
+<p>The <dfn>URL default escape set</dfn> is the
+<span>URL query escape set</span> and code point
+"<code title>?</code>". <!-- 0x3F -->
+
+<p>The <dfn>URL password escape set</dfn> is the
+<span>URL default escape set</span> and code points
+"<code title>/</code>", <!-- 0x2F -->
+"<code title>@</code>", <!-- 0x40 -->
 and
-"<code title>`</code>". <!-- 0x60 -->
+"<code title>\</code>". <!-- 0x5C -->
+
+<p>The <dfn>URL username escape set</dfn> is the
+<span>URL password escape set</span> and code point
+"<code title>:</code>". <!-- 0x3A -->
 
 <!-- we could inline handling of the EOF code point, U+0009, U+000A, and
      U+000D potentially; have them return the empty string -->
@@ -1244,7 +1247,7 @@ run these steps:
  string.
 
  <li><p>For each code point in the given value, <span>URL escape</span> it
- using the <span>URL default escape set</span>, and append the result to
+ using the <span>URL username escape set</span>, and append the result to
  <span title=concept-url-username>username</span>.
 </ol>
 
@@ -1274,7 +1277,7 @@ run these steps:
  string.
 
  <li><p>For each code point in the given value, <span>URL escape</span> it
- using the <span>URL default escape set</span>, and append the result to
+ using the <span>URL password escape set</span>, and append the result to
  <span title=concept-url-password>password</span>.
 </ol>
 
@@ -1359,7 +1362,7 @@ run these steps:
 
  <li><p>Set <span title=concept-url-path>path</span> to the empty list.
 
- <li><p><span title=concept-url-parser>Parse</span>the given value with the
+ <li><p><span title=concept-url-parser>Parse</span> the given value with the
  associated <b title>url</b> as <var title>url</var>, and
  <b title>relative path start state</b> as <var title>state override</var>.
 </ol>
