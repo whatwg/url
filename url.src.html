@@ -239,7 +239,8 @@ is named a <dfn title=concept-parsed-url>parsed URL</dfn>. The components a
 <dfn title=concept-url-scheme>scheme</dfn>,
 <dfn title=concept-url-scheme-data>scheme data</dfn> (not used if
 <span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span>),
-<dfn title=concept-url-userinfo>userinfo</dfn>,
+<dfn title=concept-url-username>username</dfn>,
+<dfn title=concept-url-password>password</dfn>,
 <dfn title=concept-url-host>host</dfn>,
 <dfn title=concept-url-port>port</dfn>,
 <dfn title=concept-url-path>path</dfn>,
@@ -317,7 +318,17 @@ optionally followed by either an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>
 or a "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
-<p>A <span title=concept-url-userinfo>userinfo</span> is zero or more
+<p><dfn title=concept-url-userinfo>Userinfo</dfn> is a
+<span title=concept-url-username>username</span>, optionally followed by a
+"<code title>:</code>" and a
+<span title=concept-url-password>password</span>.
+
+<p>A <span title=concept-url-username>username</span> is zero or more
+<span>URL units</span>, excluding "<code title>/</code>",
+"<code title>:</code>, "<code title>?</code>", and "<code title>@</code>".
+<!-- password without ":" (sorted on ASCII position) -->
+
+<p>A <span title=concept-url-password>password</span> is zero or more
 <span>URL units</span>, excluding "<code title>/</code>",
 "<code title>?</code>", and "<code title>@</code>".
 
@@ -405,10 +416,11 @@ and <span title="URL-encoded byte">URL-encoded bytes</span>.
 <p>To <dfn>clear</dfn> a <span title=concept-parsed-url>parsed URL</span>,
 set its <span title=concept-url-scheme>scheme</span>,
 <span title=concept-url-scheme-data>scheme data</span>,
-<span title=concept-url-userinfo>userinfo</span>,
+<span title=concept-url-username>username</span>,
 <span title=concept-url-host>host</span>, and
 <span title=concept-url-port>port</span> to the empty string,
-<span title=concept-url-query>query</span> and
+<span title=concept-url-password>password</span>,
+<span title=concept-url-query>query</span>, and
 <span title=concept-url-fragment>fragment</span> to null, and
 its <span title=concept-url-path>path</span> to the empty list.
 
@@ -737,17 +749,29 @@ arguments can be used for API manipulation of a
       <p>If <var title>c</var> is "<code title>@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var title>@ flag</var> is set, append
-       "<code title>%40</code>" to <var title>url</var>'s
-       <span title=concept-url-userinfo>userinfo</span>.
+       <li><p>If the <var title>@ flag</var> is set, prepend
+       "<code title>%40</code>" to <var title>buffer</var>.
 
        <li><p>Set the <var title>@ flag</var>.
 
-       <li><p>For each code point in <var title>buffer</var>,
-       <span>URL escape</span> it using the
-       <span>URL default escape set</span>, and append the result to
-       <var title>url</var>'s <span title=concept-url-userinfo>userinfo</span>.
+       <li>
+        <p>For each <var title>code point</var> in <var title>buffer</var>, run these substeps:
 
+        <ol>
+         <li><p>If <var title>code point</var> is "<code title>:</code>" and
+         <var title>url</var>'s
+         <span title=concept-url-password>password</span> is null, set
+         <var title>url</var>'s <span title=concept-url-password>password</span>
+         to the empty string and continue.
+
+         <li><p><span>URL escape</span> <var title>code point</var> using
+         the <span>URL default escape set</span> and append the result to
+         <var title>url</var>'s <span title=concept-url-password>password</span>
+         if <var title>url</var>'s <span title=concept-url-password>password</span>
+         is non-null, and to
+         <var title>url</var>'s <span title=concept-url-username>username</span>
+         otherwise.
+        </ol>
        <li><p>Set <var title>buffer</var> to the empty string.
       </ol>
 
@@ -976,8 +1000,8 @@ arguments can be used for API manipulation of a
    <dt><b title>fragment state</b>
    <dd><p>If <var title>c</var> is none of <span>EOF code point</span>,
    U+0009, U+000A, and U+000D, <span>URL escape</span> <var title>c</var>
-   using the <span title>URL simple escape set</span>, and append the result
-   to <var title>url</var>'s <span title=concept-url-fragment>fragment</span>.
+   using the <span>URL simple escape set</span>, and append the result to
+   <var title>url</var>'s <span title=concept-url-fragment>fragment</span>.
    <!-- if people complain about this do not forget that results may differ
         depending on whether or not a relative scheme is in play -->
   </dl>
@@ -1021,10 +1045,22 @@ a <span title=concept-parsed-url>parsed URL</span>, run these steps:
   <ol>
    <li><p>Append "<code title>//</code>" to <var title>output</var>.
 
-   <li><p>If <span title=concept-url-userinfo>userinfo</span> is not
-   the empty string, append
-   <span title=concept-url-userinfo>userinfo</span> concatenated with
-   "<code title>@</code>" to <var title>output</var>.
+   <li>
+    <p>If <span title=concept-url-username>username</span> is not the empty
+    string or <span title=concept-url-password>password</span> is non-null,
+    run these substeps:
+
+    <ol>
+     <li><p>Append <span title=concept-url-username>username</span> to
+     <var title>output</var>.
+
+     <li><p>If <span title=concept-url-password>password</span> is non-null,
+     append "<code title>:</code>" concatenated with
+     <span title=concept-url-password>password</span> to
+     <var title>output</var>.
+
+     <li><p>Append "<code title>@</code>" to <var title>output</var>.
+    </ol>
 
    <li><p>Append <span title=concept-url-host>host</span> to
    <var title>output</var>.
@@ -1068,6 +1104,8 @@ interface <dfn>URLUtils</dfn> {
   readonly attribute DOMString <span title=dom-URL-origin>origin</span>;
 
            attribute DOMString <span title=dom-URL-protocol>protocol</span>;
+           attribute DOMString <span title=dom-URL-username>username</span>;
+           attribute DOMString <span title=dom-URL-password>password</span>;
            attribute DOMString <span title=dom-URL-host>host</span>;
            attribute DOMString <span title=dom-URL-hostname>hostname</span>;
            attribute DOMString <span title=dom-URL-port>port</span>;
@@ -1078,8 +1116,6 @@ interface <dfn>URLUtils</dfn> {
 };</pre>
 
 <!-- Ideas:
-           attribute DOMString user;
-           attribute DOMString password; // or maybe userinfo instead?
            attribute DOMString basename; // last segment of path (Simon Sapin)
            sequence<DOMString> getPath();
            void setPath(DOMString segments...);
@@ -1192,6 +1228,54 @@ run these steps:
  "<code title>:</code>" concatenated with the associated <b title>url</b> as
  <var title>url</var> and <b title>scheme start state</b> as
  <var title>state override</var>.
+</ol>
+
+<p>The <dfn title=dom-URL-username><code>username</code></dfn> attribute
+must return <span title=concept-url-username>username</span>.
+
+<p>Setting the <code title=dom-URL-username>username</code> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <span>fatal error flag</span> is set, or the
+ <span>relative flag</span> is unset, terminate these steps.
+
+ <li><p>Set <span title=concept-url-username>username</span> to the empty
+ string.
+
+ <li><p>For each code point in the given value, <span>URL escape</span> it
+ using the <span>URL default escape set</span>, and append the result to
+ <span title=concept-url-username>username</span>.
+</ol>
+
+<p>The <dfn title=dom-URL-password><code>password</code></dfn> attribute
+must run these steps:
+
+<ol>
+ <li><p>If the <span>fatal error flag</span> is set or
+ <span title=concept-url-password>password</span> is null, return the empty
+ string.
+
+ <li><p>Return <span title=concept-url-password>password</span>.
+</ol>
+
+<p>Setting the <code title=dom-URL-password>password</code> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <span>fatal error flag</span> is set, or the
+ <span>relative flag</span> is unset, terminate these steps.
+
+ <li><p>If the given value is the empty string, set
+ <span title=concept-url-password>password</span> to null, and terminate
+ these steps.
+
+ <li><p>Set <span title=concept-url-password>password</span> to the empty
+ string.
+
+ <li><p>For each code point in the given value, <span>URL escape</span> it
+ using the <span>URL default escape set</span>, and append the result to
+ <span title=concept-url-password>password</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-host><code>host</code></dfn> attribute must run

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-november-2012">Living Standard — Last Updated 13 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-november-2012">Living Standard — Last Updated 17 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-13 November 2012, the editors have made this specification available
+17 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -259,7 +259,8 @@ is named a <dfn id="concept-parsed-url" title="concept-parsed-url">parsed URL</d
 <dfn id="concept-url-scheme" title="concept-url-scheme">scheme</dfn>,
 <dfn id="concept-url-scheme-data" title="concept-url-scheme-data">scheme data</dfn> (not used if
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is a <a href="#relative-scheme">relative scheme</a>),
-<dfn id="concept-url-userinfo" title="concept-url-userinfo">userinfo</dfn>,
+<dfn id="concept-url-username" title="concept-url-username">username</dfn>,
+<dfn id="concept-url-password" title="concept-url-password">password</dfn>,
 <dfn id="concept-url-host" title="concept-url-host">host</dfn>,
 <dfn id="concept-url-port" title="concept-url-port">port</dfn>,
 <dfn id="concept-url-path" title="concept-url-path">path</dfn>,
@@ -337,7 +338,17 @@ optionally followed by either an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>
 or a "<code title="">?</code>" and a <a href="#concept-url-query" title="concept-url-query">query</a>.
 
-<p>A <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> is zero or more
+<p><dfn id="concept-url-userinfo" title="concept-url-userinfo">Userinfo</dfn> is a
+<a href="#concept-url-username" title="concept-url-username">username</a>, optionally followed by a
+"<code title="">:</code>" and a
+<a href="#concept-url-password" title="concept-url-password">password</a>.
+
+<p>A <a href="#concept-url-username" title="concept-url-username">username</a> is zero or more
+<a href="#url-units">URL units</a>, excluding "<code title="">/</code>",
+"<code title="">:</code>, "<code title="">?</code>", and "<code title="">@</code>".
+<!-- password without ":" (sorted on ASCII position) -->
+
+<p>A <a href="#concept-url-password" title="concept-url-password">password</a> is zero or more
 <a href="#url-units">URL units</a>, excluding "<code title="">/</code>",
 "<code title="">?</code>", and "<code title="">@</code>".
 
@@ -425,10 +436,11 @@ and <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>.
 <p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
 set its <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
 <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
-<a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>,
+<a href="#concept-url-username" title="concept-url-username">username</a>,
 <a href="#concept-url-host" title="concept-url-host">host</a>, and
 <a href="#concept-url-port" title="concept-url-port">port</a> to the empty string,
-<a href="#concept-url-query" title="concept-url-query">query</a> and
+<a href="#concept-url-password" title="concept-url-password">password</a>,
+<a href="#concept-url-query" title="concept-url-query">query</a>, and
 <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to null, and
 its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
 
@@ -757,17 +769,29 @@ arguments can be used for API manipulation of a
       <p>If <var title="">c</var> is "<code title="">@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var title="">@ flag</var> is set, append
-       "<code title="">%40</code>" to <var title="">url</var>'s
-       <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>.
+       <li><p>If the <var title="">@ flag</var> is set, prepend
+       "<code title="">%40</code>" to <var title="">buffer</var>.
 
        <li><p>Set the <var title="">@ flag</var>.
 
-       <li><p>For each code point in <var title="">buffer</var>,
-       <a href="#url-escape">URL escape</a> it using the
-       <a href="#url-default-escape-set">URL default escape set</a>, and append the result to
-       <var title="">url</var>'s <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a>.
+       <li>
+        <p>For each <var title="">code point</var> in <var title="">buffer</var>, run these substeps:
 
+        <ol>
+         <li><p>If <var title="">code point</var> is "<code title="">:</code>" and
+         <var title="">url</var>'s
+         <a href="#concept-url-password" title="concept-url-password">password</a> is null, set
+         <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
+         to the empty string and continue.
+
+         <li><p><a href="#url-escape">URL escape</a> <var title="">code point</var> using
+         the <a href="#url-default-escape-set">URL default escape set</a> and append the result to
+         <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
+         if <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
+         is non-null, and to
+         <var title="">url</var>'s <a href="#concept-url-username" title="concept-url-username">username</a>
+         otherwise.
+        </ol>
        <li><p>Set <var title="">buffer</var> to the empty string.
       </ol>
 
@@ -996,8 +1020,8 @@ arguments can be used for API manipulation of a
    <dt><b title="">fragment state</b>
    <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
    U+0009, U+000A, and U+000D, <a href="#url-escape">URL escape</a> <var title="">c</var>
-   using the <span title="">URL simple escape set</span>, and append the result
-   to <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
+   using the <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
+   <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
    <!-- if people complain about this do not forget that results may differ
         depending on whether or not a relative scheme is in play -->
   </dl>
@@ -1041,10 +1065,22 @@ a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run t
   <ol>
    <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
 
-   <li><p>If <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> is not
-   the empty string, append
-   <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> concatenated with
-   "<code title="">@</code>" to <var title="">output</var>.
+   <li>
+    <p>If <a href="#concept-url-username" title="concept-url-username">username</a> is not the empty
+    string or <a href="#concept-url-password" title="concept-url-password">password</a> is non-null,
+    run these substeps:
+
+    <ol>
+     <li><p>Append <a href="#concept-url-username" title="concept-url-username">username</a> to
+     <var title="">output</var>.
+
+     <li><p>If <a href="#concept-url-password" title="concept-url-password">password</a> is non-null,
+     append "<code title="">:</code>" concatenated with
+     <a href="#concept-url-password" title="concept-url-password">password</a> to
+     <var title="">output</var>.
+
+     <li><p>Append "<code title="">@</code>" to <var title="">output</var>.
+    </ol>
 
    <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a> to
    <var title="">output</var>.
@@ -1088,6 +1124,8 @@ interface <dfn id="urlutils">URLUtils</dfn> {
   readonly attribute DOMString <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
            attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
+           attribute DOMString <a href="#dom-url-username" title="dom-URL-username">username</a>;
+           attribute DOMString <a href="#dom-url-password" title="dom-URL-password">password</a>;
            attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
            attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
            attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
@@ -1098,8 +1136,6 @@ interface <dfn id="urlutils">URLUtils</dfn> {
 };</pre>
 
 <!-- Ideas:
-           attribute DOMString user;
-           attribute DOMString password; // or maybe userinfo instead?
            attribute DOMString basename; // last segment of path (Simon Sapin)
            sequence<DOMString> getPath();
            void setPath(DOMString segments...);
@@ -1212,6 +1248,54 @@ run these steps:
  "<code title="">:</code>" concatenated with the associated <b title="">url</b> as
  <var title="">url</var> and <b title="">scheme start state</b> as
  <var title="">state override</var>.
+</ol>
+
+<p>The <dfn id="dom-url-username" title="dom-URL-username"><code>username</code></dfn> attribute
+must return <a href="#concept-url-username" title="concept-url-username">username</a>.
+
+<p>Setting the <a href="#dom-url-username"><code title="dom-URL-username">username</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, or the
+ <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
+
+ <li><p>Set <a href="#concept-url-username" title="concept-url-username">username</a> to the empty
+ string.
+
+ <li><p>For each code point in the given value, <a href="#url-escape">URL escape</a> it
+ using the <a href="#url-default-escape-set">URL default escape set</a>, and append the result to
+ <a href="#concept-url-username" title="concept-url-username">username</a>.
+</ol>
+
+<p>The <dfn id="dom-url-password" title="dom-URL-password"><code>password</code></dfn> attribute
+must run these steps:
+
+<ol>
+ <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set or
+ <a href="#concept-url-password" title="concept-url-password">password</a> is null, return the empty
+ string.
+
+ <li><p>Return <a href="#concept-url-password" title="concept-url-password">password</a>.
+</ol>
+
+<p>Setting the <a href="#dom-url-password"><code title="dom-URL-password">password</code></a> attribute must
+run these steps:
+
+<ol>
+ <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, or the
+ <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
+
+ <li><p>If the given value is the empty string, set
+ <a href="#concept-url-password" title="concept-url-password">password</a> to null, and terminate
+ these steps.
+
+ <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty
+ string.
+
+ <li><p>For each code point in the given value, <a href="#url-escape">URL escape</a> it
+ using the <a href="#url-default-escape-set">URL default escape set</a>, and append the result to
+ <a href="#concept-url-password" title="concept-url-password">password</a>.
 </ol>
 
 <p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
