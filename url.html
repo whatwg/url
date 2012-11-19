@@ -231,9 +231,10 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <li><p>If <var title="">input</var> does not end with
    "<code title="">]</code>", return failure.
 
-   <li><p>Return the result of <span title="concept-ipv6-parse">parsing</span>
-   <var title="">input</var> with its leading "<code title="">[</code>" and
-   trailing "<code title="">]</code>" omitted.
+   <li><p>Return the result of
+   <a href="#concept-ipv6-parser" title="concept-ipv6-parser">parsing</a> <var title="">input</var>
+   with its leading "<code title="">[</code>" and trailing
+   "<code title="">]</code>" removed.
   </ol>
 
  <li class="XXX">
@@ -300,7 +301,8 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <li><p>Let <var title="">value</var> and <var title="">length</var> be 0.
 
    <li><p>While <var title="">length</var> is less than 4 and
-   <var title="">c</var> is an <span>ASCII hex digit</span>, set
+   <var title="">c</var> is an
+   <a href="#ascii-hex-digits" title="ASCII hex digits">ASCII hex digit</a>, set
    <var title="">value</var> to
    <var title="">value</var> × 0x10 + <var title="">c</var> interpreted as hexadecimal number,
    and increase <var title="">pointer</var> and <var title="">length</var> by one.
@@ -331,7 +333,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li><p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>, jump to
- the <a href="#concept-ipv6-parser-finale">Finale</a>.
+ <a href="#concept-ipv6-parser-finale">Finale</a>.
 
  <li><p><i id="concept-ipv6-parser-ipv4" title="">IPv4</i>:
  If <var title="">piece pointer</var> is greater than six, return failure.
@@ -345,8 +347,8 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   <ol>
    <li><p>Let <var title="">value</var> be 0.
 
-   <li><p>While <var title="">c</var> is an <span>ASCII digit</span>, set
-   <var title="">value</var> to
+   <li><p>While <var title="">c</var> is an
+   <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, set <var title="">value</var> to
    <var title="">value</var> × 10 + <var title="">c</var> interpreted as decimal number
    and increase <var title="">pointer</var> by one.
 
