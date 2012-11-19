@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-november-2012">Living Standard — Last Updated 17 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-november-2012">Living Standard — Last Updated 19 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-17 November 2012, the editors have made this specification available
+19 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -121,6 +121,9 @@ not appear in all uppercase letters in this specification.
 <p>Some terms used in this specification are defined in the
 Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
+<p>The <dfn id="eof-code-point">EOF code point</dfn> signifies the end of a string or
+code point stream.
+
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
 <p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are <a href="#ascii-digits">ASCII digits</a> or are
@@ -173,42 +176,220 @@ sake of convenience.
 <p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
 more <dfn id="concept-domain-label" title="concept-domain-label">domain labels</dfn>.
 
-<p class="XXX">An <dfn id="concept-ipv6" title="concept-ipv6">IPv6 address</dfn> is ...
+<!-- http://tools.ietf.org/html/rfc4291 -->
+<p>An <dfn id="concept-ipv6" title="concept-ipv6">IPv6 address</dfn> is a 128-bit identifier and
+for the purposes of this specification represented as an ordered list of
+eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn>.
+<a href="#refsIPV6">[IPV6]</a>
 
 
 <h3 id="host-writing"><span class="secno">3.1 </span>Writing</h3>
 
-<p>A <a href="#concept-domain" title="concept-domain">domain</a> must be one or more
+<p>A <a href="#concept-host" title="concept-host">host</a> must be either a
+<a href="#concept-domain" title="concept-domain">domain</a> or "<code title="">[</code>", followed
+by an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, followed by
+"<code title="">]</code>".
+
+<p>A <a href="#concept-domain" title="concept-domain">domain</a> is one or more
 <a href="#concept-domain-label" title="concept-domain-label">domain labels</a> separated from each
 other by a
 <a href="#domain-label-separators" title="domain label separators">domain label separator</a>,
 optionally followed by a
 <a href="#domain-label-separators" title="domain label separators">domain label separator</a>.
+
+<p class="note">A trailing
+<a href="#domain-label-separators" title="domain label separators">domain label separator</a>
+signifies an empty <a href="#concept-domain-label" title="concept-domain-label">domain label</a>.
 <!-- if a domain has 4 labels, no trailing dot, and each label consists only
      of ASCII digits it's IPv4 because the last label of a domain cannot
      start with an ASCII digit -->
 
-<p class="XXX">An <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> must ...
+<p class="XXX">A <a href="#concept-domain-label" title="concept-domain-label">domain label</a> is ...
+
+<p>An <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> is defined in the
+<a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
+<a href="#refsIPV6">[IPV6]</a>
+<!-- http://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
+     far as what developers can do we should be liberal
+
+     XXX should we define the format inline instead just like STD 66? -->
 
 
 <h3 id="host-parsing"><span class="secno">3.2 </span>Parsing</h3>
 
 <p class="XXX">IDNA2003 vs IDNA2008 (and also UTS #46)
 
-<p>A <dfn id="concept-parsed-host" title="concept-parsed-host">parsed host</dfn> consists either of a
-<a href="#concept-parsed-domain" title="concept-parsed-domain">parsed domain</a> or a
-<a href="#concept-parsed-ipv6" title="concept-parsed-ipv6">parsed IPv6 address</a>.
+<p>The <dfn id="concept-host-parser" title="concept-host-parser">host parser</dfn> takes a string
+<var title="">input</var> and then runs these steps:
 
-<p>A <dfn id="concept-parsed-domain" title="concept-parsed-domain">parsed domain</dfn> consists of a list
-of <a href="#concept-domain-label" title="concept-domain-label">labels</a> and a
-<dfn id="trailing-dot-flag">trailing dot flag</dfn>.
+<ol>
+ <li>
+  <p>If <var title="">input</var> starts with "<code title="">[</code>", run these
+  substeps:
 
-<p>A <dfn id="concept-parsed-ipv6" title="concept-parsed-ipv6">parsed IPv6 address</dfn> consists of an
-ordered set of eight 16-bit integers.
+  <ol>
+   <li><p>If <var title="">input</var> does not end with
+   "<code title="">]</code>", return failure.
 
-<p classxxx="">To <dfn id="concept-host-parser" title="concept-host-parser">parse</dfn> ...
+   <li><p>Return the result of <span title="concept-ipv6-parse">parsing</span>
+   <var title="">input</var> with its leading "<code title="">[</code>" and
+   trailing "<code title="">]</code>" omitted.
+  </ol>
 
-<!-- http://tools.ietf.org/html/rfc4291 -->
+ <li class="XXX">
+</ol>
+
+<p>The <dfn id="concept-ipv6-parser" title="concept-ipv6-parser">IPv6 parser</dfn> takes a string
+<var title="">input</var> and then runs these steps:
+
+<ol>
+ <li><p>Let <var title="">address</var> be a new
+ <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> with its
+ <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</a> initialized to 0.
+
+ <li><p>Let <var title="">piece pointer</var> be a pointer into
+ <var title="">address</var>'s
+ <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</a>, initially zero
+ (pointing to the first <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit piece</a>),
+ and let <var title="">piece</var> be the
+ <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit piece</a> it points to.
+
+ <li><p>Let <var title="">compress pointer</var> be another pointer into
+ <var title="">pieces</var>, initially null and pointing to nothing.
+
+ <li><p>Let <var title="">pointer</var> be a pointer into
+ <var title="">input</var>, initially zero (pointing to the first code point),
+ and let <var title="">c</var> be the code point it points to.
+
+ <li><p>Let <var title="">remaining</var> be the substring after
+ <var title="">pointer</var> in <var title="">input</var>.
+
+ <li>
+  <p>If <var title="">c</var> is "<code title="">:</code>", run these substeps:
+
+  <ol>
+   <li><p>If <var title="">remaining</var> does not start with
+   "<code title="">:</code>", return failure.
+
+   <li><p>Increase <var title="">pointer</var> by two.
+
+   <li><p>Increase <var title="">piece pointer</var> by one and then set
+   <var title="">compress pointer</var> to <var title="">piece pointer</var>.
+  </ol>
+
+ <li>
+  <p><i id="concept-ipv6-parser-main" title="">Main</i>:
+  While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run these
+  substeps:
+
+  <ol>
+   <li><p>If <var title="">piece pointer</var> is eight, return failure.
+
+   <li>
+    <p>If <var title="">c</var> is "<code title="">:</code>", run these inner
+    substeps:
+
+    <ol>
+     <li>If <var title="">compress pointer</var> is not null, return failure.
+
+     <li>Increase <var title="">piece pointer</var> by one, set
+     <var title="">compress pointer</var> to <var title="">piece pointer</var>,
+     and then jump to <a href="#concept-ipv6-parser-main">Main</a>.
+    </ol>
+
+   <li><p>Let <var title="">value</var> and <var title="">length</var> be 0.
+
+   <li><p>While <var title="">length</var> is less than 4 and
+   <var title="">c</var> is an <span>ASCII hex digit</span>, set
+   <var title="">value</var> to
+   <var title="">value</var> × 0x10 + <var title="">c</var> interpreted as hexadecimal number,
+   and increase <var title="">pointer</var> and <var title="">length</var> by one.
+
+   <li>
+    <p>Based on <var title="">c</var>:
+
+    <dl class="switch">
+     <dt>"<code title="">.</code>"
+     <dd>
+      <p>If <var title="">length</var> is 0, return failure.
+      <p>Decrease <var title="">pointer</var> by <var title="">length</var>.
+      <p>Jump to <a href="#concept-ipv6-parser-ipv4">IPv4</a>.
+
+     <dt>"<code title="">:</code>"
+     <dd>
+      <p>Increase <var title="">pointer</var> by one.
+      <p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>, return
+      failure.
+
+     <dt>Anything but the <a href="#eof-code-point">EOF code point</a>
+     <dd><p>Return failure.
+    </dl>
+
+   <li><p>Set <var title="">piece</var> to <var title="">value</var>.
+
+   <li><p>Increase <var title="">piece pointer</var> by one.
+  </ol>
+
+ <li><p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>, jump to
+ the <a href="#concept-ipv6-parser-finale">Finale</a>.
+
+ <li><p><i id="concept-ipv6-parser-ipv4" title="">IPv4</i>:
+ If <var title="">piece pointer</var> is greater than six, return failure.
+
+ <li><p>Let <var title="">dots seen</var> be 0.
+
+ <li>
+  <p>While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run
+  these substeps:
+
+  <ol>
+   <li><p>Let <var title="">value</var> be 0.
+
+   <li><p>While <var title="">c</var> is an <span>ASCII digit</span>, set
+   <var title="">value</var> to
+   <var title="">value</var> × 10 + <var title="">c</var> interpreted as decimal number
+   and increase <var title="">pointer</var> by one.
+
+   <li><p>If <var title="">value</var> is greater than 255, return failure.
+
+   <li><p>If <var title="">dots seen</var> is less than 3 and
+   <var title="">c</var> is not a "<code title="">.</code>", return failure.
+
+   <li><p>If <var title="">dots seen</var> is 3 and <var title="">c</var> is not
+   the <a href="#eof-code-point">EOF code point</a>, return failure.
+
+   <li><p>Set <var title="">piece</var> to
+   <var title="">piece</var> × 0x10 + <var title="">value</var>.
+
+   <li><p>If <var title="">dots seen</var> is 0 or 2, increase
+   <var title="">piece pointer</var> by one.
+
+   <li><p>Increase <var title="">dots seen</var> by one.
+  </ol>
+
+ <li>
+  <p><i id="concept-ipv6-parser-finale" title="">Finale</i>:
+  If <var title="">compress pointer</var> is not null, run these substeps:
+
+  <ol>
+   <li><p>Let <var title="">swaps</var> be
+   <var title="">piece pointer</var> − <var title="">compress pointer</var>.
+
+   <li><p>Set <var title="">piece pointer</var> to seven.
+
+   <li><p>While neither <var title="">piece pointer</var> nor
+   <var title="">swaps</var> is zero, replace <var title="">piece</var> with the
+   <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> at pointer
+   <var title="">compress pointer</var> + <var title="">swaps</var> and then
+   decrease <var title="">piece pointer</var> and <var title="">swaps</var> by
+   one.
+  </ol>
+
+ <li><p>Otherwise, if <var title="">compress pointer</var> is null and
+ <var title="">piece pointer</var> is not eight, return failure.
+
+ <li><p>Return <var title="">address</var>.
+</ol>
 
 
 <h3 id="host-serializing"><span class="secno">3.3 </span>Serializing</h3>
@@ -423,7 +604,7 @@ and <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>.
 
 <p class="note">Code points higher than U+009F will be converted to
 <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a> by the
-<a href="#concept-url-parser" title="concept-url-parser">parser</a>.
+<a href="#concept-url-parser" title="concept-url-parser">URL parser</a>.
 
 
 
@@ -512,14 +693,14 @@ and
 
 <p class="XXX">Add the ability to halt on the first conformance error.
 
-<p>To <dfn id="concept-url-parser" title="concept-url-parser">parse</dfn> a string
+<p>The <dfn id="concept-url-parser" title="concept-url-parser">URL parser</dfn> takes a string
 <var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var title="">encoding override</var>, optionally with an
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> <var title="">url</var>, and
 if <var title="">url</var> is given, optionally with a state override
-<var title="">state override</var>, run these steps:
+<var title="">state override</var>, and then runs these steps:
 
 <p class="note">The <var title="">url</var> and <var title="">state override</var>
 arguments can be used for API manipulation of a
@@ -553,9 +734,6 @@ arguments can be used for API manipulation of a
  <li><p>Let the <var title="">@ flag</var> and the <var title="">[] flag</var> be
  unset.
 
- <li><p>Append a conceptual <dfn id="eof-code-point">EOF code point</dfn>
- (to signify end-of-input) to <var title="">input</var>.
-
  <li><p>Let <var title="">pointer</var> be a pointer to first code point in
  <var title="">input</var>.
 
@@ -574,11 +752,9 @@ arguments can be used for API manipulation of a
   <var title="">pointer</var> in <var title="">input</var>.
 
   <p class="example">If <var title="">input</var> is
-  "<code title="">mailto:example@example</code>" (omitting the
-  <a href="#eof-code-point">EOF code point</a> here) and <var title="">pointer</var> points to
-  "<code title="">@</code>", <var title="">remaining</var> is
-  "<code title="">example</code>" (again omitting the
-  <a href="#eof-code-point">EOF code point</a>).
+  "<code title="">mailto:example@example</code>" and <var title="">pointer</var>
+  points to "<code title="">@</code>", <var title="">remaining</var> is
+  "<code title="">example</code>".
 
   <dl class="switch">
    <dt><b title="">scheme start state</b>
@@ -1479,6 +1655,9 @@ steps:
 
 <dt id="refsHTML">[HTML]
 <dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
+
+<dt id="refsIPV6">[IPV6]
+<dd><cite><a href="http://tools.ietf.org/html/rfc4291">IP Version 6 Addressing Architecture</a></cite>, R. Hinden and Steve Deering. IETF.
 
 <dt id="refsORIGIN">[ORIGIN]
 <dd><cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.
