@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-november-2012">Living Standard — Last Updated 19 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-november-2012">Living Standard — Last Updated 20 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 November 2012, the editors have made this specification available
+20 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -52,21 +52,22 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a class="no-num" href="#goals">Goals</a></li>
  <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
  <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
- <li><a href="#hosts-and-ip-addresses"><span class="secno">3 </span>Hosts and IP addresses</a>
+ <li><a href="#percent-encoded-bytes"><span class="secno">3 </span>Percent-encoded bytes</a></li>
+ <li><a href="#hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</a>
   <ol>
-   <li><a href="#host-writing"><span class="secno">3.1 </span>Writing</a></li>
-   <li><a href="#host-parsing"><span class="secno">3.2 </span>Parsing</a></li>
-   <li><a href="#host-serializing"><span class="secno">3.3 </span>Serializing</a></ol></li>
- <li><a href="#urls"><span class="secno">4 </span>URLs</a>
+   <li><a href="#host-writing"><span class="secno">4.1 </span>Writing</a></li>
+   <li><a href="#host-parsing"><span class="secno">4.2 </span>Parsing</a></li>
+   <li><a href="#host-serializing"><span class="secno">4.3 </span>Serializing</a></ol></li>
+ <li><a href="#urls"><span class="secno">5 </span>URLs</a>
   <ol>
-   <li><a href="#writing"><span class="secno">4.1 </span>Writing</a></li>
-   <li><a href="#parsing"><span class="secno">4.2 </span>Parsing</a></li>
-   <li><a href="#serializing"><span class="secno">4.3 </span>Serializing</a></ol></li>
- <li><a href="#api"><span class="secno">5 </span>API</a>
+   <li><a href="#writing"><span class="secno">5.1 </span>Writing</a></li>
+   <li><a href="#parsing"><span class="secno">5.2 </span>Parsing</a></li>
+   <li><a href="#serializing"><span class="secno">5.3 </span>Serializing</a></ol></li>
+ <li><a href="#api"><span class="secno">6 </span>API</a>
   <ol>
-   <li><a href="#constructors"><span class="secno">5.1 </span>Constructors</a></li>
-   <li><a href="#interface-urlutils"><span class="secno">5.2 </span>Interface <code title="">URLUtils</code></a></li>
-   <li><a href="#interface-urlquery"><span class="secno">5.3 </span>Interface <code title="">URLQuery</code></a></ol></li>
+   <li><a href="#constructors"><span class="secno">6.1 </span>Constructors</a></li>
+   <li><a href="#interface-urlutils"><span class="secno">6.2 </span>Interface <code title="">URLUtils</code></a></li>
+   <li><a href="#interface-urlquery"><span class="secno">6.3 </span>Interface <code title="">URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -141,23 +142,84 @@ U+002E, U+3002, U+FF0E, and U+FF61.
 <!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
 
 
-<p>A <dfn id="url-encoded-byte">URL-encoded byte</dfn> is "<code title="">%</code>", followed by two
-<a href="#ascii-hex-digits">ASCII hex digits</a>.
 
-<p class="note">For maximum robustness, sequences of
-<a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>, after conversion to
-bytes, ought to not cause
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit one or more
+<h2 id="percent-encoded-bytes"><span class="secno">3 </span>Percent-encoded bytes</h2>
+
+<p>A <dfn id="percent-encoded-byte">percent-encoded byte</dfn> is "<code title="">%</code>", followed by
+two <a href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of
+<a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>, after
+conversion to bytes, should not cause
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit any
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder-error" title="decoder error">decoder errors</a>.
 
-<p>To <dfn id="url-encode">URL encode</dfn> a <var title="">byte</var> into a
-<a href="#url-encoded-byte">URL-encoded byte</a>, return a string consisting of
+<p>To <dfn id="percent-encode">percent encode</dfn> a <var title="">byte</var> into a
+<a href="#percent-encoded-byte">percent-encoded byte</a>, return a string consisting of
 "<code title="">%</code>", followed by a double-digit, uppercase, hexadecimal
 representation of <var title="">byte</var>.
 
+<!-- the escape sets are minimal as escaping can lead to problems; we might
+     be able to escape more here but only if implementors are willing and
+     there's an upside -->
+<p>The <dfn id="simple-encode-set">simple encode set</dfn> are all code points less than
+U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
+
+<p>The <dfn id="query-encode-set">query encode set</dfn> is the
+<a href="#simple-encode-set">simple encode set</a> and code points U+0020,
+'<code title="">"</code>', <!-- 0x22 -->
+"<code title="">#</code>", <!-- 0x23 -->
+"<code title="">&lt;</code>", <!-- 0x3C -->
+"<code title="">&gt;</code>", <!-- 0x3E -->
+and
+"<code title="">`</code>". <!-- 0x60 -->
+
+<p>The <dfn id="default-encode-set">default encode set</dfn> is the
+<a href="#query-encode-set">query encode set</a> and code point
+"<code title="">?</code>". <!-- 0x3F -->
+
+<p>The <dfn id="password-encode-set">password encode set</dfn> is the
+<a href="#default-encode-set">default encode set</a> and code points
+"<code title="">/</code>", <!-- 0x2F -->
+"<code title="">@</code>", <!-- 0x40 -->
+and
+"<code title="">\</code>". <!-- 0x5C -->
+
+<p>The <dfn id="username-encode-set">username encode set</dfn> is the
+<a href="#password-encode-set">password encode set</a> and code point
+"<code title="">:</code>". <!-- 0x3A -->
+
+<p>To <dfn id="potentially-percent-encode">potentially percent encode</dfn> a <var title="">code point</var>,
+using an <var title="">encode set</var>, and an optional
+<var title="">encoding override</var>, run these steps:
+
+<ol>
+ <li><p>Let <var title="">encoding</var> be <var title="">encoding override</var>,
+ if given, and <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> otherwise.
+
+ <li><p>If <var title="">code point</var> is not in
+ <var title="">encode set</var>, return <var title="">code point</var>.
+
+ <li>
+  <p>Let <var title="">bytes</var> be the result of running
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on
+  <var title="">code point</var> using <var title="">encoding</var> as
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>.
+
+  <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
+  emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
+  0x3F byte instead and do not terminate the algorithm.
+
+  <p class="note">Using <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> ensures
+  you never hit an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>
+  here, but unfortunately legacy content uses other
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding" title="encoding">encodings</a>.
+
+ <li><p><a href="#percent-encode">Percent encode</a> each byte in <var title="">bytes</var>, and
+ then return them concatenated, in the same order.
+</ol>
 
 
-<h2 id="hosts-and-ip-addresses"><span class="secno">3 </span>Hosts and IP addresses</h2>
+
+<h2 id="hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</h2>
 
 <!-- Punycode:
      http://tools.ietf.org/html/rfc3492
@@ -183,7 +245,7 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 <a href="#refsIPV6">[IPV6]</a>
 
 
-<h3 id="host-writing"><span class="secno">3.1 </span>Writing</h3>
+<h3 id="host-writing"><span class="secno">4.1 </span>Writing</h3>
 
 <p>A <a href="#concept-host" title="concept-host">host</a> must be either a
 <a href="#concept-domain" title="concept-domain">domain</a> or "<code title="">[</code>", followed
@@ -215,7 +277,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      XXX should we define the format inline instead just like STD 66? -->
 
 
-<h3 id="host-parsing"><span class="secno">3.2 </span>Parsing</h3>
+<h3 id="host-parsing"><span class="secno">4.2 </span>Parsing</h3>
 
 <p class="XXX">IDNA2003 vs IDNA2008 (and also UTS #46)
 
@@ -394,7 +456,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 </ol>
 
 
-<h3 id="host-serializing"><span class="secno">3.3 </span>Serializing</h3>
+<h3 id="host-serializing"><span class="secno">4.3 </span>Serializing</h3>
 
 <p class="XXX">Normalize IPv6 addresses
 <!-- Safari/Gecko/Opera do not do this. Chrome does. I would prefer aligning
@@ -405,7 +467,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
 
 
-<h2 id="urls"><span class="secno">4 </span>URLs</h2>
+<h2 id="urls"><span class="secno">5 </span>URLs</h2>
 
 <!-- History behind URL as term:
      http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
@@ -470,7 +532,7 @@ on the same row.
 </table>
 
 
-<h3 id="writing"><span class="secno">4.1 </span>Writing</h3>
+<h3 id="writing"><span class="secno">5.1 </span>Writing</h3>
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
@@ -599,18 +661,18 @@ U+D0000 to U+DFFFD,
 U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD,
-and <a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a>.
+and <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>.
 <!-- XXX there is a mismatch with
      http://www.whatwg.org/specs/web-apps/current-work/#preprocessing-the-input-stream
      I think they should match, need advice -->
 
 <p class="note">Code points higher than U+009F will be converted to
-<a href="#url-encoded-byte" title="URL-encoded byte">URL-encoded bytes</a> by the
+<a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a> by the
 <a href="#concept-url-parser" title="concept-url-parser">URL parser</a>.
 
 
 
-<h3 id="parsing"><span class="secno">4.2 </span>Parsing</h3>
+<h3 id="parsing"><span class="secno">5.2 </span>Parsing</h3>
 
 <p>Aside from the components mentioned earlier, a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
@@ -630,68 +692,6 @@ its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty l
 <p>To <dfn id="neuter">neuter</dfn> a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, <a href="#clear">clear</a> it, and
 then set its <a href="#fatal-error-flag">fatal error flag</a>.
-
-<!-- the escape sets are minimal as escaping can lead to problems; we might
-     be able to escape more here but only if implementors are willing and
-     there's an upside -->
-<p>The <dfn id="url-simple-escape-set">URL simple escape set</dfn> are all code points less than
-U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
-
-<p>The <dfn id="url-query-escape-set">URL query escape set</dfn> is the
-<a href="#url-simple-escape-set">URL simple escape set</a> and code points U+0020,
-'<code title="">"</code>', <!-- 0x22 -->
-"<code title="">#</code>", <!-- 0x23 -->
-"<code title="">&lt;</code>", <!-- 0x3C -->
-"<code title="">&gt;</code>", <!-- 0x3E -->
-and
-"<code title="">`</code>". <!-- 0x60 -->
-
-<p>The <dfn id="url-default-escape-set">URL default escape set</dfn> is the
-<a href="#url-query-escape-set">URL query escape set</a> and code point
-"<code title="">?</code>". <!-- 0x3F -->
-
-<p>The <dfn id="url-password-escape-set">URL password escape set</dfn> is the
-<a href="#url-default-escape-set">URL default escape set</a> and code points
-"<code title="">/</code>", <!-- 0x2F -->
-"<code title="">@</code>", <!-- 0x40 -->
-and
-"<code title="">\</code>". <!-- 0x5C -->
-
-<p>The <dfn id="url-username-escape-set">URL username escape set</dfn> is the
-<a href="#url-password-escape-set">URL password escape set</a> and code point
-"<code title="">:</code>". <!-- 0x3A -->
-
-<!-- we could inline handling of the EOF code point, U+0009, U+000A, and
-     U+000D potentially; have them return the empty string -->
-<p>To <dfn id="url-escape">URL escape</dfn> a <var title="">code point</var>, using an
-<var title="">escape set</var>, and an optional
-<var title="">encoding override</var>, run these steps:
-
-<ol>
- <li><p>Let <var title="">encoding</var> be <var title="">encoding override</var>,
- if given, and <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> otherwise.
-
- <li><p>If <var title="">code point</var> is not in
- <var title="">escape set</var>, return <var title="">code point</var>.
-
- <li>
-  <p>Let <var title="">bytes</var> be the result of running
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on
-  <var title="">code point</var> using <var title="">encoding</var> as
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>.
-
-  <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
-  emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
-  0x3F byte instead and do not terminate the algorithm.
-
-  <p class="note">Using <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> ensures
-  you never hit an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>
-  here, but unfortunately legacy content uses other
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding" title="encoding">encodings</a>.
-
- <li><p><a href="#url-encode">URL encode</a> each byte in <var title="">bytes</var>, and
- then return them concatenated, in the same order.
-</ol>
 
 <p class="XXX">Add the ability to halt on the first conformance error.
 
@@ -834,8 +834,8 @@ arguments can be used for API manipulation of a
 
      <li><p>Otherwise, if <var title="">c</var> is none of
      <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-     <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-     <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
+     <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var> using the
+     <a href="#simple-encode-set">simple encode set</a>, and append the result to
      <var title="">url</var>'s
      <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
     </ol>
@@ -965,8 +965,8 @@ arguments can be used for API manipulation of a
          <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
          to the empty string and continue.
 
-         <li><p><a href="#url-escape">URL escape</a> <var title="">code point</var> using
-         the <a href="#url-default-escape-set">URL default escape set</a> and append the result to
+         <li><p><a href="#potentially-percent-encode">potentially percent encode</a> <var title="">code point</var> using
+         the <a href="#default-encode-set">default encode set</a> and append the result to
          <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
          if <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
          is non-null, and to
@@ -1172,8 +1172,8 @@ arguments can be used for API manipulation of a
      <!-- Chrome unescapes more here; Safari does nothing -->
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-     <a href="#url-default-escape-set">URL default escape set</a>, and append the result to
+     U+000D, <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var>
+     using the <a href="#default-encode-set">default encode set</a>, and append the result to
      <var title="">buffer</var>.
     </ol>
 
@@ -1188,8 +1188,8 @@ arguments can be used for API manipulation of a
      <li>
       <p>Otherwise, if <var title="">c</var> is none of
       <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-      <a href="#url-escape">URL escape</a> <var title="">c</var> using the
-      <a href="#url-query-escape-set">URL query escape set</a> and
+      <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var> using the
+      <a href="#query-encode-set">query encode set</a> and
       <var title="">encoding override</var>, and append the result to
       <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>.
 
@@ -1200,8 +1200,8 @@ arguments can be used for API manipulation of a
 
    <dt><b title="">fragment state</b>
    <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
-   U+0009, U+000A, and U+000D, <a href="#url-escape">URL escape</a> <var title="">c</var>
-   using the <a href="#url-simple-escape-set">URL simple escape set</a>, and append the result to
+   U+0009, U+000A, and U+000D, <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var>
+   using the <a href="#simple-encode-set">simple encode set</a>, and append the result to
    <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
    <!-- if people complain about this do not forget that results may differ
         depending on whether or not a relative scheme is in play -->
@@ -1210,7 +1210,7 @@ arguments can be used for API manipulation of a
  <li><p>Return <var title="">url</var>.
 </ol>
 
-<h3 id="serializing"><span class="secno">4.3 </span>Serializing</h3>
+<h3 id="serializing"><span class="secno">5.3 </span>Serializing</h3>
 
 <p class="note">The serializing algorithms assume a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
@@ -1289,7 +1289,7 @@ a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run t
 
 
 
-<h2 id="api"><span class="secno">5 </span>API</h2>
+<h2 id="api"><span class="secno">6 </span>API</h2>
 
 <!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
      s/DOMString/UTFString -->
@@ -1345,7 +1345,7 @@ creation by the specification using <a href="#urlutils"><code>URLUtils</code></a
 only relevant for HTML. <a class="informative" href="#refsHTML">[HTML]</a>
 
 
-<h3 id="constructors"><span class="secno">5.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
+<h3 id="constructors"><span class="secno">6.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
 <dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var>, <var title="">base</var>)</code></dfn>
@@ -1373,7 +1373,7 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="interface-urlutils"><span class="secno">5.2 </span>Interface <code title="">URLUtils</code></h3>
+<h3 id="interface-urlutils"><span class="secno">6.2 </span>Interface <code title="">URLUtils</code></h3>
 
 <p class="note">The <a href="#urlutils"><code>URLUtils</code></a> interface is not exposed on the
 global object. It augments other interfaces, such as <a href="#url"><code>URL</code></a>.
@@ -1444,8 +1444,8 @@ run these steps:
  <li><p>Set <a href="#concept-url-username" title="concept-url-username">username</a> to the empty
  string.
 
- <li><p>For each code point in the given value, <a href="#url-escape">URL escape</a> it
- using the <a href="#url-username-escape-set">URL username escape set</a>, and append the result to
+ <li><p>For each code point in the given value, <a href="#potentially-percent-encode">potentially percent encode</a> it
+ using the <a href="#username-encode-set">username encode set</a>, and append the result to
  <a href="#concept-url-username" title="concept-url-username">username</a>.
 </ol>
 
@@ -1474,8 +1474,8 @@ run these steps:
  <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty
  string.
 
- <li><p>For each code point in the given value, <a href="#url-escape">URL escape</a> it
- using the <a href="#url-password-escape-set">URL password escape set</a>, and append the result to
+ <li><p>For each code point in the given value, <a href="#potentially-percent-encode">potentially percent encode</a> it
+ using the <a href="#password-encode-set">password encode set</a>, and append the result to
  <a href="#concept-url-password" title="concept-url-password">password</a>.
 </ol>
 
@@ -1638,7 +1638,7 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">5.3 </span>Interface <code title="">URLQuery</code></h3>
+<h3 id="interface-urlquery"><span class="secno">6.3 </span>Interface <code title="">URLQuery</code></h3>
 
 <pre class="idl">interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
