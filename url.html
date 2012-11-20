@@ -507,9 +507,17 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
 <h3 id="host-serializing"><span class="secno">4.3 </span>Serializing</h3>
 
-<p class="XXX">Normalize IPv6 addresses
-<!-- Safari/Gecko/Opera do not do this. Chrome does. I would prefer aligning
-     with Chrome as we normalize domains too.
+<!-- XXX The input value here can be null, which is arguably okay in the
+     context of URLs. -->
+<p>To <dfn id="concept-host-serializer" title="concept-host-serializer">serialize</dfn> a
+<a href="#concept-host" title="concept-host">host</a>, run these steps:
+
+<ol class="XXX">
+ <li><p>Normalize IPv6 addresses...
+</ol>
+
+<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. I would prefer
+     aligning with Chrome as we normalize domains too.
 
      http://tools.ietf.org/html/rfc5952#section-4 has recommendations, but
      no algorithm. -->
@@ -730,10 +738,10 @@ and <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded
 <p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
 set its <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
 <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
-<a href="#concept-url-username" title="concept-url-username">username</a>,
-<a href="#concept-url-host" title="concept-url-host">host</a>, and
+<a href="#concept-url-username" title="concept-url-username">username</a>, and
 <a href="#concept-url-port" title="concept-url-port">port</a> to the empty string,
 <a href="#concept-url-password" title="concept-url-password">password</a>,
+<a href="#concept-url-host" title="concept-url-host">host</a>,
 <a href="#concept-url-query" title="concept-url-query">query</a>, and
 <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to null, and
 its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
@@ -1055,11 +1063,23 @@ arguments can be used for API manipulation of a
         <p class="note">This is a quirk for parsing Windows drive letters and
         therefore <var title="">buffer</var> is not reset here.
 
-       <li><p>Otherwise, set
-       <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-       <var title="">buffer</var>,<!-- XXX host normalize -->
-       <var title="">buffer</var> to the empty string,
-       and <var title="">state</var> to <b title="">relative path start state</b>.
+       <li>
+        <p>Otherwise, run these steps:
+
+        <ol>
+         <li><p>Let <var title="">host</var> be the result of
+         <a href="#concept-host-parser" title="concept-host-parser">host parsing</a>
+         <var title="">buffer</var>.
+
+         <li><p>If <var title="">host</var> is failure,
+         <a href="#neuter">neuter</a> <var title="">url</var>, and then return
+         <var title="">url</var>.
+
+         <li><p>Set
+         <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
+         <var title="">host</var>, <var title="">buffer</var> to the empty string,
+         and <var title="">state</var> to <b title="">relative path start state</b>.
+        </ol>
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
@@ -1075,9 +1095,19 @@ arguments can be used for API manipulation of a
       <var title="">[] flag</var> is unset, run these substeps:
 
       <ol>
+       <li><p>Let <var title="">host</var> be the result of
+       <a href="#concept-host-parser" title="concept-host-parser">host parsing</a>
+       <var title="">buffer</var>.
+
+       <li><p>If <var title="">host</var> is failure and
+       <var title="">state override</var> is <b title="">hostname state</b>,
+       terminate this algorithm.
+
+       <li><p>If <var title="">host</var> is failure, <a href="#neuter">neuter</a>
+       <var title="">url</var>, and then return <var title="">url</var>.
+
        <li><p>Set <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-       <var title="">buffer</var>,<!-- XXX host normalize -->
-       <var title="">buffer</var> to the empty string,
+       <var title="">host</var>, <var title="">buffer</var> to the empty string,
        and <var title="">state</var> to <b title="">port state</b>.
 
        <li><p>If <var title="">state override</var> is <b title="">hostname state</b>,
@@ -1092,9 +1122,18 @@ arguments can be used for API manipulation of a
       run these substeps:
 
       <ol>
+       <li><p>Let <var title="">host</var> be the result of
+       <a href="#concept-host-parser" title="concept-host-parser">host parsing</a>
+       <var title="">buffer</var>.
+
+       <li><p>If <var title="">host</var> is failure and
+       <var title="">state override</var> is given, terminate this algorithm.
+
+       <li><p>If <var title="">host</var> is failure, <a href="#neuter">neuter</a>
+       <var title="">url</var>, and then return <var title="">url</var>.
+
        <li><p>Set <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-       <var title="">buffer</var>,<!-- XXX host normalize -->
-       <var title="">buffer</var> to the empty string,
+       <var title="">host</var>, <var title="">buffer</var> to the empty string,
        and <var title="">state</var> to <b title="">relative path start state</b>.
 
        <li><p>If <var title="">state override</var> is given, terminate this
@@ -1312,7 +1351,8 @@ a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run t
      <li><p>Append "<code title="">@</code>" to <var title="">output</var>.
     </ol>
 
-   <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a> to
+   <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a>,
+   <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>, to
    <var title="">output</var>.
 
    <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is not
@@ -1535,9 +1575,11 @@ these steps:
  <li><p>If the <a href="#fatal-error-flag">fatal error flag</a> is set, return the empty string.
 
  <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
- return <a href="#concept-url-host" title="concept-url-host">host</a>.
+ return <a href="#concept-url-host" title="concept-url-host">host</a>,
+ <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
 
  <li><p>Return <a href="#concept-url-host" title="concept-url-host">host</a>,
+ <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>,
  "<code title="">:</code>", and <a href="#concept-url-port" title="concept-url-port">port</a>
  concatenated.
 </ol>
@@ -1555,7 +1597,8 @@ steps:
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
-must return <a href="#concept-url-host" title="concept-url-host">host</a>.
+must return <a href="#concept-url-host" title="concept-url-host">host</a>,
+<a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
 
 <p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
 run these steps:
