@@ -196,6 +196,54 @@ using an <var title>encode set</var>, and an optional
  then return them concatenated, in the same order.
 </ol>
 
+<p>To <dfn>percent decode</dfn> a string <var title>input</var>, run these
+steps:
+
+<ol>
+ <li><p>Let <var title>pointer</var> be a pointer into
+ <var title>input</var>, initially zero (pointing to the first code point),
+ and let <var title>c</var> be the code point it points to.
+
+ <li><p>Let <var title>remaining</var> be the substring after
+ <var title>pointer</var> in <var title>input</var>.
+
+ <li><p>Let <var title>output</var> be an empty string.
+
+ <li>
+  <p>While <var title>c</var> is not the <span>EOF code point</span>, run
+  these substeps:
+
+  <ol>
+   <li>While <var title>c</var> is not "<code title>%</code>" or the
+   <span>EOF code point</span>, append <var title>c</var> to
+   <var title>output</var> and increase <var title>pointer</var> by one.
+
+   <li>If <var title>c</var> is "<code title>%</code>" and
+   <var title>remaining</var> does not start with two
+   <span>ASCII hex digits</span>, append <var title>c</var> to
+   <var title>output</var> increase <var title>pointer</var> by one, and run
+   these substeps again.
+
+   <li>
+    <p>Let <var title>bytes</var> be an empty sequence of bytes.
+
+    <p>While <var title>c</var> is "<code title>%</code>" and
+    <var title>remaining</var> starts with two <span>ASCII hex digits</span>,
+    append to <var title>bytes</var> a byte whose value is
+    <var title>remaining</var>'s two leading code points, interpreted as
+    hexadecimal number, and increase <var title>pointer</var> by three.
+
+    <p>Append to <var title>output</var> the result of running the
+    <span data-anolis-spec=encoding>utf-8 decoder</span> on
+    <var title>bytes</var>.
+
+    <p class=note><span data-anolis-spec=encoding>utf-8 decode</span> is not
+    used here as it would consume the byte order mark which is not desired.
+  </ol>
+
+ <li><p>Return <var title>output</var>.
+</ol>
+
 
 
 <h2>Hosts and IP addresses</h2>
@@ -258,8 +306,6 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
 <h3 id=host-parsing>Parsing</h3>
 
-<p class=XXX>IDNA2003 vs IDNA2008 (and also UTS #46)
-
 <p>The <dfn title=concept-host-parser>host parser</dfn> takes a string
 <var title>input</var> and then runs these steps:
 
@@ -278,7 +324,10 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
    "<code title>]</code>" removed.
   </ol>
 
- <li class=XXX>
+ <li><p>Let <var title>host</var> be the result of running
+ <span>percent decode</span> on <var title>input</var>.
+
+ <li><p class=XXX><a href="http://wiki.whatwg.org/wiki/URL#IDNA">IDNA hell</a>
 </ol>
 
 <p>The <dfn title=concept-ipv6-parser>IPv6 parser</dfn> takes a string

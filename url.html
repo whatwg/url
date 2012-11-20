@@ -217,6 +217,54 @@ using an <var title="">encode set</var>, and an optional
  then return them concatenated, in the same order.
 </ol>
 
+<p>To <dfn id="percent-decode">percent decode</dfn> a string <var title="">input</var>, run these
+steps:
+
+<ol>
+ <li><p>Let <var title="">pointer</var> be a pointer into
+ <var title="">input</var>, initially zero (pointing to the first code point),
+ and let <var title="">c</var> be the code point it points to.
+
+ <li><p>Let <var title="">remaining</var> be the substring after
+ <var title="">pointer</var> in <var title="">input</var>.
+
+ <li><p>Let <var title="">output</var> be an empty string.
+
+ <li>
+  <p>While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run
+  these substeps:
+
+  <ol>
+   <li>While <var title="">c</var> is not "<code title="">%</code>" or the
+   <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var> to
+   <var title="">output</var> and increase <var title="">pointer</var> by one.
+
+   <li>If <var title="">c</var> is "<code title="">%</code>" and
+   <var title="">remaining</var> does not start with two
+   <a href="#ascii-hex-digits">ASCII hex digits</a>, append <var title="">c</var> to
+   <var title="">output</var> increase <var title="">pointer</var> by one, and run
+   these substeps again.
+
+   <li>
+    <p>Let <var title="">bytes</var> be an empty sequence of bytes.
+
+    <p>While <var title="">c</var> is "<code title="">%</code>" and
+    <var title="">remaining</var> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
+    append to <var title="">bytes</var> a byte whose value is
+    <var title="">remaining</var>'s two leading code points, interpreted as
+    hexadecimal number, and increase <var title="">pointer</var> by three.
+
+    <p>Append to <var title="">output</var> the result of running the
+    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> on
+    <var title="">bytes</var>.
+
+    <p class="note"><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> is not
+    used here as it would consume the byte order mark which is not desired.
+  </ol>
+
+ <li><p>Return <var title="">output</var>.
+</ol>
+
 
 
 <h2 id="hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</h2>
@@ -279,8 +327,6 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
 <h3 id="host-parsing"><span class="secno">4.2 </span>Parsing</h3>
 
-<p class="XXX">IDNA2003 vs IDNA2008 (and also UTS #46)
-
 <p>The <dfn id="concept-host-parser" title="concept-host-parser">host parser</dfn> takes a string
 <var title="">input</var> and then runs these steps:
 
@@ -299,7 +345,10 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    "<code title="">]</code>" removed.
   </ol>
 
- <li class="XXX">
+ <li><p>Let <var title="">host</var> be the result of running
+ <a href="#percent-decode">percent decode</a> on <var title="">input</var>.
+
+ <li><p class="XXX"><a href="http://wiki.whatwg.org/wiki/URL#IDNA">IDNA hell</a>
 </ol>
 
 <p>The <dfn id="concept-ipv6-parser" title="concept-ipv6-parser">IPv6 parser</dfn> takes a string
