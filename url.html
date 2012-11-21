@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-november-2012">Living Standard — Last Updated 20 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-november-2012">Living Standard — Last Updated 21 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-20 November 2012, the editors have made this specification available
+21 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -286,11 +286,10 @@ sake of convenience.
 <p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
 more <dfn id="concept-domain-label" title="concept-domain-label">domain labels</dfn>.
 
-<!-- http://tools.ietf.org/html/rfc4291 -->
 <p>An <dfn id="concept-ipv6" title="concept-ipv6">IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn>.
-<a href="#refsIPV6">[IPV6]</a>
+<a class="informative" href="#refsIPV6">[IPV6]</a>
 
 
 <h3 id="host-writing"><span class="secno">4.1 </span>Writing</h3>
@@ -507,20 +506,74 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
 <h3 id="host-serializing"><span class="secno">4.3 </span>Serializing</h3>
 
-<!-- XXX The input value here can be null, which is arguably okay in the
-     context of URLs. -->
-<p>To <dfn id="concept-host-serializer" title="concept-host-serializer">serialize</dfn> a
-<a href="#concept-host" title="concept-host">host</a>, run these steps:
+<p>The <dfn id="concept-host-serializer" title="concept-host-serializer">host serializer</dfn> takes a
+<a href="#concept-host" title="concept-host">host</a> <var title="">host</var> and then runs
+these steps:
 
-<ol class="XXX">
- <li><p>Normalize IPv6 addresses...
+<ol>
+ <li><p>If <var title="">host</var> is null, return the empty string.
+ <!-- XXX Are we okay with this? -->
+
+ <li><p>If <var title="">host</var> is an
+ <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, return
+ "<code title="">[</code>", followed by the result of running the
+ <a href="#concept-ipv6-serializer" title="concept-ipv6-serializer">IPv6 serializer</a> on <var title="">host</var>,
+ followed by "<code title="">]</code>".
+
+ <li class="XXX"><p>If <var title="">host</var> is a
+ <a href="#concept-domain" title="concept-domain">domain</a> ...
 </ol>
 
-<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. I would prefer
-     aligning with Chrome as we normalize domains too.
+<p>The <dfn id="concept-ipv6-serializer" title="concept-ipv6-serializer">IPv6 serializer</dfn> takes an
+<a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> <var title="">address</var> and
+then runs these steps:
 
-     http://tools.ietf.org/html/rfc5952#section-4 has recommendations, but
-     no algorithm. -->
+<ol>
+ <li><p>Let <var title="">output</var> be the empty string.
+
+ <li>
+  <p>Let <var title="">compress pointer</var> be a pointer to the first
+  <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit piece</a> in the first longest
+  sequences of <var title="">address</var>'s
+  <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</a> that are 0.
+
+  <p class="example">In <code title="">0:f:0:0:f:f:0:0</code> it would point to
+  the second 0.
+
+ <li><p>If there is no sequence of <var title="">address</var>'s
+ <a href="#concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</a> that are 0 longer than
+ one, set <var title="">compress pointer</var> to null.
+
+ <li>
+  <p>For each <var title="">piece</var> in <var title="">address</var>'s
+  <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>, run these substeps:
+
+  <ol>
+   <li><p>If <var title="">compress pointer</var> points to
+   <var title="">piece</var>, append "<code title="">::</code>" to
+   <var title="">output</var> and then run these substeps again with all
+   subsequent <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a> in
+   <var title="">address</var>'s <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>
+   that are 0 skipped or go the next step in the overall set of steps if
+   that leaves no <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>.
+
+   <li><p>Append <var title="">piece</var>, represented as the shortest
+   possible lowercase hexadecimal number, to <var title="">output</var>.
+
+   <li><p>If <var title="">piece</var> is not the last of
+   <var title="">address</var>'s <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>,
+   append "<code title="">:</code>" to <var title="">output</var>.
+  </ol>
+
+ <li><p>Return <var title="">output</var>.
+</ol>
+
+<p class="note">This algorithm requires the recommendation from
+A Recommendation for IPv6 Address Text Representation.
+<a class="informative" href="#refsIPV6TEXT">[IPV6TEXT]</a>
+
+<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. This algorithm
+     follows Chrome because we normalize domains too. -->
 
 
 
@@ -1300,77 +1353,76 @@ arguments can be used for API manipulation of a
 
 <h3 id="serializing"><span class="secno">5.3 </span>Serializing</h3>
 
-<p class="note">The serializing algorithms assume a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
+<p class="note">The <a href="#concept-url-serializer" title="concept-url-serializer">URL serializer</a>
+algorithm assumes <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
 <a href="#fatal-error-flag">fatal error flag</a> is not set.
 
-<p>To <dfn id="concept-url-serializer" title="concept-url-serializer">serialize</dfn> a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run these steps:
+<p>The <dfn id="concept-url-serializer" title="concept-url-serializer">URL serializer</dfn> takes a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> <var title="">url</var>,
+optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 
 <ol>
- <li><p>Let <var title="">output</var> be the result of
- <a href="#concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serializing without fragment</a>.
-
- <li><p>If <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is non-null,
- append "<code title="">#</code>" concatenated with
- <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to <var title="">output</var>.
-
- <li><p>Return <var title="">output</var>.
-</ol>
-
-<p>To
-<dfn id="concept-url-serializer-without-fragment" title="concept-url-serializer-without-fragment">serialize without fragment</dfn>
-a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>, run these steps:
-<!-- better wording anyone?! -->
-
-<ol>
- <li><p>Let <var title="">output</var> be
+ <li><p>Let <var title="">output</var> be <var title="">url</var>'s
  <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
  "<code title="">:</code>" concatenated.
 
  <li>
-  <p>If the <a href="#relative-flag">relative flag</a> is set:
+  <p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is set:
 
   <ol>
    <li><p>Append "<code title="">//</code>" to <var title="">output</var>.
 
    <li>
-    <p>If <a href="#concept-url-username" title="concept-url-username">username</a> is not the empty
-    string or <a href="#concept-url-password" title="concept-url-password">password</a> is non-null,
-    run these substeps:
+    <p>If <var title="">url</var>'s
+    <a href="#concept-url-username" title="concept-url-username">username</a> is not the empty string
+    or <var title="">url</var>'s
+    <a href="#concept-url-password" title="concept-url-password">password</a> is non-null, run these
+    substeps:
 
     <ol>
-     <li><p>Append <a href="#concept-url-username" title="concept-url-username">username</a> to
+     <li><p>Append <var title="">url</var>'s
+     <a href="#concept-url-username" title="concept-url-username">username</a> to
      <var title="">output</var>.
 
-     <li><p>If <a href="#concept-url-password" title="concept-url-password">password</a> is non-null,
-     append "<code title="">:</code>" concatenated with
+     <li><p>If <var title="">url</var>'s
+     <a href="#concept-url-password" title="concept-url-password">password</a> is non-null, append
+     "<code title="">:</code>" concatenated with <var title="">url</var>'s
      <a href="#concept-url-password" title="concept-url-password">password</a> to
      <var title="">output</var>.
 
      <li><p>Append "<code title="">@</code>" to <var title="">output</var>.
     </ol>
 
-   <li><p>Append <a href="#concept-url-host" title="concept-url-host">host</a>,
+   <li><p>Append <var title="">url</var>'s
+   <a href="#concept-url-host" title="concept-url-host">host</a>,
    <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>, to
    <var title="">output</var>.
 
-   <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is not
-   the empty string, append "<code title="">:</code>" concatenated with
-   <a href="#concept-url-port" title="concept-url-port">port</a> to <var title="">output</var>.
-
-   <li><p>Append "<code title="">/</code>" concatenated with the strings in
-   <a href="#concept-url-path" title="concept-url-path">path</a> (including empty strings),
-   separated from each other by "<code title="">/</code>" to
+   <li><p>If <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>
+   is not the empty string, append "<code title="">:</code>" concatenated with
+   <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
    <var title="">output</var>.
 
-   <li><p>If <a href="#concept-url-query" title="concept-url-query">query</a> is non-null, append
-   "<code title="">?</code>" concatenated with
+   <li><p>Append "<code title="">/</code>" concatenated with the strings in
+   <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>
+   (including empty strings), separated from each other by
+   "<code title="">/</code>" to <var title="">output</var>.
+
+   <li><p>If <var title="">url</var>'s
+   <a href="#concept-url-query" title="concept-url-query">query</a> is non-null, append
+   "<code title="">?</code>" concatenated with <var title="">url</var>'s
    <a href="#concept-url-query" title="concept-url-query">query</a> to <var title="">output</var>.
   </ol>
 
- <li><p>Otherwise, if the <a href="#relative-flag">relative flag</a> is unset, append
+ <li><p>Otherwise, if <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is
+ unset, append <var title="">url</var>'s
  <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a> to
+ <var title="">output</var>.
+
+ <li><p>If the <i title="">exclude fragment flag</i> is unset and
+ <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is
+ non-null, append  "<code title="">#</code>" concatenated with
+ <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
  <var title="">output</var>.
 
  <li><p>Return <var title="">output</var>.
@@ -1752,6 +1804,9 @@ steps:
 
 <dt id="refsIPV6">[IPV6]
 <dd><cite><a href="http://tools.ietf.org/html/rfc4291">IP Version 6 Addressing Architecture</a></cite>, R. Hinden and Steve Deering. IETF.
+
+<dt id="refsIPV6TEXT">[IPV6TEXT]
+<dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc5952">A Recommendation for IPv6 Address Text Representation</a></cite>, S. Kawamura and M. Kawashima. IETF.
 
 <dt id="refsORIGIN">[ORIGIN]
 <dd><cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.

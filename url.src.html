@@ -265,11 +265,10 @@ sake of convenience.
 <p>A <dfn title=concept-domain>domain</dfn> is an ordered list of one or
 more <dfn title=concept-domain-label>domain labels</dfn>.
 
-<!-- http://tools.ietf.org/html/rfc4291 -->
 <p>An <dfn title=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
-<span data-anolis-ref>IPV6</span>
+<span data-anolis-ref class=informative>IPV6</span>
 
 
 <h3 id=host-writing>Writing</h3>
@@ -486,20 +485,74 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
 <h3 id=host-serializing>Serializing</h3>
 
-<!-- XXX The input value here can be null, which is arguably okay in the
-     context of URLs. -->
-<p>To <dfn title=concept-host-serializer>serialize</dfn> a
-<span title=concept-host>host</span>, run these steps:
+<p>The <dfn title=concept-host-serializer>host serializer</dfn> takes a
+<span title=concept-host>host</span> <var title>host</var> and then runs
+these steps:
 
-<ol class=XXX>
- <li><p>Normalize IPv6 addresses...
+<ol>
+ <li><p>If <var title>host</var> is null, return the empty string.
+ <!-- XXX Are we okay with this? -->
+
+ <li><p>If <var title>host</var> is an
+ <span title=concept-ipv6>IPv6 address</span>, return
+ "<code title>[</code>", followed by the result of running the
+ <span title=concept-ipv6-serializer>IPv6 serializer</span> on <var title>host</var>,
+ followed by "<code title>]</code>".
+
+ <li class=XXX><p>If <var title>host</var> is a
+ <span title=concept-domain>domain</span> ...
 </ol>
 
-<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. I would prefer
-     aligning with Chrome as we normalize domains too.
+<p>The <dfn title=concept-ipv6-serializer>IPv6 serializer</dfn> takes an
+<span title=concept-ipv6>IPv6 address</span> <var title>address</var> and
+then runs these steps:
 
-     http://tools.ietf.org/html/rfc5952#section-4 has recommendations, but
-     no algorithm. -->
+<ol>
+ <li><p>Let <var title>output</var> be the empty string.
+
+ <li>
+  <p>Let <var title>compress pointer</var> be a pointer to the first
+  <span title=concept-ipv6-piece>16-bit piece</span> in the first longest
+  sequences of <var title>address</var>'s
+  <span title=concept-ipv6-piece>16-bit pieces</span> that are 0.
+
+  <p class=example>In <code title>0:f:0:0:f:f:0:0</code> it would point to
+  the second 0.
+
+ <li><p>If there is no sequence of <var title>address</var>'s
+ <span title=concept-ipv6-piece>16-bit pieces</span> that are 0 longer than
+ one, set <var title>compress pointer</var> to null.
+
+ <li>
+  <p>For each <var title>piece</var> in <var title>address</var>'s
+  <span title=concept-ipv6-piece>pieces</span>, run these substeps:
+
+  <ol>
+   <li><p>If <var title>compress pointer</var> points to
+   <var title>piece</var>, append "<code title>::</code>" to
+   <var title>output</var> and then run these substeps again with all
+   subsequent <span title=concept-ipv6-piece>pieces</span> in
+   <var title>address</var>'s <span title=concept-ipv6-piece>pieces</span>
+   that are 0 skipped or go the next step in the overall set of steps if
+   that leaves no <span title=concept-ipv6-piece>pieces</span>.
+
+   <li><p>Append <var title>piece</var>, represented as the shortest
+   possible lowercase hexadecimal number, to <var title>output</var>.
+
+   <li><p>If <var title>piece</var> is not the last of
+   <var title>address</var>'s <span title=concept-ipv6-piece>pieces</span>,
+   append "<code title>:</code>" to <var title>output</var>.
+  </ol>
+
+ <li><p>Return <var title>output</var>.
+</ol>
+
+<p class=note>This algorithm requires the recommendation from
+A Recommendation for IPv6 Address Text Representation.
+<span data-anolis-ref class=informative>IPV6TEXT</span>
+
+<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. This algorithm
+     follows Chrome because we normalize domains too. -->
 
 
 
@@ -1279,77 +1332,76 @@ arguments can be used for API manipulation of a
 
 <h3>Serializing</h3>
 
-<p class=note>The serializing algorithms assume a
-<span title=concept-parsed-url>parsed URL</span>'s
+<p class=note>The <span title=concept-url-serializer>URL serializer</span>
+algorithm assumes <span title=concept-parsed-url>parsed URL</span>'s
 <span>fatal error flag</span> is not set.
 
-<p>To <dfn title=concept-url-serializer>serialize</dfn> a
-<span title=concept-parsed-url>parsed URL</span>, run these steps:
+<p>The <dfn title=concept-url-serializer>URL serializer</dfn> takes a
+<span title=concept-parsed-url>parsed URL</span> <var title>url</var>,
+optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <ol>
- <li><p>Let <var title>output</var> be the result of
- <span title=concept-url-serializer-without-fragment>serializing without fragment</span>.
-
- <li><p>If <span title=concept-url-fragment>fragment</span> is non-null,
- append "<code title>#</code>" concatenated with
- <span title=concept-url-fragment>fragment</span> to <var title>output</var>.
-
- <li><p>Return <var title>output</var>.
-</ol>
-
-<p>To
-<dfn title=concept-url-serializer-without-fragment>serialize without fragment</dfn>
-a <span title=concept-parsed-url>parsed URL</span>, run these steps:
-<!-- better wording anyone?! -->
-
-<ol>
- <li><p>Let <var title>output</var> be
+ <li><p>Let <var title>output</var> be <var title>url</var>'s
  <span title=concept-url-scheme>scheme</span> and
  "<code title>:</code>" concatenated.
 
  <li>
-  <p>If the <span>relative flag</span> is set:
+  <p>If <var title>url</var>'s <span>relative flag</span> is set:
 
   <ol>
    <li><p>Append "<code title>//</code>" to <var title>output</var>.
 
    <li>
-    <p>If <span title=concept-url-username>username</span> is not the empty
-    string or <span title=concept-url-password>password</span> is non-null,
-    run these substeps:
+    <p>If <var title>url</var>'s
+    <span title=concept-url-username>username</span> is not the empty string
+    or <var title>url</var>'s
+    <span title=concept-url-password>password</span> is non-null, run these
+    substeps:
 
     <ol>
-     <li><p>Append <span title=concept-url-username>username</span> to
+     <li><p>Append <var title>url</var>'s
+     <span title=concept-url-username>username</span> to
      <var title>output</var>.
 
-     <li><p>If <span title=concept-url-password>password</span> is non-null,
-     append "<code title>:</code>" concatenated with
+     <li><p>If <var title>url</var>'s
+     <span title=concept-url-password>password</span> is non-null, append
+     "<code title>:</code>" concatenated with <var title>url</var>'s
      <span title=concept-url-password>password</span> to
      <var title>output</var>.
 
      <li><p>Append "<code title>@</code>" to <var title>output</var>.
     </ol>
 
-   <li><p>Append <span title=concept-url-host>host</span>,
+   <li><p>Append <var title>url</var>'s
+   <span title=concept-url-host>host</span>,
    <span title=concept-host-serializer>serialized</span>, to
    <var title>output</var>.
 
-   <li><p>If <span title=concept-url-port>port</span> is not
-   the empty string, append "<code title>:</code>" concatenated with
-   <span title=concept-url-port>port</span> to <var title>output</var>.
-
-   <li><p>Append "<code title>/</code>" concatenated with the strings in
-   <span title=concept-url-path>path</span> (including empty strings),
-   separated from each other by "<code title>/</code>" to
+   <li><p>If <var title>url</var>'s <span title=concept-url-port>port</span>
+   is not the empty string, append "<code title>:</code>" concatenated with
+   <var title>url</var>'s <span title=concept-url-port>port</span> to
    <var title>output</var>.
 
-   <li><p>If <span title=concept-url-query>query</span> is non-null, append
-   "<code title>?</code>" concatenated with
+   <li><p>Append "<code title>/</code>" concatenated with the strings in
+   <var title>url</var>'s <span title=concept-url-path>path</span>
+   (including empty strings), separated from each other by
+   "<code title>/</code>" to <var title>output</var>.
+
+   <li><p>If <var title>url</var>'s
+   <span title=concept-url-query>query</span> is non-null, append
+   "<code title>?</code>" concatenated with <var title>url</var>'s
    <span title=concept-url-query>query</span> to <var title>output</var>.
   </ol>
 
- <li><p>Otherwise, if the <span>relative flag</span> is unset, append
+ <li><p>Otherwise, if <var title>url</var>'s <span>relative flag</span> is
+ unset, append <var title>url</var>'s
  <span title=concept-url-scheme-data>scheme data</span> to
+ <var title>output</var>.
+
+ <li><p>If the <i title>exclude fragment flag</i> is unset and
+ <var title>url</var>'s <span title=concept-url-fragment>fragment</span> is
+ non-null, append  "<code title>#</code>" concatenated with
+ <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to
  <var title>output</var>.
 
  <li><p>Return <var title>output</var>.
