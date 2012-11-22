@@ -765,7 +765,7 @@ and <span title="percent-encoded byte">percent-encoded bytes</span>.
 
 <p>Aside from the components mentioned earlier, a
 <span title=concept-parsed-url>parsed URL</span> also has an associated
-<dfn>fatal error flag</dfn> and <dfn>relative flag</dfn>.
+<dfn>relative flag</dfn>.
 
 <p>To <dfn>clear</dfn> a <span title=concept-parsed-url>parsed URL</span>,
 set its <span title=concept-url-scheme>scheme</span>,
@@ -777,10 +777,6 @@ set its <span title=concept-url-scheme>scheme</span>,
 <span title=concept-url-query>query</span>, and
 <span title=concept-url-fragment>fragment</span> to null, and
 its <span title=concept-url-path>path</span> to the empty list.
-
-<p>To <dfn>neuter</dfn> a
-<span title=concept-parsed-url>parsed URL</span>, <span>clear</span> it, and
-then set its <span>fatal error flag</span>.
 
 <p class=XXX>Add the ability to halt on the first conformance error.
 
@@ -831,10 +827,8 @@ arguments can be used for API manipulation of a
  <li>
   <p>Keep running the following state machine by switching on
   <var title>state</var>, increasing <var title>pointer</var> by one after
-  each time it is run, as long as
-  <var title>url</var>'s <span>fatal error flag</span> is not set and as
-  long as <var title>pointer</var> does not point past the end of
-  <var title>input</var>.
+  each time it is run, as long as <var title>pointer</var> does not point
+  past the end of <var title>input</var>.
 
   <p>Let <var title>c</var> be the code point to which
   <var title>pointer</var> points.
@@ -933,8 +927,7 @@ arguments can be used for API manipulation of a
    <dd>
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
-    <span>relative scheme</span>, <span>neuter</span> <var title>url</var>,
-    and then return <var title>url</var>.
+    <span>relative scheme</span>, return failure.
 
     <p class=note>You do not want to check <var title>base</var>'s
     <span>relative flag</span> here, as the
@@ -1103,9 +1096,7 @@ arguments can be used for API manipulation of a
          <span title=concept-host-parser>host parsing</span>
          <var title>buffer</var>.
 
-         <li><p>If <var title>host</var> is failure,
-         <span>neuter</span> <var title>url</var>, and then return
-         <var title>url</var>.
+         <li><p>If <var title>host</var> is failure, return failure.
 
          <li><p>Set
          <var title>url</var>'s <span title=concept-url-host>host</span> to
@@ -1131,12 +1122,7 @@ arguments can be used for API manipulation of a
        <span title=concept-host-parser>host parsing</span>
        <var title>buffer</var>.
 
-       <li><p>If <var title>host</var> is failure and
-       <var title>state override</var> is <b title>hostname state</b>,
-       terminate this algorithm.
-
-       <li><p>If <var title>host</var> is failure, <span>neuter</span>
-       <var title>url</var>, and then return <var title>url</var>.
+       <li><p>If <var title>host</var> is failure, return failure.
 
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>host</var>, <var title>buffer</var> to the empty string,
@@ -1158,11 +1144,7 @@ arguments can be used for API manipulation of a
        <span title=concept-host-parser>host parsing</span>
        <var title>buffer</var>.
 
-       <li><p>If <var title>host</var> is failure and
-       <var title>state override</var> is given, terminate this algorithm.
-
-       <li><p>If <var title>host</var> is failure, <span>neuter</span>
-       <var title>url</var>, and then return <var title>url</var>.
+       <li><p>If <var title>host</var> is failure, return failure.
 
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>host</var>, <var title>buffer</var> to the empty string,
@@ -1219,8 +1201,7 @@ arguments can be used for API manipulation of a
        decrease <var title>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, <span>neuter</span> <var title>url</var>, and then
-     return <var title>url</var>.
+     <li><p>Otherwise, return failure.
     </ol>
 
    <dt><b title>relative path start state</b>
@@ -1331,10 +1312,6 @@ arguments can be used for API manipulation of a
 </ol>
 
 <h3>Serializing</h3>
-
-<p class=note>The <span title=concept-url-serializer>URL serializer</span>
-algorithm assumes <span title=concept-parsed-url>parsed URL</span>'s
-<span>fatal error flag</span> is not set.
 
 <p>The <dfn title=concept-url-serializer>URL serializer</dfn> takes a
 <span title=concept-parsed-url>parsed URL</span> <var title>url</var>,
@@ -1453,9 +1430,9 @@ interface <dfn>URLUtils</dfn> {
 
 <p>Any object implementing <code>URLUtils</code> has an associated
 <code>URLQuery</code> object,
-<span title=concept-parsed-url>parsed URL</span> <b title>url</b>,
 <span title=concept-base-url>base URL</span> <b title>base</b>,
-<b title>input</b>, and <b title>query encoding</b>.
+<b title>input</b>, <b title>query encoding</b>, and optionally a
+<span title=concept-parsed-url>parsed URL</span> <b title>url</b>.
 Unless stated otherwise, <b title>query encoding</b> is
 <span data-anolis-spec=encoding>utf-8</span>. The others must be set on
 creation by the specification using <code>URLUtils</code>.
@@ -1480,16 +1457,22 @@ constructor must run these steps:
  <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
- <li><p>If <var title>base</var>'s <span>fatal error flag</span> is set,
+ <li><p>If <var title>base</var> is failure,
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>InvalidStateError</code>" exception.
+ "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
- <li><p><span title=concept-url-parser>Parse</span> <var title>url</var>
- with <span title=concept-base-url>base URL</span> <var title>base</var>,
- and then associate the result with a new <code>URL</code> object as its
- <b title>url</b>, associate <var title>base</var> with the new object as
- its <b title>base</b>, associate <var title>url</var> with the new object
- as its <b title>input</b>, and then return the new object.
+ <li><p>Let <var title>parsed URL</var> be the result of
+ <span title=concept-url-parser>parsing</span> <var title>url</var>
+ with <span title=concept-base-url>base URL</span> <var title>base</var>.
+
+ <li><p>If <var title>parsed URL</var> is failure,
+ <span data-anolis-spec=dom title=concept-throw>throw</span> an
+ "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+
+ <li><p>Create a new <code>URL</code> object, set its <b title>url</b> to
+ <var title>parsed URL</var>, <b title>base</b> to <var title>base</var>,
+ and <b tilte>input</b> to <var title>url</var>, and then return the new
+ object.
 </ol>
 
 
@@ -1502,7 +1485,7 @@ global object. It augments other interfaces, such as <code>URL</code>.
 these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, return the associated
+ <li><p>If there is no associated <b title>url</b>, return the associated
  <b title>input</b>.
 
  <li><p>Return the <span title=concept-url-serializer>serialization</span>.
@@ -1512,38 +1495,50 @@ these steps:
 run these steps:
 
 <ol>
- <li><p><span>Clear</span>.
+ <li><p>Unassociate <b title>url</b>.
 
  <li><p>Set the associated <b title>input</b> to the given value.
 
- <li><p><span title=concept-url-parser>Parse</span> <b title>input</b>
+ <li><p>Let <var title>parsed URL</var> be the result of
+ <span title=concept-url-parser>parsing</span> <b title>input</b>
  with <span title=concept-base-url>base URL</span> <b title>base</b> and
- <b title>query encoding</b> as <var title>encoding override</var>, and then
- set <b title>url</b> to the result.
+ <b title>query encoding</b> as <var title>encoding override</var>.
+
+ <li><p>If <var title>parsed URL</var> is not failure, set <b title>url</b>
+ to <var title>parsed URL</var>.
 </ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute must
-return the <span data-anolis-spec=origin>Unicode serialization</span> of
-the <span title=concept-parsed-url>parsed URL</span>'s
-<span data-anolis-spec=origin>origin</span>.
-<span data-anolis-ref>ORIGIN</span>
+run these steps:
+
+<ol>
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
+
+ <li><p>Return the <span data-anolis-spec=origin>Unicode serialization</span>
+ of the <b>url</b>'s <span data-anolis-spec=origin>origin</span>.
+ <span data-anolis-ref>ORIGIN</span>
+</ol>
 
 <p class=note>It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature.
 <span data-anolis-ref class=informative>HTML</span>
 
 <p>The <dfn title=dom-URL-protocol><code>protocol</code></dfn> attribute
-must return <span title=concept-url-scheme>scheme</span> and
-"<code title>:</code>" concatenated.
+must run these steps:
 
-<p class=note>In case the <span>fatal error flag</span> is set this will
-cause it to return "<code title>:</code>".
+<ol>
+ <li><p>If there is no associated <b title>url</b>, return
+ "<code title>:</code>".
+
+ <li><p>Return <span title=concept-url-scheme>scheme</span> and
+ "<code title>:</code>" concatenated.
+</ol>
 
 <p>Setting the <code title=dom-URL-protocol>protocol</code> attribute must
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, terminate these steps.
+ <li><p>If there is no associated <b title>url</b>, terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value and
  "<code title>:</code>" concatenated with the associated <b title>url</b> as
@@ -1552,13 +1547,19 @@ run these steps:
 </ol>
 
 <p>The <dfn title=dom-URL-username><code>username</code></dfn> attribute
-must return <span title=concept-url-username>username</span>.
+must run these steps:
+
+<ol>
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
+
+ <li><p>Return <span title=concept-url-username>username</span>.
+</ol>
 
 <p>Setting the <code title=dom-URL-username>username</code> attribute must
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-url-username>username</span> to the empty
@@ -1573,7 +1574,7 @@ run these steps:
 must run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set or
+ <li><p>If there is no associated <b title>url</b> or its
  <span title=concept-url-password>password</span> is null, return the empty
  string.
 
@@ -1584,7 +1585,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
@@ -1603,7 +1604,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, return the empty string.
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
 
  <li><p>If <span title=concept-url-port>port</span> is the empty string,
  return <span title=concept-url-host>host</span>,
@@ -1619,7 +1620,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with the
@@ -1628,14 +1629,20 @@ steps:
 </ol>
 
 <p>The <dfn title=dom-URL-hostname><code>hostname</code></dfn> attribute
-must return <span title=concept-url-host>host</span>,
-<span title=concept-host-serializer>serialized</span>.
+must run these steps:
+
+<ol>
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
+
+ <li><p>Return <span title=concept-url-host>host</span>,
+ <span title=concept-host-serializer>serialized</span>.
+</ol>
 
 <p>Setting the <code title=dom-URL-hostname>hostname</code> attribute must
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with the
@@ -1643,15 +1650,21 @@ run these steps:
  <b title>hostname state</b> as <var title>state override</var>.
 </ol>
 
-<p>The <dfn title=dom-URL-port><code>port</code></dfn> attribute must return
-<span title=concept-url-port>port</span>.
+<p>The <dfn title=dom-URL-port><code>port</code></dfn> attribute must run
+these steps:
+
+<ol>
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
+
+ <li><p>Return <span title=concept-url-port>port</span>.
+</ol>
 
 <p>Setting the <code title=dom-URL-port>port</code> attribute must run these
 steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, the
- <span>relative flag</span> is unset, or
+ <li><p>If there is no associated <b title>url</b>, its
+ <span>relative flag</span> is unset, or its
  <span title=concept-url-scheme>scheme</span> is "<code title>file</code>",
  terminate these steps.
 
@@ -1664,7 +1677,7 @@ steps:
 must run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, return the empty string.
+ <li><p>If there is no associated <b title>url</b>, return the empty string.
 
  <li><p>If the <span>relative flag</span> is unset, return
  <span title=concept-url-scheme-data>scheme data</span>.
@@ -1678,7 +1691,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-url-path>path</span> to the empty list.
@@ -1692,7 +1705,7 @@ run these steps:
 run these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or
+ <li><p>If there is no associated <b title>url</b>, or its
  <span title=concept-url-query>query</span> is either null or
  the empty string, return the empty string.
 
@@ -1704,7 +1717,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
@@ -1729,7 +1742,7 @@ return the associated <code>URLQuery</code> object.
 these steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or
+ <li><p>If there is no associated <b title>url</b>, or its
  <span title=concept-url-fragment>fragment</span> is either null or
  the empty string, return the empty string.
 
@@ -1741,7 +1754,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If the <span>fatal error flag</span> is set, or the
+ <li><p>If there is no associated <b title>url</b>, or its
  <span title=concept-url-scheme>scheme</span> is
  "<code title>javascript</code>", terminate these steps.
 
