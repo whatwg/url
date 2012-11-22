@@ -597,15 +597,13 @@ followed by a <a href="#concept-url-fragment" title="concept-url-fragment">fragm
 <dfn id="concept-base-url" title="concept-base-url">base URL</dfn>. If the
 <a href="#concept-base-url" title="concept-base-url">base URL</a> has no
 <a href="#relative-scheme">relative scheme</a>, <a href="#concept-url-parser" title="concept-url-parser">parsing</a>
-the <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> results in a
-fatal error.
+the <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> results in failure.
 
 <p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> stands on its own
 and is therefore a potential <a href="#concept-base-url" title="concept-base-url">base URL</a>.
 
-<p>Provided there are no fatal errors,
-<a href="#concept-url-parser" title="concept-url-parser">parsing</a> and
-<a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> a
+<p><a href="#concept-url-parser" title="concept-url-parser">Parsing</a> (provided it does not
+return failure) and <a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> a
 <a href="#concept-url" title="concept-url">URL</a> will turn it into an
 <a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a>. The intermediate form
 is named a <dfn id="concept-parsed-url" title="concept-parsed-url">parsed URL</dfn>. The components a
@@ -848,10 +846,8 @@ arguments can be used for API manipulation of a
  <li>
   <p>Keep running the following state machine by switching on
   <var title="">state</var>, increasing <var title="">pointer</var> by one after
-  each time it is run, as long as
-  <var title="">url</var>'s <span>fatal error flag</span> is not set and as
-  long as <var title="">pointer</var> does not point past the end of
-  <var title="">input</var>.
+  each time it is run, as long as <var title="">pointer</var> does not point
+  past the end of <var title="">input</var>.
 
   <p>Let <var title="">c</var> be the code point to which
   <var title="">pointer</var> points.

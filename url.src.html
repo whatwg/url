@@ -576,15 +576,13 @@ followed by a <span title=concept-url-fragment>fragment</span>.
 <dfn title=concept-base-url>base URL</dfn>. If the
 <span title=concept-base-url>base URL</span> has no
 <span>relative scheme</span>, <span title=concept-url-parser>parsing</span>
-the <span title=concept-relative-url>relative URL</span> results in a
-fatal error.
+the <span title=concept-relative-url>relative URL</span> results in failure.
 
 <p>An <dfn title=concept-absolute-url>absolute URL</dfn> stands on its own
 and is therefore a potential <span title=concept-base-url>base URL</span>.
 
-<p>Provided there are no fatal errors,
-<span title=concept-url-parser>parsing</span> and
-<span title=concept-url-serializer>serializing</span> a
+<p><span title=concept-url-parser>Parsing</span> (provided it does not
+return failure) and <span title=concept-url-serializer>serializing</span> a
 <span title=concept-url>URL</span> will turn it into an
 <span title=concept-absolute-url>absolute URL</span>. The intermediate form
 is named a <dfn title=concept-parsed-url>parsed URL</dfn>. The components a
