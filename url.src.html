@@ -2,7 +2,7 @@
 <html lang=en-US>
 <meta charset=utf-8>
 <title>URL Standard</title>
-<link rel=stylesheet href=//www.whatwg.org/style/specification>
+<link rel=stylesheet href=http://www.whatwg.org/style/specification>
 <link rel=icon href=//resources.whatwg.org/logo-url.svg>
 
 <div class=head>
@@ -1184,8 +1184,20 @@ arguments can be used for API manipulation of a
       "<code title>#</code>", or <var title>state override</var> is given, run
       these substeps:
       <ol>
-       <li><p>Remove any leading U+0030 code points from
-       <var title>buffer</var>.
+       <li>
+        <p>Remove leading U+0030 code points from <var title>buffer</var>
+        until either the leading code point is not U+0030 or
+        <var title>buffer</var> is one code point.
+
+        <div class=example><!-- putting class=example on table has side effects -->
+        <table>
+         <tr><th>Input<th>Output
+         <tr><td>"<code title>42</code>"<td>"<code title>42</code>"
+         <tr><td>"<code title>031</code>"<td>"<code title>31</code>"
+         <tr><td>"<code title>080</code>"<td>"<code title>80</code>"
+         <tr><td>"<code title>0000</code>"<td>"<code title>0</code>"
+        </table>
+        </div>
 
        <li><p>If <var title>buffer</var> is equal to
        <var title>url</var>'s <span title=concept-url-scheme>scheme</span>'s
