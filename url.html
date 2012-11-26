@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-22-november-2012">Living Standard — Last Updated 22 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-november-2012">Living Standard — Last Updated 26 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-22 November 2012, the editors have made this specification available
+26 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -653,7 +653,8 @@ on the same row.
 <p>An <a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a> is a
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, followed by
 "<code title="">:</code>", followed by
-<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
+<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>, optionally followed
+by "<code title="">?</code>" and a <a href="#concept-url-query" title="concept-url-query">query</a>.
 
 <p>A <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is one
 <a href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of
@@ -669,17 +670,18 @@ defined alongside it. For a <a href="#relative-scheme">relative scheme</a>,
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>. For
 other <a href="#concept-url-scheme" title="concept-url-scheme">schemes</a>, specifications or
 standards must define <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>
-either literally as or as a subset of one or more <a href="#url-units">URL units</a>
-that do not start with "<code title="">?</code>".
+within the constraints of zero or more <a href="#url-units">URL units</a>.
 
 <p>A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> is either a
 <a href="#concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</a>, an
 <a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>,
 or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path-relative URL</a> that
 does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
-"<code title="">:</code>". A
-<a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative to a
-<a href="#concept-base-url" title="concept-base-url">base URL</a> with a
+"<code title="">:</code>", optionally followed by a "<code title="">?</code>" and
+a <a href="#concept-url-query" title="concept-url-query">query</a>.
+
+<p>A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative
+to a <a href="#concept-base-url" title="concept-base-url">base URL</a> with a
 <a href="#relative-scheme">relative scheme</a>.
 
 <p>A <dfn id="concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</dfn> is
@@ -687,9 +689,8 @@ does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">s
 <a href="#concept-url-userinfo" title="concept-url-userinfo">userinfo</a> and "<code title="">@</code>",
 followed by a <a href="#concept-host" title="concept-host">host</a>, optionally followed
 by "<code title="">:</code>" and a <a href="#concept-url-port" title="concept-url-port">port</a>,
-optionally followed by either an
-<a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>
-or a "<code title="">?</code>" and a <a href="#concept-url-query" title="concept-url-query">query</a>.
+optionally followed by an
+<a href="#concept-absolute-path-relative-url" title="concept-absolute-path-relative-url">absolute-path-relative URL</a>.
 
 <p><dfn id="concept-url-userinfo" title="concept-url-userinfo">Userinfo</dfn> is a
 <a href="#concept-url-username" title="concept-url-username">username</a>, optionally followed by a
@@ -716,8 +717,7 @@ start with "<code title="">/</code>".
 
 <p>A <dfn id="concept-path-relative-url" title="concept-path-relative-url">path-relative URL</dfn> is zero or
 more <a href="#path-segment" title="path segment">path segments</a> separated from each
-other by a "<code title="">/</code>", optionally followed by a
-"<code title="">?</code>" and a <a href="#concept-url-query" title="concept-url-query">query</a>.
+other by a "<code title="">/</code>".
 
 <p>A <dfn id="path-segment">path segment</dfn> is zero or more <a href="#url-units">URL units</a>,
 excluding "<code title="">/</code>" and "<code title="">?</code>".
@@ -928,10 +928,14 @@ arguments can be used for API manipulation of a
    <dt><b title="">scheme data state</b>
    <dd>
     <ol>
-     <li><p>If <var title="">state override</var> is not given and <var title="">c</var>
-     is "<code title="">#</code>", set <var title="">url</var>'s
-     <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
-     the empty string and <var title="">state</var> to
+     <li><p>If <var title="">c</var> is "<code title="">?</code>", set
+     <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>
+     to the empty string and <var title="">state</var> to
+     <b title="">query state</b>.
+
+     <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+     <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>
+     to the empty string and <var title="">state</var> to
      <b title="">fragment state</b>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of

@@ -632,7 +632,8 @@ on the same row.
 <p>An <span title=concept-absolute-url>absolute URL</span> is a
 <span title=concept-url-scheme>scheme</span>, followed by
 "<code title>:</code>", followed by
-<span title=concept-url-scheme-data>scheme data</span>.
+<span title=concept-url-scheme-data>scheme data</span>, optionally followed
+by "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
 <p>A <span title=concept-url-scheme>scheme</span> is one
 <span>ASCII alpha</span>, followed by zero or more of
@@ -648,17 +649,18 @@ defined alongside it. For a <span>relative scheme</span>,
 <span title=concept-scheme-relative-url>scheme-relative URL</span>. For
 other <span title=concept-url-scheme>schemes</span>, specifications or
 standards must define <span title=concept-url-scheme-data>scheme data</span>
-either literally as or as a subset of one or more <span>URL units</span>
-that do not start with "<code title>?</code>".
+within the constraints of zero or more <span>URL units</span>.
 
 <p>A <span title=concept-relative-url>relative URL</span> is either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span> that
 does not start with a <span title=concept-url-scheme>scheme</span> and
-"<code title>:</code>". A
-<span title=concept-relative-url>relative URL</span> must be relative to a
-<span title=concept-base-url>base URL</span> with a
+"<code title>:</code>", optionally followed by a "<code title>?</code>" and
+a <span title=concept-url-query>query</span>.
+
+<p>A <span title=concept-relative-url>relative URL</span> must be relative
+to a <span title=concept-base-url>base URL</span> with a
 <span>relative scheme</span>.
 
 <p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> is
@@ -666,9 +668,8 @@ does not start with a <span title=concept-url-scheme>scheme</span> and
 <span title=concept-url-userinfo>userinfo</span> and "<code title>@</code>",
 followed by a <span title=concept-host>host</span>, optionally followed
 by "<code title>:</code>" and a <span title=concept-url-port>port</span>,
-optionally followed by either an
-<span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>
-or a "<code title>?</code>" and a <span title=concept-url-query>query</span>.
+optionally followed by an
+<span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>.
 
 <p><dfn title=concept-url-userinfo>Userinfo</dfn> is a
 <span title=concept-url-username>username</span>, optionally followed by a
@@ -695,8 +696,7 @@ start with "<code title>/</code>".
 
 <p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> is zero or
 more <span title="path segment">path segments</span> separated from each
-other by a "<code title>/</code>", optionally followed by a
-"<code title>?</code>" and a <span title=concept-url-query>query</span>.
+other by a "<code title>/</code>".
 
 <p>A <dfn>path segment</dfn> is zero or more <span>URL units</span>,
 excluding "<code title>/</code>" and "<code title>?</code>".
@@ -907,10 +907,14 @@ arguments can be used for API manipulation of a
    <dt><b title>scheme data state</b>
    <dd>
     <ol>
-     <li><p>If <var title>state override</var> is not given and <var title>c</var>
-     is "<code title>#</code>", set <var title>url</var>'s
-     <span title=concept-url-fragment>fragment</span> to
-     the empty string and <var title>state</var> to
+     <li><p>If <var title>c</var> is "<code title>?</code>", set
+     <var title>url</var>'s <span title=concept-url-query>query</span>
+     to the empty string and <var title>state</var> to
+     <b title>query state</b>.
+
+     <li><p>If <var title>c</var> is "<code title>#</code>", set
+     <var title>url</var>'s <span title=concept-url-fragment>fragment</span>
+     to the empty string and <var title>state</var> to
      <b title>fragment state</b>.
 
      <li><p>Otherwise, if <var title>c</var> is none of
