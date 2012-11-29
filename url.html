@@ -66,8 +66,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#api"><span class="secno">6 </span>API</a>
   <ol>
    <li><a href="#constructors"><span class="secno">6.1 </span>Constructors</a></li>
-   <li><a href="#interface-urlutils"><span class="secno">6.2 </span>Interface <code title="">URLUtils</code></a></li>
-   <li><a href="#interface-urlquery"><span class="secno">6.3 </span>Interface <code title="">URLQuery</code></a></ol></li>
+   <li><a href="#interface-urlutils"><span class="secno">6.2 </span>Interface <code>URLUtils</code></a></li>
+   <li><a href="#interface-urlquery"><span class="secno">6.3 </span>Interface <code>URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1450,7 +1450,7 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
            attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
            attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
-  readonly attribute <a href="#urlquery">URLQuery</a> <a href="#dom-url-query" title="dom-URL-query">query</a>;
+           attribute <a href="#urlquery">URLQuery</a>? <a href="#dom-url-query" title="dom-URL-query">query</a>;
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
 
@@ -1534,7 +1534,7 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="interface-urlutils"><span class="secno">6.2 </span>Interface <code title="">URLUtils</code></h3>
+<h3 id="interface-urlutils"><span class="secno">6.2 </span>Interface <a href="#urlutils"><code>URLUtils</code></a></h3>
 
 <p class="note">The <a href="#urlutils"><code>URLUtils</code></a> interface is not exposed on the
 global object. It augments other interfaces, such as <a href="#url"><code>URL</code></a>.
@@ -1827,8 +1827,28 @@ these steps:
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
-return the associated <a href="#urlquery"><code>URLQuery</code></a> object.
+<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must run
+these steps:
+
+<ol>
+ <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <a href="#relative-flag">relative flag</a> is unset, return null.
+
+ <li><p>Return the associated <a href="#urlquery"><code>URLQuery</code></a> object.
+</ol>
+
+<p>Setting the <a href="#dom-url-query"><code title="dom-URL-query">query</code></a> attribute must run
+these steps:
+
+<ol>
+ <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
+
+ <li><p>Set the associated <a href="#urlquery"><code>URLQuery</code></a> object to the given value.
+
+ <li><p>Run <a href="#urlquery"><code>URLQuery</code></a> object's
+ <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
+</ol>
 
 <p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute must run
 these steps:
@@ -1869,17 +1889,53 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">6.3 </span>Interface <code title="">URLQuery</code></h3>
+<h3 id="interface-urlquery"><span class="secno">6.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
-<pre class="idl">interface <dfn id="urlquery">URLQuery</dfn> {
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional <span class="XXX">...</span> <var title="">init</var>)]
+interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <span title="dom-URLQuery-getAll">getAll</span>(DOMString <var title="">name</var>);
-  void <span title="dom-URLQuery-set">set</span>(DOMString name, (sequence&lt;DOMString&gt; or DOMString) <var title="">value</var>);
-  void <span title="dom-URLQuery-delete">delete</span>(DOMString <var title="">name</var>);
-};</pre>
+  void <span title="dom-URLQuery-set">set</span>(DOMString <var title="">name</var>, (sequence&lt;DOMString&gt; or DOMString) <var title="">value</var>);
+  void <span title="dom-URLQuery-append">append</span>(DOMString <var title="">name</var>, optional DOMString? <var title="">value</var> = null);
+  void <span title="dom-URLQuery-delete">delete</span>(DOMString <var title="">name</var>, optional DOMString <var title="">value</var>);
+};</span></pre>
 
-<p class="XXX">...
+<p>A <a href="#urlquery"><code>URLQuery</code></a> object represents an ordered list of
+name/value pairs, but has an API optimized for a map of name/value pairs.
 
+<p>A <a href="#urlquery"><code>URLQuery</code></a> object can be associated with object that
+implements the <a href="#urlutils"><code>URLUtils</code></a> interface.
+
+<p>To <dfn id="concept-uq-serialize" title="concept-UQ-serialize">serialize</dfn> a
+<a href="#urlquery"><code>URLQuery</code></a> object, run these steps:
+
+<ol class="XXX"></ol>
+
+<p>A <a href="#urlquery"><code>URLQuery</code></a> object's
+<dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
+
+<ol>
+ <li><p>If there is no associated object that implements the
+ <a href="#urlutils"><code>URLUtils</code></a> interface, terminate these steps.
+
+ <li><p>Otherwise, let <var title="">object</var> be that associated object.
+
+ <li><p>Set <var title="">object</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a>
+ <a href="#concept-url-query" title="concept-URL-query">query</a> to the
+ <a href="#concept-uq-serialize" title="concept-UQ-serialize">serialization</a> of the
+ <a href="#urlquery"><code>URLQuery</code></a> object.
+
+ <li><p>Run <var title="">object</var>'s
+ <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+</ol>
+
+<ul class="XXX">
+ <li>IDL does not define open-ended dictionaries yet we need for the constructor.
+ <li>JavaScript does not have MultiMap but the idea is to implement this in
+ terms of an underlying MultiMap.
+</ul>
+
+<!-- get() should return "" when value is null -->
 
 
 <h2 class="no-num" id="references">References</h2>
