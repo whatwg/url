@@ -618,6 +618,12 @@ on the same row.
  <tr><td>"<code title>wss</code>"<td>"<code title>443</code>"
 </table>
 
+<!-- The best reason I have for listing "gopher" is Google does it too:
+     https://code.google.com/p/google-url/source/browse/trunk/src/url_canon_stdurl.cc#120
+
+     It seems fine to remain compatible on that front, no need to support it
+     elsewhere though. -->
+
 
 <h3>Writing</h3>
 
@@ -1444,16 +1450,32 @@ interface <dfn>URLUtils</dfn> {
 
 <p>Any object implementing <code>URLUtils</code> has an associated
 <code>URLQuery</code> object,
-<span title=concept-base-url>base URL</span> <b title>base</b>,
-<b title>input</b>, <b title>query encoding</b>, and optionally a
-<span title=concept-parsed-url>parsed URL</span> <b title>url</b>.
-Unless stated otherwise, <b title>query encoding</b> is
+<span title=concept-base-url>base URL</span>
+<dfn title=concept-UU-base>base</dfn>,
+<dfn title=concept-UU-input>input</dfn>,
+<dfn title=concept-UU-query-encoding>query encoding</dfn>, and optionally a
+<span title=concept-parsed-url>parsed URL</span>
+<dfn title=concept-UU-url>url</dfn>. Unless stated otherwise,
+<span title=concept-UU-query-encoding>query encoding</span> is
 <span data-anolis-spec=encoding>utf-8</span>. The others must be set on
 creation by the specification using <code>URLUtils</code>.
 <!-- standard > specification -->
 
-<p class=note>The associated <b title>query encoding</b> is a legacy concept
-only relevant for HTML. <span data-anolis-ref class=informative>HTML</span>
+<p class=note>The associated
+<span title=concept-UU-query-encoding>query encoding</span> is a legacy
+concept only relevant for HTML.
+<span data-anolis-ref class=informative>HTML</span>
+
+<p>Specifications defining objects implementing <code>URLUtils</code> may
+define <dfn title=concept-UU-update>update steps</dfn> to make it possible
+for an underlying object (such as an
+<span data-anolis-spec=dom title=concept-attribute-value>attribute value</span>)
+to be updated.
+
+<p class=note>The <span title=concept-UU-update>update steps</span> are
+always invoked after each potential modification. Specifications need to
+keep track themselves if an actual modification is made, if they wish to
+make that distinction.
 
 
 <h3>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
@@ -1483,10 +1505,11 @@ constructor must run these steps:
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
 
- <li><p>Create a new <code>URL</code> object, set its <b title>url</b> to
- <var title>parsed URL</var>, <b title>base</b> to <var title>base</var>,
- and <b tilte>input</b> to <var title>url</var>, and then return the new
- object.
+ <li><p>Create a new <code>URL</code> object, set its
+ <span title=concept-UU-url>url</span> to <var title>parsed URL</var>,
+ <span title=concept-UU-base>base</span> to <var title>base</var>,
+ and <span title=concept-UU-input>input</span> to <var title>url</var>, and
+ then return the new object.
 </ol>
 
 
@@ -1499,37 +1522,45 @@ global object. It augments other interfaces, such as <code>URL</code>.
 these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the associated
- <b title>input</b>.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return
+ <span title=concept-UU-input>input</span>.
 
- <li><p>Return the <span title=concept-url-serializer>serialization</span>.
+ <li><p>Return the <span title=concept-url-serializer>serialization</span>
+ of <span title=concept-UU-url>url</span>.
 </ol>
 
 <p>Setting the <code title=dom-URL-href>href</code> attribute must
 run these steps:
 
 <ol>
- <li><p>Unassociate <b title>url</b>.
+ <li><p>Unassociate <span title=concept-UU-url>url</span>.
 
- <li><p>Set the associated <b title>input</b> to the given value.
+ <li><p>Set <span title=concept-UU-input>input</span> to the given value.
 
  <li><p>Let <var title>parsed URL</var> be the result of
- <span title=concept-url-parser>parsing</span> <b title>input</b>
- with <span title=concept-base-url>base URL</span> <b title>base</b> and
- <b title>query encoding</b> as <var title>encoding override</var>.
+ <span title=concept-url-parser>parsing</span>
+ <span title=concept-UU-input>input</span> with
+ <span title=concept-base-url>base URL</span>
+ <span title=concept-UU-base>base</span> and
+ <span title=concept-UU-query-encoding>query encoding</span> as
+ <var title>encoding override</var>.
 
- <li><p>If <var title>parsed URL</var> is not failure, set <b title>url</b>
- to <var title>parsed URL</var>.
+ <li><p>If <var title>parsed URL</var> is not failure, set
+ <span title=concept-UU-url>url</span> to <var title>parsed URL</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute must
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>Return the <span data-anolis-spec=origin>Unicode serialization</span>
- of the <b>url</b>'s <span data-anolis-spec=origin>origin</span>.
+ of <span title=concept-UU-url>url</span>'s
+ <span data-anolis-spec=origin>origin</span>.
  <span data-anolis-ref>ORIGIN</span>
 </ol>
 
@@ -1541,7 +1572,7 @@ compatibility with HTML's <code>MessageEvent</code> feature.
 must run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return
  "<code title>:</code>".
 
  <li><p>Return <span title=concept-url-scheme>scheme</span> and
@@ -1552,19 +1583,23 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, terminate these steps.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, terminate
+ these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value and
- "<code title>:</code>" concatenated with the associated <b title>url</b> as
- <var title>url</var> and <b title>scheme start state</b> as
- <var title>state override</var>.
+ "<code title>:</code>" concatenated with
+ <span title=concept-UU-url>url</span> as <var title>url</var> and
+ <b title>scheme start state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-username><code>username</code></dfn> attribute
 must run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>Return <span title=concept-url-username>username</span>.
 </ol>
@@ -1573,22 +1608,25 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-url-username>username</span> to the empty
  string.
 
- <li><p>For each code point in the given value, <span>potentially percent encode</span> it
- using the <span>username encode set</span>, and append the result to
+ <li><p>For each code point in the given value,
+ <span>potentially percent encode</span> it using the
+ <span>username encode set</span>, and append the result to
  <span title=concept-url-username>username</span>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-password><code>password</code></dfn> attribute
 must run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b> or its
+ <li><p>If there is no <span title=concept-UU-url>url</span> or its
  <span title=concept-url-password>password</span> is null, return the empty
  string.
 
@@ -1599,11 +1637,12 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <span title=concept-url-password>password</span> to null, and terminate
+ <span title=concept-url-password>password</span> to null,
+ run the <span title=concept-UU-update>update steps</span>, and terminate
  these steps.
 
  <li><p>Set <span title=concept-url-password>password</span> to the empty
@@ -1612,13 +1651,16 @@ run these steps:
  <li><p>For each code point in the given value, <span>potentially percent encode</span> it
  using the <span>password encode set</span>, and append the result to
  <span title=concept-url-password>password</span>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-host><code>host</code></dfn> attribute must run
 these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>If <span title=concept-url-port>port</span> is the empty string,
  return <span title=concept-url-host>host</span>,
@@ -1634,19 +1676,22 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
- <li><p><span title=concept-url-parser>Parse</span> the given value with the
- associated <b title>url</b> as <var title>url</var>, and
+ <li><p><span title=concept-url-parser>Parse</span> the given value with
+ <span title=concept-UU-url>url</span> as <var title>url</var>, and
  <b title>host state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-hostname><code>hostname</code></dfn> attribute
 must run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>Return <span title=concept-url-host>host</span>,
  <span title=concept-host-serializer>serialized</span>.
@@ -1656,19 +1701,22 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
- <li><p><span title=concept-url-parser>Parse</span> the given value with the
- associated <b title>url</b> as <var title>url</var>, and
+ <li><p><span title=concept-url-parser>Parse</span> the given value with
+ <span title=concept-UU-url>url</span> as <var title>url</var>, and
  <b title>hostname state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-port><code>port</code></dfn> attribute must run
 these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>Return <span title=concept-url-port>port</span>.
 </ol>
@@ -1677,21 +1725,24 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, its
  <span>relative flag</span> is unset, or its
  <span title=concept-url-scheme>scheme</span> is "<code title>file</code>",
  terminate these steps.
 
- <li><p><span title=concept-url-parser>Parse</span> the given value with the
- associated <b title>url</b> as <var title>url</var>, and
+ <li><p><span title=concept-url-parser>Parse</span> the given value with
+ <span title=concept-UU-url>url</span> as <var title>url</var>, and
  <b title>port state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-pathname><code>pathname</code></dfn> attribute
 must run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, return the empty string.
+ <li><p>If there is no <span title=concept-UU-url>url</span>, return the
+ empty string.
 
  <li><p>If the <span>relative flag</span> is unset, return
  <span title=concept-url-scheme-data>scheme data</span>.
@@ -1705,21 +1756,23 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>Set <span title=concept-url-path>path</span> to the empty list.
 
- <li><p><span title=concept-url-parser>Parse</span> the given value with the
- associated <b title>url</b> as <var title>url</var>, and
+ <li><p><span title=concept-url-parser>Parse</span> the given value with
+ <span title=concept-UU-url>url</span> as <var title>url</var>, and
  <b title>relative path start state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-search><code>search</code></dfn> attribute must
 run these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span title=concept-url-query>query</span> is either null or
  the empty string, return the empty string.
 
@@ -1731,11 +1784,12 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <span title=concept-url-query>query</span> to null, and terminate these
+ <span title=concept-url-query>query</span> to null, run the
+ <span title=concept-UU-update>update steps</span>, and terminate these
  steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
@@ -1744,9 +1798,12 @@ these steps:
  <li><p>Set <span title=concept-url-query>query</span> to the empty string.
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
- with the associated <b title>url</b> as <var title>url</var>,
+ with <span title=concept-UU-url>url</span> as <var title>url</var>,
  <b title>query state</b> as <var title>state override</var>, and the
- associated <b title>query encoding</b> as <var title>encoding override</var>.
+ associated <span title=concept-UU-query-encoding>query encoding</span> as
+ <var title>encoding override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 <p>The <dfn title=dom-URL-query><code>query</code></dfn> attribute must
@@ -1756,7 +1813,7 @@ return the associated <code>URLQuery</code> object.
 these steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span title=concept-url-fragment>fragment</span> is either null or
  the empty string, return the empty string.
 
@@ -1768,13 +1825,14 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no associated <b title>url</b>, or its
+ <li><p>If there is no <span title=concept-UU-url>url</span>, or its
  <span title=concept-url-scheme>scheme</span> is
  "<code title>javascript</code>", terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <span title=concept-url-fragment>fragment</span> to null, and terminate
- these steps.
+ <span title=concept-url-fragment>fragment</span> to null, run the
+ <span title=concept-UU-update>update steps</span>, and terminate these
+ steps.
 
  <li><p>Let <var title>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.
@@ -1783,8 +1841,10 @@ steps:
  the empty string.
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
- with the associated <b title>url</b> as <var title>url</var>, and
+ with <span title=concept-UU-url>url</span> as <var title>url</var>, and
  <b title>fragment state</b> as <var title>state override</var>.
+
+ <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
 
 
