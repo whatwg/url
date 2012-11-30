@@ -2035,7 +2035,7 @@ interface <dfn>URLQuery</dfn> {
   void <span title=dom-URLQuery-set>set</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
   void <span title=dom-URLQuery-append>append</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
   boolean <span title=dom-URLQuery-has>has</span>(DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>, optional DOMString <var title>value</var>);
+  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>);
   readonly attribute unsigned long <span title=dom-URLQuery-size>size</span>;
 };</pre>
 
@@ -2139,15 +2139,11 @@ method must return true if there is a name-value pair whose name is
 <var title>name</var>, and false otherwise.
 
 <p>The
-<dfn title=dom-URLQuery-delete><code>delete(<var title>name</var>, <var title>value</var>)</code></dfn>
+<dfn title=dom-URLQuery-delete><code>delete(<var title>name</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <var title>value</var> is not given, remove all name-value pairs
- whose name is <var title>name</var>.
-
- <li><p>Otherwise, remove all name-value pairs whose name is
- <var tilte>name</var> and value is <var title>value</var>.
+ <li><p>Remove all name-value pairs whose name is <var title>name</var>.
 
  <li><p>Run the <span title=concept-UQ-update>update steps</span>.
 </ol>

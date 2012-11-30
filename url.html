@@ -2057,7 +2057,7 @@ interface <dfn id="urlquery">URLQuery</dfn> {
   void <a href="#dom-urlquery-set" title="dom-URLQuery-set">set</a>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
   void <a href="#dom-urlquery-append" title="dom-URLQuery-append">append</a>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
   boolean <a href="#dom-urlquery-has" title="dom-URLQuery-has">has</a>(DOMString <var title="">name</var>);
-  void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>(DOMString <var title="">name</var>, optional DOMString <var title="">value</var>);
+  void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>(DOMString <var title="">name</var>);
   readonly attribute unsigned long <a href="#dom-urlquery-size" title="dom-URLQuery-size">size</a>;
 };</span></pre>
 
@@ -2161,15 +2161,11 @@ method must return true if there is a name-value pair whose name is
 <var title="">name</var>, and false otherwise.
 
 <p>The
-<dfn id="dom-urlquery-delete" title="dom-URLQuery-delete"><code>delete(<var title="">name</var>, <var title="">value</var>)</code></dfn>
+<dfn id="dom-urlquery-delete" title="dom-URLQuery-delete"><code>delete(<var title="">name</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If <var title="">value</var> is not given, remove all name-value pairs
- whose name is <var title="">name</var>.
-
- <li><p>Otherwise, remove all name-value pairs whose name is
- <var tilte="">name</var> and value is <var title="">value</var>.
+ <li><p>Remove all name-value pairs whose name is <var title="">name</var>.
 
  <li><p>Run the <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
 </ol>
