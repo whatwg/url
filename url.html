@@ -1601,22 +1601,34 @@ interface <dfn id="urlutils">URLUtils</dfn> {
      effective TLD as it's evil.) -->
 
 <p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
-<a href="#urlquery"><code>URLQuery</code></a> object,
 <a href="#concept-base-url" title="concept-base-url">base URL</a>
 <dfn id="concept-uu-base" title="concept-UU-base">base</dfn>,
 <dfn id="concept-uu-input" title="concept-UU-input">input</dfn>,
-<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>, and optionally a
+<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>,
+<dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>, and a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
-<dfn id="concept-uu-url" title="concept-UU-url">url</dfn>. Unless stated otherwise,
+<dfn id="concept-uu-url" title="concept-UU-url">url</dfn>.
+
+Unless stated otherwise,
 <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others must be set on
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>, and
+<a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> and
+<a href="#concept-uu-url" title="concept-UU-url">url</a> are null. The others must be set on
 creation by the specification using <a href="#urlutils"><code>URLUtils</code></a>.
-<!-- standard > specification -->
 
 <p class="note">The associated
 <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is a legacy
 concept only relevant for HTML.
 <a class="informative" href="#refsHTML">[HTML]</a>
+
+<p>When an object implementing <a href="#urlutils"><code>URLUtils</code></a> is created with a
+non-null <a href="#concept-uu-url" title="concept-UU-url">url</a> whose
+<a href="#relative-flag">relative flag</a> is set,
+<a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> must be set to a
+<a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
+<a href="#concept-uu-url" title="concept-UU-url">url</a>'s
+<a href="#concept-url-query" title="concept-URL-query">query</a>.
+
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> may
 define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible
@@ -1674,7 +1686,7 @@ global object. It augments other interfaces, such as <a href="#url"><code>URL</c
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return
  <a href="#concept-uu-input" title="concept-UU-input">input</a>.
 
  <li><p>Return the <a href="#concept-url-serializer" title="concept-url-serializer">serialization</a>
@@ -1685,7 +1697,8 @@ these steps:
 run these steps:
 
 <ol>
- <li><p>Unassociate <a href="#concept-uu-url" title="concept-UU-url">url</a>.
+ <li><p>Set <a href="#concept-uu-url" title="concept-UU-url">url</a> and
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to null.
 
  <li><p>Set <a href="#concept-uu-input" title="concept-UU-input">input</a> to the given value.
 
@@ -1700,6 +1713,13 @@ run these steps:
  <li><p>If <var title="">parsed URL</var> is not failure, set
  <a href="#concept-uu-url" title="concept-UU-url">url</a> to <var title="">parsed URL</var>.
 
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is non-null and its
+ <a href="#relative-flag">relative flag</a> is set, set
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to a
+ <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
+ <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
+ <a href="#concept-url-query" title="concept-URL-query">query</a>.
+
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
 
@@ -1707,8 +1727,8 @@ run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
- empty string.
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the empty
+ string.
 
  <li><p>Return the <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-6.1">Unicode serialization</a>
  of <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
@@ -1724,7 +1744,7 @@ compatibility with HTML's <code>MessageEvent</code> feature.
 must run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return
  "<code title="">:</code>".
 
  <li><p>Return <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
@@ -1735,7 +1755,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, terminate
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, terminate
  these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value and
@@ -1750,7 +1770,7 @@ run these steps:
 must run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the
  empty string.
 
  <li><p>Return <a href="#concept-url-username" title="concept-url-username">username</a>.
@@ -1760,7 +1780,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p>Set <a href="#concept-url-username" title="concept-url-username">username</a> to the empty
@@ -1778,7 +1798,7 @@ run these steps:
 must run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a> or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null or its
  <a href="#concept-url-password" title="concept-url-password">password</a> is null, return the empty
  string.
 
@@ -1789,7 +1809,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
@@ -1811,7 +1831,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the
  empty string.
 
  <li><p>If <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string,
@@ -1828,7 +1848,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
@@ -1842,7 +1862,7 @@ steps:
 must run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the
  empty string.
 
  <li><p>Return <a href="#concept-url-host" title="concept-url-host">host</a>,
@@ -1853,7 +1873,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
@@ -1867,7 +1887,7 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the
  empty string.
 
  <li><p>Return <a href="#concept-url-port" title="concept-url-port">port</a>.
@@ -1877,7 +1897,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, its
  <a href="#relative-flag">relative flag</a> is unset, or its
  <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is "<code title="">file</code>",
  terminate these steps.
@@ -1893,7 +1913,7 @@ steps:
 must run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, return the
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the
  empty string.
 
  <li><p>If the <a href="#relative-flag">relative flag</a> is unset, return
@@ -1908,7 +1928,7 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
@@ -1924,7 +1944,7 @@ run these steps:
 run these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#concept-url-query" title="concept-url-query">query</a> is either null or
  the empty string, return the empty string.
 
@@ -1936,11 +1956,13 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a href="#concept-url-query" title="concept-url-query">query</a> to null, run the
+ <a href="#concept-url-query" title="concept-url-query">query</a> to null, set
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list
+ of name-value pairs to the empty list, run the
  <a href="#concept-uu-update" title="concept-UU-update">update steps</a>, and terminate these
  steps.
 
@@ -1955,27 +1977,26 @@ these steps:
  associated <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
  <var title="">encoding override</var>.
 
+ <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s
+ associated list of name-value pairs to the result of
+ <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
+ <var title="">input</var>.
+
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must run
-these steps:
-
-<ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
- <a href="#relative-flag">relative flag</a> is unset, return null.
-
- <li><p>Return the associated <a href="#urlquery"><code>URLQuery</code></a> object.
-</ol>
+<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
+return the <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>.
 
 <p>Setting the <a href="#dom-url-query"><code title="dom-URL-query">query</code></a> attribute must run
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
- <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
+ <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> or the
+ given value is null, terminate these steps.
 
- <li><p>Set the associated <a href="#urlquery"><code>URLQuery</code></a> object to the given value.
+ <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to the
+ given value.
 
  <li><p>Run <a href="#urlquery"><code>URLQuery</code></a> object's
  <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
@@ -1985,7 +2006,7 @@ these steps:
 these steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is either null or
  the empty string, return the empty string.
 
@@ -1997,7 +2018,7 @@ these steps:
 steps:
 
 <ol>
- <li><p>If there is no <a href="#concept-uu-url" title="concept-UU-url">url</a>, or its
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
  "<code title="">javascript</code>", terminate these steps.
 
@@ -2022,7 +2043,12 @@ steps:
 
 <h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional <span class="XXX">...</span> <var title="">init</var>)]
+<ul class="XXX">
+ <li>IDL does not define open-ended dictionaries yet we need for the constructor.
+ <li>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
+</ul>
+
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <span class="XXX">...</span>) <var title="">init</var>)]
 interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <span title="dom-URLQuery-getAll">getAll</span>(DOMString <var title="">name</var>);
@@ -2032,16 +2058,29 @@ interface <dfn id="urlquery">URLQuery</dfn> {
   boolean <span title="dom-URLQuery-has">has</span>(DOMString <var title="">name</var>);
 };</span></pre>
 
-<p>A <a href="#urlquery"><code>URLQuery</code></a> object represents an ordered list of
-name/value pairs, but has an API optimized for a map of name/value pairs.
+<p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated list of name-value
+pairs, which is initially empty.
 
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object can be associated with object that
 implements the <a href="#urlutils"><code>URLUtils</code></a> interface.
 
-<p>To <dfn id="concept-uq-serialize" title="concept-UQ-serialize">serialize</dfn> a
-<a href="#urlquery"><code>URLQuery</code></a> object, run these steps:
+<p>To create a
+<dfn id="concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</dfn>, optionally
+using a string (which can be null) or dictionary <var title="">init</var>,
+run these steps:
 
-<ol class="XXX"></ol>
+<ol>
+ <li><p>Let <var title="">query</var> be a new <a href="#urlquery"><code>URLQuery</code></a> object.
+
+ <li><p>If <var title="">init</var> is null, return <var title="">query</var>.
+
+ <li><p>If <var title="">init</var> is a string and is not the empty string,
+ set <var title="">query</var>'s associated list of name-value pairs to the
+ result of <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
+ <var title="">input</var>.
+
+ <li><p class="XXX">...
+</ol>
 
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object's
 <dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
@@ -2052,22 +2091,16 @@ implements the <a href="#urlutils"><code>URLUtils</code></a> interface.
 
  <li><p>Otherwise, let <var title="">object</var> be that associated object.
 
- <li><p>Set <var title="">object</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a>
+ <li><p>Set <var title="">object</var>'s
+ <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> to the
- <a href="#concept-uq-serialize" title="concept-UQ-serialize">serialization</a> of the
- <a href="#urlquery"><code>URLQuery</code></a> object.
+ <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
+ <a href="#urlquery"><code>URLQuery</code></a> object's associated list of name-value pairs.
 
  <li><p>Run <var title="">object</var>'s
  <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
 
-<ul class="XXX">
- <li>IDL does not define open-ended dictionaries yet we need for the constructor.
- <li>JavaScript does not have MultiMap but the idea is to implement this in
- terms of an underlying MultiMap.
-</ul>
-
-<!-- get() should return "" when value is null -->
 
 
 <h2 class="no-num" id="references">References</h2>
