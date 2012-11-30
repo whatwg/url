@@ -2043,10 +2043,7 @@ steps:
 
 <h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
-<ul class="XXX">
- <li>IDL does not define open-ended dictionaries yet we need for the constructor.
- <li>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
-</ul>
+<p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
 <pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <span class="XXX">...</span>) <var title="">init</var>)]
 interface <dfn id="urlquery">URLQuery</dfn> {
@@ -2062,8 +2059,14 @@ interface <dfn id="urlquery">URLQuery</dfn> {
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated list of name-value
 pairs, which is initially empty.
 
-<p>A <a href="#urlquery"><code>URLQuery</code></a> object can be associated with object that
-implements the <a href="#urlutils"><code>URLUtils</code></a> interface.
+<p class="note"><a href="#urlquery"><code>URLQuery</code></a> objects always use
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of
+concepts such as
+<a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a>. This is to
+encourage developers to migrate towards
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>, which they really ought to
+have done a long time ago now.
 
 <p>To create a
 <dfn id="concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</dfn>, optionally
@@ -2080,17 +2083,20 @@ run these steps:
  result of <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
  <var title="">input</var>.
 
- <li><p class="XXX">...
+ <li><p class="XXX">If <var title="">init</var> is a dictionary...
+
+ <li><p>Return <var title="">query</var>.
 </ol>
 
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object's
 <dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
 
 <ol>
- <li><p>If there is no associated object that implements the
- <a href="#urlutils"><code>URLUtils</code></a> interface, terminate these steps.
+ <li><p>If there is no object whose
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is this
+ <a href="#urlquery"><code>URLQuery</code></a> object, terminate these steps.
 
- <li><p>Otherwise, let <var title="">object</var> be that associated object.
+ <li><p>Otherwise, let <var title="">object</var> be that object.
 
  <li><p>Set <var title="">object</var>'s
  <a href="#concept-uu-url" title="concept-UU-url">url</a>'s

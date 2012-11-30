@@ -2021,10 +2021,7 @@ steps:
 
 <h3>Interface <code>URLQuery</code></h3>
 
-<ul class=XXX>
- <li>IDL does not define open-ended dictionaries yet we need for the constructor.
- <li>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
-</ul>
+<p class=XXX>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
 <pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span class=XXX>...</span>) <var title>init</var>)]
 interface <dfn>URLQuery</dfn> {
@@ -2040,8 +2037,14 @@ interface <dfn>URLQuery</dfn> {
 <p>A <code>URLQuery</code> object has an associated list of name-value
 pairs, which is initially empty.
 
-<p>A <code>URLQuery</code> object can be associated with object that
-implements the <code>URLUtils</code> interface.
+<p class=note><code>URLQuery</code> objects always use
+<span data-anolis-spec=encoding>utf-8</span> as
+<span data-anolis-spec=encoding>encoding</span>, despite the existence of
+concepts such as
+<span title=concept-UU-query-encoding>query encoding</span>. This is to
+encourage developers to migrate towards
+<span data-anolis-spec=encoding>utf-8</span>, which they really ought to
+have done a long time ago now.
 
 <p>To create a
 <dfn title=concept-UQ-new>new <code>URLQuery</code> object</dfn>, optionally
@@ -2058,17 +2061,20 @@ run these steps:
  result of <span title=concept-urlencoded-parser>parsing</span>
  <var title>input</var>.
 
- <li><p class=XXX>...
+ <li><p class=XXX>If <var title>init</var> is a dictionary...
+
+ <li><p>Return <var title>query</var>.
 </ol>
 
 <p>A <code>URLQuery</code> object's
 <dfn title=concept-UQ-update>update steps</dfn> are:
 
 <ol>
- <li><p>If there is no associated object that implements the
- <code>URLUtils</code> interface, terminate these steps.
+ <li><p>If there is no object whose
+ <span title=concept-UU-query-object>query object</span> is this
+ <code>URLQuery</code> object, terminate these steps.
 
- <li><p>Otherwise, let <var title>object</var> be that associated object.
+ <li><p>Otherwise, let <var title>object</var> be that object.
 
  <li><p>Set <var title>object</var>'s
  <span title=concept-UU-url>url</span>'s
