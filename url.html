@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-november-2012">Living Standard — Last Updated 29 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-november-2012">Living Standard — Last Updated 30 November 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-29 November 2012, the editors have made this specification available
+30 November 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -63,11 +63,12 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#writing"><span class="secno">5.1 </span>Writing</a></li>
    <li><a href="#parsing"><span class="secno">5.2 </span>Parsing</a></li>
    <li><a href="#serializing"><span class="secno">5.3 </span>Serializing</a></ol></li>
- <li><a href="#api"><span class="secno">6 </span>API</a>
+ <li><a href="#application/x-www-form-urlencoded"><span class="secno">6 </span><code>application/x-www-form-urlencoded</code></a></li>
+ <li><a href="#api"><span class="secno">7 </span>API</a>
   <ol>
-   <li><a href="#constructors"><span class="secno">6.1 </span>Constructors</a></li>
-   <li><a href="#interface-urlutils"><span class="secno">6.2 </span>Interface <code>URLUtils</code></a></li>
-   <li><a href="#interface-urlquery"><span class="secno">6.3 </span>Interface <code>URLQuery</code></a></ol></li>
+   <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
+   <li><a href="#interface-urlutils"><span class="secno">7.2 </span>Interface <code>URLUtils</code></a></li>
+   <li><a href="#interface-urlquery"><span class="secno">7.3 </span>Interface <code>URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -187,6 +188,16 @@ and
 <a href="#password-encode-set">password encode set</a> and code point
 "<code title="">:</code>". <!-- 0x3A -->
 
+<p>The <dfn id="application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</dfn>
+is the <a href="#simple-encode-set">simple encode set</a>, code points in the range
+U+0021 to U+0029, code points
+"<code title="">+</code>", <!-- 0x2B -->
+"<code title="">,</code>", <!-- 0x2C -->
+"<code title="">/</code>", <!-- 0x2F -->
+code points in the ranges U+003A to U+0040 and U+005B to U+005E, code point
+"<code title="">`</code>", <!-- 0x60 -->
+and code points in the range U+007B to U+007E.
+
 <p>To <dfn id="potentially-percent-encode">potentially percent encode</dfn> a <var title="">code point</var>,
 using an <var title="">encode set</var>, and an optional
 <var title="">encoding override</var>, run these steps:
@@ -208,6 +219,11 @@ using an <var title="">encode set</var>, and an optional
   emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
   0x3F byte instead and do not terminate the algorithm.
 
+  <p class="XXX">application/x-www-form-urlencoded wants the format
+  "<code title="">&amp;#</code>", followed by <var title="">code point</var>
+  represented using <a href="#ascii-digits">ASCII digits</a>, followed by
+  "<code title="">;</code>" here. I think we should always use that.
+
   <p class="note">Using <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> ensures
   you never hit an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>
   here, but unfortunately legacy content uses other
@@ -217,10 +233,14 @@ using an <var title="">encode set</var>, and an optional
  then return them concatenated, in the same order.
 </ol>
 
-<p>To <dfn id="percent-decode">percent decode</dfn> a string <var title="">input</var>, run these
-steps:
+<p>To <dfn id="percent-decode">percent decode</dfn> a string <var title="">input</var>, optionally
+with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<var title="">encoding override</var>, run these steps:
 
 <ol>
+ <li><p>If <var title="">encoding override</var> is not given, set it to
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+
  <li><p>Let <var title="">pointer</var> be a pointer into
  <var title="">input</var>, initially zero (pointing to the first code point),
  and let <var title="">c</var> be the code point it points to.
@@ -228,41 +248,37 @@ steps:
  <li><p>Let <var title="">remaining</var> be the substring after
  <var title="">pointer</var> in <var title="">input</var>.
 
- <li><p>Let <var title="">output</var> be an empty string.
+ <li><p>Let <var title="">bytes</var> be an empty byte sequence.
 
  <li>
   <p>While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run
   these substeps:
 
   <ol>
-   <li>While <var title="">c</var> is not "<code title="">%</code>" or the
-   <a href="#eof-code-point">EOF code point</a>, append <var title="">c</var> to
-   <var title="">output</var> and increase <var title="">pointer</var> by one.
+   <li><p>While <var title="">c</var> is not "<code title="">%</code>" or the
+   <a href="#eof-code-point">EOF code point</a>, append to <var title="">bytes</var> a byte
+   whose value is <var title="">c</var>'s code point and increase
+   <var title="">pointer</var> by one.
 
-   <li>If <var title="">c</var> is "<code title="">%</code>" and
+   <li><p>If <var title="">c</var> is "<code title="">%</code>" and
    <var title="">remaining</var> does not start with two
-   <a href="#ascii-hex-digits">ASCII hex digits</a>, append <var title="">c</var> to
-   <var title="">output</var> increase <var title="">pointer</var> by one, and run
-   these substeps again.
+   <a href="#ascii-hex-digits">ASCII hex digits</a>, append to <var title="">bytes</var> a byte
+   whose value is <var title="">c</var>'s code point, increase
+   <var title="">pointer</var> by one, and run these substeps again.
 
-   <li>
-    <p>Let <var title="">bytes</var> be an empty sequence of bytes.
-
-    <p>While <var title="">c</var> is "<code title="">%</code>" and
-    <var title="">remaining</var> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
-    append to <var title="">bytes</var> a byte whose value is
-    <var title="">remaining</var>'s two leading code points, interpreted as
-    hexadecimal number, and increase <var title="">pointer</var> by three.
-
-    <p>Append to <var title="">output</var> the result of running the
-    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> on
-    <var title="">bytes</var>.
-
-    <p class="note"><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> is not
-    used here as it would consume the byte order mark which is not desired.
+   <li><p>While <var title="">c</var> is "<code title="">%</code>" and
+   <var title="">remaining</var> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
+   append to <var title="">bytes</var> a byte whose value is
+   <var title="">remaining</var>'s two leading code points, interpreted as
+   hexadecimal number, and increase <var title="">pointer</var> by three.
   </ol>
 
- <li><p>Return <var title="">output</var>.
+ <li>
+  <p>Return the result of running <var title="">encoding override</var>'s
+  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on <var title="">bytes</var>.
+
+  <p class="note"><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decode">Decode</a> is not used
+  here as it would consume the byte order mark which is not desired.
 </ol>
 
 
@@ -1427,7 +1443,122 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 
 
 
-<h2 id="api"><span class="secno">6 </span>API</h2>
+<h2 id="application/x-www-form-urlencoded"><span class="secno">6 </span><code>application/x-www-form-urlencoded</code></h2>
+
+<p>The
+<dfn id="concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
+takes a string <var title="">input</var>, optionally with an
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<var title="">encoding override</var>, and optionally with a
+<i title="">use "<code>_charset_</code>" flag</i>, and then runs these steps:
+
+<ol>
+ <li><p>Let <var title="">strings</var> be the result of splitting
+ <var title="">input</var> on "<code title="">&amp;</code>".
+
+ <li><p>If <var title="">encoding override</var> is not given, set it to
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+
+ <li><p>Let <var title="">pairs</var> be an empty list of name-value pairs.
+
+ <li>
+  <p>For each string <var title="">string</var> in <var title="">strings</var>,
+  run these substeps:
+
+  <ol>
+   <li><p>If <var title="">string</var> is the empty string, run these substeps
+   again for the next string.
+   <!-- this is different from HTML -->
+
+   <li><p>If string contains a "<code title="">=</code>", then let
+   <var title="">name</var> be the substring of <var title="">string</var> from
+   the start of <var title="">string</var> up to but excluding its first
+   "<code title="">=</code>", and let <var title="">value</var> be the substring
+   from the first code point, if any, after the first "<code title="">=</code>"
+   up to the end of <var title="">string</var>. If "<code title="">=</code>" is
+   the first code point, then <var title="">name</var> will be the empty
+   string. If it is the last, then <var title="">value</var> will be the empty
+   string.
+
+   <li><p>Otherwise, let <var title="">name</var> have the value of
+   <var title="">string</var> and let <var title="">value</var> be the empty
+   string.
+
+   <li><p>Replace any "<code title="">+</code>" in <var title="">name</var> and
+   <var title="">value</var> with U+0020.
+
+   <li><p>If the <i title="">use "<code>_charset_</code>" flag</i> is set,
+   <var title="">name</var> is "<code title="">_charset_</code>", and
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">get an encoding</a>
+   for <var title="">value</var> does not return value, set
+   <var title="">encoding</var> to the result of
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
+   for <var title="">value</var>.
+
+   <li><p><a href="#percent-decode">Percent decode</a> <var title="">name</var> and
+   <var title="">value</var> with <var title="">encoding override</var>.
+
+   <li><p>Add a pair consisting of <var title="">name</var> and
+   <var title="">value</var> to <var title="">pairs</var>.
+  </ol>
+ <li>Return <var title="">pairs</var>.
+</ol>
+
+<p>The
+<dfn id="concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
+takes a list of name-value pairs <var title="">pairs</var>, optionally with an
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<var title="">encoding override</var>, and then runs these steps:
+
+<ol>
+ <li><p>If <var title="">encoding override</var> is not given, set it to
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+
+ <li><p>Let <var title="">output</var> be the empty string.
+
+ <li>
+  <p>For each pair <var title="">pair</var> in <var title="">pairs</var>, run
+  these substeps:
+
+  <ol>
+   <li><p>Let <var title="">new name</var> and <var title="">new value</var> be
+   the empty string.
+
+   <li><p>For each code point <var title="">c</var> in
+   <var title="">pair</var>'s name, append "<code title="">+</code>" to
+   <var title="">new name</var> if <var title="">c</var> is U+0020, and append
+   <var title="">c</var>,
+   <a href="#potentially-percent-encode" title="potentially percent encode">potentially percent encoded</a>
+   using the
+   <a href="#application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</a>
+   and <var title="">encoding override</var>, otherwise.
+
+   <li><p>For each code point <var title="">c</var> in
+   <var title="">pair</var>'s value, append "<code title="">+</code>" to
+   <var title="">new value</var> if <var title="">c</var> is U+0020, and append
+   <var title="">c</var>,
+   <a href="#potentially-percent-encode" title="potentially percent encode">potentially percent encoded</a>
+   using the
+   <a href="#application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</a>
+   and <var title="">encoding override</var>, otherwise.
+
+   <li><p>Set <var title="">pair</var>'s name to <var title="">new name</var> and
+   <var title="">pair</var>'s value to <var title="">new value</var>.
+
+   <li><p>If this is not the first pair, append "<code title="">&amp;</code>" to
+   <var title="">output</var>.
+
+   <li><p>Append <var title="">pair</var>'s name, followed by
+   "<code title="">=</code>", followed by <var title="">pair</var>'s value to
+   <var title="">output</var>.
+  </ol>
+
+ <li>Return <var title="">output</var>.
+</ol>
+
+
+
+<h2 id="api"><span class="secno">7 </span>API</h2>
 
 <!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
      s/DOMString/UTFString -->
@@ -1499,7 +1630,7 @@ keep track themselves if an actual modification is made, if they wish to
 make that distinction.
 
 
-<h3 id="constructors"><span class="secno">6.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
+<h3 id="constructors"><span class="secno">7.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
 <dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var>, <var title="">base</var>)</code></dfn>
@@ -1534,7 +1665,7 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="interface-urlutils"><span class="secno">6.2 </span>Interface <a href="#urlutils"><code>URLUtils</code></a></h3>
+<h3 id="interface-urlutils"><span class="secno">7.2 </span>Interface <a href="#urlutils"><code>URLUtils</code></a></h3>
 
 <p class="note">The <a href="#urlutils"><code>URLUtils</code></a> interface is not exposed on the
 global object. It augments other interfaces, such as <a href="#url"><code>URL</code></a>.
@@ -1889,15 +2020,16 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">6.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
+<h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
 <pre class="idl">[<span title="dom-URLQuery">Constructor(optional <span class="XXX">...</span> <var title="">init</var>)]
 interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <span title="dom-URLQuery-get">get</span>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <span title="dom-URLQuery-getAll">getAll</span>(DOMString <var title="">name</var>);
-  void <span title="dom-URLQuery-set">set</span>(DOMString <var title="">name</var>, (sequence&lt;DOMString&gt; or DOMString) <var title="">value</var>);
-  void <span title="dom-URLQuery-append">append</span>(DOMString <var title="">name</var>, optional DOMString? <var title="">value</var> = null);
+  void <span title="dom-URLQuery-set">set</span>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
+  void <span title="dom-URLQuery-append">append</span>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
   void <span title="dom-URLQuery-delete">delete</span>(DOMString <var title="">name</var>, optional DOMString <var title="">value</var>);
+  boolean <span title="dom-URLQuery-has">has</span>(DOMString <var title="">name</var>);
 };</span></pre>
 
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object represents an ordered list of

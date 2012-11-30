@@ -166,6 +166,16 @@ and
 <span>password encode set</span> and code point
 "<code title>:</code>". <!-- 0x3A -->
 
+<p>The <dfn><code>application/x-www-form-urlencoded</code> encode set</dfn>
+is the <span>simple encode set</span>, code points in the range
+U+0021 to U+0029, code points
+"<code title>+</code>", <!-- 0x2B -->
+"<code title>,</code>", <!-- 0x2C -->
+"<code title>/</code>", <!-- 0x2F -->
+code points in the ranges U+003A to U+0040 and U+005B to U+005E, code point
+"<code title>`</code>", <!-- 0x60 -->
+and code points in the range U+007B to U+007E.
+
 <p>To <dfn>potentially percent encode</dfn> a <var title>code point</var>,
 using an <var title>encode set</var>, and an optional
 <var title>encoding override</var>, run these steps:
@@ -187,6 +197,11 @@ using an <var title>encode set</var>, and an optional
   emits an <span data-anolis-spec=encoding>encoder error</span>, emit a
   0x3F byte instead and do not terminate the algorithm.
 
+  <p class=XXX>application/x-www-form-urlencoded wants the format
+  "<code title>&#</code>", followed by <var title>code point</var>
+  represented using <span>ASCII digits</span>, followed by
+  "<code title>;</code>" here. I think we should always use that.
+
   <p class=note>Using <span data-anolis-spec=encoding>utf-8</span> ensures
   you never hit an <span data-anolis-spec=encoding>encoder error</span>
   here, but unfortunately legacy content uses other
@@ -196,10 +211,14 @@ using an <var title>encode set</var>, and an optional
  then return them concatenated, in the same order.
 </ol>
 
-<p>To <dfn>percent decode</dfn> a string <var title>input</var>, run these
-steps:
+<p>To <dfn>percent decode</dfn> a string <var title>input</var>, optionally
+with an <span data-anolis-spec=encoding>encoding</span>
+<var title>encoding override</var>, run these steps:
 
 <ol>
+ <li><p>If <var title>encoding override</var> is not given, set it to
+ <span data-anolis-spec=encoding>utf-8</span>.
+
  <li><p>Let <var title>pointer</var> be a pointer into
  <var title>input</var>, initially zero (pointing to the first code point),
  and let <var title>c</var> be the code point it points to.
@@ -207,41 +226,37 @@ steps:
  <li><p>Let <var title>remaining</var> be the substring after
  <var title>pointer</var> in <var title>input</var>.
 
- <li><p>Let <var title>output</var> be an empty string.
+ <li><p>Let <var title>bytes</var> be an empty byte sequence.
 
  <li>
   <p>While <var title>c</var> is not the <span>EOF code point</span>, run
   these substeps:
 
   <ol>
-   <li>While <var title>c</var> is not "<code title>%</code>" or the
-   <span>EOF code point</span>, append <var title>c</var> to
-   <var title>output</var> and increase <var title>pointer</var> by one.
+   <li><p>While <var title>c</var> is not "<code title>%</code>" or the
+   <span>EOF code point</span>, append to <var title>bytes</var> a byte
+   whose value is <var title>c</var>'s code point and increase
+   <var title>pointer</var> by one.
 
-   <li>If <var title>c</var> is "<code title>%</code>" and
+   <li><p>If <var title>c</var> is "<code title>%</code>" and
    <var title>remaining</var> does not start with two
-   <span>ASCII hex digits</span>, append <var title>c</var> to
-   <var title>output</var> increase <var title>pointer</var> by one, and run
-   these substeps again.
+   <span>ASCII hex digits</span>, append to <var title>bytes</var> a byte
+   whose value is <var title>c</var>'s code point, increase
+   <var title>pointer</var> by one, and run these substeps again.
 
-   <li>
-    <p>Let <var title>bytes</var> be an empty sequence of bytes.
-
-    <p>While <var title>c</var> is "<code title>%</code>" and
-    <var title>remaining</var> starts with two <span>ASCII hex digits</span>,
-    append to <var title>bytes</var> a byte whose value is
-    <var title>remaining</var>'s two leading code points, interpreted as
-    hexadecimal number, and increase <var title>pointer</var> by three.
-
-    <p>Append to <var title>output</var> the result of running the
-    <span data-anolis-spec=encoding>utf-8 decoder</span> on
-    <var title>bytes</var>.
-
-    <p class=note><span data-anolis-spec=encoding>utf-8 decode</span> is not
-    used here as it would consume the byte order mark which is not desired.
+   <li><p>While <var title>c</var> is "<code title>%</code>" and
+   <var title>remaining</var> starts with two <span>ASCII hex digits</span>,
+   append to <var title>bytes</var> a byte whose value is
+   <var title>remaining</var>'s two leading code points, interpreted as
+   hexadecimal number, and increase <var title>pointer</var> by three.
   </ol>
 
- <li><p>Return <var title>output</var>.
+ <li>
+  <p>Return the result of running <var title>encoding override</var>'s
+  <span data-anolis-spec=encoding>decoder</span> on <var title>bytes</var>.
+
+  <p class=note><span data-anolis-spec=encoding>Decode</span> is not used
+  here as it would consume the byte order mark which is not desired.
 </ol>
 
 
@@ -1406,6 +1421,121 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 
 
+<h2><code>application/x-www-form-urlencoded</code></h2>
+
+<p>The
+<dfn title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parser</dfn>
+takes a string <var title>input</var>, optionally with an
+<span data-anolis-spec=encoding>encoding</span>
+<var title>encoding override</var>, and optionally with a
+<i title>use "<code>_charset_</code>" flag</i>, and then runs these steps:
+
+<ol>
+ <li><p>Let <var title>strings</var> be the result of splitting
+ <var title>input</var> on "<code title>&</code>".
+
+ <li><p>If <var title>encoding override</var> is not given, set it to
+ <span data-anolis-spec=encoding>utf-8</span>.
+
+ <li><p>Let <var title>pairs</var> be an empty list of name-value pairs.
+
+ <li>
+  <p>For each string <var title>string</var> in <var title>strings</var>,
+  run these substeps:
+
+  <ol>
+   <li><p>If <var title>string</var> is the empty string, run these substeps
+   again for the next string.
+   <!-- this is different from HTML -->
+
+   <li><p>If string contains a "<code title>=</code>", then let
+   <var title>name</var> be the substring of <var title>string</var> from
+   the start of <var title>string</var> up to but excluding its first
+   "<code title>=</code>", and let <var title>value</var> be the substring
+   from the first code point, if any, after the first "<code title>=</code>"
+   up to the end of <var title>string</var>. If "<code title>=</code>" is
+   the first code point, then <var title>name</var> will be the empty
+   string. If it is the last, then <var title>value</var> will be the empty
+   string.
+
+   <li><p>Otherwise, let <var title>name</var> have the value of
+   <var title>string</var> and let <var title>value</var> be the empty
+   string.
+
+   <li><p>Replace any "<code title>+</code>" in <var title>name</var> and
+   <var title>value</var> with U+0020.
+
+   <li><p>If the <i title>use "<code>_charset_</code>" flag</i> is set,
+   <var title>name</var> is "<code title>_charset_</code>", and
+   <span data-anolis-spec=encoding title=concept-encoding-get>get an encoding</span>
+   for <var title>value</var> does not return value, set
+   <var title>encoding</var> to the result of
+   <span data-anolis-spec=encoding title=concept-encoding-get>getting an encoding</span>
+   for <var title>value</var>.
+
+   <li><p><span>Percent decode</span> <var title>name</var> and
+   <var title>value</var> with <var title>encoding override</var>.
+
+   <li><p>Add a pair consisting of <var title>name</var> and
+   <var title>value</var> to <var title>pairs</var>.
+  </ol>
+ <li>Return <var title>pairs</var>.
+</ol>
+
+<p>The
+<dfn title=concept-urlencoded-serializer><code>application/x-www-form-urlencoded</code> serializer</dfn>
+takes a list of name-value pairs <var title>pairs</var>, optionally with an
+<span data-anolis-spec=encoding>encoding</span>
+<var title>encoding override</var>, and then runs these steps:
+
+<ol>
+ <li><p>If <var title>encoding override</var> is not given, set it to
+ <span data-anolis-spec=encoding>utf-8</span>.
+
+ <li><p>Let <var title>output</var> be the empty string.
+
+ <li>
+  <p>For each pair <var title>pair</var> in <var title>pairs</var>, run
+  these substeps:
+
+  <ol>
+   <li><p>Let <var title>new name</var> and <var title>new value</var> be
+   the empty string.
+
+   <li><p>For each code point <var title>c</var> in
+   <var title>pair</var>'s name, append "<code title>+</code>" to
+   <var title>new name</var> if <var title>c</var> is U+0020, and append
+   <var title>c</var>,
+   <span title="potentially percent encode">potentially percent encoded</span>
+   using the
+   <span><code>application/x-www-form-urlencoded</code> encode set</span>
+   and <var title>encoding override</var>, otherwise.
+
+   <li><p>For each code point <var title>c</var> in
+   <var title>pair</var>'s value, append "<code title>+</code>" to
+   <var title>new value</var> if <var title>c</var> is U+0020, and append
+   <var title>c</var>,
+   <span title="potentially percent encode">potentially percent encoded</span>
+   using the
+   <span><code>application/x-www-form-urlencoded</code> encode set</span>
+   and <var title>encoding override</var>, otherwise.
+
+   <li><p>Set <var title>pair</var>'s name to <var title>new name</var> and
+   <var title>pair</var>'s value to <var title>new value</var>.
+
+   <li><p>If this is not the first pair, append "<code title>&</code>" to
+   <var title>output</var>.
+
+   <li><p>Append <var title>pair</var>'s name, followed by
+   "<code title>=</code>", followed by <var title>pair</var>'s value to
+   <var title>output</var>.
+  </ol>
+
+ <li>Return <var title>output</var>.
+</ol>
+
+
+
 <h2>API</h2>
 
 <!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
@@ -1874,9 +2004,10 @@ steps:
 interface <dfn>URLQuery</dfn> {
   DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
   sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-set>set</span>(DOMString <var title>name</var>, (sequence&lt;DOMString> or DOMString) <var title>value</var>);
-  void <span title=dom-URLQuery-append>append</span>(DOMString <var title>name</var>, optional DOMString? <var title>value</var> = null);
+  void <span title=dom-URLQuery-set>set</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
+  void <span title=dom-URLQuery-append>append</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
   void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>, optional DOMString <var title>value</var>);
+  boolean <span title=dom-URLQuery-has>has</span>(DOMString <var title>name</var>);
 };</pre>
 
 <p>A <code>URLQuery</code> object represents an ordered list of
