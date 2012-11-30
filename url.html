@@ -203,8 +203,8 @@ using an <var title="">encode set</var>, and an optional
 <var title="">encoding override</var>, run these steps:
 
 <ol>
- <li><p>Let <var title="">encoding</var> be <var title="">encoding override</var>,
- if given, and <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> otherwise.
+ <li><p>If <var title="">encoding override</var> is not given, set it to
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>If <var title="">code point</var> is not in
  <var title="">encode set</var>, return <var title="">code point</var>.
@@ -212,7 +212,7 @@ using an <var title="">encode set</var>, and an optional
  <li>
   <p>Let <var title="">bytes</var> be the result of running
   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on
-  <var title="">code point</var> using <var title="">encoding</var> as
+  <var title="">code point</var> using <var title="">encoding override</var> as
   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>.
 
   <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
@@ -1491,7 +1491,7 @@ takes a string <var title="">input</var>, optionally with an
    <var title="">name</var> is "<code title="">_charset_</code>", and
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">get an encoding</a>
    for <var title="">value</var> does not return value, set
-   <var title="">encoding</var> to the result of
+   <var title="">encoding override</var> to the result of
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
    for <var title="">value</var>.
 

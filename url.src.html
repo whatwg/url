@@ -181,8 +181,8 @@ using an <var title>encode set</var>, and an optional
 <var title>encoding override</var>, run these steps:
 
 <ol>
- <li><p>Let <var title>encoding</var> be <var title>encoding override</var>,
- if given, and <span data-anolis-spec=encoding>utf-8</span> otherwise.
+ <li><p>If <var title>encoding override</var> is not given, set it to
+ <span data-anolis-spec=encoding>utf-8</span>.
 
  <li><p>If <var title>code point</var> is not in
  <var title>encode set</var>, return <var title>code point</var>.
@@ -190,7 +190,7 @@ using an <var title>encode set</var>, and an optional
  <li>
   <p>Let <var title>bytes</var> be the result of running
   <span data-anolis-spec=encoding>encode</span> on
-  <var title>code point</var> using <var title>encoding</var> as
+  <var title>code point</var> using <var title>encoding override</var> as
   <span data-anolis-spec=encoding>encoding</span>.
 
   <p>Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
@@ -1469,7 +1469,7 @@ takes a string <var title>input</var>, optionally with an
    <var title>name</var> is "<code title>_charset_</code>", and
    <span data-anolis-spec=encoding title=concept-encoding-get>get an encoding</span>
    for <var title>value</var> does not return value, set
-   <var title>encoding</var> to the result of
+   <var title>encoding override</var> to the result of
    <span data-anolis-spec=encoding title=concept-encoding-get>getting an encoding</span>
    for <var title>value</var>.
 
