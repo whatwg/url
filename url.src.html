@@ -1423,6 +1423,9 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <h2><code>application/x-www-form-urlencoded</code></h2>
 
+<p class=XXX>WIP
+<!-- http://krijnhoetmer.nl/irc-logs/whatwg/20121130#l-1057 -->
+
 <p>The
 <dfn title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a string <var title>input</var>, optionally with an
@@ -1433,6 +1436,7 @@ takes a string <var title>input</var>, optionally with an
 <ol>
  <li><p>Let <var title>strings</var> be the result of splitting
  <var title>input</var> on "<code title>&</code>".
+ <!-- XXX define splitting? -->
 
  <li><p>If <var title>encoding override</var> is not given, set it to
  <span data-anolis-spec=encoding>utf-8</span>.
@@ -1446,7 +1450,6 @@ takes a string <var title>input</var>, optionally with an
   <ol>
    <li><p>If <var title>string</var> is the empty string, run these substeps
    again for the next string.
-   <!-- this is different from HTML -->
 
    <li><p>If string contains a "<code title>=</code>", then let
    <var title>name</var> be the substring of <var title>string</var> from
@@ -1468,18 +1471,20 @@ takes a string <var title>input</var>, optionally with an
    <li><p>If the <i title>use "<code>_charset_</code>" flag</i> is set,
    <var title>name</var> is "<code title>_charset_</code>", and
    <span data-anolis-spec=encoding title=concept-encoding-get>get an encoding</span>
-   for <var title>value</var> does not return value, set
+   for <var title>value</var> does not return value, unset the
+   <i title>use "<code>_charset_</code>" flag</i> and set
    <var title>encoding override</var> to the result of
    <span data-anolis-spec=encoding title=concept-encoding-get>getting an encoding</span>
    for <var title>value</var>.
 
-   <li><p><span>Percent decode</span> <var title>name</var> and
-   <var title>value</var> with <var title>encoding override</var>.
-
    <li><p>Add a pair consisting of <var title>name</var> and
    <var title>value</var> to <var title>pairs</var>.
   </ol>
- <li>Return <var title>pairs</var>.
+
+ <li><p><span>Percent decode</span> all name-value pairs in
+ <var title>pairs</var>.
+
+ <li><p>Return <var title>pairs</var>.
 </ol>
 
 <p>The
