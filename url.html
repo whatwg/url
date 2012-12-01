@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-november-2012">Living Standard — Last Updated 30 November 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-december-2012">Living Standard — Last Updated 1 December 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-30 November 2012, the editors have made this specification available
+1 December 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1997,13 +1997,21 @@ return the <a href="#concept-uu-query-object" title="concept-UU-query-object">qu
 these steps:
 
 <ol>
- <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> or the
- given value is null, terminate these steps.
+ <li><p>Let <var title="">object</var> be the given value.
 
- <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to the
- given value.
+ <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> or
+ <var title="">object</var> is null, terminate these steps.
 
- <li><p>Run <a href="#urlquery"><code>URLQuery</code></a> object's
+ <li><p>If <var title="">object</var>'s
+ <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> is not null, set
+ <var title="">object</var> to a
+ <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLObject</code> object</a> using
+ <var title="">object</var>.
+
+ <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to
+ <var title="">object</var>.
+
+ <li><p>Run <var title="">object</var>'s
  <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
 </ol>
 
@@ -2050,7 +2058,7 @@ steps:
 
 <p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <span class="XXX">...</span>) <var title="">init</var>)]
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a> or <span class="XXX">...</span>) <var title="">init</var>)]
 interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>(DOMString <var title="">name</var>);
@@ -2064,6 +2072,12 @@ interface <dfn id="urlquery">URLQuery</dfn> {
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated list of name-value
 pairs, which is initially empty.
 
+<p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated
+<dfn id="concept-uq-url-object" title="concept-UQ-url-object">url object</dfn> which is an object
+implementing <a href="#urlutils"><code>URLUtils</code></a> whose
+<a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is the
+<a href="#urlquery"><code>URLQuery</code></a> object, and null if there is no such object.
+
 <p class="note"><a href="#urlquery"><code>URLQuery</code></a> objects always use
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of
@@ -2075,18 +2089,22 @@ have done a long time ago now.
 
 <p>To create a
 <dfn id="concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</dfn>, optionally
-using a string (which can be null) or dictionary <var title="">init</var>,
-run these steps:
+using <var title="">init</var>, run these steps:
 
 <ol>
  <li><p>Let <var title="">query</var> be a new <a href="#urlquery"><code>URLQuery</code></a> object.
 
- <li><p>If <var title="">init</var> is null, return <var title="">query</var>.
+ <li><p>If <var title="">init</var> is not given or is null, return
+ <var title="">query</var>.
 
  <li><p>If <var title="">init</var> is a string and is not the empty string,
  set <var title="">query</var>'s associated list of name-value pairs to the
  result of <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
  <var title="">input</var>.
+
+ <li><p>If <var title="">init</var> is a <a href="#urlquery"><code>URLQuery</code></a> object, set
+ <var title="">query</var>'s associated list of name-value pairs to a copy of
+ <var title="">init</var> associated list of name-value pairs.
 
  <li><p class="XXX">If <var title="">init</var> is a dictionary...
 
@@ -2097,19 +2115,16 @@ run these steps:
 <dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
 
 <ol>
- <li><p>If there is no object whose
- <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is this
- <a href="#urlquery"><code>URLQuery</code></a> object, terminate these steps.
+ <li><p>If <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> is null,
+ terminate these steps.
 
- <li><p>Otherwise, let <var title="">object</var> be that object.
-
- <li><p>Set <var title="">object</var>'s
+ <li><p>Set <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
  <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
  <a href="#urlquery"><code>URLQuery</code></a> object's associated list of name-value pairs.
 
- <li><p>Run <var title="">object</var>'s
+ <li><p>Run <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
  <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
 
@@ -2117,7 +2132,7 @@ run these steps:
 <dfn id="dom-urlquery" title="dom-URLQuery"><code>URLQuery(<var title="">init</var>)</code></dfn>
 constructor must return a
 <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
-<var title="">init</var>.
+<var title="">init</var> if given.
 
 <p>The
 <dfn id="dom-urlquery-get" title="dom-URLQuery-get"><code>get(<var title="">name</var>)</code></dfn>

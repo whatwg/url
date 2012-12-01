@@ -1975,13 +1975,21 @@ return the <span title=concept-UU-query-object>query object</span>.
 these steps:
 
 <ol>
- <li><p>If <span title=concept-UU-query-object>query object</span> or the
- given value is null, terminate these steps.
+ <li><p>Let <var title>object</var> be the given value.
 
- <li><p>Set <span title=concept-UU-query-object>query object</span> to the
- given value.
+ <li><p>If <span title=concept-UU-query-object>query object</span> or
+ <var title>object</var> is null, terminate these steps.
 
- <li><p>Run <code>URLQuery</code> object's
+ <li><p>If <var title>object</var>'s
+ <span title=concept-UQ-url-object>url object</span> is not null, set
+ <var title>object</var> to a
+ <span title=concept-UQ-new>new <code>URLObject</code> object</span> using
+ <var title>object</var>.
+
+ <li><p>Set <span title=concept-UU-query-object>query object</span> to
+ <var title>object</var>.
+
+ <li><p>Run <var title>object</var>'s
  <span title=concept-UQ-update>update steps</span>.
 </ol>
 
@@ -2028,7 +2036,7 @@ steps:
 
 <p class=XXX>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
-<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span class=XXX>...</span>) <var title>init</var>)]
+<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span> or <span class=XXX>...</span>) <var title>init</var>)]
 interface <dfn>URLQuery</dfn> {
   DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
   sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
@@ -2042,6 +2050,12 @@ interface <dfn>URLQuery</dfn> {
 <p>A <code>URLQuery</code> object has an associated list of name-value
 pairs, which is initially empty.
 
+<p>A <code>URLQuery</code> object has an associated
+<dfn title=concept-UQ-url-object>url object</dfn> which is an object
+implementing <code>URLUtils</code> whose
+<span title=concept-UU-query-object>query object</span> is the
+<code>URLQuery</code> object, and null if there is no such object.
+
 <p class=note><code>URLQuery</code> objects always use
 <span data-anolis-spec=encoding>utf-8</span> as
 <span data-anolis-spec=encoding>encoding</span>, despite the existence of
@@ -2053,18 +2067,22 @@ have done a long time ago now.
 
 <p>To create a
 <dfn title=concept-UQ-new>new <code>URLQuery</code> object</dfn>, optionally
-using a string (which can be null) or dictionary <var title>init</var>,
-run these steps:
+using <var title>init</var>, run these steps:
 
 <ol>
  <li><p>Let <var title>query</var> be a new <code>URLQuery</code> object.
 
- <li><p>If <var title>init</var> is null, return <var title>query</var>.
+ <li><p>If <var title>init</var> is not given or is null, return
+ <var title>query</var>.
 
  <li><p>If <var title>init</var> is a string and is not the empty string,
  set <var title>query</var>'s associated list of name-value pairs to the
  result of <span title=concept-urlencoded-parser>parsing</span>
  <var title>input</var>.
+
+ <li><p>If <var title>init</var> is a <code>URLQuery</code> object, set
+ <var title>query</var>'s associated list of name-value pairs to a copy of
+ <var title>init</var> associated list of name-value pairs.
 
  <li><p class=XXX>If <var title>init</var> is a dictionary...
 
@@ -2075,19 +2093,16 @@ run these steps:
 <dfn title=concept-UQ-update>update steps</dfn> are:
 
 <ol>
- <li><p>If there is no object whose
- <span title=concept-UU-query-object>query object</span> is this
- <code>URLQuery</code> object, terminate these steps.
+ <li><p>If <span title=concept-UQ-url-object>url object</span> is null,
+ terminate these steps.
 
- <li><p>Otherwise, let <var title>object</var> be that object.
-
- <li><p>Set <var title>object</var>'s
+ <li><p>Set <span title=concept-UQ-url-object>url object</span>'s
  <span title=concept-UU-url>url</span>'s
  <span title=concept-URL-query>query</span> to the
  <span title=concept-urlencoded-serializer>serialization</span> of the
  <code>URLQuery</code> object's associated list of name-value pairs.
 
- <li><p>Run <var title>object</var>'s
+ <li><p>Run <span title=concept-UQ-url-object>url object</span>'s
  <span title=concept-UU-update>update steps</span>.
 </ol>
 
@@ -2095,7 +2110,7 @@ run these steps:
 <dfn title=dom-URLQuery><code>URLQuery(<var title>init</var>)</code></dfn>
 constructor must return a
 <span title=concept-UQ-new>new <code>URLQuery</code> object</span> using
-<var title>init</var>.
+<var title>init</var> if given.
 
 <p>The
 <dfn title=dom-URLQuery-get><code>get(<var title>name</var>)</code></dfn>
