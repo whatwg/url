@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-december-2012">Living Standard — Last Updated 1 December 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-december-2012">Living Standard — Last Updated 15 December 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 December 2012, the editors have made this specification available
+15 December 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -158,95 +158,16 @@ conversion to bytes, should not cause
 "<code title="">%</code>", followed by a double-digit, uppercase, hexadecimal
 representation of <var title="">byte</var>.
 
-<!-- the escape sets are minimal as escaping can lead to problems; we might
-     be able to escape more here but only if implementors are willing and
-     there's an upside -->
-<p>The <dfn id="simple-encode-set">simple encode set</dfn> are all code points less than
-U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
-
-<p>The <dfn id="query-encode-set">query encode set</dfn> is the
-<a href="#simple-encode-set">simple encode set</a> and code points U+0020,
-'<code title="">"</code>', <!-- 0x22 -->
-"<code title="">#</code>", <!-- 0x23 -->
-"<code title="">&lt;</code>", <!-- 0x3C -->
-"<code title="">&gt;</code>", <!-- 0x3E -->
-and
-"<code title="">`</code>". <!-- 0x60 -->
-
-<p>The <dfn id="default-encode-set">default encode set</dfn> is the
-<a href="#query-encode-set">query encode set</a> and code point
-"<code title="">?</code>". <!-- 0x3F -->
-
-<p>The <dfn id="password-encode-set">password encode set</dfn> is the
-<a href="#default-encode-set">default encode set</a> and code points
-"<code title="">/</code>", <!-- 0x2F -->
-"<code title="">@</code>", <!-- 0x40 -->
-and
-"<code title="">\</code>". <!-- 0x5C -->
-
-<p>The <dfn id="username-encode-set">username encode set</dfn> is the
-<a href="#password-encode-set">password encode set</a> and code point
-"<code title="">:</code>". <!-- 0x3A -->
-
-<p>The <dfn id="application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</dfn>
-is the <a href="#simple-encode-set">simple encode set</a>, code points in the range
-U+0021 to U+0029, code points
-"<code title="">+</code>", <!-- 0x2B -->
-"<code title="">,</code>", <!-- 0x2C -->
-"<code title="">/</code>", <!-- 0x2F -->
-code points in the ranges U+003A to U+0040 and U+005B to U+005E, code point
-"<code title="">`</code>", <!-- 0x60 -->
-and code points in the range U+007B to U+007E.
-
-<p>To <dfn id="potentially-percent-encode">potentially percent encode</dfn> a <var title="">code point</var>,
-using an <var title="">encode set</var>, and an optional
-<var title="">encoding override</var>, run these steps:
+<p>To <dfn id="percent-decode">percent decode</dfn> a <var title="">string</var> into a byte
+sequence, run these steps:
 
 <ol>
- <li><p>If <var title="">encoding override</var> is not given, set it to
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
-
- <li><p>If <var title="">code point</var> is not in
- <var title="">encode set</var>, return <var title="">code point</var>.
-
- <li>
-  <p>Let <var title="">bytes</var> be the result of running
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on
-  <var title="">code point</var> using <var title="">encoding override</var> as
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>.
-
-  <p>Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
-  emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a
-  0x3F byte instead and do not terminate the algorithm.
-
-  <p class="XXX">application/x-www-form-urlencoded wants the format
-  "<code title="">&amp;#</code>", followed by <var title="">code point</var>
-  represented using <a href="#ascii-digits">ASCII digits</a>, followed by
-  "<code title="">;</code>" here. I think we should always use that.
-
-  <p class="note">Using <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> ensures
-  you never hit an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>
-  here, but unfortunately legacy content uses other
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding" title="encoding">encodings</a>.
-
- <li><p><a href="#percent-encode">Percent encode</a> each byte in <var title="">bytes</var>, and
- then return them concatenated, in the same order.
-</ol>
-
-<p>To <dfn id="percent-decode">percent decode</dfn> a string <var title="">input</var>, optionally
-with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
-<var title="">encoding override</var>, run these steps:
-
-<ol>
- <li><p>If <var title="">encoding override</var> is not given, set it to
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
-
  <li><p>Let <var title="">pointer</var> be a pointer into
- <var title="">input</var>, initially zero (pointing to the first code point),
+ <var title="">string</var>, initially zero (pointing to the first code point),
  and let <var title="">c</var> be the code point it points to.
 
  <li><p>Let <var title="">remaining</var> be the substring after
- <var title="">pointer</var> in <var title="">input</var>.
+ <var title="">pointer</var> in <var title="">string</var>.
 
  <li><p>Let <var title="">bytes</var> be an empty byte sequence.
 
@@ -274,11 +195,52 @@ with an <a class="external" data-anolis-spec="encoding" href="http://encoding.sp
   </ol>
 
  <li>
-  <p>Return the result of running <var title="">encoding override</var>'s
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on <var title="">bytes</var>.
+  <p>Return <var title="">bytes</var>.
+</ol>
 
-  <p class="note"><a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decode">Decode</a> is not used
-  here as it would consume the byte order mark which is not desired.
+<!-- the escape sets are minimal as escaping can lead to problems; we might
+     be able to escape more here but only if implementors are willing and
+     there's an upside
+
+     note that query and application/x-www-form-urlencoded use their own
+     local sets -->
+<p>The <dfn id="simple-encode-set">simple encode set</dfn> are all code points less than
+U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
+
+<p>The <dfn id="default-encode-set">default encode set</dfn> is the
+<a href="#simple-encode-set">simple encode set</a> and code points U+0020,
+'<code title="">"</code>', <!-- 0x22 -->
+"<code title="">#</code>", <!-- 0x23 -->
+"<code title="">&lt;</code>", <!-- 0x3C -->
+"<code title="">&gt;</code>", <!-- 0x3E -->
+"<code title="">?</code>", <!-- 0x3F -->
+and
+"<code title="">`</code>". <!-- 0x60 -->
+
+<p>The <dfn id="password-encode-set">password encode set</dfn> is the
+<a href="#default-encode-set">default encode set</a> and code points
+"<code title="">/</code>", <!-- 0x2F -->
+"<code title="">@</code>", <!-- 0x40 -->
+and
+"<code title="">\</code>". <!-- 0x5C -->
+
+<p>The <dfn id="username-encode-set">username encode set</dfn> is the
+<a href="#password-encode-set">password encode set</a> and code point
+"<code title="">:</code>". <!-- 0x3A -->
+
+<p>To <dfn id="utf-8-percent-encode">utf-8 percent encode</dfn> a <var title="">code point</var>, using
+an <var title="">encode set</var>, run these steps:
+
+<ol>
+ <li><p>If <var title="">code point</var> is not in
+ <var title="">encode set</var>, return <var title="">code point</var>.
+
+ <li><p>Let <var title="">bytes</var> be the result of running
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
+ <var title="">code point</var>.
+
+ <li><p><a href="#percent-encode">Percent encode</a> each byte in <var title="">bytes</var>, and
+ then return them concatenated, in the same order.
 </ol>
 
 
@@ -361,7 +323,10 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li><p>Let <var title="">host</var> be the result of running
- <a href="#percent-decode">percent decode</a> on <var title="">input</var>.
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
+ <a href="#percent-decode" title="percent decode">percent decoding</a> of
+ <var title="">input</var>.
 
  <li><p class="XXX"><a href="http://wiki.whatwg.org/wiki/URL#IDNA">IDNA hell</a>
 </ol>
@@ -962,7 +927,7 @@ arguments can be used for API manipulation of a
 
      <li><p>Otherwise, if <var title="">c</var> is none of
      <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-     <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var> using the
+     <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
      <a href="#simple-encode-set">simple encode set</a>, and append the result to
      <var title="">url</var>'s
      <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
@@ -1092,7 +1057,7 @@ arguments can be used for API manipulation of a
          <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
          to the empty string and continue.
 
-         <li><p><a href="#potentially-percent-encode">potentially percent encode</a> <var title="">code point</var> using
+         <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">code point</var> using
          the <a href="#default-encode-set">default encode set</a> and append the result to
          <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
          if <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>
@@ -1294,7 +1259,7 @@ arguments can be used for API manipulation of a
 
        <li>
         <p>Otherwise, if <var title="">buffer</var> is not
-        "<code title="">.</code>", run these inner substeps:
+        "<code title="">.</code>", run these subsubsteps:
 
         <ol>
          <li>
@@ -1330,7 +1295,7 @@ arguments can be used for API manipulation of a
      <!-- Chrome unescapes more here; Safari does nothing -->
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var>
+     U+000D, <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var>
      using the <a href="#default-encode-set">default encode set</a>, and append the result to
      <var title="">buffer</var>.
     </ol>
@@ -1338,27 +1303,56 @@ arguments can be used for API manipulation of a
    <dt><b title="">query state</b>
    <dd>
     <ol>
-     <li><p>If <var title="">state override</var> is not given and <var title="">c</var>
-     is "<code title="">#</code>", set
-     <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
-     and state to <b title="">fragment state</b>.
-
      <li>
-      <p>Otherwise, if <var title="">c</var> is none of
-      <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-      <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var> using the
-      <a href="#query-encode-set">query encode set</a> and
-      <var title="">encoding override</var>, and append the result to
-      <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>.
+      <p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a> or
+      <var title="">state override</var> is not given and <var title="">c</var>
+      is "<code title="">#</code>", run these substeps:
 
-      <p class="XXX">Only use <var title="">encoding override</var> for
-      http/https/file rather than for all relative schemes?
-      <!-- http://simon.html5.org/test/url/url-encoding.html -->
+      <ol>
+       <li><p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is set,
+       set <var title="">encoding override</var> to
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+       <!-- http://simon.html5.org/test/url/url-encoding.html -->
+
+       <li><p>Set <var title="">buffer</var> to the result of running
+       <var title="">encoding override</var>'s
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on
+       <var title="">buffer</var>. Whenever the
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm emits an
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a 0x3F
+       byte instead and do not terminate the algorithm.
+
+       <li>
+        <p>For each <var title="">byte</var> in <var title="">buffer</var> run
+        these subsubsteps:
+
+        <ol>
+         <li><p>If <var title="">byte</var> is less than 0x21, greater than
+         0x7E, or is one of 0x22, 0x23, 0x3C, 0x3E, and 0x60, append
+         <var title="">byte</var>,
+         <a href="#percent-encode" title="percent encode">percent encoded</a>, to
+         <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>.
+
+         <li><p>Otherwise, append a code point whose value is
+         <var title="">byte</var> to <var title="">url</var>'s
+         <a href="#concept-url-query" title="concept-url-query">query</a>.
+        </ol>
+
+       <li><p>Set <var title="">buffer</var> to the empty string.
+
+       <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+       <var title="">url</var>'s
+       <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
+       and state to <b title="">fragment state</b>.
+      </ol>
+
+     <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
+     U+000D, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
 
    <dt><b title="">fragment state</b>
    <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
-   U+0009, U+000A, and U+000D, <a href="#potentially-percent-encode">potentially percent encode</a> <var title="">c</var>
+   U+0009, U+000A, and U+000D, <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var>
    using the <a href="#simple-encode-set">simple encode set</a>, and append the result to
    <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
    <!-- if people complain about this do not forget that results may differ
@@ -1445,9 +1439,6 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 
 <h2 id="application/x-www-form-urlencoded"><span class="secno">6 </span><code>application/x-www-form-urlencoded</code></h2>
 
-<p class="XXX">WIP
-<!-- http://krijnhoetmer.nl/irc-logs/whatwg/20121130#l-1057 -->
-
 <p>The
 <dfn id="concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a string <var title="">input</var>, optionally with an
@@ -1459,7 +1450,7 @@ takes a string <var title="">input</var>, optionally with an
 <ol>
  <li><p>Let <var title="">strings</var> be the result of splitting
  <var title="">input</var> on "<code title="">&amp;</code>".
- <!-- XXX define splitting? -->
+ <!-- XXX define splitting? DOM does not do it -->
 
  <li><p>If the <i title="">isindex flag</i> is set and the first string in
  <var title="">strings</var> does not contain a "<code title="">=</code>", prepend
@@ -1508,11 +1499,56 @@ takes a string <var title="">input</var>, optionally with an
    <var title="">value</var> to <var title="">pairs</var>.
   </ol>
 
- <li><p><a href="#percent-decode">Percent decode</a> all name-value pairs in
- <var title="">pairs</var>.
+ <li><p>Replace each name-value pair in <var title="">pairs</var> with the
+ result of running <var title="">encoding override</var>'s
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
+ <a href="#percent-decode" title="percent decode">percent decoding</a> of the name-value pair.
 
  <li><p>Return <var title="">pairs</var>.
 </ol>
+
+<p>The
+<dfn id="concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
+takes a byte sequence <var title="">input</var>, an
+<var title="">encoding override</var>, and then runs these steps:
+
+<ol>
+ <li><p>Let <var title="">output</var> be the empty string.
+ <li>
+  <p>For each byte in <var title="">input</var>, depending on
+  <var title="">byte</var>:
+
+  <dl>
+   <dt>0x20
+   <dd><p>Append U+002B to <var title="">output</var>.
+
+   <dt>0x2A
+   <dt>0x2D
+   <dt>0x2E
+   <dt>0x30 to 0x39
+   <dt>0x41 to 0x5A
+   <dt>0x5F
+   <dt>0x61 to 0x7A
+   <dd><p>Append a code point whose value is <var title="">byte</var> to
+   <var title="">output</var>.
+
+   <dt>Otherwise
+   <dd><p>Append <var title="">byte</var>,
+   <a href="#percent-encode" title="percent encode">percent encoded</a>, to
+   <var title="">output</var>.
+  </dl>
+ <li><p>Return <var title="">output</var>.
+</ol>
+<!-- The inverse of the above byte set is all bytes
+     less than 0x20,
+     0x21 to 0x29,
+     0x2B,
+     0x2C,
+     0x2F,
+     0x3A to 0x40,
+     0x5B to 0x5E,
+     0x60,
+     bytes greater than 0x7A -->
 
 <p>The
 <dfn id="concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
@@ -1527,33 +1563,22 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
  <li><p>Let <var title="">output</var> be the empty string.
 
  <li>
-  <p>For each pair <var title="">pair</var> in <var title="">pairs</var>, run
+  <p>For each <var title="">pair</var> in <var title="">pairs</var>, run
   these substeps:
 
   <ol>
-   <li><p>Let <var title="">new name</var> and <var title="">new value</var> be
-   the empty string.
+   <li><p>Replace <var title="">pair</var>'s name and value with the result of
+   running <var title="">encoding override</var>'s
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on them, respectively.
+   Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
+   emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit the
+   result of running <span>utf-8 encode</span> on U+0026, U+0023, followed
+   by one or more <a href="#ascii-digits">ASCII digits</a> representing the code point that
+   caused the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a> in
+   base ten, followed by U+003B.
 
-   <li><p>For each code point <var title="">c</var> in
-   <var title="">pair</var>'s name, append "<code title="">+</code>" to
-   <var title="">new name</var> if <var title="">c</var> is U+0020, and append
-   <var title="">c</var>,
-   <a href="#potentially-percent-encode" title="potentially percent encode">potentially percent encoded</a>
-   using the
-   <a href="#application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</a>
-   and <var title="">encoding override</var>, otherwise.
-
-   <li><p>For each code point <var title="">c</var> in
-   <var title="">pair</var>'s value, append "<code title="">+</code>" to
-   <var title="">new value</var> if <var title="">c</var> is U+0020, and append
-   <var title="">c</var>,
-   <a href="#potentially-percent-encode" title="potentially percent encode">potentially percent encoded</a>
-   using the
-   <a href="#application/x-www-form-urlencoded-encode-set"><code>application/x-www-form-urlencoded</code> encode set</a>
-   and <var title="">encoding override</var>, otherwise.
-
-   <li><p>Set <var title="">pair</var>'s name to <var title="">new name</var> and
-   <var title="">pair</var>'s value to <var title="">new value</var>.
+   <li><p>Replace <var title="">pair</var>'s name and value with their
+   <a href="#concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer">serialization</a>.
 
    <li><p>If this is not the first pair, append "<code title="">&amp;</code>" to
    <var title="">output</var>.
@@ -1797,7 +1822,7 @@ run these steps:
  string.
 
  <li><p>For each code point in the given value,
- <a href="#potentially-percent-encode">potentially percent encode</a> it using the
+ <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the
  <a href="#username-encode-set">username encode set</a>, and append the result to
  <a href="#concept-url-username" title="concept-url-username">username</a>.
 
@@ -1830,7 +1855,7 @@ run these steps:
  <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty
  string.
 
- <li><p>For each code point in the given value, <a href="#potentially-percent-encode">potentially percent encode</a> it
+ <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
  using the <a href="#password-encode-set">password encode set</a>, and append the result to
  <a href="#concept-url-password" title="concept-url-password">password</a>.
 
