@@ -1550,10 +1550,11 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
    <span data-anolis-spec=encoding>encoder</span> on them, respectively.
    Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
    emits an <span data-anolis-spec=encoding>encoder error</span>, emit the
-   result of running <span>utf-8 encode</span> on U+0026, U+0023, followed
-   by one or more <span>ASCII digits</span> representing the code point that
-   caused the <span data-anolis-spec=encoding>encoder error</span> in
-   base ten, followed by U+003B.
+   result of running <span data-anolis-spec=encoding>utf-8 encode</span> on
+   U+0026, U+0023, followed by one or more <span>ASCII digits</span>
+   representing the code point that caused the
+   <span data-anolis-spec=encoding>encoder error</span> in base ten,
+   followed by U+003B.
 
    <li><p>Replace <var title>pair</var>'s name and value with their
    <span title=concept-urlencoded-byte-serializer>serialization</span>.

@@ -1572,10 +1572,11 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on them, respectively.
    Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
    emits an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit the
-   result of running <span>utf-8 encode</span> on U+0026, U+0023, followed
-   by one or more <a href="#ascii-digits">ASCII digits</a> representing the code point that
-   caused the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a> in
-   base ten, followed by U+003B.
+   result of running <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
+   U+0026, U+0023, followed by one or more <a href="#ascii-digits">ASCII digits</a>
+   representing the code point that caused the
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a> in base ten,
+   followed by U+003B.
 
    <li><p>Replace <var title="">pair</var>'s name and value with their
    <a href="#concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer">serialization</a>.
