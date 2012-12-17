@@ -735,9 +735,7 @@ U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD,
 and <span title="percent-encoded byte">percent-encoded bytes</span>.
-<!-- XXX there is a mismatch with
-     http://www.whatwg.org/specs/web-apps/current-work/#preprocessing-the-input-stream
-     I think they should match, need advice -->
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=19743 -->
 
 <p class=note>Code points higher than U+009F will be converted to
 <span title="percent-encoded byte">percent-encoded bytes</span> by the
@@ -1574,8 +1572,7 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
 
 <h2>API</h2>
 
-<!-- XXX http://lists.w3.org/Archives/Public/public-script-coord/2012OctDec/0082.html
-     s/DOMString/UTFString -->
+<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
 <pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var>)]
 interface <dfn>URL</dfn> {
@@ -1599,20 +1596,19 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-hash>hash</span>;
 };</pre>
 
-<!-- Ideas:
-           attribute DOMString basename; // last segment of path (Simon Sapin)
-           sequence<DOMString> getPath();
-           void setPath(DOMString segments...);
+<!-- XXX Ideas:
+  boolean isEqual(URL, optional URLEqualOptions options)
+           attribute URLPath segments;
 
-     Maybe also a way of comparing URLs? Or maybe rather a way to normalize
-     a URL in a way that makes string comparison work better.
+dictionary URLEqualOptions {
+  boolean percentEncoding = false;
+  boolean ignoreHash = false;
+  boolean ignoreDomainDot = false;
+  ...
+};
 
-     Working with relative paths is another thing we could improve. E.g. a
-     relPathname setter that would resolve the given value against pathname.
-
-     Could make manipulation of host easier by exposing the labels similarly
-     to the proposal for path segments above. (Should never expose
-     effective TLD as it's evil.) -->
+URLPath would be a subclassed Array similarly to how URLQuery will be a
+subclassed MultiMap. -->
 
 <p>Any object implementing <code>URLUtils</code> has an associated
 <span title=concept-base-url>base URL</span>
