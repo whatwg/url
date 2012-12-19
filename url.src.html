@@ -348,7 +348,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   </ol>
 
  <li>
-  <p><i title id=concept-ipv6-parser-main>Main</i>:
+  <p><dfn title=concept-ipv6-parser-main>Main</dfn>:
   While <var title>c</var> is not the <span>EOF code point</span>, run these
   substeps:
 
@@ -364,7 +364,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
      <li>Increase <var title>piece pointer</var> by one, set
      <var title>compress pointer</var> to <var title>piece pointer</var>,
-     and then jump to <a href=#concept-ipv6-parser-main>Main</a>.
+     and then jump to <span title=concept-ipv6-parser-main>Main</span>.
     </ol>
 
    <li><p>Let <var title>value</var> and <var title>length</var> be 0.
@@ -384,7 +384,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
      <dd>
       <p>If <var title>length</var> is 0, return failure.
       <p>Decrease <var title>pointer</var> by <var title>length</var>.
-      <p>Jump to <a href=#concept-ipv6-parser-ipv4>IPv4</a>.
+      <p>Jump to <span title=concept-ipv6-parser-ipv4>IPv4</span>.
 
      <dt>"<code title>:</code>"
      <dd>
@@ -402,9 +402,9 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   </ol>
 
  <li><p>If <var title>c</var> is the <span>EOF code point</span>, jump to
- <a href=#concept-ipv6-parser-finale>Finale</a>.
+ <span title=concept-ipv6-parser-finale>Finale</span>.
 
- <li><p><i title id=concept-ipv6-parser-ipv4>IPv4</i>:
+ <li><p><dfn title=concept-ipv6-parser-ipv4>IPv4</dfn>:
  If <var title>piece pointer</var> is greater than six, return failure.
 
  <li><p>Let <var title>dots seen</var> be 0.
@@ -439,7 +439,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   </ol>
 
  <li>
-  <p><i title id=concept-ipv6-parser-finale>Finale</i>:
+  <p><dfn title=concept-ipv6-parser-finale>Finale</dfn>:
   If <var title>compress pointer</var> is not null, run these substeps:
 
   <ol>

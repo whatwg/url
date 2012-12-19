@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-december-2012">Living Standard — Last Updated 17 December 2012</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-december-2012">Living Standard — Last Updated 19 December 2012</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-17 December 2012, the editors have made this specification available
+19 December 2012, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -370,7 +370,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li>
-  <p><i id="concept-ipv6-parser-main" title="">Main</i>:
+  <p><dfn id="concept-ipv6-parser-main" title="concept-ipv6-parser-main">Main</dfn>:
   While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run these
   substeps:
 
@@ -386,7 +386,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
      <li>Increase <var title="">piece pointer</var> by one, set
      <var title="">compress pointer</var> to <var title="">piece pointer</var>,
-     and then jump to <a href="#concept-ipv6-parser-main">Main</a>.
+     and then jump to <a href="#concept-ipv6-parser-main" title="concept-ipv6-parser-main">Main</a>.
     </ol>
 
    <li><p>Let <var title="">value</var> and <var title="">length</var> be 0.
@@ -406,7 +406,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      <dd>
       <p>If <var title="">length</var> is 0, return failure.
       <p>Decrease <var title="">pointer</var> by <var title="">length</var>.
-      <p>Jump to <a href="#concept-ipv6-parser-ipv4">IPv4</a>.
+      <p>Jump to <a href="#concept-ipv6-parser-ipv4" title="concept-ipv6-parser-ipv4">IPv4</a>.
 
      <dt>"<code title="">:</code>"
      <dd>
@@ -424,9 +424,9 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li><p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>, jump to
- <a href="#concept-ipv6-parser-finale">Finale</a>.
+ <a href="#concept-ipv6-parser-finale" title="concept-ipv6-parser-finale">Finale</a>.
 
- <li><p><i id="concept-ipv6-parser-ipv4" title="">IPv4</i>:
+ <li><p><dfn id="concept-ipv6-parser-ipv4" title="concept-ipv6-parser-ipv4">IPv4</dfn>:
  If <var title="">piece pointer</var> is greater than six, return failure.
 
  <li><p>Let <var title="">dots seen</var> be 0.
@@ -461,7 +461,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li>
-  <p><i id="concept-ipv6-parser-finale" title="">Finale</i>:
+  <p><dfn id="concept-ipv6-parser-finale" title="concept-ipv6-parser-finale">Finale</dfn>:
   If <var title="">compress pointer</var> is not null, run these substeps:
 
   <ol>
