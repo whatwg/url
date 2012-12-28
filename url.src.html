@@ -693,7 +693,7 @@ excluding "<code title>/</code>" and "<code title>?</code>".
 <p>A <span title=concept-url-fragment>fragment</span> is zero or more
 <span>URL units</span>.
 
-<p>The <dfn>URL units</dfn> are <span>ASCII alphanumeric</span>,
+<p>The <dfn>URL code points</dfn> are <span>ASCII alphanumeric</span>,
 "<code title>!</code>",<!-- 0x21, sub-delims -->
 "<code title>$</code>",<!-- 0x24, sub-delims -->
 "<code title>&</code>",<!-- 0x26, sub-delims -->
@@ -713,7 +713,7 @@ excluding "<code title>/</code>" and "<code title>?</code>".
 "<code title>@</code>",<!-- 0x40, ipchar -->
 "<code title>_</code>",<!-- 0x5F, iunreserved -->
 "<code title>~</code>",<!-- 0x7E, iunreserved -->
-code points in the ranges
+and code points in the ranges
 U+00A0 to U+D7FF,
 U+E000 to <!--U+F8FF,
 U+F900 to -->U+FDCF,
@@ -733,13 +733,15 @@ U+C0000 to U+CFFFD,
 U+D0000 to U+DFFFD,
 U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
-U+100000 to U+10FFFD,
-and <span title="percent-encoded byte">percent-encoded bytes</span>.
+U+100000 to U+10FFFD.
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=19743 -->
 
 <p class=note>Code points higher than U+009F will be converted to
 <span title="percent-encoded byte">percent-encoded bytes</span> by the
 <span title=concept-url-parser>URL parser</span>.
+
+<p>The <dfn>URL units</dfn> are <span>URL code points</span> and
+<span title="percent-encoded byte">percent-encoded bytes</span>.
 
 
 
@@ -902,17 +904,28 @@ arguments can be used for API manipulation of a
      to the empty string and <var title>state</var> to
      <span>query state</span>.
 
-     <li><p>If <var title>c</var> is "<code title>#</code>", set
+     <li><p>Otherwise, if <var title>c</var> is "<code title>#</code>", set
      <var title>url</var>'s <span title=concept-url-fragment>fragment</span>
      to the empty string and <var title>state</var> to
      <span>fragment state</span>.
 
-     <li><p>Otherwise, if <var title>c</var> is none of
-     <span>EOF code point</span>, U+0009, U+000A, and U+000D,
-     <span>utf-8 percent encode</span> <var title>c</var> using the
-     <span>simple encode set</span>, and append the result to
-     <var title>url</var>'s
-     <span title=concept-url-scheme-data>scheme data</span>.
+     <li>
+      <p>Otherwise, run these substeps:
+
+      <ol>
+       <li><p>If <var title>c</var> not the <span>EOF code point</span>, not
+       a <span title="URL code points">URL code point</span>, and
+       <var title>c</var> is not "<code>:</code>" while
+       <var title>remaining</var> starts with two
+       <span>ASCII hex digits</span>, <span>parse error</span>.
+
+       <li><p>If <var title>c</var> is none of
+       <span>EOF code point</span>, U+0009, U+000A, and U+000D,
+       <span>utf-8 percent encode</span> <var title>c</var> using the
+       <span>simple encode set</span>, and append the result to
+       <var title>url</var>'s
+       <span title=concept-url-scheme-data>scheme data</span>.
+      </ol>
     </ol>
 
    <dt><dfn>no scheme state</dfn>

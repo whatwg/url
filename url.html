@@ -715,7 +715,7 @@ excluding "<code title="">/</code>" and "<code title="">?</code>".
 <p>A <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> is zero or more
 <a href="#url-units">URL units</a>.
 
-<p>The <dfn id="url-units">URL units</dfn> are <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
+<p>The <dfn id="url-code-points">URL code points</dfn> are <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
 "<code title="">!</code>",<!-- 0x21, sub-delims -->
 "<code title="">$</code>",<!-- 0x24, sub-delims -->
 "<code title="">&amp;</code>",<!-- 0x26, sub-delims -->
@@ -735,7 +735,7 @@ excluding "<code title="">/</code>" and "<code title="">?</code>".
 "<code title="">@</code>",<!-- 0x40, ipchar -->
 "<code title="">_</code>",<!-- 0x5F, iunreserved -->
 "<code title="">~</code>",<!-- 0x7E, iunreserved -->
-code points in the ranges
+and code points in the ranges
 U+00A0 to U+D7FF,
 U+E000 to <!--U+F8FF,
 U+F900 to -->U+FDCF,
@@ -755,13 +755,15 @@ U+C0000 to U+CFFFD,
 U+D0000 to U+DFFFD,
 U+E1000 to U+EFFFD,
 U+F0000 to U+FFFFD,
-U+100000 to U+10FFFD,
-and <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>.
+U+100000 to U+10FFFD.
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=19743 -->
 
 <p class="note">Code points higher than U+009F will be converted to
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a> by the
 <a href="#concept-url-parser" title="concept-url-parser">URL parser</a>.
+
+<p>The <dfn id="url-units">URL units</dfn> are <a href="#url-code-points">URL code points</a> and
+<a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>.
 
 
 
@@ -924,17 +926,28 @@ arguments can be used for API manipulation of a
      to the empty string and <var title="">state</var> to
      <a href="#query-state">query state</a>.
 
-     <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+     <li><p>Otherwise, if <var title="">c</var> is "<code title="">#</code>", set
      <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>
      to the empty string and <var title="">state</var> to
      <a href="#fragment-state">fragment state</a>.
 
-     <li><p>Otherwise, if <var title="">c</var> is none of
-     <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-     <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
-     <a href="#simple-encode-set">simple encode set</a>, and append the result to
-     <var title="">url</var>'s
-     <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
+     <li>
+      <p>Otherwise, run these substeps:
+
+      <ol>
+       <li><p>If <var title="">c</var> not the <a href="#eof-code-point">EOF code point</a>, not
+       a <a href="#url-code-points" title="URL code points">URL code point</a>, and
+       <var title="">c</var> is not "<code>:</code>" while
+       <var title="">remaining</var> starts with two
+       <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+
+       <li><p>If <var title="">c</var> is none of
+       <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
+       <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
+       <a href="#simple-encode-set">simple encode set</a>, and append the result to
+       <var title="">url</var>'s
+       <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
+      </ol>
     </ol>
 
    <dt><dfn id="no-scheme-state">no scheme state</dfn>
