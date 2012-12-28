@@ -813,7 +813,7 @@ arguments can be used for API manipulation of a
   </ol>
 
  <li><p>Let <var title="">state</var> be <var title="">state override</var>
- if given, or <b title="">scheme start state</b> otherwise.
+ if given, or <a href="#scheme-start-state">scheme start state</a> otherwise.
 
  <li><p>If <var title="">base</var> is not given, set it to null.
 
@@ -846,21 +846,21 @@ arguments can be used for API manipulation of a
   "<code title="">example</code>".
 
   <dl class="switch">
-   <dt><b title="">scheme start state</b>
+   <dt><dfn id="scheme-start-state">scheme start state</dfn>
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is an <a href="#ascii-alpha">ASCII alpha</a>,
      append <var title="">c</var>, lowercased, to <var title="">buffer</var>, and
-     set <var title="">state</var> to <b title="">scheme state</b>.
+     set <var title="">state</var> to <a href="#scheme-state">scheme state</a>.
 
      <li><p>Otherwise, if <var title="">state override</var> is not given, set
-     <var title="">state</var> to <b title="">no scheme state</b>, and decrease
+     <var title="">state</var> to <a href="#no-scheme-state">no scheme state</a>, and decrease
      <var title="">pointer</var> by one.
 
-     <li><p>Otherwise, terminate this algorithm.
+     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 
-   <dt><b title="">scheme state</b>
+   <dt><dfn id="scheme-state">scheme state</dfn>
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is an <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
@@ -886,7 +886,7 @@ arguments can be used for API manipulation of a
        <li><p>If <var title="">url</var>'s
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
        "<code title="">file</code>", set <var title="">state</var> to
-       <b title="">relative state</b>.
+       <a href="#relative-state">relative state</a>.
        <!-- not combined with the subsequent step for clarity -->
 
        <li><p>Otherwise, if <var title="">url</var>'s
@@ -894,33 +894,33 @@ arguments can be used for API manipulation of a
        and <var title="">base</var>'s
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is equal to
        <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-       set <var title="">state</var> to <b title="">relative state</b>.
+       set <var title="">state</var> to <a href="#relative-state">relative state</a>.
 
        <li><p>Otherwise, if <var title="">url</var>'s
        <a href="#relative-flag">relative flag</a> is set, set <var title="">state</var> to
-       <b title="">authority start state</b>.
+       <a href="#authority-start-state">authority start state</a>.
 
        <li><p>Otherwise, set <var title="">state</var> to
-       <b title="">scheme data state</b>.
+       <a href="#scheme-data-state">scheme data state</a>.
       </ol>
 
-     <li><p>Otherwise, set <var title="">state</var> to <b title="">no scheme state</b>,
+     <li><p>Otherwise, set <var title="">state</var> to <a href="#no-scheme-state">no scheme state</a>,
      <var title="">buffer</var> to the empty string, and start over (from the
      first code point in <var title="">input</var>).
     </ol>
 
-   <dt><b title="">scheme data state</b>
+   <dt><dfn id="scheme-data-state">scheme data state</dfn>
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is "<code title="">?</code>", set
      <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>
      to the empty string and <var title="">state</var> to
-     <b title="">query state</b>.
+     <a href="#query-state">query state</a>.
 
      <li><p>If <var title="">c</var> is "<code title="">#</code>", set
      <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>
      to the empty string and <var title="">state</var> to
-     <b title="">fragment state</b>.
+     <a href="#fragment-state">fragment state</a>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of
      <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
@@ -930,7 +930,7 @@ arguments can be used for API manipulation of a
      <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
     </ol>
 
-   <dt><b title="">no scheme state</b>
+   <dt><dfn id="no-scheme-state">no scheme state</dfn>
    <dd>
     <p>If <var title="">base</var> is null, or <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
@@ -943,10 +943,10 @@ arguments can be used for API manipulation of a
     <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
     <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
-    <p>Otherwise, set <var title="">state</var> to <b title="">relative state</b>,
+    <p>Otherwise, set <var title="">state</var> to <a href="#relative-state">relative state</a>,
     and decrease <var title="">pointer</var> by one.
 
-   <dt><b title="">relative state</b>
+   <dt><dfn id="relative-state">relative state</dfn>
    <dd>
     <p>Set <var title="">url</var>'s <a href="#relative-flag">relative flag</a>, set
     <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
@@ -975,10 +975,10 @@ arguments can be used for API manipulation of a
       <ol>
        <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
        "<code title="">file</code>", set <var title="">state</var> to
-       <b title="">file host state</b>.
+       <a href="#file-host-state">file host state</a>.
 
        <li><p>Otherwise set <var title="">state</var> to
-       <b title="">authority start state</b>.
+       <a href="#authority-start-state">authority start state</a>.
       </ol>
 
       <p>Otherwise, set
@@ -986,7 +986,7 @@ arguments can be used for API manipulation of a
       <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
       <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
       <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-      <var title="">state</var> to <b title="">relative path start state</b>,
+      <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>,
       and decrease <var title="">pointer</var> by one.
 
      <dt>"<code title="">?</code>"
@@ -998,7 +998,7 @@ arguments can be used for API manipulation of a
      <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>,
      <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a> to the empty string,
-     and <var title="">state</var> to <b title="">query state</b>.
+     and <var title="">state</var> to <a href="#query-state">query state</a>.
 
      <dt>"<code title="">#</code>"
      <dd><p>Set
@@ -1011,7 +1011,7 @@ arguments can be used for API manipulation of a
      <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a> to
      <var title="">base</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>,
      <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
-     and <var title="">state</var> to <b title="">fragment state</b>.
+     and <var title="">state</var> to <a href="#fragment-state">fragment state</a>.
 
      <dt>Otherwise
      <dd><p>Set
@@ -1022,16 +1022,16 @@ arguments can be used for API manipulation of a
      <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
      remove <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
-     <var title="">state</var> to <b title="">relative path start state</b>,
+     <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>,
      and decrease <var title="">pointer</var> by one.
     </dl>
 
-   <dt><b title="">authority start state</b>
+   <dt><dfn id="authority-start-state">authority start state</dfn>
    <dd><p>If <var title="">c</var> is neither "<code title="">/</code>" nor
    "<code title="">\</code>", set <var title="">state</var> to
-   <b title="">authority state</b>, and decrease <var title="">pointer</var> by one.
+   <a href="#authority-state">authority state</a>, and decrease <var title="">pointer</var> by one.
 
-   <dt><b title="">authority state</b>
+   <dt><dfn id="authority-state">authority state</dfn>
    <dd>
     <ol>
      <li>
@@ -1069,13 +1069,13 @@ arguments can be used for API manipulation of a
      and "<code title="">#</code>", decrease <var title="">pointer</var> by the
      number of code points in <var title="">buffer</var>, set
      <var title="">buffer</var> to the empty string, and
-     <var title="">state</var> to <b title="">host state</b>.
+     <var title="">state</var> to <a href="#host-state">host state</a>.
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
      U+000D, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
 
-   <dt><b title="">file host state</b>
+   <dt><dfn id="file-host-state">file host state</dfn>
    <dd>
     <ol>
      <li>
@@ -1089,7 +1089,7 @@ arguments can be used for API manipulation of a
         <p>If <var title="">buffer</var> consists of two code points, of
         which the first is an <a href="#ascii-alpha">ASCII alpha</a> and the second is
         either "<code title="">:</code>" or "<code title="">|</code>", set state
-        to <b title="">relative path state</b>.
+        to <a href="#relative-path-state">relative path state</a>.
 
         <p class="note">This is a quirk for parsing Windows drive letters and
         therefore <var title="">buffer</var> is not reset here.
@@ -1107,7 +1107,7 @@ arguments can be used for API manipulation of a
          <li><p>Set
          <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
          <var title="">host</var>, <var title="">buffer</var> to the empty string,
-         and <var title="">state</var> to <b title="">relative path start state</b>.
+         and <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>.
         </ol>
       </ol>
 
@@ -1115,8 +1115,8 @@ arguments can be used for API manipulation of a
      U+000D, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
 
-   <dt><b title="">host state</b>
-   <dt><b title="">hostname state</b>
+   <dt><dfn id="host-state">host state</dfn>
+   <dt><dfn id="hostname-state">hostname state</dfn>
    <dd>
     <ol>
      <li>
@@ -1132,9 +1132,9 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
        <var title="">host</var>, <var title="">buffer</var> to the empty string,
-       and <var title="">state</var> to <b title="">port state</b>.
+       and <var title="">state</var> to <a href="#port-state">port state</a>.
 
-       <li><p>If <var title="">state override</var> is <b title="">hostname state</b>,
+       <li><p>If <var title="">state override</var> is <a href="#hostname-state">hostname state</a>,
        terminate this algorithm.
       </ol>
 
@@ -1154,7 +1154,7 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
        <var title="">host</var>, <var title="">buffer</var> to the empty string,
-       and <var title="">state</var> to <b title="">relative path start state</b>.
+       and <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>.
 
        <li><p>If <var title="">state override</var> is given, terminate this
        algorithm.
@@ -1175,7 +1175,7 @@ arguments can be used for API manipulation of a
       </ol>
     </ol>
 
-   <dt><b title="">port state</b>
+   <dt><dfn id="port-state">port state</dfn>
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
@@ -1215,19 +1215,19 @@ arguments can be used for API manipulation of a
        algorithm.
 
        <li><p>Set <var title="">buffer</var> to the empty string,
-       <var title="">state</var> to <b title="">relative path start state</b>, and
+       <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>, and
        decrease <var title="">pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, return failure.
     </ol>
 
-   <dt><b title="">relative path start state</b>
-   <dd><p>Set <var title="">state</var> to <b title="">relative path state</b> and
+   <dt><dfn id="relative-path-start-state">relative path start state</dfn>
+   <dd><p>Set <var title="">state</var> to <a href="#relative-path-state">relative path state</a> and
    if <var title="">c</var> is neither "<code title="">/</code>" nor
    "<code title="">\</code>", decrease <var title="">pointer</var> by one.
 
-   <dt><b title="">relative path state</b>
+   <dt><dfn id="relative-path-state">relative path state</dfn>
    <dd>
     <ol>
      <li>
@@ -1277,11 +1277,11 @@ arguments can be used for API manipulation of a
 
        <li><p>If <var title="">c</var> is "<code title="">?</code>", set
        <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a> to the empty string,
-       and <var title="">state</var> to <b title="">query state</b>.
+       and <var title="">state</var> to <a href="#query-state">query state</a>.
 
        <li><p>If <var title="">c</var> is "<code title="">#</code>", set
        <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
-       and <var title="">state</var> to <b title="">fragment state</b>.
+       and <var title="">state</var> to <a href="#fragment-state">fragment state</a>.
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is "<code title="">%</code>" and
@@ -1296,7 +1296,7 @@ arguments can be used for API manipulation of a
      <var title="">buffer</var>.
     </ol>
 
-   <dt><b title="">query state</b>
+   <dt><dfn id="query-state">query state</dfn>
    <dd>
     <ol>
      <li>
@@ -1339,14 +1339,14 @@ arguments can be used for API manipulation of a
        <li><p>If <var title="">c</var> is "<code title="">#</code>", set
        <var title="">url</var>'s
        <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
-       and state to <b title="">fragment state</b>.
+       and state to <a href="#fragment-state">fragment state</a>.
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
      U+000D, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
 
-   <dt><b title="">fragment state</b>
+   <dt><dfn id="fragment-state">fragment state</dfn>
    <dd><p>If <var title="">c</var> is none of <a href="#eof-code-point">EOF code point</a>,
    U+0009, U+000A, and U+000D, <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var>
    using the <a href="#simple-encode-set">simple encode set</a>, and append the result to
@@ -1791,7 +1791,7 @@ run these steps:
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value and
  "<code title="">:</code>" concatenated with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
- <b title="">scheme start state</b> as <var title="">state override</var>.
+ <a href="#scheme-start-state">scheme start state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
@@ -1883,7 +1883,7 @@ steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
- <b title="">host state</b> as <var title="">state override</var>.
+ <a href="#host-state">host state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
@@ -1908,7 +1908,7 @@ run these steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
- <b title="">hostname state</b> as <var title="">state override</var>.
+ <a href="#hostname-state">hostname state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
@@ -1934,7 +1934,7 @@ steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
- <b title="">port state</b> as <var title="">state override</var>.
+ <a href="#port-state">port state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
@@ -1965,7 +1965,7 @@ run these steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
- <b title="">relative path start state</b> as <var title="">state override</var>.
+ <a href="#relative-path-start-state">relative path start state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>
@@ -2003,7 +2003,7 @@ these steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">input</var>
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>,
- <b title="">query state</b> as <var title="">state override</var>, and the
+ <a href="#query-state">query state</a> as <var title="">state override</var>, and the
  associated <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
  <var title="">encoding override</var>.
 
@@ -2073,7 +2073,7 @@ steps:
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">input</var>
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
- <b title="">fragment state</b> as <var title="">state override</var>.
+ <a href="#fragment-state">fragment state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
 </ol>

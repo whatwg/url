@@ -791,7 +791,7 @@ arguments can be used for API manipulation of a
   </ol>
 
  <li><p>Let <var title>state</var> be <var title>state override</var>
- if given, or <b title>scheme start state</b> otherwise.
+ if given, or <span>scheme start state</span> otherwise.
 
  <li><p>If <var title>base</var> is not given, set it to null.
 
@@ -824,21 +824,21 @@ arguments can be used for API manipulation of a
   "<code title>example</code>".
 
   <dl class=switch>
-   <dt><b title>scheme start state</b>
+   <dt><dfn>scheme start state</dfn>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is an <span>ASCII alpha</span>,
      append <var title>c</var>, lowercased, to <var title>buffer</var>, and
-     set <var title>state</var> to <b title>scheme state</b>.
+     set <var title>state</var> to <span>scheme state</span>.
 
      <li><p>Otherwise, if <var title>state override</var> is not given, set
-     <var title>state</var> to <b title>no scheme state</b>, and decrease
+     <var title>state</var> to <span>no scheme state</span>, and decrease
      <var title>pointer</var> by one.
 
-     <li><p>Otherwise, terminate this algorithm.
+     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 
-   <dt><b title>scheme state</b>
+   <dt><dfn>scheme state</dfn>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is an <span>ASCII alphanumeric</span>,
@@ -864,7 +864,7 @@ arguments can be used for API manipulation of a
        <li><p>If <var title>url</var>'s
        <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>", set <var title>state</var> to
-       <b title>relative state</b>.
+       <span>relative state</span>.
        <!-- not combined with the subsequent step for clarity -->
 
        <li><p>Otherwise, if <var title>url</var>'s
@@ -872,33 +872,33 @@ arguments can be used for API manipulation of a
        and <var title>base</var>'s
        <span title=concept-url-scheme>scheme</span> is equal to
        <var title>url</var>'s <span title=concept-url-scheme>scheme</span>,
-       set <var title>state</var> to <b title>relative state</b>.
+       set <var title>state</var> to <span>relative state</span>.
 
        <li><p>Otherwise, if <var title>url</var>'s
        <span>relative flag</span> is set, set <var title>state</var> to
-       <b title>authority start state</b>.
+       <span>authority start state</span>.
 
        <li><p>Otherwise, set <var title>state</var> to
-       <b title>scheme data state</b>.
+       <span>scheme data state</span>.
       </ol>
 
-     <li><p>Otherwise, set <var title>state</var> to <b title>no scheme state</b>,
+     <li><p>Otherwise, set <var title>state</var> to <span>no scheme state</span>,
      <var title>buffer</var> to the empty string, and start over (from the
      first code point in <var title>input</var>).
     </ol>
 
-   <dt><b title>scheme data state</b>
+   <dt><dfn>scheme data state</dfn>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is "<code title>?</code>", set
      <var title>url</var>'s <span title=concept-url-query>query</span>
      to the empty string and <var title>state</var> to
-     <b title>query state</b>.
+     <span>query state</span>.
 
      <li><p>If <var title>c</var> is "<code title>#</code>", set
      <var title>url</var>'s <span title=concept-url-fragment>fragment</span>
      to the empty string and <var title>state</var> to
-     <b title>fragment state</b>.
+     <span>fragment state</span>.
 
      <li><p>Otherwise, if <var title>c</var> is none of
      <span>EOF code point</span>, U+0009, U+000A, and U+000D,
@@ -908,7 +908,7 @@ arguments can be used for API manipulation of a
      <span title=concept-url-scheme-data>scheme data</span>.
     </ol>
 
-   <dt><b title>no scheme state</b>
+   <dt><dfn>no scheme state</dfn>
    <dd>
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
@@ -921,10 +921,10 @@ arguments can be used for API manipulation of a
     <code title=dom-URL-protocol>protocol</code> attribute.
     <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
-    <p>Otherwise, set <var title>state</var> to <b title>relative state</b>,
+    <p>Otherwise, set <var title>state</var> to <span>relative state</span>,
     and decrease <var title>pointer</var> by one.
 
-   <dt><b title>relative state</b>
+   <dt><dfn>relative state</dfn>
    <dd>
     <p>Set <var title>url</var>'s <span>relative flag</span>, set
     <var title>url</var>'s <span title=concept-url-scheme>scheme</span> to
@@ -953,10 +953,10 @@ arguments can be used for API manipulation of a
       <ol>
        <li><p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>", set <var title>state</var> to
-       <b title>file host state</b>.
+       <span>file host state</span>.
 
        <li><p>Otherwise set <var title>state</var> to
-       <b title>authority start state</b>.
+       <span>authority start state</span>.
       </ol>
 
       <p>Otherwise, set
@@ -964,7 +964,7 @@ arguments can be used for API manipulation of a
       <var title>base</var>'s <span title=concept-url-host>host</span>,
       <var title>url</var>'s <span title=concept-url-port>port</span> to
       <var title>base</var>'s <span title=concept-url-port>port</span>,
-      <var title>state</var> to <b title>relative path start state</b>,
+      <var title>state</var> to <span>relative path start state</span>,
       and decrease <var title>pointer</var> by one.
 
      <dt>"<code title>?</code>"
@@ -976,7 +976,7 @@ arguments can be used for API manipulation of a
      <var title>url</var>'s <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>,
      <var title>url</var>'s <span title=concept-url-query>query</span> to the empty string,
-     and <var title>state</var> to <b title>query state</b>.
+     and <var title>state</var> to <span>query state</span>.
 
      <dt>"<code title>#</code>"
      <dd><p>Set
@@ -989,7 +989,7 @@ arguments can be used for API manipulation of a
      <var title>url</var>'s <span title=concept-url-query>query</span> to
      <var title>base</var>'s <span title=concept-url-query>query</span>,
      <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
-     and <var title>state</var> to <b title>fragment state</b>.
+     and <var title>state</var> to <span>fragment state</span>.
 
      <dt>Otherwise
      <dd><p>Set
@@ -1000,16 +1000,16 @@ arguments can be used for API manipulation of a
      <var title>url</var>'s <span title=concept-url-path>path</span> to
      <var title>base</var>'s <span title=concept-url-path>path</span>, then
      remove <var title>url</var>'s <span title=concept-url-path>path</span>'s last string, set
-     <var title>state</var> to <b title>relative path start state</b>,
+     <var title>state</var> to <span>relative path start state</span>,
      and decrease <var title>pointer</var> by one.
     </dl>
 
-   <dt><b title>authority start state</b>
+   <dt><dfn>authority start state</dfn>
    <dd><p>If <var title>c</var> is neither "<code title>/</code>" nor
    "<code title>\</code>", set <var title>state</var> to
-   <b title>authority state</b>, and decrease <var title>pointer</var> by one.
+   <span>authority state</span>, and decrease <var title>pointer</var> by one.
 
-   <dt><b title>authority state</b>
+   <dt><dfn>authority state</dfn>
    <dd>
     <ol>
      <li>
@@ -1047,13 +1047,13 @@ arguments can be used for API manipulation of a
      and "<code title>#</code>", decrease <var title>pointer</var> by the
      number of code points in <var title>buffer</var>, set
      <var title>buffer</var> to the empty string, and
-     <var title>state</var> to <b title>host state</b>.
+     <var title>state</var> to <span>host state</span>.
 
      <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
      U+000D, append <var title>c</var> to <var title>buffer</var>.
     </ol>
 
-   <dt><b title>file host state</b>
+   <dt><dfn>file host state</dfn>
    <dd>
     <ol>
      <li>
@@ -1067,7 +1067,7 @@ arguments can be used for API manipulation of a
         <p>If <var title>buffer</var> consists of two code points, of
         which the first is an <span>ASCII alpha</span> and the second is
         either "<code title>:</code>" or "<code title>|</code>", set state
-        to <b title>relative path state</b>.
+        to <span>relative path state</span>.
 
         <p class=note>This is a quirk for parsing Windows drive letters and
         therefore <var title>buffer</var> is not reset here.
@@ -1085,7 +1085,7 @@ arguments can be used for API manipulation of a
          <li><p>Set
          <var title>url</var>'s <span title=concept-url-host>host</span> to
          <var title>host</var>, <var title>buffer</var> to the empty string,
-         and <var title>state</var> to <b title>relative path start state</b>.
+         and <var title>state</var> to <span>relative path start state</span>.
         </ol>
       </ol>
 
@@ -1093,8 +1093,8 @@ arguments can be used for API manipulation of a
      U+000D, append <var title>c</var> to <var title>buffer</var>.
     </ol>
 
-   <dt><b title>host state</b>
-   <dt><b title>hostname state</b>
+   <dt><dfn>host state</dfn>
+   <dt><dfn>hostname state</dfn>
    <dd>
     <ol>
      <li>
@@ -1110,9 +1110,9 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>host</var>, <var title>buffer</var> to the empty string,
-       and <var title>state</var> to <b title>port state</b>.
+       and <var title>state</var> to <span>port state</span>.
 
-       <li><p>If <var title>state override</var> is <b title>hostname state</b>,
+       <li><p>If <var title>state override</var> is <span>hostname state</span>,
        terminate this algorithm.
       </ol>
 
@@ -1132,7 +1132,7 @@ arguments can be used for API manipulation of a
 
        <li><p>Set <var title>url</var>'s <span title=concept-url-host>host</span> to
        <var title>host</var>, <var title>buffer</var> to the empty string,
-       and <var title>state</var> to <b title>relative path start state</b>.
+       and <var title>state</var> to <span>relative path start state</span>.
 
        <li><p>If <var title>state override</var> is given, terminate this
        algorithm.
@@ -1153,7 +1153,7 @@ arguments can be used for API manipulation of a
       </ol>
     </ol>
 
-   <dt><b title>port state</b>
+   <dt><dfn>port state</dfn>
    <dd>
     <ol>
      <li><p>If <var title>c</var> is an <span title="ASCII digits">ASCII digit</span>,
@@ -1193,19 +1193,19 @@ arguments can be used for API manipulation of a
        algorithm.
 
        <li><p>Set <var title>buffer</var> to the empty string,
-       <var title>state</var> to <b title>relative path start state</b>, and
+       <var title>state</var> to <span>relative path start state</span>, and
        decrease <var title>pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, return failure.
     </ol>
 
-   <dt><b title>relative path start state</b>
-   <dd><p>Set <var title>state</var> to <b title>relative path state</b> and
+   <dt><dfn>relative path start state</dfn>
+   <dd><p>Set <var title>state</var> to <span>relative path state</span> and
    if <var title>c</var> is neither "<code title>/</code>" nor
    "<code title>\</code>", decrease <var title>pointer</var> by one.
 
-   <dt><b title>relative path state</b>
+   <dt><dfn>relative path state</dfn>
    <dd>
     <ol>
      <li>
@@ -1255,11 +1255,11 @@ arguments can be used for API manipulation of a
 
        <li><p>If <var title>c</var> is "<code title>?</code>", set
        <var title>url</var>'s <span title=concept-url-query>query</span> to the empty string,
-       and <var title>state</var> to <b title>query state</b>.
+       and <var title>state</var> to <span>query state</span>.
 
        <li><p>If <var title>c</var> is "<code title>#</code>", set
        <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
-       and <var title>state</var> to <b title>fragment state</b>.
+       and <var title>state</var> to <span>fragment state</span>.
       </ol>
 
      <li><p>Otherwise, if <var title>c</var> is "<code title>%</code>" and
@@ -1274,7 +1274,7 @@ arguments can be used for API manipulation of a
      <var title>buffer</var>.
     </ol>
 
-   <dt><b title>query state</b>
+   <dt><dfn>query state</dfn>
    <dd>
     <ol>
      <li>
@@ -1317,14 +1317,14 @@ arguments can be used for API manipulation of a
        <li><p>If <var title>c</var> is "<code title>#</code>", set
        <var title>url</var>'s
        <span title=concept-url-fragment>fragment</span> to the empty string,
-       and state to <b title>fragment state</b>.
+       and state to <span>fragment state</span>.
       </ol>
 
      <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
      U+000D, append <var title>c</var> to <var title>buffer</var>.
     </ol>
 
-   <dt><b title>fragment state</b>
+   <dt><dfn>fragment state</dfn>
    <dd><p>If <var title>c</var> is none of <span>EOF code point</span>,
    U+0009, U+000A, and U+000D, <span>utf-8 percent encode</span> <var title>c</var>
    using the <span>simple encode set</span>, and append the result to
@@ -1769,7 +1769,7 @@ run these steps:
  <li><p><span title=concept-url-parser>Parse</span> the given value and
  "<code title>:</code>" concatenated with
  <span title=concept-UU-url>url</span> as <var title>url</var> and
- <b title>scheme start state</b> as <var title>state override</var>.
+ <span>scheme start state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
@@ -1861,7 +1861,7 @@ steps:
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
  <span title=concept-UU-url>url</span> as <var title>url</var>, and
- <b title>host state</b> as <var title>state override</var>.
+ <span>host state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
@@ -1886,7 +1886,7 @@ run these steps:
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
  <span title=concept-UU-url>url</span> as <var title>url</var>, and
- <b title>hostname state</b> as <var title>state override</var>.
+ <span>hostname state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
@@ -1912,7 +1912,7 @@ steps:
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
  <span title=concept-UU-url>url</span> as <var title>url</var>, and
- <b title>port state</b> as <var title>state override</var>.
+ <span>port state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
@@ -1943,7 +1943,7 @@ run these steps:
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
  <span title=concept-UU-url>url</span> as <var title>url</var>, and
- <b title>relative path start state</b> as <var title>state override</var>.
+ <span>relative path start state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
@@ -1981,7 +1981,7 @@ these steps:
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
  with <span title=concept-UU-url>url</span> as <var title>url</var>,
- <b title>query state</b> as <var title>state override</var>, and the
+ <span>query state</span> as <var title>state override</var>, and the
  associated <span title=concept-UU-query-encoding>query encoding</span> as
  <var title>encoding override</var>.
 
@@ -2051,7 +2051,7 @@ steps:
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
  with <span title=concept-UU-url>url</span> as <var title>url</var>, and
- <b title>fragment state</b> as <var title>state override</var>.
+ <span>fragment state</span> as <var title>state override</var>.
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
