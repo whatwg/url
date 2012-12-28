@@ -904,9 +904,12 @@ arguments can be used for API manipulation of a
        <a href="#scheme-data-state">scheme data state</a>.
       </ol>
 
-     <li><p>Otherwise, set <var title="">state</var> to <a href="#no-scheme-state">no scheme state</a>,
-     <var title="">buffer</var> to the empty string, and start over (from the
-     first code point in <var title="">input</var>).
+     <li><p>Otherwise, if <var title="">state override</var> is not given, set
+     <var title="">buffer</var> to the empty string, <var title="">state</var> to
+     <a href="#no-scheme-state">no scheme state</a>, and start over (from the first code point
+     in <var title="">input</var>).
+
+     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 
    <dt><dfn id="scheme-data-state">scheme data state</dfn>

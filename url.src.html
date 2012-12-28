@@ -882,9 +882,12 @@ arguments can be used for API manipulation of a
        <span>scheme data state</span>.
       </ol>
 
-     <li><p>Otherwise, set <var title>state</var> to <span>no scheme state</span>,
-     <var title>buffer</var> to the empty string, and start over (from the
-     first code point in <var title>input</var>).
+     <li><p>Otherwise, if <var title>state override</var> is not given, set
+     <var title>buffer</var> to the empty string, <var title>state</var> to
+     <span>no scheme state</span>, and start over (from the first code point
+     in <var title>input</var>).
+
+     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 
    <dt><dfn>scheme data state</dfn>
