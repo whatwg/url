@@ -909,6 +909,10 @@ arguments can be used for API manipulation of a
      <a href="#no-scheme-state">no scheme state</a>, and start over (from the first code point
      in <var title="">input</var>).
 
+     <li><p>Otherwise, if <var title="">c</var> is the
+     <a href="#eof-code-point">EOF code point</a>, terminate this algorithm.
+     <!-- account for URL.protocol = "test" -->
+
      <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 

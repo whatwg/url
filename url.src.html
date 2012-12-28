@@ -887,6 +887,10 @@ arguments can be used for API manipulation of a
      <span>no scheme state</span>, and start over (from the first code point
      in <var title>input</var>).
 
+     <li><p>Otherwise, if <var title>c</var> is the
+     <span>EOF code point</span>, terminate this algorithm.
+     <!-- account for URL.protocol = "test" -->
+
      <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
     </ol>
 
