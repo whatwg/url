@@ -1592,7 +1592,7 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var>)]
+<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var> = "about:blank")]
 interface <dfn>URL</dfn> {
 };
 <span>URL</span> implements <span>URLUtils</span>;
@@ -1677,10 +1677,6 @@ make that distinction.
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title>base</var> is not given, set it to
- "<code title>about:blank</code>".
- <!-- URLUtils needs an associated base URL -->
-
  <li><p>If <var title>base</var> is a string,
  <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
