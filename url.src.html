@@ -2077,7 +2077,7 @@ steps:
 
 <p class=XXX>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
-<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span> or <span class=XXX>...</span>) <var title>init</var>)]
+<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span> or <span class=XXX>...</span>) <var title>init</var> = "")]
 interface <dfn>URLQuery</dfn> {
   DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
   sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
@@ -2113,10 +2113,11 @@ using <var title>init</var>, run these steps:
 <ol>
  <li><p>Let <var title>query</var> be a new <code>URLQuery</code> object.
 
- <li><p>If <var title>init</var> is not given or is null, return
+ <li><p>If <var title>init</var> is the empty string or null, return
  <var title>query</var>.
+ <!-- Beware: new URLQuery(null) is equivalent to new URLQuery("null") -->
 
- <li><p>If <var title>init</var> is a string and is not the empty string,
+ <li><p>If <var title>init</var> is a string,
  set <var title>query</var>'s associated list of name-value pairs to the
  result of <span title=concept-urlencoded-parser>parsing</span>
  <var title>input</var>.

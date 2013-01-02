@@ -2099,7 +2099,7 @@ steps:
 
 <p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a> or <span class="XXX">...</span>) <var title="">init</var>)]
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a> or <span class="XXX">...</span>) <var title="">init</var> = "")]
 interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>(DOMString <var title="">name</var>);
@@ -2135,10 +2135,11 @@ using <var title="">init</var>, run these steps:
 <ol>
  <li><p>Let <var title="">query</var> be a new <a href="#urlquery"><code>URLQuery</code></a> object.
 
- <li><p>If <var title="">init</var> is not given or is null, return
+ <li><p>If <var title="">init</var> is the empty string or null, return
  <var title="">query</var>.
+ <!-- Beware: new URLQuery(null) is equivalent to new URLQuery("null") -->
 
- <li><p>If <var title="">init</var> is a string and is not the empty string,
+ <li><p>If <var title="">init</var> is a string,
  set <var title="">query</var>'s associated list of name-value pairs to the
  result of <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
  <var title="">input</var>.
