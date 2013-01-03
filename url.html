@@ -1028,7 +1028,7 @@ arguments can be used for API manipulation of a
      <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
      <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
      remove <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
-     <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>,
+     <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
      and decrease <var title="">pointer</var> by one.
     </dl>
 
@@ -1064,7 +1064,7 @@ arguments can be used for API manipulation of a
     <var title="">state</var> to <a href="#authority-second-slash-state">authority second slash state</a>.
 
     <p>Otherwise, <span>parse error</span>, decrease
-    <var title="">pointer</var> by one and set <var title="">state</var> to
+    <var title="">pointer</var> by one, and set <var title="">state</var> to
     <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
    <dt><dfn id="authority-second-slash-state">authority second slash state</dfn>
@@ -1073,7 +1073,7 @@ arguments can be used for API manipulation of a
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
     <p>Otherwise, <span>parse error</span>, decrease
-    <var title="">pointer</var> by one and set <var title="">state</var> to
+    <var title="">pointer</var> by one, and set <var title="">state</var> to
     <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
    <dt><dfn id="authority-ignore-slashes-state">authority ignore slashes state</dfn>
