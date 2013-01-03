@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-january-2013">Living Standard — Last Updated 2 January 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-january-2013">Living Standard — Last Updated 3 January 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-2 January 2013, the editors have made this specification available
+3 January 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -900,7 +900,7 @@ arguments can be used for API manipulation of a
 
        <li><p>Otherwise, if <var title="">url</var>'s
        <a href="#relative-flag">relative flag</a> is set, set <var title="">state</var> to
-       <a href="#authority-start-state">authority start state</a>.
+       <a href="#authority-first-slash-state">authority first slash state</a>.
 
        <li><p>Otherwise, set <var title="">state</var> to
        <a href="#scheme-data-state">scheme data state</a>.
@@ -988,26 +988,12 @@ arguments can be used for API manipulation of a
      <dt>"<code title="">/</code>"
      <dt>"<code title="">\</code>"
      <dd>
-      <p>If <var title="">remaining</var> starts with either
-      "<code title="">/</code>" or "<code title="">\</code>", increase
-      <var title="">pointer</var> by one, and run these steps:
-
       <ol>
-       <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
-       "<code title="">file</code>", set <var title="">state</var> to
-       <a href="#file-host-state">file host state</a>.
-
-       <li><p>Otherwise set <var title="">state</var> to
-       <a href="#authority-start-state">authority start state</a>.
+       <li><p>If <var title="">c</var> is "<code title="">\</code>",
+       <span>parse error</span>.
+       <li><p>Set <var title="">state</var> to
+       <a href="#relative-slash-state">relative slash state</a>.
       </ol>
-
-      <p>Otherwise, set
-      <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-      <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
-      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-      <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>,
-      and decrease <var title="">pointer</var> by one.
 
      <dt>"<code title="">?</code>"
      <dd><p>Set
@@ -1046,10 +1032,57 @@ arguments can be used for API manipulation of a
      and decrease <var title="">pointer</var> by one.
     </dl>
 
-   <dt><dfn id="authority-start-state">authority start state</dfn>
-   <dd><p>If <var title="">c</var> is neither "<code title="">/</code>" nor
-   "<code title="">\</code>", set <var title="">state</var> to
-   <a href="#authority-state">authority state</a>, and decrease <var title="">pointer</var> by one.
+   <dt><dfn id="relative-slash-state">relative slash state</dfn>
+   <dd>
+    <p>If <var title="">c</var> is either "<code title="">/</code>" or
+    "<code title="">\</code>", run these steps:
+
+    <ol>
+     <li><p>If <var title="">c</var> is "<code title="">\</code>",
+     <span>parse error</span>.
+
+     <li><p>If <var title="">url</var>'s
+     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
+     "<code title="">file</code>", set <var title="">state</var> to
+     <a href="#file-host-state">file host state</a>.
+
+     <li><p>Otherwise, set <var title="">state</var> to
+     <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+    </ol>
+
+    <p>Otherwise, set
+    <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
+    <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+    <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
+    <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+    <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
+    and decrease <var title="">pointer</var> by one.
+
+   <dt><dfn id="authority-first-slash-state">authority first slash state</dfn>
+   <dd>
+    <p>If <var title="">c</var> is "<code title="">/</code>", set
+    <var title="">state</var> to <a href="#authority-second-slash-state">authority second slash state</a>.
+
+    <p>Otherwise, <span>parse error</span>, decrease
+    <var title="">pointer</var> by one and set <var title="">state</var> to
+    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+
+   <dt><dfn id="authority-second-slash-state">authority second slash state</dfn>
+   <dd>
+    <p>If <var title="">c</var> is "<code title="">/</code>", set
+    <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+
+    <p>Otherwise, <span>parse error</span>, decrease
+    <var title="">pointer</var> by one and set <var title="">state</var> to
+    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+
+   <dt><dfn id="authority-ignore-slashes-state">authority ignore slashes state</dfn>
+   <dd>
+    <p>If <var title="">c</var> is neither "<code title="">/</code>" nor
+    "<code title="">\</code>", set <var title="">state</var> to
+    <a href="#authority-state">authority state</a>, and decrease <var title="">pointer</var> by one.
+
+    <p>Otherwise, <span>parse error</span>.
 
    <dt><dfn id="authority-state">authority state</dfn>
    <dd>
