@@ -1098,6 +1098,9 @@ arguments can be used for API manipulation of a
         <p>For each <var title>code point</var> in <var title>buffer</var>, run these substeps:
 
         <ol>
+         <li><p>If <var title>code point</var> is U+0009, U+000A, or U+000D,
+         <span>parse error</span>, continue.
+
          <li><p>If <var title>code point</var> is "<code title>:</code>" and
          <var title>url</var>'s
          <span title=concept-url-password>password</span> is null, set
@@ -1122,8 +1125,7 @@ arguments can be used for API manipulation of a
      <var title>buffer</var> to the empty string, and
      <var title>state</var> to <span>host state</span>.
 
-     <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title>c</var> to <var title>buffer</var>.
+     <li><p>Otherwise, append <var title>c</var> to <var title>buffer</var>.
     </ol>
 
    <dt><dfn>file host state</dfn>
@@ -1190,9 +1192,9 @@ arguments can be used for API manipulation of a
       </ol>
 
      <li>
-      <p>Otherwise, if <var title>c</var> is one of
+      <p>Otherwise, if <var title>c</var> is the
       <span>EOF code point</span>, "<code title>/</code>",
-      "<code title>\</code>", "<code title>?</code>", and
+      "<code title>\</code>", "<code title>?</code>", or
       "<code title>#</code>", decrease <var title>pointer</var> by one, and
       run these substeps:
 
@@ -1211,9 +1213,11 @@ arguments can be used for API manipulation of a
        algorithm.
       </ol>
 
+     <li><p>Otherwise, if <var title>c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
+
      <li>
-      <p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
-      U+000D, run these substeps:
+      <p>Otherwise, run these substeps:
 
       <ol>
        <li><p>If <var title>c</var> is "<code title>[</code>", set the
@@ -1269,6 +1273,9 @@ arguments can be used for API manipulation of a
        <var title>state</var> to <span>relative path start state</span>, and
        decrease <var title>pointer</var> by one.
       </ol>
+
+     <li><p>Otherwise, if <var title>c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
 
      <li><p>Otherwise, <span>parse error</span>, return failure.
     </ol>
