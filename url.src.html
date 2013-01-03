@@ -875,7 +875,6 @@ arguments can be used for API manipulation of a
        <span title=concept-url-scheme>scheme</span> is
        "<code title>file</code>", set <var title>state</var> to
        <span>relative state</span>.
-       <!-- not combined with the subsequent step for clarity -->
 
        <li><p>Otherwise, if <var title>url</var>'s
        <span>relative flag</span> is set, <var title>base</var> is not null
@@ -924,7 +923,7 @@ arguments can be used for API manipulation of a
       <ol>
        <li><p>If <var title>c</var> not the <span>EOF code point</span>, not
        a <span title="URL code points">URL code point</span>, and
-       <var title>c</var> is not "<code>:</code>" while
+       <var title>c</var> is not "<code>%</code>" while
        <var title>remaining</var> starts with two
        <span>ASCII hex digits</span>, <span>parse error</span>.
 
