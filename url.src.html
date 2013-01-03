@@ -882,7 +882,8 @@ arguments can be used for API manipulation of a
        and <var title>base</var>'s
        <span title=concept-url-scheme>scheme</span> is equal to
        <var title>url</var>'s <span title=concept-url-scheme>scheme</span>,
-       set <var title>state</var> to <span>relative state</span>.
+       set <var title>state</var> to
+       <span>relative or authority state</span>.
 
        <li><p>Otherwise, if <var title>url</var>'s
        <span>relative flag</span> is set, set <var title>state</var> to
@@ -951,6 +952,17 @@ arguments can be used for API manipulation of a
 
     <p>Otherwise, set <var title>state</var> to <span>relative state</span>,
     and decrease <var title>pointer</var> by one.
+
+   <dt><dfn>relative or authority state</dfn>
+   <dd>
+    <p>If <var title>c</var> is "<code>/</code>" and
+    <var title>remaining</var> starts with "<code>/</code>", set
+    <var title>state</var> to <span>authority ignore slashes state</span>
+    and increase <var title>pointer</var> by one.
+
+    <p>Otherwise, <span>parse error</span>, set <var title>state</var> to
+    <span>relative state</span> and decrease <var title>pointer</var> by
+    one.
 
    <dt><dfn>relative state</dfn>
    <dd>
