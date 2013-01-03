@@ -292,7 +292,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
   <ol>
    <li><p>If <var title>input</var> does not end with
-   "<code title>]</code>", return failure.
+   "<code title>]</code>", <span>parse error</span>, return failure.
 
    <li><p>Return the result of
    <span title=concept-ipv6-parser>parsing</span> <var title>input</var>
@@ -339,7 +339,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
   <ol>
    <li><p>If <var title>remaining</var> does not start with
-   "<code title>:</code>", return failure.
+   "<code title>:</code>", <span>parse error</span>, return failure.
 
    <li><p>Increase <var title>pointer</var> by two.
 
@@ -353,14 +353,16 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   substeps:
 
   <ol>
-   <li><p>If <var title>piece pointer</var> is eight, return failure.
+   <li><p>If <var title>piece pointer</var> is eight,
+   <span>parse error</span>, return failure.
 
    <li>
     <p>If <var title>c</var> is "<code title>:</code>", run these inner
     substeps:
 
     <ol>
-     <li>If <var title>compress pointer</var> is not null, return failure.
+     <li>If <var title>compress pointer</var> is not null,
+     <span>parse error</span>, return failure.
 
      <li>Increase <var title>piece pointer</var> by one, set
      <var title>compress pointer</var> to <var title>piece pointer</var>,
@@ -382,18 +384,19 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
     <dl class=switch>
      <dt>"<code title>.</code>"
      <dd>
-      <p>If <var title>length</var> is 0, return failure.
+      <p>If <var title>length</var> is 0, <span>parse error</span>,
+      return failure.
       <p>Decrease <var title>pointer</var> by <var title>length</var>.
       <p>Jump to <span title=concept-ipv6-parser-ipv4>IPv4</span>.
 
      <dt>"<code title>:</code>"
      <dd>
       <p>Increase <var title>pointer</var> by one.
-      <p>If <var title>c</var> is the <span>EOF code point</span>, return
-      failure.
+      <p>If <var title>c</var> is the <span>EOF code point</span>,
+      <span>parse error</span>, return failure.
 
      <dt>Anything but the <span>EOF code point</span>
-     <dd><p>Return failure.
+     <dd><p><span>Parse error</span>, return failure.
     </dl>
 
    <li><p>Set <var title>piece</var> to <var title>value</var>.
@@ -405,7 +408,8 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
  <span title=concept-ipv6-parser-finale>Finale</span>.
 
  <li><p><dfn title=concept-ipv6-parser-ipv4>IPv4</dfn>:
- If <var title>piece pointer</var> is greater than six, return failure.
+ If <var title>piece pointer</var> is greater than six,
+ <span>parse error</span>, return failure.
 
  <li><p>Let <var title>dots seen</var> be 0.
 
@@ -421,13 +425,16 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
    <var title>value</var> &times; 10 + <var title>c</var> interpreted as decimal number
    and increase <var title>pointer</var> by one.
 
-   <li><p>If <var title>value</var> is greater than 255, return failure.
+   <li><p>If <var title>value</var> is greater than 255,
+   <span>parse error</span>, return failure.
 
    <li><p>If <var title>dots seen</var> is less than 3 and
-   <var title>c</var> is not a "<code title>.</code>", return failure.
+   <var title>c</var> is not a "<code title>.</code>",
+   <span>parse error</span>, return failure.
 
    <li><p>If <var title>dots seen</var> is 3 and <var title>c</var> is not
-   the <span>EOF code point</span>, return failure.
+   the <span>EOF code point</span>,
+   <span>parse error</span>, return failure.
 
    <li><p>Set <var title>piece</var> to
    <var title>piece</var> &times; 0x10 + <var title>value</var>.
@@ -457,7 +464,8 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   </ol>
 
  <li><p>Otherwise, if <var title>compress pointer</var> is null and
- <var title>piece pointer</var> is not eight, return failure.
+ <var title>piece pointer</var> is not eight, <span>parse error</span>,
+ return failure.
 
  <li><p>Return <var title>address</var>.
 </ol>
@@ -932,7 +940,7 @@ arguments can be used for API manipulation of a
    <dd>
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
-    <span>relative scheme</span>, return failure.
+    <span>relative scheme</span>, <span>parse error</span>, return failure.
 
     <p class=note>You do not want to check <var title>base</var>'s
     <span>relative flag</span> here, as the
@@ -1250,7 +1258,7 @@ arguments can be used for API manipulation of a
        decrease <var title>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, return failure.
+     <li><p>Otherwise, <span>parse error</span>, return failure.
     </ol>
 
    <dt><dfn>relative path start state</dfn>
