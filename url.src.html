@@ -361,7 +361,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
     substeps:
 
     <ol>
-     <li>If <var title>compress pointer</var> is not null,
+     <li><p>If <var title>compress pointer</var> is not null,
      <span>parse error</span>, return failure.
 
      <li>Increase <var title>piece pointer</var> by one, set
@@ -924,7 +924,7 @@ arguments can be used for API manipulation of a
        <li><p>If <var title>c</var> is not the <span>EOF code point</span>
        and not a <span title="URL code points">URL code point</span>, or
        <var title>c</var> is "<code title>%</code>" and
-       <var title>remaining</var> starts with two
+       <var title>remaining</var> does not start with two
        <span>ASCII hex digits</span>, <span>parse error</span>.
 
        <li><p>If <var title>c</var> is none of
@@ -1102,10 +1102,10 @@ arguments can be used for API manipulation of a
          <span>parse error</span>, continue.
 
          <li><p>If <var title>code point</var> is not a
-         <span>URL code point</span>, or <var title>code point</var> is
-         "<code title>%</code>" and <var title>remaining</var> does not
-         start with two <span>ASCII hex digits</span>,
-         <span>parse error</span>.
+         <span title="URL code points">URL code point</span>, or
+         <var title>code point</var> is "<code title>%</code>" and
+         <var title>remaining</var> does not start with two
+         <span>ASCII hex digits</span>, <span>parse error</span>.
 
          <li><p>If <var title>code point</var> is "<code title>:</code>" and
          <var title>url</var>'s
@@ -1289,9 +1289,15 @@ arguments can be used for API manipulation of a
     </ol>
 
    <dt><dfn>relative path start state</dfn>
-   <dd><p>Set <var title>state</var> to <span>relative path state</span> and
-   if <var title>c</var> is neither "<code title>/</code>" nor
-   "<code title>\</code>", decrease <var title>pointer</var> by one.
+   <dd>
+    <ol>
+     <li><p>If <var title>c</var> is "<code title>\</code>",
+     <span>parse error</span>.
+
+     <li><p>Set <var title>state</var> to <span>relative path state</span>
+     and if <var title>c</var> is neither "<code title>/</code>" nor
+     "<code title>\</code>", decrease <var title>pointer</var> by one.
+    </ol>
 
    <dt><dfn>relative path state</dfn>
    <dd>
@@ -1356,10 +1362,23 @@ arguments can be used for API manipulation of a
      and append "<code title>.</code>" to <var title>buffer</var>.
      <!-- Chrome unescapes more here; Safari does nothing -->
 
-     <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
-     U+000D, <span>utf-8 percent encode</span> <var title>c</var>
-     using the <span>default encode set</span>, and append the result to
-     <var title>buffer</var>.
+     <li><p>Otherwise, if <var title>c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
+
+     <li>
+      <p>Otherwise, run these steps:
+
+      <ol>
+       <li><p>If <var title>c</var> is not a
+       <span title="URL code points">URL code point</span>, or
+       <var title>c</var> is "<code title>%</code>" and
+       <var title>remaining</var> does not start with two
+       <span>ASCII hex digits</span>, <span>parse error</span>.
+
+       <li><p><span>utf-8 percent encode</span> <var title>c</var> using the
+       <span>default encode set</span>, and append the result to
+       <var title>buffer</var>.
+      </ol>
     </ol>
 
    <dt><dfn>query state</dfn>
@@ -1408,17 +1427,52 @@ arguments can be used for API manipulation of a
        and state to <span>fragment state</span>.
       </ol>
 
-     <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title>c</var> to <var title>buffer</var>.
+     <li><p>Otherwise, if <var title>c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
+
+     <li>
+      <p>Otherwise, run these substeps:
+
+      <ol>
+       <li><p>If <var title>c</var> is not a
+       <span title="URL code points">URL code point</span>, or
+       <var title>c</var> is "<code title>%</code>" and
+       <var title>remaining</var> does not start with two
+       <span>ASCII hex digits</span>, <span>parse error</span>.
+
+       <li><p>Append <var title>c</var> to <var title>buffer</var>.
+      </ol>
     </ol>
 
    <dt><dfn>fragment state</dfn>
-   <dd><p>If <var title>c</var> is none of <span>EOF code point</span>,
-   U+0009, U+000A, and U+000D, <span>utf-8 percent encode</span> <var title>c</var>
-   using the <span>simple encode set</span>, and append the result to
-   <var title>url</var>'s <span title=concept-url-fragment>fragment</span>.
-   <!-- if people complain about this do not forget that results may differ
-        depending on whether or not a relative scheme is in play -->
+   <dd>
+    <p>Based on <var title>c</var>:
+    <dl class=switch>
+     <dt><span>EOF code point</span>
+     <dd><p>Do nothing.
+
+     <dt>U+0009
+     <dt>U+000A
+     <dt>U+000D
+     <dd><p><span>Parse error</span>.
+
+     <dt>Otherwise
+     <dd>
+      <ol>
+       <li><p>If <var title>c</var> is not a
+       <span title="URL code points">URL code point</span>, or
+       <var title>c</var> is "<code title>%</code>" and
+       <var title>remaining</var> does not start with two
+       <span>ASCII hex digits</span>, <span>parse error</span>.
+
+       <li><p><span>utf-8 percent encode</span> <var title>c</var>
+       using the <span>simple encode set</span>, and append the result to
+       <var title>url</var>'s <span title=concept-url-fragment>fragment</span>.
+       <!-- if people complain about percent encoding do not forget that
+            results may differ depending on whether or not a relative scheme
+            is in play -->
+      </ol>
+    </dl>
   </dl>
 
  <li><p>Return <var title>url</var>.
