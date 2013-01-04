@@ -921,9 +921,9 @@ arguments can be used for API manipulation of a
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <var title>c</var> not the <span>EOF code point</span>, not
-       a <span title="URL code points">URL code point</span>, and
-       <var title>c</var> is not "<code>%</code>" while
+       <li><p>If <var title>c</var> is not the <span>EOF code point</span>
+       and not a <span title="URL code points">URL code point</span>, or
+       <var title>c</var> is "<code title>%</code>" and
        <var title>remaining</var> starts with two
        <span>ASCII hex digits</span>, <span>parse error</span>.
 
@@ -1060,18 +1060,18 @@ arguments can be used for API manipulation of a
     <p>If <var title>c</var> is "<code title>/</code>", set
     <var title>state</var> to <span>authority second slash state</span>.
 
-    <p>Otherwise, <span>parse error</span>, decrease
-    <var title>pointer</var> by one, and set <var title>state</var> to
-    <span>authority ignore slashes state</span>.
+    <p>Otherwise, <span>parse error</span>, set <var title>state</var> to
+    <span>authority ignore slashes state</span>, and decrease
+    <var title>pointer</var> by one.
 
    <dt><dfn>authority second slash state</dfn>
    <dd>
     <p>If <var title>c</var> is "<code title>/</code>", set
     <var title>state</var> to <span>authority ignore slashes state</span>.
 
-    <p>Otherwise, <span>parse error</span>, decrease
-    <var title>pointer</var> by one, and set <var title>state</var> to
-    <span>authority ignore slashes state</span>.
+    <p>Otherwise, <span>parse error</span>, set <var title>state</var> to
+    <span>authority ignore slashes state</span>, and decrease
+    <var title>pointer</var> by one.
 
    <dt><dfn>authority ignore slashes state</dfn>
    <dd>
@@ -1088,8 +1088,9 @@ arguments can be used for API manipulation of a
       <p>If <var title>c</var> is "<code title>@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var title>@ flag</var> is set, prepend
-       "<code title>%40</code>" to <var title>buffer</var>.
+       <li><p>If the <var title>@ flag</var> is set,
+       <span>parse error</span>, prepend "<code title>%40</code>" to
+       <var title>buffer</var>.
 
        <li><p>Set the <var title>@ flag</var>.
 
@@ -1099,6 +1100,12 @@ arguments can be used for API manipulation of a
         <ol>
          <li><p>If <var title>code point</var> is U+0009, U+000A, or U+000D,
          <span>parse error</span>, continue.
+
+         <li><p>If <var title>code point</var> is not a
+         <span>URL code point</span>, or <var title>code point</var> is
+         "<code title>%</code>" and <var title>remaining</var> does not
+         start with two <span>ASCII hex digits</span>,
+         <span>parse error</span>.
 
          <li><p>If <var title>code point</var> is "<code title>:</code>" and
          <var title>url</var>'s
@@ -1163,8 +1170,10 @@ arguments can be used for API manipulation of a
         </ol>
       </ol>
 
-     <li><p>Otherwise, if <var title>c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title>c</var> to <var title>buffer</var>.
+     <li><p>Otherwise, if <var title>c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
+
+     <li><p>Otherwise, append <var title>c</var> to <var title>buffer</var>.
     </ol>
 
    <dt><dfn>host state</dfn>

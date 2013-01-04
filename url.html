@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-january-2013">Living Standard — Last Updated 3 January 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-january-2013">Living Standard — Last Updated 4 January 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-3 January 2013, the editors have made this specification available
+4 January 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -897,7 +897,6 @@ arguments can be used for API manipulation of a
        <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
        "<code title="">file</code>", set <var title="">state</var> to
        <a href="#relative-state">relative state</a>.
-       <!-- not combined with the subsequent step for clarity -->
 
        <li><p>Otherwise, if <var title="">url</var>'s
        <a href="#relative-flag">relative flag</a> is set, <var title="">base</var> is not null
@@ -944,9 +943,9 @@ arguments can be used for API manipulation of a
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <var title="">c</var> not the <a href="#eof-code-point">EOF code point</a>, not
-       a <a href="#url-code-points" title="URL code points">URL code point</a>, and
-       <var title="">c</var> is not "<code>:</code>" while
+       <li><p>If <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>
+       and not a <a href="#url-code-points" title="URL code points">URL code point</a>, or
+       <var title="">c</var> is "<code title="">%</code>" and
        <var title="">remaining</var> starts with two
        <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
 
@@ -1083,18 +1082,18 @@ arguments can be used for API manipulation of a
     <p>If <var title="">c</var> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-second-slash-state">authority second slash state</a>.
 
-    <p>Otherwise, <span>parse error</span>, decrease
-    <var title="">pointer</var> by one, and set <var title="">state</var> to
-    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+    <p>Otherwise, <span>parse error</span>, set <var title="">state</var> to
+    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>, and decrease
+    <var title="">pointer</var> by one.
 
    <dt><dfn id="authority-second-slash-state">authority second slash state</dfn>
    <dd>
     <p>If <var title="">c</var> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
-    <p>Otherwise, <span>parse error</span>, decrease
-    <var title="">pointer</var> by one, and set <var title="">state</var> to
-    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
+    <p>Otherwise, <span>parse error</span>, set <var title="">state</var> to
+    <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>, and decrease
+    <var title="">pointer</var> by one.
 
    <dt><dfn id="authority-ignore-slashes-state">authority ignore slashes state</dfn>
    <dd>
@@ -1111,8 +1110,9 @@ arguments can be used for API manipulation of a
       <p>If <var title="">c</var> is "<code title="">@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var title="">@ flag</var> is set, prepend
-       "<code title="">%40</code>" to <var title="">buffer</var>.
+       <li><p>If the <var title="">@ flag</var> is set,
+       <span>parse error</span>, prepend "<code title="">%40</code>" to
+       <var title="">buffer</var>.
 
        <li><p>Set the <var title="">@ flag</var>.
 
@@ -1122,6 +1122,12 @@ arguments can be used for API manipulation of a
         <ol>
          <li><p>If <var title="">code point</var> is U+0009, U+000A, or U+000D,
          <span>parse error</span>, continue.
+
+         <li><p>If <var title="">code point</var> is not a
+         <span>URL code point</span>, or <var title="">code point</var> is
+         "<code title="">%</code>" and <var title="">remaining</var> does not
+         start with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
+         <span>parse error</span>.
 
          <li><p>If <var title="">code point</var> is "<code title="">:</code>" and
          <var title="">url</var>'s
@@ -1186,8 +1192,10 @@ arguments can be used for API manipulation of a
         </ol>
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is none of U+0009, U+000A, and
-     U+000D, append <var title="">c</var> to <var title="">buffer</var>.
+     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <span>parse error</span>.
+
+     <li><p>Otherwise, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
 
    <dt><dfn id="host-state">host state</dfn>
