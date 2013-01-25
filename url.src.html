@@ -364,7 +364,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
      <li><p>If <var title>compress pointer</var> is not null,
      <span>parse error</span>, return failure.
 
-     <li>Increase <var title>piece pointer</var> by one, set
+     <li>Increase <var title>pointer</var> and <var title>piece pointer</var> by one, set
      <var title>compress pointer</var> to <var title>piece pointer</var>,
      and then jump to <span title=concept-ipv6-parser-main>Main</span>.
     </ol>
@@ -458,7 +458,7 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
    <li><p>While neither <var title>piece pointer</var> nor
    <var title>swaps</var> is zero, replace <var title>piece</var> with the
    <span title=concept-ipv6-piece>piece</span> at pointer
-   <var title>compress pointer</var> + <var title>swaps</var> and then
+   <var title>compress pointer</var> + <var title>swaps</var> &minus; 1, and then
    decrease <var title>piece pointer</var> and <var title>swaps</var> by
    one.
   </ol>
@@ -2357,8 +2357,9 @@ Mathias Bynens,
 Michael™ Smith,
 Rodney Rehm,
 Simon Pieters,
-Tab Atkins, and
-Tantek Çelik
+Tab Atkins, 
+Tantek Çelik, and
+成瀬ゆい (Yui Naruse)
 for being awesome!
 
 <!-- http://dvcs.w3.org/hg/url/raw-file/feb258fa6ab5/Overview.html -->

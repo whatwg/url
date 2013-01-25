@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-january-2013">Living Standard — Last Updated 4 January 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-january-2013">Living Standard — Last Updated 25 January 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-4 January 2013, the editors have made this specification available
+25 January 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -386,7 +386,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      <li><p>If <var title="">compress pointer</var> is not null,
      <span>parse error</span>, return failure.
 
-     <li>Increase <var title="">piece pointer</var> by one, set
+     <li>Increase <var title="">pointer</var> and <var title="">piece pointer</var> by one, set
      <var title="">compress pointer</var> to <var title="">piece pointer</var>,
      and then jump to <a href="#concept-ipv6-parser-main" title="concept-ipv6-parser-main">Main</a>.
     </ol>
@@ -480,7 +480,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <li><p>While neither <var title="">piece pointer</var> nor
    <var title="">swaps</var> is zero, replace <var title="">piece</var> with the
    <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> at pointer
-   <var title="">compress pointer</var> + <var title="">swaps</var> and then
+   <var title="">compress pointer</var> + <var title="">swaps</var> − 1, and then
    decrease <var title="">piece pointer</var> and <var title="">swaps</var> by
    one.
   </ol>
@@ -2403,8 +2403,9 @@ Mathias Bynens,
 Michael™ Smith,
 Rodney Rehm,
 Simon Pieters,
-Tab Atkins, and
-Tantek Çelik
+Tab Atkins, 
+Tantek Çelik, and
+成瀬ゆい (Yui Naruse)
 for being awesome!
 
 <!-- http://dvcs.w3.org/hg/url/raw-file/feb258fa6ab5/Overview.html -->
