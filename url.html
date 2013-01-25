@@ -540,7 +540,9 @@ then runs these steps:
   <ol>
    <li><p>If <var title="">compress pointer</var> points to
    <var title="">piece</var>, append "<code title="">::</code>" to
-   <var title="">output</var> and then run these substeps again with all
+   <var title="">output</var> if <var title="">piece</var> is 
+   <var title="">address</var>'s first <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> and append
+   "<code title="">:</code>" otherwise, and then run these substeps again with all
    subsequent <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a> in
    <var title="">address</var>'s <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>
    that are 0 skipped or go the next step in the overall set of steps if
@@ -549,8 +551,8 @@ then runs these steps:
    <li><p>Append <var title="">piece</var>, represented as the shortest
    possible lowercase hexadecimal number, to <var title="">output</var>.
 
-   <li><p>If <var title="">piece</var> is not the last of
-   <var title="">address</var>'s <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a>,
+   <li><p>If <var title="">piece</var> is not
+   <var title="">address</var>'s last <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a>,
    append "<code title="">:</code>" to <var title="">output</var>.
   </ol>
 
