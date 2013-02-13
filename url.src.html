@@ -1752,14 +1752,14 @@ dictionary URLEqualOptions {
 URLPath would be a subclassed Array similarly to how URLQuery will be a
 subclassed MultiMap. -->
 
-<p>Any object implementing <code>URLUtils</code> has an associated
-<span title=concept-base-url>base URL</span>
-<dfn title=concept-UU-base>base</dfn>,
-<dfn title=concept-UU-input>input</dfn>,
-<dfn title=concept-UU-query-encoding>query encoding</dfn>,
-<dfn title=concept-UU-query-object>query object</dfn>, and a
-<span title=concept-parsed-url>parsed URL</span>
-<dfn title=concept-UU-url>url</dfn>.
+<p>An object implementing <code>URLUtils</code> has an associated
+<dfn title=concept-UU-input>input</dfn> (a string),
+<dfn title=concept-UU-query-encoding>query encoding</dfn> 
+(an <span data-anolis-spec=encoding>encoding</span>),
+<dfn title=concept-UU-query-object>query object</dfn>
+(a <code>URLQuery</code> object or null), and a 
+<dfn title=concept-UU-url>url</dfn> (a 
+<span title=concept-parsed-url>parsed URL</span> or null).
 
 Unless stated otherwise,
 <span title=concept-UU-query-encoding>query encoding</span> is
@@ -1781,6 +1781,9 @@ non-null <span title=concept-UU-url>url</span> whose
 <span title=concept-UU-url>url</span>'s
 <span title=concept-URL-query>query</span>.
 
+<p>An object implementing <code>URLUtils</code> also has an associated
+<dfn title=concept-UU-get-the-base>get the base</dfn> algorithm, which has to return the
+appropriate <span title=concept-base-URL>base URL</span> for the object.
 
 <p>Specifications defining objects implementing <code>URLUtils</code> may
 define <dfn title=concept-UU-update>update steps</dfn> to make it possible
@@ -1819,9 +1822,9 @@ constructor must run these steps:
 
  <li><p>Create a new <code>URL</code> object, set its
  <span title=concept-UU-url>url</span> to <var title>parsed URL</var>,
- <span title=concept-UU-base>base</span> to <var title>base</var>,
- and <span title=concept-UU-input>input</span> to <var title>url</var>, and
- then return the new object.
+ <span title=concept-UU-input>input</span> to <var title>url</var>, and make its
+ <span title=concept-UU-get-the-base>get the base</span> algorithm return
+ <var title>base</var>, and then return the new object.
 </ol>
 
 
@@ -1853,8 +1856,8 @@ run these steps:
  <li><p>Let <var title>parsed URL</var> be the result of
  <span title=concept-url-parser>parsing</span>
  <span title=concept-UU-input>input</span> with
- <span title=concept-base-url>base URL</span>
- <span title=concept-UU-base>base</span> and
+ <span title=concept-base-url>base URL</span> being the result of running
+ <span title=concept-UU-get-the-base>get the base</span> and
  <span title=concept-UU-query-encoding>query encoding</span> as
  <var title>encoding override</var>.
 
@@ -2372,6 +2375,7 @@ return the number of name-value pairs.
 <p>Thanks to
 Adam Barth,
 Alexandre Morgaut,
+Bobby Holley,
 Boris Zbarsky,
 David Sheets,
 Erik Arvidsson,

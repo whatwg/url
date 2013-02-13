@@ -1775,14 +1775,14 @@ dictionary URLEqualOptions {
 URLPath would be a subclassed Array similarly to how URLQuery will be a
 subclassed MultiMap. -->
 
-<p>Any object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
-<a href="#concept-base-url" title="concept-base-url">base URL</a>
-<dfn id="concept-uu-base" title="concept-UU-base">base</dfn>,
-<dfn id="concept-uu-input" title="concept-UU-input">input</dfn>,
-<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>,
-<dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>, and a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>
-<dfn id="concept-uu-url" title="concept-UU-url">url</dfn>.
+<p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
+<dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
+<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn> 
+(an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>),
+<dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>
+(a <a href="#urlquery"><code>URLQuery</code></a> object or null), and a 
+<dfn id="concept-uu-url" title="concept-UU-url">url</dfn> (a 
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> or null).
 
 Unless stated otherwise,
 <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is
@@ -1804,6 +1804,9 @@ non-null <a href="#concept-uu-url" title="concept-UU-url">url</a> whose
 <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
 <a href="#concept-url-query" title="concept-URL-query">query</a>.
 
+<p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> also has an associated
+<dfn id="concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</dfn> algorithm, which has to return the
+appropriate <a href="#concept-base-url" title="concept-base-URL">base URL</a> for the object.
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> may
 define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible
@@ -1842,9 +1845,9 @@ constructor must run these steps:
 
  <li><p>Create a new <a href="#url"><code>URL</code></a> object, set its
  <a href="#concept-uu-url" title="concept-UU-url">url</a> to <var title="">parsed URL</var>,
- <a href="#concept-uu-base" title="concept-UU-base">base</a> to <var title="">base</var>,
- and <a href="#concept-uu-input" title="concept-UU-input">input</a> to <var title="">url</var>, and
- then return the new object.
+ <a href="#concept-uu-input" title="concept-UU-input">input</a> to <var title="">url</var>, and make its
+ <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> algorithm return
+ <var title="">base</var>, and then return the new object.
 </ol>
 
 
@@ -1876,8 +1879,8 @@ run these steps:
  <li><p>Let <var title="">parsed URL</var> be the result of
  <a href="#concept-url-parser" title="concept-url-parser">parsing</a>
  <a href="#concept-uu-input" title="concept-UU-input">input</a> with
- <a href="#concept-base-url" title="concept-base-url">base URL</a>
- <a href="#concept-uu-base" title="concept-UU-base">base</a> and
+ <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+ <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> and
  <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
  <var title="">encoding override</var>.
 
@@ -2419,6 +2422,7 @@ return the number of name-value pairs.
 <p>Thanks to
 Adam Barth,
 Alexandre Morgaut,
+Bobby Holley,
 Boris Zbarsky,
 David Sheets,
 Erik Arvidsson,
