@@ -2197,6 +2197,34 @@ steps:
 </ol>
 
 
+<h3>Interface <code>URLUtilsReadOnly</code></h3>
+
+<pre class=idl>[NoInterfaceObject]
+interface <dfn>URLUtilsReadOnly</dfn> {
+  stringifier readonly attribute DOMString <span title=dom-URL-href>href</span>;<!--
+  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
+
+  readonly attribute DOMString <span title=dom-URL-protocol>protocol</span>;<!--
+  readonly attribute DOMString <span title=dom-URL-username>username</span>;
+  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
+  readonly attribute DOMString <span title=dom-URL-host>host</span>;
+  readonly attribute DOMString <span title=dom-URL-hostname>hostname</span>;
+  readonly attribute DOMString <span title=dom-URL-port>port</span>;
+  readonly attribute DOMString <span title=dom-URL-pathname>pathname</span>;
+  readonly attribute DOMString <span title=dom-URL-search>search</span>;<!--
+  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
+  readonly attribute DOMString <span title=dom-URL-hash>hash</span>;
+};</pre>
+
+<p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
+to objects implementing <code>URLUtils</code>.
+
+<p class=note>Since all members are readonly and certain members from 
+<code>URLUtils</code> are not exposed a number of potential optimizations is possible 
+compared to objects implementing <code>URLUtils</code>. These are left as an exercise to
+the reader.
+
+
 <h3>Interface <code>URLQuery</code></h3>
 
 <p class=XXX>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.

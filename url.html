@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-january-2013">Living Standard — Last Updated 25 January 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-13-february-2013">Living Standard — Last Updated 13 February 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 January 2013, the editors have made this specification available
+13 February 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -68,7 +68,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
   <ol>
    <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
    <li><a href="#interface-urlutils"><span class="secno">7.2 </span>Interface <code>URLUtils</code></a></li>
-   <li><a href="#interface-urlquery"><span class="secno">7.3 </span>Interface <code>URLQuery</code></a></ol></li>
+   <li><a href="#interface-urlutilsreadonly"><span class="secno">7.3 </span>Interface <code>URLUtilsReadOnly</code></a></li>
+   <li><a href="#interface-urlquery"><span class="secno">7.4 </span>Interface <code>URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2219,7 +2220,35 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
+<h3 id="interface-urlutilsreadonly"><span class="secno">7.3 </span>Interface <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a></h3>
+
+<pre class="idl">[NoInterfaceObject]
+interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
+  stringifier readonly attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;<!--
+  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
+
+  readonly attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
+  readonly attribute DOMString <span title=dom-URL-username>username</span>;
+  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
+  readonly attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+  readonly attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+  readonly attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+  readonly attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+  readonly attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
+  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
+  readonly attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+};</pre>
+
+<p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
+to objects implementing <a href="#urlutils"><code>URLUtils</code></a>.
+
+<p class="note">Since all members are readonly and certain members from 
+<a href="#urlutils"><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible 
+compared to objects implementing <a href="#urlutils"><code>URLUtils</code></a>. These are left as an exercise to
+the reader.
+
+
+<h3 id="interface-urlquery"><span class="secno">7.4 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
 <p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
