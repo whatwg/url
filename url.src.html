@@ -629,13 +629,13 @@ on the same row.
 "<code title>#</code>" and a
 <span title=concept-url-fragment>fragment</span>.
 
-<p>An <span title=concept-absolute-url>absolute URL</span> is a
+<p>An <span title=concept-absolute-url>absolute URL</span> must be a
 <span title=concept-url-scheme>scheme</span>, followed by
 "<code title>:</code>", followed by
 <span title=concept-url-scheme-data>scheme data</span>, optionally followed
 by "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
-<p>A <span title=concept-url-scheme>scheme</span> is one
+<p>A <span title=concept-url-scheme>scheme</span> must be one
 <span>ASCII alpha</span>, followed by zero or more of
 <span>ASCII alphanumeric</span>, "<code title>+</code>",
 "<code title>-</code>", and "<code title>.</code>". A
@@ -645,13 +645,13 @@ by "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 <p>The syntax of <span title=concept-url-scheme-data>scheme data</span>
 depends on the <span title=concept-url-scheme>scheme</span> and is typically
 defined alongside it. For a <span>relative scheme</span>,
-<span title=concept-url-scheme-data>scheme data</span> is a
+<span title=concept-url-scheme-data>scheme data</span> must be a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>. For
 other <span title=concept-url-scheme>schemes</span>, specifications or
 standards must define <span title=concept-url-scheme-data>scheme data</span>
 within the constraints of zero or more <span>URL units</span>.
 
-<p>A <span title=concept-relative-url>relative URL</span> is either a
+<p>A <span title=concept-relative-url>relative URL</span> must be either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span> that
@@ -663,7 +663,7 @@ a <span title=concept-url-query>query</span>.
 to a <span title=concept-base-url>base URL</span> with a
 <span>relative scheme</span>.
 
-<p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> is
+<p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> must be
 "<code title>//</code>", optionally followed by
 <span title=concept-url-userinfo>userinfo</span> and "<code title>@</code>",
 followed by a <span title=concept-host>host</span>, optionally followed
@@ -671,40 +671,40 @@ by "<code title>:</code>" and a <span title=concept-url-port>port</span>,
 optionally followed by an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>.
 
-<p><dfn title=concept-url-userinfo>Userinfo</dfn> is a
+<p><dfn title=concept-url-userinfo>Userinfo</dfn> must be a
 <span title=concept-url-username>username</span>, optionally followed by a
 "<code title>:</code>" and a
 <span title=concept-url-password>password</span>.
 
-<p>A <span title=concept-url-username>username</span> is zero or more
+<p>A <span title=concept-url-username>username</span> must be zero or more
 <span>URL units</span>, excluding "<code title>/</code>",
 "<code title>:</code>, "<code title>?</code>", and "<code title>@</code>".
 <!-- password without ":" (sorted on ASCII position) -->
 
-<p>A <span title=concept-url-password>password</span> is zero or more
+<p>A <span title=concept-url-password>password</span> must be zero or more
 <span>URL units</span>, excluding "<code title>/</code>",
 "<code title>?</code>", and "<code title>@</code>".
 
-<p>A <span title=concept-url-port>port</span> is zero or more
+<p>A <span title=concept-url-port>port</span> must be zero or more
 <span>ASCII digits</span>.
 
 <p>An
 <dfn title=concept-absolute-path-relative-url>absolute-path-relative URL</dfn>
-is "<code title>/</code>", followed by a
+must be "<code title>/</code>", followed by a
 <span title=concept-path-relative-url>path-relative URL</span> that does not
 start with "<code title>/</code>".
 
-<p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> is zero or
+<p>A <dfn title=concept-path-relative-url>path-relative URL</dfn> must be zero or
 more <span title="path segment">path segments</span> separated from each
 other by a "<code title>/</code>".
 
-<p>A <dfn>path segment</dfn> is zero or more <span>URL units</span>,
+<p>A <dfn>path segment</dfn> must be zero or more <span>URL units</span>,
 excluding "<code title>/</code>" and "<code title>?</code>".
 
-<p>A <span title=concept-url-query>query</span> is zero or more
+<p>A <span title=concept-url-query>query</span> must be zero or more
 <span>URL units</span>.
 
-<p>A <span title=concept-url-fragment>fragment</span> is zero or more
+<p>A <span title=concept-url-fragment>fragment</span> must be zero or more
 <span>URL units</span>.
 
 <p>The <dfn>URL code points</dfn> are <span>ASCII alphanumeric</span>,
