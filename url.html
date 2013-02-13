@@ -127,6 +127,10 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 <p>The <dfn id="eof-code-point">EOF code point</dfn> signifies the end of a string or
 code point stream.
 
+<p>A <dfn id="parse-error">parse error</dfn> indicates a non-fatal mismatch between input and requirements.
+User agents are encouraged to expose <a href="#parse-error" title="parse error">parse errors</a> 
+somehow.
+
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
 <p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are <a href="#ascii-digits">ASCII digits</a> or are
@@ -315,7 +319,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
   <ol>
    <li><p>If <var title="">input</var> does not end with
-   "<code title="">]</code>", <span>parse error</span>, return failure.
+   "<code title="">]</code>", <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Return the result of
    <a href="#concept-ipv6-parser" title="concept-ipv6-parser">parsing</a> <var title="">input</var>
@@ -362,7 +366,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
   <ol>
    <li><p>If <var title="">remaining</var> does not start with
-   "<code title="">:</code>", <span>parse error</span>, return failure.
+   "<code title="">:</code>", <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Increase <var title="">pointer</var> by two.
 
@@ -377,7 +381,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
   <ol>
    <li><p>If <var title="">piece pointer</var> is eight,
-   <span>parse error</span>, return failure.
+   <a href="#parse-error">parse error</a>, return failure.
 
    <li>
     <p>If <var title="">c</var> is "<code title="">:</code>", run these inner
@@ -385,7 +389,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
     <ol>
      <li><p>If <var title="">compress pointer</var> is not null,
-     <span>parse error</span>, return failure.
+     <a href="#parse-error">parse error</a>, return failure.
 
      <li>Increase <var title="">pointer</var> and <var title="">piece pointer</var> by one, set
      <var title="">compress pointer</var> to <var title="">piece pointer</var>,
@@ -407,7 +411,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
     <dl class="switch">
      <dt>"<code title="">.</code>"
      <dd>
-      <p>If <var title="">length</var> is 0, <span>parse error</span>,
+      <p>If <var title="">length</var> is 0, <a href="#parse-error">parse error</a>,
       return failure.
       <p>Decrease <var title="">pointer</var> by <var title="">length</var>.
       <p>Jump to <a href="#concept-ipv6-parser-ipv4" title="concept-ipv6-parser-ipv4">IPv4</a>.
@@ -416,10 +420,10 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      <dd>
       <p>Increase <var title="">pointer</var> by one.
       <p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>,
-      <span>parse error</span>, return failure.
+      <a href="#parse-error">parse error</a>, return failure.
 
      <dt>Anything but the <a href="#eof-code-point">EOF code point</a>
-     <dd><p><span>Parse error</span>, return failure.
+     <dd><p><a href="#parse-error">Parse error</a>, return failure.
     </dl>
 
    <li><p>Set <var title="">piece</var> to <var title="">value</var>.
@@ -432,7 +436,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
  <li><p><dfn id="concept-ipv6-parser-ipv4" title="concept-ipv6-parser-ipv4">IPv4</dfn>:
  If <var title="">piece pointer</var> is greater than six,
- <span>parse error</span>, return failure.
+ <a href="#parse-error">parse error</a>, return failure.
 
  <li><p>Let <var title="">dots seen</var> be 0.
 
@@ -449,15 +453,15 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    and increase <var title="">pointer</var> by one.
 
    <li><p>If <var title="">value</var> is greater than 255,
-   <span>parse error</span>, return failure.
+   <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>If <var title="">dots seen</var> is less than 3 and
    <var title="">c</var> is not a "<code title="">.</code>",
-   <span>parse error</span>, return failure.
+   <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>If <var title="">dots seen</var> is 3 and <var title="">c</var> is not
    the <a href="#eof-code-point">EOF code point</a>,
-   <span>parse error</span>, return failure.
+   <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Set <var title="">piece</var> to
    <var title="">piece</var> × 0x10 + <var title="">value</var>.
@@ -487,7 +491,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   </ol>
 
  <li><p>Otherwise, if <var title="">compress pointer</var> is null and
- <var title="">piece pointer</var> is not eight, <span>parse error</span>,
+ <var title="">piece pointer</var> is not eight, <a href="#parse-error">parse error</a>,
  return failure.
 
  <li><p>Return <var title="">address</var>.
@@ -870,7 +874,7 @@ arguments can be used for API manipulation of a
      <var title="">state</var> to <a href="#no-scheme-state">no scheme state</a>, and decrease
      <var title="">pointer</var> by one.
 
-     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
+     <li><p>Otherwise, <a href="#parse-error">parse error</a>, terminate this algorithm.
     </ol>
 
    <dt><dfn id="scheme-state">scheme state</dfn>
@@ -926,7 +930,7 @@ arguments can be used for API manipulation of a
      <a href="#eof-code-point">EOF code point</a>, terminate this algorithm.
      <!-- account for URL.protocol = "test" -->
 
-     <li><p>Otherwise, <span>parse error</span>, terminate this algorithm.
+     <li><p>Otherwise, <a href="#parse-error">parse error</a>, terminate this algorithm.
     </ol>
 
    <dt><dfn id="scheme-data-state">scheme data state</dfn>
@@ -950,7 +954,7 @@ arguments can be used for API manipulation of a
        and not a <a href="#url-code-points" title="URL code points">URL code point</a>, or
        <var title="">c</var> is "<code title="">%</code>" and
        <var title="">remaining</var> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p>If <var title="">c</var> is none of
        <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
@@ -965,7 +969,7 @@ arguments can be used for API manipulation of a
    <dd>
     <p>If <var title="">base</var> is null, or <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
-    <a href="#relative-scheme">relative scheme</a>, <span>parse error</span>, return failure.
+    <a href="#relative-scheme">relative scheme</a>, <a href="#parse-error">parse error</a>, return failure.
 
     <p class="note">You do not want to check <var title="">base</var>'s
     <a href="#relative-flag">relative flag</a> here, as the
@@ -984,7 +988,7 @@ arguments can be used for API manipulation of a
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>
     and increase <var title="">pointer</var> by one.
 
-    <p>Otherwise, <span>parse error</span>, set <var title="">state</var> to
+    <p>Otherwise, <a href="#parse-error">parse error</a>, set <var title="">state</var> to
     <a href="#relative-state">relative state</a> and decrease <var title="">pointer</var> by
     one.
 
@@ -1012,7 +1016,7 @@ arguments can be used for API manipulation of a
      <dd>
       <ol>
        <li><p>If <var title="">c</var> is "<code title="">\</code>",
-       <span>parse error</span>.
+       <a href="#parse-error">parse error</a>.
        <li><p>Set <var title="">state</var> to
        <a href="#relative-slash-state">relative slash state</a>.
       </ol>
@@ -1061,7 +1065,7 @@ arguments can be used for API manipulation of a
 
     <ol>
      <li><p>If <var title="">c</var> is "<code title="">\</code>",
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li><p>If <var title="">url</var>'s
      <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
@@ -1085,7 +1089,7 @@ arguments can be used for API manipulation of a
     <p>If <var title="">c</var> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-second-slash-state">authority second slash state</a>.
 
-    <p>Otherwise, <span>parse error</span>, set <var title="">state</var> to
+    <p>Otherwise, <a href="#parse-error">parse error</a>, set <var title="">state</var> to
     <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>, and decrease
     <var title="">pointer</var> by one.
 
@@ -1094,7 +1098,7 @@ arguments can be used for API manipulation of a
     <p>If <var title="">c</var> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
-    <p>Otherwise, <span>parse error</span>, set <var title="">state</var> to
+    <p>Otherwise, <a href="#parse-error">parse error</a>, set <var title="">state</var> to
     <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>, and decrease
     <var title="">pointer</var> by one.
 
@@ -1104,7 +1108,7 @@ arguments can be used for API manipulation of a
     "<code title="">\</code>", set <var title="">state</var> to
     <a href="#authority-state">authority state</a>, and decrease <var title="">pointer</var> by one.
 
-    <p>Otherwise, <span>parse error</span>.
+    <p>Otherwise, <a href="#parse-error">parse error</a>.
 
    <dt><dfn id="authority-state">authority state</dfn>
    <dd>
@@ -1114,7 +1118,7 @@ arguments can be used for API manipulation of a
 
       <ol>
        <li><p>If the <var title="">@ flag</var> is set,
-       <span>parse error</span>, prepend "<code title="">%40</code>" to
+       <a href="#parse-error">parse error</a>, prepend "<code title="">%40</code>" to
        <var title="">buffer</var>.
 
        <li><p>Set the <var title="">@ flag</var>.
@@ -1124,13 +1128,13 @@ arguments can be used for API manipulation of a
 
         <ol>
          <li><p>If <var title="">code point</var> is U+0009, U+000A, or U+000D,
-         <span>parse error</span>, continue.
+         <a href="#parse-error">parse error</a>, continue.
 
          <li><p>If <var title="">code point</var> is not a
          <a href="#url-code-points" title="URL code points">URL code point</a>, or
          <var title="">code point</var> is "<code title="">%</code>" and
          <var title="">remaining</var> does not start with two
-         <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+         <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
          <li><p>If <var title="">code point</var> is "<code title="">:</code>" and
          <var title="">url</var>'s
@@ -1196,7 +1200,7 @@ arguments can be used for API manipulation of a
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li><p>Otherwise, append <var title="">c</var> to <var title="">buffer</var>.
     </ol>
@@ -1247,7 +1251,7 @@ arguments can be used for API manipulation of a
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these substeps:
@@ -1308,16 +1312,16 @@ arguments can be used for API manipulation of a
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
-     <li><p>Otherwise, <span>parse error</span>, return failure.
+     <li><p>Otherwise, <a href="#parse-error">parse error</a>, return failure.
     </ol>
 
    <dt><dfn id="relative-path-start-state">relative path start state</dfn>
    <dd>
     <ol>
      <li><p>If <var title="">c</var> is "<code title="">\</code>",
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li><p>Set <var title="">state</var> to <a href="#relative-path-state">relative path state</a>
      and if <var title="">c</var> is neither "<code title="">/</code>" nor
@@ -1388,7 +1392,7 @@ arguments can be used for API manipulation of a
      <!-- Chrome unescapes more here; Safari does nothing -->
 
      <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these steps:
@@ -1398,7 +1402,7 @@ arguments can be used for API manipulation of a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
        <var title="">c</var> is "<code title="">%</code>" and
        <var title="">remaining</var> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
        <a href="#default-encode-set">default encode set</a>, and append the result to
@@ -1453,7 +1457,7 @@ arguments can be used for API manipulation of a
       </ol>
 
      <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
-     <span>parse error</span>.
+     <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these substeps:
@@ -1463,7 +1467,7 @@ arguments can be used for API manipulation of a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
        <var title="">c</var> is "<code title="">%</code>" and
        <var title="">remaining</var> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p>Append <var title="">c</var> to <var title="">buffer</var>.
       </ol>
@@ -1479,7 +1483,7 @@ arguments can be used for API manipulation of a
      <dt>U+0009
      <dt>U+000A
      <dt>U+000D
-     <dd><p><span>Parse error</span>.
+     <dd><p><a href="#parse-error">Parse error</a>.
 
      <dt>Otherwise
      <dd>
@@ -1488,7 +1492,7 @@ arguments can be used for API manipulation of a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
        <var title="">c</var> is "<code title="">%</code>" and
        <var title="">remaining</var> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <span>parse error</span>.
+       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var>
        using the <a href="#simple-encode-set">simple encode set</a>, and append the result to
