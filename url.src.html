@@ -564,16 +564,15 @@ identifier.
 followed by a <span title=concept-url-fragment>fragment</span>.
 
 <p>A <dfn title=concept-relative-url>relative URL</dfn> is a
-<span title=concept-url>URL</span> that is relative to a
-<span title=concept-parsed-url>parsed URL</span>. Such a
-<span title=concept-parsed-url>parsed URL</span> is a
-<dfn title=concept-base-url>base URL</dfn>. If the
-<span title=concept-base-url>base URL</span> has no
-<span>relative scheme</span>, <span title=concept-url-parser>parsing</span>
-the <span title=concept-relative-url>relative URL</span> results in failure.
+<span title=concept-url>URL</span> without a <span title=concept-url-scheme>scheme</span>.
+A <span title=concept-relative-url>relative URL</span> must be relative 
+to a <span title=concept-base-url>base URL</span>.
 
-<p>An <dfn title=concept-absolute-url>absolute URL</dfn> stands on its own
-and is therefore a potential <span title=concept-base-url>base URL</span>.
+<p>An <dfn title=concept-absolute-url>absolute URL</dfn> is a 
+<span title=concept-url>URL</span> with a <span title=concept-url-scheme>scheme</span>.
+
+<p>A <dfn title=concept-base-url>base URL</dfn> is an
+<span title=concept-absolute-url>absolute URL</span> with a <span>relative scheme</span>.
 
 <p><span title=concept-url-parser>Parsing</span> (provided it does not
 return failure) and <span title=concept-url-serializer>serializing</span> a
@@ -658,10 +657,6 @@ or a <span title=concept-path-relative-url>path-relative URL</span> that
 does not start with a <span title=concept-url-scheme>scheme</span> and
 "<code title>:</code>", optionally followed by a "<code title>?</code>" and
 a <span title=concept-url-query>query</span>.
-
-<p>A <span title=concept-relative-url>relative URL</span> must be relative
-to a <span title=concept-base-url>base URL</span> with a
-<span>relative scheme</span>.
 
 <p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> must be
 "<code title>//</code>", optionally followed by
@@ -1796,7 +1791,7 @@ concept only relevant for HTML.
 <dfn title=concept-UU-set-the-input>set the input</dfn> run these steps:
 
 <ol>
- <li><p>Set <span title=concept-UU-url>url</span> null.
+ <li><p>Set <span title=concept-UU-url>url</span> to null.
 
  <li><p>Set <span title=concept-UU-input>input</span> to the given value.
 
@@ -1849,7 +1844,7 @@ constructor must run these steps:
  <span data-anolis-spec=dom title=concept-throw>throw</span> an
  "<code data-anolis-spec=dom>SyntaxError</code>" exception.
  
- <li><p>Let <var title>result</var> be a new <code>URL object</code>.
+ <li><p>Let <var title>result</var> be a new <code>URL</code> object.
  
  <li><p>Let <var title>result</var>'s 
  <span title=concept-UU-get-the-base>get the base</span> return <var title>base</var>.

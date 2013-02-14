@@ -587,16 +587,15 @@ identifier.
 followed by a <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is a
-<a href="#concept-url" title="concept-url">URL</a> that is relative to a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>. Such a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> is a
-<dfn id="concept-base-url" title="concept-base-url">base URL</dfn>. If the
-<a href="#concept-base-url" title="concept-base-url">base URL</a> has no
-<a href="#relative-scheme">relative scheme</a>, <a href="#concept-url-parser" title="concept-url-parser">parsing</a>
-the <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> results in failure.
+<a href="#concept-url" title="concept-url">URL</a> without a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>.
+A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative 
+to a <a href="#concept-base-url" title="concept-base-url">base URL</a>.
 
-<p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> stands on its own
-and is therefore a potential <a href="#concept-base-url" title="concept-base-url">base URL</a>.
+<p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> is a 
+<a href="#concept-url" title="concept-url">URL</a> with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>.
+
+<p>A <dfn id="concept-base-url" title="concept-base-url">base URL</dfn> is an
+<a href="#concept-absolute-url" title="concept-absolute-url">absolute URL</a> with a <a href="#relative-scheme">relative scheme</a>.
 
 <p><a href="#concept-url-parser" title="concept-url-parser">Parsing</a> (provided it does not
 return failure) and <a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> a
@@ -681,10 +680,6 @@ or a <a href="#concept-path-relative-url" title="concept-path-relative-url">path
 does not start with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> and
 "<code title="">:</code>", optionally followed by a "<code title="">?</code>" and
 a <a href="#concept-url-query" title="concept-url-query">query</a>.
-
-<p>A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative
-to a <a href="#concept-base-url" title="concept-base-url">base URL</a> with a
-<a href="#relative-scheme">relative scheme</a>.
 
 <p>A <dfn id="concept-scheme-relative-url" title="concept-scheme-relative-url">scheme-relative URL</dfn> must be
 "<code title="">//</code>", optionally followed by
@@ -1819,7 +1814,7 @@ concept only relevant for HTML.
 <dfn id="concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</dfn> run these steps:
 
 <ol>
- <li><p>Set <a href="#concept-uu-url" title="concept-UU-url">url</a> null.
+ <li><p>Set <a href="#concept-uu-url" title="concept-UU-url">url</a> to null.
 
  <li><p>Set <a href="#concept-uu-input" title="concept-UU-input">input</a> to the given value.
 
@@ -1872,7 +1867,7 @@ constructor must run these steps:
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<a href="http://dom.spec.whatwg.org/#syntaxerror"><code class="external" data-anolis-spec="dom">SyntaxError</code></a>" exception.
  
- <li><p>Let <var title="">result</var> be a new <code>URL object</code>.
+ <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
  
  <li><p>Let <var title="">result</var>'s 
  <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> return <var title="">base</var>.
