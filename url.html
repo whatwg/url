@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-february-2013">Living Standard — Last Updated 17 February 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-february-2013">Living Standard — Last Updated 21 February 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-17 February 2013, the editors have made this specification available
+21 February 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -128,7 +128,7 @@ Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 code point stream.
 
 <p>A <dfn id="parse-error">parse error</dfn> indicates a non-fatal mismatch between input and requirements.
-User agents are encouraged to expose <a href="#parse-error" title="parse error">parse errors</a> 
+User agents are encouraged to expose <a href="#parse-error" title="parse error">parse errors</a>
 somehow.
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
@@ -545,7 +545,7 @@ then runs these steps:
   <ol>
    <li><p>If <var title="">compress pointer</var> points to
    <var title="">piece</var>, append "<code title="">::</code>" to
-   <var title="">output</var> if <var title="">piece</var> is 
+   <var title="">output</var> if <var title="">piece</var> is
    <var title="">address</var>'s first <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> and append
    "<code title="">:</code>" otherwise, and then run these substeps again with all
    subsequent <a href="#concept-ipv6-piece" title="concept-ipv6-piece">pieces</a> in
@@ -588,10 +588,10 @@ followed by a <a href="#concept-url-fragment" title="concept-url-fragment">fragm
 
 <p>A <dfn id="concept-relative-url" title="concept-relative-url">relative URL</dfn> is a
 <a href="#concept-url" title="concept-url">URL</a> without a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>.
-A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative 
+A <a href="#concept-relative-url" title="concept-relative-url">relative URL</a> must be relative
 to a <a href="#concept-base-url" title="concept-base-url">base URL</a>.
 
-<p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> is a 
+<p>An <dfn id="concept-absolute-url" title="concept-absolute-url">absolute URL</dfn> is a
 <a href="#concept-url" title="concept-url">URL</a> with a <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>.
 
 <p>A <dfn id="concept-base-url" title="concept-base-url">base URL</dfn> is an
@@ -805,9 +805,10 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 if <var title="">url</var> is given, optionally with a state override
 <var title="">state override</var>, and then runs these steps:
 
-<p class="note">The <var title="">url</var> and <var title="">state override</var>
-arguments can be used for API manipulation of a
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
+<p class="note">The <var title="">encoding override</var> argument is a legacy concept only
+relevant for HTML. The <var title="">url</var> and <var title="">state override</var> arguments
+can be used for API manipulation of a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
+<a class="informative" href="#refsHTML">[HTML]</a>
 
 <ol>
  <li>
@@ -1791,15 +1792,15 @@ make that distinction.
 
 <p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
 <dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
-<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn> 
+<dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>
 (an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>),
 <dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>
-(a <a href="#urlquery"><code>URLQuery</code></a> object or null), and a 
-<dfn id="concept-uu-url" title="concept-UU-url">url</dfn> (a 
+(a <a href="#urlquery"><code>URLQuery</code></a> object or null), and a
+<dfn id="concept-uu-url" title="concept-UU-url">url</dfn> (a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> or null).
 
 Unless stated otherwise, <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others follow from the 
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others follow from the
 <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm.
 
 <p class="note">The associated
@@ -1832,23 +1833,23 @@ concept only relevant for HTML.
  <li>
   <p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is non-null and its
   <a href="#relative-flag">relative flag</a> is set, run these substeps:
-  
+
   <ol>
    <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is null, set
    <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to a
    <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
    <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
-   
+
    <li><p>Otherwise, set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s
    associated list of name-value pairs to the result of
    <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
    <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
   </ol>
 
- <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null and 
+ <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null and
  <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is non-null, empty
- <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list of name-value 
- pairs. 
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list of name-value
+ pairs.
 </ol>
 
 
@@ -1866,15 +1867,15 @@ constructor must run these steps:
  <li><p>If <var title="">base</var> is failure,
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<a href="http://dom.spec.whatwg.org/#syntaxerror"><code class="external" data-anolis-spec="dom">SyntaxError</code></a>" exception.
- 
+
  <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
- 
- <li><p>Let <var title="">result</var>'s 
+
+ <li><p>Let <var title="">result</var>'s
  <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> return <var title="">base</var>.
- 
- <li><p>Run <var title="">result</var>'s 
+
+ <li><p>Run <var title="">result</var>'s
  <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> for <var title="">url</var>.
- 
+
  <li><p>If <var title="">result</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
  <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
  "<a href="http://dom.spec.whatwg.org/#syntaxerror"><code class="external" data-anolis-spec="dom">SyntaxError</code></a>" exception.
@@ -2257,8 +2258,8 @@ interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
 <p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
 to objects implementing <a href="#urlutils"><code>URLUtils</code></a>.
 
-<p class="note">Since all members are readonly and certain members from 
-<a href="#urlutils"><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible 
+<p class="note">Since all members are readonly and certain members from
+<a href="#urlutils"><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible
 compared to objects implementing <a href="#urlutils"><code>URLUtils</code></a>. These are left as an exercise to
 the reader.
 
@@ -2445,12 +2446,13 @@ Ian Hickson,
 James Graham,
 James Manger,
 James Ross,
+Marcos Cáceres,
 Martin Dürst,
 Mathias Bynens,
 Michael™ Smith,
 Rodney Rehm,
 Simon Pieters,
-Tab Atkins, 
+Tab Atkins,
 Tantek Çelik, and
 成瀬ゆい (Yui Naruse)
 for being awesome!
