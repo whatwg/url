@@ -1048,8 +1048,8 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
      <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
-     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then
-     remove <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last string, set
+     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then pop
+     <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, set
      <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
      and decrease <var title="">pointer</var> by one.
     </dl>
@@ -1336,13 +1336,13 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       <ol>
        <li><p>If <var title="">buffer</var> is "<code title="">..</code>" and
        <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
-       "<code title="">/</code>", and "<code title="">\</code>", set the last
-       string in <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to the empty
-       string.
+       "<code title="">/</code>", and "<code title="">\</code>", pop
+       <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> and then append
+       the empty string to it.
 
        <li><p>Otherwise, if <var title="">buffer</var> is
-       "<code title="">..</code>", remove the last string from
-       <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
+       "<code title="">..</code>", pop <var title="">url</var>'s
+       <a href="#concept-url-path" title="concept-url-path">path</a>.
 
        <li><p>Otherwise, if <var title="">buffer</var> is
        "<code title="">.</code>" and <var title="">c</var> is one of

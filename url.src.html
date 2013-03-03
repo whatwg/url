@@ -1025,8 +1025,8 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
      <var title>url</var>'s <span title=concept-url-port>port</span> to
      <var title>base</var>'s <span title=concept-url-port>port</span>,
      <var title>url</var>'s <span title=concept-url-path>path</span> to
-     <var title>base</var>'s <span title=concept-url-path>path</span>, then
-     remove <var title>url</var>'s <span title=concept-url-path>path</span>'s last string, set
+     <var title>base</var>'s <span title=concept-url-path>path</span>, then pop
+     <var title>url</var>'s <span title=concept-url-path>path</span>, set
      <var title>state</var> to <span>relative path state</span>,
      and decrease <var title>pointer</var> by one.
     </dl>
@@ -1313,13 +1313,13 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
       <ol>
        <li><p>If <var title>buffer</var> is "<code title>..</code>" and
        <var title>c</var> is one of <span>EOF code point</span>,
-       "<code title>/</code>", and "<code title>\</code>", set the last
-       string in <var title>url</var>'s <span title=concept-url-path>path</span> to the empty
-       string.
+       "<code title>/</code>", and "<code title>\</code>", pop
+       <var title>url</var>'s <span title=concept-url-path>path</span> and then append
+       the empty string to it.
 
        <li><p>Otherwise, if <var title>buffer</var> is
-       "<code title>..</code>", remove the last string from
-       <var title>url</var>'s <span title=concept-url-path>path</span>.
+       "<code title>..</code>", pop <var title>url</var>'s
+       <span title=concept-url-path>path</span>.
 
        <li><p>Otherwise, if <var title>buffer</var> is
        "<code title>.</code>" and <var title>c</var> is one of
