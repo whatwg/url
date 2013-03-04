@@ -948,6 +948,11 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
     <span title=concept-url-scheme>scheme</span> is not a
     <span>relative scheme</span>, <span>parse error</span>, return failure.
 
+    <p class=note>Due to the <code title=dom-URL-protocol>protocol</code> attribute's
+    ability to change <var title>base</var>'s
+    <span title=concept-url-scheme>scheme</span>, <var title>base</var>'s
+    <span>relative flag</span> is not used here.
+
     <p>Otherwise, set <var title>state</var> to <span>relative state</span>,
     and decrease <var title>pointer</var> by one.
 

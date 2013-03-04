@@ -971,6 +971,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
     <a href="#relative-scheme">relative scheme</a>, <a href="#parse-error">parse error</a>, return failure.
 
+    <p class="note">Due to the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute's
+    ability to change <var title="">base</var>'s
+    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, <var title="">base</var>'s
+    <a href="#relative-flag">relative flag</a> is not used here.
+
     <p>Otherwise, set <var title="">state</var> to <a href="#relative-state">relative state</a>,
     and decrease <var title="">pointer</var> by one.
 
