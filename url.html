@@ -789,17 +789,6 @@ U+100000 to U+10FFFD.
 incorrect results due to the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
-<p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
-set its <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-<a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
-<a href="#concept-url-username" title="concept-url-username">username</a>, and
-<a href="#concept-url-port" title="concept-url-port">port</a> to the empty string,
-<a href="#concept-url-password" title="concept-url-password">password</a>,
-<a href="#concept-url-host" title="concept-url-host">host</a>,
-<a href="#concept-url-query" title="concept-url-query">query</a>, and
-<a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to null, and
-its <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
-
 <p class="XXX">Add the ability to halt on the first conformance error.
 
 <p>The <dfn id="concept-url-parser" title="concept-url-parser">URL parser</dfn> takes a string
@@ -824,7 +813,16 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <li><p>Set <var title="">url</var> to a new
    <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
 
-   <li><p><a href="#clear">Clear</a> <var title="">url</var>.
+   <li><p>Set <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
+   <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
+   <a href="#concept-url-username" title="concept-url-username">username</a>, and
+   <a href="#concept-url-port" title="concept-url-port">port</a> to the empty string,
+   <a href="#concept-url-password" title="concept-url-password">password</a>,
+   <a href="#concept-url-host" title="concept-url-host">host</a>,
+   <a href="#concept-url-query" title="concept-url-query">query</a>, and
+   <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to null,
+   <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list, and unset its
+   <a href="#relative-flag">relative flag</a>.
 
    <li><p>Remove any leading and trailing
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
