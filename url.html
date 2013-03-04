@@ -783,6 +783,12 @@ U+100000 to U+10FFFD.
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> also has an associated
 <dfn id="relative-flag">relative flag</dfn>.
 
+<p class="note">The <a href="#relative-flag">relative flag</a> exists as checking if a
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>'s
+<a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is a <a href="#relative-scheme">relative scheme</a> can give
+incorrect results due to the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
+<!-- XXX maybe disallow setting protocol to non-sensical values -->
+
 <p>To <dfn id="clear">clear</dfn> a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>,
 set its <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
 <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>,
@@ -966,13 +972,6 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
     <p>If <var title="">base</var> is null, or <var title="">base</var>'s
     <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not a
     <a href="#relative-scheme">relative scheme</a>, <a href="#parse-error">parse error</a>, return failure.
-
-    <p class="note">You do not want to check <var title="">base</var>'s
-    <a href="#relative-flag">relative flag</a> here, as the
-    <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> itself can have been
-    changed to something non-sensical through the
-    <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
-    <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
     <p>Otherwise, set <var title="">state</var> to <a href="#relative-state">relative state</a>,
     and decrease <var title="">pointer</var> by one.

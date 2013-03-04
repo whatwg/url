@@ -760,6 +760,12 @@ U+100000 to U+10FFFD.
 <span title=concept-parsed-url>parsed URL</span> also has an associated
 <dfn>relative flag</dfn>.
 
+<p class=note>The <span>relative flag</span> exists as checking if a
+<span title=concept-parsed-url>parsed URL</span>'s
+<span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span> can give
+incorrect results due to the <code title=dom-URL-protocol>protocol</code> attribute.
+<!-- XXX maybe disallow setting protocol to non-sensical values -->
+
 <p>To <dfn>clear</dfn> a <span title=concept-parsed-url>parsed URL</span>,
 set its <span title=concept-url-scheme>scheme</span>,
 <span title=concept-url-scheme-data>scheme data</span>,
@@ -943,13 +949,6 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
     <p>If <var title>base</var> is null, or <var title>base</var>'s
     <span title=concept-url-scheme>scheme</span> is not a
     <span>relative scheme</span>, <span>parse error</span>, return failure.
-
-    <p class=note>You do not want to check <var title>base</var>'s
-    <span>relative flag</span> here, as the
-    <span title=concept-url-scheme>scheme</span> itself can have been
-    changed to something non-sensical through the
-    <code title=dom-URL-protocol>protocol</code> attribute.
-    <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
     <p>Otherwise, set <var title>state</var> to <span>relative state</span>,
     and decrease <var title>pointer</var> by one.
