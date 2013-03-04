@@ -1030,6 +1030,7 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
      <var title>state</var> to <span>relative path state</span>,
      and decrease <var title>pointer</var> by one.
     </dl>
+    <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
    <dt><dfn>relative slash state</dfn>
    <dd>
@@ -1314,12 +1315,12 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
        <li><p>If <var title>buffer</var> is "<code title>..</code>" and
        <var title>c</var> is one of <span>EOF code point</span>,
        "<code title>/</code>", and "<code title>\</code>", pop
-       <var title>url</var>'s <span title=concept-url-path>path</span> and then append
-       the empty string to it.
+       <var title>url</var>'s <span title=concept-url-path>path</span>, if non-empty, and
+       then append the empty string to it.
 
        <li><p>Otherwise, if <var title>buffer</var> is
        "<code title>..</code>", pop <var title>url</var>'s
-       <span title=concept-url-path>path</span>.
+       <span title=concept-url-path>path</span>, if non-empty.
 
        <li><p>Otherwise, if <var title>buffer</var> is
        "<code title>.</code>" and <var title>c</var> is one of
@@ -1532,17 +1533,16 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
    <var title>url</var>'s <span title=concept-url-path>path</span>
    (including empty strings), separated from each other by
    "<code title>/</code>" to <var title>output</var>.
-
-   <li><p>If <var title>url</var>'s
-   <span title=concept-url-query>query</span> is non-null, append
-   "<code title>?</code>" concatenated with <var title>url</var>'s
-   <span title=concept-url-query>query</span> to <var title>output</var>.
   </ol>
 
  <li><p>Otherwise, if <var title>url</var>'s <span>relative flag</span> is
  unset, append <var title>url</var>'s
  <span title=concept-url-scheme-data>scheme data</span> to
  <var title>output</var>.
+
+ <li><p>If <var title>url</var>'s <span title=concept-url-query>query</span> is non-null,
+ append "<code title>?</code>" concatenated with <var title>url</var>'s
+ <span title=concept-url-query>query</span> to <var title>output</var>.
 
  <li><p>If the <i title>exclude fragment flag</i> is unset and
  <var title>url</var>'s <span title=concept-url-fragment>fragment</span> is
