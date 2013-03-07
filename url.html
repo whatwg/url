@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-march-2013">Living Standard — Last Updated 4 March 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-march-2013">Living Standard — Last Updated 7 March 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-4 March 2013, the editors have made this specification available
+7 March 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -163,8 +163,8 @@ conversion to bytes, should not cause
 "<code title="">%</code>", followed by a double-digit, uppercase, hexadecimal
 representation of <var title="">byte</var>.
 
-<p>To <dfn id="percent-decode">percent decode</dfn> a <var title="">string</var> into a byte
-sequence, run these steps:
+<p>To <dfn id="percent-decode">percent decode</dfn> a <var title="">string</var> using code points in the range
+U+0000 to U+007F into a byte sequence, run these steps:
 
 <ol>
  <li><p>Let <var title="">pointer</var> be a pointer into
@@ -1584,8 +1584,8 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 
 <p>The
 <dfn id="concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
-takes a string <var title="">input</var>, optionally with an
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+takes a string <var title="">input</var> using code points in the range U+0000 to U+007F,
+optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var title="">encoding override</var>, optionally with a
 <i title="">use "<code>_charset_</code>" flag</i>, and optionally with an
 <i title="">isindex flag</i>, and then runs these steps:
@@ -1632,7 +1632,7 @@ takes a string <var title="">input</var>, optionally with an
    <li><p>If the <i title="">use "<code>_charset_</code>" flag</i> is set,
    <var title="">name</var> is "<code title="">_charset_</code>", and
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">get an encoding</a>
-   for <var title="">value</var> does not return value, unset the
+   for <var title="">value</var> does not return failure, unset the
    <i title="">use "<code>_charset_</code>" flag</i> and set
    <var title="">encoding override</var> to the result of
    <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
