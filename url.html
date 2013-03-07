@@ -1337,20 +1337,17 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       <var title="">c</var> is one of "<code title="">?</code>" and
       "<code title="">#</code>", run these substeps:
       <ol>
-       <li><p>If <var title="">buffer</var> is "<code title="">..</code>" and
-       <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
-       "<code title="">/</code>", and "<code title="">\</code>", pop
+       <li><p>If <var title="">c</var> is "<code title="">\</code>", <a href="#parse-error">parse error</a>.
+
+       <li><p>If <var title="">buffer</var> is "<code title="">..</code>", pop
        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, if non-empty, and
-       then append the empty string to it.
+       then if <var title="">c</var> is neither  "<code title="">/</code>" nor
+       "<code title="">\</code>", append the empty string to <var title="">url</var>'s
+       <a href="#concept-url-path" title="concept-url-path">path</a>.
 
-       <li><p>Otherwise, if <var title="">buffer</var> is
-       "<code title="">..</code>", pop <var title="">url</var>'s
-       <a href="#concept-url-path" title="concept-url-path">path</a>, if non-empty.
-
-       <li><p>Otherwise, if <var title="">buffer</var> is
-       "<code title="">.</code>" and <var title="">c</var> is one of
-       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
-       "<code title="">\</code>", append an empty string to
+       <li><p>Otherwise, if <var title="">buffer</var> is "<code title="">.</code>" and
+       <var title="">c</var> is neither "<code title="">/</code>" nor "<code title="">\</code>",
+       append an empty string to
        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
 
        <li>
