@@ -971,8 +971,9 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
    <dd>
     <p>Set <var title>url</var>'s <span>relative flag</span>, set
     <var title>url</var>'s <span title=concept-url-scheme>scheme</span> to
-    <var title>base</var>'s <span title=concept-url-scheme>scheme</span>,
-    and then, based on <var title>c</var>:
+    <var title>base</var>'s <span title=concept-url-scheme>scheme</span> if
+    <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is not
+    "<code title>file</code>", and then, based on <var title>c</var>:
 
     <dl class=switch>
      <dt><span>EOF code point</span>
@@ -2392,6 +2393,7 @@ Boris Zbarsky,
 David Sheets,
 Erik Arvidsson,
 Gavin Carothers,
+Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-march-2013">Living Standard — Last Updated 7 March 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-april-2013">Living Standard — Last Updated 9 April 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-7 March 2013, the editors have made this specification available
+9 April 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -994,8 +994,9 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dd>
     <p>Set <var title="">url</var>'s <a href="#relative-flag">relative flag</a>, set
     <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
-    <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>,
-    and then, based on <var title="">c</var>:
+    <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> if
+    <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
+    "<code title="">file</code>", and then, based on <var title="">c</var>:
 
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
@@ -2439,6 +2440,7 @@ Boris Zbarsky,
 David Sheets,
 Erik Arvidsson,
 Gavin Carothers,
+Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,
