@@ -1736,7 +1736,32 @@ interface <dfn>URLUtils</dfn> {
            attribute DOMString <span title=dom-URL-search>search</span>;
            attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;
            attribute DOMString <span title=dom-URL-hash>hash</span>;
+};
+
+[NoInterfaceObject]
+interface <dfn>URLUtilsReadOnly</dfn> {
+  stringifier readonly attribute DOMString <span title=dom-URL-href>href</span>;<!--
+  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
+
+  readonly attribute DOMString <span title=dom-URL-protocol>protocol</span>;<!--
+  readonly attribute DOMString <span title=dom-URL-username>username</span>;
+  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
+  readonly attribute DOMString <span title=dom-URL-host>host</span>;
+  readonly attribute DOMString <span title=dom-URL-hostname>hostname</span>;
+  readonly attribute DOMString <span title=dom-URL-port>port</span>;
+  readonly attribute DOMString <span title=dom-URL-pathname>pathname</span>;
+  readonly attribute DOMString <span title=dom-URL-search>search</span>;<!--
+  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
+  readonly attribute DOMString <span title=dom-URL-hash>hash</span>;
 };</pre>
+
+<p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
+to objects implementing <code>URLUtils</code>.
+
+<p class=note>Since all members are readonly and certain members from
+<code>URLUtils</code> are not exposed a number of potential optimizations is possible
+compared to objects implementing <code>URLUtils</code>. These are left as an exercise to
+the reader.
 
 <!-- XXX Ideas:
   boolean isEqual(URL, optional URLEqualOptions options)
@@ -1752,13 +1777,14 @@ dictionary URLEqualOptions {
 URLPath would be a subclassed Array similarly to how URLQuery will be a
 subclassed MultiMap. -->
 
-<p>Specifications defining objects implementing <code>URLUtils</code> must define a
+<p>Specifications defining objects implementing <code>URLUtils</code> or
+<code>URLUtilsReadOnly</code> must define a
 <dfn title=concept-UU-get-the-base>get the base</dfn> algorithm, which must return the
 appropriate <span title=concept-base-URL>base URL</span> for the object.
 
 <p>Specifications defining objects implementing <code>URLUtils</code> may
-define <dfn title=concept-UU-update>update steps</dfn> to make it possible
-for an underlying object (such as an
+define <dfn title=concept-UU-update>update steps</dfn> to make it possible for an
+underlying object (such as an
 <span data-anolis-spec=dom title=concept-attribute-value>attribute value</span>)
 to be updated.
 
@@ -1767,8 +1793,8 @@ always invoked after each potential modification. Specifications need to
 keep track themselves if an actual modification is made, if they wish to
 make that distinction.
 
-<p>An object implementing <code>URLUtils</code> has an associated
-<dfn title=concept-UU-input>input</dfn> (a string),
+<p>An object implementing <code>URLUtils</code> or <code>URLUtilsReadOnly</code> has an
+associated <dfn title=concept-UU-input>input</dfn> (a string),
 <dfn title=concept-UU-query-encoding>query encoding</dfn>
 (an <span data-anolis-spec=encoding>encoding</span>),
 <dfn title=concept-UU-query-object>query object</dfn>
@@ -1785,7 +1811,8 @@ Unless stated otherwise, <span title=concept-UU-query-encoding>query encoding</s
 concept only relevant for HTML.
 <span data-anolis-ref class=informative>HTML</span>
 
-<p>Specifications defining objects implementing <code>URLUtils</code> must use the
+<p>Specifications defining objects implementing <code>URLUtils</code> or
+<code>URLUtilsReadOnly</code> must use the
 <span title=concept-UU-set-the-input>set the input</span> algorithms to set
 <span title=concept-UU-input>input</span>, <span title=concept-UU-url>url</span>, and
 <span title=concept-UU-query-object>query object</span>. To
@@ -1861,10 +1888,11 @@ constructor must run these steps:
 </ol>
 
 
-<h3>Interface <code>URLUtils</code></h3>
+<h3><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</h3>
 
-<p class=note>The <code>URLUtils</code> interface is not exposed on the
-global object. It augments other interfaces, such as <code>URL</code>.
+<p class=note>The <code>URLUtils</code> and <code>URLUtilsReadOnly</code> interfaces are
+not exposed on the global object. They are meant to augment other interfaces, such as
+<code>URL</code>.
 
 <p>The <dfn title=dom-URL-href><code>href</code></dfn> attribute must run
 these steps:
@@ -2211,34 +2239,6 @@ steps:
 
  <li><p>Run the <span title=concept-UU-update>update steps</span>.
 </ol>
-
-
-<h3>Interface <code>URLUtilsReadOnly</code></h3>
-
-<pre class=idl>[NoInterfaceObject]
-interface <dfn>URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute DOMString <span title=dom-URL-href>href</span>;<!--
-  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
-
-  readonly attribute DOMString <span title=dom-URL-protocol>protocol</span>;<!--
-  readonly attribute DOMString <span title=dom-URL-username>username</span>;
-  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
-  readonly attribute DOMString <span title=dom-URL-host>host</span>;
-  readonly attribute DOMString <span title=dom-URL-hostname>hostname</span>;
-  readonly attribute DOMString <span title=dom-URL-port>port</span>;
-  readonly attribute DOMString <span title=dom-URL-pathname>pathname</span>;
-  readonly attribute DOMString <span title=dom-URL-search>search</span>;<!--
-  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
-  readonly attribute DOMString <span title=dom-URL-hash>hash</span>;
-};</pre>
-
-<p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
-to objects implementing <code>URLUtils</code>.
-
-<p class=note>Since all members are readonly and certain members from
-<code>URLUtils</code> are not exposed a number of potential optimizations is possible
-compared to objects implementing <code>URLUtils</code>. These are left as an exercise to
-the reader.
 
 
 <h3>Interface <code>URLQuery</code></h3>

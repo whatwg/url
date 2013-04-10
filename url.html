@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-9-april-2013">Living Standard — Last Updated 9 April 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-april-2013">Living Standard — Last Updated 10 April 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-9 April 2013, the editors have made this specification available
+10 April 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -67,9 +67,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#api"><span class="secno">7 </span>API</a>
   <ol>
    <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
-   <li><a href="#interface-urlutils"><span class="secno">7.2 </span>Interface <code>URLUtils</code></a></li>
-   <li><a href="#interface-urlutilsreadonly"><span class="secno">7.3 </span>Interface <code>URLUtilsReadOnly</code></a></li>
-   <li><a href="#interface-urlquery"><span class="secno">7.4 </span>Interface <code>URLQuery</code></a></ol></li>
+   <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">7.2 </span><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</a></li>
+   <li><a href="#interface-urlquery"><span class="secno">7.3 </span>Interface <code>URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1759,7 +1758,32 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute <a href="#urlquery">URLQuery</a>? <a href="#dom-url-query" title="dom-URL-query">query</a>;
            attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+};
+
+[NoInterfaceObject]
+interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
+  stringifier readonly attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;<!--
+  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
+
+  readonly attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
+  readonly attribute DOMString <span title=dom-URL-username>username</span>;
+  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
+  readonly attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+  readonly attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+  readonly attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+  readonly attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+  readonly attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
+  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
+  readonly attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
+
+<p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
+to objects implementing <a href="#urlutils"><code>URLUtils</code></a>.
+
+<p class="note">Since all members are readonly and certain members from
+<a href="#urlutils"><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible
+compared to objects implementing <a href="#urlutils"><code>URLUtils</code></a>. These are left as an exercise to
+the reader.
 
 <!-- XXX Ideas:
   boolean isEqual(URL, optional URLEqualOptions options)
@@ -1775,13 +1799,14 @@ dictionary URLEqualOptions {
 URLPath would be a subclassed Array similarly to how URLQuery will be a
 subclassed MultiMap. -->
 
-<p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> must define a
+<p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> or
+<a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> must define a
 <dfn id="concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</dfn> algorithm, which must return the
 appropriate <a href="#concept-base-url" title="concept-base-URL">base URL</a> for the object.
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> may
-define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible
-for an underlying object (such as an
+define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible for an
+underlying object (such as an
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-attribute-value" title="concept-attribute-value">attribute value</a>)
 to be updated.
 
@@ -1790,8 +1815,8 @@ always invoked after each potential modification. Specifications need to
 keep track themselves if an actual modification is made, if they wish to
 make that distinction.
 
-<p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> has an associated
-<dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
+<p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> or <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> has an
+associated <dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
 <dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>
 (an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>),
 <dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>
@@ -1808,7 +1833,8 @@ Unless stated otherwise, <a href="#concept-uu-query-encoding" title="concept-UU-
 concept only relevant for HTML.
 <a class="informative" href="#refsHTML">[HTML]</a>
 
-<p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> must use the
+<p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> or
+<a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> must use the
 <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithms to set
 <a href="#concept-uu-input" title="concept-UU-input">input</a>, <a href="#concept-uu-url" title="concept-UU-url">url</a>, and
 <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>. To
@@ -1884,10 +1910,11 @@ constructor must run these steps:
 </ol>
 
 
-<h3 id="interface-urlutils"><span class="secno">7.2 </span>Interface <a href="#urlutils"><code>URLUtils</code></a></h3>
+<h3 id="urlutils-and-urlutilsreadonly-members"><span class="secno">7.2 </span><a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> members</h3>
 
-<p class="note">The <a href="#urlutils"><code>URLUtils</code></a> interface is not exposed on the
-global object. It augments other interfaces, such as <a href="#url"><code>URL</code></a>.
+<p class="note">The <a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> interfaces are
+not exposed on the global object. They are meant to augment other interfaces, such as
+<a href="#url"><code>URL</code></a>.
 
 <p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code></dfn> attribute must run
 these steps:
@@ -2236,35 +2263,7 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlutilsreadonly"><span class="secno">7.3 </span>Interface <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a></h3>
-
-<pre class="idl">[NoInterfaceObject]
-interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;<!--
-  readonly attribute DOMString <span title=dom-URL-origin>origin</span>;-->
-
-  readonly attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
-  readonly attribute DOMString <span title=dom-URL-username>username</span>;
-  readonly attribute DOMString <span title=dom-URL-password>password</span>;-->
-  readonly attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
-  readonly attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-  readonly attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
-  readonly attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-  readonly attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
-  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
-  readonly attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
-};</pre>
-
-<p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
-to objects implementing <a href="#urlutils"><code>URLUtils</code></a>.
-
-<p class="note">Since all members are readonly and certain members from
-<a href="#urlutils"><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible
-compared to objects implementing <a href="#urlutils"><code>URLUtils</code></a>. These are left as an exercise to
-the reader.
-
-
-<h3 id="interface-urlquery"><span class="secno">7.4 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
+<h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
 <p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
 
