@@ -946,11 +946,12 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>
-       and not a <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <a href="#c">c</a> is "<code title="">%</code>" and
-       <a href="#remaining">remaining</a> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
+       <li><p>If <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>, not a
+       <a href="#url-code-points" title="URL code points">URL code point</a>, and not
+       "<code title="">%</code>", <a href="#parse-error">parse error</a>.
+
+       <li><p>If <a href="#c">c</a> is "<code title="">%</code>" and <a href="#remaining">remaining</a> does
+       not start with two <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p>If <a href="#c">c</a> is none of
        <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
@@ -1127,8 +1128,10 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
          <a href="#parse-error">parse error</a>, continue.
 
          <li><p>If <var title="">code point</var> is not a
-         <a href="#url-code-points" title="URL code points">URL code point</a>, or
-         <var title="">code point</var> is "<code title="">%</code>" and
+         <a href="#url-code-points" title="URL code points">URL code point</a> and not
+         "<code title="">%</code>", <a href="#parse-error">parse error</a>.
+
+         <li><p>If <var title="">code point</var> is "<code title="">%</code>" and
          <a href="#remaining">remaining</a> does not start with two
          <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
@@ -1392,10 +1395,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
       <ol>
        <li><p>If <a href="#c">c</a> is not a
-       <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <a href="#c">c</a> is "<code title="">%</code>" and
-       <a href="#remaining">remaining</a> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
+       <a href="#url-code-points" title="URL code points">URL code point</a> and not "<code title="">%</code>",
+       <a href="#parse-error">parse error</a>.
+
+       <li><p>If <a href="#c">c</a> is "<code title="">%</code>" and <a href="#remaining">remaining</a> does
+       not start with two <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <a href="#c">c</a> using the
        <a href="#default-encode-set">default encode set</a>, and append the result to
@@ -1457,10 +1461,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
       <ol>
        <li><p>If <a href="#c">c</a> is not a
-       <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <a href="#c">c</a> is "<code title="">%</code>" and
-       <a href="#remaining">remaining</a> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
+       <a href="#url-code-points" title="URL code points">URL code point</a> and not "<code title="">%</code>",
+       <a href="#parse-error">parse error</a>.
+
+       <li><p>If <a href="#c">c</a> is "<code title="">%</code>" and <a href="#remaining">remaining</a> does
+       not start with two <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p>Append <a href="#c">c</a> to <var title="">buffer</var>.
       </ol>
@@ -1482,10 +1487,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <dd>
       <ol>
        <li><p>If <a href="#c">c</a> is not a
-       <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <a href="#c">c</a> is "<code title="">%</code>" and
-       <a href="#remaining">remaining</a> does not start with two
-       <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
+       <a href="#url-code-points" title="URL code points">URL code point</a> and not
+       "<code title="">%</code>", <a href="#parse-error">parse error</a>.
+
+       <li><p>If <a href="#c">c</a> is "<code title="">%</code>" and <a href="#remaining">remaining</a> does
+       not start with two <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
        <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <a href="#c">c</a>
        using the <a href="#simple-encode-set">simple encode set</a>, and append the result to

@@ -922,11 +922,12 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <span>c</span> is not the <span>EOF code point</span>
-       and not a <span title="URL code points">URL code point</span>, or
-       <span>c</span> is "<code title>%</code>" and
-       <span>remaining</span> does not start with two
-       <span>ASCII hex digits</span>, <span>parse error</span>.
+       <li><p>If <span>c</span> is not the <span>EOF code point</span>, not a
+       <span title="URL code points">URL code point</span>, and not
+       "<code title>%</code>", <span>parse error</span>.
+
+       <li><p>If <span>c</span> is "<code title>%</code>" and <span>remaining</span> does
+       not start with two <span>ASCII hex digits</span>, <span>parse error</span>.
 
        <li><p>If <span>c</span> is none of
        <span>EOF code point</span>, U+0009, U+000A, and U+000D,
@@ -1103,8 +1104,10 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
          <span>parse error</span>, continue.
 
          <li><p>If <var title>code point</var> is not a
-         <span title="URL code points">URL code point</span>, or
-         <var title>code point</var> is "<code title>%</code>" and
+         <span title="URL code points">URL code point</span> and not
+         "<code title>%</code>", <span>parse error</span>.
+
+         <li><p>If <var title>code point</var> is "<code title>%</code>" and
          <span>remaining</span> does not start with two
          <span>ASCII hex digits</span>, <span>parse error</span>.
 
@@ -1368,10 +1371,11 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
 
       <ol>
        <li><p>If <span>c</span> is not a
-       <span title="URL code points">URL code point</span>, or
-       <span>c</span> is "<code title>%</code>" and
-       <span>remaining</span> does not start with two
-       <span>ASCII hex digits</span>, <span>parse error</span>.
+       <span title="URL code points">URL code point</span> and not "<code title>%</code>",
+       <span>parse error</span>.
+
+       <li><p>If <span>c</span> is "<code title>%</code>" and <span>remaining</span> does
+       not start with two <span>ASCII hex digits</span>, <span>parse error</span>.
 
        <li><p><span>utf-8 percent encode</span> <span>c</span> using the
        <span>default encode set</span>, and append the result to
@@ -1433,10 +1437,11 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
 
       <ol>
        <li><p>If <span>c</span> is not a
-       <span title="URL code points">URL code point</span>, or
-       <span>c</span> is "<code title>%</code>" and
-       <span>remaining</span> does not start with two
-       <span>ASCII hex digits</span>, <span>parse error</span>.
+       <span title="URL code points">URL code point</span> and not "<code title>%</code>",
+       <span>parse error</span>.
+
+       <li><p>If <span>c</span> is "<code title>%</code>" and <span>remaining</span> does
+       not start with two <span>ASCII hex digits</span>, <span>parse error</span>.
 
        <li><p>Append <span>c</span> to <var title>buffer</var>.
       </ol>
@@ -1458,10 +1463,11 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
      <dd>
       <ol>
        <li><p>If <span>c</span> is not a
-       <span title="URL code points">URL code point</span>, or
-       <span>c</span> is "<code title>%</code>" and
-       <span>remaining</span> does not start with two
-       <span>ASCII hex digits</span>, <span>parse error</span>.
+       <span title="URL code points">URL code point</span> and not
+       "<code title>%</code>", <span>parse error</span>.
+
+       <li><p>If <span>c</span> is "<code title>%</code>" and <span>remaining</span> does
+       not start with two <span>ASCII hex digits</span>, <span>parse error</span>.
 
        <li><p><span>utf-8 percent encode</span> <span>c</span>
        using the <span>simple encode set</span>, and append the result to
