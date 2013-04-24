@@ -51,7 +51,9 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 <ol class="toc">
  <li><a class="no-num" href="#goals">Goals</a></li>
  <li><a href="#conformance"><span class="secno">1 </span>Conformance</a></li>
- <li><a href="#terminology"><span class="secno">2 </span>Terminology</a></li>
+ <li><a href="#terminology"><span class="secno">2 </span>Terminology</a>
+  <ol>
+   <li><a href="#parsers"><span class="secno">2.1 </span>Parsers</a></ol></li>
  <li><a href="#percent-encoded-bytes"><span class="secno">3 </span>Percent-encoded bytes</a></li>
  <li><a href="#hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</a>
   <ol>
@@ -123,13 +125,6 @@ not appear in all uppercase letters in this specification.
 <p>Some terms used in this specification are defined in the
 Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
-<p>The <dfn id="eof-code-point">EOF code point</dfn> signifies the end of a string or
-code point stream.
-
-<p>A <dfn id="parse-error">parse error</dfn> indicates a non-fatal mismatch between input and requirements.
-User agents are encouraged to expose <a href="#parse-error" title="parse error">parse errors</a>
-somehow.
-
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 
 <p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are <a href="#ascii-digits">ASCII digits</a> or are
@@ -145,6 +140,27 @@ or in the range U+0061 to U+007A.
 <p>The <dfn id="domain-label-separators">domain label separators</dfn> are the code points
 U+002E, U+3002, U+FF0E, and U+FF61.
 <!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
+
+<h3 id="parsers"><span class="secno">2.1 </span>Parsers</h3>
+
+<p>The <dfn id="eof-code-point">EOF code point</dfn> signifies the end of a string or
+code point stream.
+
+<p>A <dfn id="parse-error">parse error</dfn> indicates a non-fatal mismatch between input and requirements.
+User agents are encouraged to expose <a href="#parse-error" title="parse error">parse errors</a>
+somehow.
+
+<p>Within a parser algorithm that uses a <var title="">pointer</var> variable, <dfn id="c">c</dfn>
+references the code point the <var title="">pointer</var> variable points to.
+
+<p>Within a string-based parser algorithm that uses a <var title="">pointer</var> variable,
+<dfn id="remaining">remaining</dfn> references the substring after <var title="">pointer</var> in the string
+being processed.
+
+<p class="example">If "<code title="">mailto:example@example</code>" is a string being
+processed and <var title="">pointer</var> points to "<code title="">@</code>",
+<a href="#c">c</a> is "<code title="">@</code>" and <a href="#remaining">remaining</a> is
+"<code title="">example</code>".
 
 
 
@@ -167,34 +183,30 @@ U+0000 to U+007F into a byte sequence, run these steps:
 
 <ol>
  <li><p>Let <var title="">pointer</var> be a pointer into
- <var title="">string</var>, initially zero (pointing to the first code point),
- and let <var title="">c</var> be the code point it points to.
-
- <li><p>Let <var title="">remaining</var> be the substring after
- <var title="">pointer</var> in <var title="">string</var>.
+ <var title="">string</var>, initially zero (pointing to the first code point).
 
  <li><p>Let <var title="">bytes</var> be an empty byte sequence.
 
  <li>
-  <p>While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run
+  <p>While <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>, run
   these substeps:
 
   <ol>
-   <li><p>While <var title="">c</var> is not "<code title="">%</code>" or the
+   <li><p>While <a href="#c">c</a> is not "<code title="">%</code>" or the
    <a href="#eof-code-point">EOF code point</a>, append to <var title="">bytes</var> a byte
-   whose value is <var title="">c</var>'s code point and increase
+   whose value is <a href="#c">c</a>'s code point and increase
    <var title="">pointer</var> by one.
 
-   <li><p>If <var title="">c</var> is "<code title="">%</code>" and
-   <var title="">remaining</var> does not start with two
+   <li><p>If <a href="#c">c</a> is "<code title="">%</code>" and
+   <a href="#remaining">remaining</a> does not start with two
    <a href="#ascii-hex-digits">ASCII hex digits</a>, append to <var title="">bytes</var> a byte
-   whose value is <var title="">c</var>'s code point, increase
+   whose value is <a href="#c">c</a>'s code point, increase
    <var title="">pointer</var> by one, and run these substeps again.
 
-   <li><p>While <var title="">c</var> is "<code title="">%</code>" and
-   <var title="">remaining</var> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
+   <li><p>While <a href="#c">c</a> is "<code title="">%</code>" and
+   <a href="#remaining">remaining</a> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
    append to <var title="">bytes</var> a byte whose value is
-   <var title="">remaining</var>'s two leading code points, interpreted as
+   <a href="#remaining">remaining</a>'s two leading code points, interpreted as
    hexadecimal number, and increase <var title="">pointer</var> by three.
   </ol>
 
@@ -354,17 +366,13 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <var title="">pieces</var>, initially null and pointing to nothing.
 
  <li><p>Let <var title="">pointer</var> be a pointer into
- <var title="">input</var>, initially zero (pointing to the first code point),
- and let <var title="">c</var> be the code point it points to.
-
- <li><p>Let <var title="">remaining</var> be the substring after
- <var title="">pointer</var> in <var title="">input</var>.
+ <var title="">input</var>, initially zero (pointing to the first code point)
 
  <li>
-  <p>If <var title="">c</var> is "<code title="">:</code>", run these substeps:
+  <p>If <a href="#c">c</a> is "<code title="">:</code>", run these substeps:
 
   <ol>
-   <li><p>If <var title="">remaining</var> does not start with
+   <li><p>If <a href="#remaining">remaining</a> does not start with
    "<code title="">:</code>", <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Increase <var title="">pointer</var> by two.
@@ -375,7 +383,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 
  <li>
   <p><dfn id="concept-ipv6-parser-main" title="concept-ipv6-parser-main">Main</dfn>:
-  While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run these
+  While <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>, run these
   substeps:
 
   <ol>
@@ -383,7 +391,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <a href="#parse-error">parse error</a>, return failure.
 
    <li>
-    <p>If <var title="">c</var> is "<code title="">:</code>", run these inner
+    <p>If <a href="#c">c</a> is "<code title="">:</code>", run these inner
     substeps:
 
     <ol>
@@ -398,14 +406,14 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <li><p>Let <var title="">value</var> and <var title="">length</var> be 0.
 
    <li><p>While <var title="">length</var> is less than 4 and
-   <var title="">c</var> is an
+   <a href="#c">c</a> is an
    <a href="#ascii-hex-digits" title="ASCII hex digits">ASCII hex digit</a>, set
    <var title="">value</var> to
-   <var title="">value</var> × 0x10 + <var title="">c</var> interpreted as hexadecimal number,
+   <var title="">value</var> × 0x10 + <a href="#c">c</a> interpreted as hexadecimal number,
    and increase <var title="">pointer</var> and <var title="">length</var> by one.
 
    <li>
-    <p>Based on <var title="">c</var>:
+    <p>Based on <a href="#c">c</a>:
 
     <dl class="switch">
      <dt>"<code title="">.</code>"
@@ -418,7 +426,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      <dt>"<code title="">:</code>"
      <dd>
       <p>Increase <var title="">pointer</var> by one.
-      <p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>,
+      <p>If <a href="#c">c</a> is the <a href="#eof-code-point">EOF code point</a>,
       <a href="#parse-error">parse error</a>, return failure.
 
      <dt>Anything but the <a href="#eof-code-point">EOF code point</a>
@@ -430,7 +438,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <li><p>Increase <var title="">piece pointer</var> by one.
   </ol>
 
- <li><p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a>, jump to
+ <li><p>If <a href="#c">c</a> is the <a href="#eof-code-point">EOF code point</a>, jump to
  <a href="#concept-ipv6-parser-finale" title="concept-ipv6-parser-finale">Finale</a>.
 
  <li><p><dfn id="concept-ipv6-parser-ipv4" title="concept-ipv6-parser-ipv4">IPv4</dfn>:
@@ -440,25 +448,25 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <li><p>Let <var title="">dots seen</var> be 0.
 
  <li>
-  <p>While <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>, run
+  <p>While <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>, run
   these substeps:
 
   <ol>
    <li><p>Let <var title="">value</var> be 0.
 
-   <li><p>While <var title="">c</var> is an
+   <li><p>While <a href="#c">c</a> is an
    <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, set <var title="">value</var> to
-   <var title="">value</var> × 10 + <var title="">c</var> interpreted as decimal number
+   <var title="">value</var> × 10 + <a href="#c">c</a> interpreted as decimal number
    and increase <var title="">pointer</var> by one.
 
    <li><p>If <var title="">value</var> is greater than 255,
    <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>If <var title="">dots seen</var> is less than 3 and
-   <var title="">c</var> is not a "<code title="">.</code>",
+   <a href="#c">c</a> is not a "<code title="">.</code>",
    <a href="#parse-error">parse error</a>, return failure.
 
-   <li><p>If <var title="">dots seen</var> is 3 and <var title="">c</var> is not
+   <li><p>If <var title="">dots seen</var> is 3 and <a href="#c">c</a> is not
    the <a href="#eof-code-point">EOF code point</a>,
    <a href="#parse-error">parse error</a>, return failure.
 
@@ -850,23 +858,12 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
   each time it is run, as long as <var title="">pointer</var> does not point
   past the end of <var title="">input</var>.
 
-  <p>Let <var title="">c</var> be the code point to which
-  <var title="">pointer</var> points.
-
-  <p>Let <var title="">remaining</var> be the substring starting after
-  <var title="">pointer</var> in <var title="">input</var>.
-
-  <p class="example">If <var title="">input</var> is
-  "<code title="">mailto:example@example</code>" and <var title="">pointer</var>
-  points to "<code title="">@</code>", <var title="">remaining</var> is
-  "<code title="">example</code>".
-
   <dl class="switch">
    <dt><dfn id="scheme-start-state">scheme start state</dfn>
    <dd>
     <ol>
-     <li><p>If <var title="">c</var> is an <a href="#ascii-alpha">ASCII alpha</a>,
-     append <var title="">c</var>, lowercased, to <var title="">buffer</var>, and
+     <li><p>If <a href="#c">c</a> is an <a href="#ascii-alpha">ASCII alpha</a>,
+     append <a href="#c">c</a>, lowercased, to <var title="">buffer</var>, and
      set <var title="">state</var> to <a href="#scheme-state">scheme state</a>.
 
      <li><p>Otherwise, if <var title="">state override</var> is not given, set
@@ -879,13 +876,13 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dt><dfn id="scheme-state">scheme state</dfn>
    <dd>
     <ol>
-     <li><p>If <var title="">c</var> is an <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
+     <li><p>If <a href="#c">c</a> is an <a href="#ascii-alphanumeric">ASCII alphanumeric</a>,
      "<code title="">+</code>", "<code title="">-</code>", or
-     "<code title="">.</code>", append <var title="">c</var>, lowercased, to
+     "<code title="">.</code>", append <a href="#c">c</a>, lowercased, to
      <var title="">buffer</var>.
 
      <li>
-      <p>Otherwise, if <var title="">c</var> is "<code title="">:</code>", set
+      <p>Otherwise, if <a href="#c">c</a> is "<code title="">:</code>", set
       <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
       <var title="">buffer</var>, <var title="">buffer</var> to the empty string,
       and then run these substeps:
@@ -925,7 +922,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <a href="#no-scheme-state">no scheme state</a>, and start over (from the first code point
      in <var title="">input</var>).
 
-     <li><p>Otherwise, if <var title="">c</var> is the
+     <li><p>Otherwise, if <a href="#c">c</a> is the
      <a href="#eof-code-point">EOF code point</a>, terminate this algorithm.
      <!-- account for URL.protocol = "test" -->
 
@@ -935,12 +932,12 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dt><dfn id="scheme-data-state">scheme data state</dfn>
    <dd>
     <ol>
-     <li><p>If <var title="">c</var> is "<code title="">?</code>", set
+     <li><p>If <a href="#c">c</a> is "<code title="">?</code>", set
      <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a>
      to the empty string and <var title="">state</var> to
      <a href="#query-state">query state</a>.
 
-     <li><p>Otherwise, if <var title="">c</var> is "<code title="">#</code>", set
+     <li><p>Otherwise, if <a href="#c">c</a> is "<code title="">#</code>", set
      <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>
      to the empty string and <var title="">state</var> to
      <a href="#fragment-state">fragment state</a>.
@@ -949,15 +946,15 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <var title="">c</var> is not the <a href="#eof-code-point">EOF code point</a>
+       <li><p>If <a href="#c">c</a> is not the <a href="#eof-code-point">EOF code point</a>
        and not a <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <var title="">c</var> is "<code title="">%</code>" and
-       <var title="">remaining</var> does not start with two
+       <a href="#c">c</a> is "<code title="">%</code>" and
+       <a href="#remaining">remaining</a> does not start with two
        <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
-       <li><p>If <var title="">c</var> is none of
+       <li><p>If <a href="#c">c</a> is none of
        <a href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-       <a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
+       <a href="#utf-8-percent-encode">utf-8 percent encode</a> <a href="#c">c</a> using the
        <a href="#simple-encode-set">simple encode set</a>, and append the result to
        <var title="">url</var>'s
        <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
@@ -980,8 +977,8 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
    <dt><dfn id="relative-or-authority-state">relative or authority state</dfn>
    <dd>
-    <p>If <var title="">c</var> is "<code>/</code>" and
-    <var title="">remaining</var> starts with "<code>/</code>", set
+    <p>If <a href="#c">c</a> is "<code>/</code>" and
+    <a href="#remaining">remaining</a> starts with "<code>/</code>", set
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>
     and increase <var title="">pointer</var> by one.
 
@@ -995,7 +992,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
     <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> to
     <var title="">base</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> if
     <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
-    "<code title="">file</code>", and then, based on <var title="">c</var>:
+    "<code title="">file</code>", and then, based on <a href="#c">c</a>:
 
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
@@ -1013,7 +1010,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <dt>"<code title="">\</code>"
      <dd>
       <ol>
-       <li><p>If <var title="">c</var> is "<code title="">\</code>",
+       <li><p>If <a href="#c">c</a> is "<code title="">\</code>",
        <a href="#parse-error">parse error</a>.
        <li><p>Set <var title="">state</var> to
        <a href="#relative-slash-state">relative slash state</a>.
@@ -1059,11 +1056,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
    <dt><dfn id="relative-slash-state">relative slash state</dfn>
    <dd>
-    <p>If <var title="">c</var> is either "<code title="">/</code>" or
+    <p>If <a href="#c">c</a> is either "<code title="">/</code>" or
     "<code title="">\</code>", run these steps:
 
     <ol>
-     <li><p>If <var title="">c</var> is "<code title="">\</code>",
+     <li><p>If <a href="#c">c</a> is "<code title="">\</code>",
      <a href="#parse-error">parse error</a>.
 
      <li><p>If <var title="">url</var>'s
@@ -1085,7 +1082,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
    <dt><dfn id="authority-first-slash-state">authority first slash state</dfn>
    <dd>
-    <p>If <var title="">c</var> is "<code title="">/</code>", set
+    <p>If <a href="#c">c</a> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-second-slash-state">authority second slash state</a>.
 
     <p>Otherwise, <a href="#parse-error">parse error</a>, set <var title="">state</var> to
@@ -1094,7 +1091,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
    <dt><dfn id="authority-second-slash-state">authority second slash state</dfn>
    <dd>
-    <p>If <var title="">c</var> is "<code title="">/</code>", set
+    <p>If <a href="#c">c</a> is "<code title="">/</code>", set
     <var title="">state</var> to <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
 
     <p>Otherwise, <a href="#parse-error">parse error</a>, set <var title="">state</var> to
@@ -1103,7 +1100,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
    <dt><dfn id="authority-ignore-slashes-state">authority ignore slashes state</dfn>
    <dd>
-    <p>If <var title="">c</var> is neither "<code title="">/</code>" nor
+    <p>If <a href="#c">c</a> is neither "<code title="">/</code>" nor
     "<code title="">\</code>", set <var title="">state</var> to
     <a href="#authority-state">authority state</a>, and decrease <var title="">pointer</var> by one.
 
@@ -1113,7 +1110,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dd>
     <ol>
      <li>
-      <p>If <var title="">c</var> is "<code title="">@</code>", run these substeps:
+      <p>If <a href="#c">c</a> is "<code title="">@</code>", run these substeps:
 
       <ol>
        <li><p>If the <var title="">@ flag</var> is set,
@@ -1132,7 +1129,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
          <li><p>If <var title="">code point</var> is not a
          <a href="#url-code-points" title="URL code points">URL code point</a>, or
          <var title="">code point</var> is "<code title="">%</code>" and
-         <var title="">remaining</var> does not start with two
+         <a href="#remaining">remaining</a> does not start with two
          <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
          <li><p>If <var title="">code point</var> is "<code title="">:</code>" and
@@ -1152,21 +1149,21 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        <li><p>Set <var title="">buffer</var> to the empty string.
       </ol>
 
-     <li><p>If <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
+     <li><p>If <a href="#c">c</a> is one of <a href="#eof-code-point">EOF code point</a>,
      "<code title="">/</code>", "<code title="">\</code>", "<code title="">?</code>",
      and "<code title="">#</code>", decrease <var title="">pointer</var> by the
      number of code points in <var title="">buffer</var> plus one, set
      <var title="">buffer</var> to the empty string, and
      <var title="">state</var> to <a href="#host-state">host state</a>.
 
-     <li><p>Otherwise, append <var title="">c</var> to <var title="">buffer</var>.
+     <li><p>Otherwise, append <a href="#c">c</a> to <var title="">buffer</var>.
     </ol>
 
    <dt><dfn id="file-host-state">file host state</dfn>
    <dd>
     <ol>
      <li>
-      <p>If <var title="">c</var> is one of <a href="#eof-code-point">EOF code point</a>,
+      <p>If <a href="#c">c</a> is one of <a href="#eof-code-point">EOF code point</a>,
       "<code title="">/</code>", "<code title="">\</code>", "<code title="">?</code>",
       and "<code title="">#</code>", decrease <var title="">pointer</var> by one,
       and run these substeps:
@@ -1198,10 +1195,10 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
         </ol>
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.
 
-     <li><p>Otherwise, append <var title="">c</var> to <var title="">buffer</var>.
+     <li><p>Otherwise, append <a href="#c">c</a> to <var title="">buffer</var>.
     </ol>
 
    <dt><dfn id="host-state">host state</dfn>
@@ -1209,7 +1206,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dd>
     <ol>
      <li>
-      <p>If <var title="">c</var> is "<code title="">:</code>" and the
+      <p>If <a href="#c">c</a> is "<code title="">:</code>" and the
       <var title="">[] flag</var> is unset, run these substeps:
 
       <ol>
@@ -1228,7 +1225,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       </ol>
 
      <li>
-      <p>Otherwise, if <var title="">c</var> is the
+      <p>Otherwise, if <a href="#c">c</a> is the
       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>",
       "<code title="">\</code>", "<code title="">?</code>", or
       "<code title="">#</code>", decrease <var title="">pointer</var> by one, and
@@ -1249,31 +1246,31 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        algorithm.
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <var title="">c</var> is "<code title="">[</code>", set the
+       <li><p>If <a href="#c">c</a> is "<code title="">[</code>", set the
        <var title="">[] flag</var>.
 
-       <li><p>If <var title="">c</var> is "<code title="">]</code>", unset the
+       <li><p>If <a href="#c">c</a> is "<code title="">]</code>", unset the
        <var title="">[] flag</var>.
 
-       <li><p>Append <var title="">c</var> to <var title="">buffer</var>.
+       <li><p>Append <a href="#c">c</a> to <var title="">buffer</var>.
       </ol>
     </ol>
 
    <dt><dfn id="port-state">port state</dfn>
    <dd>
     <ol>
-     <li><p>If <var title="">c</var> is an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
-     append <var title="">c</var> to <var title="">buffer</var>.
+     <li><p>If <a href="#c">c</a> is an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
+     append <a href="#c">c</a> to <var title="">buffer</var>.
 
      <li>
-      <p>Otherwise, if <var title="">c</var> is one of
+      <p>Otherwise, if <a href="#c">c</a> is one of
       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>",
       "<code title="">\</code>", "<code title="">?</code>", and
       "<code title="">#</code>", or <var title="">state override</var> is given, run
@@ -1310,7 +1307,7 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        decrease <var title="">pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.
 
      <li><p>Otherwise, <a href="#parse-error">parse error</a>, return failure.
@@ -1319,11 +1316,11 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dt><dfn id="relative-path-start-state">relative path start state</dfn>
    <dd>
     <ol>
-     <li><p>If <var title="">c</var> is "<code title="">\</code>",
+     <li><p>If <a href="#c">c</a> is "<code title="">\</code>",
      <a href="#parse-error">parse error</a>.
 
      <li><p>Set <var title="">state</var> to <a href="#relative-path-state">relative path state</a>
-     and if <var title="">c</var> is neither "<code title="">/</code>" nor
+     and if <a href="#c">c</a> is neither "<code title="">/</code>" nor
      "<code title="">\</code>", decrease <var title="">pointer</var> by one.
     </ol>
 
@@ -1331,22 +1328,22 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dd>
     <ol>
      <li>
-      <p>If either <var title="">c</var> is one of
+      <p>If either <a href="#c">c</a> is one of
       <a href="#eof-code-point">EOF code point</a>, "<code title="">/</code>", and
       "<code title="">\</code>", or <var title="">state override</var> is not given and
-      <var title="">c</var> is one of "<code title="">?</code>" and
+      <a href="#c">c</a> is one of "<code title="">?</code>" and
       "<code title="">#</code>", run these substeps:
       <ol>
-       <li><p>If <var title="">c</var> is "<code title="">\</code>", <a href="#parse-error">parse error</a>.
+       <li><p>If <a href="#c">c</a> is "<code title="">\</code>", <a href="#parse-error">parse error</a>.
 
        <li><p>If <var title="">buffer</var> is "<code title="">..</code>", pop
        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, if non-empty, and
-       then if <var title="">c</var> is neither  "<code title="">/</code>" nor
+       then if <a href="#c">c</a> is neither  "<code title="">/</code>" nor
        "<code title="">\</code>", append the empty string to <var title="">url</var>'s
        <a href="#concept-url-path" title="concept-url-path">path</a>.
 
        <li><p>Otherwise, if <var title="">buffer</var> is "<code title="">.</code>" and
-       <var title="">c</var> is neither "<code title="">/</code>" nor "<code title="">\</code>",
+       <a href="#c">c</a> is neither "<code title="">/</code>" nor "<code title="">\</code>",
        append an empty string to
        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
 
@@ -1372,35 +1369,35 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
        <li><p>Set <var title="">buffer</var> to the empty string.
 
-       <li><p>If <var title="">c</var> is "<code title="">?</code>", set
+       <li><p>If <a href="#c">c</a> is "<code title="">?</code>", set
        <var title="">url</var>'s <a href="#concept-url-query" title="concept-url-query">query</a> to the empty string,
        and <var title="">state</var> to <a href="#query-state">query state</a>.
 
-       <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+       <li><p>If <a href="#c">c</a> is "<code title="">#</code>", set
        <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
        and <var title="">state</var> to <a href="#fragment-state">fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is "<code title="">%</code>" and
-     <var title="">remaining</var> starts with either "<code title="">2E</code>"
+     <li><p>Otherwise, if <a href="#c">c</a> is "<code title="">%</code>" and
+     <a href="#remaining">remaining</a> starts with either "<code title="">2E</code>"
      or "<code title="">2e</code>", increase <var title="">pointer</var> by two,
      and append "<code title="">.</code>" to <var title="">buffer</var>.
      <!-- Chrome unescapes more here; Safari does nothing -->
 
-     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these steps:
 
       <ol>
-       <li><p>If <var title="">c</var> is not a
+       <li><p>If <a href="#c">c</a> is not a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <var title="">c</var> is "<code title="">%</code>" and
-       <var title="">remaining</var> does not start with two
+       <a href="#c">c</a> is "<code title="">%</code>" and
+       <a href="#remaining">remaining</a> does not start with two
        <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
-       <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var> using the
+       <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <a href="#c">c</a> using the
        <a href="#default-encode-set">default encode set</a>, and append the result to
        <var title="">buffer</var>.
       </ol>
@@ -1410,8 +1407,8 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
    <dd>
     <ol>
      <li>
-      <p>If <var title="">c</var> is the <a href="#eof-code-point">EOF code point</a> or
-      <var title="">state override</var> is not given and <var title="">c</var>
+      <p>If <a href="#c">c</a> is the <a href="#eof-code-point">EOF code point</a> or
+      <var title="">state override</var> is not given and <a href="#c">c</a>
       is "<code title="">#</code>", run these substeps:
 
       <ol>
@@ -1446,32 +1443,32 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
 
        <li><p>Set <var title="">buffer</var> to the empty string.
 
-       <li><p>If <var title="">c</var> is "<code title="">#</code>", set
+       <li><p>If <a href="#c">c</a> is "<code title="">#</code>", set
        <var title="">url</var>'s
        <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
        and state to <a href="#fragment-state">fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <var title="">c</var> is U+0009, U+000A, or U+000D,
+     <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.
 
      <li>
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <var title="">c</var> is not a
+       <li><p>If <a href="#c">c</a> is not a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <var title="">c</var> is "<code title="">%</code>" and
-       <var title="">remaining</var> does not start with two
+       <a href="#c">c</a> is "<code title="">%</code>" and
+       <a href="#remaining">remaining</a> does not start with two
        <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
-       <li><p>Append <var title="">c</var> to <var title="">buffer</var>.
+       <li><p>Append <a href="#c">c</a> to <var title="">buffer</var>.
       </ol>
     </ol>
 
    <dt><dfn id="fragment-state">fragment state</dfn>
    <dd>
-    <p>Based on <var title="">c</var>:
+    <p>Based on <a href="#c">c</a>:
     <dl class="switch">
      <dt><a href="#eof-code-point">EOF code point</a>
      <dd><p>Do nothing.
@@ -1484,13 +1481,13 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <dt>Otherwise
      <dd>
       <ol>
-       <li><p>If <var title="">c</var> is not a
+       <li><p>If <a href="#c">c</a> is not a
        <a href="#url-code-points" title="URL code points">URL code point</a>, or
-       <var title="">c</var> is "<code title="">%</code>" and
-       <var title="">remaining</var> does not start with two
+       <a href="#c">c</a> is "<code title="">%</code>" and
+       <a href="#remaining">remaining</a> does not start with two
        <a href="#ascii-hex-digits">ASCII hex digits</a>, <a href="#parse-error">parse error</a>.
 
-       <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <var title="">c</var>
+       <li><p><a href="#utf-8-percent-encode">utf-8 percent encode</a> <a href="#c">c</a>
        using the <a href="#simple-encode-set">simple encode set</a>, and append the result to
        <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
        <!-- if people complain about percent encoding do not forget that
