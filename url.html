@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-april-2013">Living Standard — Last Updated 10 April 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-april-2013">Living Standard — Last Updated 24 April 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-10 April 2013, the editors have made this specification available
+24 April 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1806,14 +1806,10 @@ appropriate <a href="#concept-base-url" title="concept-base-URL">base URL</a> fo
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> may
 define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible for an
-underlying object (such as an
+underlying string (such as an
 <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-attribute-value" title="concept-attribute-value">attribute value</a>)
-to be updated.
-
-<p class="note">The <a href="#concept-uu-update" title="concept-UU-update">update steps</a> are
-always invoked after each potential modification. Specifications need to
-keep track themselves if an actual modification is made, if they wish to
-make that distinction.
+to be updated. The <a href="#concept-uu-update" title="concept-UU-update">update steps</a> are passed a string
+<var title="">value</var> for this purpose.
 
 <p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> or <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> has an
 associated <dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
@@ -1878,6 +1874,19 @@ concept only relevant for HTML.
  pairs.
 </ol>
 
+<p>To run the <dfn id="pre-update-steps">pre-update steps</dfn> for an object implementing
+<a href="#urlutils"><code>URLUtils</code></a>, optionally given a <var title="">value</var>, run these steps:
+
+<ol>
+ <li><p>If <var title="">value</var> is not given, let <var title="">value</var> be the result
+ of <a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> the associated
+ <a href="#concept-uu-url" title="concept-UU-url">url</a>.
+ <!-- these steps are always invoked with a value if url can be null -->
+
+ <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a> with
+ <var title="">value</var>.
+</ol>
+
 
 <h3 id="constructors"><span class="secno">7.1 </span>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
@@ -1934,8 +1943,18 @@ run these steps:
  <li><p>Run the <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm for
  the given value.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
 </ol>
+
+<p class="note">This means that if the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute is set
+to value that would cause the <a href="#concept-url-parser" title="concept-url-parser">parser</a> to return
+failure, that value is still passed through unchanged. This is one of those unfortunate
+legacy incidents.
+<!--
+  var urlPoop = "http://poop:poop/"
+  <a>.href = urlPoop
+  <a>.getAttribute("href") == urlPoop
+-->
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
 run these steps:
@@ -1977,7 +1996,7 @@ run these steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#scheme-start-state">scheme start state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-username" title="dom-URL-username"><code>username</code></dfn> attribute
@@ -2005,7 +2024,7 @@ run these steps:
  <a href="#username-encode-set">username encode set</a>, and append the result to
  <a href="#concept-url-username" title="concept-url-username">username</a>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-password" title="dom-URL-password"><code>password</code></dfn> attribute
@@ -2027,18 +2046,16 @@ run these steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a href="#concept-url-password" title="concept-url-password">password</a> to null,
- run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>, and terminate
- these steps.
+ <a href="#concept-url-password" title="concept-url-password">password</a> to null, run the
+ <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
 
- <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty
- string.
+ <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty string.
 
  <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
  using the <a href="#password-encode-set">password encode set</a>, and append the result to
  <a href="#concept-url-password" title="concept-url-password">password</a>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
@@ -2069,7 +2086,7 @@ steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
  <a href="#host-state">host state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
@@ -2094,7 +2111,7 @@ run these steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
  <a href="#hostname-state">hostname state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must run
@@ -2120,7 +2137,7 @@ steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
  <a href="#port-state">port state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute
@@ -2151,7 +2168,7 @@ run these steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
  <a href="#relative-path-start-state">relative path start state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
@@ -2177,8 +2194,7 @@ these steps:
  <a href="#concept-url-query" title="concept-url-query">query</a> to null, set
  <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list
  of name-value pairs to the empty list, run the
- <a href="#concept-uu-update" title="concept-UU-update">update steps</a>, and terminate these
- steps.
+ <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
@@ -2196,7 +2212,7 @@ these steps:
  <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
  <var title="">input</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
@@ -2246,8 +2262,7 @@ steps:
 
  <li><p>If the given value is the empty string, set
  <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to null, run the
- <a href="#concept-uu-update" title="concept-UU-update">update steps</a>, and terminate these
- steps.
+ <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">#</code>" removed, if any.
@@ -2259,7 +2274,7 @@ steps:
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
  <a href="#fragment-state">fragment state</a> as <var title="">state override</var>.
 
- <li><p>Run the <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 
@@ -2335,7 +2350,7 @@ using <var title="">init</var>, run these steps:
  <a href="#urlquery"><code>URLQuery</code></a> object's associated list of name-value pairs.
 
  <li><p>Run <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
- <a href="#concept-uu-update" title="concept-UU-update">update steps</a>.
+ <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The
