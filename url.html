@@ -201,9 +201,9 @@ U+0000 to U+007F into a byte sequence, run these steps:
    <a href="#remaining">remaining</a> does not start with two
    <a href="#ascii-hex-digits">ASCII hex digits</a>, append to <var title="">bytes</var> a byte
    whose value is <a href="#c">c</a>'s code point, increase
-   <var title="">pointer</var> by one, and run these substeps again.
+   <var title="">pointer</var> by one.
 
-   <li><p>While <a href="#c">c</a> is "<code title="">%</code>" and
+   <li><p>Otherwise, while <a href="#c">c</a> is "<code title="">%</code>" and
    <a href="#remaining">remaining</a> starts with two <a href="#ascii-hex-digits">ASCII hex digits</a>,
    append to <var title="">bytes</var> a byte whose value is
    <a href="#remaining">remaining</a>'s two leading code points, interpreted as
@@ -366,7 +366,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <var title="">pieces</var>, initially null and pointing to nothing.
 
  <li><p>Let <var title="">pointer</var> be a pointer into
- <var title="">input</var>, initially zero (pointing to the first code point)
+ <var title="">input</var>, initially zero (pointing to the first code point).
 
  <li>
   <p>If <a href="#c">c</a> is "<code title="">:</code>", run these substeps:

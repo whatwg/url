@@ -177,9 +177,9 @@ U+0000 to U+007F into a byte sequence, run these steps:
    <span>remaining</span> does not start with two
    <span>ASCII hex digits</span>, append to <var title>bytes</var> a byte
    whose value is <span>c</span>'s code point, increase
-   <var title>pointer</var> by one, and run these substeps again.
+   <var title>pointer</var> by one.
 
-   <li><p>While <span>c</span> is "<code title>%</code>" and
+   <li><p>Otherwise, while <span>c</span> is "<code title>%</code>" and
    <span>remaining</span> starts with two <span>ASCII hex digits</span>,
    append to <var title>bytes</var> a byte whose value is
    <span>remaining</span>'s two leading code points, interpreted as
