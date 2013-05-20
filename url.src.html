@@ -779,8 +779,7 @@ incorrect results due to the <code title=dom-URL-protocol>protocol</code> attrib
 <span title=concept-base-url>base URL</span> <var title>base</var>,
 optionally with an <span data-anolis-spec=encoding>encoding</span>
 <var title>encoding override</var>, optionally with an
-<span title=concept-parsed-url>parsed URL</span> <var title>url</var>, and
-if <var title>url</var> is given, optionally with a state override
+<span title=concept-parsed-url>parsed URL</span> <var title>url</var> and a state override
 <var title>state override</var>, and then runs these steps:
 
 <p class=note>The <var title>encoding override</var> argument is a legacy concept only
@@ -2062,7 +2061,7 @@ steps:
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
- <span title=concept-UU-url>url</span> as <var title>url</var>, and
+ <span title=concept-UU-url>url</span> as <var title>url</var> and
  <span>host state</span> as <var title>state override</var>.
 
  <li><p>Run the <span>pre-update steps</span>.
@@ -2087,7 +2086,7 @@ run these steps:
  <span>relative flag</span> is unset, terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
- <span title=concept-UU-url>url</span> as <var title>url</var>, and
+ <span title=concept-UU-url>url</span> as <var title>url</var> and
  <span>hostname state</span> as <var title>state override</var>.
 
  <li><p>Run the <span>pre-update steps</span>.
@@ -2113,7 +2112,7 @@ steps:
  terminate these steps.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
- <span title=concept-UU-url>url</span> as <var title>url</var>, and
+ <span title=concept-UU-url>url</span> as <var title>url</var> and
  <span>port state</span> as <var title>state override</var>.
 
  <li><p>Run the <span>pre-update steps</span>.
@@ -2144,7 +2143,7 @@ run these steps:
  <li><p>Set <span title=concept-url-path>path</span> to the empty list.
 
  <li><p><span title=concept-url-parser>Parse</span> the given value with
- <span title=concept-UU-url>url</span> as <var title>url</var>, and
+ <span title=concept-UU-url>url</span> as <var title>url</var> and
  <span>relative path start state</span> as <var title>state override</var>.
 
  <li><p>Run the <span>pre-update steps</span>.
@@ -2250,7 +2249,7 @@ steps:
  the empty string.
 
  <li><p><span title=concept-url-parser>Parse</span> <var title>input</var>
- with <span title=concept-UU-url>url</span> as <var title>url</var>, and
+ with <span title=concept-UU-url>url</span> as <var title>url</var> and
  <span>fragment state</span> as <var title>state override</var>.
 
  <li><p>Run the <span>pre-update steps</span>.

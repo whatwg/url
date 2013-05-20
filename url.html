@@ -803,8 +803,7 @@ incorrect results due to the <a href="#dom-url-protocol"><code title="dom-URL-pr
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var title="">encoding override</var>, optionally with an
-<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> <var title="">url</var>, and
-if <var title="">url</var> is given, optionally with a state override
+<a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> <var title="">url</var> and a state override
 <var title="">state override</var>, and then runs these steps:
 
 <p class="note">The <var title="">encoding override</var> argument is a legacy concept only
@@ -2086,7 +2085,7 @@ steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
- <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#host-state">host state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
@@ -2111,7 +2110,7 @@ run these steps:
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
- <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#hostname-state">hostname state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
@@ -2137,7 +2136,7 @@ steps:
  terminate these steps.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
- <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#port-state">port state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
@@ -2168,7 +2167,7 @@ run these steps:
  <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
- <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#relative-path-start-state">relative path start state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
@@ -2274,7 +2273,7 @@ steps:
  the empty string.
 
  <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">input</var>
- with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>, and
+ with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#fragment-state">fragment state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
