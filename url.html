@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-may-2013">Living Standard — Last Updated 21 May 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-june-2013">Living Standard — Last Updated 27 June 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-21 May 2013, the editors have made this specification available
+27 June 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1072,13 +1072,22 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      <a href="#authority-ignore-slashes-state">authority ignore slashes state</a>.
     </ol>
 
-    <p>Otherwise, set
-    <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-    <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-    <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
-    <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-    <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
-    and decrease <var title="">pointer</var> by one.
+    <p>Otherwise, run these steps:
+
+    <ol>
+     <li>
+      <p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
+      "<code title="">file</code>", set
+      <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
+      <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> and
+      <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
+      <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>.
+
+      <pre class="example">file:/example.org/</pre>
+
+     <li><p>Set <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
+     and decrease <var title="">pointer</var> by one.
+    </ol>
 
    <dt><dfn id="authority-first-slash-state">authority first slash state</dfn>
    <dd>
@@ -2419,7 +2428,7 @@ return the number of name-value pairs.
 
 <h2 class="no-num" id="references">References</h2>
 <div id="anolis-references"><dl><dt id="refsENCODING">[ENCODING]
-<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding Standard</a></cite>, Anne van Kesteren. WHATWG.
+<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsHTML">[HTML]
 <dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.

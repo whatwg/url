@@ -1048,13 +1048,22 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
      <span>authority ignore slashes state</span>.
     </ol>
 
-    <p>Otherwise, set
-    <var title>url</var>'s <span title=concept-url-host>host</span> to
-    <var title>base</var>'s <span title=concept-url-host>host</span>,
-    <var title>url</var>'s <span title=concept-url-port>port</span> to
-    <var title>base</var>'s <span title=concept-url-port>port</span>,
-    <var title>state</var> to <span>relative path state</span>,
-    and decrease <var title>pointer</var> by one.
+    <p>Otherwise, run these steps:
+
+    <ol>
+     <li>
+      <p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is not
+      "<code title>file</code>", set
+      <var title>url</var>'s <span title=concept-url-host>host</span> to
+      <var title>base</var>'s <span title=concept-url-host>host</span> and
+      <var title>url</var>'s <span title=concept-url-port>port</span> to
+      <var title>base</var>'s <span title=concept-url-port>port</span>.
+
+      <pre class=example>file:/example.org/</pre>
+
+     <li><p>Set <var title>state</var> to <span>relative path state</span>,
+     and decrease <var title>pointer</var> by one.
+    </ol>
 
    <dt><dfn>authority first slash state</dfn>
    <dd>
