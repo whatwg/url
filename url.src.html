@@ -300,6 +300,13 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 <var title>input</var> and then runs these steps:
 
 <ol>
+ <li><p>If <var title>input</var> is the empty string, return failure.
+ <!-- Otherwise parsing URLs would not be idempotent:
+
+      http://@/example.org/ -> http:///example.org/ -> http://example.org/
+
+      Could potentially move this check to the URL parser if deemed problematic. -->
+
  <li>
   <p>If <var title>input</var> starts with "<code title>[</code>", run these
   substeps:
