@@ -1789,8 +1789,7 @@ dictionary URLEqualOptions {
   ...
 };
 
-URLPath would be a subclassed Array similarly to how URLQuery will be a
-subclassed MultiMap. -->
+URLPath would be a subclassed Array? -->
 
 <p>Specifications defining objects implementing <code>URLUtils</code> or
 <code>URLUtilsReadOnly</code> must define a
@@ -2273,9 +2272,7 @@ steps:
 
 <h3>Interface <code>URLQuery</code></h3>
 
-<p class=XXX>JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
-
-<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span> or <span class=XXX>...</span>) <var title>init</var> = "")]
+<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span>) <var title>init</var> = "")]
 interface <dfn>URLQuery</dfn> {
   DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
   sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
@@ -2323,8 +2320,6 @@ using <var title>init</var>, run these steps:
  <li><p>If <var title>init</var> is a <code>URLQuery</code> object, set
  <var title>query</var>'s associated list of name-value pairs to a copy of
  <var title>init</var> associated list of name-value pairs.
-
- <li><p class=XXX>If <var title>init</var> is a dictionary...
 
  <li><p>Return <var title>query</var>.
 </ol>

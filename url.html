@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-july-2013">Living Standard — Last Updated 3 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-july-2013">Living Standard — Last Updated 8 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-3 July 2013, the editors have made this specification available
+8 July 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1813,8 +1813,7 @@ dictionary URLEqualOptions {
   ...
 };
 
-URLPath would be a subclassed Array similarly to how URLQuery will be a
-subclassed MultiMap. -->
+URLPath would be a subclassed Array? -->
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> or
 <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> must define a
@@ -2297,9 +2296,7 @@ steps:
 
 <h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
-<p class="XXX">JavaScript does not have MultiMap but the idea is to implement this in terms of an underlying MultiMap.
-
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a> or <span class="XXX">...</span>) <var title="">init</var> = "")]
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a>) <var title="">init</var> = "")]
 interface <dfn id="urlquery">URLQuery</dfn> {
   DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>(DOMString <var title="">name</var>);
   sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>(DOMString <var title="">name</var>);
@@ -2347,8 +2344,6 @@ using <var title="">init</var>, run these steps:
  <li><p>If <var title="">init</var> is a <a href="#urlquery"><code>URLQuery</code></a> object, set
  <var title="">query</var>'s associated list of name-value pairs to a copy of
  <var title="">init</var> associated list of name-value pairs.
-
- <li><p class="XXX">If <var title="">init</var> is a dictionary...
 
  <li><p>Return <var title="">query</var>.
 </ol>
