@@ -1931,6 +1931,24 @@ constructor must run these steps:
  <li><p>Return <var title>result</var>.
 </ol>
 
+<div class=example>
+ <p>To <span title=concept-url-parser>parse</span> a <span title=concept-url>URL</span>
+ without using a <span title=concept-base-url>base URL</span>, invoke the constructor with
+ a single argument:
+
+ <pre>var input = "http://example.org/💩",
+    url = new URL(input)
+ url.pathname // "/%F0%9F%92%A9"</pre>
+
+ <p>If you rather resolve it against the <span title=concept-base-url>base URL</span> of a
+ <span data-anolis-spec=dom title=concept-document>document</span>, use
+ <code data-anolis-spec=dom title=dom-Node-baseURI>baseURI</code>:
+
+ <pre>var input = "/💩",
+    url = new URL(input, document.baseURI)
+ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
+</div>
+
 
 <h3><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</h3>
 

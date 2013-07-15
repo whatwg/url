@@ -1955,6 +1955,24 @@ constructor must run these steps:
  <li><p>Return <var title="">result</var>.
 </ol>
 
+<div class="example">
+ <p>To <a href="#concept-url-parser" title="concept-url-parser">parse</a> a <a href="#concept-url" title="concept-url">URL</a>
+ without using a <a href="#concept-base-url" title="concept-base-url">base URL</a>, invoke the constructor with
+ a single argument:
+
+ <pre>var input = "http://example.org/💩",
+    url = new URL(input)
+ url.pathname // "/%F0%9F%92%A9"</pre>
+
+ <p>If you rather resolve it against the <a href="#concept-base-url" title="concept-base-url">base URL</a> of a
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, use
+ <a href="http://dom.spec.whatwg.org/#dom-node-baseuri"><code class="external" data-anolis-spec="dom" title="dom-Node-baseURI">baseURI</code></a>:
+
+ <pre>var input = "/💩",
+    url = new URL(input, document.baseURI)
+ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
+</div>
+
 
 <h3 id="urlutils-and-urlutilsreadonly-members"><span class="secno">7.2 </span><a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> members</h3>
 
