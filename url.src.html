@@ -1938,7 +1938,7 @@ constructor must run these steps:
 
  <pre>var input = "http://example.org/💩",
     url = new URL(input)
- url.pathname // "/%F0%9F%92%A9"</pre>
+url.pathname // "/%F0%9F%92%A9"</pre>
 
  <p>If you rather resolve it against the <span title=concept-base-url>base URL</span> of a
  <span data-anolis-spec=dom title=concept-document>document</span>, use
@@ -1946,7 +1946,7 @@ constructor must run these steps:
 
  <pre>var input = "/💩",
     url = new URL(input, document.baseURI)
- url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
+url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
