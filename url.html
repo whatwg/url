@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-july-2013">Living Standard — Last Updated 8 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-july-2013">Living Standard — Last Updated 15 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-8 July 2013, the editors have made this specification available
+15 July 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1048,18 +1048,34 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
      and <var title="">state</var> to <a href="#fragment-state">fragment state</a>.
 
      <dt>Otherwise
-     <dd><p>Set
-     <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
-     <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
-     <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
-     <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
-     <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
-     <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, then pop
-     <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, set
-     <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
-     and decrease <var title="">pointer</var> by one.
+     <dd>
+      <ol>
+       <li>
+        <p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
+        "<code title="">file</code>", or <var title="">c</var> is not an
+        <a href="#ascii-alpha">ASCII alpha</a>, or <a href="#remaining">remaining</a> does not start with either
+        "<code title="">:</code>" or "<code title="">|</code>", or <a href="#remaining">remaining</a> does
+        not consist of one code point, or <a href="#remaining">remaining</a>'s second code point is
+        not one of "<code title="">/</code>", "<code title="">\</code>", "<code title="">?</code>",
+        and "<code title="">#</code>", then set
+        <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
+        <var title="">base</var>'s <a href="#concept-url-host" title="concept-url-host">host</a>,
+        <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
+        <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
+        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
+        <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, and then pop
+        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
+        <!-- base's path cannot be empty so pop does not need a non-empty check -->
+
+        <p class="note">This is a (platform-independent) Windows drive letter quirk.
+        When found at the start of a <code title="">file</code> URL it is treated as an
+        absolute path rather than one relative to
+        <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
+
+       <li><p>Set <var title="">state</var> to <a href="#relative-path-state">relative path state</a>,
+       and decrease <var title="">pointer</var> by one.
+      </ol>
     </dl>
-    <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
    <dt><dfn id="relative-slash-state">relative slash state</dfn>
    <dd>
@@ -1190,11 +1206,15 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        <li>
         <p>If <var title="">buffer</var> consists of two code points, of
         which the first is an <a href="#ascii-alpha">ASCII alpha</a> and the second is
-        either "<code title="">:</code>" or "<code title="">|</code>", set state
-        to <a href="#relative-path-state">relative path state</a>.
+        either "<code title="">:</code>" or "<code title="">|</code>", set
+        <var title="">state</var> to <a href="#relative-path-state">relative path state</a>.
 
-        <p class="note">This is a quirk for parsing Windows drive letters and
-        therefore <var title="">buffer</var> is not reset here.
+        <p class="note">This is a (platform-independent) Windows drive letter quirk.
+        <var title="">buffer</var> is not reset here and instead used in the
+        <a href="#relative-path-state">relative path state</a>.
+
+       <li><p>Otherwise, if <var title="">buffer</var> is the empty string, set
+       <var title="">state</var> to <a href="#relative-path-start-state">relative path start state</a>.
 
        <li>
         <p>Otherwise, run these steps:
@@ -1378,7 +1398,8 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
           and the second is "<code title="">|</code>", replace the second code point in
           <var title="">buffer</var> with "<code title="">:</code>".
 
-          <p class="note">Windows drive letters are beautiful, no?
+          <p class="note">This is a (platform-independent) Windows drive letter quirk.
+          They are beautiful, no?
 
          <li><p>Append <var title="">buffer</var> to
          <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
