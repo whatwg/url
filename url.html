@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-july-2013">Living Standard — Last Updated 15 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-july-2013">Living Standard — Last Updated 18 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 July 2013, the editors have made this specification available
+18 July 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1374,6 +1374,18 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
       <ol>
        <li><p>If <a href="#c">c</a> is "<code title="">\</code>", <a href="#parse-error">parse error</a>.
 
+       <li>
+        <p>If <var title="">buffer</var>, lowercased, matches any row in the first column of
+        the following table, set <var title="">buffer</var> to the contents of the cell in
+        the second column of the matched row:
+
+        <table>
+         <tr><td>"<code title="">%2e</code>"   <td>"<code title="">.</code>"
+         <tr><td>"<code title="">.%2e</code>"  <td rowspan="3">"<code title="">..</code>"
+         <tr><td>"<code title="">%2e.</code>"
+         <tr><td>"<code title="">%2e%2e</code>"
+        </table>
+
        <li><p>If <var title="">buffer</var> is "<code title="">..</code>", pop
        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, if non-empty, and
        then if <a href="#c">c</a> is neither  "<code title="">/</code>" nor
@@ -1415,12 +1427,6 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        <var title="">url</var>'s <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to the empty string,
        and <var title="">state</var> to <a href="#fragment-state">fragment state</a>.
       </ol>
-
-     <li><p>Otherwise, if <a href="#c">c</a> is "<code title="">%</code>" and
-     <a href="#remaining">remaining</a> starts with either "<code title="">2E</code>"
-     or "<code title="">2e</code>", increase <var title="">pointer</var> by two,
-     and append "<code title="">.</code>" to <var title="">buffer</var>.
-     <!-- Chrome unescapes more here; Safari does nothing -->
 
      <li><p>Otherwise, if <a href="#c">c</a> is U+0009, U+000A, or U+000D,
      <a href="#parse-error">parse error</a>.

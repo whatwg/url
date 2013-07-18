@@ -1350,6 +1350,18 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
       <ol>
        <li><p>If <span>c</span> is "<code title>\</code>", <span>parse error</span>.
 
+       <li>
+        <p>If <var title>buffer</var>, lowercased, matches any row in the first column of
+        the following table, set <var title>buffer</var> to the contents of the cell in
+        the second column of the matched row:
+
+        <table>
+         <tr><td>"<code title>%2e</code>"   <td>"<code title>.</code>"
+         <tr><td>"<code title>.%2e</code>"  <td rowspan=3>"<code title>..</code>"
+         <tr><td>"<code title>%2e.</code>"
+         <tr><td>"<code title>%2e%2e</code>"
+        </table>
+
        <li><p>If <var title>buffer</var> is "<code title>..</code>", pop
        <var title>url</var>'s <span title=concept-url-path>path</span>, if non-empty, and
        then if <span>c</span> is neither  "<code title>/</code>" nor
@@ -1391,12 +1403,6 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
        <var title>url</var>'s <span title=concept-url-fragment>fragment</span> to the empty string,
        and <var title>state</var> to <span>fragment state</span>.
       </ol>
-
-     <li><p>Otherwise, if <span>c</span> is "<code title>%</code>" and
-     <span>remaining</span> starts with either "<code title>2E</code>"
-     or "<code title>2e</code>", increase <var title>pointer</var> by two,
-     and append "<code title>.</code>" to <var title>buffer</var>.
-     <!-- Chrome unescapes more here; Safari does nothing -->
 
      <li><p>Otherwise, if <span>c</span> is U+0009, U+000A, or U+000D,
      <span>parse error</span>.
