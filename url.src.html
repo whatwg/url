@@ -1765,19 +1765,19 @@ interface <dfn>URL</dfn> {
 
 [NoInterfaceObject]
 interface <dfn>URLUtils</dfn> {
-  stringifier attribute DOMString <span title=dom-URL-href>href</span>;
+  stringifier attribute [EnsureUTF16] DOMString <span title=dom-URL-href>href</span>;
   readonly attribute DOMString <span title=dom-URL-origin>origin</span>;
 
-           attribute DOMString <span title=dom-URL-protocol>protocol</span>;
-           attribute DOMString <span title=dom-URL-username>username</span>;
-           attribute DOMString <span title=dom-URL-password>password</span>;
-           attribute DOMString <span title=dom-URL-host>host</span>;
-           attribute DOMString <span title=dom-URL-hostname>hostname</span>;
-           attribute DOMString <span title=dom-URL-port>port</span>;
-           attribute DOMString <span title=dom-URL-pathname>pathname</span>;
-           attribute DOMString <span title=dom-URL-search>search</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-protocol>protocol</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-username>username</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-password>password</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-host>host</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-hostname>hostname</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-port>port</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-pathname>pathname</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-search>search</span>;
            attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;
-           attribute DOMString <span title=dom-URL-hash>hash</span>;
+           attribute [EnsureUTF16] DOMString <span title=dom-URL-hash>hash</span>;
 };
 
 [NoInterfaceObject]
@@ -2317,14 +2317,14 @@ steps:
 
 <h3>Interface <code>URLQuery</code></h3>
 
-<pre class=idl>[<span title=dom-URLQuery>Constructor(optional (DOMString or <span>URLQuery</span>) <var title>init</var> = "")]
+<pre class=idl>[<span title=dom-URLQuery>Constructor(optional ([EnsureUTF16] DOMString or <span>URLQuery</span>) <var title>init</var> = "")]
 interface <dfn>URLQuery</dfn> {
-  DOMString? <span title=dom-URLQuery-get>get</span>(DOMString <var title>name</var>);
-  sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>(DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-set>set</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
-  void <span title=dom-URLQuery-append>append</span>(DOMString <var title>name</var>, DOMString <var title>value</var>);
-  boolean <span title=dom-URLQuery-has>has</span>(DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-delete>delete</span>(DOMString <var title>name</var>);
+  DOMString? <span title=dom-URLQuery-get>get</span>([EnsureUTF16] DOMString <var title>name</var>);
+  sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>([EnsureUTF16] DOMString <var title>name</var>);
+  void <span title=dom-URLQuery-set>set</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
+  void <span title=dom-URLQuery-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
+  boolean <span title=dom-URLQuery-has>has</span>([EnsureUTF16] DOMString <var title>name</var>);
+  void <span title=dom-URLQuery-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
   readonly attribute unsigned long <span title=dom-URLQuery-size>size</span>;
 };</pre>
 

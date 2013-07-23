@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-july-2013">Living Standard — Last Updated 18 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-july-2013">Living Standard — Last Updated 23 July 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-18 July 2013, the editors have made this specification available
+23 July 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1789,19 +1789,19 @@ interface <dfn id="url">URL</dfn> {
 
 [NoInterfaceObject]
 interface <dfn id="urlutils">URLUtils</dfn> {
-  stringifier attribute DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  stringifier attribute [EnsureUTF16] DOMString <a href="#dom-url-href" title="dom-URL-href">href</a>;
   readonly attribute DOMString <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
-           attribute DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
-           attribute DOMString <a href="#dom-url-username" title="dom-URL-username">username</a>;
-           attribute DOMString <a href="#dom-url-password" title="dom-URL-password">password</a>;
-           attribute DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
-           attribute DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-           attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
-           attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-           attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-username" title="dom-URL-username">username</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-password" title="dom-URL-password">password</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute <a href="#urlquery">URLQuery</a>? <a href="#dom-url-query" title="dom-URL-query">query</a>;
-           attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+           attribute [EnsureUTF16] DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };
 
 [NoInterfaceObject]
@@ -2341,14 +2341,14 @@ steps:
 
 <h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional (DOMString or <a href="#urlquery">URLQuery</a>) <var title="">init</var> = "")]
+<pre class="idl">[<span title="dom-URLQuery">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlquery">URLQuery</a>) <var title="">init</var> = "")]
 interface <dfn id="urlquery">URLQuery</dfn> {
-  DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>(DOMString <var title="">name</var>);
-  sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>(DOMString <var title="">name</var>);
-  void <a href="#dom-urlquery-set" title="dom-URLQuery-set">set</a>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
-  void <a href="#dom-urlquery-append" title="dom-URLQuery-append">append</a>(DOMString <var title="">name</var>, DOMString <var title="">value</var>);
-  boolean <a href="#dom-urlquery-has" title="dom-URLQuery-has">has</a>(DOMString <var title="">name</var>);
-  void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>(DOMString <var title="">name</var>);
+  DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  void <a href="#dom-urlquery-set" title="dom-URLQuery-set">set</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
+  void <a href="#dom-urlquery-append" title="dom-URLQuery-append">append</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
+  boolean <a href="#dom-urlquery-has" title="dom-URLQuery-has">has</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>([EnsureUTF16] DOMString <var title="">name</var>);
   readonly attribute unsigned long <a href="#dom-urlquery-size" title="dom-URLQuery-size">size</a>;
 };</span></pre>
 
