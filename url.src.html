@@ -237,7 +237,7 @@ an <var title>encode set</var>, run these steps:
 
 
 
-<h2>Hosts and IP addresses</h2>
+<h2>Hosts (domains and IP addresses)</h2>
 
 <!-- Punycode:
      http://tools.ietf.org/html/rfc3492
@@ -260,6 +260,58 @@ more <dfn title=concept-domain-label>domain labels</dfn>.
 for the purposes of this specification represented as an ordered list of
 eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 <span data-anolis-ref class=informative>IPV6</span>
+
+
+<h3>IDNA</h3>
+
+<p>The <dfn title=concept-domain-label-to-ascii>domain label to ASCII</dfn> algorithm is
+the <span data-anolis-spec=idna title=ToASCII>IDNA 2003 ToASCII algorithm</span> with the
+AllowUnassigned flag set and the version of Unicode used being the most recent version
+rather than Unicode 3.2.
+
+<p>The <dfn title=concept-domain-label-to-unicode>domain label to Unicode</dfn> algorithm
+is the <span data-anolis-spec=idna title=ToUnicode>IDNA 2003 ToUnicode algorithm</span>
+with the AllowUnassigned flag set and the version of Unicode used being the most recent
+version rather than Unicode 3.2.
+<span data-anolis-ref>IDNA</span>
+<span data-anolis-ref>UNICODE</span>
+
+<p class=note>These are wilful violations of IDNA 2003 as well its failed successor, to be
+compatible with widely deployed clients.
+
+<p>The <dfn title=concept-domain-to-ascii>domain to ASCII</dfn> algorithm is as follows:
+
+<ol>
+ <li><p>Let <var title>asciiLabels</var> be an empty list.
+
+ <li><p>On each <span title=concept-domain-label>domain label</span> in
+ <var title>input</var>, in order, run the
+ <span title=concept-domain-label-to-ascii>domain label to ASCII</span> algorithm.
+ If that operation failed, return failure.
+ Otherwise, append the result to <var title>asciiLabels</var>.
+
+ <li><p>Return <var title>asciiLabels</var>.
+</ol>
+
+<p>The <dfn title=concept-domain-to-unicode>domain to Unicode</dfn> algorithm is as
+follows:
+
+<ol>
+ <li><p>Let <var title>unicodeLabels</var> be an empty list.
+
+ <li>
+  <p>On each <span title=concept-domain-label>domain label</span> in
+  <var title>input</var>, in order, run the
+  <span title=concept-domain-label-to-unicode>domain label to Unicode</span> algorithm and
+  append the result to <var title>asciiLabels</var>.
+
+  <p class=note>Note that the
+  <span title=concept-domain-label-to-unicode>domain label to Unicode</span> algorithm
+  cannot fail.
+
+ <li><p>Return <var title>asciiLabels</var>.
+</ol>
+
 
 
 <h3 id=host-writing>Writing</h3>
@@ -327,7 +379,16 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
  <span title="percent decode">percent decoding</span> of
  <var title>input</var>.
 
- <li><p class=XXX><a href="http://wiki.whatwg.org/wiki/URL#IDNA">IDNA hell</a>
+ <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
+ any <span title="domain label separator">domain label separators</span>.
+
+ <li>
+  <p>Return the result of running
+  <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
+
+  <p class=note><span title=concept-domain-to-ascii>Domain to ASCII</span> can return
+  failure in which case the <span title=concept-host-parser>host parser</span> would
+  return failure here.
 </ol>
 
 <p>The <dfn title=concept-ipv6-parser>IPv6 parser</dfn> takes a string

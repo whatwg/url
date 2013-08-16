@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-23-july-2013">Living Standard — Last Updated 23 July 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-16-august-2013">Living Standard — Last Updated 16 August 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 July 2013, the editors have made this specification available
+16 August 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -55,11 +55,12 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
   <ol>
    <li><a href="#parsers"><span class="secno">2.1 </span>Parsers</a></ol></li>
  <li><a href="#percent-encoded-bytes"><span class="secno">3 </span>Percent-encoded bytes</a></li>
- <li><a href="#hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</a>
+ <li><a href="#hosts-(domains-and-ip-addresses)"><span class="secno">4 </span>Hosts (domains and IP addresses)</a>
   <ol>
-   <li><a href="#host-writing"><span class="secno">4.1 </span>Writing</a></li>
-   <li><a href="#host-parsing"><span class="secno">4.2 </span>Parsing</a></li>
-   <li><a href="#host-serializing"><span class="secno">4.3 </span>Serializing</a></ol></li>
+   <li><a href="#idna"><span class="secno">4.1 </span>IDNA</a></li>
+   <li><a href="#host-writing"><span class="secno">4.2 </span>Writing</a></li>
+   <li><a href="#host-parsing"><span class="secno">4.3 </span>Parsing</a></li>
+   <li><a href="#host-serializing"><span class="secno">4.4 </span>Serializing</a></ol></li>
  <li><a href="#urls"><span class="secno">5 </span>URLs</a>
   <ol>
    <li><a href="#writing"><span class="secno">5.1 </span>Writing</a></li>
@@ -261,7 +262,7 @@ an <var title="">encode set</var>, run these steps:
 
 
 
-<h2 id="hosts-and-ip-addresses"><span class="secno">4 </span>Hosts and IP addresses</h2>
+<h2 id="hosts-(domains-and-ip-addresses)"><span class="secno">4 </span>Hosts (domains and IP addresses)</h2>
 
 <!-- Punycode:
      http://tools.ietf.org/html/rfc3492
@@ -286,7 +287,59 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 <a class="informative" href="#refsIPV6">[IPV6]</a>
 
 
-<h3 id="host-writing"><span class="secno">4.1 </span>Writing</h3>
+<h3 id="idna"><span class="secno">4.1 </span>IDNA</h3>
+
+<p>The <dfn id="concept-domain-label-to-ascii" title="concept-domain-label-to-ascii">domain label to ASCII</dfn> algorithm is
+the <a class="external" data-anolis-spec="idna" href="http://tools.ietf.org/html/rfc3490#section-4.1" title="ToASCII">IDNA 2003 ToASCII algorithm</a> with the
+AllowUnassigned flag set and the version of Unicode used being the most recent version
+rather than Unicode 3.2.
+
+<p>The <dfn id="concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</dfn> algorithm
+is the <a class="external" data-anolis-spec="idna" href="http://tools.ietf.org/html/rfc3490#section-4.2" title="ToUnicode">IDNA 2003 ToUnicode algorithm</a>
+with the AllowUnassigned flag set and the version of Unicode used being the most recent
+version rather than Unicode 3.2.
+<a href="#refsIDNA">[IDNA]</a>
+<a href="#refsUNICODE">[UNICODE]</a>
+
+<p class="note">These are wilful violations of IDNA 2003 as well its failed successor, to be
+compatible with widely deployed clients.
+
+<p>The <dfn id="concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</dfn> algorithm is as follows:
+
+<ol>
+ <li><p>Let <var title="">asciiLabels</var> be an empty list.
+
+ <li><p>On each <a href="#concept-domain-label" title="concept-domain-label">domain label</a> in
+ <var title="">input</var>, in order, run the
+ <a href="#concept-domain-label-to-ascii" title="concept-domain-label-to-ascii">domain label to ASCII</a> algorithm.
+ If that operation failed, return failure.
+ Otherwise, append the result to <var title="">asciiLabels</var>.
+
+ <li><p>Return <var title="">asciiLabels</var>.
+</ol>
+
+<p>The <dfn id="concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</dfn> algorithm is as
+follows:
+
+<ol>
+ <li><p>Let <var title="">unicodeLabels</var> be an empty list.
+
+ <li>
+  <p>On each <a href="#concept-domain-label" title="concept-domain-label">domain label</a> in
+  <var title="">input</var>, in order, run the
+  <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm and
+  append the result to <var title="">asciiLabels</var>.
+
+  <p class="note">Note that the
+  <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm
+  cannot fail.
+
+ <li><p>Return <var title="">asciiLabels</var>.
+</ol>
+
+
+
+<h3 id="host-writing"><span class="secno">4.2 </span>Writing</h3>
 
 <p>A <a href="#concept-host" title="concept-host">host</a> must be either a
 <a href="#concept-domain" title="concept-domain">domain</a> or "<code title="">[</code>", followed
@@ -318,7 +371,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
      XXX should we define the format inline instead just like STD 66? -->
 
 
-<h3 id="host-parsing"><span class="secno">4.2 </span>Parsing</h3>
+<h3 id="host-parsing"><span class="secno">4.3 </span>Parsing</h3>
 
 <p>The <dfn id="concept-host-parser" title="concept-host-parser">host parser</dfn> takes a string
 <var title="">input</var> and then runs these steps:
@@ -351,7 +404,16 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <a href="#percent-decode" title="percent decode">percent decoding</a> of
  <var title="">input</var>.
 
- <li><p class="XXX"><a href="http://wiki.whatwg.org/wiki/URL#IDNA">IDNA hell</a>
+ <li><p>Let <var title="">domain</var> be the result of splitting <var title="">host</var> on
+ any <span title="domain label separator">domain label separators</span>.
+
+ <li>
+  <p>Return the result of running
+  <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on <var title="">domain</var>.
+
+  <p class="note"><a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">Domain to ASCII</a> can return
+  failure in which case the <a href="#concept-host-parser" title="concept-host-parser">host parser</a> would
+  return failure here.
 </ol>
 
 <p>The <dfn id="concept-ipv6-parser" title="concept-ipv6-parser">IPv6 parser</dfn> takes a string
@@ -512,7 +574,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 </ol>
 
 
-<h3 id="host-serializing"><span class="secno">4.3 </span>Serializing</h3>
+<h3 id="host-serializing"><span class="secno">4.4 </span>Serializing</h3>
 
 <p>The <dfn id="concept-host-serializer" title="concept-host-serializer">host serializer</dfn> takes a
 <a href="#concept-host" title="concept-host">host</a> <var title="">host</var> and then runs
@@ -2479,6 +2541,9 @@ return the number of name-value pairs.
 <dt id="refsHTML">[HTML]
 <dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
+<dt id="refsIDNA">[IDNA]
+<dd><cite><a href="http://tools.ietf.org/html/rfc3490">Internationalizing Domain Names in Applications (IDNA)</a></cite>, P. Faltstrom, Paul Hoffman and A. Costello. IETF.
+
 <dt id="refsIPV6">[IPV6]
 <dd><cite><a href="http://tools.ietf.org/html/rfc4291">IP Version 6 Addressing Architecture</a></cite>, R. Hinden and Steve Deering. IETF.
 
@@ -2493,6 +2558,9 @@ return the number of name-value pairs.
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
+
+<dt id="refsUNICODE">[UNICODE]
+<dd><cite><a href="http://www.unicode.org/versions/latest/">Unicode Standard</a></cite>. Unicode Consortium.
 
 <dt id="refsURI">[URI]
 <dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, Tim Berners-Lee, Roy Fielding and Larry Masinter. IETF.
