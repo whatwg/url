@@ -591,8 +591,9 @@ these steps:
  <a href="#concept-ipv6-serializer" title="concept-ipv6-serializer">IPv6 serializer</a> on <var title="">host</var>,
  followed by "<code title="">]</code>".
 
- <li class="XXX"><p>If <var title="">host</var> is a
- <a href="#concept-domain" title="concept-domain">domain</a> ...
+ <li><p>Otherwise, <var title="">host</var> is a <a href="#concept-domain" title="concept-domain">domain</a>,
+ return its <span title="concept-domain-labels">labels</span> separated from each other by
+ U+002E.
 </ol>
 
 <p>The <dfn id="concept-ipv6-serializer" title="concept-ipv6-serializer">IPv6 serializer</dfn> takes an
