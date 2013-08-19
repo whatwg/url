@@ -70,8 +70,9 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
  <li><a href="#api"><span class="secno">7 </span>API</a>
   <ol>
    <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
-   <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">7.2 </span><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</a></li>
-   <li><a href="#interface-urlquery"><span class="secno">7.3 </span>Interface <code>URLQuery</code></a></ol></li>
+   <li><a href="#url-statics"><span class="secno">7.2 </span><code>URL</code> statics</a></li>
+   <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">7.3 </span><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</a></li>
+   <li><a href="#interface-urlquery"><span class="secno">7.4 </span>Interface <code>URLQuery</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1848,6 +1849,8 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
 
 <pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString) <var title="">base</var> = "about:blank")]
 interface <dfn id="url">URL</dfn> {
+  static DOMString <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>([EnsureUTF16] DOMString <var title="">domain</var>);
+  static DOMString <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>([EnsureUTF16] DOMString <var title="">domain</var>);
 };
 <a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
 
@@ -2044,7 +2047,44 @@ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
-<h3 id="urlutils-and-urlutilsreadonly-members"><span class="secno">7.2 </span><a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> members</h3>
+<h3 id="url-statics"><span class="secno">7.2 </span><a href="#url"><code>URL</code></a> statics</h3>
+
+<p>The
+<dfn id="dom-url-domaintoascii" title="dom-URL-domainToASCII"><code>domainToASCII(<var>domain</var>)</code></dfn>
+static method must run these steps:
+
+<ol>
+ <li><p>Let <var title="">internalDomain</var> be the result of splitting
+ <var title="">domain</var> on any <a href="#domain-label-separators">domain label separators</a>.
+
+ <li><p>Let <var title="">asciiDomain</var> be the result of running
+ <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on
+ <var title="">internalDomain</var>.
+
+ <li><p>If <var title="">asciiDomain</var> is failure, return <var title="">domain</var>.
+
+ <li><p>Return <var title="">asciiDomain</var>,
+ <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
+</ol>
+
+<p>The
+<dfn id="dom-url-domaintounicode" title="dom-URL-domainToUnicode"><code>domainToUnicode(<var>domain</var>)</code></dfn>
+static method must run these steps:
+
+<ol>
+ <li><p>Let <var title="">internalDomain</var> be the result of splitting
+ <var title="">domain</var> on any <a href="#domain-label-separators">domain label separators</a>.
+
+ <li><p>Let <var title="">unicodeDomain</var> be the result of running
+ <a href="#concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</a> on
+ <var title="">internalDomain</var>.
+
+ <li><p>Return <var title="">unicodeDomain</var>,
+ <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
+</ol>
+
+
+<h3 id="urlutils-and-urlutilsreadonly-members"><span class="secno">7.3 </span><a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> members</h3>
 
 <p class="note">The <a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> interfaces are
 not exposed on the global object. They are meant to augment other interfaces, such as
@@ -2403,7 +2443,7 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">7.3 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
+<h3 id="interface-urlquery"><span class="secno">7.4 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
 
 <pre class="idl">[<span title="dom-URLQuery">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlquery">URLQuery</a>) <var title="">init</var> = "")]
 interface <dfn id="urlquery">URLQuery</dfn> {

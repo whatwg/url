@@ -1823,6 +1823,8 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
 
 <pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var> = "about:blank")]
 interface <dfn>URL</dfn> {
+  static DOMString <span title=dom-URL-domainToASCII>domainToASCII</span>([EnsureUTF16] DOMString <var title>domain</var>);
+  static DOMString <span title=dom-URL-domainToUnicode>domainToUnicode</span>([EnsureUTF16] DOMString <var title>domain</var>);
 };
 <span>URL</span> implements <span>URLUtils</span>;
 
@@ -2017,6 +2019,43 @@ url.pathname // "/%F0%9F%92%A9"</pre>
     url = new URL(input, document.baseURI)
 url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
+
+
+<h3><code>URL</code> statics</h3>
+
+<p>The
+<dfn title=dom-URL-domainToASCII><code>domainToASCII(<var>domain</var>)</code></dfn>
+static method must run these steps:
+
+<ol>
+ <li><p>Let <var title>internalDomain</var> be the result of splitting
+ <var title>domain</var> on any <span>domain label separators</span>.
+
+ <li><p>Let <var title>asciiDomain</var> be the result of running
+ <span title=concept-domain-to-ascii>domain to ASCII</span> on
+ <var title>internalDomain</var>.
+
+ <li><p>If <var title>asciiDomain</var> is failure, return <var title>domain</var>.
+
+ <li><p>Return <var title>asciiDomain</var>,
+ <span title=concept-host-serializer>serialized</span>.
+</ol>
+
+<p>The
+<dfn title=dom-URL-domainToUnicode><code>domainToUnicode(<var>domain</var>)</code></dfn>
+static method must run these steps:
+
+<ol>
+ <li><p>Let <var title>internalDomain</var> be the result of splitting
+ <var title>domain</var> on any <span>domain label separators</span>.
+
+ <li><p>Let <var title>unicodeDomain</var> be the result of running
+ <span title=concept-domain-to-unicode>domain to Unicode</span> on
+ <var title>internalDomain</var>.
+
+ <li><p>Return <var title>unicodeDomain</var>,
+ <span title=concept-host-serializer>serialized</span>.
+</ol>
 
 
 <h3><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</h3>
