@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-16-august-2013">Living Standard — Last Updated 16 August 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-august-2013">Living Standard — Last Updated 19 August 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-16 August 2013, the editors have made this specification available
+19 August 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -301,10 +301,11 @@ version rather than Unicode 3.2.
 <a href="#refsIDNA">[IDNA]</a>
 <a href="#refsUNICODE">[UNICODE]</a>
 
-<p class="note">These are wilful violations of IDNA 2003 as well its failed successor, to be
-compatible with widely deployed clients.
+<p class="note">Using the latest version of Unicode as well as IDNA 2003 rather than
+IDNA 2008 are wilful violations, to be compatible with widely deployed clients.
 
-<p>The <dfn id="concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</dfn> algorithm is as follows:
+<p>The <dfn id="concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</dfn> algorithm takes a
+<a href="#concept-domain" title="concept-domain">domain</a> <var title="">input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var title="">asciiLabels</var> be an empty list.
@@ -318,8 +319,8 @@ compatible with widely deployed clients.
  <li><p>Return <var title="">asciiLabels</var>.
 </ol>
 
-<p>The <dfn id="concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</dfn> algorithm is as
-follows:
+<p>The <dfn id="concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</dfn> algorithm takes a
+<a href="#concept-domain" title="concept-domain">domain</a> <var title="">input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var title="">unicodeLabels</var> be an empty list.
@@ -328,13 +329,13 @@ follows:
   <p>On each <a href="#concept-domain-label" title="concept-domain-label">domain label</a> in
   <var title="">input</var>, in order, run the
   <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm and
-  append the result to <var title="">asciiLabels</var>.
+  append the result to <var title="">unicodeLabels</var>.
 
   <p class="note">Note that the
   <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm
   cannot fail.
 
- <li><p>Return <var title="">asciiLabels</var>.
+ <li><p>Return <var title="">unicodeLabels</var>.
 </ol>
 
 
@@ -405,7 +406,7 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <var title="">input</var>.
 
  <li><p>Let <var title="">domain</var> be the result of splitting <var title="">host</var> on
- any <span title="domain label separator">domain label separators</span>.
+ any <a href="#domain-label-separators">domain label separators</a>.
 
  <li>
   <p>Return the result of running
