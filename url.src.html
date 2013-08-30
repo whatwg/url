@@ -1505,7 +1505,7 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
        <var title>encoding override</var>'s
        <span data-anolis-spec=encoding>encoder</span> on
        <var title>buffer</var>. Whenever the
-       <span data-anolis-spec=encoding>encoder</span> algorithm emits an
+       <span data-anolis-spec=encoding>encoder</span> algorithm would emit an
        <span data-anolis-spec=encoding>encoder error</span>, emit a 0x3F
        byte instead and do not terminate the algorithm.
 
@@ -1794,7 +1794,7 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
    running <var title>encoding override</var>'s
    <span data-anolis-spec=encoding>encoder</span> on them, respectively.
    Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
-   emits an <span data-anolis-spec=encoding>encoder error</span>, emit the
+   would emit an <span data-anolis-spec=encoding>encoder error</span>, emit the
    result of running <span data-anolis-spec=encoding>utf-8 encode</span> on
    U+0026, U+0023, followed by one or more <span>ASCII digits</span>
    representing the code point that caused the
