@@ -146,8 +146,8 @@ processed and <var title>pointer</var> points to "<code title>@</code>",
 two <span>ASCII hex digits</span>. Sequences of
 <span title="percent-encoded byte">percent-encoded bytes</span>, after
 conversion to bytes, should not cause
-<span data-anolis-spec=encoding>utf-8 decode</span> to emit any
-<span data-anolis-spec=encoding title="decoder error">decoder errors</span>.
+<span data-anolis-spec=encoding>utf-8 decode</span> to run into any
+<span data-anolis-spec=encoding title=error>errors</span>.
 
 <p>To <dfn>percent encode</dfn> a <var title>byte</var> into a
 <span>percent-encoded byte</span>, return a string consisting of
@@ -1504,10 +1504,9 @@ can be used for API manipulation of a <span title=concept-parsed-url>parsed URL<
        <li><p>Set <var title>buffer</var> to the result of running
        <var title>encoding override</var>'s
        <span data-anolis-spec=encoding>encoder</span> on
-       <var title>buffer</var>. Whenever the
-       <span data-anolis-spec=encoding>encoder</span> algorithm would emit an
-       <span data-anolis-spec=encoding>encoder error</span>, emit a 0x3F
-       byte instead and do not terminate the algorithm.
+       <var title>buffer</var>, with <var title>encoding override</var>'s
+       <span data-anolis-spec=encoding>encoder</span>'s
+       <span data-anolis-spec=encoding>error handling mode</span> set to <i title>URL</i>.
 
        <li>
         <p>For each <var title>byte</var> in <var title>buffer</var> run
@@ -1792,14 +1791,10 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
   <ol>
    <li><p>Replace <var title>pair</var>'s name and value with the result of
    running <var title>encoding override</var>'s
-   <span data-anolis-spec=encoding>encoder</span> on them, respectively.
-   Whenever the <span data-anolis-spec=encoding>encoder</span> algorithm
-   would emit an <span data-anolis-spec=encoding>encoder error</span>, emit the
-   result of running <span data-anolis-spec=encoding>utf-8 encode</span> on
-   U+0026, U+0023, followed by one or more <span>ASCII digits</span>
-   representing the code point that caused the
-   <span data-anolis-spec=encoding>encoder error</span> in base ten,
-   followed by U+003B.
+   <span data-anolis-spec=encoding>encoder</span> on them, with
+   <var title>encoding override</var>'s <span data-anolis-spec=encoding>encoder</span>'s
+   <span data-anolis-spec=encoding>error handling mode</span> set to
+   <i title>&lt;form></i>, respectively.
 
    <li><p>Replace <var title>pair</var>'s name and value with their
    <span title=concept-urlencoded-byte-serializer>serialization</span>.

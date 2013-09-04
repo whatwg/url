@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-august-2013">Living Standard — Last Updated 30 August 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-september-2013">Living Standard — Last Updated 4 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-30 August 2013, the editors have made this specification available
+4 September 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -172,8 +172,8 @@ processed and <var title="">pointer</var> points to "<code title="">@</code>",
 two <a href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to emit any
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder-error" title="decoder error">decoder errors</a>.
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to run into any
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error" title="error">errors</a>.
 
 <p>To <dfn id="percent-encode">percent encode</dfn> a <var title="">byte</var> into a
 <a href="#percent-encoded-byte">percent-encoded byte</a>, return a string consisting of
@@ -1530,10 +1530,9 @@ can be used for API manipulation of a <a href="#concept-parsed-url" title="conce
        <li><p>Set <var title="">buffer</var> to the result of running
        <var title="">encoding override</var>'s
        <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on
-       <var title="">buffer</var>. Whenever the
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm would emit an
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit a 0x3F
-       byte instead and do not terminate the algorithm.
+       <var title="">buffer</var>, with <var title="">encoding override</var>'s
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a>'s
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error-handling-mode">error handling mode</a> set to <i title="">URL</i>.
 
        <li>
         <p>For each <var title="">byte</var> in <var title="">buffer</var> run
@@ -1818,14 +1817,10 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
   <ol>
    <li><p>Replace <var title="">pair</var>'s name and value with the result of
    running <var title="">encoding override</var>'s
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on them, respectively.
-   Whenever the <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> algorithm
-   would emit an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a>, emit the
-   result of running <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
-   U+0026, U+0023, followed by one or more <a href="#ascii-digits">ASCII digits</a>
-   representing the code point that caused the
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder-error">encoder error</a> in base ten,
-   followed by U+003B.
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on them, with
+   <var title="">encoding override</var>'s <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a>'s
+   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error-handling-mode">error handling mode</a> set to
+   <i title="">&lt;form&gt;</i>, respectively.
 
    <li><p>Replace <var title="">pair</var>'s name and value with their
    <a href="#concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer">serialization</a>.
