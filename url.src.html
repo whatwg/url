@@ -2417,12 +2417,12 @@ steps:
 
 <pre class=idl>[<span title=dom-URLQuery>Constructor(optional ([EnsureUTF16] DOMString or <span>URLQuery</span>) <var title>init</var> = "")]
 interface <dfn>URLQuery</dfn> {
+  void <span title=dom-URLQuery-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
+  void <span title=dom-URLQuery-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
   DOMString? <span title=dom-URLQuery-get>get</span>([EnsureUTF16] DOMString <var title>name</var>);
   sequence&lt;DOMString> <span title=dom-URLQuery-getAll>getAll</span>([EnsureUTF16] DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-set>set</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
-  void <span title=dom-URLQuery-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
   boolean <span title=dom-URLQuery-has>has</span>([EnsureUTF16] DOMString <var title>name</var>);
-  void <span title=dom-URLQuery-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
+  void <span title=dom-URLQuery-set>set</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
 };</pre>
 
 <p>A <code>URLQuery</code> object has an associated list of name-value
@@ -2490,6 +2490,27 @@ constructor must return a
 <var title>init</var> if given.
 
 <p>The
+<dfn title=dom-URLQuery-append><code>append(<var title>name</var>, <var title>value</var>)</code></dfn>
+method must run these steps:
+
+<ol>
+ <li><p>Append a new name-value pair whose name is <var title>name</var> and
+ value is <var title>value</var>, to the list of name-value pairs.
+
+ <li><p>Run the <span title=concept-UQ-update>update steps</span>.
+</ol>
+
+<p>The
+<dfn title=dom-URLQuery-delete><code>delete(<var title>name</var>)</code></dfn>
+method must run these steps:
+
+<ol>
+ <li><p>Remove all name-value pairs whose name is <var title>name</var>.
+
+ <li><p>Run the <span title=concept-UQ-update>update steps</span>.
+</ol>
+
+<p>The
 <dfn title=dom-URLQuery-get><code>get(<var title>name</var>)</code></dfn>
 method must return the value of the first name-value pair whose name is
 <var title>name</var>, and null if there is no such pair.
@@ -2516,30 +2537,10 @@ method must run these steps:
 </ol>
 
 <p>The
-<dfn title=dom-URLQuery-append><code>append(<var title>name</var>, <var title>value</var>)</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>Append a new name-value pair whose name is <var title>name</var> and
- value is <var title>value</var>, to the list of name-value pairs.
-
- <li><p>Run the <span title=concept-UQ-update>update steps</span>.
-</ol>
-
-<p>The
 <dfn title=dom-URLQuery-has><code>has(<var title>name</var>)</code></dfn>
 method must return true if there is a name-value pair whose name is
 <var title>name</var>, and false otherwise.
 
-<p>The
-<dfn title=dom-URLQuery-delete><code>delete(<var title>name</var>)</code></dfn>
-method must run these steps:
-
-<ol>
- <li><p>Remove all name-value pairs whose name is <var title>name</var>.
-
- <li><p>Run the <span title=concept-UQ-update>update steps</span>.
-</ol>
 
 
 
