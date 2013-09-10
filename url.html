@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-4-september-2013">Living Standard — Last Updated 4 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-september-2013">Living Standard — Last Updated 10 September 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-4 September 2013, the editors have made this specification available
+10 September 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -128,6 +128,7 @@ not appear in all uppercase letters in this specification.
 Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
+<!-- XXX ref Encoding? -->
 
 <p>The <dfn id="ascii-hex-digits">ASCII hex digits</dfn> are <a href="#ascii-digits">ASCII digits</a> or are
 code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
@@ -2448,7 +2449,6 @@ interface <dfn id="urlquery">URLQuery</dfn> {
   void <a href="#dom-urlquery-append" title="dom-URLQuery-append">append</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
   boolean <a href="#dom-urlquery-has" title="dom-URLQuery-has">has</a>([EnsureUTF16] DOMString <var title="">name</var>);
   void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>([EnsureUTF16] DOMString <var title="">name</var>);
-  readonly attribute unsigned long <a href="#dom-urlquery-size" title="dom-URLQuery-size">size</a>;
 };</span></pre>
 
 <p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated list of name-value
@@ -2530,8 +2530,9 @@ method must return the values of all name-value pairs whose name is
 method must run these steps:
 
 <ol>
- <li><p>If there is a name-value pair whose name is <var title="">name</var>,
- set the value of the first such name-value pair to <var title="">value</var>.
+ <li><p>If there are any name-value pairs whose name is <var title="">name</var>,
+ set the value of the first such name-value pair to <var title="">value</var> and remove the
+ others.
 
  <li><p>Otherwise, append a new name-value pair whose name is
  <var title="">name</var> and value is <var title="">value</var>, to the list of
@@ -2565,9 +2566,6 @@ method must run these steps:
 
  <li><p>Run the <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
 </ol>
-
-<p>The <dfn id="dom-urlquery-size" title="dom-URLQuery-size"><code>size</code></dfn> attribute must
-return the number of name-value pairs.
 
 
 

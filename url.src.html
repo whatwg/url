@@ -102,6 +102,7 @@ not appear in all uppercase letters in this specification.
 Encoding Standard. <span data-anolis-ref>ENCODING</span>
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
+<!-- XXX ref Encoding? -->
 
 <p>The <dfn>ASCII hex digits</dfn> are <span>ASCII digits</span> or are
 code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
@@ -2422,7 +2423,6 @@ interface <dfn>URLQuery</dfn> {
   void <span title=dom-URLQuery-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
   boolean <span title=dom-URLQuery-has>has</span>([EnsureUTF16] DOMString <var title>name</var>);
   void <span title=dom-URLQuery-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
-  readonly attribute unsigned long <span title=dom-URLQuery-size>size</span>;
 };</pre>
 
 <p>A <code>URLQuery</code> object has an associated list of name-value
@@ -2504,8 +2504,9 @@ method must return the values of all name-value pairs whose name is
 method must run these steps:
 
 <ol>
- <li><p>If there is a name-value pair whose name is <var title>name</var>,
- set the value of the first such name-value pair to <var title>value</var>.
+ <li><p>If there are any name-value pairs whose name is <var title>name</var>,
+ set the value of the first such name-value pair to <var title>value</var> and remove the
+ others.
 
  <li><p>Otherwise, append a new name-value pair whose name is
  <var title>name</var> and value is <var title>value</var>, to the list of
@@ -2539,9 +2540,6 @@ method must run these steps:
 
  <li><p>Run the <span title=concept-UQ-update>update steps</span>.
 </ol>
-
-<p>The <dfn title=dom-URLQuery-size><code>size</code></dfn> attribute must
-return the number of name-value pairs.
 
 
 
