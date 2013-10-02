@@ -855,7 +855,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
 <p class=note>The <var title>encoding override</var> argument is a legacy concept only
 relevant for HTML. The <var title>url</var> and <var title>state override</var> arguments
-can be used for API manipulation of a <span title=concept-parsed-url>parsed URL</span>.
+are only for use by methods of objects implementing the <code>URLUtils</code> interface.
 <span class=informative data-anolis-ref>HTML</span>
 
 <ol>
@@ -1732,8 +1732,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
 <p>The
 <dfn title=concept-urlencoded-byte-serializer><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
-takes a byte sequence <var title>input</var>, an
-<var title>encoding override</var>, and then runs these steps:
+takes a byte sequence <var title>input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var title>output</var> be the empty string.

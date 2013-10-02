@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-10-september-2013">Living Standard — Last Updated 10 September 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-october-2013">Living Standard — Last Updated 2 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-10 September 2013, the editors have made this specification available
+2 October 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -881,7 +881,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 
 <p class="note">The <var title="">encoding override</var> argument is a legacy concept only
 relevant for HTML. The <var title="">url</var> and <var title="">state override</var> arguments
-can be used for API manipulation of a <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a>.
+are only for use by methods of objects implementing the <a href="#urlutils"><code>URLUtils</code></a> interface.
 <a class="informative" href="#refsHTML">[HTML]</a>
 
 <ol>
@@ -1758,8 +1758,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 
 <p>The
 <dfn id="concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
-takes a byte sequence <var title="">input</var>, an
-<var title="">encoding override</var>, and then runs these steps:
+takes a byte sequence <var title="">input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var title="">output</var> be the empty string.
