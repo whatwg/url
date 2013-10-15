@@ -1978,9 +1978,8 @@ constructor must run these steps:
  <span title=concept-url-parser>parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
- <li><p>If <var title>base</var> is failure,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <li><p>If <var title>base</var> is failure, <span data-anolis-spec=webidl>throw</span> a
+ <code title>TypeError</code> exception.
 
  <li><p>Let <var title>result</var> be a new <code>URL</code> object.
 
@@ -1991,8 +1990,7 @@ constructor must run these steps:
  <span title=concept-UU-set-the-input>set the input</span> for <var title>url</var>.
 
  <li><p>If <var title>result</var>'s <span title=concept-UU-url>url</span> is null,
- <span data-anolis-spec=dom title=concept-throw>throw</span> an
- "<code data-anolis-spec=dom>SyntaxError</code>" exception.
+ <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
  <li><p>Return <var title>result</var>.
 </ol>
@@ -2076,6 +2074,10 @@ run these steps:
 <ol>
  <li><p>Run the <span title=concept-UU-set-the-input>set the input</span> algorithm for
  the given value.
+
+ <li><p>If the <span>context object</span> is a <code>URL</code> object and its
+ <span title=concept-UU-url>url</span> is null,
+ <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
  <li><p>Run the <span>pre-update steps</span> with the given value.
 </ol>

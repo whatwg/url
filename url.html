@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-october-2013">Living Standard — Last Updated 2 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-october-2013">Living Standard — Last Updated 15 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-2 October 2013, the editors have made this specification available
+15 October 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2004,9 +2004,8 @@ constructor must run these steps:
  <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
- <li><p>If <var title="">base</var> is failure,
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
- "<a href="http://dom.spec.whatwg.org/#syntaxerror"><code class="external" data-anolis-spec="dom">SyntaxError</code></a>" exception.
+ <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a
+ <code title="">TypeError</code> exception.
 
  <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
 
@@ -2017,8 +2016,7 @@ constructor must run these steps:
  <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> for <var title="">url</var>.
 
  <li><p>If <var title="">result</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-throw" title="concept-throw">throw</a> an
- "<a href="http://dom.spec.whatwg.org/#syntaxerror"><code class="external" data-anolis-spec="dom">SyntaxError</code></a>" exception.
+ <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Return <var title="">result</var>.
 </ol>
@@ -2102,6 +2100,10 @@ run these steps:
 <ol>
  <li><p>Run the <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm for
  the given value.
+
+ <li><p>If the <span>context object</span> is a <a href="#url"><code>URL</code></a> object and its
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
+ <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
 </ol>
