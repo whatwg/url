@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-october-2013">Living Standard — Last Updated 15 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2013">Living Standard — Last Updated 24 October 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 October 2013, the editors have made this specification available
+24 October 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2295,7 +2295,12 @@ steps:
  <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is "<code title="">file</code>",
  terminate these steps.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
+ <li><p>If the given value is the empty string, set
+ <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-port" title="concept-URL-port">port</a> to
+ "<code title="">0</code>".
+ <!-- Rationale: https://www.w3.org/Bugs/Public/show_bug.cgi?id=23535 -->
+
+ <li><p>Otherwise, <a href="#concept-url-parser" title="concept-url-parser">parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#port-state">port state</a> as <var title="">state override</var>.
 
