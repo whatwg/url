@@ -526,6 +526,9 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
   <ol>
    <li><p>Let <var title="">value</var> be 0.
 
+   <li><p>If <a href="#c">c</a> is not an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
+   <a href="#parse-error">parse error</a>, return failure. <!-- prevent the empty string -->
+
    <li><p>While <a href="#c">c</a> is an
    <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, set <var title="">value</var> to
    <var title="">value</var> × 10 + <a href="#c">c</a> interpreted as decimal number
@@ -538,15 +541,17 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
    <a href="#c">c</a> is not a "<code title="">.</code>",
    <a href="#parse-error">parse error</a>, return failure.
 
-   <li><p>If <var title="">dots seen</var> is 3 and <a href="#c">c</a> is not
-   the <a href="#eof-code-point">EOF code point</a>,
-   <a href="#parse-error">parse error</a>, return failure.
-
    <li><p>Set <var title="">piece</var> to
    <var title="">piece</var> × 0x100 + <var title="">value</var>.
 
    <li><p>If <var title="">dots seen</var> is 0 or 2, increase
    <var title="">piece pointer</var> by one.
+
+   <li><p>Increase <var title="">pointer</var> by one.
+
+   <li><p>If <var title="">dots seen</var> is 3 and <a href="#c">c</a> is not
+   the <a href="#eof-code-point">EOF code point</a>,
+   <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Increase <var title="">dots seen</var> by one.
   </ol>
@@ -2631,6 +2636,7 @@ James Ross,
 Marcos Cáceres,
 Martin Dürst,
 Mathias Bynens,
+Michael Peick,
 Michael™ Smith,
 Peter Occil,
 Rodney Rehm,

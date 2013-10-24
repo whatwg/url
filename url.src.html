@@ -500,6 +500,9 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
   <ol>
    <li><p>Let <var title>value</var> be 0.
 
+   <li><p>If <span>c</span> is not an <span title="ASCII digits">ASCII digit</span>,
+   <span>parse error</span>, return failure. <!-- prevent the empty string -->
+
    <li><p>While <span>c</span> is an
    <span title="ASCII digits">ASCII digit</span>, set <var title>value</var> to
    <var title>value</var> &times; 10 + <span>c</span> interpreted as decimal number
@@ -512,15 +515,17 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
    <span>c</span> is not a "<code title>.</code>",
    <span>parse error</span>, return failure.
 
-   <li><p>If <var title>dots seen</var> is 3 and <span>c</span> is not
-   the <span>EOF code point</span>,
-   <span>parse error</span>, return failure.
-
    <li><p>Set <var title>piece</var> to
    <var title>piece</var> &times; 0x100 + <var title>value</var>.
 
    <li><p>If <var title>dots seen</var> is 0 or 2, increase
    <var title>piece pointer</var> by one.
+
+   <li><p>Increase <var title>pointer</var> by one.
+
+   <li><p>If <var title>dots seen</var> is 3 and <span>c</span> is not
+   the <span>EOF code point</span>,
+   <span>parse error</span>, return failure.
 
    <li><p>Increase <var title>dots seen</var> by one.
   </ol>
@@ -2575,6 +2580,7 @@ James Ross,
 Marcos Cáceres,
 Martin Dürst,
 Mathias Bynens,
+Michael Peick,
 Michael™ Smith,
 Peter Occil,
 Rodney Rehm,
