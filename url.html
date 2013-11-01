@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-october-2013">Living Standard — Last Updated 24 October 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-november-2013">Living Standard — Last Updated 1 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-24 October 2013, the editors have made this specification available
+1 November 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -72,7 +72,7 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
    <li><a href="#url-statics"><span class="secno">7.2 </span><code>URL</code> statics</a></li>
    <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">7.3 </span><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</a></li>
-   <li><a href="#interface-urlquery"><span class="secno">7.4 </span>Interface <code>URLQuery</code></a></ol></li>
+   <li><a href="#interface-urlsearchparams"><span class="secno">7.4 </span>Interface <code>URLSearchParams</code></a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1867,7 +1867,7 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute [EnsureUTF16] DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
            attribute [EnsureUTF16] DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
            attribute [EnsureUTF16] DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;
-           attribute <a href="#urlquery">URLQuery</a>? <a href="#dom-url-query" title="dom-URL-query">query</a>;
+           attribute <a href="#urlsearchparams">URLSearchParams</a>? <a href="#dom-url-searchparams" title="dom-URL-searchParams">searchParams</a>;
            attribute [EnsureUTF16] DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };
 
@@ -1884,7 +1884,7 @@ interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
   readonly attribute DOMString <a href="#dom-url-port" title="dom-URL-port">port</a>;
   readonly attribute DOMString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
   readonly attribute DOMString <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
-  readonly attribute <span>URLQuery</span>? <span title=dom-URL-query>query</span>;-->
+  readonly attribute <span>URLSearchParams</span>? <span title=dom-URL-searchParams>searchParams</span>;-->
   readonly attribute DOMString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
 
@@ -1926,7 +1926,7 @@ associated <dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a st
 <dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>
 (an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>),
 <dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>
-(a <a href="#urlquery"><code>URLQuery</code></a> object or null), and a
+(a <a href="#urlsearchparams"><code>URLSearchParams</code></a> object or null), and a
 <dfn id="concept-uu-url" title="concept-UU-url">url</dfn> (a
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> or null).
 
@@ -1969,7 +1969,7 @@ concept only relevant for HTML.
   <ol>
    <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is null, set
    <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to a
-   <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
+   <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLSearchParams</code> object</a> using
    <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
 
    <li><p>Otherwise, set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s
@@ -2387,10 +2387,10 @@ these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-query" title="dom-URL-query"><code>query</code></dfn> attribute must
+<p>The <dfn id="dom-url-searchparams" title="dom-URL-searchParams"><code>searchParams</code></dfn> attribute must
 return the <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>.
 
-<p>Setting the <a href="#dom-url-query"><code title="dom-URL-query">query</code></a> attribute must run
+<p>Setting the <a href="#dom-url-searchparams"><code title="dom-URL-searchParams">searchParams</code></a> attribute must run
 these steps:
 
 <ol>
@@ -2402,7 +2402,7 @@ these steps:
  <li><p>If <var title="">object</var>'s
  <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> is not null, set
  <var title="">object</var> to a
- <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
+ <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLSearchParams</code> object</a> using
  <var title="">object</var>.
 
  <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to
@@ -2450,28 +2450,28 @@ steps:
 </ol>
 
 
-<h3 id="interface-urlquery"><span class="secno">7.4 </span>Interface <a href="#urlquery"><code>URLQuery</code></a></h3>
+<h3 id="interface-urlsearchparams"><span class="secno">7.4 </span>Interface <a href="#urlsearchparams"><code>URLSearchParams</code></a></h3>
 
-<pre class="idl">[<span title="dom-URLQuery">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlquery">URLQuery</a>) <var title="">init</var> = "")]
-interface <dfn id="urlquery">URLQuery</dfn> {
-  void <a href="#dom-urlquery-append" title="dom-URLQuery-append">append</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
-  void <a href="#dom-urlquery-delete" title="dom-URLQuery-delete">delete</a>([EnsureUTF16] DOMString <var title="">name</var>);
-  DOMString? <a href="#dom-urlquery-get" title="dom-URLQuery-get">get</a>([EnsureUTF16] DOMString <var title="">name</var>);
-  sequence&lt;DOMString&gt; <a href="#dom-urlquery-getall" title="dom-URLQuery-getAll">getAll</a>([EnsureUTF16] DOMString <var title="">name</var>);
-  boolean <a href="#dom-urlquery-has" title="dom-URLQuery-has">has</a>([EnsureUTF16] DOMString <var title="">name</var>);
-  void <a href="#dom-urlquery-set" title="dom-URLQuery-set">set</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
+<pre class="idl">[<span title="dom-URLSearchParams">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = "")]
+interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
+  void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
+  void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  DOMString? <a href="#dom-urlsearchparams-get" title="dom-URLSearchParams-get">get</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  sequence&lt;DOMString&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>([EnsureUTF16] DOMString <var title="">name</var>);
+  void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
 };</span></pre>
 
-<p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated list of name-value
+<p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated list of name-value
 pairs, which is initially empty.
 
-<p>A <a href="#urlquery"><code>URLQuery</code></a> object has an associated
+<p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated
 <dfn id="concept-uq-url-object" title="concept-UQ-url-object">url object</dfn> which is an object
 implementing <a href="#urlutils"><code>URLUtils</code></a> whose
 <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is the
-<a href="#urlquery"><code>URLQuery</code></a> object, and null if there is no such object.
+<a href="#urlsearchparams"><code>URLSearchParams</code></a> object, and null if there is no such object.
 
-<p class="note"><a href="#urlquery"><code>URLQuery</code></a> objects always use
+<p class="note"><a href="#urlsearchparams"><code>URLSearchParams</code></a> objects always use
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of
 concepts such as
@@ -2481,29 +2481,29 @@ encourage developers to migrate towards
 have done a long time ago now.
 
 <p>To create a
-<dfn id="concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</dfn>, optionally
+<dfn id="concept-uq-new" title="concept-UQ-new">new <code>URLSearchParams</code> object</dfn>, optionally
 using <var title="">init</var>, run these steps:
 
 <ol>
- <li><p>Let <var title="">query</var> be a new <a href="#urlquery"><code>URLQuery</code></a> object.
+ <li><p>Let <var title="">query</var> be a new <a href="#urlsearchparams"><code>URLSearchParams</code></a> object.
 
  <li><p>If <var title="">init</var> is the empty string or null, return
  <var title="">query</var>.
- <!-- Beware: new URLQuery(null) is equivalent to new URLQuery("null") -->
+ <!-- Beware: new URLSearchParams(null) is equivalent to new URLSearchParams("null") -->
 
  <li><p>If <var title="">init</var> is a string,
  set <var title="">query</var>'s associated list of name-value pairs to the
  result of <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser">parsing</a>
  <var title="">input</var>.
 
- <li><p>If <var title="">init</var> is a <a href="#urlquery"><code>URLQuery</code></a> object, set
+ <li><p>If <var title="">init</var> is a <a href="#urlsearchparams"><code>URLSearchParams</code></a> object, set
  <var title="">query</var>'s associated list of name-value pairs to a copy of
  <var title="">init</var> associated list of name-value pairs.
 
  <li><p>Return <var title="">query</var>.
 </ol>
 
-<p>A <a href="#urlquery"><code>URLQuery</code></a> object's
+<p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
 <dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
 
 <ol>
@@ -2514,20 +2514,20 @@ using <var title="">init</var>, run these steps:
  <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
- <a href="#urlquery"><code>URLQuery</code></a> object's associated list of name-value pairs.
+ <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's associated list of name-value pairs.
 
  <li><p>Run <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
  <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The
-<dfn id="dom-urlquery" title="dom-URLQuery"><code>URLQuery(<var title="">init</var>)</code></dfn>
+<dfn id="dom-urlsearchparams" title="dom-URLSearchParams"><code>URLSearchParams(<var title="">init</var>)</code></dfn>
 constructor must return a
-<a href="#concept-uq-new" title="concept-UQ-new">new <code>URLQuery</code> object</a> using
+<a href="#concept-uq-new" title="concept-UQ-new">new <code>URLSearchParams</code> object</a> using
 <var title="">init</var> if given.
 
 <p>The
-<dfn id="dom-urlquery-append" title="dom-URLQuery-append"><code>append(<var title="">name</var>, <var title="">value</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-append" title="dom-URLSearchParams-append"><code>append(<var title="">name</var>, <var title="">value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -2538,7 +2538,7 @@ method must run these steps:
 </ol>
 
 <p>The
-<dfn id="dom-urlquery-delete" title="dom-URLQuery-delete"><code>delete(<var title="">name</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-delete" title="dom-URLSearchParams-delete"><code>delete(<var title="">name</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -2548,17 +2548,17 @@ method must run these steps:
 </ol>
 
 <p>The
-<dfn id="dom-urlquery-get" title="dom-URLQuery-get"><code>get(<var title="">name</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-get" title="dom-URLSearchParams-get"><code>get(<var title="">name</var>)</code></dfn>
 method must return the value of the first name-value pair whose name is
 <var title="">name</var>, and null if there is no such pair.
 
 <p>The
-<dfn id="dom-urlquery-getall" title="dom-URLQuery-getAll"><code>getAll(<var title="">name</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll"><code>getAll(<var title="">name</var>)</code></dfn>
 method must return the values of all name-value pairs whose name is
 <var title="">name</var>, in list order, and the empty sequence otherwise.
 
 <p>The
-<dfn id="dom-urlquery-set" title="dom-URLQuery-set"><code>set(<var title="">name</var>, <var title="">value</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-set" title="dom-URLSearchParams-set"><code>set(<var title="">name</var>, <var title="">value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
@@ -2574,7 +2574,7 @@ method must run these steps:
 </ol>
 
 <p>The
-<dfn id="dom-urlquery-has" title="dom-URLQuery-has"><code>has(<var title="">name</var>)</code></dfn>
+<dfn id="dom-urlsearchparams-has" title="dom-URLSearchParams-has"><code>has(<var title="">name</var>)</code></dfn>
 method must return true if there is a name-value pair whose name is
 <var title="">name</var>, and false otherwise.
 
