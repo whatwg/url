@@ -244,15 +244,9 @@ an <var title>encode set</var>, run these steps:
      http://tools.ietf.org/html/rfc3492
      http://mothereff.in/punycode -->
 
-<p>A <dfn title=concept-host>host</dfn> is a string that represents a
-network address, either in the form of a
-<span title=concept-domain>domain</span> or an
+<p>A <dfn title=concept-host>host</dfn> is null or a network address in the form of either
+a <span title=concept-domain>domain</span> or an
 <span title=concept-ipv6>IPv6 address</span>.
-
-<p class=note>This is a slightly more generic definition of
-<span title=concept-host>host</span> than its traditional meaning for the
-sake of convenience.
-<!-- "convenience's sake" as The Economist would write it is ugly -->
 
 <p>A <dfn title=concept-domain>domain</dfn> is an ordered list of one or
 more <dfn title=concept-domain-label>domain labels</dfn>.
@@ -573,7 +567,7 @@ these steps:
  followed by "<code title>]</code>".
 
  <li><p>Otherwise, <var title>host</var> is a <span title=concept-domain>domain</span>,
- return its <span title=concept-domain-labels>labels</span> separated from each other by
+ return its <span title=concept-domain-label>labels</span> separated from each other by
  U+002E.
 </ol>
 

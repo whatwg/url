@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-november-2013">Living Standard — Last Updated 1 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-november-2013">Living Standard — Last Updated 25 November 2013</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-1 November 2013, the editors have made this specification available
+25 November 2013, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -270,9 +270,8 @@ an <var title="">encode set</var>, run these steps:
      http://tools.ietf.org/html/rfc3492
      http://mothereff.in/punycode -->
 
-<p>A <dfn id="concept-host" title="concept-host">host</dfn> is a string that represents a
-network address, either in the form of a
-<a href="#concept-domain" title="concept-domain">domain</a> or an
+<p>A <dfn id="concept-host" title="concept-host">host</dfn> is null or a network address in the form of either
+a <a href="#concept-domain" title="concept-domain">domain</a> or an
 <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>.
 
 <p class="note">This is a slightly more generic definition of
@@ -599,7 +598,7 @@ these steps:
  followed by "<code title="">]</code>".
 
  <li><p>Otherwise, <var title="">host</var> is a <a href="#concept-domain" title="concept-domain">domain</a>,
- return its <span title="concept-domain-labels">labels</span> separated from each other by
+ return its <a href="#concept-domain-label" title="concept-domain-label">labels</a> separated from each other by
  U+002E.
 </ol>
 
