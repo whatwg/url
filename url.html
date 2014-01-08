@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-25-november-2013">Living Standard — Last Updated 25 November 2013</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-january-2014">Living Standard — Last Updated 8 January 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 November 2013, the editors have made this specification available
+8 January 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -273,11 +273,6 @@ an <var title="">encode set</var>, run these steps:
 <p>A <dfn id="concept-host" title="concept-host">host</dfn> is null or a network address in the form of either
 a <a href="#concept-domain" title="concept-domain">domain</a> or an
 <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>.
-
-<p class="note">This is a slightly more generic definition of
-<a href="#concept-host" title="concept-host">host</a> than its traditional meaning for the
-sake of convenience.
-<!-- "convenience's sake" as The Economist would write it is ugly -->
 
 <p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
 more <dfn id="concept-domain-label" title="concept-domain-label">domain labels</dfn>.
@@ -2008,7 +2003,7 @@ constructor must run these steps:
  <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
- <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a
+ <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code title="">TypeError</code> exception.
 
  <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
@@ -2020,7 +2015,7 @@ constructor must run these steps:
  <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> for <var title="">url</var>.
 
  <li><p>If <var title="">result</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+ <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Return <var title="">result</var>.
 </ol>
@@ -2045,6 +2040,8 @@ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 
 
 <h3 id="url-statics"><span class="secno">7.2 </span><a href="#url"><code>URL</code></a> statics</h3>
+
+<p class="XXX">Given the IDNA clusterfuck, maybe we should wait implementing these for now.
 
 <p>The
 <dfn id="dom-url-domaintoascii" title="dom-URL-domainToASCII"><code>domainToASCII(<var>domain</var>)</code></dfn>
@@ -2107,7 +2104,7 @@ run these steps:
 
  <li><p>If the <span>context object</span> is a <a href="#url"><code>URL</code></a> object and its
  <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://dev.w3.org/2006/webapi/WebIDL/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+ <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
 </ol>
