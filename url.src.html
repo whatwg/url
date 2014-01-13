@@ -534,12 +534,10 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 
    <li><p>Set <var title>piece pointer</var> to seven.
 
-   <li><p>While neither <var title>piece pointer</var> nor
-   <var title>swaps</var> is zero, swap <var title>piece</var> with the
-   <span title=concept-ipv6-piece>piece</span> at pointer
+   <li><p>While <var title>piece pointer</var> is not zero, swap <var title>piece</var>
+   with the <span title=concept-ipv6-piece>piece</span> at pointer
    <var title>compress pointer</var> + <var title>swaps</var> &minus; 1, and then
-   decrease <var title>piece pointer</var> and <var title>swaps</var> by
-   one.
+   decrease <var title>piece pointer</var> and <var title>swaps</var> by one.
   </ol>
 
  <li><p>Otherwise, if <var title>compress pointer</var> is null and
@@ -2576,6 +2574,7 @@ Michael™ Smith,
 Peter Occil,
 Rodney Rehm,
 Simon Pieters,
+Simon Sapin,
 Tab Atkins,
 Tantek Çelik, and
 成瀬ゆい (Yui Naruse)
