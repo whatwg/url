@@ -345,7 +345,8 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
 <h3 id=host-parsing>Parsing</h3>
 
 <p>The <dfn title=concept-host-parser>host parser</dfn> takes a string
-<var title>input</var> and then runs these steps:
+<var title>input</var> and optionally a <var title>Unicode flag</var>, and then runs
+these steps:
 
 <ol>
  <li><p>If <var title>input</var> is the empty string, return failure.
@@ -378,13 +379,15 @@ signifies an empty <span title=concept-domain-label>domain label</span>.
  <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
  any <span>domain label separators</span>.
 
- <li>
-  <p>Return the result of running
-  <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
+ <li><p>Let <var title>asciiDomain</var> be the result of running
+ <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
 
-  <p class=note><span title=concept-domain-to-ascii>Domain to ASCII</span> can return
-  failure in which case the <span title=concept-host-parser>host parser</span> would
-  return failure here.
+ <li><p>If <var title>asciiDomain</var> is failure or if the <var title>Unicode flag</var>
+ is unset, return <var title>asciiDomain</var>.
+
+ <li><p>Return the result of running
+ <span title=concept-domain-to-unicode>domain to Unicode</span> on
+ <var title>asciiDomain</var>.
 </ol>
 
 <p>The <dfn title=concept-ipv6-parser>IPv6 parser</dfn> takes a string
@@ -2020,12 +2023,8 @@ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 static method must run these steps:
 
 <ol>
- <li><p>Let <var title>internalDomain</var> be the result of splitting
- <var title>domain</var> on any <span>domain label separators</span>.
-
- <li><p>Let <var title>asciiDomain</var> be the result of running
- <span title=concept-domain-to-ascii>domain to ASCII</span> on
- <var title>internalDomain</var>.
+ <li><p>Let <var title>asciiDomain</var> be the result of
+ <span title=concept-host-parser>host parsing</span> <var title>domain</var>.
 
  <li><p>If <var title>asciiDomain</var> is failure, return <var title>domain</var>.
 
@@ -2038,12 +2037,11 @@ static method must run these steps:
 static method must run these steps:
 
 <ol>
- <li><p>Let <var title>internalDomain</var> be the result of splitting
- <var title>domain</var> on any <span>domain label separators</span>.
+ <li><p>Let <var title>unicodeDomain</var> be the result of
+ <span title=concept-host-parser>host parsing</span> <var title>domain</var> with the
+ <var title>Unicode flag</var> set.
 
- <li><p>Let <var title>unicodeDomain</var> be the result of running
- <span title=concept-domain-to-unicode>domain to Unicode</span> on
- <var title>internalDomain</var>.
+ <li><p>If <var title>unicodeDomain</var> is failure, return <var title>domain</var>.
 
  <li><p>Return <var title>unicodeDomain</var>,
  <span title=concept-host-serializer>serialized</span>.

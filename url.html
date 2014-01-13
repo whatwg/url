@@ -371,7 +371,8 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
 <h3 id="host-parsing"><span class="secno">4.3 </span>Parsing</h3>
 
 <p>The <dfn id="concept-host-parser" title="concept-host-parser">host parser</dfn> takes a string
-<var title="">input</var> and then runs these steps:
+<var title="">input</var> and optionally a <var title="">Unicode flag</var>, and then runs
+these steps:
 
 <ol>
  <li><p>If <var title="">input</var> is the empty string, return failure.
@@ -404,13 +405,15 @@ signifies an empty <a href="#concept-domain-label" title="concept-domain-label">
  <li><p>Let <var title="">domain</var> be the result of splitting <var title="">host</var> on
  any <a href="#domain-label-separators">domain label separators</a>.
 
- <li>
-  <p>Return the result of running
-  <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on <var title="">domain</var>.
+ <li><p>Let <var title="">asciiDomain</var> be the result of running
+ <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on <var title="">domain</var>.
 
-  <p class="note"><a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">Domain to ASCII</a> can return
-  failure in which case the <a href="#concept-host-parser" title="concept-host-parser">host parser</a> would
-  return failure here.
+ <li><p>If <var title="">asciiDomain</var> is failure or if the <var title="">Unicode flag</var>
+ is unset, return <var title="">asciiDomain</var>.
+
+ <li><p>Return the result of running
+ <a href="#concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</a> on
+ <var title="">asciiDomain</var>.
 </ol>
 
 <p>The <dfn id="concept-ipv6-parser" title="concept-ipv6-parser">IPv6 parser</dfn> takes a string
@@ -2046,12 +2049,8 @@ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 static method must run these steps:
 
 <ol>
- <li><p>Let <var title="">internalDomain</var> be the result of splitting
- <var title="">domain</var> on any <a href="#domain-label-separators">domain label separators</a>.
-
- <li><p>Let <var title="">asciiDomain</var> be the result of running
- <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on
- <var title="">internalDomain</var>.
+ <li><p>Let <var title="">asciiDomain</var> be the result of
+ <a href="#concept-host-parser" title="concept-host-parser">host parsing</a> <var title="">domain</var>.
 
  <li><p>If <var title="">asciiDomain</var> is failure, return <var title="">domain</var>.
 
@@ -2064,12 +2063,11 @@ static method must run these steps:
 static method must run these steps:
 
 <ol>
- <li><p>Let <var title="">internalDomain</var> be the result of splitting
- <var title="">domain</var> on any <a href="#domain-label-separators">domain label separators</a>.
+ <li><p>Let <var title="">unicodeDomain</var> be the result of
+ <a href="#concept-host-parser" title="concept-host-parser">host parsing</a> <var title="">domain</var> with the
+ <var title="">Unicode flag</var> set.
 
- <li><p>Let <var title="">unicodeDomain</var> be the result of running
- <a href="#concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</a> on
- <var title="">internalDomain</var>.
+ <li><p>If <var title="">unicodeDomain</var> is failure, return <var title="">domain</var>.
 
  <li><p>Return <var title="">unicodeDomain</var>,
  <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
