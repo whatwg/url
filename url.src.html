@@ -365,7 +365,7 @@ these steps:
    "<code title>]</code>", <span>parse error</span>, return failure.
 
    <li><p>Return the result of
-   <span title=concept-ipv6-parser>parsing</span> <var title>input</var>
+   <span title=concept-ipv6-parser>IPv6 parsing</span> <var title>input</var>
    with its leading "<code title>[</code>" and trailing
    "<code title>]</code>" removed.
   </ol>
@@ -375,6 +375,25 @@ these steps:
  <span data-anolis-spec=encoding>decoder</span> on the
  <span title="percent decode">percent decoding</span> of
  <var title>input</var>.
+ <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
+
+ <li>
+  <p>For each code point in <var title>host</var>, depending on code point:
+
+  <dl class=compact>
+   <dt><span>ASCII alpha</span>
+   <dd>Lowercase the code point in <var title>host</var>.
+   <dt>U+0000
+   <dt>U+0020
+   <dt>"<code title>#</code>"<!-- 23 -->
+   <dt>"<code title>%</code>"<!-- 25 -->
+   <dt>"<code title>/</code>"<!-- 2F -->
+   <dt>"<code title>:</code>"<!-- 3A -->
+   <dt>"<code title>?</code>"<!-- 3F -->
+   <dt>"<code title>@</code>"<!-- 40 -->
+   <dt>"<code title>\</code>"<!-- 5C -->
+   <dd>Return failure.
+  </dl>
 
  <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
  any <span>domain label separators</span>.
@@ -2571,6 +2590,7 @@ Michael Peick,
 Michael™ Smith,
 Peter Occil,
 Rodney Rehm,
+Santiago M. Mola,
 Simon Pieters,
 Simon Sapin,
 Tab Atkins,

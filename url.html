@@ -391,7 +391,7 @@ these steps:
    "<code title="">]</code>", <a href="#parse-error">parse error</a>, return failure.
 
    <li><p>Return the result of
-   <a href="#concept-ipv6-parser" title="concept-ipv6-parser">parsing</a> <var title="">input</var>
+   <a href="#concept-ipv6-parser" title="concept-ipv6-parser">IPv6 parsing</a> <var title="">input</var>
    with its leading "<code title="">[</code>" and trailing
    "<code title="">]</code>" removed.
   </ol>
@@ -401,6 +401,25 @@ these steps:
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
  <a href="#percent-decode" title="percent decode">percent decoding</a> of
  <var title="">input</var>.
+ <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
+
+ <li>
+  <p>For each code point in <var title="">host</var>, depending on code point:
+
+  <dl class="compact">
+   <dt><a href="#ascii-alpha">ASCII alpha</a>
+   <dd>Lowercase the code point in <var title="">host</var>.
+   <dt>U+0000
+   <dt>U+0020
+   <dt>"<code title="">#</code>"<!-- 23 -->
+   <dt>"<code title="">%</code>"<!-- 25 -->
+   <dt>"<code title="">/</code>"<!-- 2F -->
+   <dt>"<code title="">:</code>"<!-- 3A -->
+   <dt>"<code title="">?</code>"<!-- 3F -->
+   <dt>"<code title="">@</code>"<!-- 40 -->
+   <dt>"<code title="">\</code>"<!-- 5C -->
+   <dd>Return failure.
+  </dl>
 
  <li><p>Let <var title="">domain</var> be the result of splitting <var title="">host</var> on
  any <a href="#domain-label-separators">domain label separators</a>.
