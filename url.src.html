@@ -155,40 +155,45 @@ conversion to bytes, should not cause
 "<code title>%</code>", followed by a double-digit, uppercase, hexadecimal
 representation of <var title>byte</var>.
 
-<p>To <dfn>percent decode</dfn> a <var title>string</var> using code points in the range
-U+0000 to U+007F into a byte sequence, run these steps:
+<p>To <dfn>percent decode</dfn> a byte sequence <var title>input</var>, run these steps:
+
+<p class=warning>Using anything but <span data-anolis-spec=encoding>utf-8</span>'s
+<span data-anolis-spec=encoding>decoder</span> when the <var title>input</var> contains
+bytes outside the range 0x00 to 0x7F might be insecure and is not recommended.
 
 <ol>
- <li><p>Let <var title>pointer</var> be a pointer into
- <var title>string</var>, initially zero (pointing to the first code point).
-
- <li><p>Let <var title>bytes</var> be an empty byte sequence.
+ <li><p>Let <var title>output</var> be an empty byte sequence.
 
  <li>
-  <p>While <span>c</span> is not the <span>EOF code point</span>, run
-  these substeps:
+  <p>For each byte <var title>byte</var> in <var title>input</var>, run these steps:
 
   <ol>
-   <li><p>While <span>c</span> is not "<code title>%</code>" or the
-   <span>EOF code point</span>, append to <var title>bytes</var> a byte
-   whose value is <span>c</span>'s code point and increase
-   <var title>pointer</var> by one.
+   <li><p>If <var title>byte</var> is not `<code title>%</code>`, append
+   <var title>byte</var> to <var title>output</var>.
 
-   <li><p>If <span>c</span> is "<code title>%</code>" and
-   <span>remaining</span> does not start with two
-   <span>ASCII hex digits</span>, append to <var title>bytes</var> a byte
-   whose value is <span>c</span>'s code point, increase
-   <var title>pointer</var> by one.
+   <li><p>Otherwise, if <var title>byte</var> is `<code title>%</code>` and the next two
+   bytes after <var title>byte</var> in <var title>input</var> are not in the ranges
+   0x30 to 0x39, 0x41 to 0x46, and 0x61 to 0x66, append <var title>byte</var> to
+   <var title>output</var>.
 
-   <li><p>Otherwise, while <span>c</span> is "<code title>%</code>" and
-   <span>remaining</span> starts with two <span>ASCII hex digits</span>,
-   append to <var title>bytes</var> a byte whose value is
-   <span>remaining</span>'s two leading code points, interpreted as
-   hexadecimal number, and increase <var title>pointer</var> by three.
+   <li>
+    <p>Otherwise, run these substeps:
+
+    <ol>
+     <li><p>Let <var title>bytePoint</var> be the two bytes after <var title>byte</var> in
+     <var title>input</var>,
+     <span data-anolis-spec=encoding title="utf-8 encode">encoded</span>, and then
+     interpreted as hexadecimal number.
+     <!-- We should have a definition for this that is saner. -->
+
+     <li><p>Append a byte whose value is <var title>bytePoint</var> to
+     <var title>output</var>.
+
+     <li><p>Skip the next two bytes in <var title>input</var>.
+    </ol>
   </ol>
 
- <li>
-  <p>Return <var title>bytes</var>.
+ <li><p>Return <var title>bytes</var>.
 </ol>
 
 <!-- the escape sets are minimal as escaping can lead to problems; we might
@@ -371,10 +376,9 @@ these steps:
   </ol>
 
  <li><p>Let <var title>host</var> be the result of running
- <span data-anolis-spec=encoding>utf-8</span>'s
- <span data-anolis-spec=encoding>decoder</span> on the
- <span title="percent decode">percent decoding</span> of
- <var title>input</var>.
+ <span data-anolis-spec=encoding>utf-8 decode</span> on the
+ <span title="percent decode">percent decoding</span> of running
+ <span data-anolis-spec=encoding>utf-8 encode</span> on <var title>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
  <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
@@ -882,7 +886,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
  <p>The <var title>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var title>url</var> and <var title>state override</var> arguments are only for
  use by methods of objects implementing the <code>URLUtils</code> interface.
- <span class=informative data-anolis-ref>HTML</span>
+ <span data-anolis-ref class=informative>HTML</span>
 
  <p>When the <var title>url</var> and <var title>state override</var> arguments are not
  passed the  <span title=concept-url-parser>URL parser</span> returns either a
@@ -1695,73 +1699,105 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <h2><code>application/x-www-form-urlencoded</code></h2>
 
+<p>The <dfn><code>application/x-www-form-urlencoded</code></dfn> format is a simple way to
+encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range.
+
+<p class="note no-backref">While this description makes
+<code>application/x-www-form-urlencoded</code> sound dated — and really, it is — the
+format is in widespread use due to its prevalence of HTML forms.
+<span data-anolis-ref class=informative>HTML</span>
+
+<h3 id=urlencoded-parsing>Parsing</h3>
+
+<p class="note no-backref">The features provided by the
+<span title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parser</span>
+are mainly relevant for server-oriented implementations. A browser-based implementation
+only needs what the
+<span title=concept-urlencoded-string-parser><code>application/x-www-form-urlencoded</code> string parser</span>
+requires.
+
 <p>The
 <dfn title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parser</dfn>
-takes a string <var title>input</var> using code points in the range U+0000 to U+007F,
-optionally with an <span data-anolis-spec=encoding>encoding</span>
-<var title>encoding override</var>, optionally with a
-<i title>use "<code>_charset_</code>" flag</i>, and optionally with an
+takes a byte sequence <var title>input</var>, optionally with an
+<span data-anolis-spec=encoding>encoding</span> <var title>encoding override</var>,
+optionally with a <i title>use _charset_ flag</i>, and optionally with an
 <i title>isindex flag</i>, and then runs these steps:
 
 <ol>
- <li><p>Let <var title>strings</var> be the result of splitting
- <var title>input</var> on "<code title>&</code>".
- <!-- XXX define splitting? DOM does not do it -->
-
- <li><p>If the <i title>isindex flag</i> is set and the first string in
- <var title>strings</var> does not contain a "<code title>=</code>", prepend
- "<code title>=</code>" to the first string in <var title>strings</var>.
-
  <li><p>If <var title>encoding override</var> is not given, set it to
  <span data-anolis-spec=encoding>utf-8</span>.
 
- <li><p>Let <var title>pairs</var> be an empty list of name-value pairs.
+ <li>
+  <p>If <var title>encoding override</var> is not
+  <span data-anolis-spec=encoding>utf-8</span> and <var title>input</var> contains bytes
+  whose value is greater than 0x7F, return failure.
+
+  <p class="note no-backref">This can only happen if <var title>input</var> was not
+  generated through the <span title=concept-urlencoded-serializer>serializer</span> or
+  <code>URLSearchParams</code>.
+
+ <li><p>Let <var title>sequences</var> be the result of splitting
+ <var title>input</var> on `<code title>&</code>`.
+ <!-- XXX define splitting? DOM does not do it -->
+
+ <li><p>If the <i title>isindex flag</i> is set and the first byte sequence in
+ <var title>sequences</var> does not contain a `<code title>=</code>`, prepend
+ `<code title>=</code>` to the first byte sequence in <var title>sequences</var>.
+
+ <li><p>Let <var title>pairs</var> be an empty list of name-value pairs where both name
+ and value hold a byte sequence.
 
  <li>
-  <p>For each string <var title>string</var> in <var title>strings</var>,
+  <p>For each byte sequence <var title>bytes</var> in <var title>sequences</var>,
   run these substeps:
 
   <ol>
-   <li><p>If <var title>string</var> is the empty string, run these substeps
-   again for the next string.
+   <li><p>If <var title>bytes</var> is the empty byte sequence, run these substeps for the
+   next byte sequence.
 
-   <li><p>If string contains a "<code title>=</code>", then let
-   <var title>name</var> be the substring of <var title>string</var> from
-   the start of <var title>string</var> up to but excluding its first
-   "<code title>=</code>", and let <var title>value</var> be the substring
-   from the first code point, if any, after the first "<code title>=</code>"
-   up to the end of <var title>string</var>. If "<code title>=</code>" is
-   the first code point, then <var title>name</var> will be the empty
-   string. If it is the last, then <var title>value</var> will be the empty
-   string.
+   <li><p>If <var title>bytes</var> contains a `<code title>=</code>`, then let
+   <var title>name</var> be the bytes from the start of <var title>bytes</var> up to but
+   excluding its first `<code title>=</code>`, and let <var title>value</var> be the
+   bytes, if any, after the first `<code title>=</code>` up to the end of
+   <var title>bytes</var>. If `<code title>=</code>` is the first byte, then
+   <var title>name</var> will be the empty byte sequence. If it is the last, then
+   <var title>value</var> will be the empty byte sequence.
 
-   <li><p>Otherwise, let <var title>name</var> have the value of
-   <var title>string</var> and let <var title>value</var> be the empty
-   string.
+   <li><p>Otherwise, let <var title>name</var> have the value of <var title>bytes</var>
+   and let <var title>value</var> be the empty byte sequence.
 
-   <li><p>Replace any "<code title>+</code>" in <var title>name</var> and
-   <var title>value</var> with U+0020.
+   <li><p>Replace any `<code title>+</code>` in <var title>name</var> and
+   <var title>value</var> with 0x20.
 
-   <li><p>If the <i title>use "<code>_charset_</code>" flag</i> is set,
-   <var title>name</var> is "<code title>_charset_</code>", and
+   <li><p>If <i title>use _charset_ flag</i> is set, <var title>name</var> is
+   `<code title>_charset_</code>`, and
    <span data-anolis-spec=encoding title=concept-encoding-get>get an encoding</span>
-   for <var title>value</var> does not return failure, unset the
-   <i title>use "<code>_charset_</code>" flag</i> and set
+   for <var title>value</var>,
+   <span data-anolis-spec=encoding title="utf-8 encode">encoded</span>, does not return
+   failure, unset <i title>use _charset_ flag</i> and set
    <var title>encoding override</var> to the result of
    <span data-anolis-spec=encoding title=concept-encoding-get>getting an encoding</span>
-   for <var title>value</var>.
+   for <var title>value</var>,
+   <span data-anolis-spec=encoding title="utf-8 encode">encoded</span>.
 
    <li><p>Add a pair consisting of <var title>name</var> and
    <var title>value</var> to <var title>pairs</var>.
   </ol>
 
- <li><p>Replace each name-value pair in <var title>pairs</var> with the
- result of running <var title>encoding override</var>'s
+ <li><p>Let <var title>output</var> be an empty list of name-value pairs where both name
+ and value hold a string.
+
+ <li><p>For each name-value pair in <var title>pairs</var>, append a name-value pair to
+ <var title>output</var> where the new name and value appended to <var title>output</var>
+ are the result of running <var title>encoding override</var>'s
  <span data-anolis-spec=encoding>decoder</span> on the
- <span title="percent decode">percent decoding</span> of the name-value pair.
+ <span title="percent decode">percent decoding</span> of the name and value from
+ <var title>pairs</var>, respectively.
 
  <li><p>Return <var title>pairs</var>.
 </ol>
+
+<h3 id=urlencoded-serializing>Serializing</h3>
 
 <p>The
 <dfn title=concept-urlencoded-byte-serializer><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
@@ -1842,6 +1878,16 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
 
  <li>Return <var title>output</var>.
 </ol>
+
+<h3 id=urlencoded-hooks>Hooks</h3>
+
+<p>The
+<dfn title=concept-urlencoded-string-parser><code>application/x-www-form-urlencoded</code> string parser</dfn>
+takes a string <var title>input</var>,
+<span data-anolis-spec=encoding title="utf-8 encode">utf-8 encodes</span> it, and then
+returns the result of
+<span title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parsing</span>
+it.
 
 
 
@@ -1976,7 +2022,7 @@ concept only relevant for HTML.
 
    <li><p>Otherwise, set <span title=concept-UU-query-object>query object</span>'s
    associated list of name-value pairs to the result of
-   <span title=concept-urlencoded-parser>parsing</span>
+   <span title=concept-urlencoded-string-parser>parsing</span>
    <span title=concept-UU-url>url</span>'s <span title=concept-URL-query>query</span>.
   </ol>
 
@@ -2375,7 +2421,7 @@ these steps:
 
  <li><p>Set <span title=concept-UU-query-object>query object</span>'s
  associated list of name-value pairs to the result of
- <span title=concept-urlencoded-parser>parsing</span>
+ <span title=concept-urlencoded-string-parser>parsing</span>
  <var title="">input</var>.
 
  <li><p>Run the <span>pre-update steps</span>.
@@ -2487,7 +2533,7 @@ using <var title>init</var>, run these steps:
 
  <li><p>If <var title>init</var> is a string,
  set <var title>query</var>'s associated list of name-value pairs to the
- result of <span title=concept-urlencoded-parser>parsing</span>
+ result of <span title=concept-urlencoded-string-parser>parsing</span>
  <var title>input</var>.
 
  <li><p>If <var title>init</var> is a <code>URLSearchParams</code> object, set
