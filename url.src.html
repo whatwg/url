@@ -2500,6 +2500,7 @@ interface <dfn>URLSearchParams</dfn> {
   sequence&lt;DOMString> <span title=dom-URLSearchParams-getAll>getAll</span>([EnsureUTF16] DOMString <var title>name</var>);
   boolean <span title=dom-URLSearchParams-has>has</span>([EnsureUTF16] DOMString <var title>name</var>);
   void <span title=dom-URLSearchParams-set>set</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
+  <span title=dom-URLSearchParams-stringifier>stringifier</span>;
 };</pre>
 
 <p>A <code>URLSearchParams</code> object has an associated list of name-value
@@ -2618,6 +2619,9 @@ method must run these steps:
 method must return true if there is a name-value pair whose name is
 <var title>name</var>, and false otherwise.
 
+<p>The <dfn title=dom-URLSearchParams-stringifier>stringifier</dfn> must return the
+<span title=concept-urlencoded-serializer>serialization</span> of the
+<code>URLSearchParams</code> object's associated list of name-value pairs.
 
 
 
