@@ -904,10 +904,18 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> <var title="">url</var> and a state override
 <var title="">state override</var>, and then runs these steps:
 
-<p class="note">The <var title="">encoding override</var> argument is a legacy concept only
-relevant for HTML. The <var title="">url</var> and <var title="">state override</var> arguments
-are only for use by methods of objects implementing the <a href="#urlutils"><code>URLUtils</code></a> interface.
-<a class="informative" href="#refsHTML">[HTML]</a>
+<div class="note no-backref">
+ <p>The <var title="">encoding override</var> argument is a legacy concept only relevant for
+ HTML. The <var title="">url</var> and <var title="">state override</var> arguments are only for
+ use by methods of objects implementing the <a href="#urlutils"><code>URLUtils</code></a> interface.
+ <a class="informative" href="#refsHTML">[HTML]</a>
+
+ <p>When the <var title="">url</var> and <var title="">state override</var> arguments are not
+ passed the  <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> returns either a
+ <a href="#concept-parsed-url" title="concept-parsed-url">parsed URL</a> or failure. If they are passed the
+ algorithm simply modifies the passed <var title="">url</var> and can terminate without
+ returning anything.
+</div>
 
 <ol>
  <li>
