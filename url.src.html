@@ -377,12 +377,22 @@ these steps:
  <var title>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
+ <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
+ any <span>domain label separators</span>.
+
+ <li><p>Let <var title>asciiDomain</var> be the result of running
+ <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
+
+ <li><p>If <var title>asciiDomain</var> is failure, return failure.
+
  <li>
-  <p>For each code point in <var title>host</var>, depending on code point:
+  <p>For each <span title=concept-domain-label>label</span> <var title>asciiLabel</var> in
+  <var title>asciiDomain</var>, and then for each code point <var title>cp</var> in
+  <var title>asciiLabel</var>, depending on <var title>cp</var>:
 
   <dl class=compact>
    <dt><span>ASCII alpha</span>
-   <dd>Lowercase the code point in <var title>host</var>.
+   <dd>Lowercase <var title>cp</var> in <var title>asciiLabel</var>.
    <dt>U+0000
    <dt>U+0020
    <dt>"<code title>#</code>"<!-- 23 -->
@@ -397,18 +407,9 @@ these steps:
    <dd>Do nothing.
   </dl>
 
- <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
- any <span>domain label separators</span>.
-
- <li><p>Let <var title>asciiDomain</var> be the result of running
- <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
-
- <li><p>If <var title>asciiDomain</var> is failure or if the <var title>Unicode flag</var>
- is unset, return <var title>asciiDomain</var>.
-
- <li><p>Return the result of running
- <span title=concept-domain-to-unicode>domain to Unicode</span> on
- <var title>asciiDomain</var>.
+ <li><p>Return <var title>asciiDomain</var> if the <var title>Unicode flag</var> is unset,
+ and the result of running <span title=concept-domain-to-unicode>domain to Unicode</span>
+ on <var title>asciiDomain</var> otherwise.
 </ol>
 
 <p>The <dfn title=concept-ipv6-parser>IPv6 parser</dfn> takes a string
