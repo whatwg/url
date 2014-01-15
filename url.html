@@ -129,7 +129,9 @@ not appear in all uppercase letters in this specification.
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
 <p>Some terms used in this specification are defined in the
-Encoding Standard. <a href="#refsENCODING">[ENCODING]</a>
+DOM and Encoding Standards.
+<a href="#refsDOM">[DOM]</a>
+<a href="#refsENCODING">[ENCODING]</a>
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 <!-- XXX ref Encoding? -->
@@ -177,7 +179,8 @@ processed and <var title="">pointer</var> points to "<code title="">@</code>",
 two <a href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> to run into any
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> to run into any
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error" title="error">errors</a>.
 
 <p>To <dfn id="percent-encode">percent encode</dfn> a <var title="">byte</var> into a
@@ -279,8 +282,8 @@ an <var title="">encode set</var>, run these steps:
      http://tools.ietf.org/html/rfc3492
      http://mothereff.in/punycode -->
 
-<p>A <dfn id="concept-host" title="concept-host">host</dfn> is null or a network address in the form of either
-a <a href="#concept-domain" title="concept-domain">domain</a> or an
+<p>A <dfn id="concept-host" title="concept-host">host</dfn> is a network address in the form of a
+<a href="#concept-domain" title="concept-domain">domain</a> or an
 <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>.
 
 <p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
@@ -406,7 +409,8 @@ these steps:
   </ol>
 
  <li><p>Let <var title="">host</var> be the result of running
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode">utf-8 decode</a> on the
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
  <a href="#percent-decode" title="percent decode">percent decoding</a> of running
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var title="">input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
@@ -618,13 +622,12 @@ these steps:
 
 <h3 id="host-serializing"><span class="secno">4.4 </span>Serializing</h3>
 
-<p>The <dfn id="concept-host-serializer" title="concept-host-serializer">host serializer</dfn> takes a
+<p>The <dfn id="concept-host-serializer" title="concept-host-serializer">host serializer</dfn> takes null or a
 <a href="#concept-host" title="concept-host">host</a> <var title="">host</var> and then runs
 these steps:
 
 <ol>
  <li><p>If <var title="">host</var> is null, return the empty string.
- <!-- XXX Are we okay with this? -->
 
  <li><p>If <var title="">host</var> is an
  <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, return
@@ -2187,8 +2190,8 @@ run these steps:
  <li><p>Run the <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm for
  the given value.
 
- <li><p>If the <span>context object</span> is a <a href="#url"><code>URL</code></a> object and its
- <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
+ <li><p>If the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a>
+ object and its <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
  <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
@@ -2662,7 +2665,10 @@ method must return true if there is a name-value pair whose name is
 
 
 <h2 class="no-num" id="references">References</h2>
-<div id="anolis-references"><dl><dt id="refsENCODING">[ENCODING]
+<div id="anolis-references"><dl><dt id="refsDOM">[DOM]
+<dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
+
+<dt id="refsENCODING">[ENCODING]
 <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsHTML">[HTML]
