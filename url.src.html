@@ -529,13 +529,19 @@ these steps:
    <li><p>If <span>c</span> is not an <span title="ASCII digits">ASCII digit</span>,
    <span>parse error</span>, return failure. <!-- prevent the empty string -->
 
-   <li><p>While <span>c</span> is an
-   <span title="ASCII digits">ASCII digit</span>, set <var title>value</var> to
-   <var title>value</var> &times; 10 + <span>c</span> interpreted as decimal number
-   and increase <var title>pointer</var> by one.
+   <li>
+    <p>While <span>c</span> is an
+    <span title="ASCII digits">ASCII digit</span>, run these subsubsteps:
 
-   <li><p>If <var title>value</var> is greater than 255,
-   <span>parse error</span>, return failure.
+    <ol>
+     <li><p>Set <var title>value</var> to
+     <var title>value</var> &times; 10 + <span>c</span> interpreted as decimal number.
+
+     <li><p>Increase <var title>pointer</var> by one.
+
+     <li><p>If <var title>value</var> is 0 or greater than 255, <span>parse error</span>,
+     return failure.
+    </ol>
 
    <li><p>If <var title>dots seen</var> is less than 3 and
    <span>c</span> is not a "<code title>.</code>",

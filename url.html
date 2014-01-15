@@ -559,13 +559,19 @@ these steps:
    <li><p>If <a href="#c">c</a> is not an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
    <a href="#parse-error">parse error</a>, return failure. <!-- prevent the empty string -->
 
-   <li><p>While <a href="#c">c</a> is an
-   <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, set <var title="">value</var> to
-   <var title="">value</var> × 10 + <a href="#c">c</a> interpreted as decimal number
-   and increase <var title="">pointer</var> by one.
+   <li>
+    <p>While <a href="#c">c</a> is an
+    <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, run these subsubsteps:
 
-   <li><p>If <var title="">value</var> is greater than 255,
-   <a href="#parse-error">parse error</a>, return failure.
+    <ol>
+     <li><p>Set <var title="">value</var> to
+     <var title="">value</var> × 10 + <a href="#c">c</a> interpreted as decimal number.
+
+     <li><p>Increase <var title="">pointer</var> by one.
+
+     <li><p>If <var title="">value</var> is 0 or greater than 255, <a href="#parse-error">parse error</a>,
+     return failure.
+    </ol>
 
    <li><p>If <var title="">dots seen</var> is less than 3 and
    <a href="#c">c</a> is not a "<code title="">.</code>",
