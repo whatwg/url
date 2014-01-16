@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-january-2014">Living Standard — Last Updated 15 January 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-16-january-2014">Living Standard — Last Updated 16 January 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 January 2014, the editors have made this specification available
+16 January 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1573,9 +1573,10 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
       is "<code title="">#</code>", run these substeps:
 
       <ol>
-       <li><p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is set,
-       set <var title="">encoding override</var> to
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+       <li><p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is unset or
+       <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is either
+       "<code title="">ws</code>" or "<code title="">wss</code>", set
+       <var title="">encoding override</var> to <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
        <!-- http://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var title="">buffer</var> to the result of running
