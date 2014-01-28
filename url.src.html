@@ -1905,7 +1905,7 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional (<span>URL</span> or DOMString) <var title>base</var> = "about:blank")]
+<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional DOMString <var title>base</var> = "about:blank")]
 interface <dfn>URL</dfn> {
   static DOMString <span title=dom-URL-domainToASCII>domainToASCII</span>([EnsureUTF16] DOMString <var title>domain</var>);
   static DOMString <span title=dom-URL-domainToUnicode>domainToUnicode</span>([EnsureUTF16] DOMString <var title>domain</var>);
@@ -2063,8 +2063,7 @@ concept only relevant for HTML.
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title>base</var> is a string,
- <span title=concept-url-parser>parse</span> <var title>base</var> and set
+ <li><p><span title=concept-url-parser>Parse</span> <var title>base</var> and set
  <var title>base</var> to the result of that algorithm.
 
  <li><p>If <var title>base</var> is failure, <span data-anolis-spec=webidl>throw</span> a

@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-january-2014">Living Standard — Last Updated 27 January 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-january-2014">Living Standard — Last Updated 28 January 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-27 January 2014, the editors have made this specification available
+28 January 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1935,7 +1935,7 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional (<a href="#url">URL</a> or DOMString) <var title="">base</var> = "about:blank")]
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional DOMString <var title="">base</var> = "about:blank")]
 interface <dfn id="url">URL</dfn> {
   static DOMString <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>([EnsureUTF16] DOMString <var title="">domain</var>);
   static DOMString <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>([EnsureUTF16] DOMString <var title="">domain</var>);
@@ -2093,8 +2093,7 @@ concept only relevant for HTML.
 constructor must run these steps:
 
 <ol>
- <li><p>If <var title="">base</var> is a string,
- <a href="#concept-url-parser" title="concept-url-parser">parse</a> <var title="">base</var> and set
+ <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">base</var> and set
  <var title="">base</var> to the result of that algorithm.
 
  <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
