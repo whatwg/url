@@ -1935,7 +1935,8 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional DOMString <var title="">base</var> = "about:blank")]
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(DOMString <var title="">url</var>, optional DOMString <var title="">base</var> = "about:blank"),
+ Exposed=Window,Worker]
 interface <dfn id="url">URL</dfn> {
   static DOMString <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>([EnsureUTF16] DOMString <var title="">domain</var>);
   static DOMString <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>([EnsureUTF16] DOMString <var title="">domain</var>);
@@ -2531,7 +2532,8 @@ steps:
 
 <h3 id="interface-urlsearchparams"><span class="secno">7.4 </span>Interface <a href="#urlsearchparams"><code>URLSearchParams</code></a></h3>
 
-<pre class="idl">[<span title="dom-URLSearchParams">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = "")]
+<pre class="idl">[<span title="dom-URLSearchParams">Constructor(optional ([EnsureUTF16] DOMString or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
+ Exposed=Window,Worker]
 interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
   void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>([EnsureUTF16] DOMString <var title="">name</var>, [EnsureUTF16] DOMString <var title="">value</var>);
   void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>([EnsureUTF16] DOMString <var title="">name</var>);

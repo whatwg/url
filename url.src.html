@@ -1905,7 +1905,8 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional DOMString <var title>base</var> = "about:blank")]
+<pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional DOMString <var title>base</var> = "about:blank"),
+ Exposed=Window,Worker]
 interface <dfn>URL</dfn> {
   static DOMString <span title=dom-URL-domainToASCII>domainToASCII</span>([EnsureUTF16] DOMString <var title>domain</var>);
   static DOMString <span title=dom-URL-domainToUnicode>domainToUnicode</span>([EnsureUTF16] DOMString <var title>domain</var>);
@@ -2501,7 +2502,8 @@ steps:
 
 <h3>Interface <code>URLSearchParams</code></h3>
 
-<pre class=idl>[<span title=dom-URLSearchParams>Constructor(optional ([EnsureUTF16] DOMString or <span>URLSearchParams</span>) <var title>init</var> = "")]
+<pre class=idl>[<span title=dom-URLSearchParams>Constructor(optional ([EnsureUTF16] DOMString or <span>URLSearchParams</span>) <var title>init</var> = ""),
+ Exposed=Window,Worker]
 interface <dfn>URLSearchParams</dfn> {
   void <span title=dom-URLSearchParams-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
   void <span title=dom-URLSearchParams-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
