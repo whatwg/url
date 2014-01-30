@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-january-2014">Living Standard — Last Updated 28 January 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-january-2014">Living Standard — Last Updated 30 January 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 January 2014, the editors have made this specification available
+30 January 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2445,8 +2445,8 @@ these steps:
  <li><p>If the given value is the empty string, set
  <a href="#concept-url-query" title="concept-url-query">query</a> to null, set
  <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list
- of name-value pairs to the empty list, run the
- <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
+ of name-value pairs to the empty list, run its
+ <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>, and terminate these steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
@@ -2464,8 +2464,13 @@ these steps:
  <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
  <var title="">input</var>.
 
- <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
+ <li><p>Run <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s
+ <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
 </ol>
+
+<p class="note no-backref">The <a href="#concept-uq-update" title="concept-UQ-update">update steps</a> of
+<a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> are run to ensure all
+<a href="#concept-uq-url-object" title="concept-UQ-url-object">url objects</a> remain synchronized.
 
 <p>The <dfn id="dom-url-searchparams" title="dom-URL-searchParams"><code>searchParams</code></dfn> attribute must
 return the <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>.
@@ -2479,17 +2484,24 @@ these steps:
  <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> or
  <var title="">object</var> is null, terminate these steps.
 
- <li><p>If <var title="">object</var>'s
- <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> is not null, set
- <var title="">object</var> to a
- <a href="#concept-uq-new" title="concept-UQ-new">new <code>URLSearchParams</code> object</a> using
- <var title="">object</var>.
+ <li><p>If <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is non-null, remove
+ the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> from
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list of
+ <a href="#concept-uq-url-object" title="concept-UQ-url-object">url objects</a>.
+
+ <li><p>Append the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> to
+ <var title="">object</var>'s associated list of
+ <a href="#concept-uq-url-object" title="concept-UQ-url-object">url objects</a>.
 
  <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> to
  <var title="">object</var>.
 
- <li><p>Run <var title="">object</var>'s
- <a href="#concept-uq-update" title="concept-UQ-update">update steps</a>.
+ <li><p>Set <a href="#concept-url-query" title="concept-url-query">query</a> to the
+ <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
+ <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list of name-value
+ pairs.
+
+ <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute must run
@@ -2547,11 +2559,8 @@ interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
 <p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated list of name-value
 pairs, which is initially empty.
 
-<p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated
-<dfn id="concept-uq-url-object" title="concept-UQ-url-object">url object</dfn> which is an object
-implementing <a href="#urlutils"><code>URLUtils</code></a> whose
-<a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a> is the
-<a href="#urlsearchparams"><code>URLSearchParams</code></a> object, and null if there is no such object.
+<p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated list of zero or more
+<dfn id="concept-uq-url-object" title="concept-UQ-url-object">url objects</dfn>.
 
 <p class="note"><a href="#urlsearchparams"><code>URLSearchParams</code></a> objects always use
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
@@ -2586,20 +2595,16 @@ using <var title="">init</var>, run these steps:
 </ol>
 
 <p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
-<dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are:
+<dfn id="concept-uq-update" title="concept-UQ-update">update steps</dfn> are to run these steps for each associated
+<a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> <var title="">urlObject</var>, in order:
 
 <ol>
- <li><p>If <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a> is null,
- terminate these steps.
-
- <li><p>Set <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
- <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
+ <li><p>Set <var title="">urlObject</var>'s <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
  <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's associated list of name-value pairs.
 
- <li><p>Run <a href="#concept-uq-url-object" title="concept-UQ-url-object">url object</a>'s
- <a href="#pre-update-steps">pre-update steps</a>.
+ <li><p>Run <var title="">urlObject</var>'s <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
 <p>The
