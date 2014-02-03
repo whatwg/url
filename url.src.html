@@ -2651,6 +2651,28 @@ method must return true if there is a name-value pair whose name is
 <code>URLSearchParams</code> object's associated list of name-value pairs.
 
 
+<h3>URL APIs elsewhere</h3>
+
+<p>A standard that exposes <span title=concept-url>URLs</span>, should expose the
+<span title=concept-url>URL</span> as a string (potentially by
+<span title=concept-url-serializer>serializing</span> an internal
+<span title=concept-url>URL</span>). A standard should not expose a
+<span title=concept-url>URL</span> using a <code>URL</code> object. <code>URL</code>
+objects are meant for <span title=concept-url>URL</span> manipulation.
+
+<p class=note>The higher-level notion here is that values are to be exposed as immutable
+data structures.
+
+<p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
+should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
+as "URL", "URI", and "IRI" should not be used. If the name is a compound, "URL" (i.e.
+uppercase) is preferred, e.g. "newURL" and "oldURL".
+
+<p class=note>The <code data-anolis-spec=html>EventSource</code> and
+<code data-anolis-spec=html>HashChangeEvent</code> interfaces in HTML are examples of
+proper naming. <span data-anolis-ref class=informative>HTML</span>
+
+
 
 <h2 class=no-num>References</h2>
 <div id=anolis-references></div>

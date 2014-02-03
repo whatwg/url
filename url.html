@@ -76,7 +76,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
    <li><a href="#constructors"><span class="secno">7.1 </span>Constructors</a></li>
    <li><a href="#url-statics"><span class="secno">7.2 </span><code>URL</code> statics</a></li>
    <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">7.3 </span><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</a></li>
-   <li><a href="#interface-urlsearchparams"><span class="secno">7.4 </span>Interface <code>URLSearchParams</code></a></ol></li>
+   <li><a href="#interface-urlsearchparams"><span class="secno">7.4 </span>Interface <code>URLSearchParams</code></a></li>
+   <li><a href="#url-apis-elsewhere"><span class="secno">7.5 </span>URL APIs elsewhere</a></ol></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgments">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2125,16 +2126,17 @@ constructor must run these steps:
 </ol>
 
 <div class="example">
- <p>To <a href="#concept-url-parser" title="concept-url-parser">parse</a> a <a href="#concept-url" title="concept-url">URL</a>
- without using a <a href="#concept-base-url" title="concept-base-url">base URL</a>, invoke the constructor with
- a single argument:
+ <p>To <a href="#concept-url-parser" title="concept-url-parser">parse</a> a string into a
+ <a href="#concept-url" title="concept-url">URL</a> without using a
+ <a href="#concept-base-url" title="concept-base-url">base URL</a>, invoke the constructor with a single
+ argument:
 
  <pre>var input = "http://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
 
- <p>If you rather resolve it against the <a href="#concept-base-url" title="concept-base-url">base URL</a> of a
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a>, use
+ <p>Alternatively you can use the <a href="#concept-base-url" title="concept-base-url">base URL</a> of a
+ <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> through
  <a href="http://dom.spec.whatwg.org/#dom-node-baseuri"><code class="external" data-anolis-spec="dom" title="dom-Node-baseURI">baseURI</code></a>:
 
  <pre>var input = "/💩",
@@ -2678,6 +2680,28 @@ method must return true if there is a name-value pair whose name is
 <p>The <dfn id="dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</dfn> must return the
 <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
 <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's associated list of name-value pairs.
+
+
+<h3 id="url-apis-elsewhere"><span class="secno">7.5 </span>URL APIs elsewhere</h3>
+
+<p>A standard that exposes <a href="#concept-url" title="concept-url">URLs</a>, should expose the
+<a href="#concept-url" title="concept-url">URL</a> as a string (potentially by
+<a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> an internal
+<a href="#concept-url" title="concept-url">URL</a>). A standard should not expose a
+<a href="#concept-url" title="concept-url">URL</a> using a <a href="#url"><code>URL</code></a> object. <a href="#url"><code>URL</code></a>
+objects are meant for <a href="#concept-url" title="concept-url">URL</a> manipulation.
+
+<p class="note">The higher-level notion here is that values are to be exposed as immutable
+data structures.
+
+<p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
+should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
+as "URL", "URI", and "IRI" should not be used. If the name is a compound, "URL" (i.e.
+uppercase) is preferred, e.g. "newURL" and "oldURL".
+
+<p class="note">The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
+proper naming. <a class="informative" href="#refsHTML">[HTML]</a>
 
 
 
