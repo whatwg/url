@@ -670,42 +670,65 @@ A Recommendation for IPv6 Address Text Representation.
 <!-- History behind URL as term:
      http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>A <dfn title=concept-url>URL</dfn> is a string that represents an
-identifier.
+<p>A <dfn title=concept-url>URL</dfn> is a universal identifier.
 
-<p>A <span title=concept-url>URL</span> is either a
-<span title=concept-relative-url>relative URL</span> or an
-<span title=concept-absolute-url>absolute URL</span>. Either form can be
-followed by a <span title=concept-url-fragment>fragment</span>.
+<p>A <span title=concept-url>URL</span> consists of components, namely a
+<span title=concept-url-scheme>scheme</span>,
+<span title=concept-url-scheme-data>scheme data</span>,
+<span title=concept-url-username>username</span>,
+<span title=concept-url-password>password</span>,
+<span title=concept-url-host>host</span>,
+<span title=concept-url-port>port</span>,
+<span title=concept-url-path>path</span>,
+<span title=concept-url-query>query</span>, and
+<span title=concept-url-fragment>fragment</span>.
 
-<p>A <dfn title=concept-relative-url>relative URL</dfn> is a
-<span title=concept-url>URL</span> without a <span title=concept-url-scheme>scheme</span>.
-A <span title=concept-relative-url>relative URL</span> must be relative
-to a <span title=concept-base-url>base URL</span>.
+<p>A <span title=concept-url>URL</span>'s <dfn title=concept-url-scheme>scheme</dfn> is
+a string that identifies the type of <span title=concept-url>URL</span> and can be used to
+dispatch a <span title=concept-url>URL</span> for further processing after
+<span title=concept-url-parser>parsing</span>. It is initially the empty string.
 
-<p>An <dfn title=concept-absolute-url>absolute URL</dfn> is a
-<span title=concept-url>URL</span> with a <span title=concept-url-scheme>scheme</span>.
+<p>A <span title=concept-url>URL</span>'s
+<dfn title=concept-url-scheme-data>scheme data</dfn> is a string holding the contents of a
+<span title=concept-url>URL</span>. It is initially the empty string.
 
-<p>A <dfn title=concept-base-url>base URL</dfn> is an
-<span title=concept-absolute-url>absolute URL</span> with a <span>relative scheme</span>.
+<p class="note no-backref">A <span title=concept-url>URL</span>'s
+<span title=concept-url-scheme-data>scheme data</span> will be its initial value if its
+<span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span>, and
+otherwise will be the only component without an initial value.
 
-<p><span title=concept-url-parser>Parsing</span> (provided it does not
-return failure) and <span title=concept-url-serializer>serializing</span> a
-<span title=concept-url>URL</span> will turn it into an
-<span title=concept-absolute-url>absolute URL</span>. The intermediate form
-is named a <dfn title=concept-parsed-url>parsed URL</dfn>. The components a
-<span title=concept-url>URL</span> can consist of, and a
-<span title=concept-parsed-url>parsed URL</span> consists of, are
-<dfn title=concept-url-scheme>scheme</dfn>,
-<dfn title=concept-url-scheme-data>scheme data</dfn> (not used if
-<span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span>),
-<dfn title=concept-url-username>username</dfn>,
-<dfn title=concept-url-password>password</dfn>,
-<dfn title=concept-url-host>host</dfn>,
-<dfn title=concept-url-port>port</dfn>,
-<dfn title=concept-url-path>path</dfn>,
-<dfn title=concept-url-query>query</dfn>, and
-<dfn title=concept-url-fragment>fragment</dfn>.
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-username>username</dfn>
+is a string identifying a user. It is initially the empty string.
+
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-password>password</dfn>
+is either null or a string identifying a user's credentials. It is initially null.
+
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-host>host</dfn> is
+either null or a <span title=concept-host>host</span>. It is initially null.
+
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-port>port</dfn> is a
+string that identifies a networking port. It is initially the empty string.
+
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-path>path</dfn> is a
+list of zero or more strings holding data, usually identifying a location in hierarchical
+form. It is initially the empty list.
+
+<p>A  <span title=concept-url>URL</span>'s <dfn title=concept-url-query>query</dfn> is
+either null or a string holding data. It is initially null.
+
+<p>A <span title=concept-url>URL</span>'s <dfn title=concept-url-fragment>fragment</dfn>
+is either null or a string holding data that can be used for further processing on the
+resource the remainder of the <span title=concept-url>URL</span> identifies.
+
+<p>A <span title=concept-url>URL</span> also has an associated <dfn>relative flag</dfn>.
+It is initially unset.
+
+<p class="note no-backref">The <span>relative flag</span> exists as checking if a
+<span title=concept-url>URL</span>'s <span title=concept-url-scheme>scheme</span> is a
+<span>relative scheme</span> can give incorrect results due to the
+<code title=dom-URL-protocol>protocol</code> attribute.
+<!-- XXX maybe disallow setting protocol to non-sensical values -->
+
 
 <p>A <dfn>relative scheme</dfn> is a
 <span title=concept-url-scheme>scheme</span> listed in the first column of
@@ -732,21 +755,30 @@ on the same row.
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
 
+<p>A <span title=concept-url>URL</span> can be designated as
+<dfn title=concept-base-url>base URL</dfn>.
+
+<p class="note no-backref">A <span title=concept-base-url>base URL</span> is useful for
+the <span title=concept-url-parser>URL parser</span> when the input is potentially a
+<span title=concept-relative-url>relative URL</span>.
+
 
 <h3>Writing</h3>
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
-<p>A <span title=concept-url>URL</span> must be either a
+<p>A <span title=concept-url>URL</span> must be written as either a
 <span title=concept-relative-url>relative URL</span> or an
 <span title=concept-absolute-url>absolute URL</span>, optionally followed by
 "<code title>#</code>" and a
 <span title=concept-url-fragment>fragment</span>.
 
-<p>An <span title=concept-absolute-url>absolute URL</span> must be a
+<p>An <dfn title=concept-absolute-url>absolute URL</dfn> must be a
 <span title=concept-url-scheme>scheme</span>, followed by
-"<code title>:</code>", followed by
-<span title=concept-url-scheme-data>scheme data</span>, optionally followed
+"<code title>:</code>", followed by either a
+<span title=concept-scheme-relative-url>scheme-relative URL</span>, if
+<span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span>, or
+<span title=concept-url-scheme-data>scheme data</span> otherwise, optionally followed
 by "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
 <p>A <span title=concept-url-scheme>scheme</span> must be one
@@ -758,20 +790,21 @@ by "<code title>?</code>" and a <span title=concept-url-query>query</span>.
 
 <p>The syntax of <span title=concept-url-scheme-data>scheme data</span>
 depends on the <span title=concept-url-scheme>scheme</span> and is typically
-defined alongside it. For a <span>relative scheme</span>,
-<span title=concept-url-scheme-data>scheme data</span> must be a
-<span title=concept-scheme-relative-url>scheme-relative URL</span>. For
-other <span title=concept-url-scheme>schemes</span>, specifications or
-standards must define <span title=concept-url-scheme-data>scheme data</span>
-within the constraints of zero or more <span>URL units</span>.
+defined alongside it. Standards must define
+<span title=concept-url-scheme-data>scheme data</span> within the constraints of zero or
+more <span>URL units</span>.
 
-<p>A <span title=concept-relative-url>relative URL</span> must be either a
+<p>A <dfn title=concept-relative-url>relative URL</dfn> must be either a
 <span title=concept-scheme-relative-url>scheme-relative URL</span>, an
 <span title=concept-absolute-path-relative-url>absolute-path-relative URL</span>,
 or a <span title=concept-path-relative-url>path-relative URL</span> that
 does not start with a <span title=concept-url-scheme>scheme</span> and
 "<code title>:</code>", optionally followed by a "<code title>?</code>" and
 a <span title=concept-url-query>query</span>.
+
+<p>At the point where a <span title=concept-relative-url>relative URL</span> is
+<span title=concept-url-parser>parsed</span>, a
+<span title=concept-base-url>base URL</span> must be in scope.
 
 <p>A <dfn title=concept-scheme-relative-url>scheme-relative URL</dfn> must be
 "<code title>//</code>", optionally followed by
@@ -871,16 +904,6 @@ U+100000 to U+10FFFD.
 
 <h3>Parsing</h3>
 
-<p>Aside from the components mentioned earlier, a
-<span title=concept-parsed-url>parsed URL</span> also has an associated
-<dfn>relative flag</dfn>.
-
-<p class=note>The <span>relative flag</span> exists as checking if a
-<span title=concept-parsed-url>parsed URL</span>'s
-<span title=concept-url-scheme>scheme</span> is a <span>relative scheme</span> can give
-incorrect results due to the <code title=dom-URL-protocol>protocol</code> attribute.
-<!-- XXX maybe disallow setting protocol to non-sensical values -->
-
 <p class=XXX>Add the ability to halt on the first conformance error.
 
 <p>The <dfn title=concept-url-parser>URL parser</dfn> takes a string
@@ -888,7 +911,7 @@ incorrect results due to the <code title=dom-URL-protocol>protocol</code> attrib
 <span title=concept-base-url>base URL</span> <var title>base</var>,
 optionally with an <span data-anolis-spec=encoding>encoding</span>
 <var title>encoding override</var>, optionally with an
-<span title=concept-parsed-url>parsed URL</span> <var title>url</var> and a state override
+<span title=concept-url>URL</span> <var title>url</var> and a state override
 <var title>state override</var>, and then runs these steps:
 
 <div class="note no-backref">
@@ -899,7 +922,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
  <p>When the <var title>url</var> and <var title>state override</var> arguments are not
  passed the  <span title=concept-url-parser>URL parser</span> returns either a
- <span title=concept-parsed-url>parsed URL</span> or failure. If they are passed the
+ <span title=concept-url>URL</span> or failure. If they are passed the
  algorithm simply modifies the passed <var title>url</var> and can terminate without
  returning anything.
 </div>
@@ -909,19 +932,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
   <p>If <var title>url</var> is not given:
 
   <ol>
-   <li><p>Set <var title>url</var> to a new
-   <span title=concept-parsed-url>parsed URL</span>.
-
-   <li><p>Set <var title>url</var>'s <span title=concept-url-scheme>scheme</span>,
-   <span title=concept-url-scheme-data>scheme data</span>,
-   <span title=concept-url-username>username</span>, and
-   <span title=concept-url-port>port</span> to the empty string,
-   <span title=concept-url-password>password</span>,
-   <span title=concept-url-host>host</span>,
-   <span title=concept-url-query>query</span>, and
-   <span title=concept-url-fragment>fragment</span> to null,
-   <span title=concept-url-path>path</span> to the empty list, and unset its
-   <span>relative flag</span>.
+   <li><p>Set <var title>url</var> to a new <span title=concept-url>URL</span>.
 
    <li><p>Remove any leading and trailing
    <span data-anolis-spec=encoding>ASCII whitespace</span> from
@@ -1636,7 +1647,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 <h3>Serializing</h3>
 
 <p>The <dfn title=concept-url-serializer>URL serializer</dfn> takes a
-<span title=concept-parsed-url>parsed URL</span> <var title>url</var>,
+<span title=concept-url>URL</span> <var title>url</var>,
 optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <ol>
@@ -1971,7 +1982,7 @@ URLPath would be a subclassed Array? -->
 <p>Specifications defining objects implementing <code>URLUtils</code> or
 <code>URLUtilsReadOnly</code> must define a
 <dfn title=concept-UU-get-the-base>get the base</dfn> algorithm, which must return the
-appropriate <span title=concept-base-URL>base URL</span> for the object.
+appropriate <span title=concept-base-url>base URL</span> for the object.
 
 <p>Specifications defining objects implementing <code>URLUtils</code> may
 define <dfn title=concept-UU-update>update steps</dfn> to make it possible for an
@@ -1986,8 +1997,7 @@ associated <dfn title=concept-UU-input>input</dfn> (a string),
 (an <span data-anolis-spec=encoding>encoding</span>),
 <dfn title=concept-UU-query-object>query object</dfn>
 (a <code>URLSearchParams</code> object or null), and a
-<dfn title=concept-UU-url>url</dfn> (a
-<span title=concept-parsed-url>parsed URL</span> or null).
+<dfn title=concept-UU-url>url</dfn> (a <span title=concept-url>URL</span> or null).
 
 Unless stated otherwise, <span title=concept-UU-query-encoding>query encoding</span> is
 <span data-anolis-spec=encoding>utf-8</span>. The others follow from the
@@ -2010,7 +2020,7 @@ concept only relevant for HTML.
 
  <li><p>Set <span title=concept-UU-input>input</span> to the given value.
 
- <li><p>Let <var title>parsed URL</var> be the result of
+ <li><p>Let <var title>URL</var> be the result of
  <span title=concept-url-parser>parsing</span>
  <span title=concept-UU-input>input</span> with
  <span title=concept-base-url>base URL</span> being the result of running
@@ -2018,8 +2028,8 @@ concept only relevant for HTML.
  <span title=concept-UU-query-encoding>query encoding</span> as
  <var title>encoding override</var>.
 
- <li><p>If <var title>parsed URL</var> is not failure, set
- <span title=concept-UU-url>url</span> to <var title>parsed URL</var>.
+ <li><p>If <var title>URL</var> is not failure, set
+ <span title=concept-UU-url>url</span> to <var title>URL</var>.
 
  <li>
   <p>If <span title=concept-UU-url>url</span> is non-null and its
@@ -2085,16 +2095,17 @@ constructor must run these steps:
 </ol>
 
 <div class=example>
- <p>To <span title=concept-url-parser>parse</span> a <span title=concept-url>URL</span>
- without using a <span title=concept-base-url>base URL</span>, invoke the constructor with
- a single argument:
+ <p>To <span title=concept-url-parser>parse</span> a string into a
+ <span title=concept-url>URL</span> without using a
+ <span title=concept-base-url>base URL</span>, invoke the constructor with a single
+ argument:
 
  <pre>var input = "http://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
 
- <p>If you rather resolve it against the <span title=concept-base-url>base URL</span> of a
- <span data-anolis-spec=dom title=concept-document>document</span>, use
+ <p>Alternatively you can use the <span title=concept-base-url>base URL</span> of a
+ <span data-anolis-spec=dom title=concept-document>document</span> through
  <code data-anolis-spec=dom title=dom-Node-baseURI>baseURI</code>:
 
  <pre>var input = "/💩",
