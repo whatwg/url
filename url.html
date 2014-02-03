@@ -760,6 +760,14 @@ It is initially unset.
 <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
+<p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
+<dfn id="concept-url-object" title="concept-url-object">object</dfn> that is either null or a
+<a href="http://dev.w3.org/2006/webapi/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a>.
+<a href="#refsFILEAPI">[FILEAPI]</a>
+
+<p class="note">At this point this is used primarily to support "<code title="">blob</code>"
+URLs, but others can be added going forward, hence "object".
+
 
 <p>A <dfn id="relative-scheme">relative scheme</dfn> is a
 <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> listed in the first column of
@@ -939,6 +947,36 @@ U+100000 to U+10FFFD.
 
 <p>The <dfn id="concept-url-parser" title="concept-url-parser">URL parser</dfn> takes a string
 <var title="">input</var>, optionally with a
+<a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>, and
+optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<var title="">encoding override</var>, and then runs these steps:
+
+<ol>
+ <li><p>Let <var title="">url</var> be the result of running the
+ <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">input</var>
+ with <var title="">base</var>, and <var title="">encoding override</var> as provided.
+
+ <li><p>If <var title="">url</var> is failure, return failure.
+
+ <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
+ "<code title="">blob</code>", return <var title="">url</var>.
+
+ <li><p>If <var title="">url</var>'s <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>
+ is not in the <a class="external" data-anolis-spec="fileapi" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a>, return
+ <var title="">url</var>. <a href="#refsFILEAPI">[FILEAPI]</a>
+
+ <li><p>Set <var title="">url</var>'s <a href="#concept-url-object" title="concept-url-object">object</a> to a
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-dom-interfaces.html#structured-clone">structured clone</a> of the entry in the
+ <a class="external" data-anolis-spec="fileapi" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a> corresponding to
+ <var title="">url</var>'s <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
+ <a href="#refsHTML">[HTML]</a>
+
+ <li><p>Return <var title="">url</var>.
+</ol>
+
+
+<p>The <dfn id="concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</dfn> takes a string
+<var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var title="">encoding override</var>, optionally with an
@@ -949,10 +987,10 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <p>The <var title="">encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var title="">url</var> and <var title="">state override</var> arguments are only for
  use by methods of objects implementing the <a href="#urlutils"><code>URLUtils</code></a> interface.
- <a class="informative" href="#refsHTML">[HTML]</a>
+ <a href="#refsHTML">[HTML]</a>
 
  <p>When the <var title="">url</var> and <var title="">state override</var> arguments are not
- passed the  <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> returns either a
+ passed the <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> returns either a
  <a href="#concept-url" title="concept-url">URL</a> or failure. If they are passed the
  algorithm simply modifies the passed <var title="">url</var> and can terminate without
  returning anything.
@@ -1757,7 +1795,7 @@ encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x
 <p class="note no-backref">While this description makes
 <a href="#application/x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code></a> sound dated — and really, it is — the
 format is in widespread use due to its prevalence of HTML forms.
-<a class="informative" href="#refsHTML">[HTML]</a>
+<a href="#refsHTML">[HTML]</a>
 
 <h3 id="urlencoded-parsing"><span class="secno">6.1 </span>Parsing</h3>
 
@@ -2037,7 +2075,7 @@ Unless stated otherwise, <a href="#concept-uu-query-encoding" title="concept-UU-
 <p class="note">The associated
 <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is a legacy
 concept only relevant for HTML.
-<a class="informative" href="#refsHTML">[HTML]</a>
+<a href="#refsHTML">[HTML]</a>
 
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> or
 <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> must use the
@@ -2051,16 +2089,17 @@ concept only relevant for HTML.
 
  <li><p>Set <a href="#concept-uu-input" title="concept-UU-input">input</a> to the given value.
 
- <li><p>Let <var title="">URL</var> be the result of
- <a href="#concept-url-parser" title="concept-url-parser">parsing</a>
+ <li><p>Let <var title="">url</var> be the result of running the
+ <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
  <a href="#concept-uu-input" title="concept-UU-input">input</a> with
  <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
  <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> and
  <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
  <var title="">encoding override</var>.
+ <!-- support blob URLs at this level -->
 
- <li><p>If <var title="">URL</var> is not failure, set
- <a href="#concept-uu-url" title="concept-UU-url">url</a> to <var title="">URL</var>.
+ <li><p>If <var title="">url</var> is not failure, set
+ <a href="#concept-uu-url" title="concept-UU-url">url</a> to <var title="">url</var>.
 
  <li>
   <p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is non-null and its
@@ -2105,8 +2144,8 @@ concept only relevant for HTML.
 constructor must run these steps:
 
 <ol>
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">base</var> and set
- <var title="">base</var> to the result of that algorithm.
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">base</var>
+ and set <var title="">base</var> to the result of that algorithm.
 
  <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code title="">TypeError</code> exception.
@@ -2126,7 +2165,7 @@ constructor must run these steps:
 </ol>
 
 <div class="example">
- <p>To <a href="#concept-url-parser" title="concept-url-parser">parse</a> a string into a
+ <p>To <a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> a string into a
  <a href="#concept-url" title="concept-url">URL</a> without using a
  <a href="#concept-base-url" title="concept-base-url">base URL</a>, invoke the constructor with a single
  argument:
@@ -2211,7 +2250,7 @@ run these steps:
 </ol>
 
 <p class="note">This means that if the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute is set
-to value that would cause the <a href="#concept-url-parser" title="concept-url-parser">parser</a> to return
+to value that would cause the <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> to return
 failure, that value is still passed through unchanged. This is one of those unfortunate
 legacy incidents.
 <!--
@@ -2235,7 +2274,7 @@ run these steps:
 
 <p class="note">It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature.
-<a class="informative" href="#refsHTML">[HTML]</a>
+<a href="#refsHTML">[HTML]</a>
 
 <p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
 must run these steps:
@@ -2255,7 +2294,7 @@ run these steps:
  <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, terminate
  these steps.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value and
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> the given value and
  "<code title="">:</code>" concatenated with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#scheme-start-state">scheme start state</a> as <var title="">state override</var>.
@@ -2346,7 +2385,7 @@ steps:
  <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#host-state">host state</a> as <var title="">state override</var>.
 
@@ -2371,7 +2410,7 @@ run these steps:
  <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#hostname-state">hostname state</a> as <var title="">state override</var>.
 
@@ -2397,8 +2436,8 @@ steps:
  <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is "<code title="">file</code>",
  terminate these steps.
 
- <li><p>Otherwise, <a href="#concept-url-parser" title="concept-url-parser">parse</a> the given value with
- <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
+ <li><p>Otherwise, <a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a>
+ the given value with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#port-state">port state</a> as <var title="">state override</var>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
@@ -2428,7 +2467,7 @@ run these steps:
 
  <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> the given value with
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> the given value with
  <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#relative-path-start-state">relative path start state</a> as <var title="">state override</var>.
 
@@ -2465,7 +2504,7 @@ these steps:
 
  <li><p>Set <a href="#concept-url-query" title="concept-url-query">query</a> to the empty string.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">input</var>
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">input</var>
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>,
  <a href="#query-state">query state</a> as <var title="">state override</var>, and the
  associated <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
@@ -2546,7 +2585,7 @@ steps:
  <li><p>Set <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a> to
  the empty string.
 
- <li><p><a href="#concept-url-parser" title="concept-url-parser">Parse</a> <var title="">input</var>
+ <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">input</var>
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var> and
  <a href="#fragment-state">fragment state</a> as <var title="">state override</var>.
 
@@ -2701,7 +2740,7 @@ uppercase) is preferred, e.g. "newURL" and "oldURL".
 
 <p class="note">The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
 <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
-proper naming. <a class="informative" href="#refsHTML">[HTML]</a>
+proper naming. <a href="#refsHTML">[HTML]</a>
 
 
 
@@ -2712,8 +2751,11 @@ proper naming. <a class="informative" href="#refsHTML">[HTML]</a>
 <dt id="refsENCODING">[ENCODING]
 <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
 
+<dt id="refsFILEAPI">[FILEAPI]
+<dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
+
 <dt id="refsHTML">[HTML]
-<dd>(Non-normative) <cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
+<dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsIDNA">[IDNA]
 <dd><cite><a href="http://tools.ietf.org/html/rfc3490">Internationalizing Domain Names in Applications (IDNA)</a></cite>, P. Faltstrom, Paul Hoffman and A. Costello. IETF.
