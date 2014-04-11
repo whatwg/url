@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-19-march-2014">Living Standard — Last Updated 19 March 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-april-2014">Living Standard — Last Updated 11 April 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-19 March 2014, the editors have made this specification available
+11 April 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -179,9 +179,8 @@ processed and <var title="">pointer</var> points to "<code title="">@</code>",
 <p>A <dfn id="percent-encoded-byte">percent-encoded byte</dfn> is "<code title="">%</code>", followed by
 two <a href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>, after
-conversion to bytes, should not cause
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> to run into any
+conversion to bytes, should not cause a
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> to run into any
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error" title="error">errors</a>.
 
 <p>To <dfn id="percent-encode">percent encode</dfn> a <var title="">byte</var> into a
@@ -191,9 +190,9 @@ representation of <var title="">byte</var>.
 
 <p>To <dfn id="percent-decode">percent decode</dfn> a byte sequence <var title="">input</var>, run these steps:
 
-<p class="warning">Using anything but <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> when the <var title="">input</var> contains
-bytes outside the range 0x00 to 0x7F might be insecure and is not recommended.
+<p class="warning">Using anything but a <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a>
+when the <var title="">input</var> contains bytes outside the range 0x00 to 0x7F might be
+insecure and is not recommended.
 
 <ol>
  <li><p>Let <var title="">output</var> be an empty byte sequence.
@@ -216,8 +215,8 @@ bytes outside the range 0x00 to 0x7F might be insecure and is not recommended.
     <ol>
      <li><p>Let <var title="">bytePoint</var> be the two bytes after <var title="">byte</var> in
      <var title="">input</var>,
-     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">encoded</a>, and then
-     interpreted as hexadecimal number.
+     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>, and
+     then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
      <li><p>Append a byte whose value is <var title="">bytePoint</var> to
@@ -409,10 +408,9 @@ these steps:
    "<code title="">]</code>" removed.
   </ol>
 
- <li><p>Let <var title="">host</var> be the result of running
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>'s
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
- <a href="#percent-decode" title="percent decode">percent decoding</a> of running
+ <li><p>Let <var title="">host</var> be the result of
+ <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom">utf-8 decode without BOM</a> on the
+ <a href="#percent-decode" title="percent decode">percent decoding</a> of
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var title="">input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
@@ -949,12 +947,12 @@ U+100000 to U+10FFFD.
 <var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>, and
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
-<var title="">encoding override</var>, and then runs these steps:
+<var>encoding override</var>, and then runs these steps:
 
 <ol>
  <li><p>Let <var title="">url</var> be the result of running the
  <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">input</var>
- with <var title="">base</var>, and <var title="">encoding override</var> as provided.
+ with <var title="">base</var>, and <var>encoding override</var> as provided.
 
  <li><p>If <var title="">url</var> is failure, return failure.
 
@@ -979,12 +977,12 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 <var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
 optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
-<var title="">encoding override</var>, optionally with an
+<var>encoding override</var>, optionally with an
 <a href="#concept-url" title="concept-url">URL</a> <var title="">url</var> and a state override
 <var title="">state override</var>, and then runs these steps:
 
 <div class="note no-backref">
- <p>The <var title="">encoding override</var> argument is a legacy concept only relevant for
+ <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var title="">url</var> and <var title="">state override</var> arguments are only for
  use by methods of objects implementing the <a href="#urlutils"><code>URLUtils</code></a> interface.
  <a href="#refsHTML">[HTML]</a>
@@ -1013,7 +1011,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 
  <li><p>If <var title="">base</var> is not given, set it to null.
 
- <li><p>If <var title="">encoding override</var> is not given, set it to
+ <li><p>If <var>encoding override</var> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Let <var title="">buffer</var> be the empty string.
@@ -1626,15 +1624,12 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
        <li><p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is unset or
        <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is either
        "<code title="">ws</code>" or "<code title="">wss</code>", set
-       <var title="">encoding override</var> to <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+       <var>encoding override</var> to <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
        <!-- http://simon.html5.org/test/url/url-encoding.html -->
 
-       <li><p>Set <var title="">buffer</var> to the result of running
-       <var title="">encoding override</var>'s
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on
-       <var title="">buffer</var>, with <var title="">encoding override</var>'s
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a>'s
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error-handling-mode">error handling mode</a> set to <i title="">URL</i>.
+       <li><p>Set <var title="">buffer</var> to the result of
+       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoding</a>
+       <var title="">buffer</var> using <var>encoding override</var>.
 
        <li>
         <p>For each <var title="">byte</var> in <var title="">buffer</var> run
@@ -1809,16 +1804,16 @@ requires.
 <p>The
 <dfn id="concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var title="">input</var>, optionally with an
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a> <var title="">encoding override</var>,
+<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
 optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 <i title="">isindex flag</i>, and then runs these steps:
 
 <ol>
- <li><p>If <var title="">encoding override</var> is not given, set it to
+ <li><p>If <var>encoding override</var> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li>
-  <p>If <var title="">encoding override</var> is not
+  <p>If <var>encoding override</var> is not
   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> and <var title="">input</var> contains bytes
   whose value is greater than 0x7F, return failure.
 
@@ -1859,16 +1854,19 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
    <li><p>Replace any `<code title="">+</code>` in <var title="">name</var> and
    <var title="">value</var> with 0x20.
 
-   <li><p>If <i title="">use _charset_ flag</i> is set, <var title="">name</var> is
-   `<code title="">_charset_</code>`, and
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">get an encoding</a>
-   for <var title="">value</var>,
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">encoded</a>, does not return
-   failure, unset <i title="">use _charset_ flag</i> and set
-   <var title="">encoding override</var> to the result of
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
-   for <var title="">value</var>,
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">encoded</a>.
+   <li>
+    <p>If <i title="">use _charset_ flag</i> is set, <var title="">name</var> is
+    `<code title="">_charset_</code>`, run these substeps:
+
+    <ol>
+     <li><p>Let <var>result</var> be the result of
+     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
+     for <var title="">value</var>,
+     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>.
+
+     <li><p>If <var>result</var> is not failure, unset <i title="">use _charset_ flag</i> and
+     set <var>encoding override</var> to <var>result</var>.
+    </ol>
 
    <li><p>Add a pair consisting of <var title="">name</var> and
    <var title="">value</var> to <var title="">pairs</var>.
@@ -1879,7 +1877,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 
  <li><p>For each name-value pair in <var title="">pairs</var>, append a name-value pair to
  <var title="">output</var> where the new name and value appended to <var title="">output</var>
- are the result of running <var title="">encoding override</var>'s
+ are the result of running <var>encoding override</var>'s
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
  <a href="#percent-decode" title="percent decode">percent decoding</a> of the name and value from
  <var title="">pairs</var>, respectively.
@@ -1935,10 +1933,10 @@ takes a byte sequence <var title="">input</var> and then runs these steps:
 <dfn id="concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value pairs <var title="">pairs</var>, optionally with an
 <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
-<var title="">encoding override</var>, and then runs these steps:
+<var>encoding override</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var title="">encoding override</var> is not given, set it to
+ <li><p>If <var>encoding override</var> is not given, set it to
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Let <var title="">output</var> be the empty string.
@@ -1949,11 +1947,8 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
 
   <ol>
    <li><p>Replace <var title="">pair</var>'s name and value with the result of
-   running <var title="">encoding override</var>'s
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a> on them, with
-   <var title="">encoding override</var>'s <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoder">encoder</a>'s
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error-handling-mode">error handling mode</a> set to
-   <i title="">&lt;form&gt;</i>, respectively.
+   running <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on them using
+   <var>encoding override</var>, respectively.
 
    <li><p>Replace <var title="">pair</var>'s name and value with their
    <a href="#concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer">serialization</a>.
@@ -2095,7 +2090,7 @@ concept only relevant for HTML.
  <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
  <a href="#concept-uu-get-the-base" title="concept-UU-get-the-base">get the base</a> and
  <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
- <var title="">encoding override</var>.
+ <var>encoding override</var>.
  <!-- support blob URLs at this level -->
 
  <li><p>If <var title="">url</var> is not failure, set
@@ -2508,7 +2503,7 @@ these steps:
  with <a href="#concept-uu-url" title="concept-UU-url">url</a> as <var title="">url</var>,
  <a href="#query-state">query state</a> as <var title="">state override</var>, and the
  associated <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> as
- <var title="">encoding override</var>.
+ <var>encoding override</var>.
 
  <li><p>Set <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s
  associated list of name-value pairs to the result of
@@ -2810,7 +2805,8 @@ Santiago M. Mola,
 Simon Pieters,
 Simon Sapin,
 Tab Atkins,
-Tantek Çelik, and
+Tantek Çelik,
+Vyacheslav Matva, and
 成瀬ゆい (Yui Naruse)
 for being awesome!
 
