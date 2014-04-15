@@ -7,7 +7,7 @@
 
 <p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 <h1>URL</h1>
-<h2 class="no-num no-toc" id="living-standard-—-last-updated-11-april-2014">Living Standard — Last Updated 11 April 2014</h2>
+<h2 class="no-num no-toc" id="living-standard-—-last-updated-15-april-2014">Living Standard — Last Updated 15 April 2014</h2>
 
 <dl>
  <dt>This Version:
@@ -35,7 +35,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 April 2014, the editors have made this specification available
+15 April 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -130,9 +130,10 @@ not appear in all uppercase letters in this specification.
 <h2 id="terminology"><span class="secno">2 </span>Terminology</h2>
 
 <p>Some terms used in this specification are defined in the
-DOM and Encoding Standards.
+DOM, Encoding, and IDNA Standards.
 <a href="#refsDOM">[DOM]</a>
 <a href="#refsENCODING">[ENCODING]</a>
+<a href="#refsIDNA">[IDNA]</a>
 
 <p>The <dfn id="ascii-digits">ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 <!-- XXX ref Encoding? -->
@@ -146,10 +147,6 @@ or in the range U+0061 to U+007A.
 <p>The <dfn id="ascii-alphanumeric">ASCII alphanumeric</dfn> are <a href="#ascii-digits">ASCII digits</a> or
 <a href="#ascii-alpha">ASCII alpha</a>.
 
-
-<p>The <dfn id="domain-label-separators">domain label separators</dfn> are the code points
-U+002E, U+3002, U+FF0E, and U+FF61.
-<!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
 
 <h3 id="parsers"><span class="secno">2.1 </span>Parsers</h3>
 
@@ -286,8 +283,7 @@ an <var title="">encode set</var>, run these steps:
 <a href="#concept-domain" title="concept-domain">domain</a> or an
 <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>.
 
-<p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> is an ordered list of one or
-more <dfn id="concept-domain-label" title="concept-domain-label">domain labels</dfn>.
+<p>A <dfn id="concept-domain" title="concept-domain">domain</dfn> identifies a realm within a network.
 
 <p>An <dfn id="concept-ipv6" title="concept-ipv6">IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
@@ -297,55 +293,35 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 
 <h3 id="idna"><span class="secno">4.1 </span>IDNA</h3>
 
-<p>The <dfn id="concept-domain-label-to-ascii" title="concept-domain-label-to-ascii">domain label to ASCII</dfn> algorithm is
-the <a class="external" data-anolis-spec="idna" href="http://tools.ietf.org/html/rfc3490#section-4.1" title="ToASCII">IDNA2003 ToASCII algorithm</a> with the
-AllowUnassigned flag set and the version of Unicode used being the most recent version
-rather than Unicode 3.2.
-
-<p>The <dfn id="concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</dfn> algorithm
-is the <a class="external" data-anolis-spec="idna" href="http://tools.ietf.org/html/rfc3490#section-4.2" title="ToUnicode">IDNA2003 ToUnicode algorithm</a>
-with the AllowUnassigned flag set and the version of Unicode used being the most recent
-version rather than Unicode 3.2.
-<a href="#refsIDNA">[IDNA]</a>
-<a href="#refsUNICODE">[UNICODE]</a>
-
-<p class="note">Using the latest version of Unicode as well as IDNA2003 rather than IDNA2008
-are willful violations, to be compatible with widely deployed clients.
-
-<p>The <dfn id="concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</dfn> algorithm takes a
-<a href="#concept-domain" title="concept-domain">domain</a> <var title="">input</var> and then runs these steps:
+<p>The <dfn id="concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</dfn> given a
+<a href="#concept-domain" title="concept-domain">domain</a> <var title="">domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var title="">asciiLabels</var> be an empty list.
+ <li><p>Let <var>result</var> be the result of running
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToASCII" title="ToASCII">Unicode ToASCII</a> with
+ <i>domain_name</i> set to <var title="">domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
+ <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>On each <a href="#concept-domain-label" title="concept-domain-label">domain label</a> in
- <var title="">input</var>, in order, run the
- <a href="#concept-domain-label-to-ascii" title="concept-domain-label-to-ascii">domain label to ASCII</a> algorithm.
- If that operation failed, return failure.
- Otherwise, append the result to <var title="">asciiLabels</var>.
+ <li><p>If <var>result</var> is a failure value, return failure.
 
- <li><p>Return <var title="">asciiLabels</var>.
+ <li><p>Return <var>result</var>.
 </ol>
 
-<p>The <dfn id="concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</dfn> algorithm takes a
-<a href="#concept-domain" title="concept-domain">domain</a> <var title="">input</var> and then runs these steps:
+<p>The <dfn id="concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</dfn> given a
+<a href="#concept-domain" title="concept-domain">domain</a> <var title="">domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var title="">unicodeLabels</var> be an empty list.
+ <li><p>Let <var>result</var> be the result of running
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
+ <i>domain_name</i> set to <var title="">domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false.
 
  <li>
-  <p>On each <a href="#concept-domain-label" title="concept-domain-label">domain label</a> in
-  <var title="">input</var>, in order, run the
-  <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm and
-  append the result to <var title="">unicodeLabels</var>.
+  <p>Return <var>result</var>, ignoring any returned errors.
 
-  <p class="note">Note that the
-  <a href="#concept-domain-label-to-unicode" title="concept-domain-label-to-unicode">domain label to Unicode</a> algorithm
-  cannot fail.
-
- <li><p>Return <var title="">unicodeLabels</var>.
+  <p class="note">User agents are encouraged to report errors through a developer console.
 </ol>
-
 
 
 <h3 id="host-writing"><span class="secno">4.2 </span>Writing</h3>
@@ -355,21 +331,33 @@ are willful violations, to be compatible with widely deployed clients.
 by an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, followed by
 "<code title="">]</code>".
 
-<p>A <a href="#concept-domain" title="concept-domain">domain</a> is one or more
-<a href="#concept-domain-label" title="concept-domain-label">domain labels</a> separated from each
-other by a
-<a href="#domain-label-separators" title="domain label separators">domain label separator</a>,
-optionally followed by a
-<a href="#domain-label-separators" title="domain label separators">domain label separator</a>.
+<p>A <var title="">domain</var> is a <dfn id="valid-domain">valid domain</dfn> if these steps return success:
 
-<p class="note">A trailing
-<a href="#domain-label-separators" title="domain label separators">domain label separator</a>
-signifies an empty <a href="#concept-domain-label" title="concept-domain-label">domain label</a>.
-<!-- if a domain has 4 labels, no trailing dot, and each label consists only
-     of ASCII digits it's IPv4 because the last label of a domain cannot
-     start with an ASCII digit -->
+<ol>
+ <li><p>Let <var>result</var> be the result of running
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToASCII" title="ToASCII">Unicode ToASCII</a> with
+ <i>domain_name</i> set to <var title="">domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
+ <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
 
-<p class="XXX">A <a href="#concept-domain-label" title="concept-domain-label">domain label</a> is ...
+ <li><p>If <var>result</var> is a failure value, return failure.
+
+ <li><p>Set <var>result</var> to the result of running
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
+ <i>domain_name</i> set to <var title="">result</var>,
+ <i>UseSTD3ASCIIRules</i> set to true.
+
+ <li><p>If <var>result</var> contains any errors, return failure.
+
+ <li><p>Return success.
+</ol>
+
+<p class="XXX">Ideally we define this in terms of a sequence of code points that make up a
+<a href="#valid-domain">valid domain</a> rather than through a whack-a-mole:
+<a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334">bug 25334</a>.
+
+<p>A <a href="#concept-domain" title="concept-domain">domain</a> must be a string that is a
+<a href="#valid-domain">valid domain</a>.
 
 <p>An <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> is defined in the
 <a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
@@ -414,38 +402,27 @@ these steps:
  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var title="">input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
- <li><p>Let <var title="">domain</var> be the result of splitting <var title="">host</var> on
- any <a href="#domain-label-separators">domain label separators</a>.
-
  <li><p>Let <var title="">asciiDomain</var> be the result of running
  <a href="#concept-domain-to-ascii" title="concept-domain-to-ascii">domain to ASCII</a> on <var title="">domain</var>.
 
  <li><p>If <var title="">asciiDomain</var> is failure, return failure.
 
  <li>
-  <p>For each <a href="#concept-domain-label" title="concept-domain-label">label</a> <var title="">asciiLabel</var> in
-  <var title="">asciiDomain</var>, and then for each code point <var title="">cp</var> in
-  <var title="">asciiLabel</var>, depending on <var title="">cp</var>:
-
-  <dl class="switch">
-   <dt><a href="#ascii-alpha">ASCII alpha</a>
-   <dd>Lowercase <var title="">cp</var> in <var title="">asciiLabel</var>.
-   <dt>U+0000
-   <dt>U+0009
-   <dt>U+000A
-   <dt>U+000D
-   <dt>U+0020
-   <dt>"<code title="">#</code>"<!-- 23 -->
-   <dt>"<code title="">%</code>"<!-- 25 -->
-   <dt>"<code title="">/</code>"<!-- 2F -->
-   <dt>"<code title="">:</code>"<!-- 3A -->
-   <dt>"<code title="">?</code>"<!-- 3F -->
-   <dt>"<code title="">@</code>"<!-- 40 -->
-   <dt>"<code title="">\</code>"<!-- 5C -->
-   <dd>Return failure.
-   <dt>Otherwise
-   <dd>Do nothing.
-  </dl>
+  <p>If <var title="">asciiDomain</var> contains one of
+  U+0000,
+  U+0009,
+  U+000A,
+  U+000D,
+  U+0020,
+  "<code title="">#</code>",<!-- 23 -->
+  "<code title="">%</code>",<!-- 25 -->
+  "<code title="">/</code>",<!-- 2F -->
+  "<code title="">:</code>",<!-- 3A -->
+  "<code title="">?</code>",<!-- 3F -->
+  "<code title="">@</code>",<!-- 40 -->
+  and
+  "<code title="">\</code>",<!-- 5C -->
+  return failure.
 
  <li><p>Return <var title="">asciiDomain</var> if the <var title="">Unicode flag</var> is unset,
  and the result of running <a href="#concept-domain-to-unicode" title="concept-domain-to-unicode">domain to Unicode</a>
@@ -635,8 +612,7 @@ these steps:
  followed by "<code title="">]</code>".
 
  <li><p>Otherwise, <var title="">host</var> is a <a href="#concept-domain" title="concept-domain">domain</a>,
- return its <a href="#concept-domain-label" title="concept-domain-label">labels</a> separated from each other by
- U+002E.
+ return <var title="">host</var>.
 </ol>
 
 <p>The <dfn id="concept-ipv6-serializer" title="concept-ipv6-serializer">IPv6 serializer</dfn> takes an
@@ -2191,10 +2167,10 @@ static method must run these steps:
  <li><p>Let <var title="">asciiDomain</var> be the result of
  <a href="#concept-host-parser" title="concept-host-parser">host parsing</a> <var title="">domain</var>.
 
- <li><p>If <var title="">asciiDomain</var> is failure, return <var title="">domain</var>.
+ <li><p>If <var title="">asciiDomain</var> is an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>
+ or failure, return the empty string.
 
- <li><p>Return <var title="">asciiDomain</var>,
- <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
+ <li><p>Return <var title="">asciiDomain</var>.
 </ol>
 
 <p>The
@@ -2206,10 +2182,10 @@ static method must run these steps:
  <a href="#concept-host-parser" title="concept-host-parser">host parsing</a> <var title="">domain</var> with the
  <var title="">Unicode flag</var> set.
 
- <li><p>If <var title="">unicodeDomain</var> is failure, return <var title="">domain</var>.
+ <li><p>If <var title="">unicodeDomain</var> is an
+ <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a> or failure, return the empty string.
 
- <li><p>Return <var title="">unicodeDomain</var>,
- <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
+ <li><p>Return <var title="">unicodeDomain</var>.
 </ol>
 
 
@@ -2749,7 +2725,7 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsIDNA">[IDNA]
-<dd><cite><a href="http://tools.ietf.org/html/rfc3490">Internationalizing Domain Names in Applications (IDNA)</a></cite>, P. Faltstrom, Paul Hoffman and A. Costello. IETF.
+<dd><cite><a href="http://www.unicode.org/reports/tr46/proposed.html">Unicode IDNA Compatibility Processing (Proposed Update)</a></cite>, Mark Davis and Michel Suignard. Unicode Consortium.
 
 <dt id="refsIPV6">[IPV6]
 <dd><cite><a href="http://tools.ietf.org/html/rfc4291">IP Version 6 Addressing Architecture</a></cite>, R. Hinden and Steve Deering. IETF.
@@ -2765,9 +2741,6 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
-
-<dt id="refsUNICODE">[UNICODE]
-<dd><cite><a href="http://www.unicode.org/versions/latest/">Unicode Standard</a></cite>. Unicode Consortium.
 
 <dt id="refsURI">[URI]
 <dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>, Tim Berners-Lee, Roy Fielding and Larry Masinter. IETF.

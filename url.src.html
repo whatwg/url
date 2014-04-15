@@ -99,9 +99,10 @@ not appear in all uppercase letters in this specification.
 <h2>Terminology</h2>
 
 <p>Some terms used in this specification are defined in the
-DOM and Encoding Standards.
+DOM, Encoding, and IDNA Standards.
 <span data-anolis-ref>DOM</span>
 <span data-anolis-ref>ENCODING</span>
+<span data-anolis-ref>IDNA</span>
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 <!-- XXX ref Encoding? -->
@@ -115,10 +116,6 @@ or in the range U+0061 to U+007A.
 <p>The <dfn>ASCII alphanumeric</dfn> are <span>ASCII digits</span> or
 <span>ASCII alpha</span>.
 
-
-<p>The <dfn>domain label separators</dfn> are the code points
-U+002E, U+3002, U+FF0E, and U+FF61.
-<!-- IDNA2003/UTS #46; IDNA2008 does not define these -->
 
 <h3>Parsers</h3>
 
@@ -255,8 +252,7 @@ an <var title>encode set</var>, run these steps:
 <span title=concept-domain>domain</span> or an
 <span title=concept-ipv6>IPv6 address</span>.
 
-<p>A <dfn title=concept-domain>domain</dfn> is an ordered list of one or
-more <dfn title=concept-domain-label>domain labels</dfn>.
+<p>A <dfn title=concept-domain>domain</dfn> identifies a realm within a network.
 
 <p>An <dfn title=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
@@ -266,55 +262,35 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 
 <h3>IDNA</h3>
 
-<p>The <dfn title=concept-domain-label-to-ascii>domain label to ASCII</dfn> algorithm is
-the <span data-anolis-spec=idna title=ToASCII>IDNA2003 ToASCII algorithm</span> with the
-AllowUnassigned flag set and the version of Unicode used being the most recent version
-rather than Unicode 3.2.
-
-<p>The <dfn title=concept-domain-label-to-unicode>domain label to Unicode</dfn> algorithm
-is the <span data-anolis-spec=idna title=ToUnicode>IDNA2003 ToUnicode algorithm</span>
-with the AllowUnassigned flag set and the version of Unicode used being the most recent
-version rather than Unicode 3.2.
-<span data-anolis-ref>IDNA</span>
-<span data-anolis-ref>UNICODE</span>
-
-<p class=note>Using the latest version of Unicode as well as IDNA2003 rather than IDNA2008
-are willful violations, to be compatible with widely deployed clients.
-
-<p>The <dfn title=concept-domain-to-ascii>domain to ASCII</dfn> algorithm takes a
-<span title=concept-domain>domain</span> <var title>input</var> and then runs these steps:
+<p>The <dfn title=concept-domain-to-ascii>domain to ASCII</dfn> given a
+<span title=concept-domain>domain</span> <var title>domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var title>asciiLabels</var> be an empty list.
+ <li><p>Let <var>result</var> be the result of running
+ <span data-anolis-spec=idna title=ToASCII>Unicode ToASCII</span> with
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
+ <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>On each <span title=concept-domain-label>domain label</span> in
- <var title>input</var>, in order, run the
- <span title=concept-domain-label-to-ascii>domain label to ASCII</span> algorithm.
- If that operation failed, return failure.
- Otherwise, append the result to <var title>asciiLabels</var>.
+ <li><p>If <var>result</var> is a failure value, return failure.
 
- <li><p>Return <var title>asciiLabels</var>.
+ <li><p>Return <var>result</var>.
 </ol>
 
-<p>The <dfn title=concept-domain-to-unicode>domain to Unicode</dfn> algorithm takes a
-<span title=concept-domain>domain</span> <var title>input</var> and then runs these steps:
+<p>The <dfn title=concept-domain-to-unicode>domain to Unicode</dfn> given a
+<span title=concept-domain>domain</span> <var title>domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var title>unicodeLabels</var> be an empty list.
+ <li><p>Let <var>result</var> be the result of running
+ <span data-anolis-spec=idna title=ToUnicode>Unicode ToUnicode</span> with
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false.
 
  <li>
-  <p>On each <span title=concept-domain-label>domain label</span> in
-  <var title>input</var>, in order, run the
-  <span title=concept-domain-label-to-unicode>domain label to Unicode</span> algorithm and
-  append the result to <var title>unicodeLabels</var>.
+  <p>Return <var>result</var>, ignoring any returned errors.
 
-  <p class=note>Note that the
-  <span title=concept-domain-label-to-unicode>domain label to Unicode</span> algorithm
-  cannot fail.
-
- <li><p>Return <var title>unicodeLabels</var>.
+  <p class=note>User agents are encouraged to report errors through a developer console.
 </ol>
-
 
 
 <h3 id=host-writing>Writing</h3>
@@ -324,21 +300,33 @@ are willful violations, to be compatible with widely deployed clients.
 by an <span title=concept-ipv6>IPv6 address</span>, followed by
 "<code title>]</code>".
 
-<p>A <span title=concept-domain>domain</span> is one or more
-<span title=concept-domain-label>domain labels</span> separated from each
-other by a
-<span title="domain label separators">domain label separator</span>,
-optionally followed by a
-<span title="domain label separators">domain label separator</span>.
+<p>A <var title>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
-<p class=note>A trailing
-<span title="domain label separators">domain label separator</span>
-signifies an empty <span title=concept-domain-label>domain label</span>.
-<!-- if a domain has 4 labels, no trailing dot, and each label consists only
-     of ASCII digits it's IPv4 because the last label of a domain cannot
-     start with an ASCII digit -->
+<ol>
+ <li><p>Let <var>result</var> be the result of running
+ <span data-anolis-spec=idna title=ToASCII>Unicode ToASCII</span> with
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
+ <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
 
-<p class=XXX>A <span title=concept-domain-label>domain label</span> is ...
+ <li><p>If <var>result</var> is a failure value, return failure.
+
+ <li><p>Set <var>result</var> to the result of running
+ <span data-anolis-spec=idna title=ToUnicode>Unicode ToUnicode</span> with
+ <i>domain_name</i> set to <var title>result</var>,
+ <i>UseSTD3ASCIIRules</i> set to true.
+
+ <li><p>If <var>result</var> contains any errors, return failure.
+
+ <li><p>Return success.
+</ol>
+
+<p class=XXX>Ideally we define this in terms of a sequence of code points that make up a
+<span>valid domain</span> rather than through a whack-a-mole:
+<a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
+
+<p>A <span title=concept-domain>domain</span> must be a string that is a
+<span>valid domain</span>.
 
 <p>An <span title=concept-ipv6>IPv6 address</span> is defined in the
 <a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
@@ -383,38 +371,27 @@ these steps:
  <span data-anolis-spec=encoding>utf-8 encode</span> on <var title>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
- <li><p>Let <var title>domain</var> be the result of splitting <var title>host</var> on
- any <span>domain label separators</span>.
-
  <li><p>Let <var title>asciiDomain</var> be the result of running
  <span title=concept-domain-to-ascii>domain to ASCII</span> on <var title>domain</var>.
 
  <li><p>If <var title>asciiDomain</var> is failure, return failure.
 
  <li>
-  <p>For each <span title=concept-domain-label>label</span> <var title>asciiLabel</var> in
-  <var title>asciiDomain</var>, and then for each code point <var title>cp</var> in
-  <var title>asciiLabel</var>, depending on <var title>cp</var>:
-
-  <dl class=switch>
-   <dt><span>ASCII alpha</span>
-   <dd>Lowercase <var title>cp</var> in <var title>asciiLabel</var>.
-   <dt>U+0000
-   <dt>U+0009
-   <dt>U+000A
-   <dt>U+000D
-   <dt>U+0020
-   <dt>"<code title>#</code>"<!-- 23 -->
-   <dt>"<code title>%</code>"<!-- 25 -->
-   <dt>"<code title>/</code>"<!-- 2F -->
-   <dt>"<code title>:</code>"<!-- 3A -->
-   <dt>"<code title>?</code>"<!-- 3F -->
-   <dt>"<code title>@</code>"<!-- 40 -->
-   <dt>"<code title>\</code>"<!-- 5C -->
-   <dd>Return failure.
-   <dt>Otherwise
-   <dd>Do nothing.
-  </dl>
+  <p>If <var title>asciiDomain</var> contains one of
+  U+0000,
+  U+0009,
+  U+000A,
+  U+000D,
+  U+0020,
+  "<code title>#</code>",<!-- 23 -->
+  "<code title>%</code>",<!-- 25 -->
+  "<code title>/</code>",<!-- 2F -->
+  "<code title>:</code>",<!-- 3A -->
+  "<code title>?</code>",<!-- 3F -->
+  "<code title>@</code>",<!-- 40 -->
+  and
+  "<code title>\</code>",<!-- 5C -->
+  return failure.
 
  <li><p>Return <var title>asciiDomain</var> if the <var title>Unicode flag</var> is unset,
  and the result of running <span title=concept-domain-to-unicode>domain to Unicode</span>
@@ -604,8 +581,7 @@ these steps:
  followed by "<code title>]</code>".
 
  <li><p>Otherwise, <var title>host</var> is a <span title=concept-domain>domain</span>,
- return its <span title=concept-domain-label>labels</span> separated from each other by
- U+002E.
+ return <var title>host</var>.
 </ol>
 
 <p>The <dfn title=concept-ipv6-serializer>IPv6 serializer</dfn> takes an
@@ -2160,10 +2136,10 @@ static method must run these steps:
  <li><p>Let <var title>asciiDomain</var> be the result of
  <span title=concept-host-parser>host parsing</span> <var title>domain</var>.
 
- <li><p>If <var title>asciiDomain</var> is failure, return <var title>domain</var>.
+ <li><p>If <var title>asciiDomain</var> is an <span title=concept-ipv6>IPv6 address</span>
+ or failure, return the empty string.
 
- <li><p>Return <var title>asciiDomain</var>,
- <span title=concept-host-serializer>serialized</span>.
+ <li><p>Return <var title>asciiDomain</var>.
 </ol>
 
 <p>The
@@ -2175,10 +2151,10 @@ static method must run these steps:
  <span title=concept-host-parser>host parsing</span> <var title>domain</var> with the
  <var title>Unicode flag</var> set.
 
- <li><p>If <var title>unicodeDomain</var> is failure, return <var title>domain</var>.
+ <li><p>If <var title>unicodeDomain</var> is an
+ <span title=concept-ipv6>IPv6 address</span> or failure, return the empty string.
 
- <li><p>Return <var title>unicodeDomain</var>,
- <span title=concept-host-serializer>serialized</span>.
+ <li><p>Return <var title>unicodeDomain</var>.
 </ol>
 
 
