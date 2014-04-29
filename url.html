@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 25 April 2014</h2>
+ <h2>Living Standard — Last Updated 29 April 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-25 April 2014, the editors have made this specification available
+29 April 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -770,6 +770,12 @@ on the same row.
 
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
+
+<p>A <a href="#concept-url" title="concept-url">URL</a>
+<dfn id="include-credentials" title="include credentials">includes credentials</dfn> if either its
+<a href="#concept-url-username" title="concept-url-username">username</a> is not the empty string or its
+<a href="#concept-url-password" title="concept-url-password">password</a> is non-null.
+<!-- used by Fetch -->
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> can be designated as
 <dfn id="concept-base-url" title="concept-base-url">base URL</dfn>.
