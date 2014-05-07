@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 29 April 2014</h2>
+ <h2>Living Standard — Last Updated 7 May 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-29 April 2014, the editors have made this specification available
+7 May 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2166,8 +2166,6 @@ url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 
 <h3 id="url-statics"><span class="secno">7.2 </span><a href="#url"><code>URL</code></a> statics</h3>
 
-<p class="XXX">Given the IDNA clusterfuck, maybe we should wait implementing these for now.
-
 <p>The
 <dfn id="dom-url-domaintoascii" title="dom-URL-domainToASCII"><code>domainToASCII(<var>domain</var>)</code></dfn>
 static method must run these steps:
@@ -2196,6 +2194,9 @@ static method must run these steps:
 
  <li><p>Return <var title="">unicodeDomain</var>.
 </ol>
+
+<p class="XXX">Add domainToUI() which follows the UA conventions for when to use the Unicode
+representation?
 
 
 <h3 id="urlutils-and-urlutilsreadonly-members"><span class="secno">7.3 </span><a href="#urlutils"><code>URLUtils</code></a> and <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> members</h3>
