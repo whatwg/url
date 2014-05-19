@@ -1937,26 +1937,26 @@ it.
 <pre class=idl>[<span title=dom-URL>Constructor</span>(DOMString <var title>url</var>, optional DOMString <var title>base</var> = "about:blank"),
  Exposed=Window,Worker]
 interface <dfn>URL</dfn> {
-  static DOMString <span title=dom-URL-domainToASCII>domainToASCII</span>([EnsureUTF16] DOMString <var title>domain</var>);
-  static DOMString <span title=dom-URL-domainToUnicode>domainToUnicode</span>([EnsureUTF16] DOMString <var title>domain</var>);
+  static DOMString <span title=dom-URL-domainToASCII>domainToASCII</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
+  static DOMString <span title=dom-URL-domainToUnicode>domainToUnicode</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
 };
 <span>URL</span> implements <span>URLUtils</span>;
 
 [NoInterfaceObject]
 interface <dfn>URLUtils</dfn> {
-  stringifier attribute [EnsureUTF16] DOMString <span title=dom-URL-href>href</span>;
+  stringifier attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-href>href</span>;
   readonly attribute DOMString <span title=dom-URL-origin>origin</span>;
 
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-protocol>protocol</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-username>username</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-password>password</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-host>host</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-hostname>hostname</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-port>port</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-pathname>pathname</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-search>search</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-protocol>protocol</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-username>username</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-password>password</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-host>host</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hostname>hostname</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-port>port</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-pathname>pathname</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-search>search</span>;
            attribute <span>URLSearchParams</span> <span title=dom-URL-searchParams>searchParams</span>;
-           attribute [EnsureUTF16] DOMString <span title=dom-URL-hash>hash</span>;
+           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hash>hash</span>;
 };
 
 [NoInterfaceObject]
@@ -2541,15 +2541,15 @@ steps:
 
 <h3>Interface <code>URLSearchParams</code></h3>
 
-<pre class=idl>[<span title=dom-URLSearchParams>Constructor(optional ([EnsureUTF16] DOMString or <span>URLSearchParams</span>) <var title>init</var> = ""),
+<pre class=idl>[<span title=dom-URLSearchParams>Constructor(optional (<span data-anolis-spec=encoding>ScalarValueString</span> or <span>URLSearchParams</span>) <var title>init</var> = ""),
  Exposed=Window,Worker]
 interface <dfn>URLSearchParams</dfn> {
-  void <span title=dom-URLSearchParams-append>append</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
-  void <span title=dom-URLSearchParams-delete>delete</span>([EnsureUTF16] DOMString <var title>name</var>);
-  DOMString? <span title=dom-URLSearchParams-get>get</span>([EnsureUTF16] DOMString <var title>name</var>);
-  sequence&lt;DOMString> <span title=dom-URLSearchParams-getAll>getAll</span>([EnsureUTF16] DOMString <var title>name</var>);
-  boolean <span title=dom-URLSearchParams-has>has</span>([EnsureUTF16] DOMString <var title>name</var>);
-  void <span title=dom-URLSearchParams-set>set</span>([EnsureUTF16] DOMString <var title>name</var>, [EnsureUTF16] DOMString <var title>value</var>);
+  void <span title=dom-URLSearchParams-append>append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>value</var>);
+  void <span title=dom-URLSearchParams-delete>delete</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
+  DOMString? <span title=dom-URLSearchParams-get>get</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
+  sequence&lt;DOMString> <span title=dom-URLSearchParams-getAll>getAll</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
+  boolean <span title=dom-URLSearchParams-has>has</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
+  void <span title=dom-URLSearchParams-set>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>value</var>);
   <span title=dom-URLSearchParams-stringifier>stringifier</span>;
 };</pre>
 
