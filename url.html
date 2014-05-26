@@ -2572,7 +2572,7 @@ steps:
 
 <h3 id="interface-urlsearchparams"><span class="secno">7.4 </span>Interface <a href="#urlsearchparams"><code>URLSearchParams</code></a></h3>
 
-<pre class="idl">[<span title="dom-URLSearchParams">Constructor(optional (<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
+<pre class="idl">[<a href="#dom-urlsearchparams" title="dom-URLSearchParams">Constructor</a>(optional (<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
  Exposed=Window,Worker]
 interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
   void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
@@ -2582,7 +2582,7 @@ interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
   boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
   void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
   <a href="#dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</a>;
-};</span></pre>
+};</pre>
 
 <p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated list of name-value
 pairs, which is initially empty.
