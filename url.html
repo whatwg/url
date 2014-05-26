@@ -2701,19 +2701,20 @@ method must return true if there is a name-value pair whose name is
 <h3 id="url-apis-elsewhere"><span class="secno">7.5 </span>URL APIs elsewhere</h3>
 
 <p>A standard that exposes <a href="#concept-url" title="concept-url">URLs</a>, should expose the
-<a href="#concept-url" title="concept-url">URL</a> as a string (potentially by
+<a href="#concept-url" title="concept-url">URL</a> as a string (by
 <a href="#concept-url-serializer" title="concept-url-serializer">serializing</a> an internal
 <a href="#concept-url" title="concept-url">URL</a>). A standard should not expose a
 <a href="#concept-url" title="concept-url">URL</a> using a <a href="#url"><code>URL</code></a> object. <a href="#url"><code>URL</code></a>
-objects are meant for <a href="#concept-url" title="concept-url">URL</a> manipulation.
+objects are meant for <a href="#concept-url" title="concept-url">URL</a> manipulation. In IDL the
+<a href="http://encoding.spec.whatwg.org/#scalarvaluestring"><code class="external" data-anolis-spec="encoding">ScalarValueString</code></a> type should be used.
 
 <p class="note">The higher-level notion here is that values are to be exposed as immutable
 data structures.
 
 <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
 should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
-as "URL", "URI", and "IRI" should not be used. If the name is a compound, "URL" (i.e.
-uppercase) is preferred, e.g. "newURL" and "oldURL".
+as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
+(i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
 <p class="note">The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
 <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
