@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 23 June 2014</h2>
+ <h2>Living Standard — Last Updated 25 June 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-23 June 2014, the editors have made this specification available
+25 June 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -301,7 +301,7 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToASCII" title="ToASCII">Unicode ToASCII</a> with
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/#ToASCII" title="ToASCII">Unicode ToASCII</a> with
  <i>domain_name</i> set to <var title="">domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
@@ -316,7 +316,7 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var title="">domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
@@ -338,7 +338,7 @@ by an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, followed by
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToASCII" title="ToASCII">Unicode ToASCII</a> with
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/#ToASCII" title="ToASCII">Unicode ToASCII</a> with
  <i>domain_name</i> set to <var title="">domain</var>,
  <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
@@ -346,7 +346,7 @@ by an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, followed by
  <li><p>If <var>result</var> is a failure value, return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/proposed.html#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
+ <a class="external" data-anolis-spec="idna" href="http://www.unicode.org/reports/tr46/#ToUnicode" title="ToUnicode">Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var title="">result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
@@ -2738,7 +2738,7 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsIDNA">[IDNA]
-<dd><cite><a href="http://www.unicode.org/reports/tr46/proposed.html">Unicode IDNA Compatibility Processing (Proposed Update)</a></cite>, Mark Davis and Michel Suignard. Unicode Consortium.
+<dd><cite><a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a></cite>, Mark Davis and Michel Suignard. Unicode Consortium.
 
 <dt id="refsIPV6">[IPV6]
 <dd><cite><a href="http://tools.ietf.org/html/rfc4291">IP Version 6 Addressing Architecture</a></cite>, R. Hinden and Steve Deering. IETF.
