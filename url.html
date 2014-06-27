@@ -68,7 +68,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
   <ol>
    <li><a href="#writing"><span class="secno">5.1 </span>Writing</a></li>
    <li><a href="#parsing"><span class="secno">5.2 </span>Parsing</a></li>
-   <li><a href="#serializing"><span class="secno">5.3 </span>Serializing</a></ol></li>
+   <li><a href="#serializing"><span class="secno">5.3 </span>Serializing</a></li>
+   <li><a href="#origin"><span class="secno">5.4 </span>Origin</a></ol></li>
  <li><a href="#application/x-www-form-urlencoded"><span class="secno">6 </span><code>application/x-www-form-urlencoded</code></a>
   <ol>
    <li><a href="#urlencoded-parsing"><span class="secno">6.1 </span>Parsing</a></li>
@@ -89,8 +90,8 @@ http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 <h2 class="no-num" id="goals">Goals</h2>
 
-<p>The URL standard sets out to make URLs fully predictable and
-interoperable. This is the plan:
+<p>The URL standard standardizes URLs, aiming to make them fully interoperable.
+It does so as follows:
 
 <ul>
  <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
@@ -104,6 +105,9 @@ interoperable. This is the plan:
  practice a single algorithm is used for both so keeping them distinct is
  not helping anyone. URL also easily wins the
  <a href="http://www.googlefight.com/index.php?word1=url&amp;word2=uri">search result popularity contest</a>.
+
+ <li><p>Supplanting <a href="https://tools.ietf.org/html/rfc6454#section-4">Origin of a URI [sic]</a>.
+ <a class="informative" href="#refsORIGIN">[ORIGIN]</a>
 
  <li><p>Define URL's existing JavaScript API in full detail and add
  enhancements to make it easier to work with. Add a new <a href="#url"><code>URL</code></a>
@@ -925,7 +929,6 @@ U+100000 to U+10FFFD.
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>.
 
 
-
 <h3 id="parsing"><span class="secno">5.2 </span>Parsing</h3>
 
 <p class="XXX">Add the ability to halt on the first conformance error.
@@ -959,6 +962,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <li><p>Return <var title="">url</var>.
 </ol>
 
+<hr>
 
 <p>The <dfn id="concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</dfn> takes a string
 <var title="">input</var>, optionally with a
@@ -1696,6 +1700,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <li><p>Return <var title="">url</var>.
 </ol>
 
+
 <h3 id="serializing"><span class="secno">5.3 </span>Serializing</h3>
 
 <p>The <dfn id="concept-url-serializer" title="concept-url-serializer">URL serializer</dfn> takes a
@@ -1768,6 +1773,47 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
  <li><p>Return <var title="">output</var>.
 </ol>
 
+<h3 id="origin"><span class="secno">5.4 </span>Origin</h3>
+<!-- Still need to watch the final bits -->
+
+<p class="note">See <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>'s definition in HTML for the
+necessary background information. <a href="#refsHTML">[HTML]</a>
+
+<p>A <a href="#concept-url" title="concept-url">URL</a>'s <dfn id="concept-url-origin" title="concept-url-origin">origin</dfn> is
+the <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> returned by running these steps, switching
+on <a href="#concept-url" title="concept-url">URL</a>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>:
+
+<dl class="switch">
+ <dt>"<code title="">blob</code>"
+ <dd>
+  <p>Let <var title="">url</var> be the result of
+  <a href="#concept-basic-url-parser" title="concept-basic-url-parser">parsing</a>
+  <a href="#concept-url" title="concept-url">URL</a>'s
+  <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
+
+  <p>If <var title="">url</var> is failure, return an opaque identifier. Otherwise, return
+  <var title="">url</var>'s <a href="#concept-url-origin" title="concept-url-origin">origin</a>.
+  <!-- Did you mean: recursion -->
+
+ <dt>"<code title="">ftp</code>"
+ <dt>"<code title="">gopher</code>"
+ <dt>"<code title="">http</code>"
+ <dt>"<code title="">https</code>"
+ <dt>"<code title="">ws</code>"
+ <dt>"<code title="">wss</code>"
+ <dd><p>Return a tuple consisting of <a href="#concept-url" title="concept-url">URL</a>'s
+ <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>, its
+ <a href="#concept-url-host" title="concept-url-host">host</a>, and its <a href="#default-port">default port</a> if its
+ <a href="#concept-url-port" title="concept-url-port">port</a> is the empty string, and its
+ <a href="#concept-url-port" title="concept-url-port">port</a> otherwise.
+
+ <dt>"<code title="">file</code>"
+ <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
+ return an opaque identifier.
+
+ <dt>Otherwise
+ <dd><p>Return an opaque identifier.
+</dl>
 
 
 <h2 id="application/x-www-form-urlencoded"><span class="secno">6 </span><a href="#application/x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code></a></h2>
@@ -2250,10 +2296,10 @@ run these steps:
  <li><p>If <a href="#concept-uu-url" title="concept-UU-url">url</a> is null, return the empty
  string.
 
- <li><p>Return the <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-6.1">Unicode serialization</a>
- of <a href="#concept-uu-url" title="concept-UU-url">url</a>'s
- <a class="external" data-anolis-spec="origin" href="http://tools.ietf.org/html/rfc6454#section-4">origin</a>.
- <a href="#refsORIGIN">[ORIGIN]</a>
+ <li><p>Return the
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#unicode-serialization-of-an-origin" title="Unicode serialization of an origin">Unicode serialization</a>
+ of <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-origin" title="concept-url-origin">origin</a>.
+ <a href="#refsHTML">[HTML]</a>
 </ol>
 
 <p class="note">It returns the Unicode rather than the ASCII serialization for
@@ -2751,7 +2797,7 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 <dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a></cite>, Martin Dürst and Michel Suignard. IETF.
 
 <dt id="refsORIGIN">[ORIGIN]
-<dd><cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.
+<dd>(Non-normative) <cite><a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a></cite>, Adam Barth. IETF.
 
 <dt id="refsRFC2119">[RFC2119]
 <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner. IETF.
