@@ -543,7 +543,7 @@ these steps:
   these substeps:
 
   <ol>
-   <li><p>Let <var title="">value</var> be 0.
+   <li><p>Let <var title="">value</var> be null.
 
    <li><p>If <a href="#c">c</a> is not an <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>,
    <a href="#parse-error">parse error</a>, return failure. <!-- prevent the empty string -->
@@ -553,12 +553,18 @@ these steps:
     <a href="#ascii-digits" title="ASCII digits">ASCII digit</a>, run these subsubsteps:
 
     <ol>
-     <li><p>Set <var title="">value</var> to
-     <var title="">value</var> × 10 + <a href="#c">c</a> interpreted as decimal number.
+     <li><p>Let <var title="">number</var> be <a href="#c">c</a> interpreted as decimal number.
+
+     <li>
+      <p>If <var title="">value</var> is null, set <var title="">value</var> to <var title="">number</var>.
+
+      <p>Otherwise, if <var title="">value</var> is 0, <a href="#parse-error">parse error</a>, return failure.
+
+      <p>Otherwise, set <var title="">value</var> to <var title="">value</var> × 10 + <var title="">number</var>.
 
      <li><p>Increase <var title="">pointer</var> by one.
 
-     <li><p>If <var title="">value</var> is 0 or greater than 255, <a href="#parse-error">parse error</a>,
+     <li><p>If <var title="">value</var> is greater than 255, <a href="#parse-error">parse error</a>,
      return failure.
     </ol>
 
@@ -2812,6 +2818,7 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 
 <p>Thanks to
 Adam Barth,
+Albert Wiersch,
 Alexandre Morgaut,
 Behnam Esfahbod,
 Bobby Holley,
