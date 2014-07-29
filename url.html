@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 28 July 2014</h2>
+ <h2>Living Standard — Last Updated 29 July 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-28 July 2014, the editors have made this specification available
+29 July 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -2021,14 +2021,15 @@ it.
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
 <pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">url</var>, optional <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">base</var> = "about:blank"),
- Exposed=Window,Worker]
+ Exposed=(Window,Worker)]
 interface <dfn id="url">URL</dfn> {
   static <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
   static <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
 };
 <a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
 
-[NoInterfaceObject]
+[NoInterfaceObject,
+ Exposed=(Window,Worker)]
 interface <dfn id="urlutils">URLUtils</dfn> {
   stringifier attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
   readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
@@ -2045,7 +2046,8 @@ interface <dfn id="urlutils">URLUtils</dfn> {
            attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };
 
-[NoInterfaceObject]
+[NoInterfaceObject,
+ Exposed=(Window,Worker)]
 interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
   stringifier readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
   readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;

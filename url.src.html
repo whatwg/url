@@ -1989,14 +1989,15 @@ it.
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
 <pre class=idl>[<span title=dom-URL>Constructor</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var title>base</var> = "about:blank"),
- Exposed=Window,Worker]
+ Exposed=(Window,Worker)]
 interface <dfn>URL</dfn> {
   static <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-domainToASCII>domainToASCII</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
   static <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-domainToUnicode>domainToUnicode</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
 };
 <span>URL</span> implements <span>URLUtils</span>;
 
-[NoInterfaceObject]
+[NoInterfaceObject,
+ Exposed=(Window,Worker)]
 interface <dfn>URLUtils</dfn> {
   stringifier attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-href>href</span>;
   readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-origin>origin</span>;
@@ -2013,7 +2014,8 @@ interface <dfn>URLUtils</dfn> {
            attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hash>hash</span>;
 };
 
-[NoInterfaceObject]
+[NoInterfaceObject,
+ Exposed=(Window,Worker)]
 interface <dfn>URLUtilsReadOnly</dfn> {
   stringifier readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-href>href</span>;
   readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-origin>origin</span>;
