@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 29 July 2014</h2>
+ <h2>Living Standard — Last Updated 30 July 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-29 July 2014, the editors have made this specification available
+30 July 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -575,7 +575,7 @@ these steps:
    <li><p>Set <var title="">piece</var> to
    <var title="">piece</var> × 0x100 + <var title="">value</var>.
 
-   <li><p>If <var title="">dots seen</var> is 0 or 2, increase
+   <li><p>If <var title="">dots seen</var> is 1 or 3, increase
    <var title="">piece pointer</var> by one.
 
    <li><p>Increase <var title="">pointer</var> by one.
@@ -597,10 +597,11 @@ these steps:
 
    <li><p>Set <var title="">piece pointer</var> to seven.
 
-   <li><p>While <var title="">piece pointer</var> is not zero, swap <var title="">piece</var>
-   with the <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> at pointer
+   <li><p>While <var title="">piece pointer</var> is not zero and <var title="">swaps</var> is
+   greater than zero, swap <var title="">piece</var> with the
+   <a href="#concept-ipv6-piece" title="concept-ipv6-piece">piece</a> at pointer
    <var title="">compress pointer</var> + <var title="">swaps</var> − 1, and then
-   decrease <var title="">piece pointer</var> and <var title="">swaps</var> by one.
+   decrease both <var title="">piece pointer</var> and <var title="">swaps</var> by one.
   </ol>
 
  <li><p>Otherwise, if <var title="">compress pointer</var> is null and
@@ -960,7 +961,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <var title="">url</var>. <a href="#refsFILEAPI">[FILEAPI]</a>
 
  <li><p>Set <var title="">url</var>'s <a href="#concept-url-object" title="concept-url-object">object</a> to a
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-dom-interfaces.html#structured-clone">structured clone</a> of the entry in the
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#structured-clone">structured clone</a> of the entry in the
  <a class="external" data-anolis-spec="fileapi" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a> corresponding to
  <var title="">url</var>'s <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
  <a href="#refsHTML">[HTML]</a>
@@ -1782,11 +1783,11 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 <h3 id="origin"><span class="secno">5.4 </span>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class="note">See <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a>'s definition in HTML for the
+<p class="note">See <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a>'s definition in HTML for the
 necessary background information. <a href="#refsHTML">[HTML]</a>
 
 <p>A <a href="#concept-url" title="concept-url">URL</a>'s <dfn id="concept-url-origin" title="concept-url-origin">origin</dfn> is
-the <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin">origin</a> returned by running these steps, switching
+the <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a> returned by running these steps, switching
 on <a href="#concept-url" title="concept-url">URL</a>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>:
 
 <dl class="switch">
@@ -2305,7 +2306,7 @@ run these steps:
  string.
 
  <li><p>Return the
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#unicode-serialization-of-an-origin" title="Unicode serialization of an origin">Unicode serialization</a>
+ <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#unicode-serialisation-of-an-origin" title="Unicode serialization of an origin">Unicode serialization</a>
  of <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-origin" title="concept-url-origin">origin</a>.
  <a href="#refsHTML">[HTML]</a>
 </ol>
@@ -2773,7 +2774,7 @@ as "URL", "URI", and "IRI" should not be used. However, if the name is a compoun
 (i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
 <p class="note">The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
-<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
+<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
 proper naming. <a href="#refsHTML">[HTML]</a>
 
 

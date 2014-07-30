@@ -543,7 +543,7 @@ these steps:
    <li><p>Set <var title>piece</var> to
    <var title>piece</var> &times; 0x100 + <var title>value</var>.
 
-   <li><p>If <var title>dots seen</var> is 0 or 2, increase
+   <li><p>If <var title>dots seen</var> is 1 or 3, increase
    <var title>piece pointer</var> by one.
 
    <li><p>Increase <var title>pointer</var> by one.
@@ -565,10 +565,11 @@ these steps:
 
    <li><p>Set <var title>piece pointer</var> to seven.
 
-   <li><p>While <var title>piece pointer</var> is not zero, swap <var title>piece</var>
-   with the <span title=concept-ipv6-piece>piece</span> at pointer
+   <li><p>While <var title>piece pointer</var> is not zero and <var title>swaps</var> is
+   greater than zero, swap <var title>piece</var> with the
+   <span title=concept-ipv6-piece>piece</span> at pointer
    <var title>compress pointer</var> + <var title>swaps</var> &minus; 1, and then
-   decrease <var title>piece pointer</var> and <var title>swaps</var> by one.
+   decrease both <var title>piece pointer</var> and <var title>swaps</var> by one.
   </ol>
 
  <li><p>Otherwise, if <var title>compress pointer</var> is null and
