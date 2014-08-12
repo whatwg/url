@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 30 July 2014</h2>
+ <h2>Living Standard — Last Updated 12 August 2014</h2>
 </hgroup>
 
 <dl>
@@ -38,7 +38,7 @@
 <p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-30 July 2014, the editors have made this specification available
+12 August 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1216,8 +1216,8 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
         <p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is not
         "<code title="">file</code>", or <var title="">c</var> is not an
         <a href="#ascii-alpha">ASCII alpha</a>, or <a href="#remaining">remaining</a> does not start with either
-        "<code title="">:</code>" or "<code title="">|</code>", or <a href="#remaining">remaining</a> does
-        not consist of one code point, or <a href="#remaining">remaining</a>'s second code point is
+        "<code title="">:</code>" or "<code title="">|</code>", or <a href="#remaining">remaining</a>
+        consists of one code point, or <a href="#remaining">remaining</a>'s second code point is
         not one of "<code title="">/</code>", "<code title="">\</code>", "<code title="">?</code>",
         and "<code title="">#</code>", then set
         <var title="">url</var>'s <a href="#concept-url-host" title="concept-url-host">host</a> to
@@ -1225,8 +1225,8 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
         <var title="">url</var>'s <a href="#concept-url-port" title="concept-url-port">port</a> to
         <var title="">base</var>'s <a href="#concept-url-port" title="concept-url-port">port</a>,
         <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a> to
-        <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, and then pop
-        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>.
+        <var title="">base</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, and then remove
+        <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last entry.
         <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
         <p class="note">This is a (platform-independent) Windows drive letter quirk.
@@ -1549,9 +1549,9 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
          <tr><td>"<code title="">%2e%2e</code>"
         </table>
 
-       <li><p>If <var title="">buffer</var> is "<code title="">..</code>", pop
-       <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>, if non-empty, and
-       then if <a href="#c">c</a> is neither  "<code title="">/</code>" nor
+       <li><p>If <var title="">buffer</var> is "<code title="">..</code>", remove
+       <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>'s last entry, if
+       any, and then if <a href="#c">c</a> is neither  "<code title="">/</code>" nor
        "<code title="">\</code>", append the empty string to <var title="">url</var>'s
        <a href="#concept-url-path" title="concept-url-path">path</a>.
 
@@ -2826,6 +2826,7 @@ Alexandre Morgaut,
 Behnam Esfahbod,
 Bobby Holley,
 Boris Zbarsky,
+Brandon Ross,
 Daniel Bratell,
 David Sheets,
 Erik Arvidsson,

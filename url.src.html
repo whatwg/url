@@ -1184,8 +1184,8 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
         <p>If <var title>url</var>'s <span title=concept-url-scheme>scheme</span> is not
         "<code title>file</code>", or <var title>c</var> is not an
         <span>ASCII alpha</span>, or <span>remaining</span> does not start with either
-        "<code title>:</code>" or "<code title>|</code>", or <span>remaining</span> does
-        not consist of one code point, or <span>remaining</span>'s second code point is
+        "<code title>:</code>" or "<code title>|</code>", or <span>remaining</span>
+        consists of one code point, or <span>remaining</span>'s second code point is
         not one of "<code title>/</code>", "<code title>\</code>", "<code title>?</code>",
         and "<code title>#</code>", then set
         <var title>url</var>'s <span title=concept-url-host>host</span> to
@@ -1193,8 +1193,8 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
         <var title>url</var>'s <span title=concept-url-port>port</span> to
         <var title>base</var>'s <span title=concept-url-port>port</span>,
         <var title>url</var>'s <span title=concept-url-path>path</span> to
-        <var title>base</var>'s <span title=concept-url-path>path</span>, and then pop
-        <var title>url</var>'s <span title=concept-url-path>path</span>.
+        <var title>base</var>'s <span title=concept-url-path>path</span>, and then remove
+        <var title>url</var>'s <span title=concept-url-path>path</span>'s last entry.
         <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
@@ -1517,9 +1517,9 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
          <tr><td>"<code title>%2e%2e</code>"
         </table>
 
-       <li><p>If <var title>buffer</var> is "<code title>..</code>", pop
-       <var title>url</var>'s <span title=concept-url-path>path</span>, if non-empty, and
-       then if <span>c</span> is neither  "<code title>/</code>" nor
+       <li><p>If <var title>buffer</var> is "<code title>..</code>", remove
+       <var title>url</var>'s <span title=concept-url-path>path</span>'s last entry, if
+       any, and then if <span>c</span> is neither  "<code title>/</code>" nor
        "<code title>\</code>", append the empty string to <var title>url</var>'s
        <span title=concept-url-path>path</span>.
 
@@ -2761,6 +2761,7 @@ Alexandre Morgaut,
 Behnam Esfahbod,
 Bobby Holley,
 Boris Zbarsky,
+Brandon Ross,
 Daniel Bratell,
 David Sheets,
 Erik Arvidsson,
