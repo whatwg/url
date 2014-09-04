@@ -1766,8 +1766,8 @@ on <span title=concept-url>URL</span>'s <span title=concept-url-scheme>scheme</s
   <span title=concept-url>URL</span>'s
   <span title=concept-url-scheme-data>scheme data</span>.
 
-  <p>If <var title>url</var> is failure, return an opaque identifier. Otherwise, return
-  <var title>url</var>'s <span title=concept-url-origin>origin</span>.
+  <p>If <var title>url</var> is failure, return a new globally unique identifier.
+  Otherwise, return <var title>url</var>'s <span title=concept-url-origin>origin</span>.
   <!-- Did you mean: recursion -->
 
  <dt>"<code title>ftp</code>"
@@ -1784,10 +1784,10 @@ on <span title=concept-url>URL</span>'s <span title=concept-url-scheme>scheme</s
 
  <dt>"<code title>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
- return an opaque identifier.
+ return a new globally unique identifier.
 
  <dt>Otherwise
- <dd><p>Return an opaque identifier.
+ <dd><p>Return a new globally unique identifier.
 </dl>
 
 
