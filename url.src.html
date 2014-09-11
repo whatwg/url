@@ -198,7 +198,7 @@ insecure and is not recommended.
     </ol>
   </ol>
 
- <li><p>Return <var title>bytes</var>.
+ <li><p>Return <var title>output</var>.
 </ol>
 
 <!-- the escape sets are minimal as escaping can lead to problems; we might
@@ -422,7 +422,8 @@ these steps:
  <span title=concept-ipv6-piece>16-bit piece</span> it points to.
 
  <li><p>Let <var title>compress pointer</var> be another pointer into
- <var title>pieces</var>, initially null and pointing to nothing.
+ <var title>address</var>'s <span title=concept-ipv6-piece>16-bit pieces</span>, initially
+ null and pointing to nothing.
 
  <li><p>Let <var title>pointer</var> be a pointer into
  <var title>input</var>, initially zero (pointing to the first code point).
@@ -2770,6 +2771,7 @@ standard what it is today.
 Adam Barth,
 Albert Wiersch,
 Alexandre Morgaut,
+Arkadiusz Michalski,
 Behnam Esfahbod,
 Bobby Holley,
 Boris Zbarsky,
