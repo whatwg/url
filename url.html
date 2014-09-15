@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 <title>URL Standard</title>
-<link href="http://www.whatwg.org/style/specification" rel="stylesheet">
+<link href="//www.whatwg.org/style/specification" rel="stylesheet">
 <link href="//resources.whatwg.org/logo-url.svg" rel="icon">
 
 <div class="head">
@@ -9,36 +9,37 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 11 September 2014</h2>
+ <h2>Living Standard — Last Updated 15 September 2014</h2>
 </hgroup>
 
 <dl>
  <dt>This Version:
- <dd><a href="//url.spec.whatwg.org/">http://url.spec.whatwg.org/</a>
+ <dd><a href="//url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
 
  <dt>Participate:</dt>
  <dd>Send feedback to
-  <a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
-  (<a href="http://www.whatwg.org/mailing-list#specs">archives</a>) or
+  <a href="//www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
+  (<a href="//www.whatwg.org/mailing-list#specs">archives</a>) or
   <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a>
   (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
- <dd><a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+ <dd><a href="//wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
  <dd><a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
  <dd><a href="https://twitter.com/urlstandard">@urlstandard</a>
 
  <dt>Editor:
- <dd class="h-card vcard"><a class="u-url url p-name fn" href="http://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+ <dd class="h-card vcard"><a class="u-url url p-name fn" href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+  (<a class="p-org org h-org h-card" href="//www.mozilla.org/">Mozilla</a>)
   &lt;<a class="u-email email" href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 </dl>
 
 <script async="" src="//resources.whatwg.org/file-bug.js"></script>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>
+<p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-11 September 2014, the editors have made this specification available
+15 September 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -1625,7 +1626,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
        <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is either
        "<code title="">ws</code>" or "<code title="">wss</code>", set
        <var>encoding override</var> to <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
-       <!-- http://simon.html5.org/test/url/url-encoding.html -->
+       <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var title="">buffer</var> to the result of
        <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoding</a>
@@ -2214,7 +2215,7 @@ constructor must run these steps:
  <a href="#concept-base-url" title="concept-base-url">base URL</a>, invoke the constructor with a single
  argument:
 
- <pre>var input = "http://example.org/💩",
+ <pre>var input = "https://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
 
@@ -2224,7 +2225,7 @@ url.pathname // "/%F0%9F%92%A9"</pre>
 
  <pre>var input = "/💩",
     url = new URL(input, document.baseURI)
-url.href // "http://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
+url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
@@ -2876,4 +2877,4 @@ Vyacheslav Matva, and
 成瀬ゆい (Yui Naruse)
 for being awesome!
 
-<script id="head" src="http://www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
+<script id="head" src="//www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
