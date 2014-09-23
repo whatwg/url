@@ -1,15 +1,15 @@
 <!DOCTYPE html><html lang="en-US"><meta charset="utf-8">
 <title>URL Standard</title>
-<link href="//www.whatwg.org/style/specification" rel="stylesheet">
+<link href="//whatwg.org/style/specification" rel="stylesheet">
 <link href="//resources.whatwg.org/logo-url.svg" rel="icon">
 
 <div class="head">
 
-<p><a class="logo" href="//www.whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
+<p><a class="logo" href="//whatwg.org/"><img alt="WHATWG" height="100" src="//resources.whatwg.org/logo-url.svg" width="100"></a></p>
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 15 September 2014</h2>
+ <h2>Living Standard — Last Updated 23 September 2014</h2>
 </hgroup>
 
 <dl>
@@ -18,15 +18,15 @@
 
  <dt>Participate:</dt>
  <dd>Send feedback to
-  <a href="//www.whatwg.org/mailing-list">whatwg@whatwg.org</a>
-  (<a href="//www.whatwg.org/mailing-list#specs">archives</a>) or
-  <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a>
-  (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
+  <a href="//whatwg.org/mailing-list">whatwg@whatwg.org</a>
+  (<a href="//whatwg.org/mailing-list#specs">archives</a>) or
+  <a href="//www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a>
+  (<a href="//www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
  <dd><a href="//wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 
  <dt>Version History:
- <dd><a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
- <dd><a href="https://twitter.com/urlstandard">@urlstandard</a>
+ <dd><a href="//github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
+ <dd><a href="//twitter.com/urlstandard">@urlstandard</a>
 
  <dt>Editor:
  <dd class="h-card vcard"><a class="u-url url p-name fn" href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
@@ -39,7 +39,7 @@
 <p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
 To the extent possible under law, the editors have waived all copyright and
 related or neighboring rights to this work. In addition, as of
-15 September 2014, the editors have made this specification available
+23 September 2014, the editors have made this specification available
 under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at
@@ -185,8 +185,8 @@ processed and <var title="">pointer</var> points to "<code title="">@</code>",
 two <a href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause a
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> to run into any
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#error" title="error">errors</a>.
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> to run into any
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#error" title="error">errors</a>.
 
 <p>To <dfn id="percent-encode">percent encode</dfn> a <var title="">byte</var> into a
 <a href="#percent-encoded-byte">percent-encoded byte</a>, return a string consisting of
@@ -195,7 +195,7 @@ representation of <var title="">byte</var>.
 
 <p>To <dfn id="percent-decode">percent decode</dfn> a byte sequence <var title="">input</var>, run these steps:
 
-<p class="warning">Using anything but a <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a>
+<p class="warning">Using anything but a <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a>
 when the <var title="">input</var> contains bytes outside the range 0x00 to 0x7F might be
 insecure and is not recommended.
 
@@ -220,7 +220,7 @@ insecure and is not recommended.
     <ol>
      <li><p>Let <var title="">bytePoint</var> be the two bytes after <var title="">byte</var> in
      <var title="">input</var>,
-     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>, and
+     <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>, and
      then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
@@ -272,7 +272,7 @@ an <var title="">encode set</var>, run these steps:
  <var title="">encode set</var>, return <var title="">code point</var>.
 
  <li><p>Let <var title="">bytes</var> be the result of running
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
  <var title="">code point</var>.
 
  <li><p><a href="#percent-encode">Percent encode</a> each byte in <var title="">bytes</var>, and
@@ -405,9 +405,9 @@ these steps:
   </ol>
 
  <li><p>Let <var title="">domain</var> be the result of
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom">utf-8 decode without BOM</a> on the
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">utf-8 decode without BOM</a> on the
  <a href="#percent-decode" title="percent decode">percent decoding</a> of
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var title="">input</var>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var title="">input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
  <li><p>Let <var title="">asciiDomain</var> be the result of running
@@ -945,7 +945,7 @@ U+100000 to U+10FFFD.
 <p>The <dfn id="concept-url-parser" title="concept-url-parser">URL parser</dfn> takes a string
 <var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>, and
-optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+optionally with an <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
 <ol>
@@ -963,7 +963,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <var title="">url</var>. <a href="#refsFILEAPI">[FILEAPI]</a>
 
  <li><p>Set <var title="">url</var>'s <a href="#concept-url-object" title="concept-url-object">object</a> to a
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/infrastructure.html#structured-clone">structured clone</a> of the entry in the
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a> of the entry in the
  <a class="external" data-anolis-spec="fileapi" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a> corresponding to
  <var title="">url</var>'s <a href="#concept-url-scheme-data" title="concept-url-scheme-data">scheme data</a>.
  <a href="#refsHTML">[HTML]</a>
@@ -976,7 +976,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
 <p>The <dfn id="concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</dfn> takes a string
 <var title="">input</var>, optionally with a
 <a href="#concept-base-url" title="concept-base-url">base URL</a> <var title="">base</var>,
-optionally with an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+optionally with an <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var>encoding override</var>, optionally with an
 <a href="#concept-url" title="concept-url">URL</a> <var title="">url</var> and a state override
 <var title="">state override</var>, and then runs these steps:
@@ -1002,7 +1002,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
    <li><p>Set <var title="">url</var> to a new <a href="#concept-url" title="concept-url">URL</a>.
 
    <li><p>Remove any leading and trailing
-   <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
+   <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
    <var title="">input</var>.
   </ol>
 
@@ -1012,7 +1012,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
  <li><p>If <var title="">base</var> is not given, set it to null.
 
  <li><p>If <var>encoding override</var> is not given, set it to
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Let <var title="">buffer</var> be the empty string.
 
@@ -1625,11 +1625,11 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="http://
        <li><p>If <var title="">url</var>'s <a href="#relative-flag">relative flag</a> is unset or
        <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is either
        "<code title="">ws</code>" or "<code title="">wss</code>", set
-       <var>encoding override</var> to <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+       <var>encoding override</var> to <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var title="">buffer</var> to the result of
-       <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode" title="encode">encoding</a>
+       <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encode" title="encode">encoding</a>
        <var title="">buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1785,11 +1785,11 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 <h3 id="origin"><span class="secno">5.4 </span>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class="note">See <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a>'s definition in HTML for the
+<p class="note">See <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>'s definition in HTML for the
 necessary background information. <a href="#refsHTML">[HTML]</a>
 
 <p>A <a href="#concept-url" title="concept-url">URL</a>'s <dfn id="concept-url-origin" title="concept-url-origin">origin</dfn> is
-the <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#origin">origin</a> returned by running these steps, switching
+the <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> returned by running these steps, switching
 on <a href="#concept-url" title="concept-url">URL</a>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a>:
 
 <dl class="switch">
@@ -1805,9 +1805,9 @@ on <a href="#concept-url" title="concept-url">URL</a>'s <a href="#concept-url-sc
   <!-- Did you mean: recursion -->
 
   <p class="example no-backref">The <a href="#concept-url-origin" title="concept-url-origin">origin</a> of
-  <code title="">blob:https://www.whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is
+  <code title="">blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is
   the tuple
-  (<code title="">https</code>, <code title="">www.whatwg.org</code>, <code title="">443</code>).
+  (<code title="">https</code>, <code title="">whatwg.org</code>, <code title="">443</code>).
 
  <dt>"<code title="">ftp</code>"
  <dt>"<code title="">gopher</code>"
@@ -1852,17 +1852,17 @@ requires.
 <p>The
 <dfn id="concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var title="">input</var>, optionally with an
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
 optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 <i title="">isindex flag</i>, and then runs these steps:
 
 <ol>
  <li><p>If <var>encoding override</var> is not given, set it to
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li>
   <p>If <var>encoding override</var> is not
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> and <var title="">input</var> contains bytes
+  <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and <var title="">input</var> contains bytes
   whose value is greater than 0x7F, return failure.
 
   <p class="note no-backref">This can only happen if <var title="">input</var> was not
@@ -1908,9 +1908,9 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 
     <ol>
      <li><p>Let <var>result</var> be the result of
-     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
+     <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#concept-encoding-get" title="concept-encoding-get">getting an encoding</a>
      for <var title="">value</var>,
-     <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>.
+     <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom" title="utf-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i title="">use _charset_ flag</i> and
      set <var>encoding override</var> to <var>result</var>.
@@ -1926,7 +1926,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
  <li><p>For each name-value pair in <var title="">pairs</var>, append a name-value pair to
  <var title="">output</var> where the new name and value appended to <var title="">output</var>
  are the result of running <var>encoding override</var>'s
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#decoder">decoder</a> on the
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#decoder">decoder</a> on the
  <a href="#percent-decode" title="percent decode">percent decoding</a> of the name and value from
  <var title="">pairs</var>, respectively.
 
@@ -1980,12 +1980,12 @@ takes a byte sequence <var title="">input</var> and then runs these steps:
 <p>The
 <dfn id="concept-urlencoded-serializer" title="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value pairs <var title="">pairs</var>, optionally with an
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
 <ol>
  <li><p>If <var>encoding override</var> is not given, set it to
- <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
+ <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>.
 
  <li><p>Let <var title="">output</var> be the empty string.
 
@@ -1995,7 +1995,7 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
 
   <ol>
    <li><p>Replace <var title="">pair</var>'s name and value with the result of
-   running <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encode">encode</a> on them using
+   running <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encode">encode</a> on them using
    <var>encoding override</var>, respectively.
 
    <li><p>Replace <var title="">pair</var>'s name and value with their
@@ -2017,7 +2017,7 @@ takes a list of name-value pairs <var title="">pairs</var>, optionally with an
 <p>The
 <dfn id="concept-urlencoded-string-parser" title="concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var title="">input</var>,
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encodes</a> it, and then
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8-encode" title="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
 <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parsing</a>
 it.
@@ -2028,48 +2028,48 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">url</var>, optional <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">base</var> = "about:blank"),
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">url</var>, optional <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">base</var> = "about:blank"),
  Exposed=(Window,Worker)]
 interface <dfn id="url">URL</dfn> {
-  static <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
-  static <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
+  static <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
+  static <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
 };
 <a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn id="urlutils">URLUtils</dfn> {
-  stringifier attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
+  stringifier attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-username" title="dom-URL-username">username</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-password" title="dom-URL-password">password</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-username" title="dom-URL-username">username</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-password" title="dom-URL-password">password</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute <a href="#urlsearchparams">URLSearchParams</a> <a href="#dom-url-searchparams" title="dom-URL-searchParams">searchParams</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
+  stringifier readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
   readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-username>username</span>;
   readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-password>password</span>;-->
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
   readonly attribute <span>URLSearchParams</span> <span title=dom-URL-searchParams>searchParams</span>;-->
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
 
 <p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
@@ -2101,20 +2101,20 @@ appropriate <a href="#concept-base-url" title="concept-base-url">base URL</a> fo
 <p>Specifications defining objects implementing <a href="#urlutils"><code>URLUtils</code></a> may
 define <dfn id="concept-uu-update" title="concept-UU-update">update steps</dfn> to make it possible for an
 underlying string (such as an
-<a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-attribute-value" title="concept-attribute-value">attribute value</a>)
+<a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-attribute-value" title="concept-attribute-value">attribute value</a>)
 to be updated. The <a href="#concept-uu-update" title="concept-UU-update">update steps</a> are passed a string
 <var title="">value</var> for this purpose.
 
 <p>An object implementing <a href="#urlutils"><code>URLUtils</code></a> or <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> has an
 associated <dfn id="concept-uu-input" title="concept-UU-input">input</dfn> (a string),
 <dfn id="concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</dfn>
-(an <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>),
+(an <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>),
 <dfn id="concept-uu-query-object" title="concept-UU-query-object">query object</dfn>
 (a <a href="#urlsearchparams"><code>URLSearchParams</code></a> object or null), and a
 <dfn id="concept-uu-url" title="concept-UU-url">url</dfn> (a <a href="#concept-url" title="concept-url">URL</a> or null).
 
 Unless stated otherwise, <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a> is
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others follow from the
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others follow from the
 <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm.
 
 <p class="note">The associated
@@ -2220,8 +2220,8 @@ constructor must run these steps:
 url.pathname // "/%F0%9F%92%A9"</pre>
 
  <p>Alternatively you can use the <a href="#concept-base-url" title="concept-base-url">base URL</a> of a
- <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> through
- <a href="http://dom.spec.whatwg.org/#dom-node-baseuri"><code class="external" data-anolis-spec="dom" title="dom-Node-baseURI">baseURI</code></a>:
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#concept-document" title="concept-document">document</a> through
+ <a href="https://dom.spec.whatwg.org/#dom-node-baseuri"><code class="external" data-anolis-spec="dom" title="dom-Node-baseURI">baseURI</code></a>:
 
  <pre>var input = "/💩",
     url = new URL(input, document.baseURI)
@@ -2288,7 +2288,7 @@ run these steps:
  <li><p>Run the <a href="#concept-uu-set-the-input" title="concept-UU-set-the-input">set the input</a> algorithm for
  the given value.
 
- <li><p>If the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a>
+ <li><p>If the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a>
  object and its <a href="#concept-uu-url" title="concept-UU-url">url</a> is null,
  <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
@@ -2313,7 +2313,7 @@ run these steps:
  string.
 
  <li><p>Return the
- <a class="external" data-anolis-spec="html" href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#unicode-serialisation-of-an-origin" title="Unicode serialization of an origin">Unicode serialization</a>
+ <a class="external" data-anolis-spec="html" href="https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin" title="Unicode serialization of an origin">Unicode serialization</a>
  of <a href="#concept-uu-url" title="concept-UU-url">url</a>'s <a href="#concept-url-origin" title="concept-url-origin">origin</a>.
  <a href="#refsHTML">[HTML]</a>
 </ol>
@@ -2577,11 +2577,11 @@ these steps:
 <ol>
  <li><p>Let <var title="">object</var> be the given value.
 
- <li><p>Remove the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> from
+ <li><p>Remove the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> from
  <a href="#concept-uu-query-object" title="concept-UU-query-object">query object</a>'s associated list of
  <a href="#concept-uq-url-object" title="concept-UQ-url-object">url objects</a>.
 
- <li><p>Append the <a class="external" data-anolis-spec="dom" href="http://dom.spec.whatwg.org/#context-object">context object</a> to
+ <li><p>Append the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> to
  <var title="">object</var>'s associated list of
  <a href="#concept-uq-url-object" title="concept-UQ-url-object">url objects</a>.
 
@@ -2636,15 +2636,15 @@ steps:
 
 <h3 id="interface-urlsearchparams"><span class="secno">7.4 </span>Interface <a href="#urlsearchparams"><code>URLSearchParams</code></a></h3>
 
-<pre class="idl">[<a href="#dom-urlsearchparams" title="dom-URLSearchParams">Constructor</a>(optional (<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
+<pre class="idl">[<a href="#dom-urlsearchparams" title="dom-URLSearchParams">Constructor</a>(optional (<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
  Exposed=(Window,Worker)]
 interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
-  void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
-  void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>? <a href="#dom-urlsearchparams-get" title="dom-URLSearchParams-get">get</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  sequence&lt;<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
+  void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
+  void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
+  <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>? <a href="#dom-urlsearchparams-get" title="dom-URLSearchParams-get">get</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
+  sequence&lt;<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
+  boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
+  void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
   <a href="#dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</a>;
 };</pre>
 
@@ -2655,12 +2655,12 @@ pairs, which is initially empty.
 <dfn id="concept-uq-url-object" title="concept-UQ-url-object">url objects</dfn>.
 
 <p class="note"><a href="#urlsearchparams"><code>URLSearchParams</code></a> objects always use
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of
 concepts such as
 <a href="#concept-uu-query-encoding" title="concept-UU-query-encoding">query encoding</a>. This is to
 encourage developers to migrate towards
-<a class="external" data-anolis-spec="encoding" href="http://encoding.spec.whatwg.org/#utf-8">utf-8</a>, which they really ought to
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>, which they really ought to
 have done a long time ago now.
 
 <p>To create a
@@ -2770,7 +2770,7 @@ method must return true if there is a name-value pair whose name is
 <a href="#concept-url" title="concept-url">URL</a>). A standard should not expose a
 <a href="#concept-url" title="concept-url">URL</a> using a <a href="#url"><code>URL</code></a> object. <a href="#url"><code>URL</code></a>
 objects are meant for <a href="#concept-url" title="concept-url">URL</a> manipulation. In IDL the
-<a href="http://encoding.spec.whatwg.org/#scalarvaluestring"><code class="external" data-anolis-spec="encoding">ScalarValueString</code></a> type should be used.
+<a href="https://encoding.spec.whatwg.org/#scalarvaluestring"><code class="external" data-anolis-spec="encoding">ScalarValueString</code></a> type should be used.
 
 <p class="note">The higher-level notion here is that values are to be exposed as immutable
 data structures.
@@ -2780,24 +2780,24 @@ should name such a feature "url" (i.e. lowercase and with an "l" at the end). Na
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
 (i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
-<p class="note">The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
-<a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
+<p class="note">The <a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource"><code class="external" data-anolis-spec="html">EventSource</code></a> and
+<a href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent"><code class="external" data-anolis-spec="html">HashChangeEvent</code></a> interfaces in HTML are examples of
 proper naming. <a href="#refsHTML">[HTML]</a>
 
 
 
 <h2 class="no-num" id="references">References</h2>
 <div id="anolis-references"><dl><dt id="refsDOM">[DOM]
-<dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
+<dd><cite><a href="https://dom.spec.whatwg.org/">DOM</a></cite>, Anne van Kesteren, Aryeh Gregor and Ms2ger. WHATWG.
 
 <dt id="refsENCODING">[ENCODING]
-<dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
+<dd><cite><a href="https://encoding.spec.whatwg.org/">Encoding</a></cite>, Anne van Kesteren. WHATWG.
 
 <dt id="refsFILEAPI">[FILEAPI]
 <dd><cite><a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a></cite>, Arun Ranganathan and Jonas Sicking. W3C.
 
 <dt id="refsHTML">[HTML]
-<dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
+<dd><cite><a href="https://html.spec.whatwg.org/multipage/">HTML</a></cite>, Ian Hickson. WHATWG.
 
 <dt id="refsIDNA">[IDNA]
 <dd><cite><a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a></cite>, Mark Davis and Michel Suignard. Unicode Consortium.
@@ -2877,4 +2877,4 @@ Vyacheslav Matva, and
 成瀬ゆい (Yui Naruse)
 for being awesome!
 
-<script id="head" src="//www.whatwg.org/specs/web-apps/current-work/dfn.js"></script>
+<script id="head" src="//resources.whatwg.org/dfn.js"></script>
