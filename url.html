@@ -9,13 +9,11 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
+ <p><a href="//url.spec.whatwg.org/">url.spec.whatwg.org</a></p>
  <h2>Living Standard — Last Updated 30 September 2014</h2>
 </hgroup>
 
 <dl>
- <dt>This Version:
- <dd><a href="//url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
-
  <dt>Participate:</dt>
  <dd>Send feedback to
   <a href="//whatwg.org/mailing-list">whatwg@whatwg.org</a>
@@ -27,23 +25,9 @@
  <dt>Version History:
  <dd><a href="//github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
  <dd><a href="//twitter.com/urlstandard">@urlstandard</a>
-
- <dt>Editor:
- <dd class="h-card vcard"><a class="u-url url p-name fn" href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
-  (<a class="p-org org h-org h-card" href="//www.mozilla.org/">Mozilla</a>)
-  &lt;<a class="u-email email" href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>&gt;
 </dl>
 
 <script async="" src="//resources.whatwg.org/file-bug.js"></script>
-
-<p class="copyright"><a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="//i.creativecommons.org/p/zero/1.0/80x15.png"></a>
-To the extent possible under law, the editors have waived all copyright and
-related or neighboring rights to this work. In addition, as of
-30 September 2014, the editors have made this specification available
-under the
-<a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
-which is available at
-http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 
 </div>
 
@@ -2675,26 +2659,28 @@ using <var title="">init</var>, run these steps:
  <!-- Beware: new URLSearchParams(null) is equivalent to new URLSearchParams("null") -->
 
  <li><p>If <var title="">init</var> is a string,
- set <var title="">query</var>'s associated list of name-value pairs to the
+ set <var title="">query</var>'s <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the
  result of <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
  <var title="">init</var>.
 
  <li><p>If <var title="">init</var> is a <a href="#urlsearchparams"><code>URLSearchParams</code></a> object, set
- <var title="">query</var>'s associated list of name-value pairs to a copy of
- <var title="">init</var> associated list of name-value pairs.
+ <var title="">query</var>'s <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to a copy
+ of <var title="">init</var>'s <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Return <var title="">query</var>.
 </ol>
 
 <p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
-<dfn id="concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</dfn> are to run these steps for each associated
-<a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url object</a> <var title="">urlObject</var>, in order:
+<dfn id="concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</dfn> are to run these steps for
+each associated  <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url object</a>
+<var title="">urlObject</var>, in order:
 
 <ol>
  <li><p>Set <var title="">urlObject</var>'s <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> to the
- <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
- <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's associated list of name-value pairs.
+ <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of
+ <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Run <var title="">urlObject</var>'s <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
@@ -2702,8 +2688,8 @@ using <var title="">init</var>, run these steps:
 <p>The
 <dfn id="dom-urlsearchparams" title="dom-URLSearchParams"><code>URLSearchParams(<var title="">init</var>)</code></dfn>
 constructor must return a
-<a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a> using
-<var title="">init</var> if given.
+<a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a>
+using <var title="">init</var> if given.
 
 <p>The
 <dfn id="dom-urlsearchparams-append" title="dom-URLSearchParams-append"><code>append(<var title="">name</var>, <var title="">value</var>)</code></dfn>
@@ -2711,7 +2697,7 @@ method must run these steps:
 
 <ol>
  <li><p>Append a new name-value pair whose name is <var title="">name</var> and
- value is <var title="">value</var>, to the list of name-value pairs.
+ value is <var title="">value</var>, to <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Run the <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>.
 </ol>
@@ -2721,7 +2707,8 @@ method must run these steps:
 method must run these steps:
 
 <ol>
- <li><p>Remove all name-value pairs whose name is <var title="">name</var>.
+ <li><p>Remove all name-value pairs whose name is <var title="">name</var> from
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Run the <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>.
 </ol>
@@ -2729,25 +2716,26 @@ method must run these steps:
 <p>The
 <dfn id="dom-urlsearchparams-get" title="dom-URLSearchParams-get"><code>get(<var title="">name</var>)</code></dfn>
 method must return the value of the first name-value pair whose name is
-<var title="">name</var>, and null if there is no such pair.
+<var title="">name</var> in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, and null if
+there is no such pair.
 
 <p>The
 <dfn id="dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll"><code>getAll(<var title="">name</var>)</code></dfn>
 method must return the values of all name-value pairs whose name is
-<var title="">name</var>, in list order, and the empty sequence otherwise.
+<var title="">name</var>, in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>,
+in list order, and the empty sequence otherwise.
 
 <p>The
 <dfn id="dom-urlsearchparams-set" title="dom-URLSearchParams-set"><code>set(<var title="">name</var>, <var title="">value</var>)</code></dfn>
 method must run these steps:
 
 <ol>
- <li><p>If there are any name-value pairs whose name is <var title="">name</var>,
- set the value of the first such name-value pair to <var title="">value</var> and remove the
- others.
+ <li><p>If there are any name-value pairs whose name is <var title="">name</var>, in
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, set the value of the first such
+ name-value pair to <var title="">value</var> and remove the others.
 
- <li><p>Otherwise, append a new name-value pair whose name is
- <var title="">name</var> and value is <var title="">value</var>, to the list of
- name-value pairs.
+ <li><p>Otherwise, append a new name-value pair whose name is <var title="">name</var> and
+ value is <var title="">value</var>, to <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Run the <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>.
 </ol>
@@ -2755,11 +2743,13 @@ method must run these steps:
 <p>The
 <dfn id="dom-urlsearchparams-has" title="dom-URLSearchParams-has"><code>has(<var title="">name</var>)</code></dfn>
 method must return true if there is a name-value pair whose name is
-<var title="">name</var>, and false otherwise.
+<var title="">name</var> in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, and false
+otherwise.
 
 <p>The <dfn id="dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</dfn> must return the
 <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
-<a href="#urlsearchparams"><code>URLSearchParams</code></a> object's associated list of name-value pairs.
+<a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
+<a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
 
 <h3 id="url-apis-elsewhere"><span class="secno">7.5 </span>URL APIs elsewhere</h3>
@@ -2831,8 +2821,6 @@ proper naming. <a href="#refsHTML">[HTML]</a>
 thereby furthered the goals of this standard. Likewise many people have helped making this
 standard what it is today.
 
-<p>Ideally they are all listed here so please contact the editor with any omissions.
-
 <p>With that, many thanks to
 Adam Barth,
 Albert Wiersch,
@@ -2877,5 +2865,14 @@ Tim Berners-Lee,
 Vyacheslav Matva, and
 成瀬ゆい (Yui Naruse)
 for being awesome!
+
+<p>This standard is written by
+<a href="//annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
+(<a href="//www.mozilla.org/">Mozilla</a>,
+<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).
+
+<p>Per <a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
+the extent possible under law, the editor has waived all copyright and related or
+neighboring rights to this work.
 
 <script id="head" src="//resources.whatwg.org/dfn.js"></script>
