@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 30 September 2014</h2>
+ <h2>Living Standard — Last Updated 2 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -1552,7 +1552,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
          <li>
           <p>If <var title="">url</var>'s <a href="#concept-url-scheme" title="concept-url-scheme">scheme</a> is
           "<code title="">file</code>", <var title="">url</var>'s <a href="#concept-url-path" title="concept-url-path">path</a>
-          is the empty list, <var title="">buffer</var> consists of two
+          is empty, <var title="">buffer</var> consists of two
           code points, of which the first is an <a href="#ascii-alpha">ASCII alpha</a>,
           and the second is "<code title="">|</code>", replace the second code point in
           <var title="">buffer</var> with "<code title="">:</code>".
@@ -2139,15 +2139,15 @@ concept only relevant for HTML.
    <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
 
    <li><p>Otherwise, set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
-   associated list of name-value pairs to the result of
+   <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
    <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
    <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
   </ol>
 
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null and
  <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is non-null, empty
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s associated list of name-value
- pairs.
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 </ol>
 
 <p>To run the <dfn id="pre-update-steps">pre-update steps</dfn> for an object implementing
@@ -2493,7 +2493,7 @@ run these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p>Set <a href="#concept-url-path" title="concept-url-path">path</a> to the empty list.
+ <li><p>Empty <a href="#concept-url-path" title="concept-url-path">path</a>.
 
  <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> the given value with
  <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> as <var title="">url</var> and
@@ -2521,10 +2521,11 @@ these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a href="#concept-url-query" title="concept-url-query">query</a> to null, set
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s associated list
- of name-value pairs to the empty list, run its
- <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>, and terminate these steps.
+ <a href="#concept-url-query" title="concept-url-query">query</a> to null, empty
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, run its
+ <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>, and terminate these
+ steps.
 
  <li><p>Let <var title="">input</var> be the given value with a single leading
  "<code title="">?</code>" removed, if any.
@@ -2538,9 +2539,8 @@ these steps:
  <var>encoding override</var>.
 
  <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
- associated list of name-value pairs to the result of
- <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
- <var title="">input</var>.
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
+ <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a> <var title="">input</var>.
 
  <li><p>Run <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
  <a href="#concept-urlsearchparams-update" title="concept-URLSearchParams-update">update steps</a>.
@@ -2572,8 +2572,8 @@ these steps:
 
  <li><p>Set <a href="#concept-url-query" title="concept-url-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s associated list of name-value
- pairs.
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
