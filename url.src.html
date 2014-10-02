@@ -1943,19 +1943,20 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
   these substeps:
 
   <ol>
-   <li><p>Replace <var title>pair</var>'s name and value with the result of
-   running <span data-anolis-spec=encoding>encode</span> on them using
+   <li><p>Let <var title>outputPair</var> be a copy of <var title>pair</var>.
+
+   <li><p>Replace <var title>outputPair</var>'s name and value with the result of running
+   <span data-anolis-spec=encoding>encode</span> on them using
    <var>encoding override</var>, respectively.
 
-   <li><p>Replace <var title>pair</var>'s name and value with their
+   <li><p>Replace <var title>outputPair</var>'s name and value with their
    <span title=concept-urlencoded-byte-serializer>serialization</span>.
 
-   <li><p>If this is not the first pair, append "<code title>&</code>" to
-   <var title>output</var>.
+   <li><p>If <var title>pair</var> is not the first pair in <var title>pairs</var>, append
+   "<code title>&</code>" to <var title>output</var>.
 
-   <li><p>Append <var title>pair</var>'s name, followed by
-   "<code title>=</code>", followed by <var title>pair</var>'s value to
-   <var title>output</var>.
+   <li><p>Append <var title>outputPair</var>'s name, followed by "<code title>=</code>",
+   followed by <var title>outputPair</var>'s value to <var title>output</var>.
   </ol>
 
  <li>Return <var title>output</var>.
