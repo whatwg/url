@@ -725,6 +725,7 @@ either null or a string holding data. It is initially null.
 <p>A <a href="#concept-url" title="concept-url">URL</a>'s <dfn id="concept-url-fragment" title="concept-url-fragment">fragment</dfn>
 is either null or a string holding data that can be used for further processing on the
 resource the <a href="#concept-url" title="concept-url">URL</a>'s other components identify.
+It is initially null.
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated <dfn id="relative-flag">relative flag</dfn>.
 It is initially unset.
@@ -737,7 +738,7 @@ It is initially unset.
 
 <p>A <a href="#concept-url" title="concept-url">URL</a> also has an associated
 <dfn id="concept-url-object" title="concept-url-object">object</dfn> that is either null or a
-<a href="http://dev.w3.org/2006/webapi/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a>.
+<a href="http://dev.w3.org/2006/webapi/FileAPI/#blob"><code class="external" data-anolis-spec="fileapi">Blob</code></a>. It is initially null.
 <a href="#refsFILEAPI">[FILEAPI]</a>
 
 <p class="note">At this point this is used primarily to support "<code title="">blob</code>"
@@ -2097,8 +2098,9 @@ associated <dfn id="concept-urlutils-input" title="concept-URLUtils-input">input
 <dfn id="concept-urlutils-url" title="concept-URLUtils-url">url</dfn> (a <a href="#concept-url" title="concept-url">URL</a> or null).
 
 Unless stated otherwise, <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> is
-<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. The others follow from the
-<a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithm.
+<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and
+<a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null. The others follow
+from the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithm.
 
 <p class="note">The associated
 <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> is a legacy
@@ -2636,7 +2638,7 @@ interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
 empty.
 
 <p>A <a href="#urlsearchparams"><code>URLSearchParams</code></a> object has an associated list of zero or more
-<dfn id="concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</dfn>.
+<dfn id="concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</dfn>, which is initially empty.
 
 <p class="note"><a href="#urlsearchparams"><code>URLSearchParams</code></a> objects always use
 <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as

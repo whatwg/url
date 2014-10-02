@@ -692,6 +692,7 @@ either null or a string holding data. It is initially null.
 <p>A <span title=concept-url>URL</span>'s <dfn title=concept-url-fragment>fragment</dfn>
 is either null or a string holding data that can be used for further processing on the
 resource the <span title=concept-url>URL</span>'s other components identify.
+It is initially null.
 
 <p>A <span title=concept-url>URL</span> also has an associated <dfn>relative flag</dfn>.
 It is initially unset.
@@ -704,7 +705,7 @@ It is initially unset.
 
 <p>A <span title=concept-url>URL</span> also has an associated
 <dfn title=concept-url-object>object</dfn> that is either null or a
-<code data-anolis-spec=fileapi>Blob</code>.
+<code data-anolis-spec=fileapi>Blob</code>. It is initially null.
 <span data-anolis-ref>FILEAPI</span>
 
 <p class="note">At this point this is used primarily to support "<code title>blob</code>"
@@ -2064,8 +2065,9 @@ associated <dfn title=concept-URLUtils-input>input</dfn> (a string),
 <dfn title=concept-URLUtils-url>url</dfn> (a <span title=concept-url>URL</span> or null).
 
 Unless stated otherwise, <span title=concept-URLUtils-query-encoding>query encoding</span> is
-<span data-anolis-spec=encoding>utf-8</span>. The others follow from the
-<span title=concept-URLUtils-set-the-input>set the input</span> algorithm.
+<span data-anolis-spec=encoding>utf-8</span> and
+<span title=concept-URLUtils-query-object>query object</span> is null. The others follow
+from the <span title=concept-URLUtils-set-the-input>set the input</span> algorithm.
 
 <p class=note>The associated
 <span title=concept-URLUtils-query-encoding>query encoding</span> is a legacy
@@ -2603,7 +2605,7 @@ interface <dfn>URLSearchParams</dfn> {
 empty.
 
 <p>A <code>URLSearchParams</code> object has an associated list of zero or more
-<dfn title=concept-URLSearchParams-url-object>url objects</dfn>.
+<dfn title=concept-URLSearchParams-url-object>url objects</dfn>, which is initially empty.
 
 <p class=note><code>URLSearchParams</code> objects always use
 <span data-anolis-spec=encoding>utf-8</span> as
