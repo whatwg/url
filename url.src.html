@@ -1979,48 +1979,48 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<span title=dom-URL>Constructor</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>url</var>, optional <span data-anolis-spec=encoding>ScalarValueString</span> <var title>base</var> = "about:blank"),
+<pre class=idl>[<span title=dom-URL>Constructor</span>(USVString <var title>url</var>, optional USVString <var title>base</var> = "about:blank"),
  Exposed=(Window,Worker)]
 interface <dfn>URL</dfn> {
-  static <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-domainToASCII>domainToASCII</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
-  static <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-domainToUnicode>domainToUnicode</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>domain</var>);
+  static USVString <span title=dom-URL-domainToASCII>domainToASCII</span>(USVString <var title>domain</var>);
+  static USVString <span title=dom-URL-domainToUnicode>domainToUnicode</span>(USVString <var title>domain</var>);
 };
 <span>URL</span> implements <span>URLUtils</span>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn>URLUtils</dfn> {
-  stringifier attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-href>href</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-origin>origin</span>;
+  stringifier attribute USVString <span title=dom-URL-href>href</span>;
+  readonly attribute USVString <span title=dom-URL-origin>origin</span>;
 
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-protocol>protocol</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-username>username</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-password>password</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-host>host</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hostname>hostname</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-port>port</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-pathname>pathname</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-search>search</span>;
+           attribute USVString <span title=dom-URL-protocol>protocol</span>;
+           attribute USVString <span title=dom-URL-username>username</span>;
+           attribute USVString <span title=dom-URL-password>password</span>;
+           attribute USVString <span title=dom-URL-host>host</span>;
+           attribute USVString <span title=dom-URL-hostname>hostname</span>;
+           attribute USVString <span title=dom-URL-port>port</span>;
+           attribute USVString <span title=dom-URL-pathname>pathname</span>;
+           attribute USVString <span title=dom-URL-search>search</span>;
            attribute <span>URLSearchParams</span> <span title=dom-URL-searchParams>searchParams</span>;
-           attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hash>hash</span>;
+           attribute USVString <span title=dom-URL-hash>hash</span>;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn>URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-href>href</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-origin>origin</span>;
+  stringifier readonly attribute USVString <span title=dom-URL-href>href</span>;
+  readonly attribute USVString <span title=dom-URL-origin>origin</span>;
 
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-protocol>protocol</span>;<!--
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-username>username</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-password>password</span>;-->
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-host>host</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hostname>hostname</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-port>port</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-pathname>pathname</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-search>search</span>;<!--
+  readonly attribute USVString <span title=dom-URL-protocol>protocol</span>;<!--
+  readonly attribute USVString <span title=dom-URL-username>username</span>;
+  readonly attribute USVString <span title=dom-URL-password>password</span>;-->
+  readonly attribute USVString <span title=dom-URL-host>host</span>;
+  readonly attribute USVString <span title=dom-URL-hostname>hostname</span>;
+  readonly attribute USVString <span title=dom-URL-port>port</span>;
+  readonly attribute USVString <span title=dom-URL-pathname>pathname</span>;
+  readonly attribute USVString <span title=dom-URL-search>search</span>;<!--
   readonly attribute <span>URLSearchParams</span> <span title=dom-URL-searchParams>searchParams</span>;-->
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-hash>hash</span>;
+  readonly attribute USVString <span title=dom-URL-hash>hash</span>;
 };</pre>
 
 <p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
@@ -2588,15 +2588,15 @@ steps:
 
 <h3>Interface <code>URLSearchParams</code></h3>
 
-<pre class=idl>[<span title=dom-URLSearchParams>Constructor</span>(optional (<span data-anolis-spec=encoding>ScalarValueString</span> or <span>URLSearchParams</span>) <var title>init</var> = ""),
+<pre class=idl>[<span title=dom-URLSearchParams>Constructor</span>(optional (USVString or <span>URLSearchParams</span>) <var title>init</var> = ""),
  Exposed=(Window,Worker)]
 interface <dfn>URLSearchParams</dfn> {
-  void <span title=dom-URLSearchParams-append>append</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>value</var>);
-  void <span title=dom-URLSearchParams-delete>delete</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
-  <span data-anolis-spec=encoding>ScalarValueString</span>? <span title=dom-URLSearchParams-get>get</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
-  sequence&lt;<span data-anolis-spec=encoding>ScalarValueString</span>> <span title=dom-URLSearchParams-getAll>getAll</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
-  boolean <span title=dom-URLSearchParams-has>has</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>);
-  void <span title=dom-URLSearchParams-set>set</span>(<span data-anolis-spec=encoding>ScalarValueString</span> <var title>name</var>, <span data-anolis-spec=encoding>ScalarValueString</span> <var title>value</var>);
+  void <span title=dom-URLSearchParams-append>append</span>(USVString <var title>name</var>, USVString <var title>value</var>);
+  void <span title=dom-URLSearchParams-delete>delete</span>(USVString <var title>name</var>);
+  USVString? <span title=dom-URLSearchParams-get>get</span>(USVString <var title>name</var>);
+  sequence&lt;USVString> <span title=dom-URLSearchParams-getAll>getAll</span>(USVString <var title>name</var>);
+  boolean <span title=dom-URLSearchParams-has>has</span>(USVString <var title>name</var>);
+  void <span title=dom-URLSearchParams-set>set</span>(USVString <var title>name</var>, USVString <var title>value</var>);
   <span title=dom-URLSearchParams-stringifier>stringifier</span>;
 };</pre>
 
@@ -2729,7 +2729,7 @@ otherwise.
 <span title=concept-url>URL</span>). A standard should not expose a
 <span title=concept-url>URL</span> using a <code>URL</code> object. <code>URL</code>
 objects are meant for <span title=concept-url>URL</span> manipulation. In IDL the
-<code data-anolis-spec=encoding>ScalarValueString</code> type should be used.
+USVString type should be used.
 
 <p class=note>The higher-level notion here is that values are to be exposed as immutable
 data structures.

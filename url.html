@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 2 October 2014</h2>
+ <h2>Living Standard — Last Updated 3 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2012,48 +2012,48 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">url</var>, optional <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">base</var> = "about:blank"),
+<pre class="idl">[<a href="#dom-url" title="dom-URL">Constructor</a>(USVString <var title="">url</var>, optional USVString <var title="">base</var> = "about:blank"),
  Exposed=(Window,Worker)]
 interface <dfn id="url">URL</dfn> {
-  static <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
-  static <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">domain</var>);
+  static USVString <a href="#dom-url-domaintoascii" title="dom-URL-domainToASCII">domainToASCII</a>(USVString <var title="">domain</var>);
+  static USVString <a href="#dom-url-domaintounicode" title="dom-URL-domainToUnicode">domainToUnicode</a>(USVString <var title="">domain</var>);
 };
 <a href="#url">URL</a> implements <a href="#urlutils">URLUtils</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn id="urlutils">URLUtils</dfn> {
-  stringifier attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
+  stringifier attribute USVString <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  readonly attribute USVString <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-username" title="dom-URL-username">username</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-password" title="dom-URL-password">password</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;
+           attribute USVString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;
+           attribute USVString <a href="#dom-url-username" title="dom-URL-username">username</a>;
+           attribute USVString <a href="#dom-url-password" title="dom-URL-password">password</a>;
+           attribute USVString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+           attribute USVString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+           attribute USVString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+           attribute USVString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+           attribute USVString <a href="#dom-url-search" title="dom-URL-search">search</a>;
            attribute <a href="#urlsearchparams">URLSearchParams</a> <a href="#dom-url-searchparams" title="dom-URL-searchParams">searchParams</a>;
-           attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+           attribute USVString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn id="urlutilsreadonly">URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-href" title="dom-URL-href">href</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
+  stringifier readonly attribute USVString <a href="#dom-url-href" title="dom-URL-href">href</a>;
+  readonly attribute USVString <a href="#dom-url-origin" title="dom-URL-origin">origin</a>;
 
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-username>username</span>;
-  readonly attribute <span data-anolis-spec=encoding>ScalarValueString</span> <span title=dom-URL-password>password</span>;-->
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-host" title="dom-URL-host">host</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-port" title="dom-URL-port">port</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
+  readonly attribute USVString <a href="#dom-url-protocol" title="dom-URL-protocol">protocol</a>;<!--
+  readonly attribute USVString <span title=dom-URL-username>username</span>;
+  readonly attribute USVString <span title=dom-URL-password>password</span>;-->
+  readonly attribute USVString <a href="#dom-url-host" title="dom-URL-host">host</a>;
+  readonly attribute USVString <a href="#dom-url-hostname" title="dom-URL-hostname">hostname</a>;
+  readonly attribute USVString <a href="#dom-url-port" title="dom-URL-port">port</a>;
+  readonly attribute USVString <a href="#dom-url-pathname" title="dom-URL-pathname">pathname</a>;
+  readonly attribute USVString <a href="#dom-url-search" title="dom-URL-search">search</a>;<!--
   readonly attribute <span>URLSearchParams</span> <span title=dom-URL-searchParams>searchParams</span>;-->
-  readonly attribute <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
+  readonly attribute USVString <a href="#dom-url-hash" title="dom-URL-hash">hash</a>;
 };</pre>
 
 <p>Except where different objects implementing <a href="#urlutilsreadonly"><code>URLUtilsReadOnly</code></a> are identical
@@ -2621,15 +2621,15 @@ steps:
 
 <h3 id="interface-urlsearchparams"><span class="secno">7.4 </span>Interface <a href="#urlsearchparams"><code>URLSearchParams</code></a></h3>
 
-<pre class="idl">[<a href="#dom-urlsearchparams" title="dom-URLSearchParams">Constructor</a>(optional (<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
+<pre class="idl">[<a href="#dom-urlsearchparams" title="dom-URLSearchParams">Constructor</a>(optional (USVString or <a href="#urlsearchparams">URLSearchParams</a>) <var title="">init</var> = ""),
  Exposed=(Window,Worker)]
 interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
-  void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
-  void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>? <a href="#dom-urlsearchparams-get" title="dom-URLSearchParams-get">get</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  sequence&lt;<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a>&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>);
-  void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(<a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">name</var>, <a class="external" data-anolis-spec="encoding" href="https://encoding.spec.whatwg.org/#scalarvaluestring">ScalarValueString</a> <var title="">value</var>);
+  void <a href="#dom-urlsearchparams-append" title="dom-URLSearchParams-append">append</a>(USVString <var title="">name</var>, USVString <var title="">value</var>);
+  void <a href="#dom-urlsearchparams-delete" title="dom-URLSearchParams-delete">delete</a>(USVString <var title="">name</var>);
+  USVString? <a href="#dom-urlsearchparams-get" title="dom-URLSearchParams-get">get</a>(USVString <var title="">name</var>);
+  sequence&lt;USVString&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>(USVString <var title="">name</var>);
+  boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(USVString <var title="">name</var>);
+  void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(USVString <var title="">name</var>, USVString <var title="">value</var>);
   <a href="#dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</a>;
 };</pre>
 
@@ -2762,7 +2762,7 @@ otherwise.
 <a href="#concept-url" title="concept-url">URL</a>). A standard should not expose a
 <a href="#concept-url" title="concept-url">URL</a> using a <a href="#url"><code>URL</code></a> object. <a href="#url"><code>URL</code></a>
 objects are meant for <a href="#concept-url" title="concept-url">URL</a> manipulation. In IDL the
-<a href="https://encoding.spec.whatwg.org/#scalarvaluestring"><code class="external" data-anolis-spec="encoding">ScalarValueString</code></a> type should be used.
+USVString type should be used.
 
 <p class="note">The higher-level notion here is that values are to be exposed as immutable
 data structures.
