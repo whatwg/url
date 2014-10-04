@@ -2597,6 +2597,7 @@ interface <dfn>URLSearchParams</dfn> {
   sequence&lt;USVString> <span title=dom-URLSearchParams-getAll>getAll</span>(USVString <var title>name</var>);
   boolean <span title=dom-URLSearchParams-has>has</span>(USVString <var title>name</var>);
   void <span title=dom-URLSearchParams-set>set</span>(USVString <var title>name</var>, USVString <var title>value</var>);
+  iterable&lt;USVString, USVString>;
   <span title=dom-URLSearchParams-stringifier>stringifier</span>;
 };</pre>
 
@@ -2714,6 +2715,10 @@ method must run these steps:
 method must return true if there is a name-value pair whose name is
 <var title>name</var> in <span title=concept-URLSearchParams-list>list</span>, and false
 otherwise.
+
+<p>The <span data-anolis-spec=webidl>value pairs to iterate over</span> are the
+<span title=concept-URLSearchParams-list>list</span> name-value pairs with the key being
+the name and the value the value.
 
 <p>The <dfn title=dom-URLSearchParams-stringifier>stringifier</dfn> must return the
 <span title=concept-urlencoded-serializer>serialization</span> of the

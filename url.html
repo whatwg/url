@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 3 October 2014</h2>
+ <h2>Living Standard — Last Updated 4 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2630,6 +2630,7 @@ interface <dfn id="urlsearchparams">URLSearchParams</dfn> {
   sequence&lt;USVString&gt; <a href="#dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll">getAll</a>(USVString <var title="">name</var>);
   boolean <a href="#dom-urlsearchparams-has" title="dom-URLSearchParams-has">has</a>(USVString <var title="">name</var>);
   void <a href="#dom-urlsearchparams-set" title="dom-URLSearchParams-set">set</a>(USVString <var title="">name</var>, USVString <var title="">value</var>);
+  iterable&lt;USVString, USVString&gt;;
   <a href="#dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</a>;
 };</pre>
 
@@ -2747,6 +2748,10 @@ method must run these steps:
 method must return true if there is a name-value pair whose name is
 <var title="">name</var> in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, and false
 otherwise.
+
+<p>The <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
+<a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> name-value pairs with the key being
+the name and the value the value.
 
 <p>The <dfn id="dom-urlsearchparams-stringifier" title="dom-URLSearchParams-stringifier">stringifier</dfn> must return the
 <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of the
