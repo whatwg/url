@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 4 October 2014</h2>
+ <h2>Living Standard — Last Updated 7 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -45,19 +45,19 @@
  <li><a href="#hosts-(domains-and-ip-addresses)"><span class="secno">4 </span>Hosts (domains and IP addresses)</a>
   <ol>
    <li><a href="#idna"><span class="secno">4.1 </span>IDNA</a></li>
-   <li><a href="#host-writing"><span class="secno">4.2 </span>Writing</a></li>
-   <li><a href="#host-parsing"><span class="secno">4.3 </span>Parsing</a></li>
-   <li><a href="#host-serializing"><span class="secno">4.4 </span>Serializing</a></ol></li>
+   <li><a href="#host-writing"><span class="secno">4.2 </span>Host writing</a></li>
+   <li><a href="#host-parsing"><span class="secno">4.3 </span>Host parsing</a></li>
+   <li><a href="#host-serializing"><span class="secno">4.4 </span>Host serializing</a></ol></li>
  <li><a href="#urls"><span class="secno">5 </span>URLs</a>
   <ol>
-   <li><a href="#writing"><span class="secno">5.1 </span>Writing</a></li>
-   <li><a href="#parsing"><span class="secno">5.2 </span>Parsing</a></li>
-   <li><a href="#serializing"><span class="secno">5.3 </span>Serializing</a></li>
+   <li><a href="#url-writing"><span class="secno">5.1 </span>URL writing</a></li>
+   <li><a href="#url-parsing"><span class="secno">5.2 </span>URL parsing</a></li>
+   <li><a href="#url-serializing"><span class="secno">5.3 </span>URL serializing</a></li>
    <li><a href="#origin"><span class="secno">5.4 </span>Origin</a></ol></li>
  <li><a href="#application/x-www-form-urlencoded"><span class="secno">6 </span><code>application/x-www-form-urlencoded</code></a>
   <ol>
-   <li><a href="#urlencoded-parsing"><span class="secno">6.1 </span>Parsing</a></li>
-   <li><a href="#urlencoded-serializing"><span class="secno">6.2 </span>Serializing</a></li>
+   <li><a href="#urlencoded-parsing"><span class="secno">6.1 </span><code title="">application/x-www-form-urlencoded</code> parsing</a></li>
+   <li><a href="#urlencoded-serializing"><span class="secno">6.2 </span><code title="">application/x-www-form-urlencoded</code> serializing</a></li>
    <li><a href="#urlencoded-hooks"><span class="secno">6.3 </span>Hooks</a></ol></li>
  <li><a href="#api"><span class="secno">7 </span>API</a>
   <ol>
@@ -315,7 +315,7 @@ eight <dfn id="concept-ipv6-piece" title="concept-ipv6-piece">16-bit pieces</dfn
 </ol>
 
 
-<h3 id="host-writing"><span class="secno">4.2 </span>Writing</h3>
+<h3 id="host-writing"><span class="secno">4.2 </span>Host writing</h3>
 
 <p>A <a href="#concept-host" title="concept-host">host</a> must be either a
 <a href="#concept-domain" title="concept-domain">domain</a> or "<code title="">[</code>", followed
@@ -359,7 +359,7 @@ by an <a href="#concept-ipv6" title="concept-ipv6">IPv6 address</a>, followed by
      XXX should we define the format inline instead just like STD 66? -->
 
 
-<h3 id="host-parsing"><span class="secno">4.3 </span>Parsing</h3>
+<h3 id="host-parsing"><span class="secno">4.3 </span>Host parsing</h3>
 
 <p>The <dfn id="concept-host-parser" title="concept-host-parser">host parser</dfn> takes a string
 <var title="">input</var> and optionally a <var title="">Unicode flag</var>, and then runs
@@ -597,7 +597,7 @@ these steps:
 </ol>
 
 
-<h3 id="host-serializing"><span class="secno">4.4 </span>Serializing</h3>
+<h3 id="host-serializing"><span class="secno">4.4 </span>Host serializing</h3>
 
 <p>The <dfn id="concept-host-serializer" title="concept-host-serializer">host serializer</dfn> takes null or a
 <a href="#concept-host" title="concept-host">host</a> <var title="">host</var> and then runs
@@ -784,7 +784,7 @@ the <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> when
 <a href="#concept-relative-url" title="concept-relative-url">relative URL</a>.
 
 
-<h3 id="writing"><span class="secno">5.1 </span>Writing</h3>
+<h3 id="url-writing"><span class="secno">5.1 </span>URL writing</h3>
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
@@ -921,7 +921,7 @@ U+100000 to U+10FFFD.
 <a href="#percent-encoded-byte" title="percent-encoded byte">percent-encoded bytes</a>.
 
 
-<h3 id="parsing"><span class="secno">5.2 </span>Parsing</h3>
+<h3 id="url-parsing"><span class="secno">5.2 </span>URL parsing</h3>
 
 <p class="XXX">Add the ability to halt on the first conformance error.
 
@@ -1693,7 +1693,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
 </ol>
 
 
-<h3 id="serializing"><span class="secno">5.3 </span>Serializing</h3>
+<h3 id="url-serializing"><span class="secno">5.3 </span>URL serializing</h3>
 
 <p>The <dfn id="concept-url-serializer" title="concept-url-serializer">URL serializer</dfn> takes a
 <a href="#concept-url" title="concept-url">URL</a> <var title="">url</var>,
@@ -1823,7 +1823,7 @@ encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x
 format is in widespread use due to its prevalence of HTML forms.
 <a href="#refsHTML">[HTML]</a>
 
-<h3 id="urlencoded-parsing"><span class="secno">6.1 </span>Parsing</h3>
+<h3 id="urlencoded-parsing"><span class="secno">6.1 </span><code title="">application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
 <a href="#concept-urlencoded-parser" title="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</a>
@@ -1916,7 +1916,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
  <li><p>Return <var title="">output</var>.
 </ol>
 
-<h3 id="urlencoded-serializing"><span class="secno">6.2 </span>Serializing</h3>
+<h3 id="urlencoded-serializing"><span class="secno">6.2 </span><code title="">application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
 <dfn id="concept-urlencoded-byte-serializer" title="concept-urlencoded-byte-serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>

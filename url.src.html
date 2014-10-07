@@ -282,7 +282,7 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 </ol>
 
 
-<h3 id=host-writing>Writing</h3>
+<h3>Host writing</h3>
 
 <p>A <span title=concept-host>host</span> must be either a
 <span title=concept-domain>domain</span> or "<code title>[</code>", followed
@@ -326,7 +326,7 @@ by an <span title=concept-ipv6>IPv6 address</span>, followed by
      XXX should we define the format inline instead just like STD 66? -->
 
 
-<h3 id=host-parsing>Parsing</h3>
+<h3>Host parsing</h3>
 
 <p>The <dfn title=concept-host-parser>host parser</dfn> takes a string
 <var title>input</var> and optionally a <var title>Unicode flag</var>, and then runs
@@ -564,7 +564,7 @@ these steps:
 </ol>
 
 
-<h3 id=host-serializing>Serializing</h3>
+<h3>Host serializing</h3>
 
 <p>The <dfn title=concept-host-serializer>host serializer</dfn> takes null or a
 <span title=concept-host>host</span> <var title>host</var> and then runs
@@ -751,7 +751,7 @@ the <span title=concept-url-parser>URL parser</span> when the input is potential
 <span title=concept-relative-url>relative URL</span>.
 
 
-<h3>Writing</h3>
+<h3>URL writing</h3>
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
@@ -888,7 +888,7 @@ U+100000 to U+10FFFD.
 <span title="percent-encoded byte">percent-encoded bytes</span>.
 
 
-<h3>Parsing</h3>
+<h3>URL parsing</h3>
 
 <p class=XXX>Add the ability to halt on the first conformance error.
 
@@ -1660,7 +1660,7 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 </ol>
 
 
-<h3>Serializing</h3>
+<h3>URL serializing</h3>
 
 <p>The <dfn title=concept-url-serializer>URL serializer</dfn> takes a
 <span title=concept-url>URL</span> <var title>url</var>,
@@ -1790,7 +1790,7 @@ encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x
 format is in widespread use due to its prevalence of HTML forms.
 <span data-anolis-ref>HTML</span>
 
-<h3 id=urlencoded-parsing>Parsing</h3>
+<h3 id=urlencoded-parsing><code title>application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
 <span title=concept-urlencoded-parser><code>application/x-www-form-urlencoded</code> parser</span>
@@ -1883,7 +1883,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
  <li><p>Return <var title>output</var>.
 </ol>
 
-<h3 id=urlencoded-serializing>Serializing</h3>
+<h3 id=urlencoded-serializing><code title>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
 <dfn title=concept-urlencoded-byte-serializer><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
