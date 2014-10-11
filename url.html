@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 7 October 2014</h2>
+ <h2>Living Standard — Last Updated 11 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -1007,9 +1007,9 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
 
  <li>
   <p>Keep running the following state machine by switching on
-  <var title="">state</var>, increasing <var title="">pointer</var> by one after
-  each time it is run, and if after a run <var title="">pointer</var> points to the
-  <a href="#eof-code-point">EOF code point</a>, go to the next step.
+  <var title="">state</var>.  If after a run <var title="">pointer</var> points to
+  the <a href="#eof-code-point">EOF code point</a>, go to the next step; otherwise increase
+  <var title="">pointer</var> by one and continue with the state machine.
 
   <dl class="switch">
    <dt><dfn id="scheme-start-state">scheme start state</dfn>
@@ -1600,7 +1600,7 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
    <dd>
     <ol>
      <li>
-      <p>If <a href="#c">c</a> is the <a href="#eof-code-point">EOF code point</a> or
+      <p>If <a href="#c">c</a> is the <a href="#eof-code-point">EOF code point</a>, or
       <var title="">state override</var> is not given and <a href="#c">c</a>
       is "<code title="">#</code>", run these substeps:
 
