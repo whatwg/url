@@ -974,9 +974,10 @@ optionally with an <span data-anolis-spec=encoding>encoding</span>
 
  <li>
   <p>Keep running the following state machine by switching on
-  <var title>state</var>, increasing <var title>pointer</var> by one after
-  each time it is run, and if after a run <var title>pointer</var> points to the
-  <span>EOF code point</span>, go to the next step.
+  <var title="">state</var>.  If after a run <var title="">pointer</var> points
+  to the <a href="#eof-code-point">EOF code point</a>, go to the next step;
+  otherwise increase <var title="">pointer</var> by one and continue with the
+  state machine.
 
   <dl class=switch>
    <dt><dfn>scheme start state</dfn>
