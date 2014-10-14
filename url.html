@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 12 October 2014</h2>
+ <h2>Living Standard — Last Updated 14 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2171,7 +2171,7 @@ concept only relevant for HTML.
 
 <p>The
 <dfn id="dom-url" title="dom-URL"><code>URL(<var title="">url</var>, <var title="">base</var>)</code></dfn>
-constructor must run these steps:
+constructor, when invoked, must run these steps:
 
 <ol>
  <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">base</var>
@@ -2218,7 +2218,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 
 <p>The
 <dfn id="dom-url-domaintoascii" title="dom-URL-domainToASCII"><code>domainToASCII(<var>domain</var>)</code></dfn>
-static method must run these steps:
+static method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var title="">asciiDomain</var> be the result of
@@ -2232,7 +2232,7 @@ static method must run these steps:
 
 <p>The
 <dfn id="dom-url-domaintounicode" title="dom-URL-domainToUnicode"><code>domainToUnicode(<var>domain</var>)</code></dfn>
-static method must run these steps:
+static method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var title="">unicodeDomain</var> be the result of
@@ -2255,7 +2255,7 @@ representation?
 not exposed on the global object. They are meant to augment other interfaces, such as
 <a href="#url"><code>URL</code></a>.
 
-<p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code></dfn> attribute must run
+<p>The <dfn id="dom-url-href" title="dom-URL-href"><code>href</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2266,8 +2266,7 @@ these steps:
  of <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute must
-run these steps:
+<p>The <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithm for
@@ -2290,7 +2289,7 @@ legacy incidents.
   <a>.getAttribute("href") == urlPoop
 -->
 
-<p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute must
+<p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2307,7 +2306,7 @@ run these steps:
 compatibility with HTML's <code>MessageEvent</code> feature.
 <a href="#refsHTML">[HTML]</a>
 
-<p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute
+<p>The <dfn id="dom-url-protocol" title="dom-URL-protocol"><code>protocol</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2318,7 +2317,7 @@ must run these steps:
  "<code title="">:</code>" concatenated.
 </ol>
 
-<p>Setting the <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute must
+<p>The <a href="#dom-url-protocol"><code title="dom-URL-protocol">protocol</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2333,7 +2332,7 @@ run these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-username" title="dom-URL-username"><code>username</code></dfn> attribute
+<p>The <dfn id="dom-url-username" title="dom-URL-username"><code>username</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2343,7 +2342,7 @@ must run these steps:
  <li><p>Return <a href="#concept-url-username" title="concept-url-username">username</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-username"><code title="dom-URL-username">username</code></a> attribute must
+<p>The <a href="#dom-url-username"><code title="dom-URL-username">username</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2361,7 +2360,7 @@ run these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-password" title="dom-URL-password"><code>password</code></dfn> attribute
+<p>The <dfn id="dom-url-password" title="dom-URL-password"><code>password</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2372,7 +2371,7 @@ must run these steps:
  <li><p>Return <a href="#concept-url-password" title="concept-url-password">password</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-password"><code title="dom-URL-password">password</code></a> attribute must
+<p>The <a href="#dom-url-password"><code title="dom-URL-password">password</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2392,7 +2391,7 @@ run these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute must run
+<p>The <dfn id="dom-url-host" title="dom-URL-host"><code>host</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2409,7 +2408,7 @@ these steps:
  concatenated.
 </ol>
 
-<p>Setting the <a href="#dom-url-host"><code title="dom-URL-host">host</code></a> attribute must run these
+<p>The <a href="#dom-url-host"><code title="dom-URL-host">host</code></a> attribute's setter must run these
 steps:
 
 <ol>
@@ -2423,7 +2422,7 @@ steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute
+<p>The <dfn id="dom-url-hostname" title="dom-URL-hostname"><code>hostname</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2434,7 +2433,7 @@ must run these steps:
  <a href="#concept-host-serializer" title="concept-host-serializer">serialized</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute must
+<p>The <a href="#dom-url-hostname"><code title="dom-URL-hostname">hostname</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2448,7 +2447,7 @@ run these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute must run
+<p>The <dfn id="dom-url-port" title="dom-URL-port"><code>port</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2458,8 +2457,7 @@ these steps:
  <li><p>Return <a href="#concept-url-port" title="concept-url-port">port</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute must run these
-steps:
+<p>The <a href="#dom-url-port"><code title="dom-URL-port">port</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, its
@@ -2474,7 +2472,7 @@ steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute
+<p>The <dfn id="dom-url-pathname" title="dom-URL-pathname"><code>pathname</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2489,7 +2487,7 @@ must run these steps:
  separated from each other by "<code title="">/</code>".
 </ol>
 
-<p>Setting the <a href="#dom-url-pathname"><code title="dom-URL-pathname">pathname</code></a> attribute must
+<p>The <a href="#dom-url-pathname"><code title="dom-URL-pathname">pathname</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2505,7 +2503,7 @@ run these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute must
+<p>The <dfn id="dom-url-search" title="dom-URL-search"><code>search</code></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2517,8 +2515,7 @@ run these steps:
  <a href="#concept-url-query" title="concept-url-query">query</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-search"><code title="dom-URL-search">search</code></a> attribute must run
-these steps:
+<p>The <a href="#dom-url-search"><code title="dom-URL-search">search</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, terminate these steps.
@@ -2553,10 +2550,10 @@ these steps:
 <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> are run to ensure all
 <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a> remain synchronized.
 
-<p>The <dfn id="dom-url-searchparams" title="dom-URL-searchParams"><code>searchParams</code></dfn> attribute must
-return the <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>.
+<p>The <dfn id="dom-url-searchparams" title="dom-URL-searchParams"><code>searchParams</code></dfn> attribute's getter
+must return the <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>.
 
-<p>Setting the <a href="#dom-url-searchparams"><code title="dom-URL-searchParams">searchParams</code></a> attribute must run
+<p>The <a href="#dom-url-searchparams"><code title="dom-URL-searchParams">searchParams</code></a> attribute's setter must run
 these steps:
 
 <ol>
@@ -2581,7 +2578,7 @@ these steps:
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
 
-<p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute must run
+<p>The <dfn id="dom-url-hash" title="dom-URL-hash"><code>hash</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2593,8 +2590,7 @@ these steps:
  <a href="#concept-url-fragment" title="concept-url-fragment">fragment</a>.
 </ol>
 
-<p>Setting the <a href="#dom-url-hash"><code title="dom-URL-hash">hash</code></a> attribute must run these
-steps:
+<p>The <a href="#dom-url-hash"><code title="dom-URL-hash">hash</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
@@ -2690,13 +2686,13 @@ each associated  <a href="#concept-urlsearchparams-url-object" title="concept-UR
 
 <p>The
 <dfn id="dom-urlsearchparams" title="dom-URLSearchParams"><code>URLSearchParams(<var title="">init</var>)</code></dfn>
-constructor must return a
+constructor, when invoked, must return a
 <a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a>
 using <var title="">init</var> if given.
 
 <p>The
 <dfn id="dom-urlsearchparams-append" title="dom-URLSearchParams-append"><code>append(<var title="">name</var>, <var title="">value</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
  <li><p>Append a new name-value pair whose name is <var title="">name</var> and
@@ -2707,7 +2703,7 @@ method must run these steps:
 
 <p>The
 <dfn id="dom-urlsearchparams-delete" title="dom-URLSearchParams-delete"><code>delete(<var title="">name</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
  <li><p>Remove all name-value pairs whose name is <var title="">name</var> from
@@ -2718,19 +2714,19 @@ method must run these steps:
 
 <p>The
 <dfn id="dom-urlsearchparams-get" title="dom-URLSearchParams-get"><code>get(<var title="">name</var>)</code></dfn>
-method must return the value of the first name-value pair whose name is
+method, when invoked, must return the value of the first name-value pair whose name is
 <var title="">name</var> in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, and null if
 there is no such pair.
 
 <p>The
 <dfn id="dom-urlsearchparams-getall" title="dom-URLSearchParams-getAll"><code>getAll(<var title="">name</var>)</code></dfn>
-method must return the values of all name-value pairs whose name is
+method, when invoked, must return the values of all name-value pairs whose name is
 <var title="">name</var>, in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>,
 in list order, and the empty sequence otherwise.
 
 <p>The
 <dfn id="dom-urlsearchparams-set" title="dom-URLSearchParams-set"><code>set(<var title="">name</var>, <var title="">value</var>)</code></dfn>
-method must run these steps:
+method, when invoked, must run these steps:
 
 <ol>
  <li><p>If there are any name-value pairs whose name is <var title="">name</var>, in
@@ -2745,7 +2741,7 @@ method must run these steps:
 
 <p>The
 <dfn id="dom-urlsearchparams-has" title="dom-URLSearchParams-has"><code>has(<var title="">name</var>)</code></dfn>
-method must return true if there is a name-value pair whose name is
+method, when invoked, must return true if there is a name-value pair whose name is
 <var title="">name</var> in <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>, and false
 otherwise.
 
