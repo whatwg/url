@@ -2083,19 +2083,27 @@ concept only relevant for HTML.
 <ol>
  <li><p>Set <span title=concept-URLUtils-url>url</span> to null.
 
- <li><p>Set <span title=concept-URLUtils-input>input</span> to the given value.
+ <li><p>If the given value is null, set <span title=concept-URLUtils-input>input</span> to
+ the empty string.
 
- <li><p>Let <var title>url</var> be the result of running the
- <span title=concept-url-parser>URL parser</span> on
- <span title=concept-URLUtils-input>input</span> with
- <span title=concept-base-url>base URL</span> being the result of running
- <span title=concept-URLUtils-get-the-base>get the base</span> and
- <span title=concept-URLUtils-query-encoding>query encoding</span> as
- <var>encoding override</var>.
- <!-- support blob URLs at this level -->
+ <li>
+  <p>Otherwise, run these substeps:
 
- <li><p>If <var title>url</var> is not failure, set
- <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
+  <ol>
+   <li><p>Set <span title=concept-URLUtils-input>input</span> to the given value.
+
+   <li><p>Let <var title>url</var> be the result of running the
+   <span title=concept-url-parser>URL parser</span> on
+   <span title=concept-URLUtils-input>input</span> with
+   <span title=concept-base-url>base URL</span> being the result of running
+   <span title=concept-URLUtils-get-the-base>get the base</span> and
+   <span title=concept-URLUtils-query-encoding>query encoding</span> as
+   <var>encoding override</var>.
+   <!-- support blob URLs at this level -->
+
+   <li><p>If <var title>url</var> is not failure, set
+   <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
+  </ol>
 
  <li><p>Let <var title>query</var> be <span title=concept-URLUtils-url>url</span>'s
  <span title=concept-URL-query>query</span> if <span title=concept-URLUtils-url>url</span>

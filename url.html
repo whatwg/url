@@ -2116,19 +2116,27 @@ concept only relevant for HTML.
 <ol>
  <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to null.
 
- <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the given value.
+ <li><p>If the given value is null, set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to
+ the empty string.
 
- <li><p>Let <var title="">url</var> be the result of running the
- <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
- <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
- <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
- <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
- <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
- <var>encoding override</var>.
- <!-- support blob URLs at this level -->
+ <li>
+  <p>Otherwise, run these substeps:
 
- <li><p>If <var title="">url</var> is not failure, set
- <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+  <ol>
+   <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the given value.
+
+   <li><p>Let <var title="">url</var> be the result of running the
+   <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
+   <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
+   <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+   <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
+   <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
+   <var>encoding override</var>.
+   <!-- support blob URLs at this level -->
+
+   <li><p>If <var title="">url</var> is not failure, set
+   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+  </ol>
 
  <li><p>Let <var title="">query</var> be <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
  <a href="#concept-url-query" title="concept-URL-query">query</a> if <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
