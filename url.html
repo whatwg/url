@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 14 October 2014</h2>
+ <h2>Living Standard — Last Updated 16 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2130,26 +2130,21 @@ concept only relevant for HTML.
  <li><p>If <var title="">url</var> is not failure, set
  <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
 
- <li>
-  <p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is non-null and its
-  <a href="#relative-flag">relative flag</a> is set, run these substeps:
+ <li><p>Let <var title="">query</var> be <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
+ <a href="#concept-url-query" title="concept-URL-query">query</a> if <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ is non-null, and the empty string otherwise.
 
-  <ol>
-   <li><p>If <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null, set
-   <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to a
-   <a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a> using
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
+ <li><p>If <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null, set
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to a
+ <a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a>
+ using <var title="">query</var>, and then append the
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> to
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s list of
+ <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
 
-   <li><p>Otherwise, set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
-   <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
-   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
-  </ol>
-
- <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null and
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is non-null, empty
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
- <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
+ <li><p>Otherwise, set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
+ <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a> <var title="">query</var>.
 </ol>
 
 <p>To run the <dfn id="pre-update-steps">pre-update steps</dfn> for an object implementing
@@ -2559,11 +2554,11 @@ these steps:
  <li><p>Let <var title="">object</var> be the given value.
 
  <li><p>Remove the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> from
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s associated list of
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s list of
  <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
 
  <li><p>Append the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> to
- <var title="">object</var>'s associated list of
+ <var title="">object</var>'s list of
  <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
 
  <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to

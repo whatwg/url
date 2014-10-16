@@ -2097,26 +2097,21 @@ concept only relevant for HTML.
  <li><p>If <var title>url</var> is not failure, set
  <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
 
- <li>
-  <p>If <span title=concept-URLUtils-url>url</span> is non-null and its
-  <span>relative flag</span> is set, run these substeps:
+ <li><p>Let <var title>query</var> be <span title=concept-URLUtils-url>url</span>'s
+ <span title=concept-URL-query>query</span> if <span title=concept-URLUtils-url>url</span>
+ is non-null, and the empty string otherwise.
 
-  <ol>
-   <li><p>If <span title=concept-URLUtils-query-object>query object</span> is null, set
-   <span title=concept-URLUtils-query-object>query object</span> to a
-   <span title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</span> using
-   <span title=concept-URLUtils-url>url</span>'s <span title=concept-URL-query>query</span>.
+ <li><p>If <span title=concept-URLUtils-query-object>query object</span> is null, set
+ <span title=concept-URLUtils-query-object>query object</span> to a
+ <span title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</span>
+ using <var title>query</var>, and then append the
+ <span data-anolis-spec=dom>context object</span> to
+ <span title=concept-URLUtils-query-object>query object</span>'s list of
+ <span title=concept-URLSearchParams-url-object>url objects</span>.
 
-   <li><p>Otherwise, set <span title=concept-URLUtils-query-object>query object</span>'s
-   <span title=concept-URLSearchParams-list>list</span> to the result of
-   <span title=concept-urlencoded-string-parser>parsing</span>
-   <span title=concept-URLUtils-url>url</span>'s <span title=concept-URL-query>query</span>.
-  </ol>
-
- <li><p>If <span title=concept-URLUtils-url>url</span> is null and
- <span title=concept-URLUtils-query-object>query object</span> is non-null, empty
- <span title=concept-URLUtils-query-object>query object</span>'s
- <span title=concept-URLSearchParams-list>list</span>.
+ <li><p>Otherwise, set <span title=concept-URLUtils-query-object>query object</span>'s
+ <span title=concept-URLSearchParams-list>list</span> to the result of
+ <span title=concept-urlencoded-string-parser>parsing</span> <var title>query</var>.
 </ol>
 
 <p>To run the <dfn>pre-update steps</dfn> for an object implementing
@@ -2526,11 +2521,11 @@ these steps:
  <li><p>Let <var title>object</var> be the given value.
 
  <li><p>Remove the <span data-anolis-spec=dom>context object</span> from
- <span title=concept-URLUtils-query-object>query object</span>'s associated list of
+ <span title=concept-URLUtils-query-object>query object</span>'s list of
  <span title=concept-URLSearchParams-url-object>url objects</span>.
 
  <li><p>Append the <span data-anolis-spec=dom>context object</span> to
- <var title>object</var>'s associated list of
+ <var title>object</var>'s list of
  <span title=concept-URLSearchParams-url-object>url objects</span>.
 
  <li><p>Set <span title=concept-URLUtils-query-object>query object</span> to
