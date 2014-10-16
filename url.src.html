@@ -2273,17 +2273,19 @@ these steps:
 
    <li><p>Run the <span>pre-update steps</span> with the given value.
   </ol>
-</ol>
 
-<p class=note>This means that if the <code title=dom-URL-href>href</code> attribute is set
-to value that would cause the <span title=concept-url-parser>URL parser</span> to return
-failure, that value is still passed through unchanged. This is one of those unfortunate
-legacy incidents.
-<!--
-  var urlPoop = "http://poop:poop/"
-  <a>.href = urlPoop
-  <a>.getAttribute("href") == urlPoop
--->
+  <div class=example>
+   <p>This means that if the <code title=dom-URL-href>href</code> attribute is set to
+   value that would cause the <span title=concept-url-parser>URL parser</span> to return
+   failure, that value is still passed through unchanged. This is one of those unfortunate
+   legacy incidents.
+
+   <pre>var a = document.createElement("a"),
+    input = "https://test:test/" // invalid port makes the parser return failure
+a.href = test
+a.href === test // true</pre>
+  </div>
+</ol>
 
 <p>The <dfn title=dom-URL-origin><code>origin</code></dfn> attribute's getter must
 run these steps:
