@@ -2106,7 +2106,7 @@ concept only relevant for HTML.
   </ol>
 
  <li><p>Let <var title>query</var> be <span title=concept-URLUtils-url>url</span>'s
- <span title=concept-URL-query>query</span> if <span title=concept-URLUtils-url>url</span>
+ <span title=concept-url-query>query</span> if <span title=concept-URLUtils-url>url</span>
  is non-null, and the empty string otherwise.
 
  <li><p>If <span title=concept-URLUtils-query-object>query object</span> is null, set
@@ -2238,14 +2238,41 @@ these steps:
 <p>The <code title=dom-URL-href>href</code> attribute's setter must run these steps:
 
 <ol>
- <li><p>Run the <span title=concept-URLUtils-set-the-input>set the input</span> algorithm for
- the given value.
+ <li><p>Let <var title>input</var> be the given value.
 
- <li><p>If the <span data-anolis-spec=dom>context object</span> is a <code>URL</code>
- object and its <span title=concept-URLUtils-url>url</span> is null,
- <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
+ <li>
+  <p>If the <span data-anolis-spec=dom>context object</span> is a <code>URL</code> object,
+  run these substeps:
 
- <li><p>Run the <span>pre-update steps</span> with the given value.
+  <ol>
+   <li><p>Let <var title>url</var> be the result of running the
+   <span title=concept-basic-url-parser>basic URL parser</span> on <var title>input</var>
+   with <span title=concept-base-url>base URL</span> being the result of running
+   <span title=concept-URLUtils-get-the-base>get the base</span>.
+
+   <li><p>If <var title>url</var> is failure, <span data-anolis-spec=webidl>throw</span> a
+   <code title>TypeError</code> exception.
+
+   <li><p>Set <span title=concept-URLUtils-input>input</span> to <var title>input</var>.
+
+   <li><p>Set <span tilte=concept-URLUtils-url>url</span> to <var title>url</var>.
+
+   <li><p>Set <span title=concept-URLUtils-query-object>query object</span>'s
+   <span title=concept-URLSearchParams-list>list</span> to the result of
+   <span title=concept-urlencoded-string-parser>parsing</span>
+   <span tilte=concept-URLUtils-url>url</span>'s
+   <span title=concept-url-query>query</span>.
+  </ol>
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Run the <span title=concept-URLUtils-set-the-input>set the input</span>
+   algorithm for <var title>input</var>.
+
+   <li><p>Run the <span>pre-update steps</span> with the given value.
+  </ol>
 </ol>
 
 <p class=note>This means that if the <code title=dom-URL-href>href</code> attribute is set
@@ -2645,7 +2672,7 @@ each associated  <span title=concept-URLSearchParams-url-object>url object</span
 
 <ol>
  <li><p>Set <var title>urlObject</var>'s <span title=concept-URLUtils-url>url</span>'s
- <span title=concept-URL-query>query</span> to the
+ <span title=concept-url-query>query</span> to the
  <span title=concept-urlencoded-serializer>serialization</span> of
  <code>URLSearchParams</code> object's
  <span title=concept-URLSearchParams-list>list</span>.

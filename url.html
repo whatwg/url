@@ -2139,7 +2139,7 @@ concept only relevant for HTML.
   </ol>
 
  <li><p>Let <var title="">query</var> be <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
- <a href="#concept-url-query" title="concept-URL-query">query</a> if <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ <a href="#concept-url-query" title="concept-url-query">query</a> if <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
  is non-null, and the empty string otherwise.
 
  <li><p>If <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null, set
@@ -2271,14 +2271,41 @@ these steps:
 <p>The <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute's setter must run these steps:
 
 <ol>
- <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithm for
- the given value.
+ <li><p>Let <var title="">input</var> be the given value.
 
- <li><p>If the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a>
- object and its <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+ <li>
+  <p>If the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a> object,
+  run these substeps:
 
- <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
+  <ol>
+   <li><p>Let <var title="">url</var> be the result of running the
+   <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">input</var>
+   with <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+   <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a>.
+
+   <li><p>If <var title="">url</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
+   <code title="">TypeError</code> exception.
+
+   <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to <var title="">input</var>.
+
+   <li><p>Set <a href="#url" tilte="concept-URLUtils-url">url</a> to <var title="">url</var>.
+
+   <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+   <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
+   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
+   <a href="#url" tilte="concept-URLUtils-url">url</a>'s
+   <a href="#concept-url-query" title="concept-url-query">query</a>.
+  </ol>
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a>
+   algorithm for <var title="">input</var>.
+
+   <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
+  </ol>
 </ol>
 
 <p class="note">This means that if the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute is set
@@ -2678,7 +2705,7 @@ each associated  <a href="#concept-urlsearchparams-url-object" title="concept-UR
 
 <ol>
  <li><p>Set <var title="">urlObject</var>'s <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
- <a href="#concept-url-query" title="concept-URL-query">query</a> to the
+ <a href="#concept-url-query" title="concept-url-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of
  <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
  <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
