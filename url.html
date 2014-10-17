@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 16 October 2014</h2>
+ <h2>Living Standard — Last Updated 17 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2288,13 +2288,17 @@ these steps:
 
    <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to <var title="">input</var>.
 
-   <li><p>Set <a href="#url" tilte="concept-URLUtils-url">url</a> to <var title="">url</var>.
+   <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+
+   <li><p>Let <var title="">query</var> be the empty string if
+   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
+   <a href="#concept-url-query" title="concept-url-query">query</a> is null, and
+   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
+   <a href="#concept-url-query" title="concept-url-query">query</a> otherwise.
 
    <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
    <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
-   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
-   <a href="#url" tilte="concept-URLUtils-url">url</a>'s
-   <a href="#concept-url-query" title="concept-url-query">query</a>.
+   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a> <var title="">query</var>.
   </ol>
 
  <li>
@@ -2304,7 +2308,7 @@ these steps:
    <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a>
    algorithm for <var title="">input</var>.
 
-   <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
+   <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the <var title="">input</var>.
   </ol>
 
   <div class="example">

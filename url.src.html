@@ -2255,13 +2255,17 @@ these steps:
 
    <li><p>Set <span title=concept-URLUtils-input>input</span> to <var title>input</var>.
 
-   <li><p>Set <span tilte=concept-URLUtils-url>url</span> to <var title>url</var>.
+   <li><p>Set <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
+
+   <li><p>Let <var title>query</var> be the empty string if
+   <span title=concept-URLUtils-url>url</span>'s
+   <span title=concept-url-query>query</span> is null, and
+   <span title=concept-URLUtils-url>url</span>'s
+   <span title=concept-url-query>query</span> otherwise.
 
    <li><p>Set <span title=concept-URLUtils-query-object>query object</span>'s
    <span title=concept-URLSearchParams-list>list</span> to the result of
-   <span title=concept-urlencoded-string-parser>parsing</span>
-   <span tilte=concept-URLUtils-url>url</span>'s
-   <span title=concept-url-query>query</span>.
+   <span title=concept-urlencoded-string-parser>parsing</span> <var title>query</var>.
   </ol>
 
  <li>
@@ -2271,7 +2275,7 @@ these steps:
    <li><p>Run the <span title=concept-URLUtils-set-the-input>set the input</span>
    algorithm for <var title>input</var>.
 
-   <li><p>Run the <span>pre-update steps</span> with the given value.
+   <li><p>Run the <span>pre-update steps</span> with the <var title>input</var>.
   </ol>
 
   <div class=example>
