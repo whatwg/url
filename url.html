@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 17 October 2014</h2>
+ <h2>Living Standard — Last Updated 20 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -2111,31 +2111,41 @@ concept only relevant for HTML.
 <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithms to set
 <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a>, <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>, and
 <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>. To
-<dfn id="concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</dfn> run these steps:
+<dfn id="concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</dfn> given <var title="">input</var>
+and optionally a <var title="">url</var>, run these steps:
 
 <ol>
- <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to null.
-
- <li><p>If the given value is null, set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to
- the empty string.
+ <li><p>If <var title="">url</var> is given, set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ to <var title="">url</var> and <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to
+ <var title="">input</var>.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the given value.
+   <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to null.
 
-   <li><p>Let <var title="">url</var> be the result of running the
-   <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
-   <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
-   <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
-   <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
-   <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
-   <var>encoding override</var>.
-   <!-- support blob URLs at this level -->
+   <li><p>If <var title="">input</var> is null, set
+   <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the empty string.
 
-   <li><p>If <var title="">url</var> is not failure, set
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+   <li>
+    <p>Otherwise, run these subsubsteps:
+
+    <ol>
+     <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to <var title="">input</var>.
+
+     <li><p>Let <var title="">url</var> be the result of running the
+     <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
+     <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
+     <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+     <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
+     <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
+     <var>encoding override</var>.
+     <!-- support blob URLs at this level -->
+
+     <li><p>If <var title="">url</var> is not failure, set
+     <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+    </ol>
   </ol>
 
  <li><p>Let <var title="">query</var> be <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
@@ -2176,22 +2186,28 @@ concept only relevant for HTML.
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">base</var>
- and set <var title="">base</var> to the result of that algorithm.
+ <li><p>Set <var title="">base</var> to the result of running the
+ <a href="#concept-basic-url-parser" title="concept-basic-url-parser">base URL parser</a> on <var title="">base</var>.
 
  <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
+ <code title="">TypeError</code> exception.
+
+ <li><p>Set <var title="">url</var> to the result of running the
+ <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">input</var>
+ with <var title="">base</var>.
+
+ <li><p>If <var title="">url</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
  <code title="">TypeError</code> exception.
 
  <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
 
  <li><p>Let <var title="">result</var>'s
- <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> return <var title="">base</var>.
+ <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> return
+ <var title="">base</var>.
 
  <li><p>Run <var title="">result</var>'s
- <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> for <var title="">url</var>.
-
- <li><p>If <var title="">result</var>'s <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+ <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given the empty string
+ and <var title="">url</var>.
 
  <li><p>Return <var title="">result</var>.
 </ol>
@@ -2286,19 +2302,8 @@ these steps:
    <li><p>If <var title="">url</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
    <code title="">TypeError</code> exception.
 
-   <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to <var title="">input</var>.
-
-   <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
-
-   <li><p>Let <var title="">query</var> be the empty string if
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
-   <a href="#concept-url-query" title="concept-url-query">query</a> is null, and
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
-   <a href="#concept-url-query" title="concept-url-query">query</a> otherwise.
-
-   <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
-   <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
-   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a> <var title="">query</var>.
+   <li><p>Run <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given
+   <var title="">input</var> and <var title="">url</var>.
   </ol>
 
  <li>

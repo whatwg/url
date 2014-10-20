@@ -2078,31 +2078,41 @@ concept only relevant for HTML.
 <span title=concept-URLUtils-set-the-input>set the input</span> algorithms to set
 <span title=concept-URLUtils-input>input</span>, <span title=concept-URLUtils-url>url</span>, and
 <span title=concept-URLUtils-query-object>query object</span>. To
-<dfn title=concept-URLUtils-set-the-input>set the input</dfn> run these steps:
+<dfn title=concept-URLUtils-set-the-input>set the input</dfn> given <var title>input</var>
+and optionally a <var title>url</var>, run these steps:
 
 <ol>
- <li><p>Set <span title=concept-URLUtils-url>url</span> to null.
-
- <li><p>If the given value is null, set <span title=concept-URLUtils-input>input</span> to
- the empty string.
+ <li><p>If <var title>url</var> is given, set <span title=concept-URLUtils-url>url</span>
+ to <var title>url</var> and <span title=concept-URLUtils-input>input</span> to
+ <var title>input</var>.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <span title=concept-URLUtils-input>input</span> to the given value.
+   <li><p>Set <span title=concept-URLUtils-url>url</span> to null.
 
-   <li><p>Let <var title>url</var> be the result of running the
-   <span title=concept-url-parser>URL parser</span> on
-   <span title=concept-URLUtils-input>input</span> with
-   <span title=concept-base-url>base URL</span> being the result of running
-   <span title=concept-URLUtils-get-the-base>get the base</span> and
-   <span title=concept-URLUtils-query-encoding>query encoding</span> as
-   <var>encoding override</var>.
-   <!-- support blob URLs at this level -->
+   <li><p>If <var title>input</var> is null, set
+   <span title=concept-URLUtils-input>input</span> to the empty string.
 
-   <li><p>If <var title>url</var> is not failure, set
-   <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
+   <li>
+    <p>Otherwise, run these subsubsteps:
+
+    <ol>
+     <li><p>Set <span title=concept-URLUtils-input>input</span> to <var title>input</var>.
+
+     <li><p>Let <var title>url</var> be the result of running the
+     <span title=concept-url-parser>URL parser</span> on
+     <span title=concept-URLUtils-input>input</span> with
+     <span title=concept-base-url>base URL</span> being the result of running
+     <span title=concept-URLUtils-get-the-base>get the base</span> and
+     <span title=concept-URLUtils-query-encoding>query encoding</span> as
+     <var>encoding override</var>.
+     <!-- support blob URLs at this level -->
+
+     <li><p>If <var title>url</var> is not failure, set
+     <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
+    </ol>
   </ol>
 
  <li><p>Let <var title>query</var> be <span title=concept-URLUtils-url>url</span>'s
@@ -2143,22 +2153,28 @@ concept only relevant for HTML.
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p><span title=concept-basic-url-parser>Basic URL parse</span> <var title>base</var>
- and set <var title>base</var> to the result of that algorithm.
+ <li><p>Set <var title>base</var> to the result of running the
+ <span title=concept-basic-url-parser>base URL parser</span> on <var title>base</var>.
 
  <li><p>If <var title>base</var> is failure, <span data-anolis-spec=webidl>throw</span> a
+ <code title>TypeError</code> exception.
+
+ <li><p>Set <var title>url</var> to the result of running the
+ <span title=concept-basic-url-parser>basic URL parser</span> on <var title>input</var>
+ with <var title>base</var>.
+
+ <li><p>If <var title>url</var> is failure, <span data-anolis-spec=webidl>throw</span> a
  <code title>TypeError</code> exception.
 
  <li><p>Let <var title>result</var> be a new <code>URL</code> object.
 
  <li><p>Let <var title>result</var>'s
- <span title=concept-URLUtils-get-the-base>get the base</span> return <var title>base</var>.
+ <span title=concept-URLUtils-get-the-base>get the base</span> return
+ <var title>base</var>.
 
  <li><p>Run <var title>result</var>'s
- <span title=concept-URLUtils-set-the-input>set the input</span> for <var title>url</var>.
-
- <li><p>If <var title>result</var>'s <span title=concept-URLUtils-url>url</span> is null,
- <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
+ <span title=concept-URLUtils-set-the-input>set the input</span> given the empty string
+ and <var title>url</var>.
 
  <li><p>Return <var title>result</var>.
 </ol>
@@ -2253,19 +2269,8 @@ these steps:
    <li><p>If <var title>url</var> is failure, <span data-anolis-spec=webidl>throw</span> a
    <code title>TypeError</code> exception.
 
-   <li><p>Set <span title=concept-URLUtils-input>input</span> to <var title>input</var>.
-
-   <li><p>Set <span title=concept-URLUtils-url>url</span> to <var title>url</var>.
-
-   <li><p>Let <var title>query</var> be the empty string if
-   <span title=concept-URLUtils-url>url</span>'s
-   <span title=concept-url-query>query</span> is null, and
-   <span title=concept-URLUtils-url>url</span>'s
-   <span title=concept-url-query>query</span> otherwise.
-
-   <li><p>Set <span title=concept-URLUtils-query-object>query object</span>'s
-   <span title=concept-URLSearchParams-list>list</span> to the result of
-   <span title=concept-urlencoded-string-parser>parsing</span> <var title>query</var>.
+   <li><p>Run <span title=concept-URLUtils-set-the-input>set the input</span> given
+   <var title>input</var> and <var title>url</var>.
   </ol>
 
  <li>
