@@ -1691,6 +1691,41 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
  <li><p>Return <var title="">url</var>.
 </ol>
 
+<hr>
+
+<p>To <dfn id="set-the-username">set the username</dfn> given a <var title="">url</var> and
+<var title="">username</var>, run these steps:
+
+<ol>
+ <li><p>Set <var title="">url</var>'s <a href="#concept-url-username" title="concept-url-username">username</a> to the
+ empty string.
+
+ <li><p>For each code point in <var title="">username</var>,
+ <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a href="#username-encode-set">username encode set</a>, and
+ append the result to <var title="">url</var>'s
+ <a href="#concept-url-username" title="concept-url-username">username</a>.
+</ol>
+
+<p>To <dfn id="set-the-password">set the password</dfn> given a <var title="">url</var> and
+<var title="">password</var>, run these steps:
+
+<ol>
+ <li><p>If <var title="">password</var> is the empty string, set <var title="">url</var>'s
+ <a href="#concept-url-password" title="concept-url-password">password</a> to null.
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Set <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a> to
+   the empty string.
+
+   <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
+   using the <a href="#password-encode-set">password encode set</a>, and append the result to
+   <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>.
+  </ol>
+</ol>
+
 
 <h3 id="url-serializing"><span class="secno">5.3 </span>URL serializing</h3>
 
@@ -2389,13 +2424,8 @@ run these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p>Set <a href="#concept-url-username" title="concept-url-username">username</a> to the empty
- string.
-
- <li><p>For each code point in the given value,
- <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the
- <a href="#username-encode-set">username encode set</a>, and append the result to
- <a href="#concept-url-username" title="concept-url-username">username</a>.
+ <li><p><a href="#set-the-username">Set the username</a> given <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ and the given value.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
@@ -2418,15 +2448,8 @@ run these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p>If the given value is the empty string, set
- <a href="#concept-url-password" title="concept-url-password">password</a> to null, run the
- <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
-
- <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty string.
-
- <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
- using the <a href="#password-encode-set">password encode set</a>, and append the result to
- <a href="#concept-url-password" title="concept-url-password">password</a>.
+ <li><p><a href="#set-the-password">Set the password</a> given <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ and the given value.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
