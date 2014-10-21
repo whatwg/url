@@ -2212,9 +2212,8 @@ constructor, when invoked, must run these steps:
   <span title=concept-URLUtils-set-the-input>set the input</span> given the empty string
   and <var title>parsedURL</var>.
 
-  <p class=note>Pass the empty string since <span title=concept-URLUtils-url>url</span>
-  will never be null for <code>URL</code> objects and therefore
-  <span title=concept-URLUtils-input>input</span> will not be exposed.
+  <p class="note no-backref">A <code>URL</code> object's
+  <span title=concept-URLUtils-input>input</span> is never exposed.
 
  <li><p>Return <var title>result</var>.
 </ol>
@@ -2309,8 +2308,12 @@ these steps:
    <li><p>If <var title>parsedURL</var> is failure,
    <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
-   <li><p>Run <span title=concept-URLUtils-set-the-input>set the input</span> given
-   <var title>input</var> and <var title>parsedURL</var>.
+   <li>
+    <p>Run <span title=concept-URLUtils-set-the-input>set the input</span> given the empty
+    string and <var title>parsedURL</var>.
+
+    <p class="note no-backref">A <code>URL</code> object's
+    <span title=concept-URLUtils-input>input</span> is never exposed.
   </ol>
 
  <li>

@@ -2245,9 +2245,8 @@ constructor, when invoked, must run these steps:
   <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given the empty string
   and <var title="">parsedURL</var>.
 
-  <p class="note">Pass the empty string since <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
-  will never be null for <a href="#url"><code>URL</code></a> objects and therefore
-  <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> will not be exposed.
+  <p class="note no-backref">A <a href="#url"><code>URL</code></a> object's
+  <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> is never exposed.
 
  <li><p>Return <var title="">result</var>.
 </ol>
@@ -2342,8 +2341,12 @@ these steps:
    <li><p>If <var title="">parsedURL</var> is failure,
    <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
-   <li><p>Run <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given
-   <var title="">input</var> and <var title="">parsedURL</var>.
+   <li>
+    <p>Run <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given the empty
+    string and <var title="">parsedURL</var>.
+
+    <p class="note no-backref">A <a href="#url"><code>URL</code></a> object's
+    <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> is never exposed.
   </ol>
 
  <li>
