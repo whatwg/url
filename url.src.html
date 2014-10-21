@@ -2188,28 +2188,33 @@ and optionally a <var title>url</var>, run these steps:
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p>Set <var title>base</var> to the result of running the
- <span title=concept-basic-url-parser>base URL parser</span> on <var title>base</var>.
+ <li><p>Let <var title>parsedBase</var> be the result of running the
+ <span title=concept-basic-url-parser>basic URL parser</span> on <var title>base</var>.
 
- <li><p>If <var title>base</var> is failure, <span data-anolis-spec=webidl>throw</span> a
- <code title>TypeError</code> exception.
+ <li><p>If <var title>parsedBase</var> is failure,
+ <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
- <li><p>Set <var title>url</var> to the result of running the
- <span title=concept-basic-url-parser>basic URL parser</span> on <var title>input</var>
- with <var title>base</var>.
+ <li><p>Set <var title>parsedURL</var> to the result of running the
+ <span title=concept-basic-url-parser>basic URL parser</span> on <var title>url</var>
+ with <var title>parsedBase</var>.
 
- <li><p>If <var title>url</var> is failure, <span data-anolis-spec=webidl>throw</span> a
- <code title>TypeError</code> exception.
+ <li><p>If <var title>parsedURL</var> is failure,
+ <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
  <li><p>Let <var title>result</var> be a new <code>URL</code> object.
 
  <li><p>Let <var title>result</var>'s
  <span title=concept-URLUtils-get-the-base>get the base</span> return
- <var title>base</var>.
+ <var title>parsedBase</var>.
 
- <li><p>Run <var title>result</var>'s
- <span title=concept-URLUtils-set-the-input>set the input</span> given the empty string
- and <var title>url</var>.
+ <li>
+  <p>Run <var title>result</var>'s
+  <span title=concept-URLUtils-set-the-input>set the input</span> given the empty string
+  and <var title>parsedURL</var>.
+
+  <p class=note>Pass the empty string since <span title=concept-URLUtils-url>url</span>
+  will never be null for <code>URL</code> objects and therefore
+  <span title=concept-URLUtils-input>input</span> will not be exposed.
 
  <li><p>Return <var title>result</var>.
 </ol>
@@ -2296,16 +2301,16 @@ these steps:
   run these substeps:
 
   <ol>
-   <li><p>Let <var title>url</var> be the result of running the
+   <li><p>Let <var title>parsedURL</var> be the result of running the
    <span title=concept-basic-url-parser>basic URL parser</span> on <var title>input</var>
    with <span title=concept-base-url>base URL</span> being the result of running
    <span title=concept-URLUtils-get-the-base>get the base</span>.
 
-   <li><p>If <var title>url</var> is failure, <span data-anolis-spec=webidl>throw</span> a
-   <code title>TypeError</code> exception.
+   <li><p>If <var title>parsedURL</var> is failure,
+   <span data-anolis-spec=webidl>throw</span> a <code title>TypeError</code> exception.
 
    <li><p>Run <span title=concept-URLUtils-set-the-input>set the input</span> given
-   <var title>input</var> and <var title>url</var>.
+   <var title>input</var> and <var title>parsedURL</var>.
   </ol>
 
  <li>
