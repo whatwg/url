@@ -1720,9 +1720,10 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
    <li><p>Set <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a> to
    the empty string.
 
-   <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
-   using the <a href="#password-encode-set">password encode set</a>, and append the result to
-   <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a>.
+   <li><p>For each code point in <var title="">password</var>,
+   <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a href="#password-encode-set">password encode set</a>, and
+   append the result to <var title="">url</var>'s
+   <a href="#concept-url-password" title="concept-url-password">password</a>.
   </ol>
 </ol>
 
