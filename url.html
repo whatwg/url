@@ -9,7 +9,7 @@
 
 <hgroup>
  <h1 class="allcaps">URL</h1>
- <h2>Living Standard — Last Updated 14 October 2014</h2>
+ <h2>Living Standard — Last Updated 22 October 2014</h2>
 </hgroup>
 
 <dl>
@@ -114,6 +114,11 @@ NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
 interpreted as described in RFC2119. For readability, these words do
 not appear in all uppercase letters in this specification.
 <a href="#refsRFC2119">[RFC2119]</a>
+
+<p>Conformance requirements phrased as algorithms or specific steps may be
+implemented in any manner, so long as the end result is equivalent. (In
+particular, the algorithms defined in this specification are intended to be
+easy to follow, and not intended to be performant.)
 
 
 
@@ -1691,6 +1696,42 @@ optionally with an <a class="external" data-anolis-spec="encoding" href="https:/
  <li><p>Return <var title="">url</var>.
 </ol>
 
+<hr>
+
+<p>To <dfn id="set-the-username">set the username</dfn> given a <var title="">url</var> and
+<var title="">username</var>, run these steps:
+
+<ol>
+ <li><p>Set <var title="">url</var>'s <a href="#concept-url-username" title="concept-url-username">username</a> to the
+ empty string.
+
+ <li><p>For each code point in <var title="">username</var>,
+ <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a href="#username-encode-set">username encode set</a>, and
+ append the result to <var title="">url</var>'s
+ <a href="#concept-url-username" title="concept-url-username">username</a>.
+</ol>
+
+<p>To <dfn id="set-the-password">set the password</dfn> given a <var title="">url</var> and
+<var title="">password</var>, run these steps:
+
+<ol>
+ <li><p>If <var title="">password</var> is the empty string, set <var title="">url</var>'s
+ <a href="#concept-url-password" title="concept-url-password">password</a> to null.
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Set <var title="">url</var>'s <a href="#concept-url-password" title="concept-url-password">password</a> to
+   the empty string.
+
+   <li><p>For each code point in <var title="">password</var>,
+   <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a href="#password-encode-set">password encode set</a>, and
+   append the result to <var title="">url</var>'s
+   <a href="#concept-url-password" title="concept-url-password">password</a>.
+  </ol>
+</ol>
+
 
 <h3 id="url-serializing"><span class="secno">5.3 </span>URL serializing</h3>
 
@@ -2111,45 +2152,58 @@ concept only relevant for HTML.
 <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithms to set
 <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a>, <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>, and
 <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>. To
-<dfn id="concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</dfn> run these steps:
+<dfn id="concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</dfn> given <var title="">input</var>
+and optionally a <var title="">url</var>, run these steps:
 
 <ol>
- <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to null.
-
- <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the given value.
-
- <li><p>Let <var title="">url</var> be the result of running the
- <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
- <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
- <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
- <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
- <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
- <var>encoding override</var>.
- <!-- support blob URLs at this level -->
-
- <li><p>If <var title="">url</var> is not failure, set
- <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+ <li><p>If <var title="">url</var> is given, set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ to <var title="">url</var> and <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to
+ <var title="">input</var>.
 
  <li>
-  <p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is non-null and its
-  <a href="#relative-flag">relative flag</a> is set, run these substeps:
+  <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>If <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null, set
-   <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to a
-   <a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a> using
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
+   <li><p>Set <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to null.
 
-   <li><p>Otherwise, set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
-   <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
-   <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a>
-   <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s <a href="#concept-url-query" title="concept-URL-query">query</a>.
+   <li><p>If <var title="">input</var> is null, set
+   <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to the empty string.
+
+   <li>
+    <p>Otherwise, run these subsubsteps:
+
+    <ol>
+     <li><p>Set <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> to <var title="">input</var>.
+
+     <li><p>Let <var title="">url</var> be the result of running the
+     <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> on
+     <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> with
+     <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+     <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> and
+     <a href="#concept-urlutils-query-encoding" title="concept-URLUtils-query-encoding">query encoding</a> as
+     <var>encoding override</var>.
+     <!-- support blob URLs at this level -->
+
+     <li><p>If <var title="">url</var> is not failure, set
+     <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> to <var title="">url</var>.
+    </ol>
   </ol>
 
- <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null and
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is non-null, empty
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
- <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
+ <li><p>Let <var title="">query</var> be <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
+ <a href="#concept-url-query" title="concept-url-query">query</a> if <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ is non-null, and the empty string otherwise.
+
+ <li><p>If <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> is null, set
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to a
+ <a href="#concept-urlsearchparams-new" title="concept-URLSearchParams-new">new <code>URLSearchParams</code> object</a>
+ using <var title="">query</var>, and then append the
+ <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> to
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s list of
+ <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
+
+ <li><p>Otherwise, set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s
+ <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a> to the result of
+ <a href="#concept-urlencoded-string-parser" title="concept-urlencoded-string-parser">parsing</a> <var title="">query</var>.
 </ol>
 
 <p>To run the <dfn id="pre-update-steps">pre-update steps</dfn> for an object implementing
@@ -2173,22 +2227,32 @@ concept only relevant for HTML.
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p><a href="#concept-basic-url-parser" title="concept-basic-url-parser">Basic URL parse</a> <var title="">base</var>
- and set <var title="">base</var> to the result of that algorithm.
+ <li><p>Let <var title="">parsedBase</var> be the result of running the
+ <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">base</var>.
 
- <li><p>If <var title="">base</var> is failure, <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a
- <code title="">TypeError</code> exception.
+ <li><p>If <var title="">parsedBase</var> is failure,
+ <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+
+ <li><p>Set <var title="">parsedURL</var> to the result of running the
+ <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">url</var>
+ with <var title="">parsedBase</var>.
+
+ <li><p>If <var title="">parsedURL</var> is failure,
+ <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
 
  <li><p>Let <var title="">result</var> be a new <a href="#url"><code>URL</code></a> object.
 
  <li><p>Let <var title="">result</var>'s
- <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> return <var title="">base</var>.
+ <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a> return
+ <var title="">parsedBase</var>.
 
- <li><p>Run <var title="">result</var>'s
- <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> for <var title="">url</var>.
+ <li>
+  <p>Run <var title="">result</var>'s
+  <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given the empty string
+  and <var title="">parsedURL</var>.
 
- <li><p>If <var title="">result</var>'s <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+  <p class="note no-backref">A <a href="#url"><code>URL</code></a> object's
+  <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> is never exposed.
 
  <li><p>Return <var title="">result</var>.
 </ol>
@@ -2268,25 +2332,51 @@ these steps:
 <p>The <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute's setter must run these steps:
 
 <ol>
- <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> algorithm for
- the given value.
+ <li><p>Let <var title="">input</var> be the given value.
 
- <li><p>If the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a>
- object and its <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null,
- <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+ <li>
+  <p>If the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> is a <a href="#url"><code>URL</code></a> object,
+  run these substeps:
 
- <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the given value.
+  <ol>
+   <li><p>Let <var title="">parsedURL</var> be the result of running the
+   <a href="#concept-basic-url-parser" title="concept-basic-url-parser">basic URL parser</a> on <var title="">input</var>
+   with <a href="#concept-base-url" title="concept-base-url">base URL</a> being the result of running
+   <a href="#concept-urlutils-get-the-base" title="concept-URLUtils-get-the-base">get the base</a>.
+
+   <li><p>If <var title="">parsedURL</var> is failure,
+   <a class="external" data-anolis-spec="webidl" href="http://heycam.github.io/webidl/#dfn-throw">throw</a> a <code title="">TypeError</code> exception.
+
+   <li>
+    <p>Run <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a> given the empty
+    string and <var title="">parsedURL</var>.
+
+    <p class="note no-backref">A <a href="#url"><code>URL</code></a> object's
+    <a href="#concept-urlutils-input" title="concept-URLUtils-input">input</a> is never exposed.
+  </ol>
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Run the <a href="#concept-urlutils-set-the-input" title="concept-URLUtils-set-the-input">set the input</a>
+   algorithm for <var title="">input</var>.
+
+   <li><p>Run the <a href="#pre-update-steps">pre-update steps</a> with the <var title="">input</var>.
+  </ol>
+
+  <div class="example">
+   <p>This means that if the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute is set to
+   value that would cause the <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> to return
+   failure, that value is still passed through unchanged. This is one of those unfortunate
+   legacy incidents.
+
+   <pre>var a = document.createElement("a"),
+    input = "https://test:test/" // invalid port makes the parser return failure
+a.href = test
+a.href === test // true</pre>
+  </div>
 </ol>
-
-<p class="note">This means that if the <a href="#dom-url-href"><code title="dom-URL-href">href</code></a> attribute is set
-to value that would cause the <a href="#concept-url-parser" title="concept-url-parser">URL parser</a> to return
-failure, that value is still passed through unchanged. This is one of those unfortunate
-legacy incidents.
-<!--
-  var urlPoop = "http://poop:poop/"
-  <a>.href = urlPoop
-  <a>.getAttribute("href") == urlPoop
--->
 
 <p>The <dfn id="dom-url-origin" title="dom-URL-origin"><code>origin</code></dfn> attribute's getter must
 run these steps:
@@ -2348,13 +2438,8 @@ run these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p>Set <a href="#concept-url-username" title="concept-url-username">username</a> to the empty
- string.
-
- <li><p>For each code point in the given value,
- <a href="#utf-8-percent-encode">utf-8 percent encode</a> it using the
- <a href="#username-encode-set">username encode set</a>, and append the result to
- <a href="#concept-url-username" title="concept-url-username">username</a>.
+ <li><p><a href="#set-the-username">Set the username</a> given <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ and the given value.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
@@ -2377,15 +2462,8 @@ run these steps:
  <li><p>If <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a> is null, or its
  <a href="#relative-flag">relative flag</a> is unset, terminate these steps.
 
- <li><p>If the given value is the empty string, set
- <a href="#concept-url-password" title="concept-url-password">password</a> to null, run the
- <a href="#pre-update-steps">pre-update steps</a>, and terminate these steps.
-
- <li><p>Set <a href="#concept-url-password" title="concept-url-password">password</a> to the empty string.
-
- <li><p>For each code point in the given value, <a href="#utf-8-percent-encode">utf-8 percent encode</a> it
- using the <a href="#password-encode-set">password encode set</a>, and append the result to
- <a href="#concept-url-password" title="concept-url-password">password</a>.
+ <li><p><a href="#set-the-password">Set the password</a> given <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>
+ and the given value.
 
  <li><p>Run the <a href="#pre-update-steps">pre-update steps</a>.
 </ol>
@@ -2559,11 +2637,11 @@ these steps:
  <li><p>Let <var title="">object</var> be the given value.
 
  <li><p>Remove the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> from
- <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s associated list of
+ <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a>'s list of
  <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
 
  <li><p>Append the <a class="external" data-anolis-spec="dom" href="https://dom.spec.whatwg.org/#context-object">context object</a> to
- <var title="">object</var>'s associated list of
+ <var title="">object</var>'s list of
  <a href="#concept-urlsearchparams-url-object" title="concept-URLSearchParams-url-object">url objects</a>.
 
  <li><p>Set <a href="#concept-urlutils-query-object" title="concept-URLUtils-query-object">query object</a> to
@@ -2675,7 +2753,7 @@ each associated  <a href="#concept-urlsearchparams-url-object" title="concept-UR
 
 <ol>
  <li><p>Set <var title="">urlObject</var>'s <a href="#concept-urlutils-url" title="concept-URLUtils-url">url</a>'s
- <a href="#concept-url-query" title="concept-URL-query">query</a> to the
+ <a href="#concept-url-query" title="concept-url-query">query</a> to the
  <a href="#concept-urlencoded-serializer" title="concept-urlencoded-serializer">serialization</a> of
  <a href="#urlsearchparams"><code>URLSearchParams</code></a> object's
  <a href="#concept-urlsearchparams-list" title="concept-URLSearchParams-list">list</a>.
