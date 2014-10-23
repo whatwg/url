@@ -2,5 +2,5 @@ BIKESHED = bikeshed
 
 all: url.html
 
-url.html: url.bs biblio.json Makefile
+url.html: url.bs Makefile
 	$(BIKESHED) spec

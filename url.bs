@@ -13,6 +13,20 @@ Logo: https://resources.whatwg.org/logo-url.svg
 !Participate: <a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 </pre>
 
+<pre class="biblio"
+{
+    "IDNA": {
+        "authors": [
+            "Mark Davis",
+            "Michel Suignard"
+        ],
+        "href": "http://www.unicode.org/reports/tr46/",
+        "title": "Unicode IDNA Compatibility Processing",
+        "publisher": "Unicode Consortium"
+    }
+}
+</pre>
+
 <h2 id=goals class=no-num>Goals</h2>
 
 <p>The URL standard takes the following approach towards making URLs fully interoperable:
@@ -22,8 +36,8 @@ Logo: https://resources.whatwg.org/logo-url.svg
  obsolete them in the process. (E.g. spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
- [[URI]]
- [[IRI]]
+ [[RFC3986]]
+ [[RFC3987]]
 
  <li><p>Standardize on the term URL. URI and IRI are just confusing. In
  practice a single algorithm is used for both so keeping them distinct is
@@ -31,7 +45,7 @@ Logo: https://resources.whatwg.org/logo-url.svg
  <a href="http://www.googlefight.com/index.php?word1=url&amp;word2=uri">search result popularity contest</a>.
 
  <li><p>Supplanting <a href="https://tools.ietf.org/html/rfc6454#section-4">Origin of a URI [sic]</a>.
- [[ORIGIN]]
+ [[RFC6454]]
 
  <li><p>Define URL's existing JavaScript API in full detail and add
  enhancements to make it easier to work with. Add a new <code>URL</code>
@@ -94,8 +108,8 @@ processed and <var title>pointer</var> points to "<code title>@</code>",
 two <a>ASCII hex digits</a>. Sequences of
 <a title="percent-encoded byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause a
-<span spec=encoding>utf-8 decoder</span> to run into any
-<span spec=encoding title=error>errors</span>.
+<a href=https://encoding.spec.whatwg.org/#utf-8-decoder>utf-8 decoder</a> to run into any
+<a href=https://encoding.spec.whatwg.org/#error title=error>errors</a>.
 
 <p>To <dfn>percent encode</dfn> a <var title>byte</var> into a
 <a>percent-encoded byte</a>, return a string consisting of
@@ -104,7 +118,7 @@ representation of <var title>byte</var>.
 
 <p>To <dfn>percent decode</dfn> a byte sequence <var title>input</var>, run these steps:
 
-<p class=warning>Using anything but a <span spec=encoding>utf-8 decoder</span>
+<p class=warning>Using anything but a <a href=https://encoding.spec.whatwg.org/#utf-8-decoder>utf-8 decoder</a>
 when the <var title>input</var> contains bytes outside the range 0x00 to 0x7F might be
 insecure and is not recommended.
 
@@ -129,7 +143,7 @@ insecure and is not recommended.
     <ol>
      <li><p>Let <var title>bytePoint</var> be the two bytes after <var title>byte</var> in
      <var title>input</var>,
-     <span spec=encoding title="utf-8 decode without BOM">decoded</span>, and
+     <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM title="utf-8 decode without BOM">decoded</a>, and
      then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
@@ -157,7 +171,7 @@ U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
 '<code title>"</code>', <!-- 0x22 -->
 "<code title>#</code>", <!-- 0x23 -->
 "<code title>&lt;</code>", <!-- 0x3C -->
-"<code title>></code>", <!-- 0x3E -->
+"<code title>&gt;</code>", <!-- 0x3E -->
 "<code title>?</code>", <!-- 0x3F -->
 and
 "<code title>`</code>". <!-- 0x60 -->
@@ -181,7 +195,7 @@ an <var title>encode set</var>, run these steps:
  <var title>encode set</var>, return <var title>code point</var>.
 
  <li><p>Let <var title>bytes</var> be the result of running
- <span spec=encoding>utf-8 encode</span> on
+ <a href=https://encoding.spec.whatwg.org/#utf-8-encode>utf-8 encode</a> on
  <var title>code point</var>.
 
  <li><p><a>Percent encode</a> each byte in <var title>bytes</var>, and
@@ -205,7 +219,7 @@ an <var title>encode set</var>, run these steps:
 <p>An <dfn title=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
-[[IPV6]]
+[[RFC4291]]
 
 
 <h3 id=idna>IDNA</h3>
@@ -215,7 +229,7 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <span spec=idna title=ToASCII>Unicode ToASCII</span> with
+ <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
  <var>domain_name</var> set to <var title>domain</var>,
  <var>UseSTD3ASCIIRules</var> set to false, <var>processing_option</var> set to
  <var>Transitional_Processing</var>, and <var>VerifyDnsLength</var> set to false.
@@ -230,7 +244,7 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <span spec=idna title=ToUnicode>Unicode ToUnicode</span> with
+ <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
  <var>domain_name</var> set to <var title>domain</var>,
  <var>UseSTD3ASCIIRules</var> set to false.
 
@@ -252,7 +266,7 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <span spec=idna title=ToASCII>Unicode ToASCII</span> with
+ <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
  <var>domain_name</var> set to <var title>domain</var>,
  <var>UseSTD3ASCIIRules</var> set to true, <var>processing_option</var> set to
  <var>Nontransitional_Processing</var>, and <var>VerifyDnsLength</var> set to true.
@@ -260,7 +274,7 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
  <li><p>If <var>result</var> is a failure value, return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <span spec=idna title=ToUnicode>Unicode ToUnicode</span> with
+ <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
  <var>domain_name</var> set to <var title>result</var>,
  <var>UseSTD3ASCIIRules</var> set to true.
 
@@ -278,7 +292,7 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
 
 <p>An <a title=concept-ipv6>IPv6 address</a> is defined in the
 <a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
-[[!IPV6]]
+[[!RFC4291]]
 <!-- http://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
      far as what developers can do we should be liberal
 
@@ -314,9 +328,9 @@ these steps:
   </ol>
 
  <li><p>Let <var title>domain</var> be the result of
- <span spec=encoding>utf-8 decode without BOM</span> on the
+ <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM>utf-8 decode without BOM</a> on the
  <a title="percent decode">percent decoding</a> of
- <span spec=encoding>utf-8 encode</span> on <var title>input</var>.
+ <a href=https://encoding.spec.whatwg.org/#utf-8-encode>utf-8 encode</a> on <var title>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
  <li><p>Let <var title>asciiDomain</var> be the result of running
@@ -590,7 +604,7 @@ then runs these steps:
 
 <p class=note>This algorithm requires the recommendation from
 A Recommendation for IPv6 Address Text Representation.
-[[IPV6TEXT]]
+[[RFC5952]]
 
 <!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. This algorithm
      follows Chrome because we normalize domains too. -->
@@ -854,7 +868,7 @@ U+100000 to U+10FFFD.
 <p>The <dfn title=concept-url-parser>URL parser</dfn> takes a string
 <var title>input</var>, optionally with a
 <a title=concept-base-url>base URL</a> <var title>base</var>, and
-optionally with an <span spec=encoding>encoding</span>
+optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
 <ol>
@@ -868,12 +882,12 @@ optionally with an <span spec=encoding>encoding</span>
  "<code title>blob</code>", return <var title>url</var>.
 
  <li><p>If <var title>url</var>'s <a title=concept-url-scheme-data>scheme data</a>
- is not in the <span spec=fileapi>blob URL store</span>, return
+ is not in the <a href=http://dev.w3.org/2006/webapi/FileAPI/#blob-URL-store>blob URL store</a>, return
  <var title>url</var>. [[!FILEAPI]]
 
  <li><p>Set <var title>url</var>'s <a title=concept-url-object>object</a> to a
- <span spec=html>structured clone</span> of the entry in the
- <span spec=fileapi>blob URL store</span> corresponding to
+ <a href=https://html.spec.whatwg.org/multipage/#structured-clone>structured clone</a> of the entry in the
+ <a href=http://dev.w3.org/2006/webapi/FileAPI/#blob-URL-store>blob URL store</a> corresponding to
  <var title>url</var>'s <a title=concept-url-scheme-data>scheme data</a>.
  [[!HTML]]
 
@@ -885,7 +899,7 @@ optionally with an <span spec=encoding>encoding</span>
 <p>The <dfn title=concept-basic-url-parser>basic URL parser</dfn> takes a string
 <var title>input</var>, optionally with a
 <a title=concept-base-url>base URL</a> <var title>base</var>,
-optionally with an <span spec=encoding>encoding</span>
+optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, optionally with an
 <a title=concept-url>URL</a> <var title>url</var> and a state override
 <var title>state override</var>, and then runs these steps:
@@ -911,7 +925,7 @@ optionally with an <span spec=encoding>encoding</span>
    <li><p>Set <var title>url</var> to a new <a title=concept-url>URL</a>.
 
    <li><p>Remove any leading and trailing
-   <span spec=encoding>ASCII whitespace</span> from
+   <a href=https://encoding.spec.whatwg.org/#ASCII-whitespace>ASCII whitespace</a> from
    <var title>input</var>.
   </ol>
 
@@ -921,7 +935,7 @@ optionally with an <span spec=encoding>encoding</span>
  <li><p>If <var title>base</var> is not given, set it to null.
 
  <li><p>If <var>encoding override</var> is not given, set it to
- <span spec=encoding>utf-8</span>.
+ <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
 
  <li><p>Let <var title>buffer</var> be the empty string.
 
@@ -1534,11 +1548,11 @@ optionally with an <span spec=encoding>encoding</span>
        <li><p>If <var title>url</var>'s <a>relative flag</a> is unset or
        <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is either
        "<code title>ws</code>" or "<code title>wss</code>", set
-       <var>encoding override</var> to <span spec=encoding>utf-8</span>.
+       <var>encoding override</var> to <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var title>buffer</var> to the result of
-       <span spec=encoding title=encode>encoding</span>
+       <a href=https://encoding.spec.whatwg.org/#encode title=encode>encoding</a>
        <var title>buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1730,11 +1744,11 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 <h3 id=origin>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class=note>See <span spec=html>origin</span>'s definition in HTML for the
+<p class=note>See <a href=https://html.spec.whatwg.org/multipage/#origin>origin</a>'s definition in HTML for the
 necessary background information. [[!HTML]]
 
 <p>A <a title=concept-url>URL</a>'s <dfn title=concept-url-origin>origin</dfn> is
-the <span spec=html>origin</span> returned by running these steps, switching
+the <a href=https://html.spec.whatwg.org/multipage/#origin>origin</a> returned by running these steps, switching
 on <a title=concept-url>URL</a>'s <a title=concept-url-scheme>scheme</a>:
 
 <dl class=switch>
@@ -1797,17 +1811,17 @@ requires.
 <p>The
 <dfn title=concept-urlencoded-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var title>input</var>, optionally with an
-<span spec=encoding>encoding</span> <var>encoding override</var>,
+<a href=https://encoding.spec.whatwg.org/#encoding>encoding</a> <var>encoding override</var>,
 optionally with a <i title>use _charset_ flag</i>, and optionally with an
 <i title>isindex flag</i>, and then runs these steps:
 
 <ol>
  <li><p>If <var>encoding override</var> is not given, set it to
- <span spec=encoding>utf-8</span>.
+ <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
 
  <li>
   <p>If <var>encoding override</var> is not
-  <span spec=encoding>utf-8</span> and <var title>input</var> contains bytes
+  <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a> and <var title>input</var> contains bytes
   whose value is greater than 0x7F, return failure.
 
   <p class="note no-backref">This can only happen if <var title>input</var> was not
@@ -1853,9 +1867,9 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
 
     <ol>
      <li><p>Let <var>result</var> be the result of
-     <span spec=encoding title=concept-encoding-get>getting an encoding</span>
+     <a href=https://encoding.spec.whatwg.org/#concept-encoding-get title=concept-encoding-get>getting an encoding</a>
      for <var title>value</var>,
-     <span spec=encoding title="utf-8 decode without BOM">decoded</span>.
+     <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM title="utf-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i title>use _charset_ flag</i> and
      set <var>encoding override</var> to <var>result</var>.
@@ -1871,7 +1885,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
  <li><p>For each name-value pair in <var title>pairs</var>, append a name-value pair to
  <var title>output</var> where the new name and value appended to <var title>output</var>
  are the result of running <var>encoding override</var>'s
- <span spec=encoding>decoder</span> on the
+ <a href=https://encoding.spec.whatwg.org/#decoder>decoder</a> on the
  <a title="percent decode">percent decoding</a> of the name and value from
  <var title>pairs</var>, respectively.
 
@@ -1925,12 +1939,12 @@ takes a byte sequence <var title>input</var> and then runs these steps:
 <p>The
 <dfn title=concept-urlencoded-serializer><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value pairs <var title>pairs</var>, optionally with an
-<span spec=encoding>encoding</span>
+<a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
 <ol>
  <li><p>If <var>encoding override</var> is not given, set it to
- <span spec=encoding>utf-8</span>.
+ <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
 
  <li><p>Let <var title>output</var> be the empty string.
 
@@ -1942,7 +1956,7 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
    <li><p>Let <var title>outputPair</var> be a copy of <var title>pair</var>.
 
    <li><p>Replace <var title>outputPair</var>'s name and value with the result of running
-   <span spec=encoding>encode</span> on them using
+   <a href=https://encoding.spec.whatwg.org/#encode>encode</a> on them using
    <var>encoding override</var>, respectively.
 
    <li><p>Replace <var title>outputPair</var>'s name and value with their
@@ -1963,7 +1977,7 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
 <p>The
 <dfn title=concept-urlencoded-string-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var title>input</var>,
-<span spec=encoding title="utf-8 encode">utf-8 encodes</span> it, and then
+<a href=https://encoding.spec.whatwg.org/#utf-8-encode title="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
 <a title=concept-urlencoded-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</a>
 it.
@@ -2047,20 +2061,20 @@ appropriate <a title=concept-base-url>base URL</a> for the object.
 <p>Specifications defining objects implementing <code>URLUtils</code> may
 define <dfn title=concept-URLUtils-update>update steps</dfn> to make it possible for an
 underlying string (such as an
-<span spec=dom title=concept-attribute-value>attribute value</span>)
+<a href=https://dom.spec.whatwg.org/#concept-attribute-value title=concept-attribute-value>attribute value</a>)
 to be updated. The <a title=concept-URLUtils-update>update steps</a> are passed a string
 <var title>value</var> for this purpose.
 
 <p>An object implementing <code>URLUtils</code> or <code>URLUtilsReadOnly</code> has an
 associated <dfn title=concept-URLUtils-input>input</dfn> (a string),
 <dfn title=concept-URLUtils-query-encoding>query encoding</dfn>
-(an <span spec=encoding>encoding</span>),
+(an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>),
 <dfn title=concept-URLUtils-query-object>query object</dfn>
 (a <code>URLSearchParams</code> object or null), and a
 <dfn title=concept-URLUtils-url>url</dfn> (a <a title=concept-url>URL</a> or null).
 
 Unless stated otherwise, <a title=concept-URLUtils-query-encoding>query encoding</a> is
-<span spec=encoding>utf-8</span> and
+<a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a> and
 <a title=concept-URLUtils-query-object>query object</a> is null. The others follow
 from the <a title=concept-URLUtils-set-the-input>set the input</a> algorithm.
 
@@ -2119,7 +2133,7 @@ and optionally a <var title>url</var>, run these steps:
  <a title=concept-URLUtils-query-object>query object</a> to a
  <a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
  using <var title>query</var>, and then append the
- <span spec=dom>context object</span> to
+ <a href=https://dom.spec.whatwg.org/#context-object>context object</a> to
  <a title=concept-URLUtils-query-object>query object</a>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
@@ -2153,14 +2167,14 @@ constructor, when invoked, must run these steps:
  <a title=concept-basic-url-parser>basic URL parser</a> on <var title>base</var>.
 
  <li><p>If <var title>parsedBase</var> is failure,
- <span spec=webidl>throw</span> a <code title>TypeError</code> exception.
+ <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
  <li><p>Set <var title>parsedURL</var> to the result of running the
  <a title=concept-basic-url-parser>basic URL parser</a> on <var title>url</var>
  with <var title>parsedBase</var>.
 
  <li><p>If <var title>parsedURL</var> is failure,
- <span spec=webidl>throw</span> a <code title>TypeError</code> exception.
+ <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
  <li><p>Let <var title>result</var> be a new <code>URL</code> object.
 
@@ -2190,7 +2204,7 @@ constructor, when invoked, must run these steps:
 url.pathname // "/%F0%9F%92%A9"</pre>
 
  <p>Alternatively you can use the <a title=concept-base-url>base URL</a> of a
- <span spec=dom title=concept-document>document</span> through
+ <a href=https://dom.spec.whatwg.org/#concept-document title=concept-document>document</a> through
  <code data-anolis-spec=dom title=dom-Node-baseURI>baseURI</code>:
 
  <pre>var input = "/💩",
@@ -2257,7 +2271,7 @@ these steps:
  <li><p>Let <var title>input</var> be the given value.
 
  <li>
-  <p>If the <span spec=dom>context object</span> is a <code>URL</code> object,
+  <p>If the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> is a <code>URL</code> object,
   run these substeps:
 
   <ol>
@@ -2267,7 +2281,7 @@ these steps:
    <a title=concept-URLUtils-get-the-base>get the base</a>.
 
    <li><p>If <var title>parsedURL</var> is failure,
-   <span spec=webidl>throw</span> a <code title>TypeError</code> exception.
+   <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
    <li>
     <p>Run <a title=concept-URLUtils-set-the-input>set the input</a> given the empty
@@ -2308,7 +2322,7 @@ run these steps:
  string.
 
  <li><p>Return the
- <span spec=html title="Unicode serialization of an origin">Unicode serialization</span>
+ <a href=https://html.spec.whatwg.org/multipage/#Unicode-serialization-of-an-origin title="Unicode serialization of an origin">Unicode serialization</a>
  of <a title=concept-URLUtils-url>url</a>'s <a title=concept-url-origin>origin</a>.
  [[!HTML]]
 </ol>
@@ -2558,11 +2572,11 @@ these steps:
 <ol>
  <li><p>Let <var title>object</var> be the given value.
 
- <li><p>Remove the <span spec=dom>context object</span> from
+ <li><p>Remove the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> from
  <a title=concept-URLUtils-query-object>query object</a>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
- <li><p>Append the <span spec=dom>context object</span> to
+ <li><p>Append the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> to
  <var title>object</var>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
@@ -2637,12 +2651,12 @@ empty.
 <dfn title=concept-URLSearchParams-url-object>url objects</dfn>, which is initially empty.
 
 <p class=note><code>URLSearchParams</code> objects always use
-<span spec=encoding>utf-8</span> as
-<span spec=encoding>encoding</span>, despite the existence of
+<a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a> as
+<a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>, despite the existence of
 concepts such as
 <a title=concept-URLUtils-query-encoding>query encoding</a>. This is to
 encourage developers to migrate towards
-<span spec=encoding>utf-8</span>, which they really ought to
+<a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>, which they really ought to
 have done a long time ago now.
 
 <p>To create a
@@ -2744,7 +2758,7 @@ method, when invoked, must return true if there is a name-value pair whose name 
 <var title>name</var> in <a title=concept-URLSearchParams-list>list</a>, and false
 otherwise.
 
-<p>The <span spec=webidl>value pairs to iterate over</span> are the
+<p>The <a href=http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over>value pairs to iterate over</a> are the
 <a title=concept-URLSearchParams-list>list</a> name-value pairs with the key being
 the name and the value the value.
 
