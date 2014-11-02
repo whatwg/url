@@ -61,10 +61,11 @@ might increase in scope somewhat.
 <h2 id=terminology>Terminology</h2>
 
 <p>Some terms used in this specification are defined in the
-DOM, Encoding, and IDNA Standards.
+DOM, Encoding, IDNA, and Web IDL Standards.
 [[!DOM]]
 [[!ENCODING]]
 [[!IDNA]]
+[[!WEBIDL]]
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
 <!-- XXX ref Encoding? -->
