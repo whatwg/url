@@ -89,15 +89,15 @@ string or code point stream.
 User agents are encouraged to expose <a title="parse error">parse errors</a>
 somehow.
 
-<p>Within a parser algorithm that uses a <var title>pointer</var> variable, <dfn>c</dfn>
-references the code point the <var title>pointer</var> variable points to.
+<p>Within a parser algorithm that uses a <var>pointer</var> variable, <dfn>c</dfn>
+references the code point the <var>pointer</var> variable points to.
 
-<p>Within a string-based parser algorithm that uses a <var title>pointer</var> variable,
-<dfn>remaining</dfn> references the substring after <var title>pointer</var> in the string
+<p>Within a string-based parser algorithm that uses a <var>pointer</var> variable,
+<dfn>remaining</dfn> references the substring after <var>pointer</var> in the string
 being processed.
 
 <p class=example>If "<code title>mailto:username@example</code>" is a string being
-processed and <var title>pointer</var> points to "<code title>@</code>",
+processed and <var>pointer</var> points to "<code title>@</code>",
 <a>c</a> is "<code title>@</code>" and <a>remaining</a> is
 "<code title>example</code>".
 
@@ -112,50 +112,50 @@ conversion to bytes, should not cause a
 <a href=https://encoding.spec.whatwg.org/#utf-8-decoder>utf-8 decoder</a> to run into any
 <a href=https://encoding.spec.whatwg.org/#error title=error>errors</a>.
 
-<p>To <dfn>percent encode</dfn> a <var title>byte</var> into a
+<p>To <dfn>percent encode</dfn> a <var>byte</var> into a
 <a>percent-encoded byte</a>, return a string consisting of
 "<code title>%</code>", followed by a double-digit, uppercase, hexadecimal
-representation of <var title>byte</var>.
+representation of <var>byte</var>.
 
-<p>To <dfn>percent decode</dfn> a byte sequence <var title>input</var>, run these steps:
+<p>To <dfn>percent decode</dfn> a byte sequence <var>input</var>, run these steps:
 
 <p class=warning>Using anything but a <a href=https://encoding.spec.whatwg.org/#utf-8-decoder>utf-8 decoder</a>
-when the <var title>input</var> contains bytes outside the range 0x00 to 0x7F might be
+when the <var>input</var> contains bytes outside the range 0x00 to 0x7F might be
 insecure and is not recommended.
 
 <ol>
- <li><p>Let <var title>output</var> be an empty byte sequence.
+ <li><p>Let <var>output</var> be an empty byte sequence.
 
  <li>
-  <p>For each byte <var title>byte</var> in <var title>input</var>, run these steps:
+  <p>For each byte <var>byte</var> in <var>input</var>, run these steps:
 
   <ol>
-   <li><p>If <var title>byte</var> is not `<code title>%</code>`, append
-   <var title>byte</var> to <var title>output</var>.
+   <li><p>If <var>byte</var> is not `<code title>%</code>`, append
+   <var>byte</var> to <var>output</var>.
 
-   <li><p>Otherwise, if <var title>byte</var> is `<code title>%</code>` and the next two
-   bytes after <var title>byte</var> in <var title>input</var> are not in the ranges
-   0x30 to 0x39, 0x41 to 0x46, and 0x61 to 0x66, append <var title>byte</var> to
-   <var title>output</var>.
+   <li><p>Otherwise, if <var>byte</var> is `<code title>%</code>` and the next two
+   bytes after <var>byte</var> in <var>input</var> are not in the ranges
+   0x30 to 0x39, 0x41 to 0x46, and 0x61 to 0x66, append <var>byte</var> to
+   <var>output</var>.
 
    <li>
     <p>Otherwise, run these substeps:
 
     <ol>
-     <li><p>Let <var title>bytePoint</var> be the two bytes after <var title>byte</var> in
-     <var title>input</var>,
+     <li><p>Let <var>bytePoint</var> be the two bytes after <var>byte</var> in
+     <var>input</var>,
      <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM title="utf-8 decode without BOM">decoded</a>, and
      then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
-     <li><p>Append a byte whose value is <var title>bytePoint</var> to
-     <var title>output</var>.
+     <li><p>Append a byte whose value is <var>bytePoint</var> to
+     <var>output</var>.
 
-     <li><p>Skip the next two bytes in <var title>input</var>.
+     <li><p>Skip the next two bytes in <var>input</var>.
     </ol>
   </ol>
 
- <li><p>Return <var title>output</var>.
+ <li><p>Return <var>output</var>.
 </ol>
 
 <!-- the escape sets are minimal as escaping can lead to problems; we might
@@ -188,18 +188,18 @@ and
 <a>password encode set</a> and code point
 "<code title>:</code>". <!-- 0x3A -->
 
-<p>To <dfn>utf-8 percent encode</dfn> a <var title>code point</var>, using
-an <var title>encode set</var>, run these steps:
+<p>To <dfn>utf-8 percent encode</dfn> a <var>code point</var>, using
+an <var>encode set</var>, run these steps:
 
 <ol>
- <li><p>If <var title>code point</var> is not in
- <var title>encode set</var>, return <var title>code point</var>.
+ <li><p>If <var>code point</var> is not in
+ <var>encode set</var>, return <var>code point</var>.
 
- <li><p>Let <var title>bytes</var> be the result of running
+ <li><p>Let <var>bytes</var> be the result of running
  <a href=https://encoding.spec.whatwg.org/#utf-8-encode>utf-8 encode</a> on
- <var title>code point</var>.
+ <var>code point</var>.
 
- <li><p><a>Percent encode</a> each byte in <var title>bytes</var>, and
+ <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and
  then return them concatenated, in the same order.
 </ol>
 
@@ -226,12 +226,12 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 <h3 id=idna>IDNA</h3>
 
 <p>The <dfn title=concept-domain-to-ascii>domain to ASCII</dfn> given a
-<a title=concept-domain>domain</a> <var title>domain</var>, runs these steps:
+<a title=concept-domain>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
- <i>domain_name</i> set to <var title>domain</var>,
+ <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
@@ -241,12 +241,12 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 </ol>
 
 <p>The <dfn title=concept-domain-to-unicode>domain to Unicode</dfn> given a
-<a title=concept-domain>domain</a> <var title>domain</var>, runs these steps:
+<a title=concept-domain>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
- <i>domain_name</i> set to <var title>domain</var>,
+ <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
  <li>
@@ -263,12 +263,12 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 by an <a title=concept-ipv6>IPv6 address</a>, followed by
 "<code title>]</code>".
 
-<p>A <var title>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
+<p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
- <i>domain_name</i> set to <var title>domain</var>,
+ <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
 
@@ -276,7 +276,7 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
 
  <li><p>Set <var>result</var> to the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
- <i>domain_name</i> set to <var title>result</var>,
+ <i>domain_name</i> set to <var>result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
  <li><p>If <var>result</var> contains any errors, return failure.
@@ -303,11 +303,11 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
 <h3 id=host-parsing>Host parsing</h3>
 
 <p>The <dfn title=concept-host-parser>host parser</dfn> takes a string
-<var title>input</var> and optionally a <var title>Unicode flag</var>, and then runs
+<var>input</var> and optionally a <var>Unicode flag</var>, and then runs
 these steps:
 
 <ol>
- <li><p>If <var title>input</var> is the empty string, return failure.
+ <li><p>If <var>input</var> is the empty string, return failure.
  <!-- Otherwise parsing URLs would not be idempotent:
 
       http://@/example.org/ -> http:///example.org/ -> http://example.org/
@@ -315,32 +315,32 @@ these steps:
       Could potentially move this check to the URL parser if deemed problematic. -->
 
  <li>
-  <p>If <var title>input</var> starts with "<code title>[</code>", run these
+  <p>If <var>input</var> starts with "<code title>[</code>", run these
   substeps:
 
   <ol>
-   <li><p>If <var title>input</var> does not end with
+   <li><p>If <var>input</var> does not end with
    "<code title>]</code>", <a>parse error</a>, return failure.
 
    <li><p>Return the result of
-   <a title=concept-ipv6-parser>IPv6 parsing</a> <var title>input</var>
+   <a title=concept-ipv6-parser>IPv6 parsing</a> <var>input</var>
    with its leading "<code title>[</code>" and trailing
    "<code title>]</code>" removed.
   </ol>
 
- <li><p>Let <var title>domain</var> be the result of
+ <li><p>Let <var>domain</var> be the result of
  <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM>utf-8 decode without BOM</a> on the
  <a title="percent decode">percent decoding</a> of
- <a href=https://encoding.spec.whatwg.org/#utf-8-encode>utf-8 encode</a> on <var title>input</var>.
+ <a href=https://encoding.spec.whatwg.org/#utf-8-encode>utf-8 encode</a> on <var>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
- <li><p>Let <var title>asciiDomain</var> be the result of running
- <a title=concept-domain-to-ascii>domain to ASCII</a> on <var title>domain</var>.
+ <li><p>Let <var>asciiDomain</var> be the result of running
+ <a title=concept-domain-to-ascii>domain to ASCII</a> on <var>domain</var>.
 
- <li><p>If <var title>asciiDomain</var> is failure, return failure.
+ <li><p>If <var>asciiDomain</var> is failure, return failure.
 
  <li>
-  <p>If <var title>asciiDomain</var> contains one of
+  <p>If <var>asciiDomain</var> contains one of
   U+0000,
   U+0009,
   U+000A,
@@ -358,32 +358,32 @@ these steps:
   "<code title>]</code>",<!-- 5D -->
   return failure.
 
- <li><p>Return <var title>asciiDomain</var> if the <var title>Unicode flag</var> is unset,
+ <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset,
  and the result of running <a title=concept-domain-to-unicode>domain to Unicode</a>
- on <var title>asciiDomain</var> otherwise.
+ on <var>asciiDomain</var> otherwise.
 </ol>
 
 <p>The <dfn title=concept-ipv6-parser>IPv6 parser</dfn> takes a string
-<var title>input</var> and then runs these steps:
+<var>input</var> and then runs these steps:
 
 <ol>
- <li><p>Let <var title>address</var> be a new
+ <li><p>Let <var>address</var> be a new
  <a title=concept-ipv6>IPv6 address</a> with its
  <a title=concept-ipv6-piece>16-bit pieces</a> initialized to 0.
 
- <li><p>Let <var title>piece pointer</var> be a pointer into
- <var title>address</var>'s
+ <li><p>Let <var>piece pointer</var> be a pointer into
+ <var>address</var>'s
  <a title=concept-ipv6-piece>16-bit pieces</a>, initially zero
  (pointing to the first <a title=concept-ipv6-piece>16-bit piece</a>),
- and let <var title>piece</var> be the
+ and let <var>piece</var> be the
  <a title=concept-ipv6-piece>16-bit piece</a> it points to.
 
- <li><p>Let <var title>compress pointer</var> be another pointer into
- <var title>address</var>'s <a title=concept-ipv6-piece>16-bit pieces</a>, initially
+ <li><p>Let <var>compress pointer</var> be another pointer into
+ <var>address</var>'s <a title=concept-ipv6-piece>16-bit pieces</a>, initially
  null and pointing to nothing.
 
- <li><p>Let <var title>pointer</var> be a pointer into
- <var title>input</var>, initially zero (pointing to the first code point).
+ <li><p>Let <var>pointer</var> be a pointer into
+ <var>input</var>, initially zero (pointing to the first code point).
 
  <li>
   <p>If <a>c</a> is "<code title>:</code>", run these substeps:
@@ -392,10 +392,10 @@ these steps:
    <li><p>If <a>remaining</a> does not start with
    "<code title>:</code>", <a>parse error</a>, return failure.
 
-   <li><p>Increase <var title>pointer</var> by two.
+   <li><p>Increase <var>pointer</var> by two.
 
-   <li><p>Increase <var title>piece pointer</var> by one and then set
-   <var title>compress pointer</var> to <var title>piece pointer</var>.
+   <li><p>Increase <var>piece pointer</var> by one and then set
+   <var>compress pointer</var> to <var>piece pointer</var>.
   </ol>
 
  <li>
@@ -404,7 +404,7 @@ these steps:
   substeps:
 
   <ol>
-   <li><p>If <var title>piece pointer</var> is eight,
+   <li><p>If <var>piece pointer</var> is eight,
    <a>parse error</a>, return failure.
 
    <li>
@@ -412,22 +412,22 @@ these steps:
     substeps:
 
     <ol>
-     <li><p>If <var title>compress pointer</var> is not null,
+     <li><p>If <var>compress pointer</var> is not null,
      <a>parse error</a>, return failure.
 
-     <li>Increase <var title>pointer</var> and <var title>piece pointer</var> by one, set
-     <var title>compress pointer</var> to <var title>piece pointer</var>,
+     <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
+     <var>compress pointer</var> to <var>piece pointer</var>,
      and then jump to <a title=concept-ipv6-parser-main>Main</a>.
     </ol>
 
-   <li><p>Let <var title>value</var> and <var title>length</var> be 0.
+   <li><p>Let <var>value</var> and <var>length</var> be 0.
 
-   <li><p>While <var title>length</var> is less than 4 and
+   <li><p>While <var>length</var> is less than 4 and
    <a>c</a> is an
    <a title="ASCII hex digits">ASCII hex digit</a>, set
-   <var title>value</var> to
-   <var title>value</var> &times; 0x10 + <a>c</a> interpreted as hexadecimal number,
-   and increase <var title>pointer</var> and <var title>length</var> by one.
+   <var>value</var> to
+   <var>value</var> &times; 0x10 + <a>c</a> interpreted as hexadecimal number,
+   and increase <var>pointer</var> and <var>length</var> by one.
 
    <li>
     <p>Based on <a>c</a>:
@@ -435,14 +435,14 @@ these steps:
     <dl class=switch>
      <dt>"<code title>.</code>"
      <dd>
-      <p>If <var title>length</var> is 0, <a>parse error</a>,
+      <p>If <var>length</var> is 0, <a>parse error</a>,
       return failure.
-      <p>Decrease <var title>pointer</var> by <var title>length</var>.
+      <p>Decrease <var>pointer</var> by <var>length</var>.
       <p>Jump to <a title=concept-ipv6-parser-ipv4>IPv4</a>.
 
      <dt>"<code title>:</code>"
      <dd>
-      <p>Increase <var title>pointer</var> by one.
+      <p>Increase <var>pointer</var> by one.
       <p>If <a>c</a> is the <a>EOF code point</a>,
       <a>parse error</a>, return failure.
 
@@ -450,26 +450,26 @@ these steps:
      <dd><p><a>Parse error</a>, return failure.
     </dl>
 
-   <li><p>Set <var title>piece</var> to <var title>value</var>.
+   <li><p>Set <var>piece</var> to <var>value</var>.
 
-   <li><p>Increase <var title>piece pointer</var> by one.
+   <li><p>Increase <var>piece pointer</var> by one.
   </ol>
 
  <li><p>If <a>c</a> is the <a>EOF code point</a>, jump to
  <a title=concept-ipv6-parser-finale>Finale</a>.
 
  <li><p><dfn title=concept-ipv6-parser-ipv4>IPv4</dfn>:
- If <var title>piece pointer</var> is greater than six,
+ If <var>piece pointer</var> is greater than six,
  <a>parse error</a>, return failure.
 
- <li><p>Let <var title>dots seen</var> be 0.
+ <li><p>Let <var>dots seen</var> be 0.
 
  <li>
   <p>While <a>c</a> is not the <a>EOF code point</a>, run
   these substeps:
 
   <ol>
-   <li><p>Let <var title>value</var> be null.
+   <li><p>Let <var>value</var> be null.
 
    <li><p>If <a>c</a> is not an <a title="ASCII digits">ASCII digit</a>,
    <a>parse error</a>, return failure. <!-- prevent the empty string -->
@@ -479,128 +479,128 @@ these steps:
     <a title="ASCII digits">ASCII digit</a>, run these subsubsteps:
 
     <ol>
-     <li><p>Let <var title>number</var> be <a>c</a> interpreted as decimal number.
+     <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
 
      <li>
-      <p>If <var title>value</var> is null, set <var title>value</var> to <var title>number</var>.
+      <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
 
-      <p>Otherwise, if <var title>value</var> is 0, <a>parse error</a>, return failure.
+      <p>Otherwise, if <var>value</var> is 0, <a>parse error</a>, return failure.
 
-      <p>Otherwise, set <var title>value</var> to <var title>value</var> &times; 10 + <var title>number</var>.
+      <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
 
-     <li><p>Increase <var title>pointer</var> by one.
+     <li><p>Increase <var>pointer</var> by one.
 
-     <li><p>If <var title>value</var> is greater than 255, <a>parse error</a>,
+     <li><p>If <var>value</var> is greater than 255, <a>parse error</a>,
      return failure.
     </ol>
 
-   <li><p>If <var title>dots seen</var> is less than 3 and
+   <li><p>If <var>dots seen</var> is less than 3 and
    <a>c</a> is not a "<code title>.</code>",
    <a>parse error</a>, return failure.
 
-   <li><p>Set <var title>piece</var> to
-   <var title>piece</var> &times; 0x100 + <var title>value</var>.
+   <li><p>Set <var>piece</var> to
+   <var>piece</var> &times; 0x100 + <var>value</var>.
 
-   <li><p>If <var title>dots seen</var> is 1 or 3, increase
-   <var title>piece pointer</var> by one.
+   <li><p>If <var>dots seen</var> is 1 or 3, increase
+   <var>piece pointer</var> by one.
 
-   <li><p>Increase <var title>pointer</var> by one.
+   <li><p>Increase <var>pointer</var> by one.
 
-   <li><p>If <var title>dots seen</var> is 3 and <a>c</a> is not
+   <li><p>If <var>dots seen</var> is 3 and <a>c</a> is not
    the <a>EOF code point</a>,
    <a>parse error</a>, return failure.
 
-   <li><p>Increase <var title>dots seen</var> by one.
+   <li><p>Increase <var>dots seen</var> by one.
   </ol>
 
  <li>
   <p><dfn title=concept-ipv6-parser-finale>Finale</dfn>:
-  If <var title>compress pointer</var> is not null, run these substeps:
+  If <var>compress pointer</var> is not null, run these substeps:
 
   <ol>
-   <li><p>Let <var title>swaps</var> be
-   <var title>piece pointer</var> &minus; <var title>compress pointer</var>.
+   <li><p>Let <var>swaps</var> be
+   <var>piece pointer</var> &minus; <var>compress pointer</var>.
 
-   <li><p>Set <var title>piece pointer</var> to seven.
+   <li><p>Set <var>piece pointer</var> to seven.
 
-   <li><p>While <var title>piece pointer</var> is not zero and <var title>swaps</var> is
-   greater than zero, swap <var title>piece</var> with the
+   <li><p>While <var>piece pointer</var> is not zero and <var>swaps</var> is
+   greater than zero, swap <var>piece</var> with the
    <a title=concept-ipv6-piece>piece</a> at pointer
-   <var title>compress pointer</var> + <var title>swaps</var> &minus; 1, and then
-   decrease both <var title>piece pointer</var> and <var title>swaps</var> by one.
+   <var>compress pointer</var> + <var>swaps</var> &minus; 1, and then
+   decrease both <var>piece pointer</var> and <var>swaps</var> by one.
   </ol>
 
- <li><p>Otherwise, if <var title>compress pointer</var> is null and
- <var title>piece pointer</var> is not eight, <a>parse error</a>,
+ <li><p>Otherwise, if <var>compress pointer</var> is null and
+ <var>piece pointer</var> is not eight, <a>parse error</a>,
  return failure.
 
- <li><p>Return <var title>address</var>.
+ <li><p>Return <var>address</var>.
 </ol>
 
 
 <h3 id=host-serializing>Host serializing</h3>
 
 <p>The <dfn title=concept-host-serializer>host serializer</dfn> takes null or a
-<a title=concept-host>host</a> <var title>host</var> and then runs
+<a title=concept-host>host</a> <var>host</var> and then runs
 these steps:
 
 <ol>
- <li><p>If <var title>host</var> is null, return the empty string.
+ <li><p>If <var>host</var> is null, return the empty string.
 
- <li><p>If <var title>host</var> is an
+ <li><p>If <var>host</var> is an
  <a title=concept-ipv6>IPv6 address</a>, return
  "<code title>[</code>", followed by the result of running the
- <a title=concept-ipv6-serializer>IPv6 serializer</a> on <var title>host</var>,
+ <a title=concept-ipv6-serializer>IPv6 serializer</a> on <var>host</var>,
  followed by "<code title>]</code>".
 
- <li><p>Otherwise, <var title>host</var> is a <a title=concept-domain>domain</a>,
- return <var title>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a title=concept-domain>domain</a>,
+ return <var>host</var>.
 </ol>
 
 <p>The <dfn title=concept-ipv6-serializer>IPv6 serializer</dfn> takes an
-<a title=concept-ipv6>IPv6 address</a> <var title>address</var> and
+<a title=concept-ipv6>IPv6 address</a> <var>address</var> and
 then runs these steps:
 
 <ol>
- <li><p>Let <var title>output</var> be the empty string.
+ <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p>Let <var title>compress pointer</var> be a pointer to the first
+  <p>Let <var>compress pointer</var> be a pointer to the first
   <a title=concept-ipv6-piece>16-bit piece</a> in the first longest
-  sequences of <var title>address</var>'s
+  sequences of <var>address</var>'s
   <a title=concept-ipv6-piece>16-bit pieces</a> that are 0.
 
   <p class=example>In <code title>0:f:0:0:f:f:0:0</code> it would point to
   the second 0.
 
- <li><p>If there is no sequence of <var title>address</var>'s
+ <li><p>If there is no sequence of <var>address</var>'s
  <a title=concept-ipv6-piece>16-bit pieces</a> that are 0 longer than
- one, set <var title>compress pointer</var> to null.
+ one, set <var>compress pointer</var> to null.
 
  <li>
-  <p>For each <var title>piece</var> in <var title>address</var>'s
+  <p>For each <var>piece</var> in <var>address</var>'s
   <a title=concept-ipv6-piece>pieces</a>, run these substeps:
 
   <ol>
-   <li><p>If <var title>compress pointer</var> points to
-   <var title>piece</var>, append "<code title>::</code>" to
-   <var title>output</var> if <var title>piece</var> is
-   <var title>address</var>'s first <a title=concept-ipv6-piece>piece</a> and append
+   <li><p>If <var>compress pointer</var> points to
+   <var>piece</var>, append "<code title>::</code>" to
+   <var>output</var> if <var>piece</var> is
+   <var>address</var>'s first <a title=concept-ipv6-piece>piece</a> and append
    "<code title>:</code>" otherwise, and then run these substeps again with all
    subsequent <a title=concept-ipv6-piece>pieces</a> in
-   <var title>address</var>'s <a title=concept-ipv6-piece>pieces</a>
+   <var>address</var>'s <a title=concept-ipv6-piece>pieces</a>
    that are 0 skipped or go the next step in the overall set of steps if
    that leaves no <a title=concept-ipv6-piece>pieces</a>.
 
-   <li><p>Append <var title>piece</var>, represented as the shortest
-   possible lowercase hexadecimal number, to <var title>output</var>.
+   <li><p>Append <var>piece</var>, represented as the shortest
+   possible lowercase hexadecimal number, to <var>output</var>.
 
-   <li><p>If <var title>piece</var> is not
-   <var title>address</var>'s last <a title=concept-ipv6-piece>piece</a>,
-   append "<code title>:</code>" to <var title>output</var>.
+   <li><p>If <var>piece</var> is not
+   <var>address</var>'s last <a title=concept-ipv6-piece>piece</a>,
+   append "<code title>:</code>" to <var>output</var>.
   </ol>
 
- <li><p>Return <var title>output</var>.
+ <li><p>Return <var>output</var>.
 </ol>
 
 <p class=note>This algorithm requires the recommendation from
@@ -867,89 +867,89 @@ U+100000 to U+10FFFD.
 <p class=XXX>Add the ability to halt on the first conformance error.
 
 <p>The <dfn title=concept-url-parser>URL parser</dfn> takes a string
-<var title>input</var>, optionally with a
-<a title=concept-base-url>base URL</a> <var title>base</var>, and
+<var>input</var>, optionally with a
+<a title=concept-base-url>base URL</a> <var>base</var>, and
 optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
 <ol>
- <li><p>Let <var title>url</var> be the result of running the
- <a title=concept-basic-url-parser>basic URL parser</a> on <var title>input</var>
- with <var title>base</var>, and <var>encoding override</var> as provided.
+ <li><p>Let <var>url</var> be the result of running the
+ <a title=concept-basic-url-parser>basic URL parser</a> on <var>input</var>
+ with <var>base</var>, and <var>encoding override</var> as provided.
 
- <li><p>If <var title>url</var> is failure, return failure.
+ <li><p>If <var>url</var> is failure, return failure.
 
- <li><p>If <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is not
- "<code title>blob</code>", return <var title>url</var>.
+ <li><p>If <var>url</var>'s <a title=concept-url-scheme>scheme</a> is not
+ "<code title>blob</code>", return <var>url</var>.
 
- <li><p>If <var title>url</var>'s <a title=concept-url-scheme-data>scheme data</a>
+ <li><p>If <var>url</var>'s <a title=concept-url-scheme-data>scheme data</a>
  is not in the <a href=http://dev.w3.org/2006/webapi/FileAPI/#blob-URL-store>blob URL store</a>, return
- <var title>url</var>. [[!FILEAPI]]
+ <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var title>url</var>'s <a title=concept-url-object>object</a> to a
+ <li><p>Set <var>url</var>'s <a title=concept-url-object>object</a> to a
  <a href=https://html.spec.whatwg.org/multipage/#structured-clone>structured clone</a> of the entry in the
  <a href=http://dev.w3.org/2006/webapi/FileAPI/#blob-URL-store>blob URL store</a> corresponding to
- <var title>url</var>'s <a title=concept-url-scheme-data>scheme data</a>.
+ <var>url</var>'s <a title=concept-url-scheme-data>scheme data</a>.
  [[!HTML]]
 
- <li><p>Return <var title>url</var>.
+ <li><p>Return <var>url</var>.
 </ol>
 
 <hr>
 
 <p>The <dfn title=concept-basic-url-parser>basic URL parser</dfn> takes a string
-<var title>input</var>, optionally with a
-<a title=concept-base-url>base URL</a> <var title>base</var>,
+<var>input</var>, optionally with a
+<a title=concept-base-url>base URL</a> <var>base</var>,
 optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, optionally with an
-<a title=concept-url>URL</a> <var title>url</var> and a state override
-<var title>state override</var>, and then runs these steps:
+<a title=concept-url>URL</a> <var>url</var> and a state override
+<var>state override</var>, and then runs these steps:
 
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
- HTML. The <var title>url</var> and <var title>state override</var> arguments are only for
+ HTML. The <var>url</var> and <var>state override</var> arguments are only for
  use by methods of objects implementing the <code>URLUtils</code> interface.
  [[!HTML]]
 
- <p>When the <var title>url</var> and <var title>state override</var> arguments are not
+ <p>When the <var>url</var> and <var>state override</var> arguments are not
  passed the <a title=concept-basic-url-parser>basic URL parser</a> returns either a
  <a title=concept-url>URL</a> or failure. If they are passed the
- algorithm simply modifies the passed <var title>url</var> and can terminate without
+ algorithm simply modifies the passed <var>url</var> and can terminate without
  returning anything.
 </div>
 
 <ol>
  <li>
-  <p>If <var title>url</var> is not given:
+  <p>If <var>url</var> is not given:
 
   <ol>
-   <li><p>Set <var title>url</var> to a new <a title=concept-url>URL</a>.
+   <li><p>Set <var>url</var> to a new <a title=concept-url>URL</a>.
 
    <li><p>Remove any leading and trailing
    <a href=https://encoding.spec.whatwg.org/#ASCII-whitespace>ASCII whitespace</a> from
-   <var title>input</var>.
+   <var>input</var>.
   </ol>
 
- <li><p>Let <var title>state</var> be <var title>state override</var>
+ <li><p>Let <var>state</var> be <var>state override</var>
  if given, or <a>scheme start state</a> otherwise.
 
- <li><p>If <var title>base</var> is not given, set it to null.
+ <li><p>If <var>base</var> is not given, set it to null.
 
  <li><p>If <var>encoding override</var> is not given, set it to
  <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
 
- <li><p>Let <var title>buffer</var> be the empty string.
+ <li><p>Let <var>buffer</var> be the empty string.
 
- <li><p>Let the <var title>@ flag</var> and the <var title>[] flag</var> be
+ <li><p>Let the <var>@ flag</var> and the <var>[] flag</var> be
  unset.
 
- <li><p>Let <var title>pointer</var> be a pointer to first code point in
- <var title>input</var>.
+ <li><p>Let <var>pointer</var> be a pointer to first code point in
+ <var>input</var>.
 
  <li>
-  <p>Keep running the following state machine by switching on <var title>state</var>. If
-  after a run <var title>pointer</var> points to the <a>EOF code point</a>, go to
-  the next step. Otherwise, increase <var title>pointer</var> by one and continue with the
+  <p>Keep running the following state machine by switching on <var>state</var>. If
+  after a run <var>pointer</var> points to the <a>EOF code point</a>, go to
+  the next step. Otherwise, increase <var>pointer</var> by one and continue with the
   state machine.
 
   <dl class=switch>
@@ -957,12 +957,12 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII alpha</a>,
-     append <a>c</a>, lowercased, to <var title>buffer</var>, and
-     set <var title>state</var> to <a>scheme state</a>.
+     append <a>c</a>, lowercased, to <var>buffer</var>, and
+     set <var>state</var> to <a>scheme state</a>.
 
-     <li><p>Otherwise, if <var title>state override</var> is not given, set
-     <var title>state</var> to <a>no scheme state</a>, and decrease
-     <var title>pointer</var> by one.
+     <li><p>Otherwise, if <var>state override</var> is not given, set
+     <var>state</var> to <a>no scheme state</a>, and decrease
+     <var>pointer</var> by one.
 
      <li><p>Otherwise, <a>parse error</a>, terminate this algorithm.
     </ol>
@@ -973,48 +973,48 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
      <li><p>If <a>c</a> is an <a>ASCII alphanumeric</a>,
      "<code title>+</code>", "<code title>-</code>", or
      "<code title>.</code>", append <a>c</a>, lowercased, to
-     <var title>buffer</var>.
+     <var>buffer</var>.
 
      <li>
       <p>Otherwise, if <a>c</a> is "<code title>:</code>", set
-      <var title>url</var>'s <a title=concept-url-scheme>scheme</a> to
-      <var title>buffer</var>, <var title>buffer</var> to the empty string,
+      <var>url</var>'s <a title=concept-url-scheme>scheme</a> to
+      <var>buffer</var>, <var>buffer</var> to the empty string,
       and then run these substeps:
 
       <ol>
-       <li><p>If <var title>state override</var> is given,
+       <li><p>If <var>state override</var> is given,
        terminate this algorithm.
 
-       <li><p>If <var title>url</var>'s
+       <li><p>If <var>url</var>'s
        <a title=concept-url-scheme>scheme</a> is
-       a <a>relative scheme</a>, set <var title>url</var>'s
+       a <a>relative scheme</a>, set <var>url</var>'s
        <a>relative flag</a>.
 
-       <li><p>If <var title>url</var>'s
+       <li><p>If <var>url</var>'s
        <a title=concept-url-scheme>scheme</a> is
-       "<code title>file</code>", set <var title>state</var> to
+       "<code title>file</code>", set <var>state</var> to
        <a>relative state</a>.
 
-       <li><p>Otherwise, if <var title>url</var>'s
-       <a>relative flag</a> is set, <var title>base</var> is not null
-       and <var title>base</var>'s
+       <li><p>Otherwise, if <var>url</var>'s
+       <a>relative flag</a> is set, <var>base</var> is not null
+       and <var>base</var>'s
        <a title=concept-url-scheme>scheme</a> is equal to
-       <var title>url</var>'s <a title=concept-url-scheme>scheme</a>,
-       set <var title>state</var> to
+       <var>url</var>'s <a title=concept-url-scheme>scheme</a>,
+       set <var>state</var> to
        <a>relative or authority state</a>.
 
-       <li><p>Otherwise, if <var title>url</var>'s
-       <a>relative flag</a> is set, set <var title>state</var> to
+       <li><p>Otherwise, if <var>url</var>'s
+       <a>relative flag</a> is set, set <var>state</var> to
        <a>authority first slash state</a>.
 
-       <li><p>Otherwise, set <var title>state</var> to
+       <li><p>Otherwise, set <var>state</var> to
        <a>scheme data state</a>.
       </ol>
 
-     <li><p>Otherwise, if <var title>state override</var> is not given, set
-     <var title>buffer</var> to the empty string, <var title>state</var> to
+     <li><p>Otherwise, if <var>state override</var> is not given, set
+     <var>buffer</var> to the empty string, <var>state</var> to
      <a>no scheme state</a>, and start over (from the first code point
-     in <var title>input</var>).
+     in <var>input</var>).
 
      <li><p>Otherwise, if <a>c</a> is the
      <a>EOF code point</a>, terminate this algorithm.
@@ -1027,13 +1027,13 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
    <dd>
     <ol>
      <li><p>If <a>c</a> is "<code title>?</code>", set
-     <var title>url</var>'s <a title=concept-url-query>query</a>
-     to the empty string and <var title>state</var> to
+     <var>url</var>'s <a title=concept-url-query>query</a>
+     to the empty string and <var>state</var> to
      <a>query state</a>.
 
      <li><p>Otherwise, if <a>c</a> is "<code title>#</code>", set
-     <var title>url</var>'s <a title=concept-url-fragment>fragment</a>
-     to the empty string and <var title>state</var> to
+     <var>url</var>'s <a title=concept-url-fragment>fragment</a>
+     to the empty string and <var>state</var> to
      <a>fragment state</a>.
 
      <li>
@@ -1051,55 +1051,55 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
        <a>EOF code point</a>, U+0009, U+000A, and U+000D,
        <a>utf-8 percent encode</a> <a>c</a> using the
        <a>simple encode set</a>, and append the result to
-       <var title>url</var>'s
+       <var>url</var>'s
        <a title=concept-url-scheme-data>scheme data</a>.
       </ol>
     </ol>
 
    <dt><dfn>no scheme state</dfn>
    <dd>
-    <p>If <var title>base</var> is null, or <var title>base</var>'s
+    <p>If <var>base</var> is null, or <var>base</var>'s
     <a title=concept-url-scheme>scheme</a> is not a
     <a>relative scheme</a>, <a>parse error</a>, return failure.
 
     <p class=note>Due to the <code title=dom-URL-protocol>protocol</code> attribute's
-    ability to change <var title>base</var>'s
-    <a title=concept-url-scheme>scheme</a>, <var title>base</var>'s
+    ability to change <var>base</var>'s
+    <a title=concept-url-scheme>scheme</a>, <var>base</var>'s
     <a>relative flag</a> is not used here.
 
-    <p>Otherwise, set <var title>state</var> to <a>relative state</a>,
-    and decrease <var title>pointer</var> by one.
+    <p>Otherwise, set <var>state</var> to <a>relative state</a>,
+    and decrease <var>pointer</var> by one.
 
    <dt><dfn>relative or authority state</dfn>
    <dd>
     <p>If <a>c</a> is "<code>/</code>" and
     <a>remaining</a> starts with "<code>/</code>", set
-    <var title>state</var> to <a>authority ignore slashes state</a>
-    and increase <var title>pointer</var> by one.
+    <var>state</var> to <a>authority ignore slashes state</a>
+    and increase <var>pointer</var> by one.
 
-    <p>Otherwise, <a>parse error</a>, set <var title>state</var> to
-    <a>relative state</a> and decrease <var title>pointer</var> by
+    <p>Otherwise, <a>parse error</a>, set <var>state</var> to
+    <a>relative state</a> and decrease <var>pointer</var> by
     one.
 
    <dt><dfn>relative state</dfn>
    <dd>
-    <p>Set <var title>url</var>'s <a>relative flag</a>, set
-    <var title>url</var>'s <a title=concept-url-scheme>scheme</a> to
-    <var title>base</var>'s <a title=concept-url-scheme>scheme</a> if
-    <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is not
+    <p>Set <var>url</var>'s <a>relative flag</a>, set
+    <var>url</var>'s <a title=concept-url-scheme>scheme</a> to
+    <var>base</var>'s <a title=concept-url-scheme>scheme</a> if
+    <var>url</var>'s <a title=concept-url-scheme>scheme</a> is not
     "<code title>file</code>", and then, based on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
      <dd>
-      <p>Set <var title>url</var>'s <a title=concept-url-host>host</a>
-      to <var title>base</var>'s <a title=concept-url-host>host</a>,
-      <var title>url</var>'s <a title=concept-url-port>port</a> to
-      <var title>base</var>'s <a title=concept-url-port>port</a>,
-      <var title>url</var>'s <a title=concept-url-path>path</a> to
-      <var title>base</var>'s <a title=concept-url-path>path</a>, and
-      <var title>url</var>'s <a title=concept-url-query>query</a> to
-      <var title>base</var>'s <a title=concept-url-query>query</a>.
+      <p>Set <var>url</var>'s <a title=concept-url-host>host</a>
+      to <var>base</var>'s <a title=concept-url-host>host</a>,
+      <var>url</var>'s <a title=concept-url-port>port</a> to
+      <var>base</var>'s <a title=concept-url-port>port</a>,
+      <var>url</var>'s <a title=concept-url-path>path</a> to
+      <var>base</var>'s <a title=concept-url-path>path</a>, and
+      <var>url</var>'s <a title=concept-url-query>query</a> to
+      <var>base</var>'s <a title=concept-url-query>query</a>.
 
      <dt>"<code title>/</code>"
      <dt>"<code title>\</code>"
@@ -1107,61 +1107,61 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
       <ol>
        <li><p>If <a>c</a> is "<code title>\</code>",
        <a>parse error</a>.
-       <li><p>Set <var title>state</var> to
+       <li><p>Set <var>state</var> to
        <a>relative slash state</a>.
       </ol>
 
      <dt>"<code title>?</code>"
      <dd><p>Set
-     <var title>url</var>'s <a title=concept-url-host>host</a> to
-     <var title>base</var>'s <a title=concept-url-host>host</a>,
-     <var title>url</var>'s <a title=concept-url-port>port</a> to
-     <var title>base</var>'s <a title=concept-url-port>port</a>,
-     <var title>url</var>'s <a title=concept-url-path>path</a> to
-     <var title>base</var>'s <a title=concept-url-path>path</a>,
-     <var title>url</var>'s <a title=concept-url-query>query</a> to the empty string,
-     and <var title>state</var> to <a>query state</a>.
+     <var>url</var>'s <a title=concept-url-host>host</a> to
+     <var>base</var>'s <a title=concept-url-host>host</a>,
+     <var>url</var>'s <a title=concept-url-port>port</a> to
+     <var>base</var>'s <a title=concept-url-port>port</a>,
+     <var>url</var>'s <a title=concept-url-path>path</a> to
+     <var>base</var>'s <a title=concept-url-path>path</a>,
+     <var>url</var>'s <a title=concept-url-query>query</a> to the empty string,
+     and <var>state</var> to <a>query state</a>.
 
      <dt>"<code title>#</code>"
      <dd><p>Set
-     <var title>url</var>'s <a title=concept-url-host>host</a> to
-     <var title>base</var>'s <a title=concept-url-host>host</a>,
-     <var title>url</var>'s <a title=concept-url-port>port</a> to
-     <var title>base</var>'s <a title=concept-url-port>port</a>,
-     <var title>url</var>'s <a title=concept-url-path>path</a> to
-     <var title>base</var>'s <a title=concept-url-path>path</a>,
-     <var title>url</var>'s <a title=concept-url-query>query</a> to
-     <var title>base</var>'s <a title=concept-url-query>query</a>,
-     <var title>url</var>'s <a title=concept-url-fragment>fragment</a> to the empty string,
-     and <var title>state</var> to <a>fragment state</a>.
+     <var>url</var>'s <a title=concept-url-host>host</a> to
+     <var>base</var>'s <a title=concept-url-host>host</a>,
+     <var>url</var>'s <a title=concept-url-port>port</a> to
+     <var>base</var>'s <a title=concept-url-port>port</a>,
+     <var>url</var>'s <a title=concept-url-path>path</a> to
+     <var>base</var>'s <a title=concept-url-path>path</a>,
+     <var>url</var>'s <a title=concept-url-query>query</a> to
+     <var>base</var>'s <a title=concept-url-query>query</a>,
+     <var>url</var>'s <a title=concept-url-fragment>fragment</a> to the empty string,
+     and <var>state</var> to <a>fragment state</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
        <li>
-        <p>If <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is not
-        "<code title>file</code>", or <var title>c</var> is not an
+        <p>If <var>url</var>'s <a title=concept-url-scheme>scheme</a> is not
+        "<code title>file</code>", or <var>c</var> is not an
         <a>ASCII alpha</a>, or <a>remaining</a> does not start with either
         "<code title>:</code>" or "<code title>|</code>", or <a>remaining</a>
         consists of one code point, or <a>remaining</a>'s second code point is
         not one of "<code title>/</code>", "<code title>\</code>", "<code title>?</code>",
         and "<code title>#</code>", then set
-        <var title>url</var>'s <a title=concept-url-host>host</a> to
-        <var title>base</var>'s <a title=concept-url-host>host</a>,
-        <var title>url</var>'s <a title=concept-url-port>port</a> to
-        <var title>base</var>'s <a title=concept-url-port>port</a>,
-        <var title>url</var>'s <a title=concept-url-path>path</a> to
-        <var title>base</var>'s <a title=concept-url-path>path</a>, and then remove
-        <var title>url</var>'s <a title=concept-url-path>path</a>'s last entry.
+        <var>url</var>'s <a title=concept-url-host>host</a> to
+        <var>base</var>'s <a title=concept-url-host>host</a>,
+        <var>url</var>'s <a title=concept-url-port>port</a> to
+        <var>base</var>'s <a title=concept-url-port>port</a>,
+        <var>url</var>'s <a title=concept-url-path>path</a> to
+        <var>base</var>'s <a title=concept-url-path>path</a>, and then remove
+        <var>url</var>'s <a title=concept-url-path>path</a>'s last entry.
         <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
         When found at the start of a <code title>file</code> URL it is treated as an
         absolute path rather than one relative to
-        <var title>base</var>'s <a title=concept-url-path>path</a>.
+        <var>base</var>'s <a title=concept-url-path>path</a>.
 
-       <li><p>Set <var title>state</var> to <a>relative path state</a>,
-       and decrease <var title>pointer</var> by one.
+       <li><p>Set <var>state</var> to <a>relative path state</a>,
+       and decrease <var>pointer</var> by one.
       </ol>
     </dl>
 
@@ -1174,12 +1174,12 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
      <li><p>If <a>c</a> is "<code title>\</code>",
      <a>parse error</a>.
 
-     <li><p>If <var title>url</var>'s
+     <li><p>If <var>url</var>'s
      <a title=concept-url-scheme>scheme</a> is
-     "<code title>file</code>", set <var title>state</var> to
+     "<code title>file</code>", set <var>state</var> to
      <a>file host state</a>.
 
-     <li><p>Otherwise, set <var title>state</var> to
+     <li><p>Otherwise, set <var>state</var> to
      <a>authority ignore slashes state</a>.
     </ol>
 
@@ -1187,43 +1187,43 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
 
     <ol>
      <li>
-      <p>If <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is not
+      <p>If <var>url</var>'s <a title=concept-url-scheme>scheme</a> is not
       "<code title>file</code>", set
-      <var title>url</var>'s <a title=concept-url-host>host</a> to
-      <var title>base</var>'s <a title=concept-url-host>host</a> and
-      <var title>url</var>'s <a title=concept-url-port>port</a> to
-      <var title>base</var>'s <a title=concept-url-port>port</a>.
+      <var>url</var>'s <a title=concept-url-host>host</a> to
+      <var>base</var>'s <a title=concept-url-host>host</a> and
+      <var>url</var>'s <a title=concept-url-port>port</a> to
+      <var>base</var>'s <a title=concept-url-port>port</a>.
 
       <p class="example no-backref"><code>file:/path/</code> will not inherit
-      <var title>base</var>'s <a title=concept-url-host>host</a>.
+      <var>base</var>'s <a title=concept-url-host>host</a>.
 
-     <li><p>Set <var title>state</var> to <a>relative path state</a>,
-     and decrease <var title>pointer</var> by one.
+     <li><p>Set <var>state</var> to <a>relative path state</a>,
+     and decrease <var>pointer</var> by one.
     </ol>
 
    <dt><dfn>authority first slash state</dfn>
    <dd>
     <p>If <a>c</a> is "<code title>/</code>", set
-    <var title>state</var> to <a>authority second slash state</a>.
+    <var>state</var> to <a>authority second slash state</a>.
 
-    <p>Otherwise, <a>parse error</a>, set <var title>state</var> to
+    <p>Otherwise, <a>parse error</a>, set <var>state</var> to
     <a>authority ignore slashes state</a>, and decrease
-    <var title>pointer</var> by one.
+    <var>pointer</var> by one.
 
    <dt><dfn>authority second slash state</dfn>
    <dd>
     <p>If <a>c</a> is "<code title>/</code>", set
-    <var title>state</var> to <a>authority ignore slashes state</a>.
+    <var>state</var> to <a>authority ignore slashes state</a>.
 
-    <p>Otherwise, <a>parse error</a>, set <var title>state</var> to
+    <p>Otherwise, <a>parse error</a>, set <var>state</var> to
     <a>authority ignore slashes state</a>, and decrease
-    <var title>pointer</var> by one.
+    <var>pointer</var> by one.
 
    <dt><dfn>authority ignore slashes state</dfn>
    <dd>
     <p>If <a>c</a> is neither "<code title>/</code>" nor
-    "<code title>\</code>", set <var title>state</var> to
-    <a>authority state</a>, and decrease <var title>pointer</var> by one.
+    "<code title>\</code>", set <var>state</var> to
+    <a>authority state</a>, and decrease <var>pointer</var> by one.
 
     <p>Otherwise, <a>parse error</a>.
 
@@ -1234,52 +1234,52 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
       <p>If <a>c</a> is "<code title>@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var title>@ flag</var> is set,
+       <li><p>If the <var>@ flag</var> is set,
        <a>parse error</a>, prepend "<code title>%40</code>" to
-       <var title>buffer</var>.
+       <var>buffer</var>.
 
-       <li><p>Set the <var title>@ flag</var>.
+       <li><p>Set the <var>@ flag</var>.
 
        <li>
-        <p>For each <var title>code point</var> in <var title>buffer</var>, run these substeps:
+        <p>For each <var>code point</var> in <var>buffer</var>, run these substeps:
 
         <ol>
-         <li><p>If <var title>code point</var> is U+0009, U+000A, or U+000D,
+         <li><p>If <var>code point</var> is U+0009, U+000A, or U+000D,
          <a>parse error</a>, continue.
 
-         <li><p>If <var title>code point</var> is not a
+         <li><p>If <var>code point</var> is not a
          <a title="URL code points">URL code point</a> and not
          "<code title>%</code>", <a>parse error</a>.
 
-         <li><p>If <var title>code point</var> is "<code title>%</code>" and
+         <li><p>If <var>code point</var> is "<code title>%</code>" and
          <a>remaining</a> does not start with two
          <a>ASCII hex digits</a>, <a>parse error</a>.
 
-         <li><p>If <var title>code point</var> is "<code title>:</code>" and
-         <var title>url</var>'s
+         <li><p>If <var>code point</var> is "<code title>:</code>" and
+         <var>url</var>'s
          <a title=concept-url-password>password</a> is null, set
-         <var title>url</var>'s <a title=concept-url-password>password</a>
+         <var>url</var>'s <a title=concept-url-password>password</a>
          to the empty string and continue.
 
-         <li><p><a>utf-8 percent encode</a> <var title>code point</var> using
+         <li><p><a>utf-8 percent encode</a> <var>code point</var> using
          the <a>default encode set</a> and append the result to
-         <var title>url</var>'s <a title=concept-url-password>password</a>
-         if <var title>url</var>'s <a title=concept-url-password>password</a>
+         <var>url</var>'s <a title=concept-url-password>password</a>
+         if <var>url</var>'s <a title=concept-url-password>password</a>
          is non-null, and to
-         <var title>url</var>'s <a title=concept-url-username>username</a>
+         <var>url</var>'s <a title=concept-url-username>username</a>
          otherwise.
         </ol>
-       <li><p>Set <var title>buffer</var> to the empty string.
+       <li><p>Set <var>buffer</var> to the empty string.
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is one of <a>EOF code point</a>,
      "<code title>/</code>", "<code title>\</code>", "<code title>?</code>",
-     and "<code title>#</code>", decrease <var title>pointer</var> by the
-     number of code points in <var title>buffer</var> plus one, set
-     <var title>buffer</var> to the empty string, and
-     <var title>state</var> to <a>host state</a>.
+     and "<code title>#</code>", decrease <var>pointer</var> by the
+     number of code points in <var>buffer</var> plus one, set
+     <var>buffer</var> to the empty string, and
+     <var>state</var> to <a>host state</a>.
 
-     <li><p>Otherwise, append <a>c</a> to <var title>buffer</var>.
+     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
    <dt><dfn>file host state</dfn>
@@ -1288,44 +1288,44 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
      <li>
       <p>If <a>c</a> is one of <a>EOF code point</a>,
       "<code title>/</code>", "<code title>\</code>", "<code title>?</code>",
-      and "<code title>#</code>", decrease <var title>pointer</var> by one,
+      and "<code title>#</code>", decrease <var>pointer</var> by one,
       and run these substeps:
 
       <ol>
        <li>
-        <p>If <var title>buffer</var> consists of two code points, of
+        <p>If <var>buffer</var> consists of two code points, of
         which the first is an <a>ASCII alpha</a> and the second is
         either "<code title>:</code>" or "<code title>|</code>", set
-        <var title>state</var> to <a>relative path state</a>.
+        <var>state</var> to <a>relative path state</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        <var title>buffer</var> is not reset here and instead used in the
+        <var>buffer</var> is not reset here and instead used in the
         <a>relative path state</a>.
 
-       <li><p>Otherwise, if <var title>buffer</var> is the empty string, set
-       <var title>state</var> to <a>relative path start state</a>.
+       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
+       <var>state</var> to <a>relative path start state</a>.
 
        <li>
         <p>Otherwise, run these steps:
 
         <ol>
-         <li><p>Let <var title>host</var> be the result of
+         <li><p>Let <var>host</var> be the result of
          <a title=concept-host-parser>host parsing</a>
-         <var title>buffer</var>.
+         <var>buffer</var>.
 
-         <li><p>If <var title>host</var> is failure, return failure.
+         <li><p>If <var>host</var> is failure, return failure.
 
          <li><p>Set
-         <var title>url</var>'s <a title=concept-url-host>host</a> to
-         <var title>host</var>, <var title>buffer</var> to the empty string,
-         and <var title>state</var> to <a>relative path start state</a>.
+         <var>url</var>'s <a title=concept-url-host>host</a> to
+         <var>host</var>, <var>buffer</var> to the empty string,
+         and <var>state</var> to <a>relative path start state</a>.
         </ol>
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
      <a>parse error</a>.
 
-     <li><p>Otherwise, append <a>c</a> to <var title>buffer</var>.
+     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
    <dt><dfn>host state</dfn>
@@ -1334,20 +1334,20 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
     <ol>
      <li>
       <p>If <a>c</a> is "<code title>:</code>" and the
-      <var title>[] flag</var> is unset, run these substeps:
+      <var>[] flag</var> is unset, run these substeps:
 
       <ol>
-       <li><p>Let <var title>host</var> be the result of
+       <li><p>Let <var>host</var> be the result of
        <a title=concept-host-parser>host parsing</a>
-       <var title>buffer</var>.
+       <var>buffer</var>.
 
-       <li><p>If <var title>host</var> is failure, return failure.
+       <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var title>url</var>'s <a title=concept-url-host>host</a> to
-       <var title>host</var>, <var title>buffer</var> to the empty string,
-       and <var title>state</var> to <a>port state</a>.
+       <li><p>Set <var>url</var>'s <a title=concept-url-host>host</a> to
+       <var>host</var>, <var>buffer</var> to the empty string,
+       and <var>state</var> to <a>port state</a>.
 
-       <li><p>If <var title>state override</var> is <a>hostname state</a>,
+       <li><p>If <var>state override</var> is <a>hostname state</a>,
        terminate this algorithm.
       </ol>
 
@@ -1355,21 +1355,21 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
       <p>Otherwise, if <a>c</a> is the
       <a>EOF code point</a>, "<code title>/</code>",
       "<code title>\</code>", "<code title>?</code>", or
-      "<code title>#</code>", decrease <var title>pointer</var> by one, and
+      "<code title>#</code>", decrease <var>pointer</var> by one, and
       run these substeps:
 
       <ol>
-       <li><p>Let <var title>host</var> be the result of
+       <li><p>Let <var>host</var> be the result of
        <a title=concept-host-parser>host parsing</a>
-       <var title>buffer</var>.
+       <var>buffer</var>.
 
-       <li><p>If <var title>host</var> is failure, return failure.
+       <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var title>url</var>'s <a title=concept-url-host>host</a> to
-       <var title>host</var>, <var title>buffer</var> to the empty string,
-       and <var title>state</var> to <a>relative path start state</a>.
+       <li><p>Set <var>url</var>'s <a title=concept-url-host>host</a> to
+       <var>host</var>, <var>buffer</var> to the empty string,
+       and <var>state</var> to <a>relative path start state</a>.
 
-       <li><p>If <var title>state override</var> is given, terminate this
+       <li><p>If <var>state override</var> is given, terminate this
        algorithm.
       </ol>
 
@@ -1381,12 +1381,12 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
 
       <ol>
        <li><p>If <a>c</a> is "<code title>[</code>", set the
-       <var title>[] flag</var>.
+       <var>[] flag</var>.
 
        <li><p>If <a>c</a> is "<code title>]</code>", unset the
-       <var title>[] flag</var>.
+       <var>[] flag</var>.
 
-       <li><p>Append <a>c</a> to <var title>buffer</var>.
+       <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
     </ol>
 
@@ -1394,19 +1394,19 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a title="ASCII digits">ASCII digit</a>,
-     append <a>c</a> to <var title>buffer</var>.
+     append <a>c</a> to <var>buffer</var>.
 
      <li>
       <p>Otherwise, if <a>c</a> is one of
       <a>EOF code point</a>, "<code title>/</code>",
       "<code title>\</code>", "<code title>?</code>", and
-      "<code title>#</code>", or <var title>state override</var> is given, run
+      "<code title>#</code>", or <var>state override</var> is given, run
       these substeps:
       <ol>
        <li>
-        <p>Remove leading U+0030 code points from <var title>buffer</var>
+        <p>Remove leading U+0030 code points from <var>buffer</var>
         until either the leading code point is not U+0030 or
-        <var title>buffer</var> is one code point.
+        <var>buffer</var> is one code point.
 
         <div class=example><!-- putting class=example on table has side effects -->
         <table>
@@ -1418,20 +1418,20 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
         </table>
         </div>
 
-       <li><p>If <var title>buffer</var> is equal to
-       <var title>url</var>'s <a title=concept-url-scheme>scheme</a>'s
-       <a>default port</a>, set <var title>buffer</var> to the empty
+       <li><p>If <var>buffer</var> is equal to
+       <var>url</var>'s <a title=concept-url-scheme>scheme</a>'s
+       <a>default port</a>, set <var>buffer</var> to the empty
        string.
 
-       <li><p>Set <var title>url</var>'s
-       <a title=concept-url-port>port</a> to <var title>buffer</var>.
+       <li><p>Set <var>url</var>'s
+       <a title=concept-url-port>port</a> to <var>buffer</var>.
 
-       <li><p>If <var title>state override</var> is given, terminate this
+       <li><p>If <var>state override</var> is given, terminate this
        algorithm.
 
-       <li><p>Set <var title>buffer</var> to the empty string,
-       <var title>state</var> to <a>relative path start state</a>, and
-       decrease <var title>pointer</var> by one.
+       <li><p>Set <var>buffer</var> to the empty string,
+       <var>state</var> to <a>relative path start state</a>, and
+       decrease <var>pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
@@ -1446,9 +1446,9 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
      <li><p>If <a>c</a> is "<code title>\</code>",
      <a>parse error</a>.
 
-     <li><p>Set <var title>state</var> to <a>relative path state</a>
+     <li><p>Set <var>state</var> to <a>relative path state</a>
      and if <a>c</a> is neither "<code title>/</code>" nor
-     "<code title>\</code>", decrease <var title>pointer</var> by one.
+     "<code title>\</code>", decrease <var>pointer</var> by one.
     </ol>
 
    <dt><dfn>relative path state</dfn>
@@ -1457,15 +1457,15 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
      <li>
       <p>If either <a>c</a> is one of
       <a>EOF code point</a>, "<code title>/</code>", and
-      "<code title>\</code>", or <var title>state override</var> is not given and
+      "<code title>\</code>", or <var>state override</var> is not given and
       <a>c</a> is one of "<code title>?</code>" and
       "<code title>#</code>", run these substeps:
       <ol>
        <li><p>If <a>c</a> is "<code title>\</code>", <a>parse error</a>.
 
        <li>
-        <p>If <var title>buffer</var>, lowercased, matches any row in the first column of
-        the following table, set <var title>buffer</var> to the contents of the cell in
+        <p>If <var>buffer</var>, lowercased, matches any row in the first column of
+        the following table, set <var>buffer</var> to the contents of the cell in
         the second column of the matched row:
 
         <table>
@@ -1475,46 +1475,46 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
          <tr><td>"<code title>%2e%2e</code>"
         </table>
 
-       <li><p>If <var title>buffer</var> is "<code title>..</code>", remove
-       <var title>url</var>'s <a title=concept-url-path>path</a>'s last entry, if
+       <li><p>If <var>buffer</var> is "<code title>..</code>", remove
+       <var>url</var>'s <a title=concept-url-path>path</a>'s last entry, if
        any, and then if <a>c</a> is neither  "<code title>/</code>" nor
-       "<code title>\</code>", append the empty string to <var title>url</var>'s
+       "<code title>\</code>", append the empty string to <var>url</var>'s
        <a title=concept-url-path>path</a>.
 
-       <li><p>Otherwise, if <var title>buffer</var> is "<code title>.</code>" and
+       <li><p>Otherwise, if <var>buffer</var> is "<code title>.</code>" and
        <a>c</a> is neither "<code title>/</code>" nor "<code title>\</code>",
        append an empty string to
-       <var title>url</var>'s <a title=concept-url-path>path</a>.
+       <var>url</var>'s <a title=concept-url-path>path</a>.
 
        <li>
-        <p>Otherwise, if <var title>buffer</var> is not
+        <p>Otherwise, if <var>buffer</var> is not
         "<code title>.</code>", run these subsubsteps:
 
         <ol>
          <li>
-          <p>If <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is
-          "<code title>file</code>", <var title>url</var>'s <a title=concept-url-path>path</a>
-          is empty, <var title>buffer</var> consists of two
+          <p>If <var>url</var>'s <a title=concept-url-scheme>scheme</a> is
+          "<code title>file</code>", <var>url</var>'s <a title=concept-url-path>path</a>
+          is empty, <var>buffer</var> consists of two
           code points, of which the first is an <a>ASCII alpha</a>,
           and the second is "<code title>|</code>", replace the second code point in
-          <var title>buffer</var> with "<code title>:</code>".
+          <var>buffer</var> with "<code title>:</code>".
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
           They are beautiful, no?
 
-         <li><p>Append <var title>buffer</var> to
-         <var title>url</var>'s <a title=concept-url-path>path</a>.
+         <li><p>Append <var>buffer</var> to
+         <var>url</var>'s <a title=concept-url-path>path</a>.
         </ol>
 
-       <li><p>Set <var title>buffer</var> to the empty string.
+       <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code title>?</code>", set
-       <var title>url</var>'s <a title=concept-url-query>query</a> to the empty string,
-       and <var title>state</var> to <a>query state</a>.
+       <var>url</var>'s <a title=concept-url-query>query</a> to the empty string,
+       and <var>state</var> to <a>query state</a>.
 
        <li><p>If <a>c</a> is "<code title>#</code>", set
-       <var title>url</var>'s <a title=concept-url-fragment>fragment</a> to the empty string,
-       and <var title>state</var> to <a>fragment state</a>.
+       <var>url</var>'s <a title=concept-url-fragment>fragment</a> to the empty string,
+       and <var>state</var> to <a>fragment state</a>.
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
@@ -1533,7 +1533,7 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
 
        <li><p><a>utf-8 percent encode</a> <a>c</a> using the
        <a>default encode set</a>, and append the result to
-       <var title>buffer</var>.
+       <var>buffer</var>.
       </ol>
     </ol>
 
@@ -1542,40 +1542,40 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
     <ol>
      <li>
       <p>If <a>c</a> is the <a>EOF code point</a>, or
-      <var title>state override</var> is not given and <a>c</a>
+      <var>state override</var> is not given and <a>c</a>
       is "<code title>#</code>", run these substeps:
 
       <ol>
-       <li><p>If <var title>url</var>'s <a>relative flag</a> is unset or
-       <var title>url</var>'s <a title=concept-url-scheme>scheme</a> is either
+       <li><p>If <var>url</var>'s <a>relative flag</a> is unset or
+       <var>url</var>'s <a title=concept-url-scheme>scheme</a> is either
        "<code title>ws</code>" or "<code title>wss</code>", set
        <var>encoding override</var> to <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
-       <li><p>Set <var title>buffer</var> to the result of
+       <li><p>Set <var>buffer</var> to the result of
        <a href=https://encoding.spec.whatwg.org/#encode title=encode>encoding</a>
-       <var title>buffer</var> using <var>encoding override</var>.
+       <var>buffer</var> using <var>encoding override</var>.
 
        <li>
-        <p>For each <var title>byte</var> in <var title>buffer</var> run
+        <p>For each <var>byte</var> in <var>buffer</var> run
         these subsubsteps:
 
         <ol>
-         <li><p>If <var title>byte</var> is less than 0x21, greater than
+         <li><p>If <var>byte</var> is less than 0x21, greater than
          0x7E, or is one of 0x22, 0x23, 0x3C, 0x3E, and 0x60, append
-         <var title>byte</var>,
+         <var>byte</var>,
          <a title="percent encode">percent encoded</a>, to
-         <var title>url</var>'s <a title=concept-url-query>query</a>.
+         <var>url</var>'s <a title=concept-url-query>query</a>.
 
          <li><p>Otherwise, append a code point whose value is
-         <var title>byte</var> to <var title>url</var>'s
+         <var>byte</var> to <var>url</var>'s
          <a title=concept-url-query>query</a>.
         </ol>
 
-       <li><p>Set <var title>buffer</var> to the empty string.
+       <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code title>#</code>", set
-       <var title>url</var>'s
+       <var>url</var>'s
        <a title=concept-url-fragment>fragment</a> to the empty string,
        and state to <a>fragment state</a>.
       </ol>
@@ -1594,7 +1594,7 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
        <li><p>If <a>c</a> is "<code title>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
 
-       <li><p>Append <a>c</a> to <var title>buffer</var>.
+       <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
     </ol>
 
@@ -1622,7 +1622,7 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
 
        <li><p><a>utf-8 percent encode</a> <a>c</a>
        using the <a>simple encode set</a>, and append the result to
-       <var title>url</var>'s <a title=concept-url-fragment>fragment</a>.
+       <var>url</var>'s <a title=concept-url-fragment>fragment</a>.
        <!-- if people complain about percent encoding do not forget that
             results may differ depending on whether or not a relative scheme
             is in play -->
@@ -1630,41 +1630,41 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
     </dl>
   </dl>
 
- <li><p>Return <var title>url</var>.
+ <li><p>Return <var>url</var>.
 </ol>
 
 <hr>
 
-<p>To <dfn>set the username</dfn> given a <var title>url</var> and
-<var title>username</var>, run these steps:
+<p>To <dfn>set the username</dfn> given a <var>url</var> and
+<var>username</var>, run these steps:
 
 <ol>
- <li><p>Set <var title>url</var>'s <a title=concept-url-username>username</a> to the
+ <li><p>Set <var>url</var>'s <a title=concept-url-username>username</a> to the
  empty string.
 
- <li><p>For each code point in <var title>username</var>,
+ <li><p>For each code point in <var>username</var>,
  <a>utf-8 percent encode</a> it using the <a>username encode set</a>, and
- append the result to <var title>url</var>'s
+ append the result to <var>url</var>'s
  <a title=concept-url-username>username</a>.
 </ol>
 
-<p>To <dfn>set the password</dfn> given a <var title>url</var> and
-<var title>password</var>, run these steps:
+<p>To <dfn>set the password</dfn> given a <var>url</var> and
+<var>password</var>, run these steps:
 
 <ol>
- <li><p>If <var title>password</var> is the empty string, set <var title>url</var>'s
+ <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
  <a title=concept-url-password>password</a> to null.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <var title>url</var>'s <a title=concept-url-password>password</a> to
+   <li><p>Set <var>url</var>'s <a title=concept-url-password>password</a> to
    the empty string.
 
-   <li><p>For each code point in <var title>password</var>,
+   <li><p>For each code point in <var>password</var>,
    <a>utf-8 percent encode</a> it using the <a>password encode set</a>, and
-   append the result to <var title>url</var>'s
+   append the result to <var>url</var>'s
    <a title=concept-url-password>password</a>.
   </ol>
 </ol>
@@ -1673,73 +1673,73 @@ optionally with an <a href=https://encoding.spec.whatwg.org/#encoding>encoding</
 <h3 id=url-serializing>URL serializing</h3>
 
 <p>The <dfn title=concept-url-serializer>URL serializer</dfn> takes a
-<a title=concept-url>URL</a> <var title>url</var>,
+<a title=concept-url>URL</a> <var>url</var>,
 optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <ol>
- <li><p>Let <var title>output</var> be <var title>url</var>'s
+ <li><p>Let <var>output</var> be <var>url</var>'s
  <a title=concept-url-scheme>scheme</a> and
  "<code title>:</code>" concatenated.
 
  <li>
-  <p>If <var title>url</var>'s <a>relative flag</a> is set:
+  <p>If <var>url</var>'s <a>relative flag</a> is set:
 
   <ol>
-   <li><p>Append "<code title>//</code>" to <var title>output</var>.
+   <li><p>Append "<code title>//</code>" to <var>output</var>.
 
    <li>
-    <p>If <var title>url</var>'s
+    <p>If <var>url</var>'s
     <a title=concept-url-username>username</a> is not the empty string
-    or <var title>url</var>'s
+    or <var>url</var>'s
     <a title=concept-url-password>password</a> is non-null, run these
     substeps:
 
     <ol>
-     <li><p>Append <var title>url</var>'s
+     <li><p>Append <var>url</var>'s
      <a title=concept-url-username>username</a> to
-     <var title>output</var>.
+     <var>output</var>.
 
-     <li><p>If <var title>url</var>'s
+     <li><p>If <var>url</var>'s
      <a title=concept-url-password>password</a> is non-null, append
-     "<code title>:</code>" concatenated with <var title>url</var>'s
+     "<code title>:</code>" concatenated with <var>url</var>'s
      <a title=concept-url-password>password</a> to
-     <var title>output</var>.
+     <var>output</var>.
 
-     <li><p>Append "<code title>@</code>" to <var title>output</var>.
+     <li><p>Append "<code title>@</code>" to <var>output</var>.
     </ol>
 
-   <li><p>Append <var title>url</var>'s
+   <li><p>Append <var>url</var>'s
    <a title=concept-url-host>host</a>,
    <a title=concept-host-serializer>serialized</a>, to
-   <var title>output</var>.
+   <var>output</var>.
 
-   <li><p>If <var title>url</var>'s <a title=concept-url-port>port</a>
+   <li><p>If <var>url</var>'s <a title=concept-url-port>port</a>
    is not the empty string, append "<code title>:</code>" concatenated with
-   <var title>url</var>'s <a title=concept-url-port>port</a> to
-   <var title>output</var>.
+   <var>url</var>'s <a title=concept-url-port>port</a> to
+   <var>output</var>.
 
    <li><p>Append "<code title>/</code>" concatenated with the strings in
-   <var title>url</var>'s <a title=concept-url-path>path</a>
+   <var>url</var>'s <a title=concept-url-path>path</a>
    (including empty strings), separated from each other by
-   "<code title>/</code>" to <var title>output</var>.
+   "<code title>/</code>" to <var>output</var>.
   </ol>
 
- <li><p>Otherwise, if <var title>url</var>'s <a>relative flag</a> is
- unset, append <var title>url</var>'s
+ <li><p>Otherwise, if <var>url</var>'s <a>relative flag</a> is
+ unset, append <var>url</var>'s
  <a title=concept-url-scheme-data>scheme data</a> to
- <var title>output</var>.
+ <var>output</var>.
 
- <li><p>If <var title>url</var>'s <a title=concept-url-query>query</a> is non-null,
- append "<code title>?</code>" concatenated with <var title>url</var>'s
- <a title=concept-url-query>query</a> to <var title>output</var>.
+ <li><p>If <var>url</var>'s <a title=concept-url-query>query</a> is non-null,
+ append "<code title>?</code>" concatenated with <var>url</var>'s
+ <a title=concept-url-query>query</a> to <var>output</var>.
 
  <li><p>If the <i title>exclude fragment flag</i> is unset and
- <var title>url</var>'s <a title=concept-url-fragment>fragment</a> is
+ <var>url</var>'s <a title=concept-url-fragment>fragment</a> is
  non-null, append  "<code title>#</code>" concatenated with
- <var title>url</var>'s <a title=concept-url-fragment>fragment</a> to
- <var title>output</var>.
+ <var>url</var>'s <a title=concept-url-fragment>fragment</a> to
+ <var>output</var>.
 
- <li><p>Return <var title>output</var>.
+ <li><p>Return <var>output</var>.
 </ol>
 
 <h3 id=origin>Origin</h3>
@@ -1755,13 +1755,13 @@ on <a title=concept-url>URL</a>'s <a title=concept-url-scheme>scheme</a>:
 <dl class=switch>
  <dt>"<code title>blob</code>"
  <dd>
-  <p>Let <var title>url</var> be the result of
+  <p>Let <var>url</var> be the result of
   <a title=concept-basic-url-parser>parsing</a>
   <a title=concept-url>URL</a>'s
   <a title=concept-url-scheme-data>scheme data</a>.
 
-  <p>If <var title>url</var> is failure, return a new globally unique identifier.
-  Otherwise, return <var title>url</var>'s <a title=concept-url-origin>origin</a>.
+  <p>If <var>url</var> is failure, return a new globally unique identifier.
+  Otherwise, return <var>url</var>'s <a title=concept-url-origin>origin</a>.
   <!-- Did you mean: recursion -->
 
   <p class="example no-backref">The <a title=concept-url-origin>origin</a> of
@@ -1811,7 +1811,7 @@ requires.
 
 <p>The
 <dfn title=concept-urlencoded-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parser</dfn>
-takes a byte sequence <var title>input</var>, optionally with an
+takes a byte sequence <var>input</var>, optionally with an
 <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a> <var>encoding override</var>,
 optionally with a <i title>use _charset_ flag</i>, and optionally with an
 <i title>isindex flag</i>, and then runs these steps:
@@ -1822,92 +1822,92 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
 
  <li>
   <p>If <var>encoding override</var> is not
-  <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a> and <var title>input</var> contains bytes
+  <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a> and <var>input</var> contains bytes
   whose value is greater than 0x7F, return failure.
 
-  <p class="note no-backref">This can only happen if <var title>input</var> was not
+  <p class="note no-backref">This can only happen if <var>input</var> was not
   generated through the <a title=concept-urlencoded-serializer>serializer</a> or
   <code>URLSearchParams</code>.
 
- <li><p>Let <var title>sequences</var> be the result of splitting
- <var title>input</var> on `<code title>&</code>`.
+ <li><p>Let <var>sequences</var> be the result of splitting
+ <var>input</var> on `<code title>&</code>`.
  <!-- XXX define splitting? DOM does not do it -->
 
  <li><p>If the <i title>isindex flag</i> is set and the first byte sequence in
- <var title>sequences</var> does not contain a `<code title>=</code>`, prepend
- `<code title>=</code>` to the first byte sequence in <var title>sequences</var>.
+ <var>sequences</var> does not contain a `<code title>=</code>`, prepend
+ `<code title>=</code>` to the first byte sequence in <var>sequences</var>.
 
- <li><p>Let <var title>pairs</var> be an empty list of name-value pairs where both name
+ <li><p>Let <var>pairs</var> be an empty list of name-value pairs where both name
  and value hold a byte sequence.
 
  <li>
-  <p>For each byte sequence <var title>bytes</var> in <var title>sequences</var>,
+  <p>For each byte sequence <var>bytes</var> in <var>sequences</var>,
   run these substeps:
 
   <ol>
-   <li><p>If <var title>bytes</var> is the empty byte sequence, run these substeps for the
+   <li><p>If <var>bytes</var> is the empty byte sequence, run these substeps for the
    next byte sequence.
 
-   <li><p>If <var title>bytes</var> contains a `<code title>=</code>`, then let
-   <var title>name</var> be the bytes from the start of <var title>bytes</var> up to but
-   excluding its first `<code title>=</code>`, and let <var title>value</var> be the
+   <li><p>If <var>bytes</var> contains a `<code title>=</code>`, then let
+   <var>name</var> be the bytes from the start of <var>bytes</var> up to but
+   excluding its first `<code title>=</code>`, and let <var>value</var> be the
    bytes, if any, after the first `<code title>=</code>` up to the end of
-   <var title>bytes</var>. If `<code title>=</code>` is the first byte, then
-   <var title>name</var> will be the empty byte sequence. If it is the last, then
-   <var title>value</var> will be the empty byte sequence.
+   <var>bytes</var>. If `<code title>=</code>` is the first byte, then
+   <var>name</var> will be the empty byte sequence. If it is the last, then
+   <var>value</var> will be the empty byte sequence.
 
-   <li><p>Otherwise, let <var title>name</var> have the value of <var title>bytes</var>
-   and let <var title>value</var> be the empty byte sequence.
+   <li><p>Otherwise, let <var>name</var> have the value of <var>bytes</var>
+   and let <var>value</var> be the empty byte sequence.
 
-   <li><p>Replace any `<code title>+</code>` in <var title>name</var> and
-   <var title>value</var> with 0x20.
+   <li><p>Replace any `<code title>+</code>` in <var>name</var> and
+   <var>value</var> with 0x20.
 
    <li>
-    <p>If <i title>use _charset_ flag</i> is set, <var title>name</var> is
+    <p>If <i title>use _charset_ flag</i> is set, <var>name</var> is
     `<code title>_charset_</code>`, run these substeps:
 
     <ol>
      <li><p>Let <var>result</var> be the result of
      <a href=https://encoding.spec.whatwg.org/#concept-encoding-get title=concept-encoding-get>getting an encoding</a>
-     for <var title>value</var>,
+     for <var>value</var>,
      <a href=https://encoding.spec.whatwg.org/#utf-8-decode-without-BOM title="utf-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i title>use _charset_ flag</i> and
      set <var>encoding override</var> to <var>result</var>.
     </ol>
 
-   <li><p>Add a pair consisting of <var title>name</var> and
-   <var title>value</var> to <var title>pairs</var>.
+   <li><p>Add a pair consisting of <var>name</var> and
+   <var>value</var> to <var>pairs</var>.
   </ol>
 
- <li><p>Let <var title>output</var> be an empty list of name-value pairs where both name
+ <li><p>Let <var>output</var> be an empty list of name-value pairs where both name
  and value hold a string.
 
- <li><p>For each name-value pair in <var title>pairs</var>, append a name-value pair to
- <var title>output</var> where the new name and value appended to <var title>output</var>
+ <li><p>For each name-value pair in <var>pairs</var>, append a name-value pair to
+ <var>output</var> where the new name and value appended to <var>output</var>
  are the result of running <var>encoding override</var>'s
  <a href=https://encoding.spec.whatwg.org/#decoder>decoder</a> on the
  <a title="percent decode">percent decoding</a> of the name and value from
- <var title>pairs</var>, respectively.
+ <var>pairs</var>, respectively.
 
- <li><p>Return <var title>output</var>.
+ <li><p>Return <var>output</var>.
 </ol>
 
 <h3 id=urlencoded-serializing><code title>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
 <dfn title=concept-urlencoded-byte-serializer><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> byte serializer</dfn>
-takes a byte sequence <var title>input</var> and then runs these steps:
+takes a byte sequence <var>input</var> and then runs these steps:
 
 <ol>
- <li><p>Let <var title>output</var> be the empty string.
+ <li><p>Let <var>output</var> be the empty string.
  <li>
-  <p>For each byte in <var title>input</var>, depending on
-  <var title>byte</var>:
+  <p>For each byte in <var>input</var>, depending on
+  <var>byte</var>:
 
   <dl>
    <dt>0x20
-   <dd><p>Append U+002B to <var title>output</var>.
+   <dd><p>Append U+002B to <var>output</var>.
 
    <dt>0x2A
    <dt>0x2D
@@ -1916,15 +1916,15 @@ takes a byte sequence <var title>input</var> and then runs these steps:
    <dt>0x41 to 0x5A
    <dt>0x5F
    <dt>0x61 to 0x7A
-   <dd><p>Append a code point whose value is <var title>byte</var> to
-   <var title>output</var>.
+   <dd><p>Append a code point whose value is <var>byte</var> to
+   <var>output</var>.
 
    <dt>Otherwise
-   <dd><p>Append <var title>byte</var>,
+   <dd><p>Append <var>byte</var>,
    <a title="percent encode">percent encoded</a>, to
-   <var title>output</var>.
+   <var>output</var>.
   </dl>
- <li><p>Return <var title>output</var>.
+ <li><p>Return <var>output</var>.
 </ol>
 <!-- The inverse of the above byte set is all bytes
      less than 0x20,
@@ -1939,7 +1939,7 @@ takes a byte sequence <var title>input</var> and then runs these steps:
 
 <p>The
 <dfn title=concept-urlencoded-serializer><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializer</dfn>
-takes a list of name-value pairs <var title>pairs</var>, optionally with an
+takes a list of name-value pairs <var>pairs</var>, optionally with an
 <a href=https://encoding.spec.whatwg.org/#encoding>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
@@ -1947,37 +1947,37 @@ takes a list of name-value pairs <var title>pairs</var>, optionally with an
  <li><p>If <var>encoding override</var> is not given, set it to
  <a href=https://encoding.spec.whatwg.org/#utf-8>utf-8</a>.
 
- <li><p>Let <var title>output</var> be the empty string.
+ <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p>For each <var title>pair</var> in <var title>pairs</var>, run
+  <p>For each <var>pair</var> in <var>pairs</var>, run
   these substeps:
 
   <ol>
-   <li><p>Let <var title>outputPair</var> be a copy of <var title>pair</var>.
+   <li><p>Let <var>outputPair</var> be a copy of <var>pair</var>.
 
-   <li><p>Replace <var title>outputPair</var>'s name and value with the result of running
+   <li><p>Replace <var>outputPair</var>'s name and value with the result of running
    <a href=https://encoding.spec.whatwg.org/#encode>encode</a> on them using
    <var>encoding override</var>, respectively.
 
-   <li><p>Replace <var title>outputPair</var>'s name and value with their
+   <li><p>Replace <var>outputPair</var>'s name and value with their
    <a title=concept-urlencoded-byte-serializer>serialization</a>.
 
-   <li><p>If <var title>pair</var> is not the first pair in <var title>pairs</var>, append
-   "<code title>&</code>" to <var title>output</var>.
+   <li><p>If <var>pair</var> is not the first pair in <var>pairs</var>, append
+   "<code title>&</code>" to <var>output</var>.
 
-   <li><p>Append <var title>outputPair</var>'s name, followed by "<code title>=</code>",
-   followed by <var title>outputPair</var>'s value to <var title>output</var>.
+   <li><p>Append <var>outputPair</var>'s name, followed by "<code title>=</code>",
+   followed by <var>outputPair</var>'s value to <var>output</var>.
   </ol>
 
- <li>Return <var title>output</var>.
+ <li>Return <var>output</var>.
 </ol>
 
 <h3 id=urlencoded-hooks>Hooks</h3>
 
 <p>The
 <dfn title=concept-urlencoded-string-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> string parser</dfn>
-takes a string <var title>input</var>,
+takes a string <var>input</var>,
 <a href=https://encoding.spec.whatwg.org/#utf-8-encode title="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
 <a title=concept-urlencoded-parser><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</a>
@@ -1989,11 +1989,11 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<a title=dom-URL>Constructor</a>(USVString <var title>url</var>, optional USVString <var title>base</var> = "about:blank"),
+<pre class=idl>[<a title=dom-URL>Constructor</a>(USVString <var>url</var>, optional USVString <var>base</var> = "about:blank"),
  Exposed=(Window,Worker)]
 interface <dfn>URL</dfn> {
-  static USVString <a title=dom-URL-domainToASCII>domainToASCII</a>(USVString <var title>domain</var>);
-  static USVString <a title=dom-URL-domainToUnicode>domainToUnicode</a>(USVString <var title>domain</var>);
+  static USVString <a title=dom-URL-domainToASCII>domainToASCII</a>(USVString <var>domain</var>);
+  static USVString <a title=dom-URL-domainToUnicode>domainToUnicode</a>(USVString <var>domain</var>);
 };
 <a>URL</a> implements <a>URLUtils</a>;
 
@@ -2064,7 +2064,7 @@ define <dfn title=concept-URLUtils-update>update steps</dfn> to make it possible
 underlying string (such as an
 <a href=https://dom.spec.whatwg.org/#concept-attribute-value title=concept-attribute-value>attribute value</a>)
 to be updated. The <a title=concept-URLUtils-update>update steps</a> are passed a string
-<var title>value</var> for this purpose.
+<var>value</var> for this purpose.
 
 <p>An object implementing <code>URLUtils</code> or <code>URLUtilsReadOnly</code> has an
 associated <dfn title=concept-URLUtils-input>input</dfn> (a string),
@@ -2089,13 +2089,13 @@ concept only relevant for HTML.
 <a title=concept-URLUtils-set-the-input>set the input</a> algorithms to set
 <a title=concept-URLUtils-input>input</a>, <a title=concept-URLUtils-url>url</a>, and
 <a title=concept-URLUtils-query-object>query object</a>. To
-<dfn title=concept-URLUtils-set-the-input>set the input</dfn> given <var title>input</var>
-and optionally a <var title>url</var>, run these steps:
+<dfn title=concept-URLUtils-set-the-input>set the input</dfn> given <var>input</var>
+and optionally a <var>url</var>, run these steps:
 
 <ol>
- <li><p>If <var title>url</var> is given, set <a title=concept-URLUtils-url>url</a>
- to <var title>url</var> and <a title=concept-URLUtils-input>input</a> to
- <var title>input</var>.
+ <li><p>If <var>url</var> is given, set <a title=concept-URLUtils-url>url</a>
+ to <var>url</var> and <a title=concept-URLUtils-input>input</a> to
+ <var>input</var>.
 
  <li>
   <p>Otherwise, run these substeps:
@@ -2103,16 +2103,16 @@ and optionally a <var title>url</var>, run these steps:
   <ol>
    <li><p>Set <a title=concept-URLUtils-url>url</a> to null.
 
-   <li><p>If <var title>input</var> is null, set
+   <li><p>If <var>input</var> is null, set
    <a title=concept-URLUtils-input>input</a> to the empty string.
 
    <li>
     <p>Otherwise, run these subsubsteps:
 
     <ol>
-     <li><p>Set <a title=concept-URLUtils-input>input</a> to <var title>input</var>.
+     <li><p>Set <a title=concept-URLUtils-input>input</a> to <var>input</var>.
 
-     <li><p>Let <var title>url</var> be the result of running the
+     <li><p>Let <var>url</var> be the result of running the
      <a title=concept-url-parser>URL parser</a> on
      <a title=concept-URLUtils-input>input</a> with
      <a title=concept-base-url>base URL</a> being the result of running
@@ -2121,77 +2121,77 @@ and optionally a <var title>url</var>, run these steps:
      <var>encoding override</var>.
      <!-- support blob URLs at this level -->
 
-     <li><p>If <var title>url</var> is not failure, set
-     <a title=concept-URLUtils-url>url</a> to <var title>url</var>.
+     <li><p>If <var>url</var> is not failure, set
+     <a title=concept-URLUtils-url>url</a> to <var>url</var>.
     </ol>
   </ol>
 
- <li><p>Let <var title>query</var> be <a title=concept-URLUtils-url>url</a>'s
+ <li><p>Let <var>query</var> be <a title=concept-URLUtils-url>url</a>'s
  <a title=concept-url-query>query</a> if <a title=concept-URLUtils-url>url</a>
  is non-null, and the empty string otherwise.
 
  <li><p>If <a title=concept-URLUtils-query-object>query object</a> is null, set
  <a title=concept-URLUtils-query-object>query object</a> to a
  <a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
- using <var title>query</var>, and then append the
+ using <var>query</var>, and then append the
  <a href=https://dom.spec.whatwg.org/#context-object>context object</a> to
  <a title=concept-URLUtils-query-object>query object</a>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
  <li><p>Otherwise, set <a title=concept-URLUtils-query-object>query object</a>'s
  <a title=concept-URLSearchParams-list>list</a> to the result of
- <a title=concept-urlencoded-string-parser>parsing</a> <var title>query</var>.
+ <a title=concept-urlencoded-string-parser>parsing</a> <var>query</var>.
 </ol>
 
 <p>To run the <dfn>pre-update steps</dfn> for an object implementing
-<code>URLUtils</code>, optionally given a <var title>value</var>, run these steps:
+<code>URLUtils</code>, optionally given a <var>value</var>, run these steps:
 
 <ol>
- <li><p>If <var title>value</var> is not given, let <var title>value</var> be the result
+ <li><p>If <var>value</var> is not given, let <var>value</var> be the result
  of <a title=concept-url-serializer>serializing</a> the associated
  <a title=concept-URLUtils-url>url</a>.
  <!-- these steps are always invoked with a value if url can be null -->
 
  <li><p>Run the <a title=concept-URLUtils-update>update steps</a> with
- <var title>value</var>.
+ <var>value</var>.
 </ol>
 
 
 <h3 id=constructors>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
-<dfn title="dom-URL()"><code>URL(<var title>url</var>, <var title>base</var>)</code></dfn>
+<dfn title="dom-URL()"><code>URL(<var>url</var>, <var>base</var>)</code></dfn>
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var title>parsedBase</var> be the result of running the
- <a title=concept-basic-url-parser>basic URL parser</a> on <var title>base</var>.
+ <li><p>Let <var>parsedBase</var> be the result of running the
+ <a title=concept-basic-url-parser>basic URL parser</a> on <var>base</var>.
 
- <li><p>If <var title>parsedBase</var> is failure,
+ <li><p>If <var>parsedBase</var> is failure,
  <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
- <li><p>Set <var title>parsedURL</var> to the result of running the
- <a title=concept-basic-url-parser>basic URL parser</a> on <var title>url</var>
- with <var title>parsedBase</var>.
+ <li><p>Set <var>parsedURL</var> to the result of running the
+ <a title=concept-basic-url-parser>basic URL parser</a> on <var>url</var>
+ with <var>parsedBase</var>.
 
- <li><p>If <var title>parsedURL</var> is failure,
+ <li><p>If <var>parsedURL</var> is failure,
  <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
- <li><p>Let <var title>result</var> be a new <code>URL</code> object.
+ <li><p>Let <var>result</var> be a new <code>URL</code> object.
 
- <li><p>Let <var title>result</var>'s
+ <li><p>Let <var>result</var>'s
  <a title=concept-URLUtils-get-the-base>get the base</a> return
- <var title>parsedBase</var>.
+ <var>parsedBase</var>.
 
  <li>
-  <p>Run <var title>result</var>'s
+  <p>Run <var>result</var>'s
   <a title=concept-URLUtils-set-the-input>set the input</a> given the empty string
-  and <var title>parsedURL</var>.
+  and <var>parsedURL</var>.
 
   <p class="note no-backref">A <code>URL</code> object's
   <a title=concept-URLUtils-input>input</a> is never exposed.
 
- <li><p>Return <var title>result</var>.
+ <li><p>Return <var>result</var>.
 </ol>
 
 <div class=example>
@@ -2221,13 +2221,13 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 static method, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var title>asciiDomain</var> be the result of
- <a title=concept-host-parser>host parsing</a> <var title>domain</var>.
+ <li><p>Let <var>asciiDomain</var> be the result of
+ <a title=concept-host-parser>host parsing</a> <var>domain</var>.
 
- <li><p>If <var title>asciiDomain</var> is an <a title=concept-ipv6>IPv6 address</a>
+ <li><p>If <var>asciiDomain</var> is an <a title=concept-ipv6>IPv6 address</a>
  or failure, return the empty string.
 
- <li><p>Return <var title>asciiDomain</var>.
+ <li><p>Return <var>asciiDomain</var>.
 </ol>
 
 <p>The
@@ -2235,14 +2235,14 @@ static method, when invoked, must run these steps:
 static method, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var title>unicodeDomain</var> be the result of
- <a title=concept-host-parser>host parsing</a> <var title>domain</var> with the
- <var title>Unicode flag</var> set.
+ <li><p>Let <var>unicodeDomain</var> be the result of
+ <a title=concept-host-parser>host parsing</a> <var>domain</var> with the
+ <var>Unicode flag</var> set.
 
- <li><p>If <var title>unicodeDomain</var> is an
+ <li><p>If <var>unicodeDomain</var> is an
  <a title=concept-ipv6>IPv6 address</a> or failure, return the empty string.
 
- <li><p>Return <var title>unicodeDomain</var>.
+ <li><p>Return <var>unicodeDomain</var>.
 </ol>
 
 <p class=XXX>Add domainToUI() which follows the UA conventions for when to use the Unicode
@@ -2269,24 +2269,24 @@ these steps:
 <p>The <code title=dom-URL-href>href</code> attribute's setter must run these steps:
 
 <ol>
- <li><p>Let <var title>input</var> be the given value.
+ <li><p>Let <var>input</var> be the given value.
 
  <li>
   <p>If the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> is a <code>URL</code> object,
   run these substeps:
 
   <ol>
-   <li><p>Let <var title>parsedURL</var> be the result of running the
-   <a title=concept-basic-url-parser>basic URL parser</a> on <var title>input</var>
+   <li><p>Let <var>parsedURL</var> be the result of running the
+   <a title=concept-basic-url-parser>basic URL parser</a> on <var>input</var>
    with <a title=concept-base-url>base URL</a> being the result of running
    <a title=concept-URLUtils-get-the-base>get the base</a>.
 
-   <li><p>If <var title>parsedURL</var> is failure,
+   <li><p>If <var>parsedURL</var> is failure,
    <a href=http://heycam.github.io/webidl/#dfn-throw>throw</a> a <code title>TypeError</code> exception.
 
    <li>
     <p>Run <a title=concept-URLUtils-set-the-input>set the input</a> given the empty
-    string and <var title>parsedURL</var>.
+    string and <var>parsedURL</var>.
 
     <p class="note no-backref">A <code>URL</code> object's
     <a title=concept-URLUtils-input>input</a> is never exposed.
@@ -2297,9 +2297,9 @@ these steps:
 
   <ol>
    <li><p>Run the <a title=concept-URLUtils-set-the-input>set the input</a>
-   algorithm for <var title>input</var>.
+   algorithm for <var>input</var>.
 
-   <li><p>Run the <a>pre-update steps</a> with the <var title>input</var>.
+   <li><p>Run the <a>pre-update steps</a> with the <var>input</var>.
   </ol>
 
   <div class=example>
@@ -2352,8 +2352,8 @@ run these steps:
 
  <li><p><a title=concept-basic-url-parser>Basic URL parse</a> the given value and
  "<code title>:</code>" concatenated with
- <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>scheme start state</a> as <var title>state override</var>.
+ <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>scheme start state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2430,8 +2430,8 @@ steps:
  <a>relative flag</a> is unset, terminate these steps.
 
  <li><p><a title=concept-basic-url-parser>Basic URL parse</a> the given value with
- <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>host state</a> as <var title>state override</var>.
+ <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>host state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2455,8 +2455,8 @@ run these steps:
  <a>relative flag</a> is unset, terminate these steps.
 
  <li><p><a title=concept-basic-url-parser>Basic URL parse</a> the given value with
- <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>hostname state</a> as <var title>state override</var>.
+ <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>hostname state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2480,8 +2480,8 @@ these steps:
  terminate these steps.
 
  <li><p>Otherwise, <a title=concept-basic-url-parser>Basic URL parse</a>
- the given value with <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>port state</a> as <var title>state override</var>.
+ the given value with <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>port state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2511,8 +2511,8 @@ run these steps:
  <li><p>Empty <a title=concept-url-path>path</a>.
 
  <li><p><a title=concept-basic-url-parser>Basic URL parse</a> the given value with
- <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>relative path start state</a> as <var title>state override</var>.
+ <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>relative path start state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2541,14 +2541,14 @@ run these steps:
  <a title=concept-URLSearchParams-update>update steps</a>, and terminate these
  steps.
 
- <li><p>Let <var title>input</var> be the given value with a single leading
+ <li><p>Let <var>input</var> be the given value with a single leading
  "<code title>?</code>" removed, if any.
 
  <li><p>Set <a title=concept-url-query>query</a> to the empty string.
 
- <li><p><a title=concept-basic-url-parser>Basic URL parse</a> <var title>input</var>
- with <a title=concept-URLUtils-url>url</a> as <var title>url</var>,
- <a>query state</a> as <var title>state override</var>, and the
+ <li><p><a title=concept-basic-url-parser>Basic URL parse</a> <var>input</var>
+ with <a title=concept-URLUtils-url>url</a> as <var>url</var>,
+ <a>query state</a> as <var>state override</var>, and the
  associated <a title=concept-URLUtils-query-encoding>query encoding</a> as
  <var>encoding override</var>.
 
@@ -2571,18 +2571,18 @@ must return the <a title=concept-URLUtils-query-object>query object</a>.
 these steps:
 
 <ol>
- <li><p>Let <var title>object</var> be the given value.
+ <li><p>Let <var>object</var> be the given value.
 
  <li><p>Remove the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> from
  <a title=concept-URLUtils-query-object>query object</a>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
  <li><p>Append the <a href=https://dom.spec.whatwg.org/#context-object>context object</a> to
- <var title>object</var>'s list of
+ <var>object</var>'s list of
  <a title=concept-URLSearchParams-url-object>url objects</a>.
 
  <li><p>Set <a title=concept-URLUtils-query-object>query object</a> to
- <var title>object</var>.
+ <var>object</var>.
 
  <li><p>Set <a title=concept-url-query>query</a> to the
  <a title=concept-urlencoded-serializer>serialization</a> of the
@@ -2615,15 +2615,15 @@ these steps:
  <a title=concept-url-fragment>fragment</a> to null, run the
  <a>pre-update steps</a>, and terminate these steps.
 
- <li><p>Let <var title>input</var> be the given value with a single leading
+ <li><p>Let <var>input</var> be the given value with a single leading
  "<code title>#</code>" removed, if any.
 
  <li><p>Set <a title=concept-url-fragment>fragment</a> to
  the empty string.
 
- <li><p><a title=concept-basic-url-parser>Basic URL parse</a> <var title>input</var>
- with <a title=concept-URLUtils-url>url</a> as <var title>url</var> and
- <a>fragment state</a> as <var title>state override</var>.
+ <li><p><a title=concept-basic-url-parser>Basic URL parse</a> <var>input</var>
+ with <a title=concept-URLUtils-url>url</a> as <var>url</var> and
+ <a>fragment state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2631,15 +2631,15 @@ these steps:
 
 <h3 id=interface-urlsearchparams>Interface <code>URLSearchParams</code></h3>
 
-<pre class=idl>[<a title=dom-URLSearchParams>Constructor</a>(optional (USVString or <a>URLSearchParams</a>) <var title>init</var> = ""),
+<pre class=idl>[<a title=dom-URLSearchParams>Constructor</a>(optional (USVString or <a>URLSearchParams</a>) <var>init</var> = ""),
  Exposed=(Window,Worker)]
 interface <dfn>URLSearchParams</dfn> {
-  void <a title=dom-URLSearchParams-append>append</a>(USVString <var title>name</var>, USVString <var title>value</var>);
-  void <a title=dom-URLSearchParams-delete>delete</a>(USVString <var title>name</var>);
-  USVString? <a title=dom-URLSearchParams-get>get</a>(USVString <var title>name</var>);
-  sequence&lt;USVString> <a title=dom-URLSearchParams-getAll>getAll</a>(USVString <var title>name</var>);
-  boolean <a title=dom-URLSearchParams-has>has</a>(USVString <var title>name</var>);
-  void <a title=dom-URLSearchParams-set>set</a>(USVString <var title>name</var>, USVString <var title>value</var>);
+  void <a title=dom-URLSearchParams-append>append</a>(USVString <var>name</var>, USVString <var>value</var>);
+  void <a title=dom-URLSearchParams-delete>delete</a>(USVString <var>name</var>);
+  USVString? <a title=dom-URLSearchParams-get>get</a>(USVString <var>name</var>);
+  sequence&lt;USVString> <a title=dom-URLSearchParams-getAll>getAll</a>(USVString <var>name</var>);
+  boolean <a title=dom-URLSearchParams-has>has</a>(USVString <var>name</var>);
+  void <a title=dom-URLSearchParams-set>set</a>(USVString <var>name</var>, USVString <var>value</var>);
   iterable&lt;USVString, USVString>;
   <a title=dom-URLSearchParams-stringifier>stringifier</a>;
 };</pre>
@@ -2662,101 +2662,101 @@ have done a long time ago now.
 
 <p>To create a
 <dfn title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</dfn>, optionally
-using <var title>init</var>, run these steps:
+using <var>init</var>, run these steps:
 
 <ol>
- <li><p>Let <var title>query</var> be a new <code>URLSearchParams</code> object.
+ <li><p>Let <var>query</var> be a new <code>URLSearchParams</code> object.
 
- <li><p>If <var title>init</var> is the empty string or null, return
- <var title>query</var>.
+ <li><p>If <var>init</var> is the empty string or null, return
+ <var>query</var>.
  <!-- Beware: new URLSearchParams(null) is equivalent to new URLSearchParams("null") -->
 
- <li><p>If <var title>init</var> is a string,
- set <var title>query</var>'s <a title=concept-URLSearchParams-list>list</a> to the
+ <li><p>If <var>init</var> is a string,
+ set <var>query</var>'s <a title=concept-URLSearchParams-list>list</a> to the
  result of <a title=concept-urlencoded-string-parser>parsing</a>
- <var title>init</var>.
+ <var>init</var>.
 
- <li><p>If <var title>init</var> is a <code>URLSearchParams</code> object, set
- <var title>query</var>'s <a title=concept-URLSearchParams-list>list</a> to a copy
- of <var title>init</var>'s <a title=concept-URLSearchParams-list>list</a>.
+ <li><p>If <var>init</var> is a <code>URLSearchParams</code> object, set
+ <var>query</var>'s <a title=concept-URLSearchParams-list>list</a> to a copy
+ of <var>init</var>'s <a title=concept-URLSearchParams-list>list</a>.
 
- <li><p>Return <var title>query</var>.
+ <li><p>Return <var>query</var>.
 </ol>
 
 <p>A <code>URLSearchParams</code> object's
 <dfn title=concept-URLSearchParams-update>update steps</dfn> are to run these steps for
 each associated  <a title=concept-URLSearchParams-url-object>url object</a>
-<var title>urlObject</var>, in order:
+<var>urlObject</var>, in order:
 
 <ol>
- <li><p>Set <var title>urlObject</var>'s <a title=concept-URLUtils-url>url</a>'s
+ <li><p>Set <var>urlObject</var>'s <a title=concept-URLUtils-url>url</a>'s
  <a title=concept-url-query>query</a> to the
  <a title=concept-urlencoded-serializer>serialization</a> of
  <code>URLSearchParams</code> object's
  <a title=concept-URLSearchParams-list>list</a>.
 
- <li><p>Run <var title>urlObject</var>'s <a>pre-update steps</a>.
+ <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams()"><code>URLSearchParams(<var title>init</var>)</code></dfn>
+<dfn title="dom-URLSearchParams()"><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must return a
 <a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
-using <var title>init</var> if given.
+using <var>init</var> if given.
 
 <p>The
-<dfn title="dom-URLSearchParams-append()"><code>append(<var title>name</var>, <var title>value</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-append()"><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>Append a new name-value pair whose name is <var title>name</var> and
- value is <var title>value</var>, to <a title=concept-URLSearchParams-list>list</a>.
+ <li><p>Append a new name-value pair whose name is <var>name</var> and
+ value is <var>value</var>, to <a title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Run the <a title=concept-URLSearchParams-update>update steps</a>.
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-delete()"><code>delete(<var title>name</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-delete()"><code>delete(<var>name</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>Remove all name-value pairs whose name is <var title>name</var> from
+ <li><p>Remove all name-value pairs whose name is <var>name</var> from
  <a title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Run the <a title=concept-URLSearchParams-update>update steps</a>.
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-get()"><code>get(<var title>name</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-get()"><code>get(<var>name</var>)</code></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
-<var title>name</var> in <a title=concept-URLSearchParams-list>list</a>, and null if
+<var>name</var> in <a title=concept-URLSearchParams-list>list</a>, and null if
 there is no such pair.
 
 <p>The
-<dfn title="dom-URLSearchParams-getAll()"><code>getAll(<var title>name</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-getAll()"><code>getAll(<var>name</var>)</code></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
-<var title>name</var>, in <a title=concept-URLSearchParams-list>list</a>,
+<var>name</var>, in <a title=concept-URLSearchParams-list>list</a>,
 in list order, and the empty sequence otherwise.
 
 <p>The
-<dfn title="dom-URLSearchParams-set()"><code>set(<var title>name</var>, <var title>value</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-set()"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If there are any name-value pairs whose name is <var title>name</var>, in
+ <li><p>If there are any name-value pairs whose name is <var>name</var>, in
  <a title=concept-URLSearchParams-list>list</a>, set the value of the first such
- name-value pair to <var title>value</var> and remove the others.
+ name-value pair to <var>value</var> and remove the others.
 
- <li><p>Otherwise, append a new name-value pair whose name is <var title>name</var> and
- value is <var title>value</var>, to <a title=concept-URLSearchParams-list>list</a>.
+ <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and
+ value is <var>value</var>, to <a title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Run the <a title=concept-URLSearchParams-update>update steps</a>.
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-has()"><code>has(<var title>name</var>)</code></dfn>
+<dfn title="dom-URLSearchParams-has()"><code>has(<var>name</var>)</code></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
-<var title>name</var> in <a title=concept-URLSearchParams-list>list</a>, and false
+<var>name</var> in <a title=concept-URLSearchParams-list>list</a>, and false
 otherwise.
 
 <p>The <a href=http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over>value pairs to iterate over</a> are the
