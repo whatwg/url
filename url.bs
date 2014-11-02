@@ -231,9 +231,9 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
- <var>domain_name</var> set to <var title>domain</var>,
- <var>UseSTD3ASCIIRules</var> set to false, <var>processing_option</var> set to
- <var>Transitional_Processing</var>, and <var>VerifyDnsLength</var> set to false.
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
+ <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
  <li><p>If <var>result</var> is a failure value, return failure.
 
@@ -246,8 +246,8 @@ eight <dfn title=concept-ipv6-piece>16-bit pieces</dfn>.
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
- <var>domain_name</var> set to <var title>domain</var>,
- <var>UseSTD3ASCIIRules</var> set to false.
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to false.
 
  <li>
   <p>Return <var>result</var>, ignoring any returned errors.
@@ -268,16 +268,16 @@ by an <a title=concept-ipv6>IPv6 address</a>, followed by
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToASCII title=ToASCII>Unicode ToASCII</a> with
- <var>domain_name</var> set to <var title>domain</var>,
- <var>UseSTD3ASCIIRules</var> set to true, <var>processing_option</var> set to
- <var>Nontransitional_Processing</var>, and <var>VerifyDnsLength</var> set to true.
+ <i>domain_name</i> set to <var title>domain</var>,
+ <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
+ <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
 
  <li><p>If <var>result</var> is a failure value, return failure.
 
  <li><p>Set <var>result</var> to the result of running
  <a href=http://www.unicode.org/reports/tr46/#ToUnicode title=ToUnicode>Unicode ToUnicode</a> with
- <var>domain_name</var> set to <var title>result</var>,
- <var>UseSTD3ASCIIRules</var> set to true.
+ <i>domain_name</i> set to <var title>result</var>,
+ <i>UseSTD3ASCIIRules</i> set to true.
 
  <li><p>If <var>result</var> contains any errors, return failure.
 
