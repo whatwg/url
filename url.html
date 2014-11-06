@@ -25,7 +25,7 @@
 <div data-fill-with=at-risk></div>
 
 <h2 class="no-num no-toc no-ref heading settled" id=contents><span class=content>Table of Contents</span></h2>
-<div data-fill-with=table-of-contents><ul class=toc><li><a href=#goals><span class=secno></span> <span class=content>Goals</span></a><li><a href=#terminology><span class=secno>1</span> <span class=content>Terminology</span></a><ul class=toc><li><a href=#parsers><span class=secno>1.1</span> <span class=content>Parsers</span></a></ul><li><a href=#percent-encoded-bytes><span class=secno>2</span> <span class=content>Percent-encoded bytes</span></a><li><a href=#hosts-(domains-and-ip-addresses)><span class=secno>3</span> <span class=content>Hosts (domains and IP addresses)</span></a><ul class=toc><li><a href=#idna><span class=secno>3.1</span> <span class=content>IDNA</span></a><li><a href=#host-writing><span class=secno>3.2</span> <span class=content>Host writing</span></a><li><a href=#host-parsing><span class=secno>3.3</span> <span class=content>Host parsing</span></a><li><a href=#host-serializing><span class=secno>3.4</span> <span class=content>Host serializing</span></a></ul><li><a href=#urls><span class=secno>4</span> <span class=content>URLs</span></a><ul class=toc><li><a href=#url-writing><span class=secno>4.1</span> <span class=content>URL writing</span></a><li><a href=#url-parsing><span class=secno>4.2</span> <span class=content>URL parsing</span></a><li><a href=#url-serializing><span class=secno>4.3</span> <span class=content>URL serializing</span></a><li><a href=#origin><span class=secno>4.4</span> <span class=content>Origin</span></a></ul><li><a href=#application/x-www-form-urlencoded><span class=secno>5</span> <span class=content><span data-link-type=dfn title=application/x-www-form-urlencoded><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code></span></span></a><ul class=toc><li><a href=#urlencoded-parsing><span class=secno>5.1</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</span></a><li><a href=#urlencoded-serializing><span class=secno>5.2</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</span></a><li><a href=#urlencoded-hooks><span class=secno>5.3</span> <span class=content>Hooks</span></a></ul><li><a href=#api><span class=secno>6</span> <span class=content>API</span></a><ul class=toc><li><a href=#constructors><span class=secno>6.1</span> <span class=content>Constructors</span></a><li><a href=#url-statics><span class=secno>6.2</span> <span class=content><code>URL</code> statics</span></a><li><a href=#urlutils-and-urlutilsreadonly-members><span class=secno>6.3</span> <span class=content><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</span></a><li><a href=#interface-urlsearchparams><span class=secno>6.4</span> <span class=content>Interface <code>URLSearchParams</code></span></a><li><a href=#url-apis-elsewhere><span class=secno>6.5</span> <span class=content>URL APIs elsewhere</span></a></ul><li><a href=#acknowledgments><span class=secno></span> <span class=content>Acknowledgments</span></a><li><a href=#conformance><span class=secno></span> <span class=content>Conformance</span></a><li><a href=#references><span class=secno></span> <span class=content>References</span></a><ul class=toc><li><a href=#normative><span class=secno></span> <span class=content>Normative References</span></a><li><a href=#informative><span class=secno></span> <span class=content>Informative References</span></a></ul><li><a href=#index><span class=secno></span> <span class=content>Index</span></a><li><a href=#idl-index><span class=secno></span> <span class=content>IDL Index</span></a></ul></div>
+<div data-fill-with=table-of-contents><ul class=toc><li><a href=#goals><span class=secno></span> <span class=content>Goals</span></a><li><a href=#terminology><span class=secno>1</span> <span class=content>Terminology</span></a><ul class=toc><li><a href=#parsers><span class=secno>1.1</span> <span class=content>Parsers</span></a></ul><li><a href=#percent-encoded-bytes><span class=secno>2</span> <span class=content>Percent-encoded bytes</span></a><li><a href=#hosts-(domains-and-ip-addresses)><span class=secno>3</span> <span class=content>Hosts (domains and IP addresses)</span></a><ul class=toc><li><a href=#idna><span class=secno>3.1</span> <span class=content>IDNA</span></a><li><a href=#host-writing><span class=secno>3.2</span> <span class=content>Host writing</span></a><li><a href=#host-parsing><span class=secno>3.3</span> <span class=content>Host parsing</span></a><li><a href=#host-serializing><span class=secno>3.4</span> <span class=content>Host serializing</span></a></ul><li><a href=#urls><span class=secno>4</span> <span class=content>URLs</span></a><ul class=toc><li><a href=#url-writing><span class=secno>4.1</span> <span class=content>URL writing</span></a><li><a href=#url-parsing><span class=secno>4.2</span> <span class=content>URL parsing</span></a><li><a href=#url-serializing><span class=secno>4.3</span> <span class=content>URL serializing</span></a><li><a href=#origin><span class=secno>4.4</span> <span class=content>Origin</span></a></ul><li><a href=#application/x-www-form-urlencoded><span class=secno>5</span> <span class=content><span data-link-type=dfn title=application/x-www-form-urlencoded><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code></span></span></a><ul class=toc><li><a href=#urlencoded-parsing><span class=secno>5.1</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</span></a><li><a href=#urlencoded-serializing><span class=secno>5.2</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</span></a><li><a href=#urlencoded-hooks><span class=secno>5.3</span> <span class=content>Hooks</span></a></ul><li><a href=#api><span class=secno>6</span> <span class=content>API</span></a><ul class=toc><li><a href=#constructors><span class=secno>6.1</span> <span class=content>Constructors</span></a><li><a href=#url-statics><span class=secno>6.2</span> <span class=content><span data-link-type=interface title=URL><code>URL</code></span> statics</span></a><li><a href=#urlutils-and-urlutilsreadonly-members><span class=secno>6.3</span> <span class=content><span data-link-type=interface title=URLUtils><code>URLUtils</code></span> and <span data-link-type=interface title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></span> members</span></a><li><a href=#interface-urlsearchparams><span class=secno>6.4</span> <span class=content>Interface <span data-link-type=interface title=URLSearchParams><code>URLSearchParams</code></span></span></a><li><a href=#url-apis-elsewhere><span class=secno>6.5</span> <span class=content>URL APIs elsewhere</span></a></ul><li><a href=#acknowledgments><span class=secno></span> <span class=content>Acknowledgments</span></a><li><a href=#conformance><span class=secno></span> <span class=content>Conformance</span></a><li><a href=#references><span class=secno></span> <span class=content>References</span></a><ul class=toc><li><a href=#normative><span class=secno></span> <span class=content>Normative References</span></a><li><a href=#informative><span class=secno></span> <span class=content>Informative References</span></a></ul><li><a href=#index><span class=secno></span> <span class=content>Index</span></a><li><a href=#idl-index><span class=secno></span> <span class=content>IDL Index</span></a></ul></div>
 
 
 
@@ -53,7 +53,7 @@
  <a data-biblio-type=informative data-link-type=biblio href=#biblio-rfc6454 title=RFC6454>[RFC6454]</a>
 
  <li><p>Define URL’s existing JavaScript API in full detail and add
- enhancements to make it easier to work with. Add a new <code>URL</code>
+ enhancements to make it easier to work with. Add a new <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a>
  object as well for URL manipulation without usage of HTML elements. (Useful
  for JavaScript worker environments.)
 </ul>
@@ -892,7 +892,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for
- use by methods of objects implementing the <code>URLUtils</code> interface.
+ use by methods of objects implementing the <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> interface.
  <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not
@@ -1809,7 +1809,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 
   <p class="note no-backref">This can only happen if <var>input</var> was not
   generated through the <a data-link-type=dfn href=#concept-urlencoded-serializer title=concept-urlencoded-serializer>serializer</a> or
-  <code>URLSearchParams</code>.
+  <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a>.
 
  <li><p>Let <var>sequences</var> be the result of splitting
  <var>input</var> on `<code>&amp;</code>`.
@@ -2003,34 +2003,34 @@ interface <dfn class=idl-code data-dfn-type=interface data-export="" data-global
   readonly attribute USVString <a class=idl-code data-global-name="URLUtilsReadOnly<interface>/hash<attribute>" data-link-for=URLUtilsReadOnly data-link-type=attribute data-readonly="" data-type="USVString " href=#dom-urlutilsreadonly-hash title=hash>hash</a>;
 };</pre>
 
-<p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
-to objects implementing <code>URLUtils</code>.
+<p>Except where different objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> are identical
+to objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a>.
 
 <p class=note>Since all members are readonly and certain members from
-<code>URLUtils</code> are not exposed a number of potential optimizations is possible
-compared to objects implementing <code>URLUtils</code>. These are left as an exercise to
+<a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible
+compared to objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a>. These are left as an exercise to
 the reader.
 
 </p>
 
-<p>Specifications defining objects implementing <code>URLUtils</code> or
-<code>URLUtilsReadOnly</code> must define a
+<p>Specifications defining objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> or
+<a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> must define a
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-get-the-base title=concept-URLUtils-get-the-base>get the base<a class=self-link href=#concept-urlutils-get-the-base></a></dfn> algorithm, which must return the
 appropriate <a data-link-type=dfn href=#concept-base-url title=concept-base-url>base URL</a> for the object.
 
-<p>Specifications defining objects implementing <code>URLUtils</code> may
+<p>Specifications defining objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> may
 define <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-update title=concept-URLUtils-update>update steps<a class=self-link href=#concept-urlutils-update></a></dfn> to make it possible for an
 underlying string (such as an
 <a data-link-type=dfn href=https://dom.spec.whatwg.org/#concept-attribute-value title=concept-attribute-value>attribute value</a>)
 to be updated. The <a data-link-type=dfn href=#concept-urlutils-update title=concept-URLUtils-update>update steps</a> are passed a string
 <var>value</var> for this purpose.
 
-<p>An object implementing <code>URLUtils</code> or <code>URLUtilsReadOnly</code> has an
+<p>An object implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> or <a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> has an
 associated <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-input title=concept-URLUtils-input>input<a class=self-link href=#concept-urlutils-input></a></dfn> (a string),
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-query-encoding title=concept-URLUtils-query-encoding>query encoding<a class=self-link href=#concept-urlutils-query-encoding></a></dfn>
 (an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#encoding title=encoding>encoding</a>),
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-query-object title=concept-URLUtils-query-object>query object<a class=self-link href=#concept-urlutils-query-object></a></dfn>
-(a <code>URLSearchParams</code> object or null), and a
+(a <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object or null), and a
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-url title=concept-URLUtils-url>url<a class=self-link href=#concept-urlutils-url></a></dfn> (a <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> or null).
 
 <p>Unless stated otherwise, <a data-link-type=dfn href=#concept-urlutils-query-encoding title=concept-URLUtils-query-encoding>query encoding</a> is
@@ -2043,8 +2043,8 @@ from the <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concep
 concept only relevant for HTML.
 <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
-<p>Specifications defining objects implementing <code>URLUtils</code> or
-<code>URLUtilsReadOnly</code> must use the
+<p>Specifications defining objects implementing <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> or
+<a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> must use the
 <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> algorithms to set
 <a data-link-type=dfn href=#concept-urlutils-input title=concept-URLUtils-input>input</a>, <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a>, and
 <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a>. To
@@ -2091,7 +2091,7 @@ and optionally a <var>url</var>, run these steps:
 
  <li><p>If <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a> is null, set
  <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a> to a
- <a data-link-type=dfn href=#concept-urlsearchparams-new title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
+ <a data-link-type=dfn href=#concept-urlsearchparams-new title=concept-URLSearchParams-new>new </a><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object
  using <var>query</var>, and then append the
  <a data-link-type=dfn href=https://dom.spec.whatwg.org/#context-object title="context object">context object</a> to
  <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a>’s list of
@@ -2103,7 +2103,7 @@ and optionally a <var>url</var>, run these steps:
 </ol>
 
 <p>To run the <dfn data-dfn-type=dfn data-noexport="" id=pre-update-steps>pre-update steps<a class=self-link href=#pre-update-steps></a></dfn> for an object implementing
-<code>URLUtils</code>, optionally given a <var>value</var>, run these steps:
+<a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a>, optionally given a <var>value</var>, run these steps:
 
 <ol>
  <li><p>If <var>value</var> is not given, let <var>value</var> be the result
@@ -2136,7 +2136,7 @@ constructor, when invoked, must run these steps:
  <li><p>If <var>parsedURL</var> is failure,
  <a data-link-type=dfn href=http://heycam.github.io/webidl/#dfn-throw title=throw>throw</a> a <code>TypeError</code> exception.
 
- <li><p>Let <var>result</var> be a new <code>URL</code> object.
+ <li><p>Let <var>result</var> be a new <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> object.
 
  <li><p>Let <var>result</var>’s
  <a data-link-type=dfn href=#concept-urlutils-get-the-base title=concept-URLUtils-get-the-base>get the base</a> return
@@ -2147,7 +2147,7 @@ constructor, when invoked, must run these steps:
   <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> given the empty string
   and <var>parsedURL</var>.
 
-  <p class="note no-backref">A <code>URL</code> object’s
+  <p class="note no-backref">A <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> object’s
   <a data-link-type=dfn href=#concept-urlutils-input title=concept-URLUtils-input>input</a> is never exposed.
 
  <li><p>Return <var>result</var>.
@@ -2173,7 +2173,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
-<h3 class="heading settled" data-level=6.2 id=url-statics><span class=secno>6.2. </span><span class=content><code>URL</code> statics</span><a class=self-link href=#url-statics></a></h3>
+<h3 class="heading settled" data-level=6.2 id=url-statics><span class=secno>6.2. </span><span class=content><a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> statics</span><a class=self-link href=#url-statics></a></h3>
 
 <p>The
 <dfn class=idl-code data-dfn-for=URL data-dfn-type=method data-export="" id=dom-url-domaintoascii title=domainToASCII()><code>domainToASCII(<var>domain</var>)</code><a class=self-link href=#dom-url-domaintoascii></a></dfn>
@@ -2208,11 +2208,11 @@ static method, when invoked, must run these steps:
 representation?
 
 
-<h3 class="heading settled" data-level=6.3 id=urlutils-and-urlutilsreadonly-members><span class=secno>6.3. </span><span class=content><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</span><a class=self-link href=#urlutils-and-urlutilsreadonly-members></a></h3>
+<h3 class="heading settled" data-level=6.3 id=urlutils-and-urlutilsreadonly-members><span class=secno>6.3. </span><span class=content><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> and <a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> members</span><a class=self-link href=#urlutils-and-urlutilsreadonly-members></a></h3>
 
-<p class=note>The <code>URLUtils</code> and <code>URLUtilsReadOnly</code> interfaces are
+<p class=note>The <a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils><code>URLUtils</code></a> and <a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly><code>URLUtilsReadOnly</code></a> interfaces are
 not exposed on the global object. They are meant to augment other interfaces, such as
-<code>URL</code>.
+<a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a>.
 
 <p>The <dfn class=idl-code data-dfn-for=URLUtilsReadOnly data-dfn-type=stringifier data-export="" id=dom-urlutilsreadonly-href><dfn class=idl-code data-dfn-for=URLUtils data-dfn-type=stringifier data-export="" id=dom-urlutils-href><code>href</code><a class=self-link href=#dom-urlutils-href></a></dfn><a class=self-link href=#dom-urlutilsreadonly-href></a></dfn> attribute’s getter must run
 these steps:
@@ -2231,7 +2231,7 @@ these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <a data-link-type=dfn href=https://dom.spec.whatwg.org/#context-object title="context object">context object</a> is a <code>URL</code> object,
+  <p>If the <a data-link-type=dfn href=https://dom.spec.whatwg.org/#context-object title="context object">context object</a> is a <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> object,
   run these substeps:
 
   <ol>
@@ -2247,7 +2247,7 @@ these steps:
     <p>Run <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
-    <p class="note no-backref">A <code>URL</code> object’s
+    <p class="note no-backref">A <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> object’s
     <a data-link-type=dfn href=#concept-urlutils-input title=concept-URLUtils-input>input</a> is never exposed.
   </ol>
 
@@ -2588,7 +2588,7 @@ these steps:
 </ol>
 
 
-<h3 class="heading settled" data-level=6.4 id=interface-urlsearchparams><span class=secno>6.4. </span><span class=content>Interface <code>URLSearchParams</code></span><a class=self-link href=#interface-urlsearchparams></a></h3>
+<h3 class="heading settled" data-level=6.4 id=interface-urlsearchparams><span class=secno>6.4. </span><span class=content>Interface <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a></span><a class=self-link href=#interface-urlsearchparams></a></h3>
 
 <pre class=idl>[Constructor(optional (USVString or <a data-link-type=idl-name href=#dom-urlsearchparams title=URLSearchParams>URLSearchParams</a>) <dfn class=idl-code data-dfn-for=URLSearchParams/URLSearchParams() data-dfn-type=argument data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams()<method>/init<argument>" id=dom-urlsearchparams-urlsearchparams-init>init<a class=self-link href=#dom-urlsearchparams-urlsearchparams-init></a></dfn> = ""),
  Exposed=(Window,Worker)]
@@ -2603,14 +2603,14 @@ interface <dfn class=idl-code data-dfn-type=interface data-export="" data-global
   stringifier;
 };</pre>
 
-<p>A <code>URLSearchParams</code> object has an associated
+<p>A <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object has an associated
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-list title=concept-URLSearchParams-list>list<a class=self-link href=#concept-urlsearchparams-list></a></dfn> of name-value pairs, which is initially
 empty.
 
-<p>A <code>URLSearchParams</code> object has an associated list of zero or more
+<p>A <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object has an associated list of zero or more
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-url-object title=concept-URLSearchParams-url-object>url objects<a class=self-link href=#concept-urlsearchparams-url-object></a></dfn>, which is initially empty.
 
-<p class=note><code>URLSearchParams</code> objects always use
+<p class=note><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> objects always use
 <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#utf-8 title=utf-8>utf-8</a> as
 <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#encoding title=encoding>encoding</a>, despite the existence of
 concepts such as
@@ -2620,11 +2620,11 @@ encourage developers to migrate towards
 have done a long time ago now.
 
 <p>To create a
-<dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-new title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object<a class=self-link href=#concept-urlsearchparams-new></a></dfn>, optionally
+<dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-new title=concept-URLSearchParams-new>new <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object<a class=self-link href=#concept-urlsearchparams-new></a></dfn>, optionally
 using <var>init</var>, run these steps:
 
 <ol>
- <li><p>Let <var>query</var> be a new <code>URLSearchParams</code> object.
+ <li><p>Let <var>query</var> be a new <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object.
 
  <li><p>If <var>init</var> is the empty string or null, return
  <var>query</var>.
@@ -2635,14 +2635,14 @@ using <var>init</var>, run these steps:
  result of <a data-link-type=dfn href=#concept-urlencoded-string-parser title=concept-urlencoded-string-parser>parsing</a>
  <var>init</var>.
 
- <li><p>If <var>init</var> is a <code>URLSearchParams</code> object, set
+ <li><p>If <var>init</var> is a <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object, set
  <var>query</var>’s <a data-link-type=dfn href=#concept-urlsearchparams-list title=concept-URLSearchParams-list>list</a> to a copy
  of <var>init</var>’s <a data-link-type=dfn href=#concept-urlsearchparams-list title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
 
-<p>A <code>URLSearchParams</code> object’s
+<p>A <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object’s
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-update title=concept-URLSearchParams-update>update steps<a class=self-link href=#concept-urlsearchparams-update></a></dfn> are to run these steps for
 each associated  <a data-link-type=dfn href=#concept-urlsearchparams-url-object title=concept-URLSearchParams-url-object>url object</a>
 <var>urlObject</var>, in order:
@@ -2651,7 +2651,7 @@ each associated  <a data-link-type=dfn href=#concept-urlsearchparams-url-object 
  <li><p>Set <var>urlObject</var>’s <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a>’s
  <a data-link-type=dfn href=#concept-url-query title=concept-url-query>query</a> to the
  <a data-link-type=dfn href=#concept-urlencoded-serializer title=concept-urlencoded-serializer>serialization</a> of
- <code>URLSearchParams</code> object’s
+ <a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object’s
  <a data-link-type=dfn href=#concept-urlsearchparams-list title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Run <var>urlObject</var>’s <a data-link-type=dfn href=#pre-update-steps title="pre-update steps">pre-update steps</a>.
@@ -2660,7 +2660,7 @@ each associated  <a data-link-type=dfn href=#concept-urlsearchparams-url-object 
 <p>The
 <dfn class=idl-code data-dfn-for=URLSearchParams data-dfn-type=constructor data-export="" id=dom-urlsearchparams-urlsearchparams title=URLSearchParams()><code>URLSearchParams(<var>init</var>)</code><a class=self-link href=#dom-urlsearchparams-urlsearchparams></a></dfn>
 constructor, when invoked, must return a
-<a data-link-type=dfn href=#concept-urlsearchparams-new title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
+<a data-link-type=dfn href=#concept-urlsearchparams-new title=concept-URLSearchParams-new>new </a><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object
 using <var>init</var> if given.
 
 <p>The
@@ -2724,7 +2724,7 @@ the name and the value the value.
 
 <p>The <dfn class=idl-code data-dfn-for=URLSearchParams data-dfn-type=stringifier data-export="" id=dom-urlsearchparams-stringifier>stringifier<a class=self-link href=#dom-urlsearchparams-stringifier></a></dfn> must return the
 <a data-link-type=dfn href=#concept-urlencoded-serializer title=concept-urlencoded-serializer>serialization</a> of the
-<code>URLSearchParams</code> object’s
+<a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams><code>URLSearchParams</code></a> object’s
 <a data-link-type=dfn href=#concept-urlsearchparams-list title=concept-URLSearchParams-list>list</a>.
 
 
@@ -2734,7 +2734,7 @@ the name and the value the value.
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> as a string (by
 <a data-link-type=dfn href=#concept-url-serializer title=concept-url-serializer>serializing</a> an internal
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>). A standard should not expose a
-<a data-link-type=dfn href=#concept-url title=concept-url>URL</a> using a <code>URL</code> object. <code>URL</code>
+<a data-link-type=dfn href=#concept-url title=concept-url>URL</a> using a <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a> object. <a class=idl-code data-link-type=interface href=#dom-url title=URL><code>URL</code></a>
 objects are meant for <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> manipulation. In IDL the
 USVString type should be used.
 

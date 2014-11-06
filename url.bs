@@ -168,7 +168,7 @@ Logo: https://resources.whatwg.org/logo-url.svg
  [[RFC6454]]
 
  <li><p>Define URL's existing JavaScript API in full detail and add
- enhancements to make it easier to work with. Add a new <code>URL</code>
+ enhancements to make it easier to work with. Add a new <a interface><code>URL</code></a>
  object as well for URL manipulation without usage of HTML elements. (Useful
  for JavaScript worker environments.)
 </ul>
@@ -1028,7 +1028,7 @@ optionally with an <a>encoding</a>
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for
- use by methods of objects implementing the <code>URLUtils</code> interface.
+ use by methods of objects implementing the <a interface><code>URLUtils</code></a> interface.
  [[!HTML]]
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not
@@ -1947,7 +1947,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
 
   <p class="note no-backref">This can only happen if <var>input</var> was not
   generated through the <a title=concept-urlencoded-serializer>serializer</a> or
-  <code>URLSearchParams</code>.
+  <a interface><code>URLSearchParams</code></a>.
 
  <li><p>Let <var>sequences</var> be the result of splitting
  <var>input</var> on `<code>&</code>`.
@@ -2153,12 +2153,12 @@ interface URLUtilsReadOnly {
   readonly attribute USVString hash;
 };</pre>
 
-<p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
-to objects implementing <code>URLUtils</code>.
+<p>Except where different objects implementing <a interface><code>URLUtilsReadOnly</code></a> are identical
+to objects implementing <a interface><code>URLUtils</code></a>.
 
 <p class=note>Since all members are readonly and certain members from
-<code>URLUtils</code> are not exposed a number of potential optimizations is possible
-compared to objects implementing <code>URLUtils</code>. These are left as an exercise to
+<a interface><code>URLUtils</code></a> are not exposed a number of potential optimizations is possible
+compared to objects implementing <a interface><code>URLUtils</code></a>. These are left as an exercise to
 the reader.
 
 <!-- XXX Ideas:
@@ -2174,24 +2174,24 @@ dictionary URLEqualOptions {
 
 URLPath would be a subclassed Array? -->
 
-<p>Specifications defining objects implementing <code>URLUtils</code> or
-<code>URLUtilsReadOnly</code> must define a
+<p>Specifications defining objects implementing <a interface><code>URLUtils</code></a> or
+<a interface><code>URLUtilsReadOnly</code></a> must define a
 <dfn title=concept-URLUtils-get-the-base>get the base</dfn> algorithm, which must return the
 appropriate <a title=concept-base-url>base URL</a> for the object.
 
-<p>Specifications defining objects implementing <code>URLUtils</code> may
+<p>Specifications defining objects implementing <a interface><code>URLUtils</code></a> may
 define <dfn title=concept-URLUtils-update>update steps</dfn> to make it possible for an
 underlying string (such as an
 <a title=concept-attribute-value>attribute value</a>)
 to be updated. The <a title=concept-URLUtils-update>update steps</a> are passed a string
 <var>value</var> for this purpose.
 
-<p>An object implementing <code>URLUtils</code> or <code>URLUtilsReadOnly</code> has an
+<p>An object implementing <a interface><code>URLUtils</code></a> or <a interface><code>URLUtilsReadOnly</code></a> has an
 associated <dfn title=concept-URLUtils-input>input</dfn> (a string),
 <dfn title=concept-URLUtils-query-encoding>query encoding</dfn>
 (an <a>encoding</a>),
 <dfn title=concept-URLUtils-query-object>query object</dfn>
-(a <code>URLSearchParams</code> object or null), and a
+(a <a interface><code>URLSearchParams</code></a> object or null), and a
 <dfn title=concept-URLUtils-url>url</dfn> (a <a title=concept-url>URL</a> or null).
 
 Unless stated otherwise, <a title=concept-URLUtils-query-encoding>query encoding</a> is
@@ -2204,8 +2204,8 @@ from the <a title=concept-URLUtils-set-the-input>set the input</a> algorithm.
 concept only relevant for HTML.
 [[!HTML]]
 
-<p>Specifications defining objects implementing <code>URLUtils</code> or
-<code>URLUtilsReadOnly</code> must use the
+<p>Specifications defining objects implementing <a interface><code>URLUtils</code></a> or
+<a interface><code>URLUtilsReadOnly</code></a> must use the
 <a title=concept-URLUtils-set-the-input>set the input</a> algorithms to set
 <a title=concept-URLUtils-input>input</a>, <a title=concept-URLUtils-url>url</a>, and
 <a title=concept-URLUtils-query-object>query object</a>. To
@@ -2252,7 +2252,7 @@ and optionally a <var>url</var>, run these steps:
 
  <li><p>If <a title=concept-URLUtils-query-object>query object</a> is null, set
  <a title=concept-URLUtils-query-object>query object</a> to a
- <a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
+ <a title=concept-URLSearchParams-new>new <a interface><code>URLSearchParams</code></a> object</a>
  using <var>query</var>, and then append the
  <a>context object</a> to
  <a title=concept-URLUtils-query-object>query object</a>'s list of
@@ -2264,7 +2264,7 @@ and optionally a <var>url</var>, run these steps:
 </ol>
 
 <p>To run the <dfn>pre-update steps</dfn> for an object implementing
-<code>URLUtils</code>, optionally given a <var>value</var>, run these steps:
+<a interface><code>URLUtils</code></a>, optionally given a <var>value</var>, run these steps:
 
 <ol>
  <li><p>If <var>value</var> is not given, let <var>value</var> be the result
@@ -2297,7 +2297,7 @@ constructor, when invoked, must run these steps:
  <li><p>If <var>parsedURL</var> is failure,
  <a>throw</a> a <code>TypeError</code> exception.
 
- <li><p>Let <var>result</var> be a new <code>URL</code> object.
+ <li><p>Let <var>result</var> be a new <a interface><code>URL</code></a> object.
 
  <li><p>Let <var>result</var>'s
  <a title=concept-URLUtils-get-the-base>get the base</a> return
@@ -2308,7 +2308,7 @@ constructor, when invoked, must run these steps:
   <a title=concept-URLUtils-set-the-input>set the input</a> given the empty string
   and <var>parsedURL</var>.
 
-  <p class="note no-backref">A <code>URL</code> object's
+  <p class="note no-backref">A <a interface><code>URL</code></a> object's
   <a title=concept-URLUtils-input>input</a> is never exposed.
 
  <li><p>Return <var>result</var>.
@@ -2334,7 +2334,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
-<h3 id=url-statics><code>URL</code> statics</h3>
+<h3 id=url-statics><a interface><code>URL</code></a> statics</h3>
 
 <p>The
 <dfn method dfn-for=URL><code>domainToASCII(<var>domain</var>)</code></dfn>
@@ -2369,11 +2369,11 @@ static method, when invoked, must run these steps:
 representation?
 
 
-<h3 id=urlutils-and-urlutilsreadonly-members><code>URLUtils</code> and <code>URLUtilsReadOnly</code> members</h3>
+<h3 id=urlutils-and-urlutilsreadonly-members><a interface><code>URLUtils</code></a> and <a interface><code>URLUtilsReadOnly</code></a> members</h3>
 
-<p class=note>The <code>URLUtils</code> and <code>URLUtilsReadOnly</code> interfaces are
+<p class=note>The <a interface><code>URLUtils</code></a> and <a interface><code>URLUtilsReadOnly</code></a> interfaces are
 not exposed on the global object. They are meant to augment other interfaces, such as
-<code>URL</code>.
+<a interface><code>URL</code></a>.
 
 <p>The <dfn stringifier dfn-for=URLUtilsReadOnly><dfn stringifier dfn-for=URLUtils><code>href</code></dfn></dfn> attribute's getter must run
 these steps:
@@ -2392,7 +2392,7 @@ these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <a>context object</a> is a <code>URL</code> object,
+  <p>If the <a>context object</a> is a <a interface><code>URL</code></a> object,
   run these substeps:
 
   <ol>
@@ -2408,7 +2408,7 @@ these steps:
     <p>Run <a title=concept-URLUtils-set-the-input>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
-    <p class="note no-backref">A <code>URL</code> object's
+    <p class="note no-backref">A <a interface><code>URL</code></a> object's
     <a title=concept-URLUtils-input>input</a> is never exposed.
   </ol>
 
@@ -2749,7 +2749,7 @@ these steps:
 </ol>
 
 
-<h3 id=interface-urlsearchparams>Interface <code>URLSearchParams</code></h3>
+<h3 id=interface-urlsearchparams>Interface <a interface><code>URLSearchParams</code></a></h3>
 
 <pre class=idl>[Constructor(optional (USVString or URLSearchParams) init = ""),
  Exposed=(Window,Worker)]
@@ -2764,14 +2764,14 @@ interface URLSearchParams {
   stringifier;
 };</pre>
 
-<p>A <code>URLSearchParams</code> object has an associated
+<p>A <a interface><code>URLSearchParams</code></a> object has an associated
 <dfn title=concept-URLSearchParams-list>list</dfn> of name-value pairs, which is initially
 empty.
 
-<p>A <code>URLSearchParams</code> object has an associated list of zero or more
+<p>A <a interface><code>URLSearchParams</code></a> object has an associated list of zero or more
 <dfn title=concept-URLSearchParams-url-object>url objects</dfn>, which is initially empty.
 
-<p class=note><code>URLSearchParams</code> objects always use
+<p class=note><a interface><code>URLSearchParams</code></a> objects always use
 <a>utf-8</a> as
 <a>encoding</a>, despite the existence of
 concepts such as
@@ -2781,11 +2781,11 @@ encourage developers to migrate towards
 have done a long time ago now.
 
 <p>To create a
-<dfn title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</dfn>, optionally
+<dfn title=concept-URLSearchParams-new>new <a interface><code>URLSearchParams</code></a> object</dfn>, optionally
 using <var>init</var>, run these steps:
 
 <ol>
- <li><p>Let <var>query</var> be a new <code>URLSearchParams</code> object.
+ <li><p>Let <var>query</var> be a new <a interface><code>URLSearchParams</code></a> object.
 
  <li><p>If <var>init</var> is the empty string or null, return
  <var>query</var>.
@@ -2796,14 +2796,14 @@ using <var>init</var>, run these steps:
  result of <a title=concept-urlencoded-string-parser>parsing</a>
  <var>init</var>.
 
- <li><p>If <var>init</var> is a <code>URLSearchParams</code> object, set
+ <li><p>If <var>init</var> is a <a interface><code>URLSearchParams</code></a> object, set
  <var>query</var>'s <a title=concept-URLSearchParams-list>list</a> to a copy
  of <var>init</var>'s <a title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
 
-<p>A <code>URLSearchParams</code> object's
+<p>A <a interface><code>URLSearchParams</code></a> object's
 <dfn title=concept-URLSearchParams-update>update steps</dfn> are to run these steps for
 each associated  <a title=concept-URLSearchParams-url-object>url object</a>
 <var>urlObject</var>, in order:
@@ -2812,7 +2812,7 @@ each associated  <a title=concept-URLSearchParams-url-object>url object</a>
  <li><p>Set <var>urlObject</var>'s <a title=concept-URLUtils-url>url</a>'s
  <a title=concept-url-query>query</a> to the
  <a title=concept-urlencoded-serializer>serialization</a> of
- <code>URLSearchParams</code> object's
+ <a interface><code>URLSearchParams</code></a> object's
  <a title=concept-URLSearchParams-list>list</a>.
 
  <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
@@ -2821,7 +2821,7 @@ each associated  <a title=concept-URLSearchParams-url-object>url object</a>
 <p>The
 <dfn constructor dfn-for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must return a
-<a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
+<a title=concept-URLSearchParams-new>new <a interface><code>URLSearchParams</code></a> object</a>
 using <var>init</var> if given.
 
 <p>The
@@ -2885,7 +2885,7 @@ the name and the value the value.
 
 <p>The <dfn stringifier dfn-for=URLSearchParams>stringifier</dfn> must return the
 <a title=concept-urlencoded-serializer>serialization</a> of the
-<code>URLSearchParams</code> object's
+<a interface><code>URLSearchParams</code></a> object's
 <a title=concept-URLSearchParams-list>list</a>.
 
 
@@ -2895,7 +2895,7 @@ the name and the value the value.
 <a title=concept-url>URL</a> as a string (by
 <a title=concept-url-serializer>serializing</a> an internal
 <a title=concept-url>URL</a>). A standard should not expose a
-<a title=concept-url>URL</a> using a <code>URL</code> object. <code>URL</code>
+<a title=concept-url>URL</a> using a <a interface><code>URL</code></a> object. <a interface><code>URL</code></a>
 objects are meant for <a title=concept-url>URL</a> manipulation. In IDL the
 USVString type should be used.
 
