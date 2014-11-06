@@ -794,7 +794,7 @@ It is initially unset.
 <p class="note no-backref">The <a>relative flag</a> exists as checking if a
 <a title=concept-url>URL</a>'s <a title=concept-url-scheme>scheme</a> is a
 <a>relative scheme</a> can give incorrect results due to the
-<code title=dom-URLUtils-protocol>protocol</code> attribute.
+<a attribute for=URLUtils><code>protocol</code></a> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
 <p>A <a title=concept-url>URL</a> also has an associated
@@ -1182,7 +1182,7 @@ optionally with an <a>encoding</a>
     <a title=concept-url-scheme>scheme</a> is not a
     <a>relative scheme</a>, <a>parse error</a>, return failure.
 
-    <p class=note>Due to the <code title=dom-URLUtils-protocol>protocol</code> attribute's
+    <p class=note>Due to the <a attribute for=URLUtils><code>protocol</code></a> attribute's
     ability to change <var>base</var>'s
     <a title=concept-url-scheme>scheme</a>, <var>base</var>'s
     <a>relative flag</a> is not used here.
@@ -2386,7 +2386,7 @@ these steps:
  of <a title=concept-URLUtils-url>url</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-href>href</code> attribute's setter must run these steps:
+<p>The <a stringifier for=URLUtils><code>href</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>Let <var>input</var> be the given value.
@@ -2423,7 +2423,7 @@ these steps:
   </ol>
 
   <div class=example>
-   <p>This means that if the <code title=dom-URLUtils-href>href</code> attribute is set to
+   <p>This means that if the <a stringifier for=URLUtils><code>href</code></a> attribute is set to
    value that would cause the <a title=concept-url-parser>URL parser</a> to return
    failure, that value is still passed through unchanged. This is one of those unfortunate
    legacy incidents.
@@ -2463,7 +2463,7 @@ must run these steps:
  "<code>:</code>" concatenated.
 </ol>
 
-<p>The <code title=dom-URLUtils-protocol>protocol</code> attribute's setter must
+<p>The <a attribute for=URLUtils><code>protocol</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2488,7 +2488,7 @@ must run these steps:
  <li><p>Return <a title=concept-url-username>username</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-username>username</code> attribute's setter must
+<p>The <a attribute for=URLUtils><code>username</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2512,7 +2512,7 @@ must run these steps:
  <li><p>Return <a title=concept-url-password>password</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-password>password</code> attribute's setter must
+<p>The <a attribute for=URLUtils><code>password</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2542,7 +2542,7 @@ these steps:
  concatenated.
 </ol>
 
-<p>The <code title=dom-URLUtils-host>host</code> attribute's setter must run these
+<p>The <a attribute for=URLUtils><code>host</code></a> attribute's setter must run these
 steps:
 
 <ol>
@@ -2567,7 +2567,7 @@ must run these steps:
  <a title=concept-host-serializer>serialized</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-hostname>hostname</code> attribute's setter must
+<p>The <a attribute for=URLUtils><code>hostname</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2591,7 +2591,7 @@ these steps:
  <li><p>Return <a title=concept-url-port>port</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-port>port</code> attribute's setter must run these steps:
+<p>The <a attribute for=URLUtils><code>port</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, its
@@ -2621,7 +2621,7 @@ must run these steps:
  separated from each other by "<code>/</code>".
 </ol>
 
-<p>The <code title=dom-URLUtils-pathname>pathname</code> attribute's setter must
+<p>The <a attribute for=URLUtils><code>pathname</code></a> attribute's setter must
 run these steps:
 
 <ol>
@@ -2649,7 +2649,7 @@ run these steps:
  <a title=concept-url-query>query</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-search>search</code> attribute's setter must run these steps:
+<p>The <a attribute for=URLUtils><code>search</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, terminate these steps.
@@ -2687,7 +2687,7 @@ run these steps:
 <p>The <dfn attribute dfn-for=URLUtils><code>searchParams</code></dfn> attribute's getter
 must return the <a title=concept-URLUtils-query-object>query object</a>.
 
-<p>The <code title=dom-URLUtils-searchParams>searchParams</code> attribute's setter must run
+<p>The <a attribute for=URLUtils><code>searchParams</code></a> attribute's setter must run
 these steps:
 
 <ol>
@@ -2724,7 +2724,7 @@ these steps:
  <a title=concept-url-fragment>fragment</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-hash>hash</code> attribute's setter must run these steps:
+<p>The <a attribute for=URLUtils><code>hash</code></a> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, or its

@@ -663,7 +663,7 @@ It is initially unset.
 <p class="note no-backref">The <a data-link-type=dfn href=#relative-flag title="relative flag">relative flag</a> exists as checking if a
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a> is a
 <a data-link-type=dfn href=#relative-scheme title="relative scheme">relative scheme</a> can give incorrect results due to the
-<code title=dom-URLUtils-protocol>protocol</code> attribute.
+<a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol><code>protocol</code></a> attribute.
 
 
 <p>A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> also has an associated
@@ -1046,7 +1046,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
     <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a> is not a
     <a data-link-type=dfn href=#relative-scheme title="relative scheme">relative scheme</a>, <a data-link-type=dfn href=#parse-error title="parse error">parse error</a>, return failure.
 
-    <p class=note>Due to the <code title=dom-URLUtils-protocol>protocol</code> attribute’s
+    <p class=note>Due to the <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol><code>protocol</code></a> attribute’s
     ability to change <var>base</var>’s
     <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a>, <var>base</var>’s
     <a data-link-type=dfn href=#relative-flag title="relative flag">relative flag</a> is not used here.
@@ -2225,7 +2225,7 @@ these steps:
  of <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-href>href</code> attribute’s setter must run these steps:
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=stringifier href=#dom-urlutils-href title=href><code>href</code></a> attribute’s setter must run these steps:
 
 <ol>
  <li><p>Let <var>input</var> be the given value.
@@ -2262,7 +2262,7 @@ these steps:
   </ol>
 
   <div class=example>
-   <p>This means that if the <code title=dom-URLUtils-href>href</code> attribute is set to
+   <p>This means that if the <a class=idl-code data-link-for=URLUtils data-link-type=stringifier href=#dom-urlutils-href title=href><code>href</code></a> attribute is set to
    value that would cause the <a data-link-type=dfn href=#concept-url-parser title=concept-url-parser>URL parser</a> to return
    failure, that value is still passed through unchanged. This is one of those unfortunate
    legacy incidents.
@@ -2302,7 +2302,7 @@ must run these steps:
  "<code>:</code>" concatenated.
 </ol>
 
-<p>The <code title=dom-URLUtils-protocol>protocol</code> attribute’s setter must
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol><code>protocol</code></a> attribute’s setter must
 run these steps:
 
 <ol>
@@ -2327,7 +2327,7 @@ must run these steps:
  <li><p>Return <a data-link-type=dfn href=#concept-url-username title=concept-url-username>username</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-username>username</code> attribute’s setter must
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-username title=username><code>username</code></a> attribute’s setter must
 run these steps:
 
 <ol>
@@ -2351,7 +2351,7 @@ must run these steps:
  <li><p>Return <a data-link-type=dfn href=#concept-url-password title=concept-url-password>password</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-password>password</code> attribute’s setter must
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-password title=password><code>password</code></a> attribute’s setter must
 run these steps:
 
 <ol>
@@ -2381,7 +2381,7 @@ these steps:
  concatenated.
 </ol>
 
-<p>The <code title=dom-URLUtils-host>host</code> attribute’s setter must run these
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-host title=host><code>host</code></a> attribute’s setter must run these
 steps:
 
 <ol>
@@ -2406,7 +2406,7 @@ must run these steps:
  <a data-link-type=dfn href=#concept-host-serializer title=concept-host-serializer>serialized</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-hostname>hostname</code> attribute’s setter must
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-hostname title=hostname><code>hostname</code></a> attribute’s setter must
 run these steps:
 
 <ol>
@@ -2430,7 +2430,7 @@ these steps:
  <li><p>Return <a data-link-type=dfn href=#concept-url-port title=concept-url-port>port</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-port>port</code> attribute’s setter must run these steps:
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-port title=port><code>port</code></a> attribute’s setter must run these steps:
 
 <ol>
  <li><p>If <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a> is null, its
@@ -2460,7 +2460,7 @@ must run these steps:
  separated from each other by "<code>/</code>".
 </ol>
 
-<p>The <code title=dom-URLUtils-pathname>pathname</code> attribute’s setter must
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-pathname title=pathname><code>pathname</code></a> attribute’s setter must
 run these steps:
 
 <ol>
@@ -2488,7 +2488,7 @@ run these steps:
  <a data-link-type=dfn href=#concept-url-query title=concept-url-query>query</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-search>search</code> attribute’s setter must run these steps:
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-search title=search><code>search</code></a> attribute’s setter must run these steps:
 
 <ol>
  <li><p>If <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a> is null, terminate these steps.
@@ -2526,7 +2526,7 @@ run these steps:
 <p>The <dfn class=idl-code data-dfn-for=URLUtils data-dfn-type=attribute data-export="" id=dom-urlutils-searchparams><code>searchParams</code><a class=self-link href=#dom-urlutils-searchparams></a></dfn> attribute’s getter
 must return the <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a>.
 
-<p>The <code title=dom-URLUtils-searchParams>searchParams</code> attribute’s setter must run
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-searchparams title=searchParams><code>searchParams</code></a> attribute’s setter must run
 these steps:
 
 <ol>
@@ -2563,7 +2563,7 @@ these steps:
  <a data-link-type=dfn href=#concept-url-fragment title=concept-url-fragment>fragment</a>.
 </ol>
 
-<p>The <code title=dom-URLUtils-hash>hash</code> attribute’s setter must run these steps:
+<p>The <a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-hash title=hash><code>hash</code></a> attribute’s setter must run these steps:
 
 <ol>
  <li><p>If <a data-link-type=dfn href=#concept-urlutils-url title=concept-URLUtils-url>url</a> is null, or its
