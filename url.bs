@@ -1912,7 +1912,7 @@ on <a title=concept-url>URL</a>'s <a title=concept-url-scheme>scheme</a>:
 
 <h2 id="application/x-www-form-urlencoded"><a><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code></a></h2>
 
-<p>The <dfn id=application-x-www-form-urlencoded-0><a><code>application/x-www-form-urlencoded</code></a></dfn> format is a simple way to
+<p>The <dfn id=application-x-www-form-urlencoded-0><code>application/x-www-form-urlencoded</code></dfn> format is a simple way to
 encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range.
 
 <p class="note no-backref">While this description makes
@@ -2435,7 +2435,7 @@ a.href === test // true</pre>
   </div>
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><a><code>origin</code></a></dfn></dfn> attribute's getter must
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>origin</code></dfn></dfn> attribute's getter must
 run these steps:
 
 <ol>
