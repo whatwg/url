@@ -794,7 +794,7 @@ It is initially unset.
 <p class="note no-backref">The <a>relative flag</a> exists as checking if a
 <a title=concept-url>URL</a>'s <a title=concept-url-scheme>scheme</a> is a
 <a>relative scheme</a> can give incorrect results due to the
-<code title=dom-URL-protocol>protocol</code> attribute.
+<code title=dom-URLUtils-protocol>protocol</code> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
 <p>A <a title=concept-url>URL</a> also has an associated
@@ -1182,7 +1182,7 @@ optionally with an <a>encoding</a>
     <a title=concept-url-scheme>scheme</a> is not a
     <a>relative scheme</a>, <a>parse error</a>, return failure.
 
-    <p class=note>Due to the <code title=dom-URL-protocol>protocol</code> attribute's
+    <p class=note>Due to the <code title=dom-URLUtils-protocol>protocol</code> attribute's
     ability to change <var>base</var>'s
     <a title=concept-url-scheme>scheme</a>, <var>base</var>'s
     <a>relative flag</a> is not used here.
@@ -2109,48 +2109,48 @@ it.
 
 <!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
 
-<pre class=idl>[<a title=dom-URL>Constructor</a>(USVString <var>url</var>, optional USVString <var>base</var> = "about:blank"),
+<pre class=idl>[Constructor(USVString url, optional USVString base = "about:blank"),
  Exposed=(Window,Worker)]
-interface <dfn>URL</dfn> {
-  static USVString <a title=dom-URL-domainToASCII>domainToASCII</a>(USVString <var>domain</var>);
-  static USVString <a title=dom-URL-domainToUnicode>domainToUnicode</a>(USVString <var>domain</var>);
+interface URL {
+  static USVString domainToASCII(USVString domain);
+  static USVString domainToUnicode(USVString domain);
 };
-<a>URL</a> implements <a>URLUtils</a>;
+URL implements URLUtils;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <dfn>URLUtils</dfn> {
-  stringifier attribute USVString <a title=dom-URL-href>href</a>;
-  readonly attribute USVString <a title=dom-URL-origin>origin</a>;
+interface URLUtils {
+  stringifier attribute USVString href;
+  readonly attribute USVString origin;
 
-           attribute USVString <a title=dom-URL-protocol>protocol</a>;
-           attribute USVString <a title=dom-URL-username>username</a>;
-           attribute USVString <a title=dom-URL-password>password</a>;
-           attribute USVString <a title=dom-URL-host>host</a>;
-           attribute USVString <a title=dom-URL-hostname>hostname</a>;
-           attribute USVString <a title=dom-URL-port>port</a>;
-           attribute USVString <a title=dom-URL-pathname>pathname</a>;
-           attribute USVString <a title=dom-URL-search>search</a>;
-           attribute <a>URLSearchParams</a> <a title=dom-URL-searchParams>searchParams</a>;
-           attribute USVString <a title=dom-URL-hash>hash</a>;
+           attribute USVString protocol;
+           attribute USVString username;
+           attribute USVString password;
+           attribute USVString host;
+           attribute USVString hostname;
+           attribute USVString port;
+           attribute USVString pathname;
+           attribute USVString search;
+           attribute URLSearchParams searchParams;
+           attribute USVString hash;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <dfn>URLUtilsReadOnly</dfn> {
-  stringifier readonly attribute USVString <a title=dom-URL-href>href</a>;
-  readonly attribute USVString <a title=dom-URL-origin>origin</a>;
+interface URLUtilsReadOnly {
+  stringifier readonly attribute USVString href;
+  readonly attribute USVString origin;
 
-  readonly attribute USVString <a title=dom-URL-protocol>protocol</a>;<!--
-  readonly attribute USVString <a title=dom-URL-username>username</a>;
-  readonly attribute USVString <a title=dom-URL-password>password</a>;-->
-  readonly attribute USVString <a title=dom-URL-host>host</a>;
-  readonly attribute USVString <a title=dom-URL-hostname>hostname</a>;
-  readonly attribute USVString <a title=dom-URL-port>port</a>;
-  readonly attribute USVString <a title=dom-URL-pathname>pathname</a>;
-  readonly attribute USVString <a title=dom-URL-search>search</a>;<!--
-  readonly attribute <a>URLSearchParams</a> <a title=dom-URL-searchParams>searchParams</a>;-->
-  readonly attribute USVString <a title=dom-URL-hash>hash</a>;
+  readonly attribute USVString protocol;<!--
+  readonly attribute USVString username;
+  readonly attribute USVString password;-->
+  readonly attribute USVString host;
+  readonly attribute USVString hostname;
+  readonly attribute USVString port;
+  readonly attribute USVString pathname;
+  readonly attribute USVString search;<!--
+  readonly attribute URLSearchParams searchParams;-->
+  readonly attribute USVString hash;
 };</pre>
 
 <p>Except where different objects implementing <code>URLUtilsReadOnly</code> are identical
@@ -2280,7 +2280,7 @@ and optionally a <var>url</var>, run these steps:
 <h3 id=constructors>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
 
 <p>The
-<dfn title="dom-URL()"><code>URL(<var>url</var>, <var>base</var>)</code></dfn>
+<dfn constructor dfn-for=URL><code>URL(<var>url</var>, <var>base</var>)</code></dfn>
 constructor, when invoked, must run these steps:
 
 <ol>
@@ -2337,7 +2337,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 <h3 id=url-statics><code>URL</code> statics</h3>
 
 <p>The
-<dfn title="dom-URL-domainToASCII()"><code>domainToASCII(<var>domain</var>)</code></dfn>
+<dfn method dfn-for=URL><code>domainToASCII(<var>domain</var>)</code></dfn>
 static method, when invoked, must run these steps:
 
 <ol>
@@ -2351,7 +2351,7 @@ static method, when invoked, must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-URL-domainToUnicode()"><code>domainToUnicode(<var>domain</var>)</code></dfn>
+<dfn method dfn-for=URL><code>domainToUnicode(<var>domain</var>)</code></dfn>
 static method, when invoked, must run these steps:
 
 <ol>
@@ -2375,7 +2375,7 @@ representation?
 not exposed on the global object. They are meant to augment other interfaces, such as
 <code>URL</code>.
 
-<p>The <dfn title=dom-URL-href><code>href</code></dfn> attribute's getter must run
+<p>The <dfn stringifier dfn-for=URLUtilsReadOnly><dfn stringifier dfn-for=URLUtils><code>href</code></dfn></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2386,7 +2386,7 @@ these steps:
  of <a title=concept-URLUtils-url>url</a>.
 </ol>
 
-<p>The <code title=dom-URL-href>href</code> attribute's setter must run these steps:
+<p>The <code title=dom-URLUtils-href>href</code> attribute's setter must run these steps:
 
 <ol>
  <li><p>Let <var>input</var> be the given value.
@@ -2423,7 +2423,7 @@ these steps:
   </ol>
 
   <div class=example>
-   <p>This means that if the <code title=dom-URL-href>href</code> attribute is set to
+   <p>This means that if the <code title=dom-URLUtils-href>href</code> attribute is set to
    value that would cause the <a title=concept-url-parser>URL parser</a> to return
    failure, that value is still passed through unchanged. This is one of those unfortunate
    legacy incidents.
@@ -2435,7 +2435,7 @@ a.href === test // true</pre>
   </div>
 </ol>
 
-<p>The <dfn title=dom-URL-origin><a><code>origin</code></a></dfn> attribute's getter must
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><a><code>origin</code></a></dfn></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2452,7 +2452,7 @@ run these steps:
 compatibility with HTML's <code>MessageEvent</code> feature.
 [[!HTML]]
 
-<p>The <dfn title=dom-URL-protocol><code>protocol</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>protocol</code></dfn></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2463,7 +2463,7 @@ must run these steps:
  "<code>:</code>" concatenated.
 </ol>
 
-<p>The <code title=dom-URL-protocol>protocol</code> attribute's setter must
+<p>The <code title=dom-URLUtils-protocol>protocol</code> attribute's setter must
 run these steps:
 
 <ol>
@@ -2478,7 +2478,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-username><code>username</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>username</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2488,7 +2488,7 @@ must run these steps:
  <li><p>Return <a title=concept-url-username>username</a>.
 </ol>
 
-<p>The <code title=dom-URL-username>username</code> attribute's setter must
+<p>The <code title=dom-URLUtils-username>username</code> attribute's setter must
 run these steps:
 
 <ol>
@@ -2501,7 +2501,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-password><code>password</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>password</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2512,7 +2512,7 @@ must run these steps:
  <li><p>Return <a title=concept-url-password>password</a>.
 </ol>
 
-<p>The <code title=dom-URL-password>password</code> attribute's setter must
+<p>The <code title=dom-URLUtils-password>password</code> attribute's setter must
 run these steps:
 
 <ol>
@@ -2525,7 +2525,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-host><code>host</code></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>host</code></dfn></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2542,7 +2542,7 @@ these steps:
  concatenated.
 </ol>
 
-<p>The <code title=dom-URL-host>host</code> attribute's setter must run these
+<p>The <code title=dom-URLUtils-host>host</code> attribute's setter must run these
 steps:
 
 <ol>
@@ -2556,7 +2556,7 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-hostname><code>hostname</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>hostname</code></dfn></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2567,7 +2567,7 @@ must run these steps:
  <a title=concept-host-serializer>serialized</a>.
 </ol>
 
-<p>The <code title=dom-URL-hostname>hostname</code> attribute's setter must
+<p>The <code title=dom-URLUtils-hostname>hostname</code> attribute's setter must
 run these steps:
 
 <ol>
@@ -2581,7 +2581,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-port><code>port</code></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>port</code></dfn></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2591,7 +2591,7 @@ these steps:
  <li><p>Return <a title=concept-url-port>port</a>.
 </ol>
 
-<p>The <code title=dom-URL-port>port</code> attribute's setter must run these steps:
+<p>The <code title=dom-URLUtils-port>port</code> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, its
@@ -2606,7 +2606,7 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-pathname><code>pathname</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>pathname</code></dfn></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2621,7 +2621,7 @@ must run these steps:
  separated from each other by "<code>/</code>".
 </ol>
 
-<p>The <code title=dom-URL-pathname>pathname</code> attribute's setter must
+<p>The <code title=dom-URLUtils-pathname>pathname</code> attribute's setter must
 run these steps:
 
 <ol>
@@ -2637,7 +2637,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-search><code>search</code></dfn> attribute's getter must
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>search</code></dfn></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2649,7 +2649,7 @@ run these steps:
  <a title=concept-url-query>query</a>.
 </ol>
 
-<p>The <code title=dom-URL-search>search</code> attribute's setter must run these steps:
+<p>The <code title=dom-URLUtils-search>search</code> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, terminate these steps.
@@ -2684,10 +2684,10 @@ run these steps:
 <a title=concept-URLUtils-query-object>query object</a> are run to ensure all
 <a title=concept-URLSearchParams-url-object>url objects</a> remain synchronized.
 
-<p>The <dfn title=dom-URL-searchParams><code>searchParams</code></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>searchParams</code></dfn> attribute's getter
 must return the <a title=concept-URLUtils-query-object>query object</a>.
 
-<p>The <code title=dom-URL-searchParams>searchParams</code> attribute's setter must run
+<p>The <code title=dom-URLUtils-searchParams>searchParams</code> attribute's setter must run
 these steps:
 
 <ol>
@@ -2712,7 +2712,7 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn title=dom-URL-hash><code>hash</code></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>hash</code></dfn></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2724,7 +2724,7 @@ these steps:
  <a title=concept-url-fragment>fragment</a>.
 </ol>
 
-<p>The <code title=dom-URL-hash>hash</code> attribute's setter must run these steps:
+<p>The <code title=dom-URLUtils-hash>hash</code> attribute's setter must run these steps:
 
 <ol>
  <li><p>If <a title=concept-URLUtils-url>url</a> is null, or its
@@ -2751,17 +2751,17 @@ these steps:
 
 <h3 id=interface-urlsearchparams>Interface <code>URLSearchParams</code></h3>
 
-<pre class=idl>[<a title=dom-URLSearchParams>Constructor</a>(optional (USVString or <a>URLSearchParams</a>) <var>init</var> = ""),
+<pre class=idl>[Constructor(optional (USVString or URLSearchParams) init = ""),
  Exposed=(Window,Worker)]
-interface <dfn>URLSearchParams</dfn> {
-  void <a title=dom-URLSearchParams-append>append</a>(USVString <var>name</var>, USVString <var>value</var>);
-  void <a title=dom-URLSearchParams-delete>delete</a>(USVString <var>name</var>);
-  USVString? <a title=dom-URLSearchParams-get>get</a>(USVString <var>name</var>);
-  sequence&lt;USVString> <a title=dom-URLSearchParams-getAll>getAll</a>(USVString <var>name</var>);
-  boolean <a title=dom-URLSearchParams-has>has</a>(USVString <var>name</var>);
-  void <a title=dom-URLSearchParams-set>set</a>(USVString <var>name</var>, USVString <var>value</var>);
+interface URLSearchParams {
+  void append(USVString name, USVString value);
+  void delete(USVString name);
+  USVString? get(USVString name);
+  sequence&lt;USVString> getAll(USVString name);
+  boolean has(USVString name);
+  void set(USVString name, USVString value);
   iterable&lt;USVString, USVString>;
-  <a title=dom-URLSearchParams-stringifier>stringifier</a>;
+  stringifier;
 };</pre>
 
 <p>A <code>URLSearchParams</code> object has an associated
@@ -2819,13 +2819,13 @@ each associated  <a title=concept-URLSearchParams-url-object>url object</a>
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams()"><code>URLSearchParams(<var>init</var>)</code></dfn>
+<dfn constructor dfn-for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must return a
 <a title=concept-URLSearchParams-new>new <code>URLSearchParams</code> object</a>
 using <var>init</var> if given.
 
 <p>The
-<dfn title="dom-URLSearchParams-append()"><code>append(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
@@ -2836,7 +2836,7 @@ method, when invoked, must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-delete()"><code>delete(<var>name</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>delete(<var>name</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
@@ -2847,19 +2847,19 @@ method, when invoked, must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-get()"><code>get(<var>name</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
 <var>name</var> in <a title=concept-URLSearchParams-list>list</a>, and null if
 there is no such pair.
 
 <p>The
-<dfn title="dom-URLSearchParams-getAll()"><code>getAll(<var>name</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
 <var>name</var>, in <a title=concept-URLSearchParams-list>list</a>,
 in list order, and the empty sequence otherwise.
 
 <p>The
-<dfn title="dom-URLSearchParams-set()"><code>set(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
@@ -2874,7 +2874,7 @@ method, when invoked, must run these steps:
 </ol>
 
 <p>The
-<dfn title="dom-URLSearchParams-has()"><code>has(<var>name</var>)</code></dfn>
+<dfn method dfn-for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
 <var>name</var> in <a title=concept-URLSearchParams-list>list</a>, and false
 otherwise.
@@ -2883,7 +2883,7 @@ otherwise.
 <a title=concept-URLSearchParams-list>list</a> name-value pairs with the key being
 the name and the value the value.
 
-<p>The <dfn title=dom-URLSearchParams-stringifier>stringifier</dfn> must return the
+<p>The <dfn stringifier dfn-for=URLSearchParams>stringifier</dfn> must return the
 <a title=concept-urlencoded-serializer>serialization</a> of the
 <code>URLSearchParams</code> object's
 <a title=concept-URLSearchParams-list>list</a>.
