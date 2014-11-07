@@ -13,158 +13,6 @@ Logo: https://resources.whatwg.org/logo-url.svg
 !Participate: <a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 </pre>
 
-<pre class="biblio"
-{
-    "IDNA": {
-        "authors": [
-            "Mark Davis",
-            "Michel Suignard"
-        ],
-        "href": "http://www.unicode.org/reports/tr46/",
-        "title": "Unicode IDNA Compatibility Processing",
-        "publisher": "Unicode Consortium"
-    },
-    "DOM": {
-        "authors": [
-            "Anne van Kesteren",
-            "Aryeh Gregor",
-            "Ms2ger"
-        ],
-        "href": "https://dom.spec.whatwg.org/",
-        "title": "DOM",
-        "publisher": "WHATWG"
-    },
-    "ENCODING": {
-        "authors": [
-            "Anne van Kesteren"
-        ],
-        "href": "https://encoding.spec.whatwg.org/",
-        "title": "Encoding",
-        "publisher": "WHATWG"
-    }
-}
-</pre>
-
-<pre class="anchors">
-[
-    {
-        "linkingText": "ascii whitespace",
-        "url": "https://encoding.spec.whatwg.org/#ascii-whitespace",
-        "shortname": "encoding", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "blob",
-        "url": "http://dev.w3.org/2006/webapi/FileAPI/#blob",
-        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "blob url store",
-        "url": "http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore",
-        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "concept-attribute-value",
-        "url": "https://dom.spec.whatwg.org/#concept-attribute-value",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "concept-document",
-        "url": "https://dom.spec.whatwg.org/#concept-document",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "concept-encoding-get",
-        "url": "https://encoding.spec.whatwg.org/#concept-encoding-get",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "context object",
-        "url": "https://dom.spec.whatwg.org/#context-object",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "decoder",
-        "url": "https://encoding.spec.whatwg.org/#decoder",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "dom-node-baseuri",
-        "url": "https://dom.spec.whatwg.org/#dom-node-baseuri",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "encoding",
-        "url": "https://encoding.spec.whatwg.org/#encoding",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "error",
-        "url": "https://encoding.spec.whatwg.org/#error",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "eventsource",
-        "url": "https://html.spec.whatwg.org/multipage/comms.html#eventsource",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "hashchangeevent",
-        "url": "https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "structured clone",
-        "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "throw",
-        "url": "http://heycam.github.io/webidl/#dfn-throw",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "toascii",
-        "url": "http://www.unicode.org/reports/tr46/#ToASCII",
-        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "tounicode",
-        "url": "http://www.unicode.org/reports/tr46/#ToUnicode",
-        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8",
-        "url": "https://encoding.spec.whatwg.org/#utf-8",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 decode without bom",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-decode-without-bom",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 encode",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-encode",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 decoder",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-decoder",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "unicode serialization of an origin",
-        "url": "https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "value pairs to iterate over",
-        "url": "http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    }
-]
-</pre>
-
 <h2 id=goals class=no-num>Goals</h2>
 
 <p>The URL standard takes the following approach towards making URLs fully interoperable:
@@ -2995,3 +2843,155 @@ the extent possible under law, the editor has waived all copyright and related o
 neighboring rights to this work.
 
 <script id=head src=//resources.whatwg.org/dfn.js></script>
+
+<pre class="biblio"
+{
+    "IDNA": {
+        "authors": [
+            "Mark Davis",
+            "Michel Suignard"
+        ],
+        "href": "http://www.unicode.org/reports/tr46/",
+        "title": "Unicode IDNA Compatibility Processing",
+        "publisher": "Unicode Consortium"
+    },
+    "DOM": {
+        "authors": [
+            "Anne van Kesteren",
+            "Aryeh Gregor",
+            "Ms2ger"
+        ],
+        "href": "https://dom.spec.whatwg.org/",
+        "title": "DOM",
+        "publisher": "WHATWG"
+    },
+    "ENCODING": {
+        "authors": [
+            "Anne van Kesteren"
+        ],
+        "href": "https://encoding.spec.whatwg.org/",
+        "title": "Encoding",
+        "publisher": "WHATWG"
+    }
+}
+</pre>
+
+<pre class="anchors">
+[
+    {
+        "linkingText": "ascii whitespace",
+        "url": "https://encoding.spec.whatwg.org/#ascii-whitespace",
+        "shortname": "encoding", "type": "dfn", "level": 2, "status": "current"
+    },
+    {
+        "linkingText": "blob",
+        "url": "http://dev.w3.org/2006/webapi/FileAPI/#blob",
+        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
+    },
+    {
+        "linkingText": "blob url store",
+        "url": "http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore",
+        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
+    },
+    {
+        "linkingText": "concept-attribute-value",
+        "url": "https://dom.spec.whatwg.org/#concept-attribute-value",
+        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
+    },
+    {
+        "linkingText": "concept-document",
+        "url": "https://dom.spec.whatwg.org/#concept-document",
+        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "concept-encoding-get",
+        "url": "https://encoding.spec.whatwg.org/#concept-encoding-get",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "context object",
+        "url": "https://dom.spec.whatwg.org/#context-object",
+        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "decoder",
+        "url": "https://encoding.spec.whatwg.org/#decoder",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "dom-node-baseuri",
+        "url": "https://dom.spec.whatwg.org/#dom-node-baseuri",
+        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "encoding",
+        "url": "https://encoding.spec.whatwg.org/#encoding",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "error",
+        "url": "https://encoding.spec.whatwg.org/#error",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "eventsource",
+        "url": "https://html.spec.whatwg.org/multipage/comms.html#eventsource",
+        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "hashchangeevent",
+        "url": "https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent",
+        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "structured clone",
+        "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone",
+        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "throw",
+        "url": "http://heycam.github.io/webidl/#dfn-throw",
+        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
+    },
+    {
+        "linkingText": "toascii",
+        "url": "http://www.unicode.org/reports/tr46/#ToASCII",
+        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "tounicode",
+        "url": "http://www.unicode.org/reports/tr46/#ToUnicode",
+        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "utf-8",
+        "url": "https://encoding.spec.whatwg.org/#utf-8",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "utf-8 decode without bom",
+        "url": "https://encoding.spec.whatwg.org/#utf-8-decode-without-bom",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "utf-8 encode",
+        "url": "https://encoding.spec.whatwg.org/#utf-8-encode",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "utf-8 decoder",
+        "url": "https://encoding.spec.whatwg.org/#utf-8-decoder",
+        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "unicode serialization of an origin",
+        "url": "https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin",
+        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "value pairs to iterate over",
+        "url": "http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over",
+        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
+    }
+]
+</pre>
