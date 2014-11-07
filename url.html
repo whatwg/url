@@ -13,8 +13,8 @@
 </p>
   <h1 class="p-name no-ref" id=title>URL</h1>
   <h2 class="no-num no-toc no-ref heading settled" id=subtitle><span class=content>Living Standard — Last Updated
-    <span class=dt-updated><span class=value-title title=20141106>6 November 2014</span></span></span></h2>
-  <div data-fill-with=spec-metadata><dl><dt class=editor>Editor:<dd class=editor><div class="p-author h-card vcard"><span class="p-name fn">No</span></div><dt>Version History:<dd><span><a href=https://github.com/whatwg/url/commits>https://github.com/whatwg/url/commits</a> <a href=https://twitter.com/urlstandard>@urlstandard</a></span><dt>Participate:<dd><span><a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)</span><dd><span><a href=https://whatwg.org/mailing-list>whatwg@whatwg.org</a> (<a href=https://whatwg.org/mailing-list#specs>archives</a>)</span><dd><span><a href=http://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a></span></dl></div>
+    <span class=dt-updated><span class=value-title title=20141107>7 November 2014</span></span></span></h2>
+  <div data-fill-with=spec-metadata><dl><dt>Version History:<dd><span><a href=https://github.com/whatwg/url/commits>https://github.com/whatwg/url/commits</a> <a href=https://twitter.com/urlstandard>@urlstandard</a></span><dt>Participate:<dd><span><a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)</span><dd><span><a href=https://whatwg.org/mailing-list>whatwg@whatwg.org</a> (<a href=https://whatwg.org/mailing-list#specs>archives</a>)</span><dd><span><a href=http://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a></span></dl></div>
   <div data-fill-with=warning></div>
 </div>
 
@@ -25,7 +25,8 @@
 <div data-fill-with=at-risk></div>
 
 <h2 class="no-num no-toc no-ref heading settled" id=contents><span class=content>Table of Contents</span></h2>
-<div data-fill-with=table-of-contents><ul class=toc><li><a href=#goals><span class=secno></span> <span class=content>Goals</span></a><li><a href=#terminology><span class=secno>1</span> <span class=content>Terminology</span></a><ul class=toc><li><a href=#parsers><span class=secno>1.1</span> <span class=content>Parsers</span></a></ul><li><a href=#percent-encoded-bytes><span class=secno>2</span> <span class=content>Percent-encoded bytes</span></a><li><a href=#hosts-(domains-and-ip-addresses)><span class=secno>3</span> <span class=content>Hosts (domains and IP addresses)</span></a><ul class=toc><li><a href=#idna><span class=secno>3.1</span> <span class=content>IDNA</span></a><li><a href=#host-writing><span class=secno>3.2</span> <span class=content>Host writing</span></a><li><a href=#host-parsing><span class=secno>3.3</span> <span class=content>Host parsing</span></a><li><a href=#host-serializing><span class=secno>3.4</span> <span class=content>Host serializing</span></a></ul><li><a href=#urls><span class=secno>4</span> <span class=content>URLs</span></a><ul class=toc><li><a href=#url-writing><span class=secno>4.1</span> <span class=content>URL writing</span></a><li><a href=#url-parsing><span class=secno>4.2</span> <span class=content>URL parsing</span></a><li><a href=#url-serializing><span class=secno>4.3</span> <span class=content>URL serializing</span></a><li><a href=#origin><span class=secno>4.4</span> <span class=content>Origin</span></a></ul><li><a href=#application/x-www-form-urlencoded><span class=secno>5</span> <span class=content><code title=application-x-www-form-urlencoded-0><span data-link-type=dfn title=application/x-www-form-urlencoded>application/x-www-form-urlencoded</span></code></span></a><ul class=toc><li><a href=#urlencoded-parsing><span class=secno>5.1</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</span></a><li><a href=#urlencoded-serializing><span class=secno>5.2</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</span></a><li><a href=#urlencoded-hooks><span class=secno>5.3</span> <span class=content>Hooks</span></a></ul><li><a href=#api><span class=secno>6</span> <span class=content>API</span></a><ul class=toc><li><a href=#constructors><span class=secno>6.1</span> <span class=content>Constructors</span></a><li><a href=#url-statics><span class=secno>6.2</span> <span class=content><code><span data-link-type=interface title=URL>URL</span></code> statics</span></a><li><a href=#urlutils-and-urlutilsreadonly-members><span class=secno>6.3</span> <span class=content><code><span data-link-type=interface title=URLUtils>URLUtils</span></code> and <code><span data-link-type=interface title=URLUtilsReadOnly>URLUtilsReadOnly</span></code> members</span></a><li><a href=#interface-urlsearchparams><span class=secno>6.4</span> <span class=content>Interface <code><span data-link-type=interface title=URLSearchParams>URLSearchParams</span></code></span></a><li><a href=#url-apis-elsewhere><span class=secno>6.5</span> <span class=content>URL APIs elsewhere</span></a></ul><li><a href=#acknowledgments><span class=secno></span> <span class=content>Acknowledgments</span></a><li><a href=#conformance><span class=secno></span> <span class=content>Conformance</span></a><li><a href=#references><span class=secno></span> <span class=content>References</span></a><ul class=toc><li><a href=#normative><span class=secno></span> <span class=content>Normative References</span></a><li><a href=#informative><span class=secno></span> <span class=content>Informative References</span></a></ul><li><a href=#index><span class=secno></span> <span class=content>Index</span></a><li><a href=#idl-index><span class=secno></span> <span class=content>IDL Index</span></a></ul></div>
+<div data-fill-with=table-of-contents role=navigation><ul class=toc role=directory><li><a href=#goals><span class=secno></span> <span class=content>Goals</span></a><li><a href=#terminology><span class=secno>1</span> <span class=content>Terminology</span></a><ul class=toc><li><a href=#parsers><span class=secno>1.1</span> <span class=content>Parsers</span></a></ul><li><a href=#percent-encoded-bytes><span class=secno>2</span> <span class=content>Percent-encoded bytes</span></a><li><a href=#hosts-(domains-and-ip-addresses)><span class=secno>3</span> <span class=content>Hosts (domains and IP addresses)</span></a><ul class=toc><li><a href=#idna><span class=secno>3.1</span> <span class=content>IDNA</span></a><li><a href=#host-writing><span class=secno>3.2</span> <span class=content>Host writing</span></a><li><a href=#host-parsing><span class=secno>3.3</span> <span class=content>Host parsing</span></a><li><a href=#host-serializing><span class=secno>3.4</span> <span class=content>Host serializing</span></a></ul><li><a href=#urls><span class=secno>4</span> <span class=content>URLs</span></a><ul class=toc><li><a href=#url-writing><span class=secno>4.1</span> <span class=content>URL writing</span></a><li><a href=#url-parsing><span class=secno>4.2</span> <span class=content>URL parsing</span></a><li><a href=#url-serializing><span class=secno>4.3</span> <span class=content>URL serializing</span></a><li><a href=#origin><span class=secno>4.4</span> <span class=content>Origin</span></a></ul><li><a href=#application/x-www-form-urlencoded><span class=secno>5</span> <span class=content><code title=application-x-www-form-urlencoded-0><span data-link-type=dfn title=application/x-www-form-urlencoded>application/x-www-form-urlencoded</span></code></span></a><ul class=toc><li><a href=#urlencoded-parsing><span class=secno>5.1</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</span></a><li><a href=#urlencoded-serializing><span class=secno>5.2</span> <span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</span></a><li><a href=#urlencoded-hooks><span class=secno>5.3</span> <span class=content>Hooks</span></a></ul><li><a href=#api><span class=secno>6</span> <span class=content>API</span></a><ul class=toc><li><a href=#constructors><span class=secno>6.1</span> <span class=content>Constructors</span></a><li><a href=#url-statics><span class=secno>6.2</span> <span class=content><code><span data-link-type=interface title=URL>URL</span></code> statics</span></a><li><a href=#urlutils-and-urlutilsreadonly-members><span class=secno>6.3</span> <span class=content><code><span data-link-type=interface title=URLUtils>URLUtils</span></code> and <code><span data-link-type=interface title=URLUtilsReadOnly>URLUtilsReadOnly</span></code> members</span></a><li><a href=#interface-urlsearchparams><span class=secno>6.4</span> <span class=content>Interface <code><span data-link-type=interface title=URLSearchParams>URLSearchParams</span></code></span></a><li><a href=#url-apis-elsewhere><span class=secno>6.5</span> <span class=content>URL APIs elsewhere</span></a></ul><li><a href=#acknowledgments><span class=secno></span> <span class=content>Acknowledgments</span></a><li><a href=#conformance><span class=secno></span> <span class=content>Conformance</span></a><li><a href=#references><span class=secno></span> <span class=content>References</span></a><ul class=toc><li><a href=#normative><span class=secno></span> <span class=content>Normative References</span></a><li><a href=#informative><span class=secno></span> <span class=content>Informative References</span></a></ul><li><a href=#index><span class=secno></span> <span class=content>Index</span></a><li><a href=#idl-index><span class=secno></span> <span class=content>IDL Index</span></a></ul></div>
+<main>
 
 
 
@@ -58,7 +59,7 @@
  for JavaScript worker environments.)
 </ul>
 
-<p class=note>As the editor learns more about the subject matter the goals
+<p class=note role=note>As the editor learns more about the subject matter the goals
 might increase in scope somewhat.
 
 
@@ -250,7 +251,7 @@ eight <dfn data-dfn-type=dfn data-noexport="" id=concept-ipv6-piece title=concep
  <li>
   <p>Return <var>result</var>, ignoring any returned errors.
 
-  <p class=note>User agents are encouraged to report errors through a developer console.
+  <p class=note role=note>User agents are encouraged to report errors through a developer console.
 </ol>
 
 
@@ -594,7 +595,7 @@ then runs these steps:
  <li><p>Return <var>output</var>.
 </ol>
 
-<p class=note>This algorithm requires the recommendation from
+<p class=note role=note>This algorithm requires the recommendation from
 A Recommendation for IPv6 Address Text Representation.
 <a data-biblio-type=informative data-link-type=biblio href=#biblio-rfc5952 title=RFC5952>[RFC5952]</a>
 
@@ -628,7 +629,7 @@ dispatch a <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> for
 <dfn data-dfn-type=dfn data-noexport="" id=concept-url-scheme-data title=concept-url-scheme-data>scheme data<a class=self-link href=#concept-url-scheme-data></a></dfn> is a string holding the contents of a
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>. It is initially the empty string.
 
-<p class="note no-backref">A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s
+<p class="note no-backref" role=note>A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s
 <a data-link-type=dfn href=#concept-url-scheme-data title=concept-url-scheme-data>scheme data</a> will be its initial value if its
 <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a> is a <a data-link-type=dfn href=#relative-scheme title="relative scheme">relative scheme</a>, and
 otherwise will be the only component without an initial value.
@@ -660,7 +661,7 @@ It is initially null.
 <p>A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> also has an associated <dfn data-dfn-type=dfn data-noexport="" id=relative-flag>relative flag<a class=self-link href=#relative-flag></a></dfn>.
 It is initially unset.
 
-<p class="note no-backref">The <a data-link-type=dfn href=#relative-flag title="relative flag">relative flag</a> exists as checking if a
+<p class="note no-backref" role=note>The <a data-link-type=dfn href=#relative-flag title="relative flag">relative flag</a> exists as checking if a
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a> is a
 <a data-link-type=dfn href=#relative-scheme title="relative scheme">relative scheme</a> can give incorrect results due to the
 <code><a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol>protocol</a></code> attribute.
@@ -671,7 +672,7 @@ It is initially unset.
 <code><a data-link-type=dfn href=http://dev.w3.org/2006/webapi/FileAPI/#blob title=Blob>Blob</a></code>. It is initially null.
 <a data-biblio-type=normative data-link-type=biblio href=#biblio-fileapi title=FILEAPI>[FILEAPI]</a>
 
-<p class=note>At this point this is used primarily to support "<code>blob</code>"
+<p class=note role=note>At this point this is used primarily to support "<code>blob</code>"
 URLs, but others can be added going forward, hence "object".
 
 
@@ -705,7 +706,7 @@ on the same row.
 <p>A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> can be designated as
 <dfn data-dfn-type=dfn data-noexport="" id=concept-base-url title=concept-base-url>base URL<a class=self-link href=#concept-base-url></a></dfn>.
 
-<p class="note no-backref">A <a data-link-type=dfn href=#concept-base-url title=concept-base-url>base URL</a> is useful for
+<p class="note no-backref" role=note>A <a data-link-type=dfn href=#concept-base-url title=concept-base-url>base URL</a> is useful for
 the <a data-link-type=dfn href=#concept-url-parser title=concept-url-parser>URL parser</a> when the input is potentially a
 <a data-link-type=dfn href=#concept-relative-url title=concept-relative-url>relative URL</a>.
 
@@ -838,7 +839,7 @@ U+E0000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD.
 
-<p class=note>Code points higher than U+009F will be converted to
+<p class=note role=note>Code points higher than U+009F will be converted to
 <a data-link-type=dfn href=#percent-encoded-byte title="percent-encoded byte">percent-encoded bytes</a> by the
 <a data-link-type=dfn href=#concept-url-parser title=concept-url-parser>URL parser</a>.
 
@@ -889,7 +890,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
 <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> <var>url</var> and a state override
 <var>state override</var>, and then runs these steps:
 
-<div class="note no-backref">
+<div class="note no-backref" role=note>
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for
  use by methods of objects implementing the <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code> interface.
@@ -1046,7 +1047,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
     <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a> is not a
     <a data-link-type=dfn href=#relative-scheme title="relative scheme">relative scheme</a>, <a data-link-type=dfn href=#parse-error title="parse error">parse error</a>, return failure.
 
-    <p class=note>Due to the <code><a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol>protocol</a></code> attribute’s
+    <p class=note role=note>Due to the <code><a class=idl-code data-link-for=URLUtils data-link-type=attribute href=#dom-urlutils-protocol title=protocol>protocol</a></code> attribute’s
     ability to change <var>base</var>’s
     <a data-link-type=dfn href=#concept-url-scheme title=concept-url-scheme>scheme</a>, <var>base</var>’s
     <a data-link-type=dfn href=#relative-flag title="relative flag">relative flag</a> is not used here.
@@ -1139,7 +1140,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
         <var>url</var>’s <a data-link-type=dfn href=#concept-url-path title=concept-url-path>path</a>’s last entry.
         
 
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+        <p class=note role=note>This is a (platform-independent) Windows drive letter quirk.
         When found at the start of a <code>file</code> URL it is treated as an
         absolute path rather than one relative to
         <var>base</var>’s <a data-link-type=dfn href=#concept-url-path title=concept-url-path>path</a>.
@@ -1282,7 +1283,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
         either "<code>:</code>" or "<code>|</code>", set
         <var>state</var> to <a data-link-type=dfn href=#relative-path-state title="relative path state">relative path state</a>.
 
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+        <p class=note role=note>This is a (platform-independent) Windows drive letter quirk.
         <var>buffer</var> is not reset here and instead used in the
         <a data-link-type=dfn href=#relative-path-state title="relative path state">relative path state</a>.
 
@@ -1483,7 +1484,7 @@ optionally with an <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#
           and the second is "<code>|</code>", replace the second code point in
           <var>buffer</var> with "<code>:</code>".
 
-          <p class=note>This is a (platform-independent) Windows drive letter quirk.
+          <p class=note role=note>This is a (platform-independent) Windows drive letter quirk.
           They are beautiful, no?
 
          <li><p>Append <var>buffer</var> to
@@ -1727,7 +1728,7 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 <h3 class="heading settled" data-level=4.4 id=origin><span class=secno>4.4. </span><span class=content>Origin</span><a class=self-link href=#origin></a></h3>
 
 
-<p class=note>See <a data-link-type=dfn href=http://dev.w3.org/csswg/css-cascade-3/#origin title=origin>origin</a>’s definition in HTML for the
+<p class=note role=note>See <a data-link-type=dfn href=http://dev.w3.org/csswg/css-cascade-3/#origin title=origin>origin</a>’s definition in HTML for the
 necessary background information. <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
 <p>A <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s <dfn data-dfn-type=dfn data-noexport="" id=concept-url-origin title=concept-url-origin>origin<a class=self-link href=#concept-url-origin></a></dfn> is
@@ -1777,14 +1778,14 @@ on <a data-link-type=dfn href=#concept-url title=concept-url>URL</a>’s <a data
 <p>The <dfn data-dfn-type=dfn data-noexport="" id=application-x-www-form-urlencoded-0><code>application/x-www-form-urlencoded</code><a class=self-link href=#application-x-www-form-urlencoded-0></a></dfn> format is a simple way to
 encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range.
 
-<p class="note no-backref">While this description makes
+<p class="note no-backref" role=note>While this description makes
 <code title=application-x-www-form-urlencoded-0><a data-link-type=dfn href=#application-x-www-form-urlencoded-0 title=application/x-www-form-urlencoded>application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
 format is in widespread use due to its prevalence of HTML forms.
 <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
 <h3 class="heading settled" data-level=5.1 id=urlencoded-parsing><span class=secno>5.1. </span><span class=content><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</span><a class=self-link href=#urlencoded-parsing></a></h3>
 
-<p class="note no-backref">The features provided by the
+<p class="note no-backref" role=note>The features provided by the
 <code title=application-x-www-form-urlencoded-0><a data-link-type=dfn href=#concept-urlencoded-parser title=concept-urlencoded-parser></a><a data-link-type=dfn href=#application-x-www-form-urlencoded-0 title=application/x-www-form-urlencoded>application/x-www-form-urlencoded</a></code> parser
 are mainly relevant for server-oriented implementations. A browser-based implementation
 only needs what the
@@ -1807,7 +1808,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
   <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#utf-8 title=utf-8>utf-8</a> and <var>input</var> contains bytes
   whose value is greater than 0x7F, return failure.
 
-  <p class="note no-backref">This can only happen if <var>input</var> was not
+  <p class="note no-backref" role=note>This can only happen if <var>input</var> was not
   generated through the <a data-link-type=dfn href=#concept-urlencoded-serializer title=concept-urlencoded-serializer>serializer</a> or
   <code><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams>URLSearchParams</a></code>.
 
@@ -2006,7 +2007,7 @@ interface <dfn class=idl-code data-dfn-type=interface data-export="" data-global
 <p>Except where different objects implementing <code><a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly>URLUtilsReadOnly</a></code> are identical
 to objects implementing <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code>.
 
-<p class=note>Since all members are readonly and certain members from
+<p class=note role=note>Since all members are readonly and certain members from
 <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code> are not exposed a number of potential optimizations is possible
 compared to objects implementing <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code>. These are left as an exercise to
 the reader.
@@ -2038,7 +2039,7 @@ associated <dfn data-dfn-type=dfn data-noexport="" id=concept-urlutils-input tit
 <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a> is null. The others follow
 from the <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> algorithm.</p>
 
-<p class=note>The associated
+<p class=note role=note>The associated
 <a data-link-type=dfn href=#concept-urlutils-query-encoding title=concept-URLUtils-query-encoding>query encoding</a> is a legacy
 concept only relevant for HTML.
 <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
@@ -2147,7 +2148,7 @@ constructor, when invoked, must run these steps:
   <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> given the empty string
   and <var>parsedURL</var>.
 
-  <p class="note no-backref">A <code><a class=idl-code data-link-type=interface href=#dom-url title=URL>URL</a></code> object’s
+  <p class="note no-backref" role=note>A <code><a class=idl-code data-link-type=interface href=#dom-url title=URL>URL</a></code> object’s
   <a data-link-type=dfn href=#concept-urlutils-input title=concept-URLUtils-input>input</a> is never exposed.
 
  <li><p>Return <var>result</var>.
@@ -2210,7 +2211,7 @@ representation?
 
 <h3 class="heading settled" data-level=6.3 id=urlutils-and-urlutilsreadonly-members><span class=secno>6.3. </span><span class=content><code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code> and <code><a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly>URLUtilsReadOnly</a></code> members</span><a class=self-link href=#urlutils-and-urlutilsreadonly-members></a></h3>
 
-<p class=note>The <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code> and <code><a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly>URLUtilsReadOnly</a></code> interfaces are
+<p class=note role=note>The <code><a class=idl-code data-link-type=interface href=#dom-urlutils title=URLUtils>URLUtils</a></code> and <code><a class=idl-code data-link-type=interface href=#dom-urlutilsreadonly title=URLUtilsReadOnly>URLUtilsReadOnly</a></code> interfaces are
 not exposed on the global object. They are meant to augment other interfaces, such as
 <code><a class=idl-code data-link-type=interface href=#dom-url title=URL>URL</a></code>.
 
@@ -2247,7 +2248,7 @@ these steps:
     <p>Run <a data-link-type=dfn href=#concept-urlutils-set-the-input title=concept-URLUtils-set-the-input>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
-    <p class="note no-backref">A <code><a class=idl-code data-link-type=interface href=#dom-url title=URL>URL</a></code> object’s
+    <p class="note no-backref" role=note>A <code><a class=idl-code data-link-type=interface href=#dom-url title=URL>URL</a></code> object’s
     <a data-link-type=dfn href=#concept-urlutils-input title=concept-URLUtils-input>input</a> is never exposed.
   </ol>
 
@@ -2287,7 +2288,7 @@ run these steps:
  <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 </ol>
 
-<p class=note>It returns the Unicode rather than the ASCII serialization for
+<p class=note role=note>It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML’s <code>MessageEvent</code> feature.
 <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
@@ -2519,7 +2520,7 @@ run these steps:
  <a data-link-type=dfn href=#concept-urlsearchparams-update title=concept-URLSearchParams-update>update steps</a>.
 </ol>
 
-<p class="note no-backref">The <a data-link-type=dfn href=#concept-urlsearchparams-update title=concept-URLSearchParams-update>update steps</a> of
+<p class="note no-backref" role=note>The <a data-link-type=dfn href=#concept-urlsearchparams-update title=concept-URLSearchParams-update>update steps</a> of
 <a data-link-type=dfn href=#concept-urlutils-query-object title=concept-URLUtils-query-object>query object</a> are run to ensure all
 <a data-link-type=dfn href=#concept-urlsearchparams-url-object title=concept-URLSearchParams-url-object>url objects</a> remain synchronized.
 
@@ -2610,7 +2611,7 @@ empty.
 <p>A <code><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams>URLSearchParams</a></code> object has an associated list of zero or more
 <dfn data-dfn-type=dfn data-noexport="" id=concept-urlsearchparams-url-object title=concept-URLSearchParams-url-object>url objects<a class=self-link href=#concept-urlsearchparams-url-object></a></dfn>, which is initially empty.
 
-<p class=note><code><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams>URLSearchParams</a></code> objects always use
+<p class=note role=note><code><a class=idl-code data-link-type=interface href=#dom-urlsearchparams title=URLSearchParams>URLSearchParams</a></code> objects always use
 <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#utf-8 title=utf-8>utf-8</a> as
 <a data-link-type=dfn href=https://encoding.spec.whatwg.org/#encoding title=encoding>encoding</a>, despite the existence of
 concepts such as
@@ -2738,7 +2739,7 @@ the name and the value the value.
 objects are meant for <a data-link-type=dfn href=#concept-url title=concept-url>URL</a> manipulation. In IDL the
 USVString type should be used.
 
-<p class=note>The higher-level notion here is that values are to be exposed as immutable
+<p class=note role=note>The higher-level notion here is that values are to be exposed as immutable
 data structures.
 
 <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
@@ -2746,7 +2747,7 @@ should name such a feature "url" (i.e. lowercase and with an "l" at the end). Na
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
 (i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
-<p class=note>The <code><a data-link-type=dfn href=https://html.spec.whatwg.org/multipage/comms.html#eventsource title=EventSource>EventSource</a></code> and
+<p class=note role=note>The <code><a data-link-type=dfn href=https://html.spec.whatwg.org/multipage/comms.html#eventsource title=EventSource>EventSource</a></code> and
 <code><a data-link-type=dfn href=https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent title=HashChangeEvent>HashChangeEvent</a></code> interfaces in HTML are examples of
 proper naming. <a data-biblio-type=normative data-link-type=biblio href=#biblio-html title=HTML>[HTML]</a>
 
@@ -2815,6 +2816,7 @@ for being awesome!
 the extent possible under law, the editor has waived all copyright and related or
 neighboring rights to this work.
 
+</main>
 <h2 class="no-num no-ref heading settled" id=conformance><span class=content>Conformance</span><a class=self-link href=#conformance></a></h2>
 
 <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked
