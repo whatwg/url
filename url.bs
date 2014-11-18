@@ -2822,7 +2822,6 @@ Michel Suignard,
 Peter Occil,
 Rodney Rehm,
 Roy Fielding,
-Sam Ruby,
 Santiago M. Mola,
 Simon Pieters,
 Simon Sapin,
@@ -2836,7 +2835,11 @@ for being awesome!
 <p>This standard is written by
 <a lang=nl href=//annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=//www.mozilla.org/>Mozilla</a>,
-<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
+<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>)
+and
+<a lang=en-US href=http://intertwingly.net/>Sam Ruby</a>
+(<a href=//www.ibm.com/>IBM</a>,
+<a href=mailto:rubys@intertwingly.net>rubys@intertwingly.net</a>).
 
 <p>Per <a rel="license" href="//creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to
 the extent possible under law, the editor has waived all copyright and related or
