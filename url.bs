@@ -5,7 +5,7 @@ H1: URL
 Shortname: url
 Status: LS
 No Editor: true
-Abstract: This specification provides APIs for creating, parsing, and working with universal identifiers.
+Abstract: The URL Standard defines URLs, domains, IP addresses, the <code title>application/x-www-form-urlencoded</code> format, and their API.
 Logo: https://resources.whatwg.org/logo-url.svg
 !Version History: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a> <a href="https://twitter.com/urlstandard">@urlstandard</a>
 !Participate: <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
