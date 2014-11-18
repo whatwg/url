@@ -2884,6 +2884,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
         "href": "https://encoding.spec.whatwg.org/",
         "title": "Encoding",
         "publisher": "WHATWG"
+    },
+    "FILEAPI": {
+        "authors": [
+            "Arun Ranganathan",
+            "Jonas Sicking"
+        ],
+        "href": "http://dev.w3.org/2006/webapi/FileAPI/",
+        "title": "File API",
+        "publisher": "W3C"
+    },
+    "WEBIDL": {
+        "authors": [
+            "Cameron McCormack",
+            "Jonas Sicking"
+        ],
+        "href": "http://heycam.github.io/webidl/",
+        "title": "Web IDL",
+        "publisher": "W3C"
     }
 }
 </pre>
