@@ -1789,10 +1789,10 @@ format is in widespread use due to its prevalence of HTML forms.
 <h3 id=urlencoded-parsing><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'><a>application/x-www-form-urlencoded</a></code> parser</a>
+<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'>application/x-www-form-urlencoded</a></code> parser</a>
 are mainly relevant for server-oriented implementations. A browser-based implementation
 only needs what the
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded string parser'><a>application/x-www-form-urlencoded</a></code> string parser</a>
+<code title=application-x-www-form-urlencoded-0><a title='urlencoded string parser'>application/x-www-form-urlencoded</a></code> string parser</a>
 requires.
 
 <p>The
@@ -1966,7 +1966,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
 takes a string <var>input</var>,
 <a title="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'><a>application/x-www-form-urlencoded</a></code> parsing</a>
+<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'>application/x-www-form-urlencoded</a></code> parsing</a>
 it.
 
 
