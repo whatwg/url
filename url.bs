@@ -740,7 +740,7 @@ by "<code>?</code>" and a <a title='URL query'>query</a>.
 depends on the <a title='URL scheme'>scheme</a> and is typically
 defined alongside it. Standards must define
 <a title='URL scheme data'>scheme data</a> within the constraints of zero or
-more <a>URL units</a>.
+more <a>URL units</a>, excluding "<code>?</code>".
 
 <p>A <dfn id=concept-relative-url title='relative URL'>relative URL</dfn> must be either a
 <a>scheme-relative URL</a>, an
