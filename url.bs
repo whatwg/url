@@ -1539,7 +1539,7 @@ optionally with an <a>encoding</a>
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
-       <a>encoding</a>
+       <a function title='encode'>encoding</a>
        <var>buffer</var> using <var>encoding override</var>.
 
        <li>
