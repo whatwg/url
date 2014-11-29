@@ -1539,7 +1539,7 @@ optionally with an <a>encoding</a>
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
-       <a title=encode>encoding</a>
+       <a>encoding</a>
        <var>buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1943,7 +1943,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
    <li><p>Let <var>outputPair</var> be a copy of <var>pair</var>.
 
    <li><p>Replace <var>outputPair</var>'s name and value with the result of running
-   <a>encode</a> on them using
+   <a function>encode</a> on them using
    <var>encoding override</var>, respectively.
 
    <li><p>Replace <var>outputPair</var>'s name and value with their
@@ -2955,6 +2955,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         "linkingText": "dom-node-baseuri",
         "url": "https://dom.spec.whatwg.org/#dom-node-baseuri",
         "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "encode",
+        "url": "https://encoding.spec.whatwg.org/#encode",
+        "shortname": "encode", "type": "function", "level": 1, "status": "current"
     },
     {
         "linkingText": "encoding",
