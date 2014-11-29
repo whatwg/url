@@ -1731,11 +1731,11 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 <h3 id=origin>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class=note>See <a>origin</a>'s definition in HTML for the
+<p class=note>See <a spec=html>origin</a>'s definition in HTML for the
 necessary background information. [[!HTML]]
 
 <p>A <a>URL</a>'s <dfn id=concept-url-origin title='URL origin'>origin</dfn> is
-the <a>origin</a> returned by running these steps, switching
+the <a spec=html>origin</a> returned by running these steps, switching
 on <a>URL</a>'s <a title='URL scheme'>scheme</a>:
 
 <dl class=switch>
@@ -2974,6 +2974,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     {
         "linkingText": "hashchangeevent",
         "url": "https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent",
+        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
+    },
+    {
+        "linkingText": "origin",
+        "url": "https://html.spec.whatwg.org/multipage/browsers.html#origin",
         "shortname": "html", "type": "dfn", "level": 1, "status": "current"
     },
     {
