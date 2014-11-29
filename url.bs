@@ -2258,8 +2258,8 @@ these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <code><a>context object</a> is a <a interface>URL</a></code> object,
-  run these substeps:
+  <p>If the <code><a>context object</a></code> is a
+  <code><a interface>URL</a></code> object, run these substeps:
 
   <ol>
    <li><p>Let <var>parsedURL</var> be the result of running the
