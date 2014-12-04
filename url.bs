@@ -2241,7 +2241,7 @@ representation?
 not exposed on the global object. They are meant to augment other interfaces, such as
 <code><a interface>URL</a></code>.
 
-<p>The <dfn stringifier dfn-for=URLUtilsReadOnly><dfn stringifier dfn-for=URLUtils><code>href</code></dfn></dfn> attribute's getter must run
+<p>The <dfn stringifier dfn-for=URLUtils><code>href</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2301,7 +2301,7 @@ a.href === test // true</pre>
   </div>
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>origin</code></dfn></dfn> attribute's getter must
+<p>The <dfn attribute dfn-for=URLUtils><code>origin</code></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2318,7 +2318,7 @@ run these steps:
 compatibility with HTML's <code>MessageEvent</code> feature.
 [[!HTML]]
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>protocol</code></dfn></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>protocol</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2391,7 +2391,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>host</code></dfn></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtils><code>host</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2422,7 +2422,7 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>hostname</code></dfn></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>hostname</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2447,7 +2447,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>port</code></dfn></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtils><code>port</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2472,7 +2472,7 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>pathname</code></dfn></dfn> attribute's getter
+<p>The <dfn attribute dfn-for=URLUtils><code>pathname</code></dfn> attribute's getter
 must run these steps:
 
 <ol>
@@ -2503,7 +2503,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>search</code></dfn></dfn> attribute's getter must
+<p>The <dfn attribute dfn-for=URLUtils><code>search</code></dfn> attribute's getter must
 run these steps:
 
 <ol>
@@ -2578,7 +2578,7 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtilsReadOnly><dfn attribute dfn-for=URLUtils><code>hash</code></dfn></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtils><code>hash</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
