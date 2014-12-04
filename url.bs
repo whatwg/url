@@ -2042,23 +2042,23 @@ URLPath would be a subclassed Array? -->
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
 <code><a interface>URLUtilsReadOnly</a></code> must define a
-<dfn id=concept-URLUtils-get-the-base title='URLUtils get the base'>get the base</dfn> algorithm, which must return the
+<dfn id=concept-urlutils-get-the-base title='URLUtils get the base'>get the base</dfn> algorithm, which must return the
 appropriate <a>base URL</a> for the object.
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> may
-define <dfn id=concept-URLUtils-update title='URLUtils update'>update steps</dfn> to make it possible for an
+define <dfn id=concept-urlutils-update title='URLUtils update'>update steps</dfn> to make it possible for an
 underlying string (such as an
 <a title=concept-attribute-value>attribute value</a>)
 to be updated. The <a title='URLUtils update'>update steps</a> are passed a string
 <var>value</var> for this purpose.
 
 <p>An object implementing <code><a interface>URLUtils</a></code> or <code><a interface>URLUtilsReadOnly</a></code> has an
-associated <dfn id=concept-URLUtils-input title='URLUtils input'>input</dfn> (a string),
-<dfn id=concept-URLUtils-query-encoding title='URLUtils query encoding'>query encoding</dfn>
+associated <dfn id=concept-urlutils-input title='URLUtils input'>input</dfn> (a string),
+<dfn id=concept-urlutils-query-encoding title='URLUtils query encoding'>query encoding</dfn>
 (an <a>encoding</a>),
-<dfn id=concept-URLUtils-query-object title='URLUtils query object'>query object</dfn>
+<dfn id=concept-urlutils-query-object title='URLUtils query object'>query object</dfn>
 (a <code><a interface>URLSearchParams</a></code> object or null), and a
-<dfn id=concept-URLUtils-url title='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
+<dfn id=concept-urlutils-url title='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
 
 Unless stated otherwise, <a title='URLUtils query encoding'>query encoding</a> is
 <a>utf-8</a> and
@@ -2075,7 +2075,7 @@ concept only relevant for HTML.
 <a title='URLUtils set the input'>set the input</a> algorithms to set
 <a title='URLUtils input'>input</a>, <a title='URLUtils URL'>url</a>, and
 <a title='URLUtils query object'>query object</a>. To
-<dfn id=concept-URLUtils-set-the-input title='URLUtils set the input'>set the input</dfn> given <var>input</var>
+<dfn id=concept-urlutils-set-the-input title='URLUtils set the input'>set the input</dfn> given <var>input</var>
 and optionally a <var>url</var>, run these steps:
 
 <ol>
@@ -2631,11 +2631,11 @@ interface URLSearchParams {
 };</pre>
 
 <p>A <code><a interface>URLSearchParams</a></code> object has an associated
-<dfn id=concept-URLSearchParams-list title='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
+<dfn id=concept-urlsearchparams-list title='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
 empty.
 
 <p>A <code><a interface>URLSearchParams</a></code> object has an associated list of zero or more
-<dfn id=concept-URLSearchParams-url-object title='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
+<dfn id=concept-urlsearchparams-url-object title='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
 
 <p class=note><code><a interface>URLSearchParams</a></code> objects always use
 <a>utf-8</a> as
@@ -2647,7 +2647,7 @@ encourage developers to migrate towards
 have done a long time ago now.
 
 <p>To create a
-<dfn id=concept-URLSearchParams-new title='URLSearchParams new'>new <code><a interface>URLSearchParams</a></code> object</dfn>, optionally
+<dfn id=concept-urlsearchparams-new title='URLSearchParams new'>new <code><a interface>URLSearchParams</a></code> object</dfn>, optionally
 using <var>init</var>, run these steps:
 
 <ol>
@@ -2670,7 +2670,7 @@ using <var>init</var>, run these steps:
 </ol>
 
 <p>A <code><a interface>URLSearchParams</a></code> object's
-<dfn id=concept-URLSearchParams-update title='URLSearchParams update'>update steps</dfn> are to run these steps for
+<dfn id=concept-urlsearchparams-update title='URLSearchParams update'>update steps</dfn> are to run these steps for
 each associated  <a title='URLSearchParams URL object'>url object</a>
 <var>urlObject</var>, in order:
 
