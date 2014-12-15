@@ -2241,7 +2241,7 @@ representation?
 not exposed on the global object. They are meant to augment other interfaces, such as
 <code><a interface>URL</a></code>.
 
-<p>The <dfn stringifier dfn-for=URLUtils><code>href</code></dfn> attribute's getter must run
+<p>The <dfn attribute dfn-for=URLUtils><code>href</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2252,7 +2252,7 @@ these steps:
  of <a title='URLUtils URL'>url</a>.
 </ol>
 
-<p>The <code><a stringifier for=URLUtils>href</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URLUtils>href</a></code> attribute's setter must run these steps:
 
 <ol>
  <li><p>Let <var>input</var> be the given value.
@@ -2289,7 +2289,7 @@ these steps:
   </ol>
 
   <div class=example>
-   <p>This means that if the <code><a stringifier for=URLUtils>href</a></code> attribute is set to
+   <p>This means that if the <code><a attribute for=URLUtils>href</a></code> attribute is set to
    value that would cause the <a>URL parser</a> to return
    failure, that value is still passed through unchanged. This is one of those unfortunate
    legacy incidents.
@@ -2749,7 +2749,7 @@ otherwise.
 <a title='URLSearchParams list'>list</a> name-value pairs with the key being
 the name and the value the value.
 
-<p>The <dfn stringifier dfn-for=URLSearchParams>stringifier</dfn> must return the
+<p>The <dfn dfn dfn-for=URLSearchParams>stringification behavior</dfn> must return the
 <a title='urlencoded serializer'>serialization</a> of the
 <code><a interface>URLSearchParams</a></code> object's
 <a title='URLSearchParams list'>list</a>.
