@@ -842,7 +842,8 @@ U+100000 to U+10FFFD.
 
 <p class=note>Code points higher than U+009F will be converted to
 <a title="percent-encoded byte">percent-encoded bytes</a> by the
-<a>URL parser</a>.
+<a>URL parser</a>, except for code points appearing in
+<a title="URL fragment">fragments</a>.
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and
 <a title="percent-encoded byte">percent-encoded bytes</a>.
@@ -1591,6 +1592,7 @@ optionally with an <a>encoding</a>
      <dt><a>EOF code point</a>
      <dd><p>Do nothing.
 
+     <dt>U+0000
      <dt>U+0009
      <dt>U+000A
      <dt>U+000D
@@ -1599,19 +1601,19 @@ optionally with an <a>encoding</a>
      <dt>Otherwise
      <dd>
       <ol>
-       <li><p>If <a>c</a> is not a
-       <a title="URL code points">URL code point</a> and not
+       <li><p>If <a>c</a> is not a <a title="URL code points">URL code point</a> and not
        "<code>%</code>", <a>parse error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
 
-       <li><p><a>utf-8 percent encode</a> <a>c</a>
-       using the <a>simple encode set</a>, and append the result to
-       <var>url</var>'s <a title='URL fragment'>fragment</a>.
-       <!-- if people complain about percent encoding do not forget that
-            results may differ depending on whether or not a relative scheme
-            is in play -->
+       <li>
+        <p>Append <a>c</a> to <var>url</var>'s <a title="URL fragment">fragment</a>.
+
+        <p class=note>Unfortunately not using <a title="percent encode">percent-encoding</a> is intentional as
+        implementations with majority market share exhibit this behavior.
+        <!-- Chrome does percent-encoding if the scheme is not a relative scheme,
+             hopefully that can be aligned since flip-flopping is not great. -->
       </ol>
     </dl>
   </dl>
@@ -2758,12 +2760,10 @@ the name and the value the value.
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
 <p>A standard that exposes <a title='URL'>URLs</a>, should expose the
-<a>URL</a> as a string (by
-<a title='URL serializer'>serializing</a> an internal
-<a>URL</a>). A standard should not expose a
-<code><a>URL</a> using a <a interface>URL</a></code> object. <code><a interface>URL</a></code>
-objects are meant for <a>URL</a> manipulation. In IDL the
-USVString type should be used.
+<a>URL</a> as a string (by <a title='URL serializer'>serializing</a> an internal
+<a>URL</a>). A standard should not expose a <a>URL</a> using a
+<code><a interface>URL</a></code> object. <code><a interface>URL</a></code> objects are
+meant for <a>URL</a> manipulation. In IDL the USVString type should be used.
 
 <p class=note>The higher-level notion here is that values are to be exposed as immutable
 data structures.
