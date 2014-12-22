@@ -11,6 +11,7 @@ Logo: https://resources.whatwg.org/logo-url.svg
 !Participate: <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
 !Participate: <a href="https://whatwg.org/mailing-list">whatwg@whatwg.org</a> (<a href="https://whatwg.org/mailing-list#specs">archives</a>)
 !Participate: <a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+Indent: 2
 </pre>
 
 <h2 id=goals class=no-num>Goals</h2>
@@ -1540,7 +1541,7 @@ optionally with an <a>encoding</a>
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
-       <a function title='encode'>encoding</a>
+       <a title='encode'>encoding</a>
        <var>buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1945,7 +1946,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
    <li><p>Let <var>outputPair</var> be a copy of <var>pair</var>.
 
    <li><p>Replace <var>outputPair</var>'s name and value with the result of running
-   <a function>encode</a> on them using
+   <a>encode</a> on them using
    <var>encoding override</var>, respectively.
 
    <li><p>Replace <var>outputPair</var>'s name and value with their
@@ -2773,8 +2774,8 @@ should name such a feature "url" (i.e. lowercase and with an "l" at the end). Na
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
 (i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
-<p class=note>The <code><a>EventSource</a></code> and
-<code><a>HashChangeEvent</a></code> interfaces in HTML are examples of
+<p class=note>The {{EventSource}} and
+{{HashChangeEvent}} interfaces in HTML are examples of
 proper naming. [[!HTML]]
 
 
@@ -2859,7 +2860,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 </script>
 
-<pre class="biblio"
+<pre class="biblio">
 {
     "IDNA": {
         "authors": [
@@ -2910,131 +2911,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </pre>
 
 <pre class="anchors">
-[
-    {
-        "linkingText": "ascii whitespace",
-        "url": "https://encoding.spec.whatwg.org/#ascii-whitespace",
-        "shortname": "encoding", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "blob",
-        "url": "http://dev.w3.org/2006/webapi/FileAPI/#blob",
-        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "blob url store",
-        "url": "http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore",
-        "shortname": "fileapi", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "concept-attribute-value",
-        "url": "https://dom.spec.whatwg.org/#concept-attribute-value",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "concept-document",
-        "url": "https://dom.spec.whatwg.org/#concept-document",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "concept-encoding-get",
-        "url": "https://encoding.spec.whatwg.org/#concept-encoding-get",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "context object",
-        "url": "https://dom.spec.whatwg.org/#context-object",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "decoder",
-        "url": "https://encoding.spec.whatwg.org/#decoder",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "dom-node-baseuri",
-        "url": "https://dom.spec.whatwg.org/#dom-node-baseuri",
-        "shortname": "dom", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "encode",
-        "url": "https://encoding.spec.whatwg.org/#encode",
-        "shortname": "encode", "type": "function", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "encoding",
-        "url": "https://encoding.spec.whatwg.org/#encoding",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "error",
-        "url": "https://encoding.spec.whatwg.org/#error",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "eventsource",
-        "url": "https://html.spec.whatwg.org/multipage/comms.html#eventsource",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "hashchangeevent",
-        "url": "https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "origin",
-        "url": "https://html.spec.whatwg.org/multipage/browsers.html#origin",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "structured clone",
-        "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "throw",
-        "url": "http://heycam.github.io/webidl/#dfn-throw",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    },
-    {
-        "linkingText": "toascii",
-        "url": "http://www.unicode.org/reports/tr46/#ToASCII",
-        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "tounicode",
-        "url": "http://www.unicode.org/reports/tr46/#ToUnicode",
-        "shortname": "idna", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8",
-        "url": "https://encoding.spec.whatwg.org/#utf-8",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 decode without bom",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-decode-without-bom",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 encode",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-encode",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "utf-8 decoder",
-        "url": "https://encoding.spec.whatwg.org/#utf-8-decoder",
-        "shortname": "encoding", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "unicode serialization of an origin",
-        "url": "https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin",
-        "shortname": "html", "type": "dfn", "level": 1, "status": "current"
-    },
-    {
-        "linkingText": "value pairs to iterate over",
-        "url": "http://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over",
-        "shortname": "webidl", "type": "dfn", "level": 2, "status": "current"
-    }
-]
+urlPrefix: http://dev.w3.org/2006/webapi/FileAPI/; type: dfn
+  text: blob
+  text: blob url store; url: #BlobURLStore
+urlPrefix: https://dom.spec.whatwg.org/; type: dfn
+  text: concept-attribute-value
+  text: concept-document
+  text: context object
+  text: dom-node-baseuri
+urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
+  text: ascii whitespace
+  text: concept-encoding-get
+  text: decoder
+  text: encode
+  text: encoding
+  text: error
+  text: utf-8
+  text: utf-8 decode without bom
+  text: utf-8 encode
+  text: utf-8 decoder
+urlPrefix: https://html.spec.whatwg.org/multipage/comms.html; type: interface;
+  text: EventSource
+  text: HashChangeEvent
+urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html; type: dfn;
+  text: origin
+  text: unicode serialization of an origin
+urlPrefix: https://html.spec.whatwg.org/multipage/infrastructure.html; type: dfn; text: structured clone
+urlPrefix: http://heycam.github.io/webidl/#dfn-; type: dfn;
+  text: throw
+  text: value pairs to iterate over
+url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii
+url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode
 </pre>
