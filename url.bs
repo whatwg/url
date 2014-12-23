@@ -2930,13 +2930,15 @@ urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: utf-8 decode without bom
   text: utf-8 encode
   text: utf-8 decoder
-urlPrefix: https://html.spec.whatwg.org/multipage/comms.html; type: interface;
-  text: EventSource
-  text: HashChangeEvent
-urlPrefix: https://html.spec.whatwg.org/multipage/browsers.html; type: dfn;
-  text: origin
-  text: unicode serialization of an origin
-urlPrefix: https://html.spec.whatwg.org/multipage/infrastructure.html; type: dfn; text: structured clone
+urlPrefix: https://html.spec.whatwg.org/multipage/
+  urlPrefix: comms.html; type: interface;
+    text: EventSource
+    text: HashChangeEvent
+  urlPrefix: browsers.html; type: dfn;
+    text: origin
+    text: unicode serialization of an origin
+  urlPrefix: infrastructure.html; type: dfn;
+    text: structured clone
 urlPrefix: http://heycam.github.io/webidl/#dfn-; type: dfn;
   text: throw
   text: value pairs to iterate over
