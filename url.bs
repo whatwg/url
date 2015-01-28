@@ -699,7 +699,8 @@ on the same row.
      elsewhere though. -->
 
 <p>A <dfn>local scheme</dfn> is a <a title="URL scheme">scheme</a> that is one of
-"<code>about</code>", "<code>blob</code>", and "<code>data</code>".
+"<code>about</code>", "<code>blob</code>", "<code>data</code>", and
+"<code>filesystem</code>".
 
 <p>A <a>URL</a> <dfn>is local</dfn> if its <a title="URL scheme">scheme</a> is a
 <a>local scheme</a>.
