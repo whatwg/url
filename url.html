@@ -1123,6 +1123,14 @@ on the same row.
    <p></p>
 
 
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is one of
+"<code>about</code>", "<code>blob</code>", and "<code>data</code>".
+
+</p>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-local">is local<a class="self-link" href="#is-local"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a
+<a data-link-type="dfn" href="#local-scheme">local scheme</a>.
+
+</p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>
 <dfn data-dfn-type="dfn" data-noexport="" id="include-credentials" title="include credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either its
 <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its
@@ -4407,6 +4415,8 @@ and not intended to be performant.)
    <li>IPv6 parser Main, <a href="#concept-ipv6-parser-main">3.3</a>
    <li>IPv6 piece, <a href="#concept-ipv6-piece">3</a>
    <li>IPv6 serializer, <a href="#concept-ipv6-serializer">3.4</a>
+   <li>is local, <a href="#is-local">4</a>
+   <li>local scheme, <a href="#local-scheme">4</a>
    <li>name
     <ul>
      <li>argument for URLSearchParams/append, <a href="#dom-urlsearchparams-append-name">6.4</a>

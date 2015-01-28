@@ -698,6 +698,12 @@ on the same row.
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
 
+<p>A <dfn>local scheme</dfn> is a <a title="URL scheme">scheme</a> that is one of
+"<code>about</code>", "<code>blob</code>", and "<code>data</code>".
+
+<p>A <a>URL</a> <dfn>is local</dfn> if its <a title="URL scheme">scheme</a> is a
+<a>local scheme</a>.
+
 <p>A <a>URL</a>
 <dfn title="include credentials">includes credentials</dfn> if either its
 <a title='URL username'>username</a> is not the empty string or its
