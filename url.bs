@@ -73,7 +73,7 @@ or in the range U+0061 to U+007A.
 string or code point stream.
 
 <p>A <dfn>parse error</dfn> indicates a non-fatal mismatch between input and requirements.
-User agents are encouraged to expose <a title="parse error">parse errors</a>
+User agents are encouraged to expose <a lt="parse error">parse errors</a>
 somehow.
 
 <p>Within a parser algorithm that uses a <var>pointer</var> variable, <dfn>c</dfn>
@@ -94,10 +94,10 @@ processed and <var>pointer</var> points to "<code>@</code>",
 
 <p>A <dfn>percent-encoded byte</dfn> is "<code>%</code>", followed by
 two <a>ASCII hex digits</a>. Sequences of
-<a title="percent-encoded byte">percent-encoded bytes</a>, after
+<a lt="percent-encoded byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause a
 <a>utf-8 decoder</a> to run into any
-<a title=error>errors</a>.
+<a lt=error>errors</a>.
 
 <p>To <dfn>percent encode</dfn> a <var>byte</var> into a
 <a>percent-encoded byte</a>, return a string consisting of
@@ -131,7 +131,7 @@ insecure and is not recommended.
     <ol>
      <li><p>Let <var>bytePoint</var> be the two bytes after <var>byte</var> in
      <var>input</var>,
-     <a title="utf-8 decode without BOM">decoded</a>, and
+     <a lt="utf-8 decode without BOM">decoded</a>, and
      then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
@@ -198,26 +198,26 @@ an <var>encode set</var>, run these steps:
      http://tools.ietf.org/html/rfc3492
      http://mothereff.in/punycode -->
 
-<p>A <dfn id=concept-host title='host'>host</dfn> is a network address in the form of a
+<p>A <dfn id=concept-host lt='host'>host</dfn> is a network address in the form of a
 <a>domain</a> or an
-<a title='IPv6'>IPv6 address</a>.
+<a lt='IPv6'>IPv6 address</a>.
 
-<p>A <dfn id=concept-domain title='domain'>domain</dfn> identifies a realm within a network.
+<p>A <dfn id=concept-domain lt='domain'>domain</dfn> identifies a realm within a network.
 
-<p>An <dfn id=concept-ipv6 title='IPv6'>IPv6 address</dfn> is a 128-bit identifier and
+<p>An <dfn id=concept-ipv6 lt='IPv6'>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
-eight <dfn id=concept-ipv6-piece title='IPv6 piece'>16-bit pieces</dfn>.
+eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 [[RFC4291]]
 
 
 <h3 id=idna>IDNA</h3>
 
-<p>The <dfn id=concept-domain-to-ascii title='domain to ASCII'>domain to ASCII</dfn> given a
+<p>The <dfn id=concept-domain-to-ascii lt='domain to ASCII'>domain to ASCII</dfn> given a
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a title=ToASCII>Unicode ToASCII</a> with
+ <a lt=ToASCII>Unicode ToASCII</a> with
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
@@ -227,12 +227,12 @@ eight <dfn id=concept-ipv6-piece title='IPv6 piece'>16-bit pieces</dfn>.
  <li><p>Return <var>result</var>.
 </ol>
 
-<p>The <dfn id=concept-domain-to-unicode title='domain to Unicode'>domain to Unicode</dfn> given a
+<p>The <dfn id=concept-domain-to-unicode lt='domain to Unicode'>domain to Unicode</dfn> given a
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a title=ToUnicode>Unicode ToUnicode</a> with
+ <a lt=ToUnicode>Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
@@ -247,14 +247,14 @@ eight <dfn id=concept-ipv6-piece title='IPv6 piece'>16-bit pieces</dfn>.
 
 <p>A <a>host</a> must be either a
 <a>domain</a> or "<code>[</code>", followed
-by an <a title='IPv6'>IPv6 address</a>, followed by
+by an <a lt='IPv6'>IPv6 address</a>, followed by
 "<code>]</code>".
 
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a title=ToASCII>Unicode ToASCII</a> with
+ <a lt=ToASCII>Unicode ToASCII</a> with
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
@@ -262,7 +262,7 @@ by an <a title='IPv6'>IPv6 address</a>, followed by
  <li><p>If <var>result</var> is a failure value, return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <a title=ToUnicode>Unicode ToUnicode</a> with
+ <a lt=ToUnicode>Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var>result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
@@ -278,7 +278,7 @@ by an <a title='IPv6'>IPv6 address</a>, followed by
 <p>A <a>domain</a> must be a string that is a
 <a>valid domain</a>.
 
-<p>An <a title='IPv6'>IPv6 address</a> is defined in the
+<p>An <a lt='IPv6'>IPv6 address</a> is defined in the
 <a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
 <!-- http://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
@@ -289,7 +289,7 @@ by an <a title='IPv6'>IPv6 address</a>, followed by
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser title='host parser'>host parser</dfn> takes a string
+<p>The <dfn id=concept-host-parser lt='host parser'>host parser</dfn> takes a string
 <var>input</var> and optionally a <var>Unicode flag</var>, and then runs
 these steps:
 
@@ -310,14 +310,14 @@ these steps:
    "<code>]</code>", <a>parse error</a>, return failure.
 
    <li><p>Return the result of
-   <a title='IPv6 parser'>IPv6 parsing</a> <var>input</var>
+   <a lt='IPv6 parser'>IPv6 parsing</a> <var>input</var>
    with its leading "<code>[</code>" and trailing
    "<code>]</code>" removed.
   </ol>
 
  <li><p>Let <var>domain</var> be the result of
  <a>utf-8 decode without BOM</a> on the
- <a title="percent decode">percent decoding</a> of
+ <a lt="percent decode">percent decoding</a> of
  <a>utf-8 encode</a> on <var>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
@@ -350,23 +350,23 @@ these steps:
  on <var>asciiDomain</var> otherwise.
 </ol>
 
-<p>The <dfn id=concept-ipv6-parser title='IPv6 parser'>IPv6 parser</dfn> takes a string
+<p>The <dfn id=concept-ipv6-parser lt='IPv6 parser'>IPv6 parser</dfn> takes a string
 <var>input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var>address</var> be a new
- <a title='IPv6'>IPv6 address</a> with its
- <a title='IPv6 piece'>16-bit pieces</a> initialized to 0.
+ <a lt='IPv6'>IPv6 address</a> with its
+ <a lt='IPv6 piece'>16-bit pieces</a> initialized to 0.
 
  <li><p>Let <var>piece pointer</var> be a pointer into
  <var>address</var>'s
- <a title='IPv6 piece'>16-bit pieces</a>, initially zero
- (pointing to the first <a title='IPv6 piece'>16-bit piece</a>),
+ <a lt='IPv6 piece'>16-bit pieces</a>, initially zero
+ (pointing to the first <a lt='IPv6 piece'>16-bit piece</a>),
  and let <var>piece</var> be the
- <a title='IPv6 piece'>16-bit piece</a> it points to.
+ <a lt='IPv6 piece'>16-bit piece</a> it points to.
 
  <li><p>Let <var>compress pointer</var> be another pointer into
- <var>address</var>'s <a title='IPv6 piece'>16-bit pieces</a>, initially
+ <var>address</var>'s <a lt='IPv6 piece'>16-bit pieces</a>, initially
  null and pointing to nothing.
 
  <li><p>Let <var>pointer</var> be a pointer into
@@ -386,7 +386,7 @@ these steps:
   </ol>
 
  <li>
-  <p><dfn id=concept-ipv6-parser-main title='IPv6 parser Main'>Main</dfn>:
+  <p><dfn id=concept-ipv6-parser-main lt='IPv6 parser Main'>Main</dfn>:
   While <a>c</a> is not the <a>EOF code point</a>, run these
   substeps:
 
@@ -404,14 +404,14 @@ these steps:
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
      <var>compress pointer</var> to <var>piece pointer</var>,
-     and then jump to <a title='IPv6 parser Main'>Main</a>.
+     and then jump to <a lt='IPv6 parser Main'>Main</a>.
     </ol>
 
    <li><p>Let <var>value</var> and <var>length</var> be 0.
 
    <li><p>While <var>length</var> is less than 4 and
    <a>c</a> is an
-   <a title="ASCII hex digits">ASCII hex digit</a>, set
+   <a lt="ASCII hex digits">ASCII hex digit</a>, set
    <var>value</var> to
    <var>value</var> &times; 0x10 + <a>c</a> interpreted as hexadecimal number,
    and increase <var>pointer</var> and <var>length</var> by one.
@@ -425,7 +425,7 @@ these steps:
       <p>If <var>length</var> is 0, <a>parse error</a>,
       return failure.
       <p>Decrease <var>pointer</var> by <var>length</var>.
-      <p>Jump to <a title='IPv6 parser IPv4'>IPv4</a>.
+      <p>Jump to <a lt='IPv6 parser IPv4'>IPv4</a>.
 
      <dt>"<code>:</code>"
      <dd>
@@ -443,9 +443,9 @@ these steps:
   </ol>
 
  <li><p>If <a>c</a> is the <a>EOF code point</a>, jump to
- <a title='IPv6 parser Finale'>Finale</a>.
+ <a lt='IPv6 parser Finale'>Finale</a>.
 
- <li><p><dfn id=concept-ipv6-parser-ipv4 title='IPv6 parser IPv4'>IPv4</dfn>:
+ <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>:
  If <var>piece pointer</var> is greater than six,
  <a>parse error</a>, return failure.
 
@@ -458,12 +458,12 @@ these steps:
   <ol>
    <li><p>Let <var>value</var> be null.
 
-   <li><p>If <a>c</a> is not an <a title="ASCII digits">ASCII digit</a>,
+   <li><p>If <a>c</a> is not an <a lt="ASCII digits">ASCII digit</a>,
    <a>parse error</a>, return failure. <!-- prevent the empty string -->
 
    <li>
     <p>While <a>c</a> is an
-    <a title="ASCII digits">ASCII digit</a>, run these subsubsteps:
+    <a lt="ASCII digits">ASCII digit</a>, run these subsubsteps:
 
     <ol>
      <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
@@ -501,7 +501,7 @@ these steps:
   </ol>
 
  <li>
-  <p><dfn id=concept-ipv6-parser-finale title='IPv6 parser Finale'>Finale</dfn>:
+  <p><dfn id=concept-ipv6-parser-finale lt='IPv6 parser Finale'>Finale</dfn>:
   If <var>compress pointer</var> is not null, run these substeps:
 
   <ol>
@@ -512,7 +512,7 @@ these steps:
 
    <li><p>While <var>piece pointer</var> is not zero and <var>swaps</var> is
    greater than zero, swap <var>piece</var> with the
-   <a title='IPv6 piece'>piece</a> at pointer
+   <a lt='IPv6 piece'>piece</a> at pointer
    <var>compress pointer</var> + <var>swaps</var> &minus; 1, and then
    decrease both <var>piece pointer</var> and <var>swaps</var> by one.
   </ol>
@@ -527,7 +527,7 @@ these steps:
 
 <h3 id=host-serializing>Host serializing</h3>
 
-<p>The <dfn id=concept-host-serializer title='host serializer'>host serializer</dfn> takes null or a
+<p>The <dfn id=concept-host-serializer lt='host serializer'>host serializer</dfn> takes null or a
 <a>host</a> <var>host</var> and then runs
 these steps:
 
@@ -535,7 +535,7 @@ these steps:
  <li><p>If <var>host</var> is null, return the empty string.
 
  <li><p>If <var>host</var> is an
- <a title='IPv6'>IPv6 address</a>, return
+ <a lt='IPv6'>IPv6 address</a>, return
  "<code>[</code>", followed by the result of running the
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
@@ -544,8 +544,8 @@ these steps:
  return <var>host</var>.
 </ol>
 
-<p>The <dfn id=concept-ipv6-serializer title='IPv6 serializer'>IPv6 serializer</dfn> takes an
-<a title='IPv6'>IPv6 address</a> <var>address</var> and
+<p>The <dfn id=concept-ipv6-serializer lt='IPv6 serializer'>IPv6 serializer</dfn> takes an
+<a lt='IPv6'>IPv6 address</a> <var>address</var> and
 then runs these steps:
 
 <ol>
@@ -553,37 +553,37 @@ then runs these steps:
 
  <li>
   <p>Let <var>compress pointer</var> be a pointer to the first
-  <a title='IPv6 piece'>16-bit piece</a> in the first longest
+  <a lt='IPv6 piece'>16-bit piece</a> in the first longest
   sequences of <var>address</var>'s
-  <a title='IPv6 piece'>16-bit pieces</a> that are 0.
+  <a lt='IPv6 piece'>16-bit pieces</a> that are 0.
 
   <p class=example>In <code>0:f:0:0:f:f:0:0</code> it would point to
   the second 0.
 
  <li><p>If there is no sequence of <var>address</var>'s
- <a title='IPv6 piece'>16-bit pieces</a> that are 0 longer than
+ <a lt='IPv6 piece'>16-bit pieces</a> that are 0 longer than
  one, set <var>compress pointer</var> to null.
 
  <li>
   <p>For each <var>piece</var> in <var>address</var>'s
-  <a title='IPv6 piece'>pieces</a>, run these substeps:
+  <a lt='IPv6 piece'>pieces</a>, run these substeps:
 
   <ol>
    <li><p>If <var>compress pointer</var> points to
    <var>piece</var>, append "<code>::</code>" to
    <var>output</var> if <var>piece</var> is
-   <var>address</var>'s first <a title='IPv6 piece'>piece</a> and append
+   <var>address</var>'s first <a lt='IPv6 piece'>piece</a> and append
    "<code>:</code>" otherwise, and then run these substeps again with all
-   subsequent <a title='IPv6 piece'>pieces</a> in
-   <var>address</var>'s <a title='IPv6 piece'>pieces</a>
+   subsequent <a lt='IPv6 piece'>pieces</a> in
+   <var>address</var>'s <a lt='IPv6 piece'>pieces</a>
    that are 0 skipped or go the next step in the overall set of steps if
-   that leaves no <a title='IPv6 piece'>pieces</a>.
+   that leaves no <a lt='IPv6 piece'>pieces</a>.
 
    <li><p>Append <var>piece</var>, represented as the shortest
    possible lowercase hexadecimal number, to <var>output</var>.
 
    <li><p>If <var>piece</var> is not
-   <var>address</var>'s last <a title='IPv6 piece'>piece</a>,
+   <var>address</var>'s last <a lt='IPv6 piece'>piece</a>,
    append "<code>:</code>" to <var>output</var>.
   </ol>
 
@@ -604,53 +604,53 @@ A Recommendation for IPv6 Address Text Representation.
 <!-- History behind URL as term:
      http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>A <dfn id=concept-url title='URL'>URL</dfn> is a universal identifier.
+<p>A <dfn id=concept-url lt='URL'>URL</dfn> is a universal identifier.
 
 <p>A <a>URL</a> consists of components, namely a
-<a title='URL scheme'>scheme</a>,
-<a title='URL scheme data'>scheme data</a>,
-<a title='URL username'>username</a>,
-<a title='URL password'>password</a>,
-<a title='URL host'>host</a>,
-<a title='URL port'>port</a>,
-<a title='URL path'>path</a>,
-<a title='URL query'>query</a>, and
-<a title='URL fragment'>fragment</a>.
+<a lt='URL scheme'>scheme</a>,
+<a lt='URL scheme data'>scheme data</a>,
+<a lt='URL username'>username</a>,
+<a lt='URL password'>password</a>,
+<a lt='URL host'>host</a>,
+<a lt='URL port'>port</a>,
+<a lt='URL path'>path</a>,
+<a lt='URL query'>query</a>, and
+<a lt='URL fragment'>fragment</a>.
 
-<p>A <a>URL</a>'s <dfn id=concept-url-scheme title='URL scheme'>scheme</dfn> is
+<p>A <a>URL</a>'s <dfn id=concept-url-scheme lt='URL scheme'>scheme</dfn> is
 a string that identifies the type of <a>URL</a> and can be used to
 dispatch a <a>URL</a> for further processing after
-<a title='URL parser'>parsing</a>. It is initially the empty string.
+<a lt='URL parser'>parsing</a>. It is initially the empty string.
 
 <p>A <a>URL</a>'s
-<dfn id=concept-url-scheme-data title='URL scheme data'>scheme data</dfn> is a string holding the contents of a
+<dfn id=concept-url-scheme-data lt='URL scheme data'>scheme data</dfn> is a string holding the contents of a
 <a>URL</a>. It is initially the empty string.
 
 <p class="note no-backref">A <a>URL</a>'s
-<a title='URL scheme data'>scheme data</a> will be its initial value if its
-<a title='URL scheme'>scheme</a> is a <a>relative scheme</a>, and
+<a lt='URL scheme data'>scheme data</a> will be its initial value if its
+<a lt='URL scheme'>scheme</a> is a <a>relative scheme</a>, and
 otherwise will be the only component without an initial value.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-username title='URL username'>username</dfn>
+<p>A  <a>URL</a>'s <dfn id=concept-url-username lt='URL username'>username</dfn>
 is a string identifying a user. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-password title='URL password'>password</dfn>
+<p>A  <a>URL</a>'s <dfn id=concept-url-password lt='URL password'>password</dfn>
 is either null or a string identifying a user's credentials. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-host title='URL host'>host</dfn> is
+<p>A  <a>URL</a>'s <dfn id=concept-url-host lt='URL host'>host</dfn> is
 either null or a <a>host</a>. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-port title='URL port'>port</dfn> is a
+<p>A  <a>URL</a>'s <dfn id=concept-url-port lt='URL port'>port</dfn> is a
 string that identifies a networking port. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-path title='URL path'>path</dfn> is a
+<p>A  <a>URL</a>'s <dfn id=concept-url-path lt='URL path'>path</dfn> is a
 list of zero or more strings holding data, usually identifying a location in hierarchical
 form. It is initially the empty list.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-query title='URL query'>query</dfn> is
+<p>A  <a>URL</a>'s <dfn id=concept-url-query lt='URL query'>query</dfn> is
 either null or a string holding data. It is initially null.
 
-<p>A <a>URL</a>'s <dfn id=concept-url-fragment title='URL fragment'>fragment</dfn>
+<p>A <a>URL</a>'s <dfn id=concept-url-fragment lt='URL fragment'>fragment</dfn>
 is either null or a string holding data that can be used for further processing on the
 resource the <a>URL</a>'s other components identify.
 It is initially null.
@@ -659,13 +659,13 @@ It is initially null.
 It is initially unset.
 
 <p class="note no-backref">The <a>relative flag</a> exists as checking if a
-<a>URL</a>'s <a title='URL scheme'>scheme</a> is a
+<a>URL</a>'s <a lt='URL scheme'>scheme</a> is a
 <a>relative scheme</a> can give incorrect results due to the
 <code><a attribute for=URLUtils>protocol</a></code> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
 <p>A <a>URL</a> also has an associated
-<dfn id=concept-url-object title='URL object'>object</dfn> that is either null or a
+<dfn id=concept-url-object lt='URL object'>object</dfn> that is either null or a
 <code><a>Blob</a></code>. It is initially null.
 [[!FILEAPI]]
 
@@ -674,15 +674,15 @@ URLs, but others can be added going forward, hence "object".
 
 
 <p>A <dfn>relative scheme</dfn> is a
-<a title='URL scheme'>scheme</a> listed in the first column of
+<a lt='URL scheme'>scheme</a> listed in the first column of
 the following table. A <dfn>default port</dfn> is a
 <a>relative scheme</a>'s optional corresponding
-<a title='URL port'>port</a> and is listed in the second column
+<a lt='URL port'>port</a> and is listed in the second column
 on the same row.
 
 <table>
- <tr><th><a title='URL scheme'>scheme</a>
-     <th><a title='URL port'>port</a>
+ <tr><th><a lt='URL scheme'>scheme</a>
+     <th><a lt='URL port'>port</a>
  <tr><td>"<code>ftp</code>"<td>"<code>21</code>"
  <tr><td>"<code>file</code>"<td>
  <tr><td>"<code>gopher</code>"<td>"<code>70</code>"
@@ -698,21 +698,21 @@ on the same row.
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
 
-<p>A <dfn>local scheme</dfn> is a <a title="URL scheme">scheme</a> that is one of
+<p>A <dfn>local scheme</dfn> is a <a lt="URL scheme">scheme</a> that is one of
 "<code>about</code>", "<code>blob</code>", "<code>data</code>", and
 "<code>filesystem</code>".
 
-<p>A <a>URL</a> <dfn>is local</dfn> if its <a title="URL scheme">scheme</a> is a
+<p>A <a>URL</a> <dfn>is local</dfn> if its <a lt="URL scheme">scheme</a> is a
 <a>local scheme</a>.
 
 <p>A <a>URL</a>
-<dfn title="include credentials">includes credentials</dfn> if either its
-<a title='URL username'>username</a> is not the empty string or its
-<a title='URL password'>password</a> is non-null.
+<dfn lt="include credentials">includes credentials</dfn> if either its
+<a lt='URL username'>username</a> is not the empty string or its
+<a lt='URL password'>password</a> is non-null.
 <!-- used by Fetch -->
 
 <p>A <a>URL</a> can be designated as
-<dfn id=concept-base-url title='base URL'>base URL</dfn>.
+<dfn id=concept-base-url lt='base URL'>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for
 the <a>URL parser</a> when the input is potentially a
@@ -727,83 +727,83 @@ the <a>URL parser</a> when the input is potentially a
 <a>relative URL</a> or an
 <a>absolute URL</a>, optionally followed by
 "<code>#</code>" and a
-<a title='URL fragment'>fragment</a>.
+<a lt='URL fragment'>fragment</a>.
 
-<p>An <dfn id=concept-absolute-url title='absolute URL'>absolute URL</dfn> must be a
-<a title='URL scheme'>scheme</a>, followed by
+<p>An <dfn id=concept-absolute-url lt='absolute URL'>absolute URL</dfn> must be a
+<a lt='URL scheme'>scheme</a>, followed by
 "<code>:</code>", followed by either a
 <a>scheme-relative URL</a>, if
-<a title='URL scheme'>scheme</a> is a <a>relative scheme</a>, or
-<a title='URL scheme data'>scheme data</a> otherwise, optionally followed
-by "<code>?</code>" and a <a title='URL query'>query</a>.
+<a lt='URL scheme'>scheme</a> is a <a>relative scheme</a>, or
+<a lt='URL scheme data'>scheme data</a> otherwise, optionally followed
+by "<code>?</code>" and a <a lt='URL query'>query</a>.
 
-<p>A <a title='URL scheme'>scheme</a> must be one
+<p>A <a lt='URL scheme'>scheme</a> must be one
 <a>ASCII alpha</a>, followed by zero or more of
 <a>ASCII alphanumeric</a>, "<code>+</code>",
 "<code>-</code>", and "<code>.</code>". A
-<a title='URL scheme'>scheme</a> must be registered
+<a lt='URL scheme'>scheme</a> must be registered
 <span class=XXX>...</span>.
 
-<p>The syntax of <a title='URL scheme data'>scheme data</a>
-depends on the <a title='URL scheme'>scheme</a> and is typically
+<p>The syntax of <a lt='URL scheme data'>scheme data</a>
+depends on the <a lt='URL scheme'>scheme</a> and is typically
 defined alongside it. Standards must define
-<a title='URL scheme data'>scheme data</a> within the constraints of zero or
+<a lt='URL scheme data'>scheme data</a> within the constraints of zero or
 more <a>URL units</a>, excluding "<code>?</code>".
 
-<p>A <dfn id=concept-relative-url title='relative URL'>relative URL</dfn> must be either a
+<p>A <dfn id=concept-relative-url lt='relative URL'>relative URL</dfn> must be either a
 <a>scheme-relative URL</a>, an
 <a>absolute-path-relative URL</a>,
 or a <a>path-relative URL</a> that
-does not start with a <a title='URL scheme'>scheme</a> and
+does not start with a <a lt='URL scheme'>scheme</a> and
 "<code>:</code>", optionally followed by a "<code>?</code>" and
-a <a title='URL query'>query</a>.
+a <a lt='URL query'>query</a>.
 
 <p>At the point where a <a>relative URL</a> is
-<a title='URL parser'>parsed</a>, a
+<a lt='URL parser'>parsed</a>, a
 <a>base URL</a> must be in scope.
 
-<p>A <dfn id=concept-scheme-relative-url title='scheme-relative URL'>scheme-relative URL</dfn> must be
+<p>A <dfn id=concept-scheme-relative-url lt='scheme-relative URL'>scheme-relative URL</dfn> must be
 "<code>//</code>", optionally followed by
-<a title='URL Userinfo'>userinfo</a> and "<code>@</code>",
+<a lt='URL Userinfo'>userinfo</a> and "<code>@</code>",
 followed by a <a>host</a>, optionally followed
-by "<code>:</code>" and a <a title='URL port'>port</a>,
+by "<code>:</code>" and a <a lt='URL port'>port</a>,
 optionally followed by an
 <a>absolute-path-relative URL</a>.
 
-<p><dfn id=concept-url-userinfo title='URL Userinfo'>Userinfo</dfn> must be a
-<a title='URL username'>username</a>, optionally followed by a
+<p><dfn id=concept-url-userinfo lt='URL Userinfo'>Userinfo</dfn> must be a
+<a lt='URL username'>username</a>, optionally followed by a
 "<code>:</code>" and a
-<a title='URL password'>password</a>.
+<a lt='URL password'>password</a>.
 
-<p>A <a title='URL username'>username</a> must be zero or more
+<p>A <a lt='URL username'>username</a> must be zero or more
 <a>URL units</a>, excluding "<code>/</code>",
 "<code>:</code>, "<code>?</code>", and "<code>@</code>".
 <!-- password without ":" (sorted on ASCII position) -->
 
-<p>A <a title='URL password'>password</a> must be zero or more
+<p>A <a lt='URL password'>password</a> must be zero or more
 <a>URL units</a>, excluding "<code>/</code>",
 "<code>?</code>", and "<code>@</code>".
 
-<p>A <a title='URL port'>port</a> must be zero or more
+<p>A <a lt='URL port'>port</a> must be zero or more
 <a>ASCII digits</a>.
 
 <p>An
-<dfn id=concept-absolute-path-relative-url title='absolute-path-relative URL'>absolute-path-relative URL</dfn>
+<dfn id=concept-absolute-path-relative-url lt='absolute-path-relative URL'>absolute-path-relative URL</dfn>
 must be "<code>/</code>", followed by a
 <a>path-relative URL</a> that does not
 start with "<code>/</code>".
 
-<p>A <dfn id=concept-path-relative-url title='path-relative URL'>path-relative URL</dfn> must be zero or
-more <a title="path segment">path segments</a> separated from each
+<p>A <dfn id=concept-path-relative-url lt='path-relative URL'>path-relative URL</dfn> must be zero or
+more <a lt="path segment">path segments</a> separated from each
 other by a "<code>/</code>".
 
 <p>A <dfn>path segment</dfn> must be zero or more <a>URL units</a>,
 excluding "<code>/</code>" and "<code>?</code>".
 
-<p>A <a title='URL query'>query</a> must be zero or more
+<p>A <a lt='URL query'>query</a> must be zero or more
 <a>URL units</a>.
 
-<p>A <a title='URL fragment'>fragment</a> must be zero or more
+<p>A <a lt='URL fragment'>fragment</a> must be zero or more
 <a>URL units</a>.
 
 <p>The <dfn>URL code points</dfn> are <a>ASCII alphanumeric</a>,
@@ -849,19 +849,19 @@ U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD.
 
 <p class=note>Code points higher than U+009F will be converted to
-<a title="percent-encoded byte">percent-encoded bytes</a> by the
+<a lt="percent-encoded byte">percent-encoded bytes</a> by the
 <a>URL parser</a>, except for code points appearing in
-<a title="URL fragment">fragments</a>.
+<a lt="URL fragment">fragments</a>.
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and
-<a title="percent-encoded byte">percent-encoded bytes</a>.
+<a lt="percent-encoded byte">percent-encoded bytes</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>
 
 <p class=XXX>Add the ability to halt on the first conformance error.
 
-<p>The <dfn id=concept-url-parser title='URL parser'>URL parser</dfn> takes a string
+<p>The <dfn id=concept-url-parser lt='URL parser'>URL parser</dfn> takes a string
 <var>input</var>, optionally with a
 <a>base URL</a> <var>base</var>, and
 optionally with an <a>encoding</a>
@@ -874,17 +874,17 @@ optionally with an <a>encoding</a>
 
  <li><p>If <var>url</var> is failure, return failure.
 
- <li><p>If <var>url</var>'s <a title='URL scheme'>scheme</a> is not
+ <li><p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>If <var>url</var>'s <a title='URL scheme data'>scheme data</a>
+ <li><p>If <var>url</var>'s <a lt='URL scheme data'>scheme data</a>
  is not in the <a>blob URL store</a>, return
  <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a title='URL object'>object</a> to a
+ <li><p>Set <var>url</var>'s <a lt='URL object'>object</a> to a
  <a>structured clone</a> of the entry in the
  <a>blob URL store</a> corresponding to
- <var>url</var>'s <a title='URL scheme data'>scheme data</a>.
+ <var>url</var>'s <a lt='URL scheme data'>scheme data</a>.
  [[!HTML]]
 
  <li><p>Return <var>url</var>.
@@ -892,7 +892,7 @@ optionally with an <a>encoding</a>
 
 <hr>
 
-<p>The <dfn id=concept-basic-url-parser title='basic URL parser'>basic URL parser</dfn> takes a string
+<p>The <dfn id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a string
 <var>input</var>, optionally with a
 <a>base URL</a> <var>base</var>,
 optionally with an <a>encoding</a>
@@ -972,7 +972,7 @@ optionally with an <a>encoding</a>
 
      <li>
       <p>Otherwise, if <a>c</a> is "<code>:</code>", set
-      <var>url</var>'s <a title='URL scheme'>scheme</a> to
+      <var>url</var>'s <a lt='URL scheme'>scheme</a> to
       <var>buffer</var>, <var>buffer</var> to the empty string,
       and then run these substeps:
 
@@ -981,20 +981,20 @@ optionally with an <a>encoding</a>
        terminate this algorithm.
 
        <li><p>If <var>url</var>'s
-       <a title='URL scheme'>scheme</a> is
+       <a lt='URL scheme'>scheme</a> is
        a <a>relative scheme</a>, set <var>url</var>'s
        <a>relative flag</a>.
 
        <li><p>If <var>url</var>'s
-       <a title='URL scheme'>scheme</a> is
+       <a lt='URL scheme'>scheme</a> is
        "<code>file</code>", set <var>state</var> to
        <a>relative state</a>.
 
        <li><p>Otherwise, if <var>url</var>'s
        <a>relative flag</a> is set, <var>base</var> is not null
        and <var>base</var>'s
-       <a title='URL scheme'>scheme</a> is equal to
-       <var>url</var>'s <a title='URL scheme'>scheme</a>,
+       <a lt='URL scheme'>scheme</a> is equal to
+       <var>url</var>'s <a lt='URL scheme'>scheme</a>,
        set <var>state</var> to
        <a>relative or authority state</a>.
 
@@ -1022,12 +1022,12 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li><p>If <a>c</a> is "<code>?</code>", set
-     <var>url</var>'s <a title='URL query'>query</a>
+     <var>url</var>'s <a lt='URL query'>query</a>
      to the empty string and <var>state</var> to
      <a>query state</a>.
 
      <li><p>Otherwise, if <a>c</a> is "<code>#</code>", set
-     <var>url</var>'s <a title='URL fragment'>fragment</a>
+     <var>url</var>'s <a lt='URL fragment'>fragment</a>
      to the empty string and <var>state</var> to
      <a>fragment state</a>.
 
@@ -1036,7 +1036,7 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a
-       <a title="URL code points">URL code point</a>, and not
+       <a lt="URL code points">URL code point</a>, and not
        "<code>%</code>", <a>parse error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
@@ -1047,19 +1047,19 @@ optionally with an <a>encoding</a>
        <a>utf-8 percent encode</a> <a>c</a> using the
        <a>simple encode set</a>, and append the result to
        <var>url</var>'s
-       <a title='URL scheme data'>scheme data</a>.
+       <a lt='URL scheme data'>scheme data</a>.
       </ol>
     </ol>
 
    <dt><dfn>no scheme state</dfn>
    <dd>
     <p>If <var>base</var> is null, or <var>base</var>'s
-    <a title='URL scheme'>scheme</a> is not a
+    <a lt='URL scheme'>scheme</a> is not a
     <a>relative scheme</a>, <a>parse error</a>, return failure.
 
     <p class=note>Due to the <code><a attribute for=URLUtils>protocol</a></code> attribute's
     ability to change <var>base</var>'s
-    <a title='URL scheme'>scheme</a>, <var>base</var>'s
+    <a lt='URL scheme'>scheme</a>, <var>base</var>'s
     <a>relative flag</a> is not used here.
 
     <p>Otherwise, set <var>state</var> to <a>relative state</a>,
@@ -1079,22 +1079,22 @@ optionally with an <a>encoding</a>
    <dt><dfn>relative state</dfn>
    <dd>
     <p>Set <var>url</var>'s <a>relative flag</a>, set
-    <var>url</var>'s <a title='URL scheme'>scheme</a> to
-    <var>base</var>'s <a title='URL scheme'>scheme</a> if
-    <var>url</var>'s <a title='URL scheme'>scheme</a> is not
+    <var>url</var>'s <a lt='URL scheme'>scheme</a> to
+    <var>base</var>'s <a lt='URL scheme'>scheme</a> if
+    <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
     "<code>file</code>", and then, based on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
      <dd>
-      <p>Set <var>url</var>'s <a title='URL host'>host</a>
-      to <var>base</var>'s <a title='URL host'>host</a>,
-      <var>url</var>'s <a title='URL port'>port</a> to
-      <var>base</var>'s <a title='URL port'>port</a>,
-      <var>url</var>'s <a title='URL path'>path</a> to
-      <var>base</var>'s <a title='URL path'>path</a>, and
-      <var>url</var>'s <a title='URL query'>query</a> to
-      <var>base</var>'s <a title='URL query'>query</a>.
+      <p>Set <var>url</var>'s <a lt='URL host'>host</a>
+      to <var>base</var>'s <a lt='URL host'>host</a>,
+      <var>url</var>'s <a lt='URL port'>port</a> to
+      <var>base</var>'s <a lt='URL port'>port</a>,
+      <var>url</var>'s <a lt='URL path'>path</a> to
+      <var>base</var>'s <a lt='URL path'>path</a>, and
+      <var>url</var>'s <a lt='URL query'>query</a> to
+      <var>base</var>'s <a lt='URL query'>query</a>.
 
      <dt>"<code>/</code>"
      <dt>"<code>\</code>"
@@ -1108,52 +1108,52 @@ optionally with an <a>encoding</a>
 
      <dt>"<code>?</code>"
      <dd><p>Set
-     <var>url</var>'s <a title='URL host'>host</a> to
-     <var>base</var>'s <a title='URL host'>host</a>,
-     <var>url</var>'s <a title='URL port'>port</a> to
-     <var>base</var>'s <a title='URL port'>port</a>,
-     <var>url</var>'s <a title='URL path'>path</a> to
-     <var>base</var>'s <a title='URL path'>path</a>,
-     <var>url</var>'s <a title='URL query'>query</a> to the empty string,
+     <var>url</var>'s <a lt='URL host'>host</a> to
+     <var>base</var>'s <a lt='URL host'>host</a>,
+     <var>url</var>'s <a lt='URL port'>port</a> to
+     <var>base</var>'s <a lt='URL port'>port</a>,
+     <var>url</var>'s <a lt='URL path'>path</a> to
+     <var>base</var>'s <a lt='URL path'>path</a>,
+     <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
      <dd><p>Set
-     <var>url</var>'s <a title='URL host'>host</a> to
-     <var>base</var>'s <a title='URL host'>host</a>,
-     <var>url</var>'s <a title='URL port'>port</a> to
-     <var>base</var>'s <a title='URL port'>port</a>,
-     <var>url</var>'s <a title='URL path'>path</a> to
-     <var>base</var>'s <a title='URL path'>path</a>,
-     <var>url</var>'s <a title='URL query'>query</a> to
-     <var>base</var>'s <a title='URL query'>query</a>,
-     <var>url</var>'s <a title='URL fragment'>fragment</a> to the empty string,
+     <var>url</var>'s <a lt='URL host'>host</a> to
+     <var>base</var>'s <a lt='URL host'>host</a>,
+     <var>url</var>'s <a lt='URL port'>port</a> to
+     <var>base</var>'s <a lt='URL port'>port</a>,
+     <var>url</var>'s <a lt='URL path'>path</a> to
+     <var>base</var>'s <a lt='URL path'>path</a>,
+     <var>url</var>'s <a lt='URL query'>query</a> to
+     <var>base</var>'s <a lt='URL query'>query</a>,
+     <var>url</var>'s <a lt='URL fragment'>fragment</a> to the empty string,
      and <var>state</var> to <a>fragment state</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
        <li>
-        <p>If <var>url</var>'s <a title='URL scheme'>scheme</a> is not
+        <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
         "<code>file</code>", or <var>c</var> is not an
         <a>ASCII alpha</a>, or <a>remaining</a> does not start with either
         "<code>:</code>" or "<code>|</code>", or <a>remaining</a>
         consists of one code point, or <a>remaining</a>'s second code point is
         not one of "<code>/</code>", "<code>\</code>", "<code>?</code>",
         and "<code>#</code>", then set
-        <var>url</var>'s <a title='URL host'>host</a> to
-        <var>base</var>'s <a title='URL host'>host</a>,
-        <var>url</var>'s <a title='URL port'>port</a> to
-        <var>base</var>'s <a title='URL port'>port</a>,
-        <var>url</var>'s <a title='URL path'>path</a> to
-        <var>base</var>'s <a title='URL path'>path</a>, and then remove
-        <var>url</var>'s <a title='URL path'>path</a>'s last entry.
+        <var>url</var>'s <a lt='URL host'>host</a> to
+        <var>base</var>'s <a lt='URL host'>host</a>,
+        <var>url</var>'s <a lt='URL port'>port</a> to
+        <var>base</var>'s <a lt='URL port'>port</a>,
+        <var>url</var>'s <a lt='URL path'>path</a> to
+        <var>base</var>'s <a lt='URL path'>path</a>, and then remove
+        <var>url</var>'s <a lt='URL path'>path</a>'s last entry.
         <!-- base's path cannot be empty so pop does not need a non-empty check -->
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
         When found at the start of a <code>file</code> URL it is treated as an
         absolute path rather than one relative to
-        <var>base</var>'s <a title='URL path'>path</a>.
+        <var>base</var>'s <a lt='URL path'>path</a>.
 
        <li><p>Set <var>state</var> to <a>relative path state</a>,
        and decrease <var>pointer</var> by one.
@@ -1170,7 +1170,7 @@ optionally with an <a>encoding</a>
      <a>parse error</a>.
 
      <li><p>If <var>url</var>'s
-     <a title='URL scheme'>scheme</a> is
+     <a lt='URL scheme'>scheme</a> is
      "<code>file</code>", set <var>state</var> to
      <a>file host state</a>.
 
@@ -1182,15 +1182,15 @@ optionally with an <a>encoding</a>
 
     <ol>
      <li>
-      <p>If <var>url</var>'s <a title='URL scheme'>scheme</a> is not
+      <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
       "<code>file</code>", set
-      <var>url</var>'s <a title='URL host'>host</a> to
-      <var>base</var>'s <a title='URL host'>host</a> and
-      <var>url</var>'s <a title='URL port'>port</a> to
-      <var>base</var>'s <a title='URL port'>port</a>.
+      <var>url</var>'s <a lt='URL host'>host</a> to
+      <var>base</var>'s <a lt='URL host'>host</a> and
+      <var>url</var>'s <a lt='URL port'>port</a> to
+      <var>base</var>'s <a lt='URL port'>port</a>.
 
       <p class="example no-backref"><code>file:/path/</code> will not inherit
-      <var>base</var>'s <a title='URL host'>host</a>.
+      <var>base</var>'s <a lt='URL host'>host</a>.
 
      <li><p>Set <var>state</var> to <a>relative path state</a>,
      and decrease <var>pointer</var> by one.
@@ -1243,7 +1243,7 @@ optionally with an <a>encoding</a>
          <a>parse error</a>, continue.
 
          <li><p>If <var>code point</var> is not a
-         <a title="URL code points">URL code point</a> and not
+         <a lt="URL code points">URL code point</a> and not
          "<code>%</code>", <a>parse error</a>.
 
          <li><p>If <var>code point</var> is "<code>%</code>" and
@@ -1252,16 +1252,16 @@ optionally with an <a>encoding</a>
 
          <li><p>If <var>code point</var> is "<code>:</code>" and
          <var>url</var>'s
-         <a title='URL password'>password</a> is null, set
-         <var>url</var>'s <a title='URL password'>password</a>
+         <a lt='URL password'>password</a> is null, set
+         <var>url</var>'s <a lt='URL password'>password</a>
          to the empty string and continue.
 
          <li><p><a>utf-8 percent encode</a> <var>code point</var> using
          the <a>default encode set</a> and append the result to
-         <var>url</var>'s <a title='URL password'>password</a>
-         if <var>url</var>'s <a title='URL password'>password</a>
+         <var>url</var>'s <a lt='URL password'>password</a>
+         if <var>url</var>'s <a lt='URL password'>password</a>
          is non-null, and to
-         <var>url</var>'s <a title='URL username'>username</a>
+         <var>url</var>'s <a lt='URL username'>username</a>
          otherwise.
         </ol>
        <li><p>Set <var>buffer</var> to the empty string.
@@ -1305,13 +1305,13 @@ optionally with an <a>encoding</a>
 
         <ol>
          <li><p>Let <var>host</var> be the result of
-         <a title='host parser'>host parsing</a>
+         <a lt='host parser'>host parsing</a>
          <var>buffer</var>.
 
          <li><p>If <var>host</var> is failure, return failure.
 
          <li><p>Set
-         <var>url</var>'s <a title='URL host'>host</a> to
+         <var>url</var>'s <a lt='URL host'>host</a> to
          <var>host</var>, <var>buffer</var> to the empty string,
          and <var>state</var> to <a>relative path start state</a>.
         </ol>
@@ -1333,12 +1333,12 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>Let <var>host</var> be the result of
-       <a title='host parser'>host parsing</a>
+       <a lt='host parser'>host parsing</a>
        <var>buffer</var>.
 
        <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var>url</var>'s <a title='URL host'>host</a> to
+       <li><p>Set <var>url</var>'s <a lt='URL host'>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>port state</a>.
 
@@ -1355,12 +1355,12 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>Let <var>host</var> be the result of
-       <a title='host parser'>host parsing</a>
+       <a lt='host parser'>host parsing</a>
        <var>buffer</var>.
 
        <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var>url</var>'s <a title='URL host'>host</a> to
+       <li><p>Set <var>url</var>'s <a lt='URL host'>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>relative path start state</a>.
 
@@ -1388,7 +1388,7 @@ optionally with an <a>encoding</a>
    <dt><dfn>port state</dfn>
    <dd>
     <ol>
-     <li><p>If <a>c</a> is an <a title="ASCII digits">ASCII digit</a>,
+     <li><p>If <a>c</a> is an <a lt="ASCII digits">ASCII digit</a>,
      append <a>c</a> to <var>buffer</var>.
 
      <li>
@@ -1414,12 +1414,12 @@ optionally with an <a>encoding</a>
         </div>
 
        <li><p>If <var>buffer</var> is equal to
-       <var>url</var>'s <a title='URL scheme'>scheme</a>'s
+       <var>url</var>'s <a lt='URL scheme'>scheme</a>'s
        <a>default port</a>, set <var>buffer</var> to the empty
        string.
 
        <li><p>Set <var>url</var>'s
-       <a title='URL port'>port</a> to <var>buffer</var>.
+       <a lt='URL port'>port</a> to <var>buffer</var>.
 
        <li><p>If <var>state override</var> is given, terminate this
        algorithm.
@@ -1471,15 +1471,15 @@ optionally with an <a>encoding</a>
         </table>
 
        <li><p>If <var>buffer</var> is "<code>..</code>", remove
-       <var>url</var>'s <a title='URL path'>path</a>'s last entry, if
+       <var>url</var>'s <a lt='URL path'>path</a>'s last entry, if
        any, and then if <a>c</a> is neither  "<code>/</code>" nor
        "<code>\</code>", append the empty string to <var>url</var>'s
-       <a title='URL path'>path</a>.
+       <a lt='URL path'>path</a>.
 
        <li><p>Otherwise, if <var>buffer</var> is "<code>.</code>" and
        <a>c</a> is neither "<code>/</code>" nor "<code>\</code>",
        append an empty string to
-       <var>url</var>'s <a title='URL path'>path</a>.
+       <var>url</var>'s <a lt='URL path'>path</a>.
 
        <li>
         <p>Otherwise, if <var>buffer</var> is not
@@ -1487,8 +1487,8 @@ optionally with an <a>encoding</a>
 
         <ol>
          <li>
-          <p>If <var>url</var>'s <a title='URL scheme'>scheme</a> is
-          "<code>file</code>", <var>url</var>'s <a title='URL path'>path</a>
+          <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is
+          "<code>file</code>", <var>url</var>'s <a lt='URL path'>path</a>
           is empty, <var>buffer</var> consists of two
           code points, of which the first is an <a>ASCII alpha</a>,
           and the second is "<code>|</code>", replace the second code point in
@@ -1498,17 +1498,17 @@ optionally with an <a>encoding</a>
           They are beautiful, no?
 
          <li><p>Append <var>buffer</var> to
-         <var>url</var>'s <a title='URL path'>path</a>.
+         <var>url</var>'s <a lt='URL path'>path</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code>?</code>", set
-       <var>url</var>'s <a title='URL query'>query</a> to the empty string,
+       <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
        and <var>state</var> to <a>query state</a>.
 
        <li><p>If <a>c</a> is "<code>#</code>", set
-       <var>url</var>'s <a title='URL fragment'>fragment</a> to the empty string,
+       <var>url</var>'s <a lt='URL fragment'>fragment</a> to the empty string,
        and <var>state</var> to <a>fragment state</a>.
       </ol>
 
@@ -1520,7 +1520,7 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>If <a>c</a> is not a
-       <a title="URL code points">URL code point</a> and not "<code>%</code>",
+       <a lt="URL code points">URL code point</a> and not "<code>%</code>",
        <a>parse error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
@@ -1542,13 +1542,13 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>If <var>url</var>'s <a>relative flag</a> is unset or
-       <var>url</var>'s <a title='URL scheme'>scheme</a> is either
+       <var>url</var>'s <a lt='URL scheme'>scheme</a> is either
        "<code>ws</code>" or "<code>wss</code>", set
        <var>encoding override</var> to <a>utf-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
-       <a title='encode'>encoding</a>
+       <a lt='encode'>encoding</a>
        <var>buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1559,19 +1559,19 @@ optionally with an <a>encoding</a>
          <li><p>If <var>byte</var> is less than 0x21, greater than
          0x7E, or is one of 0x22, 0x23, 0x3C, 0x3E, and 0x60, append
          <var>byte</var>,
-         <a title="percent encode">percent encoded</a>, to
-         <var>url</var>'s <a title='URL query'>query</a>.
+         <a lt="percent encode">percent encoded</a>, to
+         <var>url</var>'s <a lt='URL query'>query</a>.
 
          <li><p>Otherwise, append a code point whose value is
          <var>byte</var> to <var>url</var>'s
-         <a title='URL query'>query</a>.
+         <a lt='URL query'>query</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code>#</code>", set
        <var>url</var>'s
-       <a title='URL fragment'>fragment</a> to the empty string,
+       <a lt='URL fragment'>fragment</a> to the empty string,
        and state to <a>fragment state</a>.
       </ol>
 
@@ -1583,7 +1583,7 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>If <a>c</a> is not a
-       <a title="URL code points">URL code point</a> and not "<code>%</code>",
+       <a lt="URL code points">URL code point</a> and not "<code>%</code>",
        <a>parse error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
@@ -1609,16 +1609,16 @@ optionally with an <a>encoding</a>
      <dt>Otherwise
      <dd>
       <ol>
-       <li><p>If <a>c</a> is not a <a title="URL code points">URL code point</a> and not
+       <li><p>If <a>c</a> is not a <a lt="URL code points">URL code point</a> and not
        "<code>%</code>", <a>parse error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
 
        <li>
-        <p>Append <a>c</a> to <var>url</var>'s <a title="URL fragment">fragment</a>.
+        <p>Append <a>c</a> to <var>url</var>'s <a lt="URL fragment">fragment</a>.
 
-        <p class=note>Unfortunately not using <a title="percent encode">percent-encoding</a> is intentional as
+        <p class=note>Unfortunately not using <a lt="percent encode">percent-encoding</a> is intentional as
         implementations with majority market share exhibit this behavior.
         <!-- Chrome does percent-encoding if the scheme is not a relative scheme,
              hopefully that can be aligned since flip-flopping is not great. -->
@@ -1635,13 +1635,13 @@ optionally with an <a>encoding</a>
 <var>username</var>, run these steps:
 
 <ol>
- <li><p>Set <var>url</var>'s <a title='URL username'>username</a> to the
+ <li><p>Set <var>url</var>'s <a lt='URL username'>username</a> to the
  empty string.
 
  <li><p>For each code point in <var>username</var>,
  <a>utf-8 percent encode</a> it using the <a>username encode set</a>, and
  append the result to <var>url</var>'s
- <a title='URL username'>username</a>.
+ <a lt='URL username'>username</a>.
 </ol>
 
 <p>To <dfn>set the password</dfn> given a <var>url</var> and
@@ -1649,32 +1649,32 @@ optionally with an <a>encoding</a>
 
 <ol>
  <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
- <a title='URL password'>password</a> to null.
+ <a lt='URL password'>password</a> to null.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <var>url</var>'s <a title='URL password'>password</a> to
+   <li><p>Set <var>url</var>'s <a lt='URL password'>password</a> to
    the empty string.
 
    <li><p>For each code point in <var>password</var>,
    <a>utf-8 percent encode</a> it using the <a>password encode set</a>, and
    append the result to <var>url</var>'s
-   <a title='URL password'>password</a>.
+   <a lt='URL password'>password</a>.
   </ol>
 </ol>
 
 
 <h3 id=url-serializing>URL serializing</h3>
 
-<p>The <dfn id=concept-url-serializer title='URL serializer'>URL serializer</dfn> takes a
+<p>The <dfn id=concept-url-serializer lt='URL serializer'>URL serializer</dfn> takes a
 <a>URL</a> <var>url</var>,
 optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
 <ol>
  <li><p>Let <var>output</var> be <var>url</var>'s
- <a title='URL scheme'>scheme</a> and
+ <a lt='URL scheme'>scheme</a> and
  "<code>:</code>" concatenated.
 
  <li>
@@ -1685,54 +1685,54 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 
    <li>
     <p>If <var>url</var>'s
-    <a title='URL username'>username</a> is not the empty string
+    <a lt='URL username'>username</a> is not the empty string
     or <var>url</var>'s
-    <a title='URL password'>password</a> is non-null, run these
+    <a lt='URL password'>password</a> is non-null, run these
     substeps:
 
     <ol>
      <li><p>Append <var>url</var>'s
-     <a title='URL username'>username</a> to
+     <a lt='URL username'>username</a> to
      <var>output</var>.
 
      <li><p>If <var>url</var>'s
-     <a title='URL password'>password</a> is non-null, append
+     <a lt='URL password'>password</a> is non-null, append
      "<code>:</code>" concatenated with <var>url</var>'s
-     <a title='URL password'>password</a> to
+     <a lt='URL password'>password</a> to
      <var>output</var>.
 
      <li><p>Append "<code>@</code>" to <var>output</var>.
     </ol>
 
    <li><p>Append <var>url</var>'s
-   <a title='URL host'>host</a>,
-   <a title='host serializer'>serialized</a>, to
+   <a lt='URL host'>host</a>,
+   <a lt='host serializer'>serialized</a>, to
    <var>output</var>.
 
-   <li><p>If <var>url</var>'s <a title='URL port'>port</a>
+   <li><p>If <var>url</var>'s <a lt='URL port'>port</a>
    is not the empty string, append "<code>:</code>" concatenated with
-   <var>url</var>'s <a title='URL port'>port</a> to
+   <var>url</var>'s <a lt='URL port'>port</a> to
    <var>output</var>.
 
    <li><p>Append "<code>/</code>" concatenated with the strings in
-   <var>url</var>'s <a title='URL path'>path</a>
+   <var>url</var>'s <a lt='URL path'>path</a>
    (including empty strings), separated from each other by
    "<code>/</code>" to <var>output</var>.
   </ol>
 
  <li><p>Otherwise, if <var>url</var>'s <a>relative flag</a> is
  unset, append <var>url</var>'s
- <a title='URL scheme data'>scheme data</a> to
+ <a lt='URL scheme data'>scheme data</a> to
  <var>output</var>.
 
- <li><p>If <var>url</var>'s <a title='URL query'>query</a> is non-null,
+ <li><p>If <var>url</var>'s <a lt='URL query'>query</a> is non-null,
  append "<code>?</code>" concatenated with <var>url</var>'s
- <a title='URL query'>query</a> to <var>output</var>.
+ <a lt='URL query'>query</a> to <var>output</var>.
 
  <li><p>If the <i title>exclude fragment flag</i> is unset and
- <var>url</var>'s <a title='URL fragment'>fragment</a> is
+ <var>url</var>'s <a lt='URL fragment'>fragment</a> is
  non-null, append  "<code>#</code>" concatenated with
- <var>url</var>'s <a title='URL fragment'>fragment</a> to
+ <var>url</var>'s <a lt='URL fragment'>fragment</a> to
  <var>output</var>.
 
  <li><p>Return <var>output</var>.
@@ -1744,23 +1744,23 @@ optionally an <i title>exclude fragment flag</i>, and then runs these steps:
 <p class=note>See <a spec=html>origin</a>'s definition in HTML for the
 necessary background information. [[!HTML]]
 
-<p>A <a>URL</a>'s <dfn id=concept-url-origin title='URL origin'>origin</dfn> is
+<p>A <a>URL</a>'s <dfn id=concept-url-origin lt='URL origin'>origin</dfn> is
 the <a spec=html>origin</a> returned by running these steps, switching
-on <a>URL</a>'s <a title='URL scheme'>scheme</a>:
+on <a>URL</a>'s <a lt='URL scheme'>scheme</a>:
 
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
   <p>Let <var>url</var> be the result of
-  <a title='basic URL parser'>parsing</a>
+  <a lt='basic URL parser'>parsing</a>
   <a>URL</a>'s
-  <a title='URL scheme data'>scheme data</a>.
+  <a lt='URL scheme data'>scheme data</a>.
 
   <p>If <var>url</var> is failure, return a new globally unique identifier.
-  Otherwise, return <var>url</var>'s <a title='URL origin'>origin</a>.
+  Otherwise, return <var>url</var>'s <a lt='URL origin'>origin</a>.
   <!-- Did you mean: recursion -->
 
-  <p class="example no-backref">The <a title='URL origin'>origin</a> of
+  <p class="example no-backref">The <a lt='URL origin'>origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is
   the tuple
   (<code>https</code>, <code>whatwg.org</code>, <code>443</code>).
@@ -1772,10 +1772,10 @@ on <a>URL</a>'s <a title='URL scheme'>scheme</a>:
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
  <dd><p>Return a tuple consisting of <a>URL</a>'s
- <a title='URL scheme'>scheme</a>, its
- <a title='URL host'>host</a>, and its <a>default port</a> if its
- <a title='URL port'>port</a> is the empty string, and its
- <a title='URL port'>port</a> otherwise.
+ <a lt='URL scheme'>scheme</a>, its
+ <a lt='URL host'>host</a>, and its <a>default port</a> if its
+ <a lt='URL port'>port</a> is the empty string, and its
+ <a lt='URL port'>port</a> otherwise.
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
@@ -1786,27 +1786,27 @@ on <a>URL</a>'s <a title='URL scheme'>scheme</a>:
 </dl>
 
 
-<h2 id="application/x-www-form-urlencoded"><code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code></h2>
+<h2 id="application/x-www-form-urlencoded"><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code></h2>
 
 <p>The <dfn id=application-x-www-form-urlencoded-0><code>application/x-www-form-urlencoded</code></dfn> format is a simple way to
 encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range.
 
 <p class="note no-backref">While this description makes
-<code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
+<code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
 format is in widespread use due to its prevalence of HTML forms.
 [[!HTML]]
 
-<h3 id=urlencoded-parsing><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</h3>
+<h3 id=urlencoded-parsing><code lt=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'>application/x-www-form-urlencoded</a></code> parser</a>
+<code lt=application-x-www-form-urlencoded-0><a lt='urlencoded parser'>application/x-www-form-urlencoded</a></code> parser</a>
 are mainly relevant for server-oriented implementations. A browser-based implementation
 only needs what the
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded string parser'>application/x-www-form-urlencoded</a></code> string parser</a>
+<code lt=application-x-www-form-urlencoded-0><a lt='urlencoded string parser'>application/x-www-form-urlencoded</a></code> string parser</a>
 requires.
 
 <p>The
-<dfn id=concept-urlencoded-parser title='urlencoded parser'><code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> parser</dfn>
+<dfn id=concept-urlencoded-parser lt='urlencoded parser'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> parser</dfn>
 takes a byte sequence <var>input</var>, optionally with an
 <a>encoding</a> <var>encoding override</var>,
 optionally with a <i title>use _charset_ flag</i>, and optionally with an
@@ -1822,7 +1822,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
   whose value is greater than 0x7F, return failure.
 
   <p class="note no-backref">This can only happen if <var>input</var> was not
-  generated through the <a title='urlencoded serializer'>serializer</a> or
+  generated through the <a lt='urlencoded serializer'>serializer</a> or
   <code><a interface>URLSearchParams</a></code>.
 
  <li><p>Let <var>sequences</var> be the result of splitting
@@ -1864,9 +1864,9 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
 
     <ol>
      <li><p>Let <var>result</var> be the result of
-     <a title=concept-encoding-get>getting an encoding</a>
+     <a lt=concept-encoding-get>getting an encoding</a>
      for <var>value</var>,
-     <a title="utf-8 decode without BOM">decoded</a>.
+     <a lt="utf-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i title>use _charset_ flag</i> and
      set <var>encoding override</var> to <var>result</var>.
@@ -1883,16 +1883,16 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
  <var>output</var> where the new name and value appended to <var>output</var>
  are the result of running <var>encoding override</var>'s
  <a>decoder</a> on the
- <a title="percent decode">percent decoding</a> of the name and value from
+ <a lt="percent decode">percent decoding</a> of the name and value from
  <var>pairs</var>, respectively.
 
  <li><p>Return <var>output</var>.
 </ol>
 
-<h3 id=urlencoded-serializing><code title=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</h3>
+<h3 id=urlencoded-serializing><code lt=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
-<dfn id=concept-urlencoded-byte-serializer title='urlencoded byte serializer'><code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> byte serializer</dfn>
+<dfn id=concept-urlencoded-byte-serializer lt='urlencoded byte serializer'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> byte serializer</dfn>
 takes a byte sequence <var>input</var> and then runs these steps:
 
 <ol>
@@ -1917,7 +1917,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
 
    <dt>Otherwise
    <dd><p>Append <var>byte</var>,
-   <a title="percent encode">percent encoded</a>, to
+   <a lt="percent encode">percent encoded</a>, to
    <var>output</var>.
   </dl>
  <li><p>Return <var>output</var>.
@@ -1934,7 +1934,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
      bytes greater than 0x7A -->
 
 <p>The
-<dfn id=concept-urlencoded-serializer title='urlencoded serializer'><code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> serializer</dfn>
+<dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> serializer</dfn>
 takes a list of name-value pairs <var>pairs</var>, optionally with an
 <a>encoding</a>
 <var>encoding override</var>, and then runs these steps:
@@ -1957,7 +1957,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
    <var>encoding override</var>, respectively.
 
    <li><p>Replace <var>outputPair</var>'s name and value with their
-   <a title='urlencoded byte serializer'>serialization</a>.
+   <a lt='urlencoded byte serializer'>serialization</a>.
 
    <li><p>If <var>pair</var> is not the first pair in <var>pairs</var>, append
    "<code>&</code>" to <var>output</var>.
@@ -1972,11 +1972,11 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
 <h3 id=urlencoded-hooks>Hooks</h3>
 
 <p>The
-<dfn id=concept-urlencoded-string-parser title='urlencoded string parser'><code title=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> string parser</dfn>
+<dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> string parser</dfn>
 takes a string <var>input</var>,
-<a title="utf-8 encode">utf-8 encodes</a> it, and then
+<a lt="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
-<code title=application-x-www-form-urlencoded-0><a title='urlencoded parser'>application/x-www-form-urlencoded</a></code> parsing</a>
+<code lt=application-x-www-form-urlencoded-0><a lt='urlencoded parser'>application/x-www-form-urlencoded</a></code> parsing</a>
 it.
 
 
@@ -2052,91 +2052,91 @@ URLPath would be a subclassed Array? -->
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
 <code><a interface>URLUtilsReadOnly</a></code> must define a
-<dfn id=concept-urlutils-get-the-base title='URLUtils get the base'>get the base</dfn> algorithm, which must return the
+<dfn id=concept-urlutils-get-the-base lt='URLUtils get the base'>get the base</dfn> algorithm, which must return the
 appropriate <a>base URL</a> for the object.
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> may
-define <dfn id=concept-urlutils-update title='URLUtils update'>update steps</dfn> to make it possible for an
+define <dfn id=concept-urlutils-update lt='URLUtils update'>update steps</dfn> to make it possible for an
 underlying string (such as an
-<a title=concept-attribute-value>attribute value</a>)
-to be updated. The <a title='URLUtils update'>update steps</a> are passed a string
+<a lt=concept-attribute-value>attribute value</a>)
+to be updated. The <a lt='URLUtils update'>update steps</a> are passed a string
 <var>value</var> for this purpose.
 
 <p>An object implementing <code><a interface>URLUtils</a></code> or <code><a interface>URLUtilsReadOnly</a></code> has an
-associated <dfn id=concept-urlutils-input title='URLUtils input'>input</dfn> (a string),
-<dfn id=concept-urlutils-query-encoding title='URLUtils query encoding'>query encoding</dfn>
+associated <dfn id=concept-urlutils-input lt='URLUtils input'>input</dfn> (a string),
+<dfn id=concept-urlutils-query-encoding lt='URLUtils query encoding'>query encoding</dfn>
 (an <a>encoding</a>),
-<dfn id=concept-urlutils-query-object title='URLUtils query object'>query object</dfn>
+<dfn id=concept-urlutils-query-object lt='URLUtils query object'>query object</dfn>
 (a <code><a interface>URLSearchParams</a></code> object or null), and a
-<dfn id=concept-urlutils-url title='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
+<dfn id=concept-urlutils-url lt='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
 
-Unless stated otherwise, <a title='URLUtils query encoding'>query encoding</a> is
+Unless stated otherwise, <a lt='URLUtils query encoding'>query encoding</a> is
 <a>utf-8</a> and
-<a title='URLUtils query object'>query object</a> is null. The others follow
-from the <a title='URLUtils set the input'>set the input</a> algorithm.
+<a lt='URLUtils query object'>query object</a> is null. The others follow
+from the <a lt='URLUtils set the input'>set the input</a> algorithm.
 
 <p class=note>The associated
-<a title='URLUtils query encoding'>query encoding</a> is a legacy
+<a lt='URLUtils query encoding'>query encoding</a> is a legacy
 concept only relevant for HTML.
 [[!HTML]]
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
 <code><a interface>URLUtilsReadOnly</a></code> must use the
-<a title='URLUtils set the input'>set the input</a> algorithms to set
-<a title='URLUtils input'>input</a>, <a title='URLUtils URL'>url</a>, and
-<a title='URLUtils query object'>query object</a>. To
-<dfn id=concept-urlutils-set-the-input title='URLUtils set the input'>set the input</dfn> given <var>input</var>
+<a lt='URLUtils set the input'>set the input</a> algorithms to set
+<a lt='URLUtils input'>input</a>, <a lt='URLUtils URL'>url</a>, and
+<a lt='URLUtils query object'>query object</a>. To
+<dfn id=concept-urlutils-set-the-input lt='URLUtils set the input'>set the input</dfn> given <var>input</var>
 and optionally a <var>url</var>, run these steps:
 
 <ol>
- <li><p>If <var>url</var> is given, set <a title='URLUtils URL'>url</a>
- to <var>url</var> and <a title='URLUtils input'>input</a> to
+ <li><p>If <var>url</var> is given, set <a lt='URLUtils URL'>url</a>
+ to <var>url</var> and <a lt='URLUtils input'>input</a> to
  <var>input</var>.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <a title='URLUtils URL'>url</a> to null.
+   <li><p>Set <a lt='URLUtils URL'>url</a> to null.
 
    <li><p>If <var>input</var> is null, set
-   <a title='URLUtils input'>input</a> to the empty string.
+   <a lt='URLUtils input'>input</a> to the empty string.
 
    <li>
     <p>Otherwise, run these subsubsteps:
 
     <ol>
-     <li><p>Set <a title='URLUtils input'>input</a> to <var>input</var>.
+     <li><p>Set <a lt='URLUtils input'>input</a> to <var>input</var>.
 
      <li><p>Let <var>url</var> be the result of running the
      <a>URL parser</a> on
-     <a title='URLUtils input'>input</a> with
+     <a lt='URLUtils input'>input</a> with
      <a>base URL</a> being the result of running
-     <a title='URLUtils get the base'>get the base</a> and
-     <a title='URLUtils query encoding'>query encoding</a> as
+     <a lt='URLUtils get the base'>get the base</a> and
+     <a lt='URLUtils query encoding'>query encoding</a> as
      <var>encoding override</var>.
      <!-- support blob URLs at this level -->
 
      <li><p>If <var>url</var> is not failure, set
-     <a title='URLUtils URL'>url</a> to <var>url</var>.
+     <a lt='URLUtils URL'>url</a> to <var>url</var>.
     </ol>
   </ol>
 
- <li><p>Let <var>query</var> be <a title='URLUtils URL'>url</a>'s
- <a title='URL query'>query</a> if <a title='URLUtils URL'>url</a>
+ <li><p>Let <var>query</var> be <a lt='URLUtils URL'>url</a>'s
+ <a lt='URL query'>query</a> if <a lt='URLUtils URL'>url</a>
  is non-null, and the empty string otherwise.
 
- <li><p>If <a title='URLUtils query object'>query object</a> is null, set
- <a title='URLUtils query object'>query object</a> to a
- <code><a title='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
+ <li><p>If <a lt='URLUtils query object'>query object</a> is null, set
+ <a lt='URLUtils query object'>query object</a> to a
+ <code><a lt='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
  using <var>query</var>, and then append the
  <a>context object</a> to
- <a title='URLUtils query object'>query object</a>'s list of
- <a title='URLSearchParams URL object'>url objects</a>.
+ <a lt='URLUtils query object'>query object</a>'s list of
+ <a lt='URLSearchParams URL object'>url objects</a>.
 
- <li><p>Otherwise, set <a title='URLUtils query object'>query object</a>'s
- <a title='URLSearchParams list'>list</a> to the result of
- <a title='urlencoded string parser'>parsing</a> <var>query</var>.
+ <li><p>Otherwise, set <a lt='URLUtils query object'>query object</a>'s
+ <a lt='URLSearchParams list'>list</a> to the result of
+ <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
 </ol>
 
 <p>To run the <dfn>pre-update steps</dfn> for an object implementing
@@ -2144,11 +2144,11 @@ and optionally a <var>url</var>, run these steps:
 
 <ol>
  <li><p>If <var>value</var> is not given, let <var>value</var> be the result
- of <a title='URL serializer'>serializing</a> the associated
- <a title='URLUtils URL'>url</a>.
+ of <a lt='URL serializer'>serializing</a> the associated
+ <a lt='URLUtils URL'>url</a>.
  <!-- these steps are always invoked with a value if url can be null -->
 
- <li><p>Run the <a title='URLUtils update'>update steps</a> with
+ <li><p>Run the <a lt='URLUtils update'>update steps</a> with
  <var>value</var>.
 </ol>
 
@@ -2176,22 +2176,22 @@ constructor, when invoked, must run these steps:
  <li><p>Let <var>result</var> be a new <code><a interface>URL</a></code> object.
 
  <li><p>Let <var>result</var>'s
- <a title='URLUtils get the base'>get the base</a> return
+ <a lt='URLUtils get the base'>get the base</a> return
  <var>parsedBase</var>.
 
  <li>
   <p>Run <var>result</var>'s
-  <a title='URLUtils set the input'>set the input</a> given the empty string
+  <a lt='URLUtils set the input'>set the input</a> given the empty string
   and <var>parsedURL</var>.
 
   <p class="note no-backref">A <code><a interface>URL</a></code> object's
-  <a title='URLUtils input'>input</a> is never exposed.
+  <a lt='URLUtils input'>input</a> is never exposed.
 
  <li><p>Return <var>result</var>.
 </ol>
 
 <div class=example>
- <p>To <a title='basic URL parser'>Basic URL parse</a> a string into a
+ <p>To <a lt='basic URL parser'>Basic URL parse</a> a string into a
  <a>URL</a> without using a
  <a>base URL</a>, invoke the constructor with a single
  argument:
@@ -2201,8 +2201,8 @@ constructor, when invoked, must run these steps:
 url.pathname // "/%F0%9F%92%A9"</pre>
 
  <p>Alternatively you can use the <a>base URL</a> of a
- <a title=concept-document>document</a> through
- <code><a title=dom-Node-baseURI>baseURI</a></code>:
+ <a lt=concept-document>document</a> through
+ <code><a lt=dom-Node-baseURI>baseURI</a></code>:
 
  <pre>var input = "/💩",
     url = new URL(input, document.baseURI)
@@ -2218,9 +2218,9 @@ static method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>asciiDomain</var> be the result of
- <a title='host parser'>host parsing</a> <var>domain</var>.
+ <a lt='host parser'>host parsing</a> <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is an <a title='IPv6'>IPv6 address</a>
+ <li><p>If <var>asciiDomain</var> is an <a lt='IPv6'>IPv6 address</a>
  or failure, return the empty string.
 
  <li><p>Return <var>asciiDomain</var>.
@@ -2232,11 +2232,11 @@ static method, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>unicodeDomain</var> be the result of
- <a title='host parser'>host parsing</a> <var>domain</var> with the
+ <a lt='host parser'>host parsing</a> <var>domain</var> with the
  <var>Unicode flag</var> set.
 
  <li><p>If <var>unicodeDomain</var> is an
- <a title='IPv6'>IPv6 address</a> or failure, return the empty string.
+ <a lt='IPv6'>IPv6 address</a> or failure, return the empty string.
 
  <li><p>Return <var>unicodeDomain</var>.
 </ol>
@@ -2255,11 +2255,11 @@ not exposed on the global object. They are meant to augment other interfaces, su
 these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return
- <a title='URLUtils input'>input</a>.
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return
+ <a lt='URLUtils input'>input</a>.
 
- <li><p>Return the <a title='URL serializer'>serialization</a>
- of <a title='URLUtils URL'>url</a>.
+ <li><p>Return the <a lt='URL serializer'>serialization</a>
+ of <a lt='URLUtils URL'>url</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>href</a></code> attribute's setter must run these steps:
@@ -2275,24 +2275,24 @@ these steps:
    <li><p>Let <var>parsedURL</var> be the result of running the
    <a>basic URL parser</a> on <var>input</var>
    with <a>base URL</a> being the result of running
-   <a title='URLUtils get the base'>get the base</a>.
+   <a lt='URLUtils get the base'>get the base</a>.
 
    <li><p>If <var>parsedURL</var> is failure,
    <a>throw</a> a <code>TypeError</code> exception.
 
    <li>
-    <p>Run <a title='URLUtils set the input'>set the input</a> given the empty
+    <p>Run <a lt='URLUtils set the input'>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
     <p class="note no-backref">A <code><a interface>URL</a></code> object's
-    <a title='URLUtils input'>input</a> is never exposed.
+    <a lt='URLUtils input'>input</a> is never exposed.
   </ol>
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Run the <a title='URLUtils set the input'>set the input</a>
+   <li><p>Run the <a lt='URLUtils set the input'>set the input</a>
    algorithm for <var>input</var>.
 
    <li><p>Run the <a>pre-update steps</a> with the <var>input</var>.
@@ -2315,12 +2315,12 @@ a.href === test // true</pre>
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the empty
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the empty
  string.
 
  <li><p>Return the
- <a title="Unicode serialization of an origin">Unicode serialization</a>
- of <a title='URLUtils URL'>url</a>'s <a title='URL origin'>origin</a>.
+ <a lt="Unicode serialization of an origin">Unicode serialization</a>
+ of <a lt='URLUtils URL'>url</a>'s <a lt='URL origin'>origin</a>.
  [[!HTML]]
 </ol>
 
@@ -2332,10 +2332,10 @@ compatibility with HTML's <code>MessageEvent</code> feature.
 must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return
  "<code>:</code>".
 
- <li><p>Return <a title='URL scheme'>scheme</a> and
+ <li><p>Return <a lt='URL scheme'>scheme</a> and
  "<code>:</code>" concatenated.
 </ol>
 
@@ -2343,12 +2343,12 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, terminate
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, terminate
  these steps.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> the given value and
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> the given value and
  "<code>:</code>" concatenated with
- <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>scheme start state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2358,20 +2358,20 @@ run these steps:
 must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the
  empty string.
 
- <li><p>Return <a title='URL username'>username</a>.
+ <li><p>Return <a lt='URL username'>username</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>username</a></code> attribute's setter must
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
  <a>relative flag</a> is unset, terminate these steps.
 
- <li><p><a>Set the username</a> given <a title='URLUtils URL'>url</a>
+ <li><p><a>Set the username</a> given <a lt='URLUtils URL'>url</a>
  and the given value.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2381,21 +2381,21 @@ run these steps:
 must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null or its
- <a title='URL password'>password</a> is null, return the empty
+ <li><p>If <a lt='URLUtils URL'>url</a> is null or its
+ <a lt='URL password'>password</a> is null, return the empty
  string.
 
- <li><p>Return <a title='URL password'>password</a>.
+ <li><p>Return <a lt='URL password'>password</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>password</a></code> attribute's setter must
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
  <a>relative flag</a> is unset, terminate these steps.
 
- <li><p><a>Set the password</a> given <a title='URLUtils URL'>url</a>
+ <li><p><a>Set the password</a> given <a lt='URLUtils URL'>url</a>
  and the given value.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2405,16 +2405,16 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the
  empty string.
 
- <li><p>If <a title='URL port'>port</a> is the empty string,
- return <a title='URL host'>host</a>,
- <a title='host serializer'>serialized</a>.
+ <li><p>If <a lt='URL port'>port</a> is the empty string,
+ return <a lt='URL host'>host</a>,
+ <a lt='host serializer'>serialized</a>.
 
- <li><p>Return <a title='URL host'>host</a>,
- <a title='host serializer'>serialized</a>,
- "<code>:</code>", and <a title='URL port'>port</a>
+ <li><p>Return <a lt='URL host'>host</a>,
+ <a lt='host serializer'>serialized</a>,
+ "<code>:</code>", and <a lt='URL port'>port</a>
  concatenated.
 </ol>
 
@@ -2422,11 +2422,11 @@ these steps:
 steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
  <a>relative flag</a> is unset, terminate these steps.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> the given value with
- <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> the given value with
+ <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>host state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2436,22 +2436,22 @@ steps:
 must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the
  empty string.
 
- <li><p>Return <a title='URL host'>host</a>,
- <a title='host serializer'>serialized</a>.
+ <li><p>Return <a lt='URL host'>host</a>,
+ <a lt='host serializer'>serialized</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>hostname</a></code> attribute's setter must
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
  <a>relative flag</a> is unset, terminate these steps.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> the given value with
- <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> the given value with
+ <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>hostname state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2461,22 +2461,22 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the
  empty string.
 
- <li><p>Return <a title='URL port'>port</a>.
+ <li><p>Return <a lt='URL port'>port</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>port</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, its
  <a>relative flag</a> is unset, or its
- <a title='URL scheme'>scheme</a> is "<code>file</code>",
+ <a lt='URL scheme'>scheme</a> is "<code>file</code>",
  terminate these steps.
 
- <li><p>Otherwise, <a title='basic URL parser'>Basic URL parse</a>
- the given value with <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <li><p>Otherwise, <a lt='basic URL parser'>Basic URL parse</a>
+ the given value with <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>port state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2486,14 +2486,14 @@ these steps:
 must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, return the
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, return the
  empty string.
 
  <li><p>If the <a>relative flag</a> is unset, return
- <a title='URL scheme data'>scheme data</a>.
+ <a lt='URL scheme data'>scheme data</a>.
 
  <li><p>Return "<code>/</code>" concatenated with the strings in
- <a title='URL path'>path</a> (including empty strings),
+ <a lt='URL path'>path</a> (including empty strings),
  separated from each other by "<code>/</code>".
 </ol>
 
@@ -2501,13 +2501,13 @@ must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
  <a>relative flag</a> is unset, terminate these steps.
 
- <li><p>Empty <a title='URL path'>path</a>.
+ <li><p>Empty <a lt='URL path'>path</a>.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> the given value with
- <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> the given value with
+ <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>relative path start state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2517,51 +2517,51 @@ run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
- <a title='URL query'>query</a> is either null or
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
+ <a lt='URL query'>query</a> is either null or
  the empty string, return the empty string.
 
  <li><p>Return "<code>?</code>" concatenated with
- <a title='URL query'>query</a>.
+ <a lt='URL query'>query</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>search</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, terminate these steps.
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a title='URL query'>query</a> to null, empty
- <a title='URLUtils query object'>query object</a>'s
- <a title='URLSearchParams list'>list</a>, run its
- <a title='URLSearchParams update'>update steps</a>, and terminate these
+ <a lt='URL query'>query</a> to null, empty
+ <a lt='URLUtils query object'>query object</a>'s
+ <a lt='URLSearchParams list'>list</a>, run its
+ <a lt='URLSearchParams update'>update steps</a>, and terminate these
  steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading
  "<code>?</code>" removed, if any.
 
- <li><p>Set <a title='URL query'>query</a> to the empty string.
+ <li><p>Set <a lt='URL query'>query</a> to the empty string.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> <var>input</var>
- with <a title='URLUtils URL'>url</a> as <var>url</var>,
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var>
+ with <a lt='URLUtils URL'>url</a> as <var>url</var>,
  <a>query state</a> as <var>state override</var>, and the
- associated <a title='URLUtils query encoding'>query encoding</a> as
+ associated <a lt='URLUtils query encoding'>query encoding</a> as
  <var>encoding override</var>.
 
- <li><p>Set <a title='URLUtils query object'>query object</a>'s
- <a title='URLSearchParams list'>list</a> to the result of
- <a title='urlencoded string parser'>parsing</a> <var title="">input</var>.
+ <li><p>Set <a lt='URLUtils query object'>query object</a>'s
+ <a lt='URLSearchParams list'>list</a> to the result of
+ <a lt='urlencoded string parser'>parsing</a> <var lt="">input</var>.
 
- <li><p>Run <a title='URLUtils query object'>query object</a>'s
- <a title='URLSearchParams update'>update steps</a>.
+ <li><p>Run <a lt='URLUtils query object'>query object</a>'s
+ <a lt='URLSearchParams update'>update steps</a>.
 </ol>
 
-<p class="note no-backref">The <a title='URLSearchParams update'>update steps</a> of
-<a title='URLUtils query object'>query object</a> are run to ensure all
-<a title='URLSearchParams URL object'>url objects</a> remain synchronized.
+<p class="note no-backref">The <a lt='URLSearchParams update'>update steps</a> of
+<a lt='URLUtils query object'>query object</a> are run to ensure all
+<a lt='URLSearchParams URL object'>url objects</a> remain synchronized.
 
 <p>The <dfn attribute dfn-for=URLUtils><code>searchParams</code></dfn> attribute's getter
-must return the <a title='URLUtils query object'>query object</a>.
+must return the <a lt='URLUtils query object'>query object</a>.
 
 <p>The <code><a attribute for=URLUtils>searchParams</a></code> attribute's setter must run
 these steps:
@@ -2570,20 +2570,20 @@ these steps:
  <li><p>Let <var>object</var> be the given value.
 
  <li><p>Remove the <a>context object</a> from
- <a title='URLUtils query object'>query object</a>'s list of
- <a title='URLSearchParams URL object'>url objects</a>.
+ <a lt='URLUtils query object'>query object</a>'s list of
+ <a lt='URLSearchParams URL object'>url objects</a>.
 
  <li><p>Append the <a>context object</a> to
  <var>object</var>'s list of
- <a title='URLSearchParams URL object'>url objects</a>.
+ <a lt='URLSearchParams URL object'>url objects</a>.
 
- <li><p>Set <a title='URLUtils query object'>query object</a> to
+ <li><p>Set <a lt='URLUtils query object'>query object</a> to
  <var>object</var>.
 
- <li><p>Set <a title='URL query'>query</a> to the
- <a title='urlencoded serializer'>serialization</a> of the
- <a title='URLUtils query object'>query object</a>'s
- <a title='URLSearchParams list'>list</a>.
+ <li><p>Set <a lt='URL query'>query</a> to the
+ <a lt='urlencoded serializer'>serialization</a> of the
+ <a lt='URLUtils query object'>query object</a>'s
+ <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2592,33 +2592,33 @@ these steps:
 these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
- <a title='URL fragment'>fragment</a> is either null or
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
+ <a lt='URL fragment'>fragment</a> is either null or
  the empty string, return the empty string.
 
  <li><p>Return "<code>#</code>" concatenated with
- <a title='URL fragment'>fragment</a>.
+ <a lt='URL fragment'>fragment</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>hash</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a title='URLUtils URL'>url</a> is null, or its
- <a title='URL scheme'>scheme</a> is
+ <li><p>If <a lt='URLUtils URL'>url</a> is null, or its
+ <a lt='URL scheme'>scheme</a> is
  "<code>javascript</code>", terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a title='URL fragment'>fragment</a> to null, run the
+ <a lt='URL fragment'>fragment</a> to null, run the
  <a>pre-update steps</a>, and terminate these steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading
  "<code>#</code>" removed, if any.
 
- <li><p>Set <a title='URL fragment'>fragment</a> to
+ <li><p>Set <a lt='URL fragment'>fragment</a> to
  the empty string.
 
- <li><p><a title='basic URL parser'>Basic URL parse</a> <var>input</var>
- with <a title='URLUtils URL'>url</a> as <var>url</var> and
+ <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var>
+ with <a lt='URLUtils URL'>url</a> as <var>url</var> and
  <a>fragment state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2641,23 +2641,23 @@ interface URLSearchParams {
 };</pre>
 
 <p>A <code><a interface>URLSearchParams</a></code> object has an associated
-<dfn id=concept-urlsearchparams-list title='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
+<dfn id=concept-urlsearchparams-list lt='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
 empty.
 
 <p>A <code><a interface>URLSearchParams</a></code> object has an associated list of zero or more
-<dfn id=concept-urlsearchparams-url-object title='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
+<dfn id=concept-urlsearchparams-url-object lt='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
 
 <p class=note><code><a interface>URLSearchParams</a></code> objects always use
 <a>utf-8</a> as
 <a>encoding</a>, despite the existence of
 concepts such as
-<a title='URLUtils query encoding'>query encoding</a>. This is to
+<a lt='URLUtils query encoding'>query encoding</a>. This is to
 encourage developers to migrate towards
 <a>utf-8</a>, which they really ought to
 have done a long time ago now.
 
 <p>To create a
-<dfn id=concept-urlsearchparams-new title='URLSearchParams new'>new <code><a interface>URLSearchParams</a></code> object</dfn>, optionally
+<dfn id=concept-urlsearchparams-new lt='URLSearchParams new'>new <code><a interface>URLSearchParams</a></code> object</dfn>, optionally
 using <var>init</var>, run these steps:
 
 <ol>
@@ -2668,28 +2668,28 @@ using <var>init</var>, run these steps:
  <!-- Beware: new URLSearchParams(null) is equivalent to new URLSearchParams("null") -->
 
  <li><p>If <var>init</var> is a string,
- set <var>query</var>'s <a title='URLSearchParams list'>list</a> to the
- result of <a title='urlencoded string parser'>parsing</a>
+ set <var>query</var>'s <a lt='URLSearchParams list'>list</a> to the
+ result of <a lt='urlencoded string parser'>parsing</a>
  <var>init</var>.
 
  <li><p>If <var>init</var> is a <code><a interface>URLSearchParams</a></code> object, set
- <var>query</var>'s <a title='URLSearchParams list'>list</a> to a copy
- of <var>init</var>'s <a title='URLSearchParams list'>list</a>.
+ <var>query</var>'s <a lt='URLSearchParams list'>list</a> to a copy
+ of <var>init</var>'s <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
 
 <p>A <code><a interface>URLSearchParams</a></code> object's
-<dfn id=concept-urlsearchparams-update title='URLSearchParams update'>update steps</dfn> are to run these steps for
-each associated  <a title='URLSearchParams URL object'>url object</a>
+<dfn id=concept-urlsearchparams-update lt='URLSearchParams update'>update steps</dfn> are to run these steps for
+each associated  <a lt='URLSearchParams URL object'>url object</a>
 <var>urlObject</var>, in order:
 
 <ol>
- <li><p>Set <var>urlObject</var>'s <a title='URLUtils URL'>url</a>'s
- <a title='URL query'>query</a> to the
- <a title='urlencoded serializer'>serialization</a> of
+ <li><p>Set <var>urlObject</var>'s <a lt='URLUtils URL'>url</a>'s
+ <a lt='URL query'>query</a> to the
+ <a lt='urlencoded serializer'>serialization</a> of
  <code><a interface>URLSearchParams</a></code> object's
- <a title='URLSearchParams list'>list</a>.
+ <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
 </ol>
@@ -2697,7 +2697,7 @@ each associated  <a title='URLSearchParams URL object'>url object</a>
 <p>The
 <dfn constructor dfn-for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must return a
-<code><a title='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
+<code><a lt='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
 using <var>init</var> if given.
 
 <p>The
@@ -2706,9 +2706,9 @@ method, when invoked, must run these steps:
 
 <ol>
  <li><p>Append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a title='URLSearchParams list'>list</a>.
+ value is <var>value</var>, to <a lt='URLSearchParams list'>list</a>.
 
- <li><p>Run the <a title='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
 </ol>
 
 <p>The
@@ -2717,21 +2717,21 @@ method, when invoked, must run these steps:
 
 <ol>
  <li><p>Remove all name-value pairs whose name is <var>name</var> from
- <a title='URLSearchParams list'>list</a>.
+ <a lt='URLSearchParams list'>list</a>.
 
- <li><p>Run the <a title='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
 </ol>
 
 <p>The
 <dfn method dfn-for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
-<var>name</var> in <a title='URLSearchParams list'>list</a>, and null if
+<var>name</var> in <a lt='URLSearchParams list'>list</a>, and null if
 there is no such pair.
 
 <p>The
 <dfn method dfn-for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
-<var>name</var>, in <a title='URLSearchParams list'>list</a>,
+<var>name</var>, in <a lt='URLSearchParams list'>list</a>,
 in list order, and the empty sequence otherwise.
 
 <p>The
@@ -2740,35 +2740,35 @@ method, when invoked, must run these steps:
 
 <ol>
  <li><p>If there are any name-value pairs whose name is <var>name</var>, in
- <a title='URLSearchParams list'>list</a>, set the value of the first such
+ <a lt='URLSearchParams list'>list</a>, set the value of the first such
  name-value pair to <var>value</var> and remove the others.
 
  <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a title='URLSearchParams list'>list</a>.
+ value is <var>value</var>, to <a lt='URLSearchParams list'>list</a>.
 
- <li><p>Run the <a title='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
 </ol>
 
 <p>The
 <dfn method dfn-for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
-<var>name</var> in <a title='URLSearchParams list'>list</a>, and false
+<var>name</var> in <a lt='URLSearchParams list'>list</a>, and false
 otherwise.
 
 <p>The <a>value pairs to iterate over</a> are the
-<a title='URLSearchParams list'>list</a> name-value pairs with the key being
+<a lt='URLSearchParams list'>list</a> name-value pairs with the key being
 the name and the value the value.
 
 <p>The <dfn dfn dfn-for=URLSearchParams>stringification behavior</dfn> must return the
-<a title='urlencoded serializer'>serialization</a> of the
+<a lt='urlencoded serializer'>serialization</a> of the
 <code><a interface>URLSearchParams</a></code> object's
-<a title='URLSearchParams list'>list</a>.
+<a lt='URLSearchParams list'>list</a>.
 
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
-<p>A standard that exposes <a title='URL'>URLs</a>, should expose the
-<a>URL</a> as a string (by <a title='URL serializer'>serializing</a> an internal
+<p>A standard that exposes <a lt='URL'>URLs</a>, should expose the
+<a>URL</a> as a string (by <a lt='URL serializer'>serializing</a> an internal
 <a>URL</a>). A standard should not expose a <a>URL</a> using a
 <code><a interface>URL</a></code> object. <code><a interface>URL</a></code> objects are
 meant for <a>URL</a> manipulation. In IDL the USVString type should be used.
@@ -2790,7 +2790,7 @@ proper naming. [[!HTML]]
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 <p>There have been a lot of people that have helped make
-<a title='URL' class=no-backref>URLs</a> more interoperable over the years and
+<a lt='URL' class=no-backref>URLs</a> more interoperable over the years and
 thereby furthered the goals of this standard. Likewise many people have helped making this
 standard what it is today.
 

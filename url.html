@@ -16,6 +16,7 @@
   <link href="https://resources.whatwg.org/logo-url.svg" rel="icon">
   
 
+  <meta content="1.0.0" name="bikeshed-semver">
   <script>
 document.addEventListener("DOMContentLoaded", function(event) {
   // no backrefs for index
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-01-28">28 January 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-01-30">30 January 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -105,18 +106,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
       <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
       <li><a href="#origin"><span class="secno">4.4</span> <span class="content">Origin</span></a>
      </ul>
-    <li><a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code title="application-x-www-form-urlencoded-0"><span title="application/x-www-form-urlencoded">application/x-www-form-urlencoded</span></code></span></a>
+    <li><a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span data-lt="application/x-www-form-urlencoded">application/x-www-form-urlencoded</span></code></span></a>
      <ul class="toc">
-      <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code title="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
-      <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code title="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
+      <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
+      <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
       <li><a href="#urlencoded-hooks"><span class="secno">5.3</span> <span class="content">Hooks</span></a>
      </ul>
     <li><a href="#api"><span class="secno">6</span> <span class="content">API</span></a>
      <ul class="toc">
       <li><a href="#constructors"><span class="secno">6.1</span> <span class="content">Constructors</span></a>
-      <li><a href="#url-statics"><span class="secno">6.2</span> <span class="content"><code><span title="URL">URL</span></code> statics</span></a>
-      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">6.3</span> <span class="content"><code><span title="URLUtils">URLUtils</span></code> and <code><span title="URLUtilsReadOnly">URLUtilsReadOnly</span></code> members</span></a>
-      <li><a href="#interface-urlsearchparams"><span class="secno">6.4</span> <span class="content">Interface <code><span title="URLSearchParams">URLSearchParams</span></code></span></a>
+      <li><a href="#url-statics"><span class="secno">6.2</span> <span class="content"><code><span data-lt="URL">URL</span></code> statics</span></a>
+      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">6.3</span> <span class="content"><code><span data-lt="URLUtils">URLUtils</span></code> and <code><span data-lt="URLUtilsReadOnly">URLUtilsReadOnly</span></code> members</span></a>
+      <li><a href="#interface-urlsearchparams"><span class="secno">6.4</span> <span class="content">Interface <code><span data-lt="URLSearchParams">URLSearchParams</span></code></span></a>
       <li><a href="#url-apis-elsewhere"><span class="secno">6.5</span> <span class="content">URL APIs elsewhere</span></a>
      </ul>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
@@ -388,9 +389,9 @@ an <var>encode set</var>, run these steps:
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a network.
 
 </p>
-   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6" title="IPv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
+   <p>An <dfn data-dfn-type="dfn" data-lt="IPv6" data-noexport="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
-eight <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-piece" title="IPv6 piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>.
+eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept-ipv6-piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>.
 <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a>
 
 
@@ -644,7 +645,7 @@ these steps:
  
     <li>
   
-     <p><dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-parser-main" title="IPv6 parser Main">Main<a class="self-link" href="#concept-ipv6-parser-main"></a></dfn>:
+     <p><dfn data-dfn-type="dfn" data-lt="IPv6 parser Main" data-noexport="" id="concept-ipv6-parser-main">Main<a class="self-link" href="#concept-ipv6-parser-main"></a></dfn>:
   While <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, run these
   substeps:
 
@@ -745,7 +746,7 @@ these steps:
 
  </p>
     <li>
-     <p><dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-parser-ipv4" title="IPv6 parser IPv4">IPv4<a class="self-link" href="#concept-ipv6-parser-ipv4"></a></dfn>:
+     <p><dfn data-dfn-type="dfn" data-lt="IPv6 parser IPv4" data-noexport="" id="concept-ipv6-parser-ipv4">IPv4<a class="self-link" href="#concept-ipv6-parser-ipv4"></a></dfn>:
  If <var>piece pointer</var> is greater than six,
  <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
@@ -841,7 +842,7 @@ these steps:
  
     <li>
   
-     <p><dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-parser-finale" title="IPv6 parser Finale">Finale<a class="self-link" href="#concept-ipv6-parser-finale"></a></dfn>:
+     <p><dfn data-dfn-type="dfn" data-lt="IPv6 parser Finale" data-noexport="" id="concept-ipv6-parser-finale">Finale<a class="self-link" href="#concept-ipv6-parser-finale"></a></dfn>:
   If <var>compress pointer</var> is not null, run these substeps:
 
   </p>
@@ -1004,14 +1005,14 @@ A Recommendation for IPv6 Address Text Representation.
 <a data-link-type="dfn" href="#concept-url-fragment">fragment</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-scheme" title="URL scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL scheme" data-noexport="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is
 a string that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to
 dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further processing after
 <a data-link-type="dfn" href="#concept-url-parser">parsing</a>. It is initially the empty string.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-url-scheme-data" title="URL scheme data">scheme data<a class="self-link" href="#concept-url-scheme-data"></a></dfn> is a string holding the contents of a
+<dfn data-dfn-type="dfn" data-lt="URL scheme data" data-noexport="" id="concept-url-scheme-data">scheme data<a class="self-link" href="#concept-url-scheme-data"></a></dfn> is a string holding the contents of a
 <a data-link-type="dfn" href="#concept-url">URL</a>. It is initially the empty string.
 
 </p>
@@ -1021,32 +1022,32 @@ dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further proce
 otherwise will be the only component without an initial value.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-username" title="URL username">username<a class="self-link" href="#concept-url-username"></a></dfn>
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL username" data-noexport="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn>
 is a string identifying a user. It is initially the empty string.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-password" title="URL password">password<a class="self-link" href="#concept-url-password"></a></dfn>
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL password" data-noexport="" id="concept-url-password">password<a class="self-link" href="#concept-url-password"></a></dfn>
 is either null or a string identifying a user’s credentials. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-host" title="URL host">host<a class="self-link" href="#concept-url-host"></a></dfn> is
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL host" data-noexport="" id="concept-url-host">host<a class="self-link" href="#concept-url-host"></a></dfn> is
 either null or a <a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-port" title="URL port">port<a class="self-link" href="#concept-url-port"></a></dfn> is a
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL port" data-noexport="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is a
 string that identifies a networking port. It is initially the empty string.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-path" title="URL path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL path" data-noexport="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a
 list of zero or more strings holding data, usually identifying a location in hierarchical
 form. It is initially the empty list.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-query" title="URL query">query<a class="self-link" href="#concept-url-query"></a></dfn> is
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL query" data-noexport="" id="concept-url-query">query<a class="self-link" href="#concept-url-query"></a></dfn> is
 either null or a string holding data. It is initially null.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-fragment" title="URL fragment">fragment<a class="self-link" href="#concept-url-fragment"></a></dfn>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL fragment" data-noexport="" id="concept-url-fragment">fragment<a class="self-link" href="#concept-url-fragment"></a></dfn>
 is either null or a string holding data that can be used for further processing on the
 resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify.
 It is initially null.
@@ -1064,7 +1065,7 @@ It is initially unset.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-url-object" title="URL object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a
+<dfn data-dfn-type="dfn" data-lt="URL object" data-noexport="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a
 <code><a data-link-type="dfn" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code>. It is initially null.
 <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a>
 
@@ -1133,7 +1134,7 @@ on the same row.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>
-<dfn data-dfn-type="dfn" data-noexport="" id="include-credentials" title="include credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either its
+<dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either its
 <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its
 <a data-link-type="dfn" href="#concept-url-password">password</a> is non-null.
 
@@ -1208,7 +1209,7 @@ optionally followed by an
 <a data-link-type="dfn" href="#concept-absolute-path-relative-url">absolute-path-relative URL</a>.
 
 </p>
-   <p><dfn data-dfn-type="dfn" data-noexport="" id="concept-url-userinfo" title="URL Userinfo">Userinfo<a class="self-link" href="#concept-url-userinfo"></a></dfn> must be a
+   <p><dfn data-dfn-type="dfn" data-lt="URL Userinfo" data-noexport="" id="concept-url-userinfo">Userinfo<a class="self-link" href="#concept-url-userinfo"></a></dfn> must be a
 <a data-link-type="dfn" href="#concept-url-username">username</a>, optionally followed by a
 "<code>:</code>" and a
 <a data-link-type="dfn" href="#concept-url-password">password</a>.
@@ -2734,7 +2735,7 @@ optionally an <i title="">exclude fragment flag</i>, and then runs these steps:
 necessary background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-origin" title="URL origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL origin" data-noexport="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is
 the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#origin">origin</a> returned by running these steps, switching
 on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>:
 
@@ -2797,7 +2798,7 @@ on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="df
 
 
 
-   <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
+   <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="application-x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#application-x-www-form-urlencoded-0"></a></dfn> format is a simple way to
@@ -2805,24 +2806,24 @@ encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x
 
 </p>
    <p class="note no-backref" role="note">While this description makes
-<code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
+<code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
 format is in widespread use due to its prevalence of HTML forms.
 <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
-   <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code title="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
 
 
    <p class="note no-backref" role="note">The features provided by the
-<code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parser
+<code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parser
 are mainly relevant for server-oriented implementations. A browser-based implementation
 only needs what the
-<code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-string-parser">application/x-www-form-urlencoded</a></code> string parser
+<code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-string-parser">application/x-www-form-urlencoded</a></code> string parser
 requires.
 
 </p>
    <p>The
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded-parser" title="urlencoded parser"><code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn>
+<dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn>
 takes a byte sequence <var>input</var>, optionally with an
 <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
 optionally with a <i title="">use _charset_ flag</i>, and optionally with an
@@ -2948,11 +2949,11 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an
 </p></ol>
 
 
-   <h3 class="heading settled" data-level="5.2" id="urlencoded-serializing"><span class="secno">5.2. </span><span class="content"><code title="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="urlencoded-serializing"><span class="secno">5.2. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
 
 
    <p>The
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded-byte-serializer" title="urlencoded byte serializer"><code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> byte serializer<a class="self-link" href="#concept-urlencoded-byte-serializer"></a></dfn>
+<dfn data-dfn-type="dfn" data-lt="urlencoded byte serializer" data-noexport="" id="concept-urlencoded-byte-serializer"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> byte serializer<a class="self-link" href="#concept-urlencoded-byte-serializer"></a></dfn>
 takes a byte sequence <var>input</var> and then runs these steps:
 
 </p>
@@ -3011,7 +3012,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
 
 
    <p>The
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded-serializer" title="urlencoded serializer"><code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn>
+<dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn>
 takes a list of name-value pairs <var>pairs</var>, optionally with an
 <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
 <var>encoding override</var>, and then runs these steps:
@@ -3072,11 +3073,11 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
 
 
    <p>The
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded-string-parser" title="urlencoded string parser"><code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn>
+<dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn>
 takes a string <var>input</var>,
 <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encodes</a> it, and then
 returns the result of
-<code title="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parsing
+<code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parsing
 it.
 
 
@@ -3087,17 +3088,17 @@ it.
 
 
 
-   <pre class="idl">[<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" data-global-name="URL<interface>/URL(url, base)<constructor>" id="dom-url-urlurl-base" title="URL(url, base)">Constructor<a class="self-link" href="#dom-url-urlurl-base"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/url<argument>" id="dom-url-urlurl-base-url">url<a class="self-link" href="#dom-url-urlurl-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/base<argument>" id="dom-url-urlurl-base-base">base<a class="self-link" href="#dom-url-urlurl-base-base"></a></dfn> = "about:blank"), Exposed=(Window,Worker)]
+   <pre class="idl">[<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" data-global-name="URL<interface>/URL(url, base)<constructor>" data-lt="URL(url, base)" id="dom-url-urlurl-base">Constructor<a class="self-link" href="#dom-url-urlurl-base"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/url<argument>" id="dom-url-urlurl-base-url">url<a class="self-link" href="#dom-url-urlurl-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/base<argument>" id="dom-url-urlurl-base-base">base<a class="self-link" href="#dom-url-urlurl-base-base"></a></dfn> = "about:blank"), Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
-  static USVString <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-global-name="URL<interface>/domainToASCII(domain)<method>" id="dom-url-domaintoasciidomain" title="domainToASCII(domain)">domainToASCII<a class="self-link" href="#dom-url-domaintoasciidomain"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII" data-dfn-type="argument" data-export="" data-global-name="URL/domainToASCII/domain<argument>" id="dom-url-domaintoascii-domain">domain<a class="self-link" href="#dom-url-domaintoascii-domain"></a></dfn>);
-  static USVString <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-global-name="URL<interface>/domainToUnicode(domain)<method>" id="dom-url-domaintounicodedomain" title="domainToUnicode(domain)">domainToUnicode<a class="self-link" href="#dom-url-domaintounicodedomain"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode" data-dfn-type="argument" data-export="" data-global-name="URL/domainToUnicode/domain<argument>" id="dom-url-domaintounicode-domain">domain<a class="self-link" href="#dom-url-domaintounicode-domain"></a></dfn>);
+  static USVString <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-global-name="URL<interface>/domainToASCII(domain)<method>" data-lt="domainToASCII(domain)" id="dom-url-domaintoasciidomain">domainToASCII<a class="self-link" href="#dom-url-domaintoasciidomain"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII" data-dfn-type="argument" data-export="" data-global-name="URL/domainToASCII/domain<argument>" id="dom-url-domaintoascii-domain">domain<a class="self-link" href="#dom-url-domaintoascii-domain"></a></dfn>);
+  static USVString <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-global-name="URL<interface>/domainToUnicode(domain)<method>" data-lt="domainToUnicode(domain)" id="dom-url-domaintounicodedomain">domainToUnicode<a class="self-link" href="#dom-url-domaintounicodedomain"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode" data-dfn-type="argument" data-export="" data-global-name="URL/domainToUnicode/domain<argument>" id="dom-url-domaintounicode-domain">domain<a class="self-link" href="#dom-url-domaintounicode-domain"></a></dfn>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlutils">URLUtils<a class="self-link" href="#urlutils"></a></dfn> {
-  <dfn data-dfn-for="URLUtils" data-dfn-type="dfn" data-global-name="URLUtils/stringification behavior<dfn>" data-noexport="" id="URLUtils-stringification-behavior" title="stringification behavior">stringifier<a class="self-link" href="#URLUtils-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/href<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
+  <dfn data-dfn-for="URLUtils" data-dfn-type="dfn" data-global-name="URLUtils/stringification behavior<dfn>" data-lt="stringification behavior" data-noexport="" id="URLUtils-stringification-behavior">stringifier<a class="self-link" href="#URLUtils-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/href<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
   readonly attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/origin<attribute>" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
 
            attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/protocol<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
@@ -3115,7 +3116,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-gl
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlutilsreadonly">URLUtilsReadOnly<a class="self-link" href="#urlutilsreadonly"></a></dfn> {
-  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-global-name="URLUtilsReadOnly/stringification behavior<dfn>" data-noexport="" id="URLUtilsReadOnly-stringification-behavior" title="stringification behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/href<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-href">href<a class="self-link" href="#dom-urlutilsreadonly-href"></a></dfn>;
+  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-global-name="URLUtilsReadOnly/stringification behavior<dfn>" data-lt="stringification behavior" data-noexport="" id="URLUtilsReadOnly-stringification-behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/href<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-href">href<a class="self-link" href="#dom-urlutilsreadonly-href"></a></dfn>;
   readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/origin<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-origin">origin<a class="self-link" href="#dom-urlutilsreadonly-origin"></a></dfn>;
 
   readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/protocol<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-protocol">protocol<a class="self-link" href="#dom-urlutilsreadonly-protocol"></a></dfn>;
@@ -3142,12 +3143,12 @@ the reader.
 
    <p>Specifications defining objects implementing <code><a class="idl-code" data-link-type="interface" href="#urlutils">URLUtils</a></code> or
 <code><a class="idl-code" data-link-type="interface" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> must define a
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-get-the-base" title="URLUtils get the base">get the base<a class="self-link" href="#concept-urlutils-get-the-base"></a></dfn> algorithm, which must return the
+<dfn data-dfn-type="dfn" data-lt="URLUtils get the base" data-noexport="" id="concept-urlutils-get-the-base">get the base<a class="self-link" href="#concept-urlutils-get-the-base"></a></dfn> algorithm, which must return the
 appropriate <a data-link-type="dfn" href="#concept-base-url">base URL</a> for the object.
 
 </p>
    <p>Specifications defining objects implementing <code><a class="idl-code" data-link-type="interface" href="#urlutils">URLUtils</a></code> may
-define <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-update" title="URLUtils update">update steps<a class="self-link" href="#concept-urlutils-update"></a></dfn> to make it possible for an
+define <dfn data-dfn-type="dfn" data-lt="URLUtils update" data-noexport="" id="concept-urlutils-update">update steps<a class="self-link" href="#concept-urlutils-update"></a></dfn> to make it possible for an
 underlying string (such as an
 <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute-value">attribute value</a>)
 to be updated. The <a data-link-type="dfn" href="#concept-urlutils-update">update steps</a> are passed a string
@@ -3155,12 +3156,12 @@ to be updated. The <a data-link-type="dfn" href="#concept-urlutils-update">updat
 
 </p>
    <p>An object implementing <code><a class="idl-code" data-link-type="interface" href="#urlutils">URLUtils</a></code> or <code><a class="idl-code" data-link-type="interface" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> has an
-associated <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-input" title="URLUtils input">input<a class="self-link" href="#concept-urlutils-input"></a></dfn> (a string),
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-query-encoding" title="URLUtils query encoding">query encoding<a class="self-link" href="#concept-urlutils-query-encoding"></a></dfn>
+associated <dfn data-dfn-type="dfn" data-lt="URLUtils input" data-noexport="" id="concept-urlutils-input">input<a class="self-link" href="#concept-urlutils-input"></a></dfn> (a string),
+<dfn data-dfn-type="dfn" data-lt="URLUtils query encoding" data-noexport="" id="concept-urlutils-query-encoding">query encoding<a class="self-link" href="#concept-urlutils-query-encoding"></a></dfn>
 (an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>),
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-query-object" title="URLUtils query object">query object<a class="self-link" href="#concept-urlutils-query-object"></a></dfn>
+<dfn data-dfn-type="dfn" data-lt="URLUtils query object" data-noexport="" id="concept-urlutils-query-object">query object<a class="self-link" href="#concept-urlutils-query-object"></a></dfn>
 (a <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object or null), and a
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-url" title="URLUtils URL">url<a class="self-link" href="#concept-urlutils-url"></a></dfn> (a <a data-link-type="dfn" href="#concept-url">URL</a> or null).
+<dfn data-dfn-type="dfn" data-lt="URLUtils URL" data-noexport="" id="concept-urlutils-url">url<a class="self-link" href="#concept-urlutils-url"></a></dfn> (a <a data-link-type="dfn" href="#concept-url">URL</a> or null).
 
 </p>
    <p>Unless stated otherwise, <a data-link-type="dfn" href="#concept-urlutils-query-encoding">query encoding</a> is
@@ -3180,7 +3181,7 @@ concept only relevant for HTML.
 <a data-link-type="dfn" href="#concept-urlutils-set-the-input">set the input</a> algorithms to set
 <a data-link-type="dfn" href="#concept-urlutils-input">input</a>, <a data-link-type="dfn" href="#concept-urlutils-url">url</a>, and
 <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>. To
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-set-the-input" title="URLUtils set the input">set the input<a class="self-link" href="#concept-urlutils-set-the-input"></a></dfn> given <var>input</var>
+<dfn data-dfn-type="dfn" data-lt="URLUtils set the input" data-noexport="" id="concept-urlutils-set-the-input">set the input<a class="self-link" href="#concept-urlutils-set-the-input"></a></dfn> given <var>input</var>
 and optionally a <var>url</var>, run these steps:
 
 </p>
@@ -3288,7 +3289,7 @@ and optionally a <var>url</var>, run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url" title="URL()"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" data-lt="URL()" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn>
 constructor, when invoked, must run these steps:
 
 </p>
@@ -3368,7 +3369,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoascii" title="domainToASCII()"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-lt="domainToASCII()" id="dom-url-domaintoascii"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn>
 static method, when invoked, must run these steps:
 
 </p>
@@ -3390,7 +3391,7 @@ static method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintounicode" title="domainToUnicode()"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicode"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" data-lt="domainToUnicode()" id="dom-url-domaintounicode"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicode"></a></dfn>
 static method, when invoked, must run these steps:
 
 </p>
@@ -3890,7 +3891,7 @@ run these steps:
     <li>
      <p>Set <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>’s
  <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a> to the result of
- <a data-link-type="dfn" href="#concept-urlencoded-string-parser">parsing</a> <var title="">input</var>.
+ <a data-link-type="dfn" href="#concept-urlencoded-string-parser">parsing</a> <var data-lt="">input</var>.
 
  </p>
     <li>
@@ -4007,26 +4008,26 @@ these steps:
    <h3 class="heading settled" data-level="6.4" id="interface-urlsearchparams"><span class="secno">6.4. </span><span class="content">Interface <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code></span><a class="self-link" href="#interface-urlsearchparams"></a></h3>
 
 
-   <pre class="idl">[<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<constructor>" id="dom-urlsearchparams-urlsearchparamsinit" title="URLSearchParams(init)">Constructor<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit"></a></dfn>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<method>/init<argument>" id="dom-urlsearchparams-urlsearchparamsinit-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit-init"></a></dfn> = ""), Exposed=(Window,Worker)]
+   <pre class="idl">[<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<constructor>" data-lt="URLSearchParams(init)" id="dom-urlsearchparams-urlsearchparamsinit">Constructor<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit"></a></dfn>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<method>/init<argument>" id="dom-urlsearchparams-urlsearchparamsinit-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit-init"></a></dfn> = ""), Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlsearchparams">URLSearchParams<a class="self-link" href="#urlsearchparams"></a></dfn> {
-  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/append(name, value)<method>" id="dom-urlsearchparams-appendname-value" title="append(name, value)">append<a class="self-link" href="#dom-urlsearchparams-appendname-value"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/append/name<argument>" id="dom-urlsearchparams-append-name">name<a class="self-link" href="#dom-urlsearchparams-append-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/append/value<argument>" id="dom-urlsearchparams-append-value">value<a class="self-link" href="#dom-urlsearchparams-append-value"></a></dfn>);
-  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/delete(name)<method>" id="dom-urlsearchparams-deletename" title="delete(name)">delete<a class="self-link" href="#dom-urlsearchparams-deletename"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/delete/name<argument>" id="dom-urlsearchparams-delete-name">name<a class="self-link" href="#dom-urlsearchparams-delete-name"></a></dfn>);
-  USVString? <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/get(name)<method>" id="dom-urlsearchparams-getname" title="get(name)">get<a class="self-link" href="#dom-urlsearchparams-getname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/get/name<argument>" id="dom-urlsearchparams-get-name">name<a class="self-link" href="#dom-urlsearchparams-get-name"></a></dfn>);
-  sequence&lt;USVString> <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/getAll(name)<method>" id="dom-urlsearchparams-getallname" title="getAll(name)">getAll<a class="self-link" href="#dom-urlsearchparams-getallname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/getAll/name<argument>" id="dom-urlsearchparams-getall-name">name<a class="self-link" href="#dom-urlsearchparams-getall-name"></a></dfn>);
-  boolean <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/has(name)<method>" id="dom-urlsearchparams-hasname" title="has(name)">has<a class="self-link" href="#dom-urlsearchparams-hasname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/has/name<argument>" id="dom-urlsearchparams-has-name">name<a class="self-link" href="#dom-urlsearchparams-has-name"></a></dfn>);
-  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/set(name, value)<method>" id="dom-urlsearchparams-setname-value" title="set(name, value)">set<a class="self-link" href="#dom-urlsearchparams-setname-value"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/set/name<argument>" id="dom-urlsearchparams-set-name">name<a class="self-link" href="#dom-urlsearchparams-set-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/set/value<argument>" id="dom-urlsearchparams-set-value">value<a class="self-link" href="#dom-urlsearchparams-set-value"></a></dfn>);
+  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/append(name, value)<method>" data-lt="append(name, value)" id="dom-urlsearchparams-appendname-value">append<a class="self-link" href="#dom-urlsearchparams-appendname-value"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/append/name<argument>" id="dom-urlsearchparams-append-name">name<a class="self-link" href="#dom-urlsearchparams-append-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/append/value<argument>" id="dom-urlsearchparams-append-value">value<a class="self-link" href="#dom-urlsearchparams-append-value"></a></dfn>);
+  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/delete(name)<method>" data-lt="delete(name)" id="dom-urlsearchparams-deletename">delete<a class="self-link" href="#dom-urlsearchparams-deletename"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/delete/name<argument>" id="dom-urlsearchparams-delete-name">name<a class="self-link" href="#dom-urlsearchparams-delete-name"></a></dfn>);
+  USVString? <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/get(name)<method>" data-lt="get(name)" id="dom-urlsearchparams-getname">get<a class="self-link" href="#dom-urlsearchparams-getname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/get/name<argument>" id="dom-urlsearchparams-get-name">name<a class="self-link" href="#dom-urlsearchparams-get-name"></a></dfn>);
+  sequence&lt;USVString> <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/getAll(name)<method>" data-lt="getAll(name)" id="dom-urlsearchparams-getallname">getAll<a class="self-link" href="#dom-urlsearchparams-getallname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/getAll/name<argument>" id="dom-urlsearchparams-getall-name">name<a class="self-link" href="#dom-urlsearchparams-getall-name"></a></dfn>);
+  boolean <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/has(name)<method>" data-lt="has(name)" id="dom-urlsearchparams-hasname">has<a class="self-link" href="#dom-urlsearchparams-hasname"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/has/name<argument>" id="dom-urlsearchparams-has-name">name<a class="self-link" href="#dom-urlsearchparams-has-name"></a></dfn>);
+  void <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-global-name="URLSearchParams<interface>/set(name, value)<method>" data-lt="set(name, value)" id="dom-urlsearchparams-setname-value">set<a class="self-link" href="#dom-urlsearchparams-setname-value"></a></dfn>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/set/name<argument>" id="dom-urlsearchparams-set-name">name<a class="self-link" href="#dom-urlsearchparams-set-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams/set/value<argument>" id="dom-urlsearchparams-set-value">value<a class="self-link" href="#dom-urlsearchparams-set-value"></a></dfn>);
   iterable&lt;USVString, USVString>;
   <a data-global-name="URLSearchParams/stringification behavior<dfn>" data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
 };</pre>
 
 
    <p>A <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object has an associated
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-list" title="URLSearchParams list">list<a class="self-link" href="#concept-urlsearchparams-list"></a></dfn> of name-value pairs, which is initially
+<dfn data-dfn-type="dfn" data-lt="URLSearchParams list" data-noexport="" id="concept-urlsearchparams-list">list<a class="self-link" href="#concept-urlsearchparams-list"></a></dfn> of name-value pairs, which is initially
 empty.
 
 </p>
    <p>A <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object has an associated list of zero or more
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-url-object" title="URLSearchParams URL object">url objects<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is initially empty.
+<dfn data-dfn-type="dfn" data-lt="URLSearchParams URL object" data-noexport="" id="concept-urlsearchparams-url-object">url objects<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is initially empty.
 
 </p>
    <p class="note" role="note"><code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> objects always use
@@ -4040,7 +4041,7 @@ have done a long time ago now.
 
 </p>
    <p>To create a
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-new" title="URLSearchParams new">new <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object<a class="self-link" href="#concept-urlsearchparams-new"></a></dfn>, optionally
+<dfn data-dfn-type="dfn" data-lt="URLSearchParams new" data-noexport="" id="concept-urlsearchparams-new">new <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object<a class="self-link" href="#concept-urlsearchparams-new"></a></dfn>, optionally
 using <var>init</var>, run these steps:
 
 </p>
@@ -4075,7 +4076,7 @@ using <var>init</var>, run these steps:
 
 
    <p>A <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object’s
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-update" title="URLSearchParams update">update steps<a class="self-link" href="#concept-urlsearchparams-update"></a></dfn> are to run these steps for
+<dfn data-dfn-type="dfn" data-lt="URLSearchParams update" data-noexport="" id="concept-urlsearchparams-update">update steps<a class="self-link" href="#concept-urlsearchparams-update"></a></dfn> are to run these steps for
 each associated  <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>
 <var>urlObject</var>, in order:
 
@@ -4096,14 +4097,14 @@ each associated  <a data-link-type="dfn" href="#concept-urlsearchparams-url-obje
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" id="dom-urlsearchparams-urlsearchparams" title="URLSearchParams()"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" data-lt="URLSearchParams()" id="dom-urlsearchparams-urlsearchparams"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn>
 constructor, when invoked, must return a
 <code><a data-link-type="dfn" href="#concept-urlsearchparams-new">new </a><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object
 using <var>init</var> if given.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-append" title="append()"><code>append(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-append"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="append()" id="dom-urlsearchparams-append"><code>append(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-append"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4120,7 +4121,7 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-delete" title="delete()"><code>delete(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-delete"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="delete()" id="dom-urlsearchparams-delete"><code>delete(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-delete"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4137,21 +4138,21 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-get" title="get()"><code>get(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-get"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="get()" id="dom-urlsearchparams-get"><code>get(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-get"></a></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
 <var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and null if
 there is no such pair.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-getall" title="getAll()"><code>getAll(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getall"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="getAll()" id="dom-urlsearchparams-getall"><code>getAll(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getall"></a></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
 <var>name</var>, in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>,
 in list order, and the empty sequence otherwise.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-set" title="set()"><code>set(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-set"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="set()" id="dom-urlsearchparams-set"><code>set(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-set"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4174,7 +4175,7 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-has" title="has()"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-has"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" data-lt="has()" id="dom-urlsearchparams-has"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-has"></a></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
 <var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and false
 otherwise.
