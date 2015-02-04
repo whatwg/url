@@ -2122,9 +2122,9 @@ and optionally a <var>url</var>, run these steps:
     </ol>
   </ol>
 
- <li><p>Let <var>query</var> be <a lt='URLUtils URL'>url</a>'s
- <a lt='URL query'>query</a> if <a lt='URLUtils URL'>url</a>
- is non-null, and the empty string otherwise.
+ <li><p>Let <var>query</var> be <a lt="URLUtils URL">url</a>'s <a lt="URL query">query</a>
+ if <a lt="URLUtils URL">url</a> and its <a lt="URL query">query</a> are non-null, and the
+ empty string otherwise.
 
  <li><p>If <a lt='URLUtils query object'>query object</a> is null, set
  <a lt='URLUtils query object'>query object</a> to a
@@ -2663,10 +2663,6 @@ using <var>init</var>, run these steps:
 <ol>
  <li><p>Let <var>query</var> be a new <code><a interface>URLSearchParams</a></code> object.
 
- <li><p>If <var>init</var> is the empty string or null, return
- <var>query</var>.
- <!-- Beware: new URLSearchParams(null) is equivalent to new URLSearchParams("null") -->
-
  <li><p>If <var>init</var> is a string,
  set <var>query</var>'s <a lt='URLSearchParams list'>list</a> to the
  result of <a lt='urlencoded string parser'>parsing</a>
@@ -2697,7 +2693,7 @@ each associated  <a lt='URLSearchParams URL object'>url object</a>
 <p>The
 <dfn constructor dfn-for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must return a
-<code><a lt='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
+<a lt='URLSearchParams new'>new <code>URLSearchParams</code> object</a>
 using <var>init</var> if given.
 
 <p>The
@@ -2818,6 +2814,7 @@ James Graham,
 James Manger,
 James Ross,
 Joshua Bell,
+Jxck,
 Kevin Grandon,
 Larry Masinter,
 Mark Davis,

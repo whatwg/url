@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-01-30">30 January 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-02-04">4 February 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -3243,9 +3243,9 @@ and optionally a <var>url</var>, run these steps:
 
  
     <li>
-     <p>Let <var>query</var> be <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s
- <a data-link-type="dfn" href="#concept-url-query">query</a> if <a data-link-type="dfn" href="#concept-urlutils-url">url</a>
- is non-null, and the empty string otherwise.
+     <p>Let <var>query</var> be <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a>
+ if <a data-link-type="dfn" href="#concept-urlutils-url">url</a> and its <a data-link-type="dfn" href="#concept-url-query">query</a> are non-null, and the
+ empty string otherwise.
 
  </p>
     <li>
@@ -4052,12 +4052,6 @@ using <var>init</var>, run these steps:
 
  </p>
     <li>
-     <p>If <var>init</var> is the empty string or null, return
- <var>query</var>.
- 
-
- </p>
-    <li>
      <p>If <var>init</var> is a string,
  set <var>query</var>’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a> to the
  result of <a data-link-type="dfn" href="#concept-urlencoded-string-parser">parsing</a>
@@ -4099,7 +4093,7 @@ each associated  <a data-link-type="dfn" href="#concept-urlsearchparams-url-obje
    <p>The
 <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" data-lt="URLSearchParams()" id="dom-urlsearchparams-urlsearchparams"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn>
 constructor, when invoked, must return a
-<code><a data-link-type="dfn" href="#concept-urlsearchparams-new">new </a><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code> object
+<a data-link-type="dfn" href="#concept-urlsearchparams-new">new <code>URLSearchParams</code> object</a>
 using <var>init</var> if given.
 
 </p>
@@ -4253,6 +4247,7 @@ James Graham,
 James Manger,
 James Ross,
 Joshua Bell,
+Jxck,
 Kevin Grandon,
 Larry Masinter,
 Mark Davis,
