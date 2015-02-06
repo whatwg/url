@@ -2166,9 +2166,8 @@ constructor, when invoked, must run these steps:
  <li><p>If <var>parsedBase</var> is failure,
  <a>throw</a> a <code>TypeError</code> exception.
 
- <li><p>Set <var>parsedURL</var> to the result of running the
- <a>basic URL parser</a> on <var>url</var>
- with <var>parsedBase</var>.
+ <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on
+ <var>url</var> with <var>parsedBase</var>.
 
  <li><p>If <var>parsedURL</var> is failure,
  <a>throw</a> a <code>TypeError</code> exception.
