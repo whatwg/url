@@ -7,13 +7,14 @@ Status: LS
 No Editor: true
 Abstract: The URL Standard defines URLs, domains, IP addresses, the <code title>application/x-www-form-urlencoded</code> format, and their API.
 Logo: https://resources.whatwg.org/logo-url.svg
-!Participate: <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
-!Participate: <a href="https://whatwg.org/mailing-list">whatwg@whatwg.org</a> (<a href="https://whatwg.org/mailing-list#specs">archives</a>)
+!Participate: <a href=https://github.com/whatwg/url>GitHub whatwg/url</a> (<a href=https://github.com/whatwg/url/issues/new>new issue</a>, <a href="https://github.com/whatwg/url/issues">open issues</a>, <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">legacy open bugs</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Commits: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
 !Commits: <a href="https://twitter.com/urlstandard">@urlstandard</a>
 Indent: 2
 </pre>
+
+<script src=https://resources.whatwg.org/file-issue.js async></script>
 
 <h2 id=goals class=no-num>Goals</h2>
 
@@ -667,7 +668,7 @@ It is initially unset.
 
 <p>A <a>URL</a> also has an associated
 <dfn id=concept-url-object lt='URL object'>object</dfn> that is either null or a
-<code><a>Blob</a></code>. It is initially null.
+<code><a>Blob</a></code> object. It is initially null.
 [[!FILEAPI]]
 
 <p class="note">At this point this is used primarily to support "<code>blob</code>"
@@ -904,7 +905,7 @@ optionally with an <a>encoding</a>
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for
- use by methods of objects implementing the <code><a interface>URLUtils</a></code> interface.
+ use by methods of objects implementing the {{URLUtils}} interface.
  [[!HTML]]
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not
@@ -2028,13 +2029,12 @@ interface URLUtilsReadOnly {
   readonly attribute USVString hash;
 };</pre>
 
-<p>Except where different objects implementing <code><a interface>URLUtilsReadOnly</a></code> are identical
-to objects implementing <code><a interface>URLUtils</a></code>.
+<p>Except where different objects implementing {{URLUtilsReadOnly}} are identical to
+objects implementing {{URLUtils}}.
 
-<p class=note>Since all members are readonly and certain members from
-<code><a interface>URLUtils</a></code> are not exposed a number of potential optimizations is possible
-compared to objects implementing <code><a interface>URLUtils</a></code>. These are left as an exercise to
-the reader.
+<p class=note>Since all members are readonly and certain members from {{URLUtils}} are not
+exposed a number of potential optimizations is possible compared to objects implementing
+{{URLUtils}}. These are left as an exercise to the reader.
 
 <!-- XXX Ideas:
   boolean isEqual(URL, optional URLEqualOptions options)
@@ -2049,24 +2049,23 @@ dictionary URLEqualOptions {
 
 URLPath would be a subclassed Array? -->
 
-<p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
-<code><a interface>URLUtilsReadOnly</a></code> must define a
-<dfn id=concept-urlutils-get-the-base>get the base</dfn> algorithm, which must return the
-appropriate <a>base URL</a> for the object.
+<p>Specifications defining objects implementing {{URLUtils}} or {{URLUtilsReadOnly}} must
+define a <dfn id=concept-urlutils-get-the-base>get the base</dfn> algorithm, which must
+return the appropriate <a>base URL</a> for the object.
 
-<p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> may
-define <dfn id=concept-urlutils-update lt='URLUtils update'>update steps</dfn> to make it possible for an
-underlying string (such as an
+<p>Specifications defining objects implementing {{URLUtils}} may define
+<dfn id=concept-urlutils-update lt='URLUtils update'>update steps</dfn> to make it
+possible for an underlying string (such as an
 <a lt=concept-attribute-value>attribute value</a>)
 to be updated. The <a lt='URLUtils update'>update steps</a> are passed a string
 <var>value</var> for this purpose.
 
-<p>An object implementing <code><a interface>URLUtils</a></code> or <code><a interface>URLUtilsReadOnly</a></code> has an
+<p>An object implementing {{URLUtils}} or {{URLUtilsReadOnly}} has an
 associated <dfn id=concept-urlutils-input lt='URLUtils input'>input</dfn> (a string),
 <dfn id=concept-urlutils-query-encoding lt='URLUtils query encoding'>query encoding</dfn>
 (an <a>encoding</a>),
 <dfn id=concept-urlutils-query-object lt='URLUtils query object'>query object</dfn>
-(a <code><a interface>URLSearchParams</a></code> object or null), and a
+(a {{URLSearchParams}} object or null), and a
 <dfn id=concept-urlutils-url lt='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
 
 Unless stated otherwise, <a lt='URLUtils query encoding'>query encoding</a> is
@@ -2079,13 +2078,12 @@ from the <a lt='URLUtils set the input'>set the input</a> algorithm.
 concept only relevant for HTML.
 [[!HTML]]
 
-<p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
-<code><a interface>URLUtilsReadOnly</a></code> must use the
-<a lt='URLUtils set the input'>set the input</a> algorithms to set
+<p>Specifications defining objects implementing {{URLUtils}} or {{URLUtilsReadOnly}} must
+use the <a lt='URLUtils set the input'>set the input</a> algorithms to set
 <a lt='URLUtils input'>input</a>, <a lt='URLUtils URL'>url</a>, and
 <a lt='URLUtils query object'>query object</a>. To
-<dfn id=concept-urlutils-set-the-input lt='URLUtils set the input'>set the input</dfn> given <var>input</var>
-and optionally a <var>url</var>, run these steps:
+<dfn id=concept-urlutils-set-the-input lt='URLUtils set the input'>set the input</dfn>
+given <var>input</var> and optionally a <var>url</var>, run these steps:
 
 <ol>
  <li><p>If <var>url</var> is given, set <a lt='URLUtils URL'>url</a>
@@ -2127,7 +2125,7 @@ and optionally a <var>url</var>, run these steps:
 
  <li><p>If <a lt='URLUtils query object'>query object</a> is null, set
  <a lt='URLUtils query object'>query object</a> to a
- <code><a lt='URLSearchParams new'>new <a interface>URLSearchParams</a></code> object</a>
+ <a lt='URLSearchParams new'>new <code>URLSearchParams</code> object</a>
  using <var>query</var>, and then append the
  <a>context object</a> to
  <a lt='URLUtils query object'>query object</a>'s list of
@@ -2138,8 +2136,8 @@ and optionally a <var>url</var>, run these steps:
  <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
 </ol>
 
-<p>To run the <dfn>pre-update steps</dfn> for an object implementing
-<code><a interface>URLUtils</a></code>, optionally given a <var>value</var>, run these steps:
+<p>To run the <dfn>pre-update steps</dfn> for an object implementing {{URLUtils}},
+optionally given a <var>value</var>, run these steps:
 
 <ol>
  <li><p>If <var>value</var> is not given, let <var>value</var> be the result
@@ -2187,7 +2185,7 @@ constructor, when invoked, must run these steps:
   <a lt='URLUtils set the input'>set the input</a> given the empty string
   and <var>parsedURL</var>.
 
-  <p class="note no-backref">A <code><a interface>URL</a></code> object's
+  <p class="note no-backref">A {{URL}} object's
   <a lt='URLUtils input'>input</a> is never exposed.
 
  <li><p>Return <var>result</var>.
@@ -2213,7 +2211,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 </div>
 
 
-<h3 id=url-statics><code><a interface>URL</a></code> statics</h3>
+<h3 id=url-statics>{{URL}} statics</h3>
 
 <p>The
 <dfn method dfn-for=URL><code>domainToASCII(<var>domain</var>)</code></dfn>
@@ -2248,11 +2246,11 @@ static method, when invoked, must run these steps:
 representation?
 
 
-<h3 id=urlutils-and-urlutilsreadonly-members><code><a interface>URLUtils</a></code> and <code><a interface>URLUtilsReadOnly</a></code> members</h3>
+<h3 id=urlutils-and-urlutilsreadonly-members>{{URLUtils}} and {{URLUtilsReadOnly}} members</h3>
 
-<p class=note>The <code><a interface>URLUtils</a></code> and <code><a interface>URLUtilsReadOnly</a></code> interfaces are
-not exposed on the global object. They are meant to augment other interfaces, such as
-<code><a interface>URL</a></code>.
+<p class=note>The {{URLUtils}} and {{URLUtilsReadOnly}} interfaces are
+not exposed on the global object. They are meant to augment other objects, such as
+{{URL}}.
 
 <p>The <dfn attribute dfn-for=URLUtils><code>href</code></dfn> attribute's getter must run
 these steps:
@@ -2271,8 +2269,7 @@ these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <code><a>context object</a></code> is a
-  <code><a interface>URL</a></code> object, run these substeps:
+  <p>If the <code><a>context object</a></code> is a {{URL}} object, run these substeps:
 
   <ol>
    <li><p>Let <var>parsedURL</var> be the result of running the
@@ -2287,8 +2284,8 @@ these steps:
     <p>Run <a lt='URLUtils set the input'>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
-    <p class="note no-backref">A <code><a interface>URL</a></code> object's
-    <a lt='URLUtils input'>input</a> is never exposed.
+    <p class="note no-backref">A {{URL}} object's <a lt='URLUtils input'>input</a> is
+    never exposed.
   </ol>
 
  <li>
@@ -2643,42 +2640,40 @@ interface URLSearchParams {
   stringifier;
 };</pre>
 
-<p>A <code><a interface>URLSearchParams</a></code> object has an associated
+<p>A {{URLSearchParams}} object has an associated
 <dfn id=concept-urlsearchparams-list lt='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
 empty.
 
-<p>A <code><a interface>URLSearchParams</a></code> object has an associated list of zero or more
+<p>A {{URLSearchParams}} object has an associated list of zero or more
 <dfn id=concept-urlsearchparams-url-object lt='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
 
-<p class=note><code><a interface>URLSearchParams</a></code> objects always use
-<a>utf-8</a> as
-<a>encoding</a>, despite the existence of
-concepts such as
+<p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as <a>encoding</a>,
+despite the existence of concepts such as
 <a lt='URLUtils query encoding'>query encoding</a>. This is to
 encourage developers to migrate towards
 <a>utf-8</a>, which they really ought to
 have done a long time ago now.
 
 <p>To create a
-<dfn id=concept-urlsearchparams-new lt='URLSearchParams new'>new <code><a interface>URLSearchParams</a></code> object</dfn>, optionally
-using <var>init</var>, run these steps:
+<dfn id=concept-urlsearchparams-new lt='URLSearchParams new'>new <code>URLSearchParams</code> object</dfn>,
+optionally using <var>init</var>, run these steps:
 
 <ol>
- <li><p>Let <var>query</var> be a new <code><a interface>URLSearchParams</a></code> object.
+ <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
 
  <li><p>If <var>init</var> is a string,
  set <var>query</var>'s <a lt='URLSearchParams list'>list</a> to the
  result of <a lt='urlencoded string parser'>parsing</a>
  <var>init</var>.
 
- <li><p>If <var>init</var> is a <code><a interface>URLSearchParams</a></code> object, set
+ <li><p>If <var>init</var> is a {{URLSearchParams}} object, set
  <var>query</var>'s <a lt='URLSearchParams list'>list</a> to a copy
  of <var>init</var>'s <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
 
-<p>A <code><a interface>URLSearchParams</a></code> object's
+<p>A {{URLSearchParams}} object's
 <dfn id=concept-urlsearchparams-update lt='URLSearchParams update'>update steps</dfn> are to run these steps for
 each associated  <a lt='URLSearchParams URL object'>url object</a>
 <var>urlObject</var>, in order:
@@ -2687,7 +2682,7 @@ each associated  <a lt='URLSearchParams URL object'>url object</a>
  <li><p>Set <var>urlObject</var>'s <a lt='URLUtils URL'>url</a>'s
  <a lt='URL query'>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of
- <code><a interface>URLSearchParams</a></code> object's
+ {{URLSearchParams}} object's
  <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
@@ -2760,7 +2755,7 @@ the name and the value the value.
 
 <p>The <dfn dfn dfn-for=URLSearchParams>stringification behavior</dfn> must return the
 <a lt='urlencoded serializer'>serialization</a> of the
-<code><a interface>URLSearchParams</a></code> object's
+{{URLSearchParams}} object's
 <a lt='URLSearchParams list'>list</a>.
 
 
@@ -2769,7 +2764,7 @@ the name and the value the value.
 <p>A standard that exposes <a lt='URL'>URLs</a>, should expose the
 <a>URL</a> as a string (by <a lt='URL serializer'>serializing</a> an internal
 <a>URL</a>). A standard should not expose a <a>URL</a> using a
-<code><a interface>URL</a></code> object. <code><a interface>URL</a></code> objects are
+{{URL}} object. {{URL}} objects are
 meant for <a>URL</a> manipulation. In IDL the USVString type should be used.
 
 <p class=note>The higher-level notion here is that values are to be exposed as immutable
