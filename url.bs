@@ -7,10 +7,11 @@ Status: LS
 No Editor: true
 Abstract: The URL Standard defines URLs, domains, IP addresses, the <code title>application/x-www-form-urlencoded</code> format, and their API.
 Logo: https://resources.whatwg.org/logo-url.svg
-!Version History: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a> <a href="https://twitter.com/urlstandard">@urlstandard</a>
 !Participate: <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=URL">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">open bugs</a>)
 !Participate: <a href="https://whatwg.org/mailing-list">whatwg@whatwg.org</a> (<a href="https://whatwg.org/mailing-list#specs">archives</a>)
-!Participate: <a href="http://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+!Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
+!Commits: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
+!Commits: <a href="https://twitter.com/urlstandard">@urlstandard</a>
 Indent: 2
 </pre>
 
@@ -195,8 +196,8 @@ an <var>encode set</var>, run these steps:
 <h2 id="hosts-(domains-and-ip-addresses)">Hosts (domains and IP addresses)</h2>
 
 <!-- Punycode:
-     http://tools.ietf.org/html/rfc3492
-     http://mothereff.in/punycode -->
+     https://tools.ietf.org/html/rfc3492
+     https://mothereff.in/punycode -->
 
 <p>A <dfn id=concept-host lt='host'>host</dfn> is a network address in the form of a
 <a>domain</a> or an
@@ -279,9 +280,9 @@ by an <a lt='IPv6'>IPv6 address</a>, followed by
 <a>valid domain</a>.
 
 <p>An <a lt='IPv6'>IPv6 address</a> is defined in the
-<a href="http://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
+<a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
-<!-- http://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
+<!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
      far as what developers can do we should be liberal
 
      XXX should we define the format inline instead just like STD 66? -->
@@ -602,7 +603,7 @@ A Recommendation for IPv6 Address Text Representation.
 <h2 id=urls>URLs</h2>
 
 <!-- History behind URL as term:
-     http://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
+     https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
 <p>A <dfn id=concept-url lt='URL'>URL</dfn> is a universal identifier.
 
@@ -1983,9 +1984,7 @@ it.
 
 <h2 id=api>API</h2>
 
-<!-- XXX https://www.w3.org/Bugs/Public/show_bug.cgi?id=20159 -->
-
-<pre class=idl>[Constructor(USVString url, optional USVString base = "about:blank"),
+<pre class=idl>[Constructor(USVString url, optional USVString base),
  Exposed=(Window,Worker)]
 interface URL {
   static USVString domainToASCII(USVString domain);
@@ -2052,7 +2051,7 @@ URLPath would be a subclassed Array? -->
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> or
 <code><a interface>URLUtilsReadOnly</a></code> must define a
-<dfn id=concept-urlutils-get-the-base lt='URLUtils get the base'>get the base</dfn> algorithm, which must return the
+<dfn id=concept-urlutils-get-the-base>get the base</dfn> algorithm, which must return the
 appropriate <a>base URL</a> for the object.
 
 <p>Specifications defining objects implementing <code><a interface>URLUtils</a></code> may
@@ -2112,7 +2111,7 @@ and optionally a <var>url</var>, run these steps:
      <a>URL parser</a> on
      <a lt='URLUtils input'>input</a> with
      <a>base URL</a> being the result of running
-     <a lt='URLUtils get the base'>get the base</a> and
+     <a>get the base</a> and
      <a lt='URLUtils query encoding'>query encoding</a> as
      <var>encoding override</var>.
      <!-- support blob URLs at this level -->
@@ -2160,23 +2159,28 @@ and optionally a <var>url</var>, run these steps:
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var>parsedBase</var> be the result of running the
- <a>basic URL parser</a> on <var>base</var>.
+ <li><p>Let <var>parsedBased</var> be null.
 
- <li><p>If <var>parsedBase</var> is failure,
- <a>throw</a> a <code>TypeError</code> exception.
+ <li>
+  <p>If <var>base</var> is given, run these substeps:
+
+  <ol>
+   <li><p>Let <var>parsedBase</var> be the result of running the <a>basic URL parser</a>
+   on <var>base</var>.
+
+   <li><p>If <var>parsedBase</var> is failure, <a>throw</a> a <code>TypeError</code>
+   exception.
+  </ol>
 
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on
  <var>url</var> with <var>parsedBase</var>.
 
- <li><p>If <var>parsedURL</var> is failure,
- <a>throw</a> a <code>TypeError</code> exception.
+ <li><p>If <var>parsedURL</var> is failure, <a>throw</a> a <code>TypeError</code>
+ exception.
 
- <li><p>Let <var>result</var> be a new <code><a interface>URL</a></code> object.
+ <li><p>Let <var>result</var> be a new {{URL}} object.
 
- <li><p>Let <var>result</var>'s
- <a lt='URLUtils get the base'>get the base</a> return
- <var>parsedBase</var>.
+ <li><p>Let <var>result</var>'s <a>get the base</a> return <var>parsedBase</var>.
 
  <li>
   <p>Run <var>result</var>'s
@@ -2274,7 +2278,7 @@ these steps:
    <li><p>Let <var>parsedURL</var> be the result of running the
    <a>basic URL parser</a> on <var>input</var>
    with <a>base URL</a> being the result of running
-   <a lt='URLUtils get the base'>get the base</a>.
+   <a>get the base</a>.
 
    <li><p>If <var>parsedURL</var> is failure,
    <a>throw</a> a <code>TypeError</code> exception.
@@ -2837,8 +2841,8 @@ Vyacheslav Matva, and
 for being awesome!
 
 <p>This standard is written by
-<a lang=nl href=//annevankesteren.nl/>Anne van Kesteren</a>
-(<a href=//www.mozilla.org/>Mozilla</a>,
+<a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
+(<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>)
 and
 <a lang=en-US href=http://intertwingly.net/>Sam Ruby</a>
@@ -2848,20 +2852,6 @@ and
 <p>Per <a rel="license" href="//creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to
 the extent possible under law, the editors have waived all copyright and related or
 neighboring rights to this work.
-
-<script>
-document.addEventListener("DOMContentLoaded", function(event) {
-  // no backrefs for index
-  document.querySelector('.indexlist').classList.add('no-backref');
-
-  // as bikeshed relocates script elements, add the script element for dfn.js
-  // after document loads
-  var script = document.createElement('script');
-  script.setAttribute('id', 'head');
-  script.setAttribute('src', 'https://resources.whatwg.org/dfn.js');
-  document.body.appendChild(script);
-});
-</script>
 
 <pre class="biblio">
 {
@@ -2876,9 +2866,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     "DOM": {
         "authors": [
-            "Anne van Kesteren",
-            "Aryeh Gregor",
-            "Ms2ger"
+            "Anne van Kesteren"
         ],
         "href": "https://dom.spec.whatwg.org/",
         "title": "DOM",
@@ -2903,10 +2891,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     "WEBIDL": {
         "authors": [
-            "Cameron McCormack",
-            "Jonas Sicking"
+            "Boris Zbarsky",
+            "Cameron McCormack"
         ],
-        "href": "http://heycam.github.io/webidl/",
+        "href": "https://heycam.github.io/webidl/",
         "title": "Web IDL",
         "publisher": "W3C"
     }
@@ -2918,21 +2906,21 @@ urlPrefix: http://dev.w3.org/2006/webapi/FileAPI/; type: dfn
   text: blob
   text: blob url store; url: #BlobURLStore
 urlPrefix: https://dom.spec.whatwg.org/; type: dfn
-  text: concept-attribute-value
-  text: concept-document
+  text: concept-attribute-value; url: concept-attribute-value
+  text: concept-document; url: concept-document
   text: context object
-  text: dom-node-baseuri
+  text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: ascii whitespace
-  text: concept-encoding-get
+  text: concept-encoding-get; url: concept-encoding-get
   text: decoder
   text: encode
   text: encoding
   text: error
-  text: utf-8
-  text: utf-8 decode without bom
-  text: utf-8 encode
-  text: utf-8 decoder
+  text: utf-8; url: utf-8
+  text: utf-8 decode without bom; url: utf-8-decode-without-bom
+  text: utf-8 encode; url: utf-8-encode
+  text: utf-8 decoder; url: utf-8-decoder
 urlPrefix: https://html.spec.whatwg.org/multipage/
   urlPrefix: comms.html; type: interface;
     text: EventSource
@@ -2942,9 +2930,11 @@ urlPrefix: https://html.spec.whatwg.org/multipage/
     text: unicode serialization of an origin
   urlPrefix: infrastructure.html; type: dfn;
     text: structured clone
-urlPrefix: http://heycam.github.io/webidl/#dfn-; type: dfn;
+urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
   text: throw
   text: value pairs to iterate over
 url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii
 url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode
 </pre>
+
+<script id=head src=https://resources.whatwg.org/dfn.js></script>
