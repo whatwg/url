@@ -2319,7 +2319,7 @@ run these steps:
  string.
 
  <li><p>Return the
- <a lt="Unicode serialization of an origin">Unicode serialization</a>
+ <a lt="Unicode serialisation of an origin">Unicode serialization</a>
  of <a lt='URLUtils URL'>url</a>'s <a lt='URL origin'>origin</a>.
  [[!HTML]]
 </ol>
@@ -2922,7 +2922,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage/
     text: HashChangeEvent
   urlPrefix: browsers.html; type: dfn;
     text: origin
-    text: unicode serialization of an origin
+    text: unicode serialisation of an origin
   urlPrefix: infrastructure.html; type: dfn;
     text: structured clone
 urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
