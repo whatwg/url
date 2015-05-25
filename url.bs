@@ -1089,7 +1089,9 @@ optionally with an <a>encoding</a>
     <dl class=switch>
      <dt><a>EOF code point</a>
      <dd>
-      <p>Set <var>url</var>'s <a lt='URL host'>host</a>
+      <p>Set <var>url</var>'s <a lt='URL Userinfo'>userinfo</a> to
+      <var>base</var>'s <a lt='URL Userinfo'>userinfo</a>,
+      <var>url</var>'s <a lt='URL host'>host</a>
       to <var>base</var>'s <a lt='URL host'>host</a>,
       <var>url</var>'s <a lt='URL port'>port</a> to
       <var>base</var>'s <a lt='URL port'>port</a>,
@@ -1110,6 +1112,8 @@ optionally with an <a>encoding</a>
 
      <dt>"<code>?</code>"
      <dd><p>Set
+     <var>url</var>'s <a lt='URL Userinfo'>userinfo</a> to
+     <var>base</var>'s <a lt='URL Userinfo'>userinfo</a>,
      <var>url</var>'s <a lt='URL host'>host</a> to
      <var>base</var>'s <a lt='URL host'>host</a>,
      <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1121,6 +1125,8 @@ optionally with an <a>encoding</a>
 
      <dt>"<code>#</code>"
      <dd><p>Set
+     <var>url</var>'s <a lt='URL Userinfo'>userinfo</a> to
+     <var>base</var>'s <a lt='URL Userinfo'>userinfo</a>,
      <var>url</var>'s <a lt='URL host'>host</a> to
      <var>base</var>'s <a lt='URL host'>host</a>,
      <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1143,6 +1149,8 @@ optionally with an <a>encoding</a>
         consists of one code point, or <a>remaining</a>'s second code point is
         not one of "<code>/</code>", "<code>\</code>", "<code>?</code>",
         and "<code>#</code>", then set
+        <var>url</var>'s <a lt='URL Userinfo'>userinfo</a> to
+        <var>base</var>'s <a lt='URL Userinfo'>userinfo</a>,
         <var>url</var>'s <a lt='URL host'>host</a> to
         <var>base</var>'s <a lt='URL host'>host</a>,
         <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1186,6 +1194,8 @@ optionally with an <a>encoding</a>
      <li>
       <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
       "<code>file</code>", set
+      <var>url</var>'s <a lt='URL Userinfo'>userinfo</a> to
+      <var>base</var>'s <a lt='URL Userinfo'>userinfo</a>,
       <var>url</var>'s <a lt='URL host'>host</a> to
       <var>base</var>'s <a lt='URL host'>host</a> and
       <var>url</var>'s <a lt='URL port'>port</a> to

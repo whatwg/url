@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-05-09">9 May 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-05-25">25 May 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1645,7 +1645,9 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      
         <dd>
       
-         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>
       to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
@@ -1679,6 +1681,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      
         <dd>
          <p>Set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1693,6 +1697,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      
         <dd>
          <p>Set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1720,6 +1726,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         consists of one code point, or <a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is
         not one of "<code>/</code>", "<code>\</code>", "<code>?</code>",
         and "<code>#</code>", then set
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> to
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a>,
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
         <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1786,6 +1794,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       
          <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not
       "<code>file</code>", set
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a>,
       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and
       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
