@@ -766,13 +766,13 @@ a <a lt='URL query'>query</a>.
 
 <p>A <dfn id=concept-scheme-relative-url lt='scheme-relative URL'>scheme-relative URL</dfn> must be
 "<code>//</code>", optionally followed by
-<a lt='URL Userinfo'>userinfo</a> and "<code>@</code>",
+<a lt='URL userinfo'>userinfo</a> and "<code>@</code>",
 followed by a <a>host</a>, optionally followed
 by "<code>:</code>" and a <a lt='URL port'>port</a>,
 optionally followed by an
 <a>absolute-path-relative URL</a>.
 
-<p><dfn id=concept-url-userinfo lt='URL Userinfo'>Userinfo</dfn> must be a
+<p><dfn id=concept-url-userinfo lt='URL userinfo'>Userinfo</dfn> must be a
 <a lt='URL username'>username</a>, optionally followed by a
 "<code>:</code>" and a
 <a lt='URL password'>password</a>.
@@ -1088,15 +1088,18 @@ optionally with an <a>encoding</a>
 
     <dl class=switch>
      <dt><a>EOF code point</a>
-     <dd>
-      <p>Set <var>url</var>'s <a lt='URL host'>host</a>
-      to <var>base</var>'s <a lt='URL host'>host</a>,
-      <var>url</var>'s <a lt='URL port'>port</a> to
-      <var>base</var>'s <a lt='URL port'>port</a>,
-      <var>url</var>'s <a lt='URL path'>path</a> to
-      <var>base</var>'s <a lt='URL path'>path</a>, and
-      <var>url</var>'s <a lt='URL query'>query</a> to
-      <var>base</var>'s <a lt='URL query'>query</a>.
+     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
+     <var>base</var>'s <a lt='URL username'>username</a>,
+     <var>url</var>'s <a lt='URL password'>password</a> to
+     <var>base</var>'s <a lt='URL password'>password</a>,
+     <var>url</var>'s <a lt='URL host'>host</a>
+     to <var>base</var>'s <a lt='URL host'>host</a>,
+     <var>url</var>'s <a lt='URL port'>port</a> to
+     <var>base</var>'s <a lt='URL port'>port</a>,
+     <var>url</var>'s <a lt='URL path'>path</a> to
+     <var>base</var>'s <a lt='URL path'>path</a>, and
+     <var>url</var>'s <a lt='URL query'>query</a> to
+     <var>base</var>'s <a lt='URL query'>query</a>.
 
      <dt>"<code>/</code>"
      <dt>"<code>\</code>"
@@ -1109,7 +1112,10 @@ optionally with an <a>encoding</a>
       </ol>
 
      <dt>"<code>?</code>"
-     <dd><p>Set
+     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
+     <var>base</var>'s <a lt='URL username'>username</a>,
+     <var>url</var>'s <a lt='URL password'>password</a> to
+     <var>base</var>'s <a lt='URL password'>password</a>,
      <var>url</var>'s <a lt='URL host'>host</a> to
      <var>base</var>'s <a lt='URL host'>host</a>,
      <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1120,7 +1126,10 @@ optionally with an <a>encoding</a>
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
-     <dd><p>Set
+     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
+     <var>base</var>'s <a lt='URL username'>username</a>,
+     <var>url</var>'s <a lt='URL password'>password</a> to
+     <var>base</var>'s <a lt='URL password'>password</a>,
      <var>url</var>'s <a lt='URL host'>host</a> to
      <var>base</var>'s <a lt='URL host'>host</a>,
      <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1143,6 +1152,10 @@ optionally with an <a>encoding</a>
         consists of one code point, or <a>remaining</a>'s second code point is
         not one of "<code>/</code>", "<code>\</code>", "<code>?</code>",
         and "<code>#</code>", then set
+        <var>url</var>'s <a lt='URL username'>username</a> to
+        <var>base</var>'s <a lt='URL username'>username</a>,
+        <var>url</var>'s <a lt='URL password'>password</a> to
+        <var>base</var>'s <a lt='URL password'>password</a>,
         <var>url</var>'s <a lt='URL host'>host</a> to
         <var>base</var>'s <a lt='URL host'>host</a>,
         <var>url</var>'s <a lt='URL port'>port</a> to
@@ -1186,6 +1199,10 @@ optionally with an <a>encoding</a>
      <li>
       <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
       "<code>file</code>", set
+      <var>url</var>'s <a lt='URL username'>username</a> to
+      <var>base</var>'s <a lt='URL username'>username</a>,
+      <var>url</var>'s <a lt='URL password'>password</a> to
+      <var>base</var>'s <a lt='URL password'>password</a>,
       <var>url</var>'s <a lt='URL host'>host</a> to
       <var>base</var>'s <a lt='URL host'>host</a> and
       <var>url</var>'s <a lt='URL port'>port</a> to

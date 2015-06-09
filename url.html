@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-05-09">9 May 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-09">9 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1195,7 +1195,7 @@ optionally followed by an
 <a data-link-type="dfn" href="#concept-absolute-path-relative-url">absolute-path-relative URL</a>.
 
 </p>
-   <p><dfn data-dfn-type="dfn" data-lt="URL Userinfo" data-noexport="" id="concept-url-userinfo">Userinfo<a class="self-link" href="#concept-url-userinfo"></a></dfn> must be a
+   <p><dfn data-dfn-type="dfn" data-lt="URL userinfo" data-noexport="" id="concept-url-userinfo">Userinfo<a class="self-link" href="#concept-url-userinfo"></a></dfn> must be a
 <a data-link-type="dfn" href="#concept-url-username">username</a>, optionally followed by a
 "<code>:</code>" and a
 <a data-link-type="dfn" href="#concept-url-password">password</a>.
@@ -1644,15 +1644,18 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt><a data-link-type="dfn" href="#eof-code-point">EOF code point</a>
      
         <dd>
-      
-         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>
-      to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>.
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>
+     to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>.
 
      </p>
         <dt>"<code>/</code>"
@@ -1678,7 +1681,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt>"<code>?</code>"
      
         <dd>
-         <p>Set
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1692,7 +1698,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt>"<code>#</code>"
      
         <dd>
-         <p>Set
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1720,6 +1729,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         consists of one code point, or <a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is
         not one of "<code>/</code>", "<code>\</code>", "<code>?</code>",
         and "<code>#</code>", then set
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
         <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -1786,6 +1799,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       
          <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not
       "<code>file</code>", set
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and
       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
@@ -3072,44 +3089,44 @@ it.
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 
 
-   <pre class="idl">[<a class="idl-code" data-global-name="URL<interface>/URL(url, base)<constructor>" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/url<argument>" id="dom-url-urlurl-base-url">url<a class="self-link" href="#dom-url-urlurl-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/URL(url, base)<method>/base<argument>" id="dom-url-urlurl-base-base">base<a class="self-link" href="#dom-url-urlurl-base-base"></a></dfn>), Exposed=(Window,Worker)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
-  static USVString <a class="idl-code" data-global-name="URL<interface>/domainToASCII(domain)<method>" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII(domain)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/domainToASCII(domain)<method>/domain<argument>" id="dom-url-domaintoasciidomain-domain">domain<a class="self-link" href="#dom-url-domaintoasciidomain-domain"></a></dfn>);
-  static USVString <a class="idl-code" data-global-name="URL<interface>/domainToUnicode(domain)<method>" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" data-global-name="URL<interface>/domainToUnicode(domain)<method>/domain<argument>" id="dom-url-domaintounicodedomain-domain">domain<a class="self-link" href="#dom-url-domaintounicodedomain-domain"></a></dfn>);
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-urlurl-base-url">url<a class="self-link" href="#dom-url-urlurl-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-urlurl-base-base">base<a class="self-link" href="#dom-url-urlurl-base-base"></a></dfn>), Exposed=(Window,Worker)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintoasciidomain-domain">domain<a class="self-link" href="#dom-url-domaintoasciidomain-domain"></a></dfn>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintounicodedomain-domain">domain<a class="self-link" href="#dom-url-domaintounicodedomain-domain"></a></dfn>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlutils">URLUtils<a class="self-link" href="#urlutils"></a></dfn> {
-  <dfn data-dfn-for="URLUtils" data-dfn-type="dfn" data-global-name="URLUtils/stringification behavior<dfn>" data-lt="stringification behavior" data-noexport="" id="URLUtils-stringification-behavior">stringifier<a class="self-link" href="#URLUtils-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/href<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
-  readonly attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/origin<attribute>" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlutils">URLUtils<a class="self-link" href="#urlutils"></a></dfn> {
+  <dfn data-dfn-for="URLUtils" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URLUtils-stringification-behavior">stringifier<a class="self-link" href="#URLUtils-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
 
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/protocol<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/username<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-username">username</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/password<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-password">password</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/host<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-host">host</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/hostname<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/port<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/pathname<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/search<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-global-name="URLUtils<interface>/searchParams<attribute>" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/hash<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-username">username</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-password">password</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-host">host</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
+           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlutilsreadonly">URLUtilsReadOnly<a class="self-link" href="#urlutilsreadonly"></a></dfn> {
-  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-global-name="URLUtilsReadOnly/stringification behavior<dfn>" data-lt="stringification behavior" data-noexport="" id="URLUtilsReadOnly-stringification-behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/href<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-href">href<a class="self-link" href="#dom-urlutilsreadonly-href"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/origin<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-origin">origin<a class="self-link" href="#dom-urlutilsreadonly-origin"></a></dfn>;
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlutilsreadonly">URLUtilsReadOnly<a class="self-link" href="#urlutilsreadonly"></a></dfn> {
+  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URLUtilsReadOnly-stringification-behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-href">href<a class="self-link" href="#dom-urlutilsreadonly-href"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-origin">origin<a class="self-link" href="#dom-urlutilsreadonly-origin"></a></dfn>;
 
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/protocol<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-protocol">protocol<a class="self-link" href="#dom-urlutilsreadonly-protocol"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/host<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-host">host<a class="self-link" href="#dom-urlutilsreadonly-host"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/hostname<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hostname">hostname<a class="self-link" href="#dom-urlutilsreadonly-hostname"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/port<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-port">port<a class="self-link" href="#dom-urlutilsreadonly-port"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/pathname<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-pathname">pathname<a class="self-link" href="#dom-urlutilsreadonly-pathname"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/search<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-search">search<a class="self-link" href="#dom-urlutilsreadonly-search"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-global-name="URLUtilsReadOnly<interface>/hash<attribute>" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hash">hash<a class="self-link" href="#dom-urlutilsreadonly-hash"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-protocol">protocol<a class="self-link" href="#dom-urlutilsreadonly-protocol"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-host">host<a class="self-link" href="#dom-urlutilsreadonly-host"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hostname">hostname<a class="self-link" href="#dom-urlutilsreadonly-hostname"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-port">port<a class="self-link" href="#dom-urlutilsreadonly-port"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-pathname">pathname<a class="self-link" href="#dom-urlutilsreadonly-pathname"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-search">search<a class="self-link" href="#dom-urlutilsreadonly-search"></a></dfn>;
+  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hash">hash<a class="self-link" href="#dom-urlutilsreadonly-hash"></a></dfn>;
 };</pre>
 
 
@@ -3999,16 +4016,16 @@ these steps:
    <h3 class="heading settled" data-level="6.4" id="interface-urlsearchparams"><span class="secno">6.4. </span><span class="content">Interface <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code></span><a class="self-link" href="#interface-urlsearchparams"></a></h3>
 
 
-   <pre class="idl">[<a class="idl-code" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<constructor>" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<method>/init<argument>" id="dom-urlsearchparams-urlsearchparamsinit-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit-init"></a></dfn> = ""), Exposed=(Window,Worker)]
-interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="urlsearchparams">URLSearchParams<a class="self-link" href="#urlsearchparams"></a></dfn> {
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/append(name, value)<method>" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/append(name, value)<method>/name<argument>" id="dom-urlsearchparams-appendname-value-name">name<a class="self-link" href="#dom-urlsearchparams-appendname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/append(name, value)<method>/value<argument>" id="dom-urlsearchparams-appendname-value-value">value<a class="self-link" href="#dom-urlsearchparams-appendname-value-value"></a></dfn>);
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/delete(name)<method>" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete(name)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/delete(name)<method>/name<argument>" id="dom-urlsearchparams-deletename-name">name<a class="self-link" href="#dom-urlsearchparams-deletename-name"></a></dfn>);
-  USVString? <a class="idl-code" data-global-name="URLSearchParams<interface>/get(name)<method>" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get(name)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/get(name)<method>/name<argument>" id="dom-urlsearchparams-getname-name">name<a class="self-link" href="#dom-urlsearchparams-getname-name"></a></dfn>);
-  sequence&lt;USVString> <a class="idl-code" data-global-name="URLSearchParams<interface>/getAll(name)<method>" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll(name)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/getAll(name)<method>/name<argument>" id="dom-urlsearchparams-getallname-name">name<a class="self-link" href="#dom-urlsearchparams-getallname-name"></a></dfn>);
-  boolean <a class="idl-code" data-global-name="URLSearchParams<interface>/has(name)<method>" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has(name)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/has(name)<method>/name<argument>" id="dom-urlsearchparams-hasname-name">name<a class="self-link" href="#dom-urlsearchparams-hasname-name"></a></dfn>);
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/set(name, value)<method>" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/set(name, value)<method>/name<argument>" id="dom-urlsearchparams-setname-value-name">name<a class="self-link" href="#dom-urlsearchparams-setname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" data-global-name="URLSearchParams<interface>/set(name, value)<method>/value<argument>" id="dom-urlsearchparams-setname-value-value">value<a class="self-link" href="#dom-urlsearchparams-setname-value-value"></a></dfn>);
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-urlsearchparamsinit-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit-init"></a></dfn> = ""), Exposed=(Window,Worker)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlsearchparams">URLSearchParams<a class="self-link" href="#urlsearchparams"></a></dfn> {
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-appendname-value-name">name<a class="self-link" href="#dom-urlsearchparams-appendname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-appendname-value-value">value<a class="self-link" href="#dom-urlsearchparams-appendname-value-value"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-deletename-name">name<a class="self-link" href="#dom-urlsearchparams-deletename-name"></a></dfn>);
+  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-getname-name">name<a class="self-link" href="#dom-urlsearchparams-getname-name"></a></dfn>);
+  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-getallname-name">name<a class="self-link" href="#dom-urlsearchparams-getallname-name"></a></dfn>);
+  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-hasname-name">name<a class="self-link" href="#dom-urlsearchparams-hasname-name"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-setname-value-name">name<a class="self-link" href="#dom-urlsearchparams-setname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-setname-value-value">value<a class="self-link" href="#dom-urlsearchparams-setname-value-value"></a></dfn>);
   iterable&lt;USVString, USVString>;
-  <a data-global-name="URLSearchParams/stringification behavior<dfn>" data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
+  <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
 };</pre>
 
 
@@ -4475,7 +4492,7 @@ neighboring rights to this work.
    <li>URL serializer, <a href="#concept-url-serializer">4.3</a>
    <li>URL units, <a href="#url-units">4.1</a>
    <li>URL(url, base), <a href="#dom-url-urlurl-base">6.1</a>
-   <li>URL Userinfo, <a href="#concept-url-userinfo">4.1</a>
+   <li>URL userinfo, <a href="#concept-url-userinfo">4.1</a>
    <li>URL username, <a href="#concept-url-username">4</a>
    <li>URLUtils, <a href="#urlutils">6</a>
    <li>URLUtils input, <a href="#concept-urlutils-input">6</a>
@@ -4504,7 +4521,7 @@ neighboring rights to this work.
    <dt id="biblio-fileapi"><a class="self-link" href="#biblio-fileapi"></a>[FILEAPI]
    <dd>Arun Ranganathan; Jonas Sicking. <a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a>. URL: <a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-idna"><a class="self-link" href="#biblio-idna"></a>[IDNA]
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WEBIDL]
@@ -4524,55 +4541,55 @@ neighboring rights to this work.
    <dt id="biblio-rfc6454"><a class="self-link" href="#biblio-rfc6454"></a>[RFC6454]
    <dd>A. Barth. <a href="https://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>. December 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6454">https://tools.ietf.org/html/rfc6454</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[<a class="idl-code" data-global-name="URL<interface>/URL(url, base)<constructor>" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <a data-global-name="URL<interface>/URL(url, base)<method>/url<argument>" href="#dom-url-urlurl-base-url">url</a>, optional USVString <a data-global-name="URL<interface>/URL(url, base)<method>/base<argument>" href="#dom-url-urlurl-base-base">base</a>), Exposed=(Window,Worker)]
-interface <a data-global-name="" href="#url">URL</a> {
-  static USVString <a class="idl-code" data-global-name="URL<interface>/domainToASCII(domain)<method>" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <a data-global-name="URL<interface>/domainToASCII(domain)<method>/domain<argument>" href="#dom-url-domaintoasciidomain-domain">domain</a>);
-  static USVString <a class="idl-code" data-global-name="URL<interface>/domainToUnicode(domain)<method>" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <a data-global-name="URL<interface>/domainToUnicode(domain)<method>/domain<argument>" href="#dom-url-domaintounicodedomain-domain">domain</a>);
+  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <a href="#dom-url-urlurl-base-url">url</a>, optional USVString <a href="#dom-url-urlurl-base-base">base</a>), Exposed=(Window,Worker)]
+interface <a href="#url">URL</a> {
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <a href="#dom-url-domaintoasciidomain-domain">domain</a>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <a href="#dom-url-domaintounicodedomain-domain">domain</a>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <a data-global-name="" href="#urlutils">URLUtils</a> {
-  <a data-global-name="URLUtils/stringification behavior<dfn>" href="#URLUtils-stringification-behavior">stringifier</a> attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/href<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
-  readonly attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/origin<attribute>" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
+interface <a href="#urlutils">URLUtils</a> {
+  <a href="#URLUtils-stringification-behavior">stringifier</a> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
 
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/protocol<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/username<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-username">username</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/password<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-password">password</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/host<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-host">host</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/hostname<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/port<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/pathname<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/search<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-global-name="URLUtils<interface>/searchParams<attribute>" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
-           attribute USVString <a class="idl-code" data-global-name="URLUtils<interface>/hash<attribute>" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-username">username</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-password">password</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-host">host</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
+           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
 };
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
-interface <a data-global-name="" href="#urlutilsreadonly">URLUtilsReadOnly</a> {
-  <a data-global-name="URLUtilsReadOnly/stringification behavior<dfn>" href="#URLUtilsReadOnly-stringification-behavior">stringifier</a> readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/href<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-href">href</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/origin<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-origin">origin</a>;
+interface <a href="#urlutilsreadonly">URLUtilsReadOnly</a> {
+  <a href="#URLUtilsReadOnly-stringification-behavior">stringifier</a> readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-href">href</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-origin">origin</a>;
 
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/protocol<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-protocol">protocol</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/host<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-host">host</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/hostname<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hostname">hostname</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/port<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-port">port</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/pathname<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-pathname">pathname</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/search<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-search">search</a>;
-  readonly attribute USVString <a data-global-name="URLUtilsReadOnly<interface>/hash<attribute>" data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hash">hash</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-protocol">protocol</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-host">host</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hostname">hostname</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-port">port</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-pathname">pathname</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-search">search</a>;
+  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hash">hash</a>;
 };
-[<a class="idl-code" data-global-name="URLSearchParams<interface>/URLSearchParams(init)<constructor>" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a data-global-name="URLSearchParams<interface>/URLSearchParams(init)<method>/init<argument>" href="#dom-urlsearchparams-urlsearchparamsinit-init">init</a> = ""), Exposed=(Window,Worker)]
-interface <a data-global-name="" href="#urlsearchparams">URLSearchParams</a> {
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/append(name, value)<method>" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <a data-global-name="URLSearchParams<interface>/append(name, value)<method>/name<argument>" href="#dom-urlsearchparams-appendname-value-name">name</a>, USVString <a data-global-name="URLSearchParams<interface>/append(name, value)<method>/value<argument>" href="#dom-urlsearchparams-appendname-value-value">value</a>);
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/delete(name)<method>" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <a data-global-name="URLSearchParams<interface>/delete(name)<method>/name<argument>" href="#dom-urlsearchparams-deletename-name">name</a>);
-  USVString? <a class="idl-code" data-global-name="URLSearchParams<interface>/get(name)<method>" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <a data-global-name="URLSearchParams<interface>/get(name)<method>/name<argument>" href="#dom-urlsearchparams-getname-name">name</a>);
-  sequence&lt;USVString> <a class="idl-code" data-global-name="URLSearchParams<interface>/getAll(name)<method>" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <a data-global-name="URLSearchParams<interface>/getAll(name)<method>/name<argument>" href="#dom-urlsearchparams-getallname-name">name</a>);
-  boolean <a class="idl-code" data-global-name="URLSearchParams<interface>/has(name)<method>" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <a data-global-name="URLSearchParams<interface>/has(name)<method>/name<argument>" href="#dom-urlsearchparams-hasname-name">name</a>);
-  void <a class="idl-code" data-global-name="URLSearchParams<interface>/set(name, value)<method>" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <a data-global-name="URLSearchParams<interface>/set(name, value)<method>/name<argument>" href="#dom-urlsearchparams-setname-value-name">name</a>, USVString <a data-global-name="URLSearchParams<interface>/set(name, value)<method>/value<argument>" href="#dom-urlsearchparams-setname-value-value">value</a>);
+[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a href="#dom-urlsearchparams-urlsearchparamsinit-init">init</a> = ""), Exposed=(Window,Worker)]
+interface <a href="#urlsearchparams">URLSearchParams</a> {
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <a href="#dom-urlsearchparams-appendname-value-name">name</a>, USVString <a href="#dom-urlsearchparams-appendname-value-value">value</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <a href="#dom-urlsearchparams-deletename-name">name</a>);
+  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <a href="#dom-urlsearchparams-getname-name">name</a>);
+  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <a href="#dom-urlsearchparams-getallname-name">name</a>);
+  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <a href="#dom-urlsearchparams-hasname-name">name</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <a href="#dom-urlsearchparams-setname-value-name">name</a>, USVString <a href="#dom-urlsearchparams-setname-value-value">value</a>);
   iterable&lt;USVString, USVString>;
-  <a data-global-name="URLSearchParams/stringification behavior<dfn>" data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
+  <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
 };
 </pre>
  </body>
