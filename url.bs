@@ -166,7 +166,7 @@ U+0020 (i.e. excluding U+0020) and all code points greater than U+007E.
 "<code>`</code>", <!-- 0x60 -->
 "<code>{</code>", <!-- 0x7B -->
 and
-"<code>}</code>", <!-- 0x7D -->
+"<code>}</code>". <!-- 0x7D -->
 
 <p>The <dfn>password encode set</dfn> is the
 <a>default encode set</a> and code points
