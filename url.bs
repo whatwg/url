@@ -1577,15 +1577,13 @@ optionally with an <a>encoding</a>
         these subsubsteps:
 
         <ol>
-         <li><p>If <var>byte</var> is less than 0x21, greater than
-         0x7E, or is one of 0x22, 0x23, 0x3C, 0x3E, and 0x60, append
-         <var>byte</var>,
-         <a lt="percent encode">percent encoded</a>, to
-         <var>url</var>'s <a lt='URL query'>query</a>.
+         <li><p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is one of
+         0x22, 0x23, 0x3C, and 0x3E, append <var>byte</var>,
+         <a lt="percent encode">percent encoded</a>, to <var>url</var>'s
+         <a lt="URL query">query</a>.
 
-         <li><p>Otherwise, append a code point whose value is
-         <var>byte</var> to <var>url</var>'s
-         <a lt='URL query'>query</a>.
+         <li><p>Otherwise, append a code point whose value is <var>byte</var> to
+         <var>url</var>'s <a lt="URL query">query</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
