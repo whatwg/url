@@ -765,27 +765,9 @@ a <a lt='URL query'>query</a>.
 <a lt='URL parser'>parsed</a>, a
 <a>base URL</a> must be in scope.
 
-<p>A <dfn id=concept-scheme-relative-url lt='scheme-relative URL'>scheme-relative URL</dfn> must be
-"<code>//</code>", optionally followed by
-<a lt='URL userinfo'>userinfo</a> and "<code>@</code>",
-followed by a <a>host</a>, optionally followed
-by "<code>:</code>" and a <a lt='URL port'>port</a>,
-optionally followed by an
-<a>absolute-path-relative URL</a>.
-
-<p><dfn id=concept-url-userinfo lt='URL userinfo'>Userinfo</dfn> must be a
-<a lt='URL username'>username</a>, optionally followed by a
-"<code>:</code>" and a
-<a lt='URL password'>password</a>.
-
-<p>A <a lt='URL username'>username</a> must be zero or more
-<a>URL units</a>, excluding "<code>/</code>",
-"<code>:</code>, "<code>?</code>", and "<code>@</code>".
-<!-- password without ":" (sorted on ASCII position) -->
-
-<p>A <a lt='URL password'>password</a> must be zero or more
-<a>URL units</a>, excluding "<code>/</code>",
-"<code>?</code>", and "<code>@</code>".
+<p>A <dfn id=concept-scheme-relative-url>scheme-relative URL</dfn> must be
+"<code>//</code>", followed by a <a>host</a>, optionally followed by "<code>:</code>" and
+a <a lt="URL port">port</a>, optionally followed by an <a>absolute-path-relative URL</a>.
 
 <p>A <a lt='URL port'>port</a> must be zero or more
 <a>ASCII digits</a>.
@@ -858,6 +840,12 @@ U+100000 to U+10FFFD.
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and
 <a lt="percent-encoded byte">percent-encoded bytes</a>.
+
+<hr>
+
+<p class="note no-backref">There is no valid way to express a
+<a lt="URL username">username</a> or <a lt="URL password">password</a> within a
+<a>URL</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>
@@ -1249,8 +1237,9 @@ optionally with an <a>encoding</a>
       <p>If <a>c</a> is "<code>@</code>", run these substeps:
 
       <ol>
-       <li><p>If the <var>@ flag</var> is set,
-       <a>parse error</a>, prepend "<code>%40</code>" to
+       <li><p><a>Parse error</a>.
+
+       <li><p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
        <var>buffer</var>.
 
        <li><p>Set the <var>@ flag</var>.
@@ -1259,16 +1248,7 @@ optionally with an <a>encoding</a>
         <p>For each <var>code point</var> in <var>buffer</var>, run these substeps:
 
         <ol>
-         <li><p>If <var>code point</var> is U+0009, U+000A, or U+000D,
-         <a>parse error</a>, continue.
-
-         <li><p>If <var>code point</var> is not a
-         <a lt="URL code points">URL code point</a> and not
-         "<code>%</code>", <a>parse error</a>.
-
-         <li><p>If <var>code point</var> is "<code>%</code>" and
-         <a>remaining</a> does not start with two
-         <a>ASCII hex digits</a>, <a>parse error</a>.
+         <li><p>If <var>code point</var> is U+0009, U+000A, or U+000D, continue.
 
          <li><p>If <var>code point</var> is "<code>:</code>" and
          <var>url</var>'s

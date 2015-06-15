@@ -1189,29 +1189,8 @@ a <a data-link-type="dfn" href="#concept-url-query">query</a>.
 
 </p>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-scheme-relative-url">scheme-relative URL<a class="self-link" href="#concept-scheme-relative-url"></a></dfn> must be
-"<code>//</code>", optionally followed by
-<a data-link-type="dfn" href="#concept-url-userinfo">userinfo</a> and "<code>@</code>",
-followed by a <a data-link-type="dfn" href="#concept-host">host</a>, optionally followed
-by "<code>:</code>" and a <a data-link-type="dfn" href="#concept-url-port">port</a>,
-optionally followed by an
-<a data-link-type="dfn" href="#concept-absolute-path-relative-url">absolute-path-relative URL</a>.
-
-</p>
-   <p><dfn data-dfn-type="dfn" data-lt="URL userinfo" data-noexport="" id="concept-url-userinfo">Userinfo<a class="self-link" href="#concept-url-userinfo"></a></dfn> must be a
-<a data-link-type="dfn" href="#concept-url-username">username</a>, optionally followed by a
-"<code>:</code>" and a
-<a data-link-type="dfn" href="#concept-url-password">password</a>.
-
-</p>
-   <p>A <a data-link-type="dfn" href="#concept-url-username">username</a> must be zero or more
-<a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>/</code>",
-"<code>:</code>, "<code>?</code>", and "<code>@</code>".
-
-
-</p>
-   <p>A <a data-link-type="dfn" href="#concept-url-password">password</a> must be zero or more
-<a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>/</code>",
-"<code>?</code>", and "<code>@</code>".
+"<code>//</code>", followed by a <a data-link-type="dfn" href="#concept-host">host</a>, optionally followed by "<code>:</code>" and
+a <a data-link-type="dfn" href="#concept-url-port">port</a>, optionally followed by an <a data-link-type="dfn" href="#concept-absolute-path-relative-url">absolute-path-relative URL</a>.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url-port">port</a> must be zero or more
@@ -1292,6 +1271,14 @@ U+100000 to U+10FFFD.
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-units">URL units<a class="self-link" href="#url-units"></a></dfn> are <a data-link-type="dfn" href="#url-code-points">URL code points</a> and
 <a data-link-type="dfn" href="#percent_encoded-byte">percent-encoded bytes</a>.
+
+</p>
+   <hr>
+
+
+   <p class="note no-backref" role="note">There is no valid way to express a
+<a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> within a
+<a data-link-type="dfn" href="#concept-url">URL</a>.
 
 
 </p>
@@ -1875,8 +1862,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p>If the <var>@ flag</var> is set,
-       <a data-link-type="dfn" href="#parse-error">parse error</a>, prepend "<code>%40</code>" to
+           <p><a data-link-type="dfn" href="#parse-error">Parse error</a>.
+
+       </p>
+          <li>
+           <p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
        <var>buffer</var>.
 
        </p>
@@ -1892,20 +1882,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <ol>
          
             <li>
-             <p>If <var>code point</var> is U+0009, U+000A, or U+000D,
-         <a data-link-type="dfn" href="#parse-error">parse error</a>, continue.
-
-         </p>
-            <li>
-             <p>If <var>code point</var> is not a
-         <a data-link-type="dfn" href="#url-code-points">URL code point</a> and not
-         "<code>%</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-         </p>
-            <li>
-             <p>If <var>code point</var> is "<code>%</code>" and
-         <a data-link-type="dfn" href="#remaining">remaining</a> does not start with two
-         <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+             <p>If <var>code point</var> is U+0009, U+000A, or U+000D, continue.
 
          </p>
             <li>
@@ -4502,7 +4479,6 @@ neighboring rights to this work.
    <li>URL serializer, <a href="#concept-url-serializer">4.3</a>
    <li>URL units, <a href="#url-units">4.1</a>
    <li>URL(url, base), <a href="#dom-url-urlurl-base">6.1</a>
-   <li>URL userinfo, <a href="#concept-url-userinfo">4.1</a>
    <li>URL username, <a href="#concept-url-username">4</a>
    <li>URLUtils, <a href="#urlutils">6</a>
    <li>URLUtils input, <a href="#concept-urlutils-input">6</a>
