@@ -2775,7 +2775,7 @@ otherwise.
 
 <p>The <a>value pairs to iterate over</a> are the
 <a lt='URLSearchParams list'>list</a> name-value pairs with the key being
-the name and the value the value.
+the name and the value being the value.
 
 <p>The <dfn dfn dfn-for=URLSearchParams>stringification behavior</dfn> must return the
 <a lt='urlencoded serializer'>serialization</a> of the
