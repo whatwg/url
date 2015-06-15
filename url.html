@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-10">10 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-15">15 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -96,7 +96,7 @@
      <ul class="toc">
       <li><a href="#constructors"><span class="secno">6.1</span> <span class="content">Constructors</span></a>
       <li><a href="#url-statics"><span class="secno">6.2</span> <span class="content"><code class="idl"><span>URL</span></code> statics</span></a>
-      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">6.3</span> <span class="content"><code class="idl"><span>URLUtils</span></code> and <code class="idl"><span>URLUtilsReadOnly</span></code> members</span></a>
+      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">6.3</span> <span class="content"><code class="idl"><span>URLUtils</span></code>/<code class="idl"><span>URLUtilsSearchParams</span></code> and <code class="idl"><span>URLUtilsReadOnly</span></code> members</span></a>
       <li><a href="#interface-urlsearchparams"><span class="secno">6.4</span> <span class="content">Interface <code><span>URLSearchParams</span></code></span></a>
       <li><a href="#url-apis-elsewhere"><span class="secno">6.5</span> <span class="content">URL APIs elsewhere</span></a>
      </ul>
@@ -105,6 +105,7 @@
     <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ul class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
+      <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
      </ul>
     <li><a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ul class="toc">
@@ -3095,6 +3096,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintounicodedomain-domain">domain<a class="self-link" href="#dom-url-domaintounicodedomain-domain"></a></dfn>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
+<a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutilssearchparams">URLUtilsSearchParams</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
@@ -3110,8 +3112,13 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
+};
+
+[NoInterfaceObject,
+ Exposed=(Window, Worker)]
+interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlutilssearchparams">URLUtilsSearchParams<a class="self-link" href="#urlutilssearchparams"></a></dfn> {
+           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
 };
 
 [NoInterfaceObject,
@@ -3131,7 +3138,8 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
 
 
    <p>Except where different objects implementing <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> are identical to
-objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>.
+objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>. <code class="idl"><a data-link-type="idl" href="#dom-urlutilssearchparams-searchparams">searchParams</a></code> is on its own
+interface since <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/browsers.html#location">Location</a></code> cannot support it. <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
    <p class="note" role="note">Since all members are readonly and certain members from <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> are not
@@ -3141,9 +3149,10 @@ exposed a number of potential optimizations is possible compared to objects impl
 </p>
 
 
-   <p>Specifications defining objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> or <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> must
-define a <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-get-the-base">get the base<a class="self-link" href="#concept-urlutils-get-the-base"></a></dfn> algorithm, which must
-return the appropriate <a data-link-type="dfn" href="#concept-base-url">base URL</a> for the object.
+   <p>Specifications defining objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> or
+<code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> must define a
+<dfn data-dfn-type="dfn" data-noexport="" id="concept-urlutils-get-the-base">get the base<a class="self-link" href="#concept-urlutils-get-the-base"></a></dfn> algorithm, which must return the
+appropriate <a data-link-type="dfn" href="#concept-base-url">base URL</a> for the object.
 
 </p>
    <p>Specifications defining objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> may define
@@ -3175,9 +3184,9 @@ concept only relevant for HTML.
 <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
-   <p>Specifications defining objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> or <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> must
-use the <a data-link-type="dfn" href="#concept-urlutils-set-the-input">set the input</a> algorithms to set
-<a data-link-type="dfn" href="#concept-urlutils-input">input</a>, <a data-link-type="dfn" href="#concept-urlutils-url">url</a>, and
+   <p>Specifications defining objects implementing <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> or
+<code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> must use the <a data-link-type="dfn" href="#concept-urlutils-set-the-input">set the input</a>
+algorithms to set <a data-link-type="dfn" href="#concept-urlutils-input">input</a>, <a data-link-type="dfn" href="#concept-urlutils-url">url</a>, and
 <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>. To
 <dfn data-dfn-type="dfn" data-lt="URLUtils set the input" data-noexport="" id="concept-urlutils-set-the-input">set the input<a class="self-link" href="#concept-urlutils-set-the-input"></a></dfn>
 given <var>input</var> and optionally a <var>url</var>, run these steps:
@@ -3427,12 +3436,12 @@ representation?
 
 
 </p>
-   <h3 class="heading settled" data-level="6.3" id="urlutils-and-urlutilsreadonly-members"><span class="secno">6.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> members</span><a class="self-link" href="#urlutils-and-urlutilsreadonly-members"></a></h3>
+   <h3 class="heading settled" data-level="6.3" id="urlutils-and-urlutilsreadonly-members"><span class="secno">6.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> members</span><a class="self-link" href="#urlutils-and-urlutilsreadonly-members"></a></h3>
 
 
-   <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> interfaces are
-not exposed on the global object. They are meant to augment other objects, such as
-<code class="idl"><a data-link-type="idl" href="#url">URL</a></code>.
+   <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code>
+interfaces are not exposed on the global object. They are mixins for other objects, such
+as <code class="idl"><a data-link-type="idl" href="#url">URL</a></code>.
 
 </p>
    <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-href"><code>href</code><a class="self-link" href="#dom-urlutils-href"></a></dfn> attribute’s getter must run
@@ -3913,12 +3922,12 @@ run these steps:
 <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a> remain synchronized.
 
 </p>
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlutils-searchparams"></a></dfn> attribute’s getter
-must return the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>.
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtilsSearchParams" data-dfn-type="attribute" data-export="" id="dom-urlutilssearchparams-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlutilssearchparams-searchparams"></a></dfn>
+attribute’s getter must return the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>.
 
 </p>
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-searchparams">searchParams</a></code> attribute’s setter must run
-these steps:
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutilssearchparams-searchparams">searchParams</a></code> attribute’s
+setter must run these steps:
 
 </p>
    <ol>
@@ -4452,7 +4461,7 @@ neighboring rights to this work.
      <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-search">6</a>
      <li>attribute for URLUtils, <a href="#dom-urlutils-search">6.3</a>
     </ul>
-   <li>searchParams, <a href="#dom-urlutils-searchparams">6.3</a>
+   <li>searchParams, <a href="#dom-urlutilssearchparams-searchparams">6.3</a>
    <li>set(name, value), <a href="#dom-urlsearchparams-setname-value">6.4</a>
    <li>set the password, <a href="#set-the-password">4.2</a>
    <li>set the username, <a href="#set-the-username">4.2</a>
@@ -4501,6 +4510,7 @@ neighboring rights to this work.
    <li>URLUtils query encoding, <a href="#concept-urlutils-query-encoding">6</a>
    <li>URLUtils query object, <a href="#concept-urlutils-query-object">6</a>
    <li>URLUtilsReadOnly, <a href="#urlutilsreadonly">6</a>
+   <li>URLUtilsSearchParams, <a href="#urlutilssearchparams">6</a>
    <li>URLUtils set the input, <a href="#concept-urlutils-set-the-input">6</a>
    <li>URLUtils update, <a href="#concept-urlutils-update">6</a>
    <li>URLUtils URL, <a href="#concept-urlutils-url">6</a>
@@ -4512,6 +4522,12 @@ neighboring rights to this work.
     <ul>
      <li>argument for URLSearchParams/append(name, value), <a href="#dom-urlsearchparams-appendname-value-value">6.4</a>
      <li>argument for URLSearchParams/set(name, value), <a href="#dom-urlsearchparams-setname-value-value">6.4</a>
+    </ul></ul>
+  <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="indexlist">
+   <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
+    <ul>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#location">Location</a>
     </ul></ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
@@ -4549,6 +4565,7 @@ interface <a href="#url">URL</a> {
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <a href="#dom-url-domaintounicodedomain-domain">domain</a>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
+<a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutilssearchparams">URLUtilsSearchParams</a>;
 
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
@@ -4564,8 +4581,13 @@ interface <a href="#urlutils">URLUtils</a> {
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-port">port</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-search">search</a>;
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutils-searchparams">searchParams</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
+};
+
+[NoInterfaceObject,
+ Exposed=(Window, Worker)]
+interface <a href="#urlutilssearchparams">URLUtilsSearchParams</a> {
+           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
 };
 
 [NoInterfaceObject,
