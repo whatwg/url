@@ -293,9 +293,9 @@ by an <a lt='IPv6'>IPv6 address</a>, followed by
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser lt='host parser'>host parser</dfn> takes a string
-<var>input</var> and optionally a <var>Unicode flag</var>, and then runs
-these steps:
+<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var> and
+an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
+steps:
 
 <ol>
  <li><p>If <var>input</var> is the empty string, return failure.
@@ -349,9 +349,8 @@ these steps:
   "<code>]</code>",<!-- 5D -->
   return failure.
 
- <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset,
- and the result of running <a>domain to Unicode</a>
- on <var>asciiDomain</var> otherwise.
+ <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
+ result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </ol>
 
 <p>The <dfn id=concept-ipv6-parser lt='IPv6 parser'>IPv6 parser</dfn> takes a string

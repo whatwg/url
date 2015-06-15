@@ -495,9 +495,9 @@ by an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, followed by
    <h3 class="heading settled" data-level="3.3" id="host-parsing"><span class="secno">3.3. </span><span class="content">Host parsing</span><a class="self-link" href="#host-parsing"></a></h3>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-host-parser">host parser<a class="self-link" href="#concept-host-parser"></a></dfn> takes a string
-<var>input</var> and optionally a <var>Unicode flag</var>, and then runs
-these steps:
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-host-parser">host parser<a class="self-link" href="#concept-host-parser"></a></dfn> takes a string <var>input</var> and
+an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
+steps:
 
 </p>
    <ol>
@@ -570,9 +570,8 @@ these steps:
 
  </p>
     <li>
-     <p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset,
- and the result of running <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a>
- on <var>asciiDomain</var> otherwise.
+     <p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
+ result of running <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </p></ol>
 
 
