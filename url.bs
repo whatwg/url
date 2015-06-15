@@ -629,10 +629,9 @@ dispatch a <a>URL</a> for further processing after
 <dfn id=concept-url-scheme-data lt='URL scheme data'>scheme data</dfn> is a string holding the contents of a
 <a>URL</a>. It is initially the empty string.
 
-<p class="note no-backref">A <a>URL</a>'s
-<a lt='URL scheme data'>scheme data</a> will be its initial value if its
-<a lt='URL scheme'>scheme</a> is a <a>relative scheme</a>, and
-otherwise will be the only component without an initial value.
+<p class="note no-backref">A <a>URL</a>'s <a lt="URL scheme data">scheme data</a> will be
+its initial value if its <a lt="URL scheme">scheme</a> is a <a>relative scheme</a>, and
+will be the only component without an initial value otherwise.
 
 <p>A  <a>URL</a>'s <dfn id=concept-url-username lt='URL username'>username</dfn>
 is a string identifying a user. It is initially the empty string.
@@ -1045,13 +1044,12 @@ optionally with an <a>encoding</a>
    <dt><dfn>no scheme state</dfn>
    <dd>
     <p>If <var>base</var> is null, or <var>base</var>'s
-    <a lt='URL scheme'>scheme</a> is not a
-    <a>relative scheme</a>, <a>parse error</a>, return failure.
+    <a lt='URL scheme'>scheme</a> is not a <a>relative scheme</a> and <a>c</a> is not
+    "<code>#</code>", <a>parse error</a>, return failure.
 
-    <p class=note>Due to the <code><a attribute for=URLUtils>protocol</a></code> attribute's
-    ability to change <var>base</var>'s
-    <a lt='URL scheme'>scheme</a>, <var>base</var>'s
-    <a>relative flag</a> is not used here.
+    <p class=note>Due to the <code><a attribute for=URLUtils>protocol</a></code>
+    attribute's setter ability to change <var>base</var>'s <a lt="URL scheme">scheme</a>,
+    <var>base</var>'s <a>relative flag</a> is not used here.
 
     <p>Otherwise, set <var>state</var> to <a>relative state</a>,
     and decrease <var>pointer</var> by one.
@@ -1115,20 +1113,26 @@ optionally with an <a>encoding</a>
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
-     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
-     <var>base</var>'s <a lt='URL username'>username</a>,
-     <var>url</var>'s <a lt='URL password'>password</a> to
-     <var>base</var>'s <a lt='URL password'>password</a>,
-     <var>url</var>'s <a lt='URL host'>host</a> to
-     <var>base</var>'s <a lt='URL host'>host</a>,
-     <var>url</var>'s <a lt='URL port'>port</a> to
-     <var>base</var>'s <a lt='URL port'>port</a>,
-     <var>url</var>'s <a lt='URL path'>path</a> to
-     <var>base</var>'s <a lt='URL path'>path</a>,
-     <var>url</var>'s <a lt='URL query'>query</a> to
-     <var>base</var>'s <a lt='URL query'>query</a>,
-     <var>url</var>'s <a lt='URL fragment'>fragment</a> to the empty string,
-     and <var>state</var> to <a>fragment state</a>.
+     <dd>
+      <p>Set <var>url</var>'s <a lt="URL scheme data">scheme data</a> to
+      <var>base</var>'s <a lt="URL scheme data">scheme data</a>,
+      <var>url</var>'s <a lt="URL username">username</a> to
+      <var>base</var>'s <a lt="URL username">username</a>,
+      <var>url</var>'s <a lt="URL password">password</a> to
+      <var>base</var>'s <a lt="URL password">password</a>,
+      <var>url</var>'s <a lt="URL host">host</a> to
+      <var>base</var>'s <a lt="URL host">host</a>,
+      <var>url</var>'s <a lt="URL port">port</a> to
+      <var>base</var>'s <a lt="URL port">port</a>,
+      <var>url</var>'s <a lt="URL path">path</a> to
+      <var>base</var>'s <a lt="URL path">path</a>,
+      <var>url</var>'s <a lt="URL query">query</a> to
+      <var>base</var>'s <a lt="URL query">query</a>,
+      <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
+      and <var>state</var> to <a>fragment state</a>.
+
+      <p class="note no-backref">This also copies <a lt="URL scheme data">scheme data</a>
+      as all <a>URLs</a> support relative <a lt="URL fragment">fragments</a>.
 
      <dt>Otherwise
      <dd>

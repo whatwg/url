@@ -1004,10 +1004,9 @@ dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further proce
 <a data-link-type="dfn" href="#concept-url">URL</a>. It is initially the empty string.
 
 </p>
-   <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-url">URL</a>’s
-<a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> will be its initial value if its
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, and
-otherwise will be the only component without an initial value.
+   <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> will be
+its initial value if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, and
+will be the only component without an initial value otherwise.
 
 </p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL username" data-noexport="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn>
@@ -1588,14 +1587,13 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
     
        <p>If <var>base</var> is null, or <var>base</var>’s
-    <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a
-    <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+    <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a> and <a data-link-type="dfn" href="#c">c</a> is not
+    "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
     </p>
-       <p class="note" role="note">Due to the <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-protocol">protocol</a></code> attribute’s
-    ability to change <var>base</var>’s
-    <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, <var>base</var>’s
-    <a data-link-type="dfn" href="#relative-flag">relative flag</a> is not used here.
+       <p class="note" role="note">Due to the <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-protocol">protocol</a></code>
+    attribute’s setter ability to change <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
+    <var>base</var>’s <a data-link-type="dfn" href="#relative-flag">relative flag</a> is not used here.
 
     </p>
        <p>Otherwise, set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a>,
@@ -1687,20 +1685,27 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt>"<code>#</code>"
      
         <dd>
-         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
-     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
-     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string,
-     and <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+      
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
+      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string,
+      and <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+
+      </p>
+         <p class="note no-backref" role="note">This also copies <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>
+      as all <a data-link-type="dfn" href="#concept-url">URLs</a> support relative <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>.
 
      </p>
         <dt>Otherwise
