@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-15">15 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-16">16 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1899,13 +1899,16 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
          </p>
             <li>
-             <p><a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>code point</var> using
-         the <a data-link-type="dfn" href="#default-encode-set">default encode set</a> and append the result to
-         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>
-         if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>
-         is non-null, and to
-         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>
-         otherwise.
+             <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> is non-null,
+         <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>code point</var> using the
+         <a data-link-type="dfn" href="#password-encode-set">password encode set</a> and append the result to <var>url</var>’s
+         <a data-link-type="dfn" href="#concept-url-password">password</a>.
+
+         </p>
+            <li>
+             <p>Otherwise, <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>code point</var> using the
+         <a data-link-type="dfn" href="#username-encode-set">username encode set</a> and append the result to <var>url</var>’s
+         <a data-link-type="dfn" href="#concept-url-username">username</a>.
         </p>
            </ol>
            
@@ -4258,6 +4261,7 @@ Peter Occil,
 Rodney Rehm,
 Roy Fielding,
 Santiago M. Mola,
+Sebastian Mayr,
 Simon Pieters,
 Simon Sapin,
 Tab Atkins,
