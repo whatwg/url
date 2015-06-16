@@ -1067,8 +1067,10 @@ It is initially unset.
    <p class="note" role="note">At this point this is used primarily to support "<code>blob</code>"
 URLs, but others can be added going forward, hence "object".
 
-
 </p>
+   <hr>
+
+
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="special-scheme">special scheme<a class="self-link" href="#special-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> listed in the first
 column of the following table. A <dfn data-dfn-type="dfn" data-noexport="" id="default-port">default port<a class="self-link" href="#default-port"></a></dfn> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>’s
 optional corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is listed in the second column on the
@@ -1450,25 +1452,48 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        <ol>
      
         <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
-     "<code>+</code>", "<code>-</code>", or
-     "<code>.</code>", append <a data-link-type="dfn" href="#c">c</a>, lowercased, to
+         <p>If <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code>+</code>",
+     "<code>-</code>", or "<code>.</code>", append <a data-link-type="dfn" href="#c">c</a>, lowercased, to
      <var>buffer</var>.
 
      </p>
         <li>
       
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is "<code>:</code>", set
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
-      <var>buffer</var>, <var>buffer</var> to the empty string,
-      and then run these substeps:
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is "<code>:</code>", run these substeps:
 
       </p>
          <ol>
        
           <li>
-           <p>If <var>state override</var> is given,
-       terminate this algorithm.
+        
+           <p>If <var>state override</var> is given, run these subsubsteps:
+
+        </p>
+           <ol>
+         
+            <li>
+             <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a
+         <a data-link-type="dfn" href="#special-scheme">special scheme</a> and <var>buffer</var> is not, terminate this algorithm.
+
+         </p>
+            <li>
+             <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a
+         <a data-link-type="dfn" href="#special-scheme">special scheme</a> and <var>buffer</var> is, terminate this algorithm.
+        </p>
+           </ol>
+           
+
+       
+          <li>
+           <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to <var>buffer</var>.
+
+       </p>
+          <li>
+           <p>Set <var>buffer</var> to the empty string.
+
+       </p>
+          <li>
+           <p>If <var>state override</var> is given, terminate this algorithm.
 
        </p>
           <li>
