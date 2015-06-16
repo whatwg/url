@@ -177,20 +177,25 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a>
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-digits">ASCII digits<a class="self-link" href="#ascii-digits"></a></dfn> are code points in the range U+0030 to U+0039.
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="c0-controls">C0 controls<a class="self-link" href="#c0-controls"></a></dfn> are code points in the range U+0000 to U+001F, inclusive.
+
+</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="c0-controls-and-space">C0 controls and space<a class="self-link" href="#c0-controls-and-space"></a></dfn> are <a data-link-type="dfn" href="#c0-controls">C0 controls</a> and U+0020.
+
+</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-digits">ASCII digits<a class="self-link" href="#ascii-digits"></a></dfn> are code points in the range U+0030 to U+0039, inclusive.
 
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-hex-digits">ASCII hex digits<a class="self-link" href="#ascii-hex-digits"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> or are
-code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-hex-digits">ASCII hex digits<a class="self-link" href="#ascii-hex-digits"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>, code points in the range
+U+0041 to U+0046, inclusive, and code points in the range U+0061 to U+0066, inclusive.
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-alpha">ASCII alpha<a class="self-link" href="#ascii-alpha"></a></dfn> are code points in the range U+0041 to U+005A
-or in the range U+0061 to U+007A.
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-alpha">ASCII alpha<a class="self-link" href="#ascii-alpha"></a></dfn> are code points in the range U+0041 to U+005A, inclusive,
+and in the range U+0061 to U+007A, inclusive.
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-alphanumeric">ASCII alphanumeric<a class="self-link" href="#ascii-alphanumeric"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> or
-<a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>.
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-alphanumeric">ASCII alphanumeric<a class="self-link" href="#ascii-alphanumeric"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> and <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>.
 
 
 </p>
@@ -1372,8 +1377,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
    </p>
       <li>
-       <p>Remove any leading and trailing
-   <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-whitespace">ASCII whitespace</a> from
+       <p>Remove any leading and trailing <a data-link-type="dfn" href="#c0-controls-and-space">C0 controls and space</a> from
    <var>input</var>.
   </p>
      </ol>
@@ -1603,7 +1607,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> to
     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>,
     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, and
     <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
 
@@ -4337,6 +4341,8 @@ neighboring rights to this work.
    <li>base URL, <a href="#concept-base-url">4</a>
    <li>basic URL parser, <a href="#concept-basic-url-parser">4.2</a>
    <li>c, <a href="#c">1.1</a>
+   <li>C0 controls, <a href="#c0-controls">1</a>
+   <li>C0 controls and space, <a href="#c0-controls-and-space">1</a>
    <li>default encode set, <a href="#default-encode-set">2</a>
    <li>default port, <a href="#default-port">4</a>
    <li>delete(name), <a href="#dom-urlsearchparams-deletename">6.4</a>

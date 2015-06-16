@@ -56,17 +56,20 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 [[!IDNA]]
 [[!WEBIDL]]
 
-<p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039.
+<p>The <dfn>C0 controls</dfn> are code points in the range U+0000 to U+001F, inclusive.
+
+<p>The <dfn>C0 controls and space</dfn> are <a>C0 controls</a> and U+0020.
+
+<p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039, inclusive.
 <!-- XXX ref Encoding? -->
 
-<p>The <dfn>ASCII hex digits</dfn> are <a>ASCII digits</a> or are
-code points in the range U+0041 to U+0046 or in the range U+0061 to U+0066.
+<p>The <dfn>ASCII hex digits</dfn> are <a>ASCII digits</a>, code points in the range
+U+0041 to U+0046, inclusive, and code points in the range U+0061 to U+0066, inclusive.
 
-<p>The <dfn>ASCII alpha</dfn> are code points in the range U+0041 to U+005A
-or in the range U+0061 to U+007A.
+<p>The <dfn>ASCII alpha</dfn> are code points in the range U+0041 to U+005A, inclusive,
+and in the range U+0061 to U+007A, inclusive.
 
-<p>The <dfn>ASCII alphanumeric</dfn> are <a>ASCII digits</a> or
-<a>ASCII alpha</a>.
+<p>The <dfn>ASCII alphanumeric</dfn> are <a>ASCII digits</a> and <a>ASCII alpha</a>.
 
 
 <h3 id=parsers>Parsers</h3>
@@ -910,8 +913,7 @@ optionally with an <a>encoding</a>
   <ol>
    <li><p>Set <var>url</var> to a new <a>URL</a>.
 
-   <li><p>Remove any leading and trailing
-   <a>ASCII whitespace</a> from
+   <li><p>Remove any leading and trailing <a>C0 controls and space</a> from
    <var>input</var>.
   </ol>
 
@@ -1058,7 +1060,7 @@ optionally with an <a>encoding</a>
     <var>url</var>'s <a lt="URL scheme data">scheme data</a> to
     <var>base</var>'s <a lt="URL scheme data">scheme data</a>,
     <var>url</var>'s <a lt='URL query'>query</a> to
-    <var>base</var>'s <a lt='URL query'>query</a>
+    <var>base</var>'s <a lt='URL query'>query</a>,
     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string, and
     <var>state</var> to <a>fragment state</a>.
 
