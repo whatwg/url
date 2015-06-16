@@ -71,6 +71,8 @@ and in the range U+0061 to U+007A, inclusive.
 
 <p>The <dfn>ASCII alphanumeric</dfn> are <a>ASCII digits</a> and <a>ASCII alpha</a>.
 
+<p>An <dfn>ASCII string</dfn> is a <a>string</a> in the range U+0000 to U+007F, inclusive.
+
 
 <h3 id=parsers>Parsers</h3>
 
@@ -623,38 +625,41 @@ A Recommendation for IPv6 Address Text Representation.
 <a lt='URL query'>query</a>, and
 <a lt='URL fragment'>fragment</a>.
 
-<p>A <a>URL</a>'s <dfn id=concept-url-scheme lt='URL scheme'>scheme</dfn> is
-a string that identifies the type of <a>URL</a> and can be used to
+<p>A <a>URL</a>'s <dfn id=concept-url-scheme lt="URL scheme">scheme</dfn> is
+an <a>ASCII string</a> that identifies the type of <a>URL</a> and can be used to
 dispatch a <a>URL</a> for further processing after
 <a lt='URL parser'>parsing</a>. It is initially the empty string.
 
 <p>A <a>URL</a>'s
-<dfn id=concept-url-scheme-data lt='URL scheme data'>scheme data</dfn> is a string holding the contents of a
-<a>URL</a>. It is initially the empty string.
+<dfn id=concept-url-scheme-data lt="URL scheme data">scheme data</dfn> is an
+<a>ASCII string</a> holding the contents of a <a>URL</a>. It is initially the empty
+string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-username lt='URL username'>username</dfn>
-is a string identifying a user. It is initially the empty string.
+<p>A  <a>URL</a>'s <dfn id=concept-url-username lt="URL username">username</dfn>
+is an <a>ASCII string</a> identifying a user. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-password lt='URL password'>password</dfn>
-is either null or a string identifying a user's credentials. It is initially null.
+<p>A  <a>URL</a>'s <dfn id=concept-url-password lt="URL password">password</dfn>
+is either null or an <a>ASCII string</a> identifying a user's credentials. It is initially
+null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-host lt='URL host'>host</dfn> is
-either null or a <a>host</a>. It is initially null.
+<p>A  <a>URL</a>'s <dfn id=concept-url-host lt="URL host">host</dfn> is either null or a
+<a>host</a>. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-port lt='URL port'>port</dfn> is a
-string that identifies a networking port. It is initially the empty string.
+<p>A  <a>URL</a>'s <dfn id=concept-url-port lt="URL port">port</dfn> is an
+<a>ASCII string</a> that identifies a networking port. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-path lt='URL path'>path</dfn> is a
-list of zero or more strings holding data, usually identifying a location in hierarchical
+<p>A  <a>URL</a>'s <dfn id=concept-url-path lt="URL path">path</dfn> is a list of zero or
+more <a>ASCII string</a> holding data, usually identifying a location in hierarchical
 form. It is initially the empty list.
 
 <p>A  <a>URL</a>'s <dfn id=concept-url-query lt='URL query'>query</dfn> is
-either null or a string holding data. It is initially null.
+either null or an <a>ASCII string</a> holding data. It is initially null.
 
 <p>A <a>URL</a>'s <dfn id=concept-url-fragment lt='URL fragment'>fragment</dfn>
 is either null or a string holding data that can be used for further processing on the
-resource the <a>URL</a>'s other components identify.
-It is initially null.
+resource the <a>URL</a>'s other components identify. It is initially null.
+
+<p class="note no-backref">This is not an <a>ASCII string</a> on purpose.
 
 <p>A <a>URL</a> also has an associated <dfn>relative flag</dfn>.
 It is initially unset.
@@ -2915,7 +2920,7 @@ urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: context object
   text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
-  text: ascii whitespace
+  text: string
   text: concept-encoding-get; url: concept-encoding-get
   text: decoder
   text: encode

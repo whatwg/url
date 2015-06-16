@@ -197,6 +197,9 @@ and in the range U+0061 to U+007A, inclusive.
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-alphanumeric">ASCII alphanumeric<a class="self-link" href="#ascii-alphanumeric"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> and <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>.
 
+</p>
+   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="ascii-string">ASCII string<a class="self-link" href="#ascii-string"></a></dfn> is a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#string">string</a> in the range U+0000 to U+007F, inclusive.
+
 
 </p>
    <h3 class="heading settled" data-level="1.1" id="parsers"><span class="secno">1.1. </span><span class="content">Parsers</span><a class="self-link" href="#parsers"></a></h3>
@@ -999,45 +1002,49 @@ A Recommendation for IPv6 Address Text Representation.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL scheme" data-noexport="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is
-a string that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to
+an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to
 dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further processing after
 <a data-link-type="dfn" href="#concept-url-parser">parsing</a>. It is initially the empty string.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s
-<dfn data-dfn-type="dfn" data-lt="URL scheme data" data-noexport="" id="concept-url-scheme-data">scheme data<a class="self-link" href="#concept-url-scheme-data"></a></dfn> is a string holding the contents of a
-<a data-link-type="dfn" href="#concept-url">URL</a>. It is initially the empty string.
+<dfn data-dfn-type="dfn" data-lt="URL scheme data" data-noexport="" id="concept-url-scheme-data">scheme data<a class="self-link" href="#concept-url-scheme-data"></a></dfn> is an
+<a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding the contents of a <a data-link-type="dfn" href="#concept-url">URL</a>. It is initially the empty
+string.
 
 </p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL username" data-noexport="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn>
-is a string identifying a user. It is initially the empty string.
+is an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user. It is initially the empty string.
 
 </p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL password" data-noexport="" id="concept-url-password">password<a class="self-link" href="#concept-url-password"></a></dfn>
-is either null or a string identifying a user’s credentials. It is initially null.
+is either null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user’s credentials. It is initially
+null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL host" data-noexport="" id="concept-url-host">host<a class="self-link" href="#concept-url-host"></a></dfn> is
-either null or a <a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL host" data-noexport="" id="concept-url-host">host<a class="self-link" href="#concept-url-host"></a></dfn> is either null or a
+<a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL port" data-noexport="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is a
-string that identifies a networking port. It is initially the empty string.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL port" data-noexport="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is an
+<a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies a networking port. It is initially the empty string.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL path" data-noexport="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a
-list of zero or more strings holding data, usually identifying a location in hierarchical
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL path" data-noexport="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a list of zero or
+more <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data, usually identifying a location in hierarchical
 form. It is initially the empty list.
 
 </p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL query" data-noexport="" id="concept-url-query">query<a class="self-link" href="#concept-url-query"></a></dfn> is
-either null or a string holding data. It is initially null.
+either null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data. It is initially null.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL fragment" data-noexport="" id="concept-url-fragment">fragment<a class="self-link" href="#concept-url-fragment"></a></dfn>
 is either null or a string holding data that can be used for further processing on the
-resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify.
-It is initially null.
+resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify. It is initially null.
+
+</p>
+   <p class="note no-backref" role="note">This is not an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> on purpose.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-type="dfn" data-noexport="" id="relative-flag">relative flag<a class="self-link" href="#relative-flag"></a></dfn>.
@@ -4320,6 +4327,7 @@ neighboring rights to this work.
    <li>ASCII alphanumeric, <a href="#ascii-alphanumeric">1</a>
    <li>ASCII digits, <a href="#ascii-digits">1</a>
    <li>ASCII hex digits, <a href="#ascii-hex-digits">1</a>
+   <li>ASCII string, <a href="#ascii-string">1</a>
    <li>authority first slash state, <a href="#authority-first-slash-state">4.2</a>
    <li>authority ignore slashes state, <a href="#authority-ignore-slashes-state">4.2</a>
    <li>authority second slash state, <a href="#authority-second-slash-state">4.2</a>
