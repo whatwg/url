@@ -1009,11 +1009,6 @@ dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further proce
 <a data-link-type="dfn" href="#concept-url">URL</a>. It is initially the empty string.
 
 </p>
-   <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> will be
-its initial value if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, and
-will be the only component without an initial value otherwise.
-
-</p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-type="dfn" data-lt="URL username" data-noexport="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn>
 is a string identifying a user. It is initially the empty string.
 
@@ -1051,7 +1046,7 @@ It is initially unset.
 </p>
    <p class="note no-backref" role="note">The <a data-link-type="dfn" href="#relative-flag">relative flag</a> exists as checking if a
 <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a
-<a data-link-type="dfn" href="#relative-scheme">relative scheme</a> can give incorrect results due to the
+<a data-link-type="dfn" href="#special-scheme">special scheme</a> can give incorrect results due to the
 <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-protocol">protocol</a></code> attribute.
 
 
@@ -1067,12 +1062,10 @@ URLs, but others can be added going forward, hence "object".
 
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="relative-scheme">relative scheme<a class="self-link" href="#relative-scheme"></a></dfn> is a
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a> listed in the first column of
-the following table. A <dfn data-dfn-type="dfn" data-noexport="" id="default-port">default port<a class="self-link" href="#default-port"></a></dfn> is a
-<a data-link-type="dfn" href="#relative-scheme">relative scheme</a>’s optional corresponding
-<a data-link-type="dfn" href="#concept-url-port">port</a> and is listed in the second column
-on the same row.
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="special-scheme">special scheme<a class="self-link" href="#special-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> listed in the first
+column of the following table. A <dfn data-dfn-type="dfn" data-noexport="" id="default-port">default port<a class="self-link" href="#default-port"></a></dfn> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>’s
+optional corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is listed in the second column on the
+same row.
 
 </p>
    <table>
@@ -1155,19 +1148,15 @@ the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a> when the i
 
 </p>
    <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-absolute-url">absolute URL<a class="self-link" href="#concept-absolute-url"></a></dfn> must be a
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, followed by
-"<code>:</code>", followed by either a
-<a data-link-type="dfn" href="#concept-scheme-relative-url">scheme-relative URL</a>, if
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, or
-<a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> otherwise, optionally followed
-by "<code>?</code>" and a <a data-link-type="dfn" href="#concept-url-query">query</a>.
+<a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, followed by "<code>:</code>", followed by either a
+<a data-link-type="dfn" href="#concept-scheme-relative-url">scheme-relative URL</a>, if <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>,
+or <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> otherwise, optionally followed by
+"<code>?</code>" and a <a data-link-type="dfn" href="#concept-url-query">query</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> must be one
-<a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of
-<a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code>+</code>",
-"<code>-</code>", and "<code>.</code>". A
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a> must be registered
+   <p>A <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> must be one <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or
+more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
+"<code>.</code>". A <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> must be registered
 <span class="XXX">...</span>.
 
 </p>
@@ -1476,10 +1465,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
        </p>
           <li>
-           <p>If <var>url</var>’s
-       <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is
-       a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a>, set <var>url</var>’s
-       <a data-link-type="dfn" href="#relative-flag">relative flag</a>.
+           <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a
+       <a data-link-type="dfn" href="#special-scheme">special scheme</a>, set <var>url</var>’s <a data-link-type="dfn" href="#relative-flag">relative flag</a>.
 
        </p>
           <li>
@@ -1590,9 +1577,9 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    
       <dd>
     
-       <p>If <var>base</var> is null, or <var>base</var>’s
-    <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a <a data-link-type="dfn" href="#relative-scheme">relative scheme</a> and <a data-link-type="dfn" href="#c">c</a> is not
-    "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+       <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is
+    not a <a data-link-type="dfn" href="#special-scheme">special scheme</a> and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>,
+    return failure.
 
     </p>
        <p class="note" role="note">Due to the <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-protocol">protocol</a></code>
@@ -1601,7 +1588,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
     </p>
        <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a
-    <a data-link-type="dfn" href="#relative-scheme">relative scheme</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set
+    <a data-link-type="dfn" href="#special-scheme">special scheme</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set
     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>
     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> to
@@ -4444,7 +4431,6 @@ neighboring rights to this work.
    <li>relative or authority state, <a href="#relative-or-authority-state">4.2</a>
    <li>relative path start state, <a href="#relative-path-start-state">4.2</a>
    <li>relative path state, <a href="#relative-path-state">4.2</a>
-   <li>relative scheme, <a href="#relative-scheme">4</a>
    <li>relative slash state, <a href="#relative-slash-state">4.2</a>
    <li>relative state, <a href="#relative-state">4.2</a>
    <li>relative URL, <a href="#concept-relative-url">4.1</a>
@@ -4463,6 +4449,7 @@ neighboring rights to this work.
    <li>set the password, <a href="#set-the-password">4.2</a>
    <li>set the username, <a href="#set-the-username">4.2</a>
    <li>simple encode set, <a href="#simple-encode-set">2</a>
+   <li>special scheme, <a href="#special-scheme">4</a>
    <li>stringification behavior
     <ul>
      <li>dfn for URLUtils, <a href="#URLUtils-stringification-behavior">6</a>

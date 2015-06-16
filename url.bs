@@ -632,10 +632,6 @@ dispatch a <a>URL</a> for further processing after
 <dfn id=concept-url-scheme-data lt='URL scheme data'>scheme data</dfn> is a string holding the contents of a
 <a>URL</a>. It is initially the empty string.
 
-<p class="note no-backref">A <a>URL</a>'s <a lt="URL scheme data">scheme data</a> will be
-its initial value if its <a lt="URL scheme">scheme</a> is a <a>relative scheme</a>, and
-will be the only component without an initial value otherwise.
-
 <p>A  <a>URL</a>'s <dfn id=concept-url-username lt='URL username'>username</dfn>
 is a string identifying a user. It is initially the empty string.
 
@@ -665,7 +661,7 @@ It is initially unset.
 
 <p class="note no-backref">The <a>relative flag</a> exists as checking if a
 <a>URL</a>'s <a lt='URL scheme'>scheme</a> is a
-<a>relative scheme</a> can give incorrect results due to the
+<a>special scheme</a> can give incorrect results due to the
 <code><a attribute for=URLUtils>protocol</a></code> attribute.
 <!-- XXX maybe disallow setting protocol to non-sensical values -->
 
@@ -678,16 +674,14 @@ It is initially unset.
 URLs, but others can be added going forward, hence "object".
 
 
-<p>A <dfn>relative scheme</dfn> is a
-<a lt='URL scheme'>scheme</a> listed in the first column of
-the following table. A <dfn>default port</dfn> is a
-<a>relative scheme</a>'s optional corresponding
-<a lt='URL port'>port</a> and is listed in the second column
-on the same row.
+<p>A <dfn>special scheme</dfn> is a <a lt="URL scheme">scheme</a> listed in the first
+column of the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s
+optional corresponding <a lt="URL port">port</a> and is listed in the second column on the
+same row.
 
 <table>
- <tr><th><a lt='URL scheme'>scheme</a>
-     <th><a lt='URL port'>port</a>
+ <tr><th><a lt="URL scheme">scheme</a>
+     <th><a lt="URL port">port</a>
  <tr><td>"<code>ftp</code>"<td>"<code>21</code>"
  <tr><td>"<code>file</code>"<td>
  <tr><td>"<code>gopher</code>"<td>"<code>70</code>"
@@ -697,7 +691,8 @@ on the same row.
  <tr><td>"<code>wss</code>"<td>"<code>443</code>"
 </table>
 
-<!-- The best reason I have for listing "gopher" is Google does it too:
+<!-- The best reason I have for listing "gopher" is Apple/Google:
+     https://github.com/WebKit/webkit/blob/master/Source/WebCore/platform/URL.cpp#L72
      https://code.google.com/p/google-url/source/browse/trunk/src/url_canon_stdurl.cc#120
 
      It seems fine to remain compatible on that front, no need to support it
@@ -734,19 +729,15 @@ the <a>URL parser</a> when the input is potentially a
 "<code>#</code>" and a
 <a lt='URL fragment'>fragment</a>.
 
-<p>An <dfn id=concept-absolute-url lt='absolute URL'>absolute URL</dfn> must be a
-<a lt='URL scheme'>scheme</a>, followed by
-"<code>:</code>", followed by either a
-<a>scheme-relative URL</a>, if
-<a lt='URL scheme'>scheme</a> is a <a>relative scheme</a>, or
-<a lt='URL scheme data'>scheme data</a> otherwise, optionally followed
-by "<code>?</code>" and a <a lt='URL query'>query</a>.
+<p>An <dfn id=concept-absolute-url lt="absolute URL">absolute URL</dfn> must be a
+<a lt="URL scheme">scheme</a>, followed by "<code>:</code>", followed by either a
+<a>scheme-relative URL</a>, if <a lt="URL scheme">scheme</a> is a <a>special scheme</a>,
+or <a lt="URL scheme data">scheme data</a> otherwise, optionally followed by
+"<code>?</code>" and a <a lt="URL query">query</a>.
 
-<p>A <a lt='URL scheme'>scheme</a> must be one
-<a>ASCII alpha</a>, followed by zero or more of
-<a>ASCII alphanumeric</a>, "<code>+</code>",
-"<code>-</code>", and "<code>.</code>". A
-<a lt='URL scheme'>scheme</a> must be registered
+<p>A <a lt="URL scheme">scheme</a> must be one <a>ASCII alpha</a>, followed by zero or
+more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
+"<code>.</code>". A <a lt="URL scheme">scheme</a> must be registered
 <span class=XXX>...</span>.
 
 <p>The syntax of <a lt='URL scheme data'>scheme data</a>
@@ -972,10 +963,8 @@ optionally with an <a>encoding</a>
        <li><p>If <var>state override</var> is given,
        terminate this algorithm.
 
-       <li><p>If <var>url</var>'s
-       <a lt='URL scheme'>scheme</a> is
-       a <a>relative scheme</a>, set <var>url</var>'s
-       <a>relative flag</a>.
+       <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is a
+       <a>special scheme</a>, set <var>url</var>'s <a>relative flag</a>.
 
        <li><p>If <var>url</var>'s
        <a lt='URL scheme'>scheme</a> is
@@ -1045,16 +1034,16 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>no scheme state</dfn>
    <dd>
-    <p>If <var>base</var> is null, or <var>base</var>'s
-    <a lt='URL scheme'>scheme</a> is not a <a>relative scheme</a> and <a>c</a> is not
-    "<code>#</code>", <a>parse error</a>, return failure.
+    <p>If <var>base</var> is null, or <var>base</var>'s <a lt="URL scheme">scheme</a> is
+    not a <a>special scheme</a> and <a>c</a> is not "<code>#</code>", <a>parse error</a>,
+    return failure.
 
     <p class=note>Due to the <code><a attribute for=URLUtils>protocol</a></code>
     attribute's setter ability to change <var>base</var>'s <a lt="URL scheme">scheme</a>,
     <var>base</var>'s <a>relative flag</a> is not used here.
 
     <p>Otherwise, if <var>base</var>'s <a lt="URL scheme">scheme</a> is not a
-    <a>relative scheme</a> and <a>c</a> is "<code>#</code>", set
+    <a>special scheme</a> and <a>c</a> is "<code>#</code>", set
     <var>url</var>'s <a lt="URL scheme">scheme</a> to
     <var>base</var>'s <a lt="URL scheme">scheme</a>
     <var>url</var>'s <a lt="URL scheme data">scheme data</a> to
@@ -1630,7 +1619,7 @@ optionally with an <a>encoding</a>
 
         <p class=note>Unfortunately not using <a lt="percent encode">percent-encoding</a> is intentional as
         implementations with majority market share exhibit this behavior.
-        <!-- Chrome does percent-encoding if the scheme is not a relative scheme,
+        <!-- Chrome does percent-encoding if the scheme is not a special scheme,
              hopefully that can be aligned since flip-flopping is not great. -->
       </ol>
     </dl>
