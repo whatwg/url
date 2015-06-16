@@ -1596,6 +1596,18 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <var>base</var>’s <a data-link-type="dfn" href="#relative-flag">relative flag</a> is not used here.
 
     </p>
+       <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not a
+    <a data-link-type="dfn" href="#relative-scheme">relative scheme</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set
+    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>
+    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> to
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>,
+    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>
+    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, and
+    <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+
+    </p>
        <p>Otherwise, set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a>,
     and decrease <var>pointer</var> by one.
 
@@ -1685,27 +1697,20 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt>"<code>#</code>"
      
         <dd>
-      
-         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string,
-      and <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
-
-      </p>
-         <p class="note no-backref" role="note">This also copies <a data-link-type="dfn" href="#concept-url-scheme-data">scheme data</a>
-      as all <a data-link-type="dfn" href="#concept-url">URLs</a> support relative <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>.
+         <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string,
+     and <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
 
      </p>
         <dt>Otherwise

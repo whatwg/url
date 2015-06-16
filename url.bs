@@ -1051,6 +1051,17 @@ optionally with an <a>encoding</a>
     attribute's setter ability to change <var>base</var>'s <a lt="URL scheme">scheme</a>,
     <var>base</var>'s <a>relative flag</a> is not used here.
 
+    <p>Otherwise, if <var>base</var>'s <a lt="URL scheme">scheme</a> is not a
+    <a>relative scheme</a> and <a>c</a> is "<code>#</code>", set
+    <var>url</var>'s <a lt="URL scheme">scheme</a> to
+    <var>base</var>'s <a lt="URL scheme">scheme</a>
+    <var>url</var>'s <a lt="URL scheme data">scheme data</a> to
+    <var>base</var>'s <a lt="URL scheme data">scheme data</a>,
+    <var>url</var>'s <a lt='URL query'>query</a> to
+    <var>base</var>'s <a lt='URL query'>query</a>
+    <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string, and
+    <var>state</var> to <a>fragment state</a>.
+
     <p>Otherwise, set <var>state</var> to <a>relative state</a>,
     and decrease <var>pointer</var> by one.
 
@@ -1113,26 +1124,20 @@ optionally with an <a>encoding</a>
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
-     <dd>
-      <p>Set <var>url</var>'s <a lt="URL scheme data">scheme data</a> to
-      <var>base</var>'s <a lt="URL scheme data">scheme data</a>,
-      <var>url</var>'s <a lt="URL username">username</a> to
-      <var>base</var>'s <a lt="URL username">username</a>,
-      <var>url</var>'s <a lt="URL password">password</a> to
-      <var>base</var>'s <a lt="URL password">password</a>,
-      <var>url</var>'s <a lt="URL host">host</a> to
-      <var>base</var>'s <a lt="URL host">host</a>,
-      <var>url</var>'s <a lt="URL port">port</a> to
-      <var>base</var>'s <a lt="URL port">port</a>,
-      <var>url</var>'s <a lt="URL path">path</a> to
-      <var>base</var>'s <a lt="URL path">path</a>,
-      <var>url</var>'s <a lt="URL query">query</a> to
-      <var>base</var>'s <a lt="URL query">query</a>,
-      <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
-      and <var>state</var> to <a>fragment state</a>.
-
-      <p class="note no-backref">This also copies <a lt="URL scheme data">scheme data</a>
-      as all <a>URLs</a> support relative <a lt="URL fragment">fragments</a>.
+     <dd><p>Set <var>url</var>'s <a lt="URL username">username</a> to
+     <var>base</var>'s <a lt="URL username">username</a>,
+     <var>url</var>'s <a lt="URL password">password</a> to
+     <var>base</var>'s <a lt="URL password">password</a>,
+     <var>url</var>'s <a lt="URL host">host</a> to
+     <var>base</var>'s <a lt="URL host">host</a>,
+     <var>url</var>'s <a lt="URL port">port</a> to
+     <var>base</var>'s <a lt="URL port">port</a>,
+     <var>url</var>'s <a lt="URL path">path</a> to
+     <var>base</var>'s <a lt="URL path">path</a>,
+     <var>url</var>'s <a lt="URL query">query</a> to
+     <var>base</var>'s <a lt="URL query">query</a>,
+     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
+     and <var>state</var> to <a>fragment state</a>.
 
      <dt>Otherwise
      <dd>
