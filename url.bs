@@ -492,7 +492,8 @@ steps:
    <li><p>If <var>dots seen</var> is 1 or 3, increase
    <var>piece pointer</var> by one.
 
-   <li><p>Increase <var>pointer</var> by one.
+   <li><p>If <a>c</a> is not the <a>EOF code point</a>, increase <var>pointer</var> by
+   one.
 
    <li><p>If <var>dots seen</var> is 3 and <a>c</a> is not
    the <a>EOF code point</a>,
