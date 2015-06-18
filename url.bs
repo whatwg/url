@@ -2187,8 +2187,8 @@ representation?
 interfaces are not exposed on the global object. They are mixins for other objects, such
 as {{URL}}.
 
-<p>The <dfn attribute dfn-for=URLUtils><code>href</code></dfn> attribute's getter must run
-these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>href</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt='URLUtils URL'>url</a> is null, return
@@ -2198,7 +2198,8 @@ these steps:
  of <a lt='URLUtils URL'>url</a>.
 </ol>
 
-<p>The <code><a attribute for=URLUtils>href</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for="URLUtils">href</a></code> attribute's
+setter must run these steps:
 
 <ol>
  <li><p>Let <var>input</var> be the given value.
@@ -2246,8 +2247,8 @@ a.href === test // true</pre>
   </div>
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>origin</code></dfn> attribute's getter must
-run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>origin</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt='URLUtils URL'>url</a> is null, return the empty
@@ -2263,8 +2264,8 @@ run these steps:
 compatibility with HTML's <code>MessageEvent</code> feature.
 [[!HTML]]
 
-<p>The <dfn attribute dfn-for=URLUtils><code>protocol</code></dfn> attribute's getter
-must run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>protocol</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, return "<code>:</code>".
@@ -2285,8 +2286,8 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>username</code></dfn> attribute's getter
-must run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>username</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, return the empty string.
@@ -2306,8 +2307,8 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>password</code></dfn> attribute's getter
-must run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>password</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt='URLUtils URL'>url</a> is null or its <a lt="URL password">password</a>
@@ -2329,8 +2330,8 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>host</code></dfn> attribute's getter must run
-these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>host</code></dfn> attribute's
+getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL host">host</a> is null,
@@ -2357,8 +2358,8 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>hostname</code></dfn> attribute's getter
-must run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>hostname</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL host">host</a> is null,
@@ -2381,7 +2382,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>port</code></dfn> attribute's getter must run
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>port</code></dfn> attribute's getter must run
 these steps:
 
 <ol>
@@ -2405,8 +2406,8 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>pathname</code></dfn> attribute's getter
-must run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>pathname</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, return the empty string.
@@ -2434,8 +2435,8 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>search</code></dfn> attribute's getter must
-run these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>search</code></dfn>
+attribute's getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL query">query</a> is
@@ -2444,7 +2445,8 @@ run these steps:
  <li><p>Return "<code>?</code>", followed by <a lt="URL query">query</a>.
 </ol>
 
-<p>The <code><a attribute for=URLUtils>search</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URLUtils>search</a></code> attribute's setter must run these
+steps:
 
 <ol>
  <li><p>If <a lt='URLUtils URL'>url</a> is null, terminate these steps.
@@ -2479,8 +2481,8 @@ run these steps:
 <a lt='URLUtils query object'>query object</a> are run to ensure all
 <a lt='URLSearchParams URL object'>url objects</a> remain synchronized.
 
-<p>The <dfn attribute dfn-for=URLUtilsSearchParams><code>searchParams</code></dfn>
-attribute's getter must return the <a lt='URLUtils query object'>query object</a>.
+<p>The <dfn attribute for=URLUtilsSearchParams><code>searchParams</code></dfn> attribute's
+getter must return the <a lt="URLUtils query object">query object</a>.
 
 <p>The <code><a attribute for=URLUtilsSearchParams>searchParams</a></code> attribute's
 setter must run these steps:
@@ -2507,8 +2509,8 @@ setter must run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute dfn-for=URLUtils><code>hash</code></dfn> attribute's getter must run
-these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>hash</code></dfn> attribute's
+getter must run these steps:
 
 <ol>
  <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL fragment">fragment</a>

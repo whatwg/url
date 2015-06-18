@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-17">17 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-06-18">18 June 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -3039,16 +3039,16 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlutilsreadonly">URLUtilsReadOnly<a class="self-link" href="#urlutilsreadonly"></a></dfn> {
-  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URLUtilsReadOnly-stringification-behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-href">href<a class="self-link" href="#dom-urlutilsreadonly-href"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-origin">origin<a class="self-link" href="#dom-urlutilsreadonly-origin"></a></dfn>;
+  <dfn data-dfn-for="URLUtilsReadOnly" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URLUtilsReadOnly-stringification-behavior">stringifier<a class="self-link" href="#URLUtilsReadOnly-stringification-behavior"></a></dfn> readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
 
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-protocol">protocol<a class="self-link" href="#dom-urlutilsreadonly-protocol"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-host">host<a class="self-link" href="#dom-urlutilsreadonly-host"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hostname">hostname<a class="self-link" href="#dom-urlutilsreadonly-hostname"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-port">port<a class="self-link" href="#dom-urlutilsreadonly-port"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-pathname">pathname<a class="self-link" href="#dom-urlutilsreadonly-pathname"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-search">search<a class="self-link" href="#dom-urlutilsreadonly-search"></a></dfn>;
-  readonly attribute USVString <dfn class="idl-code" data-dfn-for="URLUtilsReadOnly" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString " id="dom-urlutilsreadonly-hash">hash<a class="self-link" href="#dom-urlutilsreadonly-hash"></a></dfn>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-host">host</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-port">port</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-search">search</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
 };
 </pre>
 
@@ -3360,8 +3360,8 @@ interfaces are not exposed on the global object. They are mixins for other objec
 as <code class="idl"><a data-link-type="idl" href="#url">URL</a></code>.
 
 </p>
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-href"><code>href</code><a class="self-link" href="#dom-urlutils-href"></a></dfn> attribute’s getter must run
-these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-href"><code>href</code><a class="self-link" href="#dom-urlutils-href"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3377,7 +3377,8 @@ these steps:
 </p></ol>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-href">href</a></code> attribute’s setter must run these steps:
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-href">href</a></code> attribute’s
+setter must run these steps:
 
 </p>
    <ol>
@@ -3455,8 +3456,8 @@ a.href === test // true</pre>
 </ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-origin"><code>origin</code><a class="self-link" href="#dom-urlutils-origin"></a></dfn> attribute’s getter must
-run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-origin"><code>origin</code><a class="self-link" href="#dom-urlutils-origin"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3479,8 +3480,8 @@ compatibility with HTML’s <code>MessageEvent</code> feature.
 <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-protocol"><code>protocol</code><a class="self-link" href="#dom-urlutils-protocol"></a></dfn> attribute’s getter
-must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-protocol"><code>protocol</code><a class="self-link" href="#dom-urlutils-protocol"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3515,8 +3516,8 @@ these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-username"><code>username</code><a class="self-link" href="#dom-urlutils-username"></a></dfn> attribute’s getter
-must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-username"><code>username</code><a class="self-link" href="#dom-urlutils-username"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3550,8 +3551,8 @@ run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-password"><code>password</code><a class="self-link" href="#dom-urlutils-password"></a></dfn> attribute’s getter
-must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-password"><code>password</code><a class="self-link" href="#dom-urlutils-password"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3587,8 +3588,8 @@ run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-host"><code>host</code><a class="self-link" href="#dom-urlutils-host"></a></dfn> attribute’s getter must run
-these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-host"><code>host</code><a class="self-link" href="#dom-urlutils-host"></a></dfn> attribute’s
+getter must run these steps:
 
 </p>
    <ol>
@@ -3631,8 +3632,8 @@ steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-hostname"><code>hostname</code><a class="self-link" href="#dom-urlutils-hostname"></a></dfn> attribute’s getter
-must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-hostname"><code>hostname</code><a class="self-link" href="#dom-urlutils-hostname"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3669,7 +3670,7 @@ run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-port"><code>port</code><a class="self-link" href="#dom-urlutils-port"></a></dfn> attribute’s getter must run
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-port"><code>port</code><a class="self-link" href="#dom-urlutils-port"></a></dfn> attribute’s getter must run
 these steps:
 
 </p>
@@ -3707,8 +3708,8 @@ steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-pathname"><code>pathname</code><a class="self-link" href="#dom-urlutils-pathname"></a></dfn> attribute’s getter
-must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-pathname"><code>pathname</code><a class="self-link" href="#dom-urlutils-pathname"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3754,8 +3755,8 @@ run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-search"><code>search</code><a class="self-link" href="#dom-urlutils-search"></a></dfn> attribute’s getter must
-run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-search"><code>search</code><a class="self-link" href="#dom-urlutils-search"></a></dfn>
+attribute’s getter must run these steps:
 
 </p>
    <ol>
@@ -3770,7 +3771,8 @@ run these steps:
 </p></ol>
 
 
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-search">search</a></code> attribute’s setter must run these steps:
+   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutils-search">search</a></code> attribute’s setter must run these
+steps:
 
 </p>
    <ol>
@@ -3822,8 +3824,8 @@ run these steps:
 <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a> remain synchronized.
 
 </p>
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtilsSearchParams" data-dfn-type="attribute" data-export="" id="dom-urlutilssearchparams-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlutilssearchparams-searchparams"></a></dfn>
-attribute’s getter must return the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>.
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtilsSearchParams" data-dfn-type="attribute" data-export="" id="dom-urlutilssearchparams-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlutilssearchparams-searchparams"></a></dfn> attribute’s
+getter must return the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>.
 
 </p>
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutilssearchparams-searchparams">searchParams</a></code> attribute’s
@@ -3865,8 +3867,8 @@ setter must run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils" data-dfn-type="attribute" data-export="" id="dom-urlutils-hash"><code>hash</code><a class="self-link" href="#dom-urlutils-hash"></a></dfn> attribute’s getter must run
-these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-hash"><code>hash</code><a class="self-link" href="#dom-urlutils-hash"></a></dfn> attribute’s
+getter must run these steps:
 
 </p>
    <ol>
@@ -4264,32 +4266,19 @@ neighboring rights to this work.
    <li>getAll(name), <a href="#dom-urlsearchparams-getallname">6.4</a>
    <li>get(name), <a href="#dom-urlsearchparams-getname">6.4</a>
    <li>get the base, <a href="#concept-urlutils-get-the-base">6</a>
-   <li>hash
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-hash">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-hash">6.3</a>
-    </ul>
+   <li>hash, <a href="#dom-urlutils-hash">6.3</a>
    <li>has(name), <a href="#dom-urlsearchparams-hasname">6.4</a>
    <li>host
     <ul>
      <li>definition of, <a href="#concept-host">3</a>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-host">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-host">6.3</a>
+     <li>attribute for URLUtils, URLUtilsReadOnly, <a href="#dom-urlutils-host">6.3</a>
     </ul>
-   <li>hostname
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-hostname">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-hostname">6.3</a>
-    </ul>
+   <li>hostname, <a href="#dom-urlutils-hostname">6.3</a>
    <li>hostname state, <a href="#hostname-state">4.2</a>
    <li>host parser, <a href="#concept-host-parser">3.3</a>
    <li>host serializer, <a href="#concept-host-serializer">3.4</a>
    <li>host state, <a href="#host-state">4.2</a>
-   <li>href
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-href">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-href">6.3</a>
-    </ul>
+   <li>href, <a href="#dom-urlutils-href">6.3</a>
    <li>include credentials, <a href="#include-credentials">4</a>
    <li>init, <a href="#dom-urlsearchparams-urlsearchparamsinit-init">6.4</a>
    <li>IPv6, <a href="#concept-ipv6">3</a>
@@ -4314,37 +4303,21 @@ neighboring rights to this work.
    <li>non-relative flag, <a href="#non_relative-flag">4</a>
    <li>non-relative path state, <a href="#non_relative-path-state">4.2</a>
    <li>no scheme state, <a href="#no-scheme-state">4.2</a>
-   <li>origin
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-origin">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-origin">6.3</a>
-    </ul>
+   <li>origin, <a href="#dom-urlutils-origin">6.3</a>
    <li>parse error, <a href="#parse-error">1.1</a>
    <li>password, <a href="#dom-urlutils-password">6.3</a>
    <li>password encode set, <a href="#password-encode-set">2</a>
-   <li>pathname
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-pathname">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-pathname">6.3</a>
-    </ul>
+   <li>pathname, <a href="#dom-urlutils-pathname">6.3</a>
    <li>path or authority state, <a href="#path-or-authority-state">4.2</a>
    <li>path start state, <a href="#path-start-state">4.2</a>
    <li>path state, <a href="#path-state">4.2</a>
    <li>percent decode, <a href="#percent-decode">2</a>
    <li>percent encode, <a href="#percent-encode">2</a>
    <li>percent-encoded byte, <a href="#percent_encoded-byte">2</a>
-   <li>port
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-port">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-port">6.3</a>
-    </ul>
+   <li>port, <a href="#dom-urlutils-port">6.3</a>
    <li>port state, <a href="#port-state">4.2</a>
    <li>pre-update steps, <a href="#pre_update-steps">6</a>
-   <li>protocol
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-protocol">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-protocol">6.3</a>
-    </ul>
+   <li>protocol, <a href="#dom-urlutils-protocol">6.3</a>
    <li>query state, <a href="#query-state">4.2</a>
    <li>relative slash state, <a href="#relative-slash-state">4.2</a>
    <li>relative state, <a href="#relative-state">4.2</a>
@@ -4353,11 +4326,7 @@ neighboring rights to this work.
    <li>scheme-relative URL, <a href="#concept-scheme-relative-url">4.1</a>
    <li>scheme start state, <a href="#scheme-start-state">4.2</a>
    <li>scheme state, <a href="#scheme-state">4.2</a>
-   <li>search
-    <ul>
-     <li>attribute for URLUtilsReadOnly, <a href="#dom-urlutilsreadonly-search">6</a>
-     <li>attribute for URLUtils, <a href="#dom-urlutils-search">6.3</a>
-    </ul>
+   <li>search, <a href="#dom-urlutils-search">6.3</a>
    <li>searchParams, <a href="#dom-urlutilssearchparams-searchparams">6.3</a>
    <li>set(name, value), <a href="#dom-urlsearchparams-setname-value">6.4</a>
    <li>set the password, <a href="#set-the-password">4.2</a>
@@ -4493,16 +4462,16 @@ interface <a href="#urlutilssearchparams">URLUtilsSearchParams</a> {
 [NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <a href="#urlutilsreadonly">URLUtilsReadOnly</a> {
-  <a href="#URLUtilsReadOnly-stringification-behavior">stringifier</a> readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-href">href</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-origin">origin</a>;
+  <a href="#URLUtilsReadOnly-stringification-behavior">stringifier</a> readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-origin">origin</a>;
 
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-protocol">protocol</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-host">host</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hostname">hostname</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-port">port</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-pathname">pathname</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-search">search</a>;
-  readonly attribute USVString <a data-readonly="" data-type="USVString " href="#dom-urlutilsreadonly-hash">hash</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-protocol">protocol</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-host">host</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-hostname">hostname</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-port">port</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-pathname">pathname</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-search">search</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
 };
 
 [<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a href="#dom-urlsearchparams-urlsearchparamsinit-init">init</a> = ""),
