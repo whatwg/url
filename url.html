@@ -1242,10 +1242,12 @@ U+100000 to U+10FFFD.
 
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string
-<var>input</var>, optionally with a
-<a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var>, and
-optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
-<var>encoding override</var>, and then runs these steps:
+<var>input</var>, with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional
+<a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps:
+
+</p>
+   <p class="note no-backref" role="note">Non-web-browser implementations only need to implement the
+<a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a>.
 
 </p>
    <ol>
@@ -1296,15 +1298,14 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    <div class="note no-backref" role="note">
  
     <p>The <var>encoding override</var> argument is a legacy concept only relevant for
- HTML. The <var>url</var> and <var>state override</var> arguments are only for
- use by methods of objects implementing the <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> interface.
+ HTML. The <var>url</var> and <var>state override</var> arguments are only for use by
+ objects implementing the <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> interface.
  <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
  </p>
-    <p>When the <var>url</var> and <var>state override</var> arguments are not
- passed the <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a> returns either a
- <a data-link-type="dfn" href="#concept-url">URL</a> or failure. If they are passed the
- algorithm simply modifies the passed <var>url</var> and can terminate without
+    <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
+ <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a> returns either a new <a data-link-type="dfn" href="#concept-url">URL</a> or failure. If they are passed
+ the algorithm simply modifies the passed <var>url</var> and can terminate without
  returning anything.
 </p></div>
 

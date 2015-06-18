@@ -807,11 +807,12 @@ U+100000 to U+10FFFD.
 
 <p class=XXX>Add the ability to halt on the first conformance error.
 
-<p>The <dfn id=concept-url-parser lt='URL parser'>URL parser</dfn> takes a string
-<var>input</var>, optionally with a
-<a>base URL</a> <var>base</var>, and
-optionally with an <a>encoding</a>
-<var>encoding override</var>, and then runs these steps:
+<p>The <dfn id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
+<var>input</var>, with an optional <a>base URL</a> <var>base</var> and an optional
+<a>encoding</a> <var>encoding override</var>, and then runs these steps:
+
+<p class="note no-backref">Non-web-browser implementations only need to implement the
+<a>basic URL parser</a>.
 
 <ol>
  <li><p>Let <var>url</var> be the result of running the
@@ -845,14 +846,13 @@ optionally with an <a>encoding</a>
 
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
- HTML. The <var>url</var> and <var>state override</var> arguments are only for
- use by methods of objects implementing the {{URLUtils}} interface.
+ HTML. The <var>url</var> and <var>state override</var> arguments are only for use by
+ objects implementing the {{URLUtils}} interface.
  [[!HTML]]
 
- <p>When the <var>url</var> and <var>state override</var> arguments are not
- passed the <a>basic URL parser</a> returns either a
- <a>URL</a> or failure. If they are passed the
- algorithm simply modifies the passed <var>url</var> and can terminate without
+ <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
+ <a>basic URL parser</a> returns either a new <a>URL</a> or failure. If they are passed
+ the algorithm simply modifies the passed <var>url</var> and can terminate without
  returning anything.
 </div>
 
