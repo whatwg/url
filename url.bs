@@ -960,36 +960,6 @@ optionally with an <a>encoding</a>
      <li><p>Otherwise, <a>parse error</a>, terminate this algorithm.
     </ol>
 
-   <dt><dfn>non-relative path state</dfn>
-   <dd>
-    <ol>
-     <li><p>If <a>c</a> is "<code>?</code>", set <var>url</var>'s
-     <a lt="URL query">query</a> to the empty string and <var>state</var> to
-     <a>query state</a>.
-
-     <li><p>Otherwise, if <a>c</a> is "<code>#</code>", set <var>url</var>'s
-     <a lt="URL fragment">fragment</a> to the empty string and <var>state</var> to
-     <a>fragment state</a>.
-
-     <li>
-      <p>Otherwise, run these substeps:
-
-      <ol>
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a
-       <a lt="URL code points">URL code point</a>, and not
-       "<code>%</code>", <a>parse error</a>.
-
-       <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
-
-       <li><p>If <a>c</a> is none of
-       <a>EOF code point</a>, U+0009, U+000A, and U+000D,
-       <a>utf-8 percent encode</a> <a>c</a> using the
-       <a>simple encode set</a>, and append the result to the first string in
-       <var>url</var>'s <a lt="URL path">path</a>.
-      </ol>
-    </ol>
-
    <dt><dfn>no scheme state</dfn>
    <dd>
     <p>If <var>base</var> is null, or <var>base</var>'s <a>non-relative flag</a> is set
@@ -1219,51 +1189,6 @@ optionally with an <a>encoding</a>
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
-   <dt><dfn>file host state</dfn>
-   <dd>
-    <ol>
-     <li>
-      <p>If <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps:
-
-      <ol>
-       <li>
-        <p>If <var>buffer</var> consists of two code points, of
-        which the first is an <a>ASCII alpha</a> and the second is
-        either "<code>:</code>" or "<code>|</code>", set
-        <var>state</var> to <a>path state</a>.
-
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
-        <a>path state</a>.
-
-       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a>path start state</a>.
-
-       <li>
-        <p>Otherwise, run these steps:
-
-        <ol>
-         <li><p>Let <var>host</var> be the result of
-         <a lt='host parser'>host parsing</a>
-         <var>buffer</var>.
-
-         <li><p>If <var>host</var> is failure, return failure.
-
-         <li><p>Set
-         <var>url</var>'s <a lt='URL host'>host</a> to
-         <var>host</var>, <var>buffer</var> to the empty string,
-         and <var>state</var> to <a>path start state</a>.
-        </ol>
-      </ol>
-
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
-
-     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
-    </ol>
-
    <dt><dfn>host state</dfn>
    <dt><dfn>hostname state</dfn>
    <dd>
@@ -1332,6 +1257,51 @@ optionally with an <a>encoding</a>
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
+    </ol>
+
+   <dt><dfn>file host state</dfn>
+   <dd>
+    <ol>
+     <li>
+      <p>If <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>", "<code>\</code>",
+      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
+      these substeps:
+
+      <ol>
+       <li>
+        <p>If <var>buffer</var> consists of two code points, of
+        which the first is an <a>ASCII alpha</a> and the second is
+        either "<code>:</code>" or "<code>|</code>", set
+        <var>state</var> to <a>path state</a>.
+
+        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+        <var>buffer</var> is not reset here and instead used in the
+        <a>path state</a>.
+
+       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
+       <var>state</var> to <a>path start state</a>.
+
+       <li>
+        <p>Otherwise, run these steps:
+
+        <ol>
+         <li><p>Let <var>host</var> be the result of
+         <a lt='host parser'>host parsing</a>
+         <var>buffer</var>.
+
+         <li><p>If <var>host</var> is failure, return failure.
+
+         <li><p>Set
+         <var>url</var>'s <a lt='URL host'>host</a> to
+         <var>host</var>, <var>buffer</var> to the empty string,
+         and <var>state</var> to <a>path start state</a>.
+        </ol>
+      </ol>
+
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
+     <a>parse error</a>.
+
+     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
    <dt><dfn>port state</dfn>
@@ -1477,6 +1447,36 @@ optionally with an <a>encoding</a>
        <li><p><a>utf-8 percent encode</a> <a>c</a> using the
        <a>default encode set</a>, and append the result to
        <var>buffer</var>.
+      </ol>
+    </ol>
+
+   <dt><dfn>non-relative path state</dfn>
+   <dd>
+    <ol>
+     <li><p>If <a>c</a> is "<code>?</code>", set <var>url</var>'s
+     <a lt="URL query">query</a> to the empty string and <var>state</var> to
+     <a>query state</a>.
+
+     <li><p>Otherwise, if <a>c</a> is "<code>#</code>", set <var>url</var>'s
+     <a lt="URL fragment">fragment</a> to the empty string and <var>state</var> to
+     <a>fragment state</a>.
+
+     <li>
+      <p>Otherwise, run these substeps:
+
+      <ol>
+       <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a
+       <a lt="URL code points">URL code point</a>, and not
+       "<code>%</code>", <a>parse error</a>.
+
+       <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
+       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
+
+       <li><p>If <a>c</a> is none of
+       <a>EOF code point</a>, U+0009, U+000A, and U+000D,
+       <a>utf-8 percent encode</a> <a>c</a> using the
+       <a>simple encode set</a>, and append the result to the first string in
+       <var>url</var>'s <a lt="URL path">path</a>.
       </ol>
     </ol>
 

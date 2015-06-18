@@ -1490,56 +1490,6 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
 
    
-      <dt><dfn data-dfn-type="dfn" data-noexport="" id="non_relative-path-state">non-relative path state<a class="self-link" href="#non_relative-path-state"></a></dfn>
-   
-      <dd>
-    
-       <ol>
-     
-        <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>?</code>", set <var>url</var>’s
-     <a data-link-type="dfn" href="#concept-url-query">query</a> to the empty string and <var>state</var> to
-     <a data-link-type="dfn" href="#query-state">query state</a>.
-
-     </p>
-        <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set <var>url</var>’s
-     <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string and <var>state</var> to
-     <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
-
-     </p>
-        <li>
-      
-         <p>Otherwise, run these substeps:
-
-      </p>
-         <ol>
-       
-          <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, not a
-       <a data-link-type="dfn" href="#url-code-points">URL code point</a>, and not
-       "<code>%</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-       </p>
-          <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
-       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-       </p>
-          <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is none of
-       <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
-       <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the
-       <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in
-       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
-      </p>
-         </ol>
-         
-    
-       </ol>
-       
-
-   
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="no-scheme-state">no scheme state<a class="self-link" href="#no-scheme-state"></a></dfn>
    
       <dd>
@@ -1876,81 +1826,6 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
 
    
-      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-host-state">file host state<a class="self-link" href="#file-host-state"></a></dfn>
-   
-      <dd>
-    
-       <ol>
-     
-        <li>
-      
-         <p>If <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps:
-
-      </p>
-         <ol>
-       
-          <li>
-        
-           <p>If <var>buffer</var> consists of two code points, of
-        which the first is an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is
-        either "<code>:</code>" or "<code>|</code>", set
-        <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
-
-        </p>
-           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
-        <a data-link-type="dfn" href="#path-state">path state</a>.
-
-       </p>
-          <li>
-           <p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
-
-       </p>
-          <li>
-        
-           <p>Otherwise, run these steps:
-
-        </p>
-           <ol>
-         
-            <li>
-             <p>Let <var>host</var> be the result of
-         <a data-link-type="dfn" href="#concept-host-parser">host parsing</a>
-         <var>buffer</var>.
-
-         </p>
-            <li>
-             <p>If <var>host</var> is failure, return failure.
-
-         </p>
-            <li>
-             <p>Set
-         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
-         <var>host</var>, <var>buffer</var> to the empty string,
-         and <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
-        </p>
-           </ol>
-           
-      
-         </ol>
-         
-
-     
-        <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-     </p>
-        <li>
-         <p>Otherwise, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
-    </p>
-       </ol>
-       
-
-   
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="host-state">host state<a class="self-link" href="#host-state"></a></dfn>
    
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="hostname-state">hostname state<a class="self-link" href="#hostname-state"></a></dfn>
@@ -2065,6 +1940,81 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          </ol>
          
     
+       </ol>
+       
+
+   
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-host-state">file host state<a class="self-link" href="#file-host-state"></a></dfn>
+   
+      <dd>
+    
+       <ol>
+     
+        <li>
+      
+         <p>If <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>",
+      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
+      these substeps:
+
+      </p>
+         <ol>
+       
+          <li>
+        
+           <p>If <var>buffer</var> consists of two code points, of
+        which the first is an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is
+        either "<code>:</code>" or "<code>|</code>", set
+        <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
+
+        </p>
+           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
+        <var>buffer</var> is not reset here and instead used in the
+        <a data-link-type="dfn" href="#path-state">path state</a>.
+
+       </p>
+          <li>
+           <p>Otherwise, if <var>buffer</var> is the empty string, set
+       <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
+
+       </p>
+          <li>
+        
+           <p>Otherwise, run these steps:
+
+        </p>
+           <ol>
+         
+            <li>
+             <p>Let <var>host</var> be the result of
+         <a data-link-type="dfn" href="#concept-host-parser">host parsing</a>
+         <var>buffer</var>.
+
+         </p>
+            <li>
+             <p>If <var>host</var> is failure, return failure.
+
+         </p>
+            <li>
+             <p>Set
+         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+         <var>host</var>, <var>buffer</var> to the empty string,
+         and <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
+        </p>
+           </ol>
+           
+      
+         </ol>
+         
+
+     
+        <li>
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
+     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+     </p>
+        <li>
+         <p>Otherwise, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
+    </p>
        </ol>
        
 
@@ -2325,6 +2275,56 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p><a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the
        <a data-link-type="dfn" href="#default-encode-set">default encode set</a>, and append the result to
        <var>buffer</var>.
+      </p>
+         </ol>
+         
+    
+       </ol>
+       
+
+   
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="non_relative-path-state">non-relative path state<a class="self-link" href="#non_relative-path-state"></a></dfn>
+   
+      <dd>
+    
+       <ol>
+     
+        <li>
+         <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>?</code>", set <var>url</var>’s
+     <a data-link-type="dfn" href="#concept-url-query">query</a> to the empty string and <var>state</var> to
+     <a data-link-type="dfn" href="#query-state">query state</a>.
+
+     </p>
+        <li>
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set <var>url</var>’s
+     <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string and <var>state</var> to
+     <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+
+     </p>
+        <li>
+      
+         <p>Otherwise, run these substeps:
+
+      </p>
+         <ol>
+       
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, not a
+       <a data-link-type="dfn" href="#url-code-points">URL code point</a>, and not
+       "<code>%</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+       </p>
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
+       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+       </p>
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is none of
+       <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D,
+       <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the
+       <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
       </p>
          </ol>
          
