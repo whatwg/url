@@ -12,6 +12,7 @@ Logo: https://resources.whatwg.org/logo-url.svg
 !Commits: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
 !Commits: <a href="https://twitter.com/urlstandard">@urlstandard</a>
 Indent: 2
+Boilerplate: omit feedback-header
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
@@ -390,7 +391,7 @@ steps:
  <!-- XXX radix-R digit, hahaha, that's not a thing -->
 
  <li><p>Return the mathematical integer value that is represented by <var>input</var> in
- radix-<var>R</var> notation, using <span>ASCII hex digits</span> for digits with values 0
+ radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with values 0
  through 15.
  <!-- XXX well, you know, it works for ECMAScript, kinda -->
 </ol>
