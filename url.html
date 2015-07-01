@@ -17,6 +17,64 @@
   
 
   <meta content="Bikeshed 1.0.0" name="generator">
+  <style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #708090 } /* Comment */
+.highlight .k { color: #990055 } /* Keyword */
+.highlight .l { color: #669900 } /* Literal */
+.highlight .n { color: #0077aa } /* Name */
+.highlight .o { color: #999999 } /* Operator */
+.highlight .p { color: #999999 } /* Punctuation */
+.highlight .cm { color: #708090 } /* Comment.Multiline */
+.highlight .cp { color: #708090 } /* Comment.Preproc */
+.highlight .c1 { color: #708090 } /* Comment.Single */
+.highlight .cs { color: #708090 } /* Comment.Special */
+.highlight .kc { color: #990055 } /* Keyword.Constant */
+.highlight .kd { color: #990055 } /* Keyword.Declaration */
+.highlight .kn { color: #990055 } /* Keyword.Namespace */
+.highlight .kp { color: #990055 } /* Keyword.Pseudo */
+.highlight .kr { color: #990055 } /* Keyword.Reserved */
+.highlight .kt { color: #990055 } /* Keyword.Type */
+.highlight .ld { color: #669900 } /* Literal.Date */
+.highlight .m { color: #990055 } /* Literal.Number */
+.highlight .s { color: #669900 } /* Literal.String */
+.highlight .na { color: #0077aa } /* Name.Attribute */
+.highlight .nc { color: #0077aa } /* Name.Class */
+.highlight .no { color: #0077aa } /* Name.Constant */
+.highlight .nd { color: #0077aa } /* Name.Decorator */
+.highlight .ni { color: #0077aa } /* Name.Entity */
+.highlight .ne { color: #0077aa } /* Name.Exception */
+.highlight .nf { color: #0077aa } /* Name.Function */
+.highlight .nl { color: #0077aa } /* Name.Label */
+.highlight .nn { color: #0077aa } /* Name.Namespace */
+.highlight .py { color: #0077aa } /* Name.Property */
+.highlight .nt { color: #0077aa } /* Name.Tag */
+.highlight .nv { color: #0077aa } /* Name.Variable */
+.highlight .ow { color: #999999 } /* Operator.Word */
+.highlight .mb { color: #990055 } /* Literal.Number.Bin */
+.highlight .mf { color: #990055 } /* Literal.Number.Float */
+.highlight .mh { color: #990055 } /* Literal.Number.Hex */
+.highlight .mi { color: #990055 } /* Literal.Number.Integer */
+.highlight .mo { color: #990055 } /* Literal.Number.Oct */
+.highlight .sb { color: #669900 } /* Literal.String.Backtick */
+.highlight .sc { color: #669900 } /* Literal.String.Char */
+.highlight .sd { color: #669900 } /* Literal.String.Doc */
+.highlight .s2 { color: #669900 } /* Literal.String.Double */
+.highlight .se { color: #669900 } /* Literal.String.Escape */
+.highlight .sh { color: #669900 } /* Literal.String.Heredoc */
+.highlight .si { color: #669900 } /* Literal.String.Interpol */
+.highlight .sx { color: #669900 } /* Literal.String.Other */
+.highlight .sr { color: #669900 } /* Literal.String.Regex */
+.highlight .s1 { color: #669900 } /* Literal.String.Single */
+.highlight .ss { color: #669900 } /* Literal.String.Symbol */
+.highlight .vc { color: #0077aa } /* Name.Variable.Class */
+.highlight .vg { color: #0077aa } /* Name.Variable.Global */
+.highlight .vi { color: #0077aa } /* Name.Variable.Instance */
+.highlight .il { color: #990055 } /* Literal.Number.Integer.Long */
+    .highlight { background: hsl(24, 20%, 95%); }
+    pre.highlight { padding: 1em; margin: .5em 0; overflow: auto; }
+    :not(pre).highlight { padding: .1em; border-radius: .3em; }
+    </style>
  </head>
  <body class="h-entry status-LS">
 
@@ -30,7 +88,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-06-18">18 June 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-07-01">1 July 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -379,14 +437,16 @@ an <var>encode set</var>, run these steps:
 
 
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a network address in the form of a
-<a data-link-type="dfn" href="#concept-domain">domain</a> or an
-<a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>.
+<a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>.
 
 </p>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a network.
 
 </p>
-   <p>An <dfn data-dfn-type="dfn" data-lt="IPv6" data-noexport="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
+   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv4">IPV4 address<a class="self-link" href="#concept-ipv4"></a></dfn> is a 32-bit identifier.
+
+</p>
+   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept-ipv6-piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>.
 <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a>
@@ -445,10 +505,8 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
    <h3 class="heading settled" data-level="3.2" id="host-writing"><span class="secno">3.2. </span><span class="content">Host writing</span><a class="self-link" href="#host-writing"></a></h3>
 
 
-   <p>A <a data-link-type="dfn" href="#concept-host">host</a> must be either a
-<a data-link-type="dfn" href="#concept-domain">domain</a> or "<code>[</code>", followed
-by an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, followed by
-"<code>]</code>".
+   <p>A <a data-link-type="dfn" href="#concept-host">host</a> must be a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or
+"<code>[</code>", followed by an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, followed by "<code>]</code>".
 
 </p>
    <p>A <var>domain</var> is a <dfn data-dfn-type="dfn" data-noexport="" id="valid-domain">valid domain<a class="self-link" href="#valid-domain"></a></dfn> if these steps return success:
@@ -489,8 +547,12 @@ by an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, followed by
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334">bug 25334</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-domain">domain</a> must be a string that is a
-<a data-link-type="dfn" href="#valid-domain">valid domain</a>.
+   <p>A <a data-link-type="dfn" href="#concept-domain">domain</a> must be a string that is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>.
+
+</p>
+   <p>An <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a> must be four sequences of up to three <span>ASCII digits</span>
+per sequence, each representing a number no greater than 255, and separated from each
+other by "<code>.</code>".
 
 </p>
    <p>An <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> is defined in the
@@ -572,13 +634,177 @@ steps:
 
  </p>
     <li>
+     <p>Let <var>ipv4Host</var> be the result of <a data-link-type="dfn" href="#concept-ipv4-parser">IPv4 parsing</a>
+ <var>asciiDomain</var>.
+
+ </p>
+    <li>
+     <p>If <var>ipv4Host</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a> or failure, return
+ <var>ipv4Host</var>.
+
+ </p>
+    <li>
      <p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
  result of running <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </p></ol>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-parser">IPv6 parser<a class="self-link" href="#concept-ipv6-parser"></a></dfn> takes a string
-<var>input</var> and then runs these steps:
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ipv4-number-parser">IPv4 number parser<a class="self-link" href="#ipv4-number-parser"></a></dfn> takes a string <var>input</var> and then runs these
+steps:</p>
+
+
+   <ol>
+ 
+    <li>
+     <p>Let <var>R</var> be 10.
+
+ </p>
+    <li>
+  
+     <p>If <var>input</var> contains at least two code points and the first two code points
+  are either "<code>0x</code>" or "<code>0X</code>", run these substeps:
+
+  </p>
+     <ol>
+   
+      <li>
+       <p>Remove the first two code points from <var>input</var>.
+
+   </p>
+      <li>
+       <p>Set <var>R</var> to 16.
+  </p>
+     </ol>
+     
+
+ 
+    <li>
+  
+     <p>Otherwise, if <var>input</var> contains at least one code point and the first code
+  point is "<code>0</code>", run these substeps:
+
+  </p>
+     <ol>
+   
+      <li>
+       <p>Remove the first code point from <var>input</var>.
+
+   </p>
+      <li>
+       <p>Set <var>R</var> to 8.
+  </p>
+     </ol>
+     
+
+ 
+    <li>
+     <p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
+ return failure.
+ 
+
+ </p>
+    <li>
+     <p>Return the mathematical integer value that is represented by <var>input</var> in
+ radix-<var>R</var> notation, using <span>ASCII hex digits</span> for digits with values 0
+ through 15.
+ 
+</p></ol>
+
+
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv4-parser">IPv4 parser<a class="self-link" href="#concept-ipv4-parser"></a></dfn> takes a string <var>input</var> and then
+runs these steps:</p>
+
+
+   <ol>
+ 
+    <li>
+     <p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
+
+ </p>
+    <li>
+     <p>If the last item in <var>parts</var> is the empty string, remove it from
+ <var>parts</var>.
+
+ </p>
+    <li>
+     <p>If <var>parts</var> has more than four items, return <var>input</var>.
+
+ </p>
+    <li>
+     <p>Let <var>numbers</var> be the empty list.
+
+ </p>
+    <li>
+  
+     <p>For each <var>part</var> in <var>parts</var>:
+
+  </p>
+     <ol>
+   
+      <li>
+       <p>Let <var>n</var> be the result of <a data-link-type="dfn" href="#ipv4-number-parser">parsing</a>
+   <var>part</var>.
+
+   </p>
+      <li>
+       <p>If <var>n</var> is failure, return <var>input</var>.
+
+   </p>
+      <li>
+       <p>Append <var>n</var> to <var>numbers</var>.
+  </p>
+     </ol>
+     
+
+ 
+    <li>
+     <p>If any but the last item in <var>numbers</var> is greater than 255, return
+ failure.
+
+ </p>
+    <li>
+     <p>If the last item in <var>numbers</var> is greater than or equal to
+ 256<sup>(4 − the number of items in <var>numbers</var>)</sup>, return failure.
+
+ </p>
+    <li>
+     <p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
+
+ </p>
+    <li>
+     <p>Remove the last item from <var>numbers</var>.
+
+ </p>
+    <li>
+     <p>Let <var>counter</var> be zero.
+
+ </p>
+    <li>
+  
+     <p>For each <var>n</var> in <var>numbers</var>:
+
+  </p>
+     <ol>
+   
+      <li>
+       <p>Increment <var>ipv4</var> by <var>n</var> ×
+   256<sup>(3 − <var>counter</var>)</sup>.
+
+   </p>
+      <li>
+       <p>Increment <var>counter</var> by one.
+  </p>
+     </ol>
+     
+
+ 
+    <li>
+     <p>Return <var>ipv4</var>.
+</p></ol>
+
+
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-parser">IPv6 parser<a class="self-link" href="#concept-ipv6-parser"></a></dfn> takes a string <var>input</var> and
+then runs these steps:
 
 </p>
    <ol>
@@ -881,8 +1107,12 @@ steps:
    <ol>
  
     <li>
-     <p>If <var>host</var> is an
- <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, return
+     <p>If <var>host</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, return the result of running the
+ <a data-link-type="dfn" href="#concept-ipv4-serializer">IPv4 serializer</a> on <var>host</var>.
+
+ </p>
+    <li>
+     <p>Otherwise, if <var>host</var> is an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, return
  "<code>[</code>", followed by the result of running the
  <a data-link-type="dfn" href="#concept-ipv6-serializer">IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
@@ -894,9 +1124,46 @@ steps:
 </p></ol>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-serializer">IPv6 serializer<a class="self-link" href="#concept-ipv6-serializer"></a></dfn> takes an
-<a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> <var>address</var> and
-then runs these steps:
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv4-serializer">IPv4 serializer<a class="self-link" href="#concept-ipv4-serializer"></a></dfn> takes an
+<span>IPv4 address</span> <var>address</var> and then runs these steps:</p>
+
+
+   <ol>
+ 
+    <li>
+     <p>Let <var>output</var> be the empty string.
+
+ </p>
+    <li>
+     <p>Let <var>n</var> be the value of <var>address</var>.
+
+ </p>
+    <li>
+  
+     <p>Repeat four times:
+
+  </p>
+     <ol>
+   
+      <li>
+       <p>Append <var>n</var> % 256, represented as the shortest possible decimal
+   number, to <var>output</var>.
+
+   </p>
+      <li>
+       <p>Unless this is the fourth time, append "<code>.</code>" to <var>output</var>.
+
+   </p>
+      <li>
+       <p>Set <var>n</var> to <var>n</var> / 256.
+  </p>
+     </ol>
+     
+</ol>
+
+
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-serializer">IPv6 serializer<a class="self-link" href="#concept-ipv6-serializer"></a></dfn> takes an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>
+<var>address</var> and then runs these steps:
 
 </p>
    <ol>
@@ -3005,11 +3272,11 @@ it.
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 
 
-   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-urlurl-base-url">url<a class="self-link" href="#dom-url-urlurl-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-urlurl-base-base">base<a class="self-link" href="#dom-url-urlurl-base-base"></a></dfn>),
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-url">url<a class="self-link" href="#dom-url-url-url-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-base">base<a class="self-link" href="#dom-url-url-url-base-base"></a></dfn>),
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
-  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintoasciidomain-domain">domain<a class="self-link" href="#dom-url-domaintoasciidomain-domain"></a></dfn>);
-  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintounicodedomain-domain">domain<a class="self-link" href="#dom-url-domaintounicodedomain-domain"></a></dfn>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoascii">domainToASCII</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintoascii-domain-domain">domain<a class="self-link" href="#dom-url-domaintoascii-domain-domain"></a></dfn>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicode">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintounicode-domain-domain">domain<a class="self-link" href="#dom-url-domaintounicode-domain-domain"></a></dfn>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutilssearchparams">URLUtilsSearchParams</a>;
@@ -3213,7 +3480,7 @@ optionally given a <var>value</var>, run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-urlurl-base"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-urlurl-base"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn>
 constructor, when invoked, must run these steps:
 
 </p>
@@ -3304,7 +3571,7 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoasciidomain"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoasciidomain"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoascii"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn>
 static method, when invoked, must run these steps:
 
 </p>
@@ -3316,8 +3583,8 @@ static method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>asciiDomain</var> is an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>
- or failure, return the empty string.
+     <p>If <var>asciiDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or
+ failure, return the empty string.
 
  </p>
     <li>
@@ -3326,7 +3593,7 @@ static method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintounicodedomain"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicodedomain"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintounicode"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicode"></a></dfn>
 static method, when invoked, must run these steps:
 
 </p>
@@ -3339,8 +3606,8 @@ static method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>unicodeDomain</var> is an
- <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> or failure, return the empty string.
+     <p>If <var>unicodeDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or
+ failure, return the empty string.
 
  </p>
     <li>
@@ -3924,15 +4191,15 @@ steps:
    <h3 class="heading settled" data-level="6.4" id="interface-urlsearchparams"><span class="secno">6.4. </span><span class="content">Interface <code><a class="idl-code" data-link-type="interface" href="#urlsearchparams">URLSearchParams</a></code></span><a class="self-link" href="#interface-urlsearchparams"></a></h3>
 
 
-   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-urlsearchparamsinit-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit-init"></a></dfn> = ""),
+   <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparams">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-urlsearchparams-init-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparams-init-init"></a></dfn> = ""),
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlsearchparams">URLSearchParams<a class="self-link" href="#urlsearchparams"></a></dfn> {
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-appendname-value-name">name<a class="self-link" href="#dom-urlsearchparams-appendname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-appendname-value-value">value<a class="self-link" href="#dom-urlsearchparams-appendname-value-value"></a></dfn>);
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-deletename-name">name<a class="self-link" href="#dom-urlsearchparams-deletename-name"></a></dfn>);
-  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-getname-name">name<a class="self-link" href="#dom-urlsearchparams-getname-name"></a></dfn>);
-  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-getallname-name">name<a class="self-link" href="#dom-urlsearchparams-getallname-name"></a></dfn>);
-  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-hasname-name">name<a class="self-link" href="#dom-urlsearchparams-hasname-name"></a></dfn>);
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-setname-value-name">name<a class="self-link" href="#dom-urlsearchparams-setname-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-setname-value-value">value<a class="self-link" href="#dom-urlsearchparams-setname-value-value"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-append">append</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-append-name-value-name">name<a class="self-link" href="#dom-urlsearchparams-append-name-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/append(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-append-name-value-value">value<a class="self-link" href="#dom-urlsearchparams-append-name-value-value"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-delete">delete</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/delete(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-delete-name-name">name<a class="self-link" href="#dom-urlsearchparams-delete-name-name"></a></dfn>);
+  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-get">get</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/get(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-get-name-name">name<a class="self-link" href="#dom-urlsearchparams-get-name-name"></a></dfn>);
+  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getall">getAll</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/getAll(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-getall-name-name">name<a class="self-link" href="#dom-urlsearchparams-getall-name-name"></a></dfn>);
+  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-has">has</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-has-name-name">name<a class="self-link" href="#dom-urlsearchparams-has-name-name"></a></dfn>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-set">set</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-set-name-value-name">name<a class="self-link" href="#dom-urlsearchparams-set-name-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-set-name-value-value">value<a class="self-link" href="#dom-urlsearchparams-set-name-value-value"></a></dfn>);
   iterable&lt;USVString, USVString>;
   <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
 };
@@ -4007,14 +4274,14 @@ each associated  <a data-link-type="dfn" href="#concept-urlsearchparams-url-obje
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" id="dom-urlsearchparams-urlsearchparamsinit"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparamsinit"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" id="dom-urlsearchparams-urlsearchparams"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn>
 constructor, when invoked, must return a
 <a data-link-type="dfn" href="#concept-urlsearchparams-new">new <code>URLSearchParams</code> object</a>
 using <var>init</var> if given.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-appendname-value"><code>append(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-appendname-value"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-append"><code>append(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-append"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4031,7 +4298,7 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-deletename"><code>delete(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-deletename"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-delete"><code>delete(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-delete"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4048,21 +4315,21 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-getname"><code>get(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getname"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-get"><code>get(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-get"></a></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
 <var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and null if
 there is no such pair.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-getallname"><code>getAll(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getallname"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-getall"><code>getAll(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getall"></a></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
 <var>name</var>, in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>,
 in list order, and the empty sequence otherwise.
 
 </p>
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-setname-value"><code>set(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-setname-value"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-set"><code>set(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-set"></a></dfn>
 method, when invoked, must run these steps:
 
 </p>
@@ -4085,7 +4352,7 @@ method, when invoked, must run these steps:
 
 
    <p>The
-<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-hasname"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-hasname"></a></dfn>
+<dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-has"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-has"></a></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
 <var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and false
 otherwise.
@@ -4234,7 +4501,7 @@ neighboring rights to this work.
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>absolute URL, <a href="#concept-absolute-url">4.1</a>
-   <li>append(name, value), <a href="#dom-urlsearchparams-appendname-value">6.4</a>
+   <li>append(name, value), <a href="#dom-urlsearchparams-append">6.4</a>
    <li>application/x-www-form-urlencoded, <a href="#application-x-www-form-urlencoded-0">5</a>
    <li>ASCII alpha, <a href="#ascii-alpha">1</a>
    <li>ASCII alphanumeric, <a href="#ascii-alphanumeric">1</a>
@@ -4242,7 +4509,7 @@ neighboring rights to this work.
    <li>ASCII hex digits, <a href="#ascii-hex-digits">1</a>
    <li>ASCII string, <a href="#ascii-string">1</a>
    <li>authority state, <a href="#authority-state">4.2</a>
-   <li>base, <a href="#dom-url-urlurl-base-base">6</a>
+   <li>base, <a href="#dom-url-url-url-base-base">6</a>
    <li>base URL, <a href="#concept-base-url">4</a>
    <li>basic URL parser, <a href="#concept-basic-url-parser">4.2</a>
    <li>c, <a href="#c">1.1</a>
@@ -4250,25 +4517,25 @@ neighboring rights to this work.
    <li>C0 controls and space, <a href="#c0-controls-and-space">1</a>
    <li>default encode set, <a href="#default-encode-set">2</a>
    <li>default port, <a href="#default-port">4</a>
-   <li>delete(name), <a href="#dom-urlsearchparams-deletename">6.4</a>
+   <li>delete(name), <a href="#dom-urlsearchparams-delete">6.4</a>
    <li>domain
     <ul>
      <li>definition of, <a href="#concept-domain">3</a>
-     <li>argument for URL/domainToASCII(domain), <a href="#dom-url-domaintoasciidomain-domain">6</a>
-     <li>argument for URL/domainToUnicode(domain), <a href="#dom-url-domaintounicodedomain-domain">6</a>
+     <li>argument for URL/domainToASCII(domain), <a href="#dom-url-domaintoascii-domain-domain">6</a>
+     <li>argument for URL/domainToUnicode(domain), <a href="#dom-url-domaintounicode-domain-domain">6</a>
     </ul>
    <li>domain to ASCII, <a href="#concept-domain-to-ascii">3.1</a>
-   <li>domainToASCII(domain), <a href="#dom-url-domaintoasciidomain">6.2</a>
+   <li>domainToASCII(domain), <a href="#dom-url-domaintoascii">6.2</a>
    <li>domain to Unicode, <a href="#concept-domain-to-unicode">3.1</a>
-   <li>domainToUnicode(domain), <a href="#dom-url-domaintounicodedomain">6.2</a>
+   <li>domainToUnicode(domain), <a href="#dom-url-domaintounicode">6.2</a>
    <li>EOF code point, <a href="#eof-code-point">1.1</a>
    <li>file host state, <a href="#file-host-state">4.2</a>
    <li>fragment state, <a href="#fragment-state">4.2</a>
-   <li>getAll(name), <a href="#dom-urlsearchparams-getallname">6.4</a>
-   <li>get(name), <a href="#dom-urlsearchparams-getname">6.4</a>
+   <li>getAll(name), <a href="#dom-urlsearchparams-getall">6.4</a>
+   <li>get(name), <a href="#dom-urlsearchparams-get">6.4</a>
    <li>get the base, <a href="#concept-urlutils-get-the-base">6</a>
    <li>hash, <a href="#dom-urlutils-hash">6.3</a>
-   <li>has(name), <a href="#dom-urlsearchparams-hasname">6.4</a>
+   <li>has(name), <a href="#dom-urlsearchparams-has">6.4</a>
    <li>host
     <ul>
      <li>definition of, <a href="#concept-host">3</a>
@@ -4281,8 +4548,12 @@ neighboring rights to this work.
    <li>host state, <a href="#host-state">4.2</a>
    <li>href, <a href="#dom-urlutils-href">6.3</a>
    <li>include credentials, <a href="#include-credentials">4</a>
-   <li>init, <a href="#dom-urlsearchparams-urlsearchparamsinit-init">6.4</a>
-   <li>IPv6, <a href="#concept-ipv6">3</a>
+   <li>init, <a href="#dom-urlsearchparams-urlsearchparams-init-init">6.4</a>
+   <li>IPV4 address, <a href="#concept-ipv4">3</a>
+   <li>IPv4 number parser, <a href="#ipv4-number-parser">3.3</a>
+   <li>IPv4 parser, <a href="#concept-ipv4-parser">3.3</a>
+   <li>IPv4 serializer, <a href="#concept-ipv4-serializer">3.4</a>
+   <li>IPv6 address, <a href="#concept-ipv6">3</a>
    <li>IPv6 parser, <a href="#concept-ipv6-parser">3.3</a>
    <li>IPv6 parser Finale, <a href="#concept-ipv6-parser-finale">3.3</a>
    <li>IPv6 parser IPv4, <a href="#concept-ipv6-parser-ipv4">3.3</a>
@@ -4294,12 +4565,12 @@ neighboring rights to this work.
    <li>local scheme, <a href="#local-scheme">4</a>
    <li>name
     <ul>
-     <li>argument for URLSearchParams/append(name, value), <a href="#dom-urlsearchparams-appendname-value-name">6.4</a>
-     <li>argument for URLSearchParams/delete(name), <a href="#dom-urlsearchparams-deletename-name">6.4</a>
-     <li>argument for URLSearchParams/get(name), <a href="#dom-urlsearchparams-getname-name">6.4</a>
-     <li>argument for URLSearchParams/getAll(name), <a href="#dom-urlsearchparams-getallname-name">6.4</a>
-     <li>argument for URLSearchParams/has(name), <a href="#dom-urlsearchparams-hasname-name">6.4</a>
-     <li>argument for URLSearchParams/set(name, value), <a href="#dom-urlsearchparams-setname-value-name">6.4</a>
+     <li>argument for URLSearchParams/append(name, value), <a href="#dom-urlsearchparams-append-name-value-name">6.4</a>
+     <li>argument for URLSearchParams/delete(name), <a href="#dom-urlsearchparams-delete-name-name">6.4</a>
+     <li>argument for URLSearchParams/get(name), <a href="#dom-urlsearchparams-get-name-name">6.4</a>
+     <li>argument for URLSearchParams/getAll(name), <a href="#dom-urlsearchparams-getall-name-name">6.4</a>
+     <li>argument for URLSearchParams/has(name), <a href="#dom-urlsearchparams-has-name-name">6.4</a>
+     <li>argument for URLSearchParams/set(name, value), <a href="#dom-urlsearchparams-set-name-value-name">6.4</a>
     </ul>
    <li>non-relative flag, <a href="#non_relative-flag">4</a>
    <li>non-relative path state, <a href="#non_relative-path-state">4.2</a>
@@ -4329,7 +4600,7 @@ neighboring rights to this work.
    <li>scheme state, <a href="#scheme-state">4.2</a>
    <li>search, <a href="#dom-urlutils-search">6.3</a>
    <li>searchParams, <a href="#dom-urlutilssearchparams-searchparams">6.3</a>
-   <li>set(name, value), <a href="#dom-urlsearchparams-setname-value">6.4</a>
+   <li>set(name, value), <a href="#dom-urlsearchparams-set">6.4</a>
    <li>set the password, <a href="#set-the-password">4.2</a>
    <li>set the username, <a href="#set-the-username">4.2</a>
    <li>simple encode set, <a href="#simple-encode-set">2</a>
@@ -4348,7 +4619,7 @@ neighboring rights to this work.
      <li>definition of, <a href="#concept-url">4</a>
      <li>(interface), <a href="#url">6</a>
     </ul>
-   <li>url, <a href="#dom-url-urlurl-base-url">6</a>
+   <li>url, <a href="#dom-url-url-url-base-url">6</a>
    <li>URL code points, <a href="#url-code-points">4.1</a>
    <li>urlencoded byte serializer, <a href="#concept-urlencoded-byte-serializer">5.2</a>
    <li>urlencoded parser, <a href="#concept-urlencoded-parser">5.1</a>
@@ -4365,14 +4636,14 @@ neighboring rights to this work.
    <li>URL query, <a href="#concept-url-query">4</a>
    <li>URL scheme, <a href="#concept-url-scheme">4</a>
    <li>URLSearchParams, <a href="#urlsearchparams">6.4</a>
-   <li>URLSearchParams(init), <a href="#dom-urlsearchparams-urlsearchparamsinit">6.4</a>
+   <li>URLSearchParams(init), <a href="#dom-urlsearchparams-urlsearchparams">6.4</a>
    <li>URLSearchParams list, <a href="#concept-urlsearchparams-list">6.4</a>
    <li>URLSearchParams new, <a href="#concept-urlsearchparams-new">6.4</a>
    <li>URLSearchParams update, <a href="#concept-urlsearchparams-update">6.4</a>
    <li>URLSearchParams URL object, <a href="#concept-urlsearchparams-url-object">6.4</a>
    <li>URL serializer, <a href="#concept-url-serializer">4.3</a>
    <li>URL units, <a href="#url-units">4.1</a>
-   <li>URL(url, base), <a href="#dom-url-urlurl-base">6.1</a>
+   <li>URL(url, base), <a href="#dom-url-url">6.1</a>
    <li>URL username, <a href="#concept-url-username">4</a>
    <li>URLUtils, <a href="#urlutils">6</a>
    <li>URLUtils input, <a href="#concept-urlutils-input">6</a>
@@ -4389,8 +4660,8 @@ neighboring rights to this work.
    <li>valid domain, <a href="#valid-domain">3.2</a>
    <li>value
     <ul>
-     <li>argument for URLSearchParams/append(name, value), <a href="#dom-urlsearchparams-appendname-value-value">6.4</a>
-     <li>argument for URLSearchParams/set(name, value), <a href="#dom-urlsearchparams-setname-value-value">6.4</a>
+     <li>argument for URLSearchParams/append(name, value), <a href="#dom-urlsearchparams-append-name-value-value">6.4</a>
+     <li>argument for URLSearchParams/set(name, value), <a href="#dom-urlsearchparams-set-name-value-value">6.4</a>
     </ul></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
@@ -4428,11 +4699,11 @@ neighboring rights to this work.
    <dt id="biblio-rfc6454"><a class="self-link" href="#biblio-rfc6454"></a>[RFC6454]
    <dd>A. Barth. <a href="https://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>. December 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6454">https://tools.ietf.org/html/rfc6454</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-urlurl-base">Constructor</a>(USVString <a href="#dom-url-urlurl-base-url">url</a>, optional USVString <a href="#dom-url-urlurl-base-base">base</a>),
+  <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <a href="#dom-url-url-url-base-url">url</a>, optional USVString <a href="#dom-url-url-url-base-base">base</a>),
  Exposed=(Window,Worker)]
 interface <a href="#url">URL</a> {
-  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoasciidomain">domainToASCII</a>(USVString <a href="#dom-url-domaintoasciidomain-domain">domain</a>);
-  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicodedomain">domainToUnicode</a>(USVString <a href="#dom-url-domaintounicodedomain-domain">domain</a>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoascii">domainToASCII</a>(USVString <a href="#dom-url-domaintoascii-domain-domain">domain</a>);
+  static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicode">domainToUnicode</a>(USVString <a href="#dom-url-domaintounicode-domain-domain">domain</a>);
 };
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutils">URLUtils</a>;
 <a data-link-type="idl-name" href="#url">URL</a> implements <a data-link-type="idl-name" href="#urlutilssearchparams">URLUtilsSearchParams</a>;
@@ -4475,15 +4746,15 @@ interface <a href="#urlutilsreadonly">URLUtilsReadOnly</a> {
   readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-urlutils-hash">hash</a>;
 };
 
-[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparamsinit">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a href="#dom-urlsearchparams-urlsearchparamsinit-init">init</a> = ""),
+[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparams">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a> = ""),
  Exposed=(Window,Worker)]
 interface <a href="#urlsearchparams">URLSearchParams</a> {
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-appendname-value">append</a>(USVString <a href="#dom-urlsearchparams-appendname-value-name">name</a>, USVString <a href="#dom-urlsearchparams-appendname-value-value">value</a>);
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-deletename">delete</a>(USVString <a href="#dom-urlsearchparams-deletename-name">name</a>);
-  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getname">get</a>(USVString <a href="#dom-urlsearchparams-getname-name">name</a>);
-  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getallname">getAll</a>(USVString <a href="#dom-urlsearchparams-getallname-name">name</a>);
-  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-hasname">has</a>(USVString <a href="#dom-urlsearchparams-hasname-name">name</a>);
-  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-setname-value">set</a>(USVString <a href="#dom-urlsearchparams-setname-value-name">name</a>, USVString <a href="#dom-urlsearchparams-setname-value-value">value</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-append">append</a>(USVString <a href="#dom-urlsearchparams-append-name-value-name">name</a>, USVString <a href="#dom-urlsearchparams-append-name-value-value">value</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-delete">delete</a>(USVString <a href="#dom-urlsearchparams-delete-name-name">name</a>);
+  USVString? <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-get">get</a>(USVString <a href="#dom-urlsearchparams-get-name-name">name</a>);
+  sequence&lt;USVString> <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-getall">getAll</a>(USVString <a href="#dom-urlsearchparams-getall-name-name">name</a>);
+  boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-has">has</a>(USVString <a href="#dom-urlsearchparams-has-name-name">name</a>);
+  void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-set">set</a>(USVString <a href="#dom-urlsearchparams-set-name-value-name">name</a>, USVString <a href="#dom-urlsearchparams-set-name-value-value">value</a>);
   iterable&lt;USVString, USVString>;
   <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
 };

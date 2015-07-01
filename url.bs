@@ -208,12 +208,13 @@ an <var>encode set</var>, run these steps:
      https://mothereff.in/punycode -->
 
 <p>A <dfn id=concept-host lt='host'>host</dfn> is a network address in the form of a
-<a>domain</a> or an
-<a lt='IPv6'>IPv6 address</a>.
+<a>domain</a>, an <a>IPv4 address</a>, or an <a>IPv6 address</a>.
 
-<p>A <dfn id=concept-domain lt='domain'>domain</dfn> identifies a realm within a network.
+<p>A <dfn id=concept-domain>domain</dfn> identifies a realm within a network.
 
-<p>An <dfn id=concept-ipv6 lt='IPv6'>IPv6 address</dfn> is a 128-bit identifier and
+<p>An <dfn id=concept-ipv4>IPV4 address</dfn> is a 32-bit identifier.
+
+<p>An <dfn id=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 [[RFC4291]]
@@ -254,10 +255,8 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 
 <h3 id=host-writing>Host writing</h3>
 
-<p>A <a>host</a> must be either a
-<a>domain</a> or "<code>[</code>", followed
-by an <a lt='IPv6'>IPv6 address</a>, followed by
-"<code>]</code>".
+<p>A <a>host</a> must be a <a>domain</a>, an <a>IPv4 address</a>, or
+"<code>[</code>", followed by an <a>IPv6 address</a>, followed by "<code>]</code>".
 
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
@@ -284,10 +283,13 @@ by an <a lt='IPv6'>IPv6 address</a>, followed by
 <a>valid domain</a> rather than through a whack-a-mole:
 <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
 
-<p>A <a>domain</a> must be a string that is a
-<a>valid domain</a>.
+<p>A <a>domain</a> must be a string that is a <a>valid domain</a>.
 
-<p>An <a lt='IPv6'>IPv6 address</a> is defined in the
+<p>An <a>IPv4 address</a> must be four sequences of up to three <span>ASCII digits</span>
+per sequence, each representing a number no greater than 255, and separated from each
+other by "<code>.</code>".
+
+<p>An <a>IPv6 address</a> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
 <!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
@@ -312,7 +314,7 @@ steps:
    "<code>]</code>", <a>parse error</a>, return failure.
 
    <li><p>Return the result of
-   <a lt='IPv6 parser'>IPv6 parsing</a> <var>input</var>
+   <a lt="IPv6 parser">IPv6 parsing</a> <var>input</var>
    with its leading "<code>[</code>" and trailing
    "<code>]</code>" removed.
   </ol>
@@ -347,16 +349,108 @@ steps:
   "<code>]</code>",<!-- 5D -->
   return failure.
 
+ <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
+ <var>asciiDomain</var>.
+
+ <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a> or failure, return
+ <var>ipv4Host</var>.
+
  <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
  result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </ol>
 
-<p>The <dfn id=concept-ipv6-parser lt='IPv6 parser'>IPv6 parser</dfn> takes a string
-<var>input</var> and then runs these steps:
+The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these
+steps:
+
+<ol>
+ <li><p>Let <var>R</var> be 10.
+
+ <li>
+  <p>If <var>input</var> contains at least two code points and the first two code points
+  are either "<code>0x</code>" or "<code>0X</code>", run these substeps:
+
+  <ol>
+   <li><p>Remove the first two code points from <var>input</var>.
+
+   <li><p>Set <var>R</var> to 16.
+  </ol>
+
+ <li>
+  <p>Otherwise, if <var>input</var> contains at least one code point and the first code
+  point is "<code>0</code>", run these substeps:
+
+  <ol>
+   <li><p>Remove the first code point from <var>input</var>.
+
+   <li><p>Set <var>R</var> to 8.
+  </ol>
+
+ <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
+ return failure.
+ <!-- XXX radix-R digit, hahaha, that's not a thing -->
+
+ <li><p>Return the mathematical integer value that is represented by <var>input</var> in
+ radix-<var>R</var> notation, using <span>ASCII hex digits</span> for digits with values 0
+ through 15.
+ <!-- XXX well, you know, it works for ECMAScript, kinda -->
+</ol>
+
+The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then
+runs these steps:
+
+<ol>
+ <li><p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
+
+ <li><p>If the last item in <var>parts</var> is the empty string, remove it from
+ <var>parts</var>.
+
+ <li><p>If <var>parts</var> has more than four items, return <var>input</var>.
+
+ <li><p>Let <var>numbers</var> be the empty list.
+
+ <li>
+  <p>For each <var>part</var> in <var>parts</var>:
+
+  <ol>
+   <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
+   <var>part</var>.
+
+   <li><p>If <var>n</var> is failure, return <var>input</var>.
+
+   <li><p>Append <var>n</var> to <var>numbers</var>.
+  </ol>
+
+ <li><p>If any but the last item in <var>numbers</var> is greater than 255, return
+ failure.
+
+ <li><p>If the last item in <var>numbers</var> is greater than or equal to
+ 256<sup>(4 &minus; the number of items in <var>numbers</var>)</sup>, return failure.
+
+ <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
+
+ <li><p>Remove the last item from <var>numbers</var>.
+
+ <li><p>Let <var>counter</var> be zero.
+
+ <li>
+  <p>For each <var>n</var> in <var>numbers</var>:
+
+  <ol>
+   <li><p>Increment <var>ipv4</var> by <var>n</var> &times;
+   256<sup>(3 &minus; <var>counter</var>)</sup>.
+
+   <li><p>Increment <var>counter</var> by one.
+  </ol>
+
+ <li><p>Return <var>ipv4</var>.
+</ol>
+
+<p>The <dfn id=concept-ipv6-parser>IPv6 parser</dfn> takes a string <var>input</var> and
+then runs these steps:
 
 <ol>
  <li><p>Let <var>address</var> be a new
- <a lt='IPv6'>IPv6 address</a> with its
+ <a>IPv6 address</a> with its
  <a lt='IPv6 piece'>16-bit pieces</a> initialized to 0.
 
  <li><p>Let <var>piece pointer</var> be a pointer into
@@ -533,8 +627,10 @@ steps:
 <a>host</a> <var>host</var> and then runs these steps:
 
 <ol>
- <li><p>If <var>host</var> is an
- <a lt='IPv6'>IPv6 address</a>, return
+ <li><p>If <var>host</var> is an <a>IPv4 address</a>, return the result of running the
+ <a>IPv4 serializer</a> on <var>host</var>.
+
+ <li><p>Otherwise, if <var>host</var> is an <a>IPv6 address</a>, return
  "<code>[</code>", followed by the result of running the
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
@@ -543,9 +639,29 @@ steps:
  return <var>host</var>.
 </ol>
 
-<p>The <dfn id=concept-ipv6-serializer lt='IPv6 serializer'>IPv6 serializer</dfn> takes an
-<a lt='IPv6'>IPv6 address</a> <var>address</var> and
-then runs these steps:
+The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
+<span>IPv4 address</span> <var>address</var> and then runs these steps:
+
+<ol>
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>Let <var>n</var> be the value of <var>address</var>.
+
+ <li>
+  <p>Repeat four times:
+
+  <ol>
+   <li><p>Append <var>n</var> % 256, represented as the shortest possible decimal
+   number, to <var>output</var>.
+
+   <li><p>Unless this is the fourth time, append "<code>.</code>" to <var>output</var>.
+
+   <li><p>Set <var>n</var> to <var>n</var> / 256.
+  </ol>
+</ol>
+
+<p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an <a>IPv6 address</a>
+<var>address</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.
@@ -2156,8 +2272,8 @@ static method, when invoked, must run these steps:
  <li><p>Let <var>asciiDomain</var> be the result of
  <a lt='host parser'>host parsing</a> <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is an <a lt='IPv6'>IPv6 address</a>
- or failure, return the empty string.
+ <li><p>If <var>asciiDomain</var> is an <a>IPv4 address</a>, <a>IPv6 address</a>, or
+ failure, return the empty string.
 
  <li><p>Return <var>asciiDomain</var>.
 </ol>
@@ -2171,8 +2287,8 @@ static method, when invoked, must run these steps:
  <a lt='host parser'>host parsing</a> <var>domain</var> with the
  <var>Unicode flag</var> set.
 
- <li><p>If <var>unicodeDomain</var> is an
- <a lt='IPv6'>IPv6 address</a> or failure, return the empty string.
+ <li><p>If <var>unicodeDomain</var> is an <a>IPv4 address</a>, <a>IPv6 address</a>, or
+ failure, return the empty string.
 
  <li><p>Return <var>unicodeDomain</var>.
 </ol>
