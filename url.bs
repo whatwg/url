@@ -425,7 +425,7 @@ runs these steps:
  failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
- 256<sup>(4 &minus; the number of items in <var>numbers</var>)</sup>, return failure.
+ 256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>, return failure.
 
  <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
 
@@ -2866,6 +2866,7 @@ Santiago M. Mola,
 Sebastian Mayr,
 Simon Pieters,
 Simon Sapin,
+Stuart Cook,
 Tab Atkins,
 Tantek Çelik,
 Tim Berners-Lee,
