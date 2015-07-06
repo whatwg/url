@@ -810,6 +810,8 @@ same row.
 <p>A <a>URL</a> <dfn>is local</dfn> if its <a lt="URL scheme">scheme</a> is a
 <a>local scheme</a>.
 
+<p class=note>This definition is used by other specifications such as [[FETCH]].
+
 <p>A <a>URL</a>
 <dfn lt="include credentials">includes credentials</dfn> if either its
 <a lt='URL username'>username</a> is not the empty string or its
