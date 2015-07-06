@@ -1903,7 +1903,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
    <var>value</var> with 0x20.
 
    <li>
-    <p>If <i title>use _charset_ flag</i> is set, <var>name</var> is
+    <p>If <i title>use _charset_ flag</i> is set and <var>name</var> is
     `<code>_charset_</code>`, run these substeps:
 
     <ol>
