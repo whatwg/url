@@ -16,6 +16,8 @@ Boilerplate: omit feedback-header
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
+<script id=head src=https://resources.whatwg.org/dfn.js defer></script>
+
 
 <h2 id=goals class=no-num>Goals</h2>
 
@@ -810,7 +812,9 @@ same row.
 <p>A <a>URL</a> <dfn>is local</dfn> if its <a lt="URL scheme">scheme</a> is a
 <a>local scheme</a>.
 
-<p class=note>This definition is used externally. E.g., by the Fetch Standard. [[FETCH]]
+<p class=note>This definition is used externally. E.g., by the Fetch Standard and
+Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
+<!-- And soonish CSP -->
 
 <p>A <a>URL</a>
 <dfn lt="include credentials">includes credentials</dfn> if either its
@@ -2974,5 +2978,3 @@ urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
 url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii
 url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode
 </pre>
-
-<script id=head src=https://resources.whatwg.org/dfn.js></script>
