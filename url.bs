@@ -2215,7 +2215,7 @@ optionally given a <var>value</var>, run these steps:
 constructor, when invoked, must run these steps:
 
 <ol>
- <li><p>Let <var>parsedBased</var> be null.
+ <li><p>Let <var>parsedBase</var> be null.
 
  <li>
   <p>If <var>base</var> is given, run these substeps:
@@ -2873,6 +2873,7 @@ Sebastian Mayr,
 Simon Pieters,
 Simon Sapin,
 Stuart Cook,
+Sven Uhlig,
 Tab Atkins,
 Tantek Çelik,
 Tim Berners-Lee,
