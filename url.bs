@@ -654,13 +654,15 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
   <p>Repeat four times:
 
   <ol>
-   <li><p>Append <var>n</var> % 256, represented as the shortest possible decimal
+   <li><p>Prepend <var>n</var> % 256, represented as the shortest possible decimal
    number, to <var>output</var>.
 
-   <li><p>Unless this is the fourth time, append "<code>.</code>" to <var>output</var>.
+   <li><p>Unless this is the fourth time, prepend "<code>.</code>" to <var>output</var>.
 
    <li><p>Set <var>n</var> to <var>n</var> / 256.
   </ol>
+
+ <li><p>Return <var>output</var>.
 </ol>
 
 <p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an <a>IPv6 address</a>

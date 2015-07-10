@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-07-09">9 July 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-07-10">10 July 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1091,12 +1091,12 @@ then runs these steps:
      <ol>
    
       <li>
-       <p>Append <var>n</var> % 256, represented as the shortest possible decimal
+       <p>Prepend <var>n</var> % 256, represented as the shortest possible decimal
    number, to <var>output</var>.
 
    </p>
       <li>
-       <p>Unless this is the fourth time, append "<code>.</code>" to <var>output</var>.
+       <p>Unless this is the fourth time, prepend "<code>.</code>" to <var>output</var>.
 
    </p>
       <li>
@@ -1104,7 +1104,11 @@ then runs these steps:
   </p>
      </ol>
      
-</ol>
+
+ 
+    <li>
+     <p>Return <var>output</var>.
+</p></ol>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-serializer">IPv6 serializer<a class="self-link" href="#concept-ipv6-serializer"></a></dfn> takes an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>
