@@ -848,8 +848,10 @@ followed by "<code>?</code>" and a <a lt="URL query">query</a>.
 
 <p>A <a lt="URL scheme">scheme</a> must be one <a>ASCII alpha</a>, followed by zero or
 more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
-"<code>.</code>". A <a lt="URL scheme">scheme</a> must be registered
-<span class=XXX>...</span>.
+"<code>.</code>". Developers should ensure that all <a lt="URL scheme">schemes</a> that
+they use are registered in the IANA URI [sic] Schemes registry.
+[[!IANA-URI-SCHEMES]]
+[[RFC7595]]
 
 <p>A <dfn id=concept-relative-url lt="relative URL">relative URL</dfn> must be either a
 <a>scheme-relative URL</a>, or a <a lt="URL path">path</a> that does not start with a
