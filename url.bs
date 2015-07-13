@@ -215,7 +215,7 @@ an <var>encode set</var>, run these steps:
 
 <p>A <dfn id=concept-domain>domain</dfn> identifies a realm within a network.
 
-<p>An <dfn id=concept-ipv4>IPV4 address</dfn> is a 32-bit identifier.
+<p>An <dfn id=concept-ipv4>IPv4 address</dfn> is a 32-bit identifier.
 
 <p>An <dfn id=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
