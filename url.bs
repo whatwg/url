@@ -856,8 +856,8 @@ more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
 <a lt="URL scheme">scheme</a> and "<code>:</code>", optionally followed by a
 "<code>?</code>" and a <a lt="URL query">query</a>.
 
-<p>When a <a>relative URL</a> is <a lt="URL parser">parsed</a>, a <a>base URL</a> must be
-in scope.
+<p class="note no-backref">A non-null <a>base URL</a> is necessary when
+<a lt="URL parser">parsing</a> a <a>relative URL</a>.
 
 <p>A <dfn id=concept-scheme-relative-url>scheme-relative URL</dfn> must be
 "<code>//</code>", followed by a <a>host</a>, optionally followed by "<code>:</code>" and
