@@ -380,6 +380,9 @@ steps:
    <li><p>Set <var>R</var> to 16.
   </ol>
 
+ <li><p>If <var>input</var> is the empty string, return zero.
+ <!-- 0x/0X is a valid IPv4 number apparently -->
+
  <li>
   <p>Otherwise, if <var>input</var> contains at least two code points and the first code
   point is "<code>0</code>", run these substeps:
