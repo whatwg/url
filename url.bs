@@ -381,8 +381,9 @@ steps:
   </ol>
 
  <li>
-  <p>Otherwise, if <var>input</var> contains at least one code point and the first code
+  <p>Otherwise, if <var>input</var> contains at least two code points and the first code
   point is "<code>0</code>", run these substeps:
+  <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
 
   <ol>
    <li><p>Remove the first code point from <var>input</var>.
