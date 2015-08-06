@@ -1842,7 +1842,11 @@ on <a>URL</a>'s <a lt='URL scheme'>scheme</a>:
  return a new globally unique identifier.
 
  <dt>Otherwise
- <dd><p>Return a new globally unique identifier.
+ <dd>
+  <p>Return a new globally unique identifier.
+
+  <p class="note no-backref">This does indeed mean that these <a>URLs</a> cannot be
+  <a spec=html lt="same origin">same-origin</a> with themselves.
 </dl>
 
 
