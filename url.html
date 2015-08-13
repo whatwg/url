@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-06">6 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-13">13 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -3193,18 +3193,14 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
      <ol>
    
       <li>
-       <p>Let <var>outputPair</var> be a copy of <var>pair</var>.
+       <p>Let <var>outputPair</var> be a new name-value pair.
 
    </p>
       <li>
-       <p>Replace <var>outputPair</var>’s name and value with the result of running
-   <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encode</a> on them using
-   <var>encoding override</var>, respectively.
-
-   </p>
-      <li>
-       <p>Replace <var>outputPair</var>’s name and value with their
-   <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serialization</a>.
+       <p>Set <var>outputPair</var>’s name and value, to the result of
+   <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of
+   <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>pair</var>’s name and value, respectively, using
+   <var>encoding override</var>.
 
    </p>
       <li>
