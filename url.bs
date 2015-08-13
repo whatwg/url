@@ -1424,10 +1424,11 @@ optionally with an <a>encoding</a>
 
          <li><p>If <var>host</var> is failure, return failure.
 
-         <li><p>Set
-         <var>url</var>'s <a lt='URL host'>host</a> to
-         <var>host</var>, <var>buffer</var> to the empty string,
-         and <var>state</var> to <a>path start state</a>.
+         <li><p>If <var>host</var> is not "<code title>localhost</code>", set
+         <var>url</var>'s <a lt='URL host'>host</a> to <var>host</var>.
+
+         <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
+         <a>path start state</a>.
         </ol>
       </ol>
 
