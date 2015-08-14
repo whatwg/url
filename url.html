@@ -439,7 +439,7 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 
  </p>
     <li>
-     <p>If <var>result</var> is a failure value, return failure.
+     <p>If <var>result</var> is a failure value, <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
  </p>
     <li>
@@ -461,11 +461,8 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 
  </p>
     <li>
-  
-     <p>Return <var>result</var>, ignoring any returned errors.
-
-  </p>
-     <p class="note" role="note">User agents are encouraged to report errors through a developer console.
+     <p>Signify <a data-link-type="dfn" href="#parse-error">parse errors</a> any returned errors, and then, return
+ <var>result</var>.
 </p></ol>
 
 
@@ -598,7 +595,7 @@ steps:
   "<code>\</code>",
   and
   "<code>]</code>",
-  return failure.
+  <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
  </p>
     <li>
@@ -741,13 +738,14 @@ runs these steps:</p>
 
  
     <li>
-     <p>If any but the last item in <var>numbers</var> is greater than 255, return
- failure.
+     <p>If any but the last item in <var>numbers</var> is greater than 255,
+ <a data-link-type="dfn" href="#parse-error">parse error</a> return failure.
 
  </p>
     <li>
      <p>If the last item in <var>numbers</var> is greater than or equal to
- 256<sup>(5 − the number of items in <var>numbers</var>)</sup>, return failure.
+ 256<sup>(5 − the number of items in <var>numbers</var>)</sup>,
+ <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
  </p>
     <li>
@@ -1590,6 +1588,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    
       <li>
        <p>Set <var>url</var> to a new <a data-link-type="dfn" href="#concept-url">URL</a>.
+
+   </p>
+      <li>
+       <p>If <var>input</var> contains any leading or trailing
+   <a data-link-type="dfn" href="#c0-controls-and-space">C0 controls and space</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
 
    </p>
       <li>
@@ -4679,6 +4682,7 @@ Michel Suignard,
 Peter Occil,
 Rodney Rehm,
 Roy Fielding,
+Ryan Sleevi,
 Santiago M. Mola,
 Sebastian Mayr,
 Simon Pieters,

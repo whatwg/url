@@ -252,7 +252,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>If <var>result</var> is a failure value, return failure.
+ <li><p>If <var>result</var> is a failure value, <a>parse error</a>, return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -266,10 +266,8 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
- <li>
-  <p>Return <var>result</var>, ignoring any returned errors.
-
-  <p class=note>User agents are encouraged to report errors through a developer console.
+ <li><p>Signify <a>parse errors</a> any returned errors, and then, return
+ <var>result</var>.
 </ol>
 
 
@@ -367,7 +365,7 @@ steps:
   "<code>\</code>",<!-- 5C -->
   and
   "<code>]</code>",<!-- 5D -->
-  return failure.
+  <a>parse error</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -450,11 +448,12 @@ runs these steps:
    <li><p>Append <var>n</var> to <var>numbers</var>.
   </ol>
 
- <li><p>If any but the last item in <var>numbers</var> is greater than 255, return
- failure.
+ <li><p>If any but the last item in <var>numbers</var> is greater than 255,
+ <a>parse error</a> return failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
- 256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>, return failure.
+ 256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>,
+ <a>parse error</a>, return failure.
 
  <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
 
@@ -1022,6 +1021,9 @@ optionally with an <a>encoding</a>
 
   <ol>
    <li><p>Set <var>url</var> to a new <a>URL</a>.
+
+   <li><p>If <var>input</var> contains any leading or trailing
+   <a>C0 controls and space</a>, <a>parse error</a>.
 
    <li><p>Remove any leading and trailing <a>C0 controls and space</a> from
    <var>input</var>.
@@ -3019,6 +3021,7 @@ Michel Suignard,
 Peter Occil,
 Rodney Rehm,
 Roy Fielding,
+Ryan Sleevi,
 Santiago M. Mola,
 Sebastian Mayr,
 Simon Pieters,
