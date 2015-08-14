@@ -236,6 +236,9 @@ for the purposes of this specification represented as an ordered list of
 eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 [[RFC4291]]
 
+<p class="note">Support for <code>&lt;zone_id></code> is
+<a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>.
+
 
 <h3 id=idna>IDNA</h3>
 
