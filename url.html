@@ -84,7 +84,8 @@
       <li><a href="#url-writing"><span class="secno">4.1</span> <span class="content">URL writing</span></a>
       <li><a href="#url-parsing"><span class="secno">4.2</span> <span class="content">URL parsing</span></a>
       <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
-      <li><a href="#origin"><span class="secno">4.4</span> <span class="content">Origin</span></a>
+      <li><a href="#url-equivalence"><span class="secno">4.4</span> <span class="content">URL equivalence</span></a>
+      <li><a href="#origin"><span class="secno">4.5</span> <span class="content">Origin</span></a>
      </ul>
     <li><a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
      <ul class="toc">
@@ -3052,7 +3053,36 @@ these steps:
 </p></ol>
 
 
-   <h3 class="heading settled" data-level="4.4" id="origin"><span class="secno">4.4. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
+
+   <h3 class="heading settled" data-level="4.4" id="url-equivalence"><span class="secno">4.4. </span><span class="content">URL equivalence</span><a class="self-link" href="#url-equivalence"></a></h3>
+
+
+   <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a> <var>A</var> <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="equals">equals<a class="self-link" href="#equals"></a></dfn>
+<var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps:
+
+</p>
+   <ol>
+ 
+    <li>
+     <p>Let <var>serializedA</var> be the result of <a data-link-type="dfn" href="#concept-url-serializer">serializing</a>
+ <var>A</var>, with the <i>exclude fragment flag</i> set if the
+ <i>exclude fragments flag</i> is set.
+
+ </p>
+    <li>
+     <p>Let <var>serializedB</var> be the result of <a data-link-type="dfn" href="#concept-url-serializer">serializing</a>
+ <var>B</var>, with the <i>exclude fragment flag</i> set if the
+ <i>exclude fragments flag</i> is set.
+
+ </p>
+    <li>
+     <p>Return true if <var>serializedA</var> is <var>serializedB</var>, and false
+ otherwise.
+</p></ol>
+
+
+
+   <h3 class="heading settled" data-level="4.5" id="origin"><span class="secno">4.5. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
 
 
 
@@ -4667,6 +4697,7 @@ neighboring rights to this work.
    <li><a href="#concept-domain-to-unicode">domain to Unicode</a><span>, in §3.1</span>
    <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §6.2</span>
    <li><a href="#eof-code-point">EOF code point</a><span>, in §1.1</span>
+   <li><a href="#equals">equals</a><span>, in §4.4</span>
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
    <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
    <li><a href="#file-state">file state</a><span>, in §4.2</span>
@@ -4771,7 +4802,7 @@ neighboring rights to this work.
    <li><a href="#concept-url-fragment">URL fragment</a><span>, in §4</span>
    <li><a href="#concept-url-host">URL host</a><span>, in §4</span>
    <li><a href="#concept-url-object">URL object</a><span>, in §4</span>
-   <li><a href="#concept-url-origin">URL origin</a><span>, in §4.4</span>
+   <li><a href="#concept-url-origin">URL origin</a><span>, in §4.5</span>
    <li><a href="#concept-url-parser">URL parser</a><span>, in §4.2</span>
    <li><a href="#concept-url-password">URL password</a><span>, in §4</span>
    <li><a href="#concept-url-path">URL path</a><span>, in §4</span>

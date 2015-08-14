@@ -1902,6 +1902,26 @@ these steps:
  <li><p>Return <var>output</var>.
 </ol>
 
+
+<h3 id=url-equivalence>URL equivalence</h3>
+
+<p>To determine whether a <a>URL</a> <var>A</var> <dfn export for=URL>equals</dfn>
+<var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps:
+
+<ol>
+ <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
+ <var>A</var>, with the <i>exclude fragment flag</i> set if the
+ <i>exclude fragments flag</i> is set.
+
+ <li><p>Let <var>serializedB</var> be the result of <a lt="URL serializer">serializing</a>
+ <var>B</var>, with the <i>exclude fragment flag</i> set if the
+ <i>exclude fragments flag</i> is set.
+
+ <li><p>Return true if <var>serializedA</var> is <var>serializedB</var>, and false
+ otherwise.
+</ol>
+
+
 <h3 id=origin>Origin</h3>
 <!-- Still need to watch the final bits -->
 
