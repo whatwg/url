@@ -2006,7 +2006,7 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
 
   <p class="note no-backref">This can only happen if <var>input</var> was not
   generated through the <a lt='urlencoded serializer'>serializer</a> or
-  <code><a interface>URLSearchParams</a></code>.
+  {{URLSearchParams}}.
 
  <li><p>Let <var>sequences</var> be the result of splitting
  <var>input</var> on `<code>&</code>`.
@@ -2297,17 +2297,13 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
  if <a for=URLUtils>url</a> and its <a for=URL>query</a> are non-null, and the
  empty string otherwise.
 
- <li><p>If <a for=URLUtils>query object</a> is null, set
- <a for=URLUtils>query object</a> to a
- <a lt='URLSearchParams new'>new <code>URLSearchParams</code> object</a>
- using <var>query</var>, and then append the
- <a>context object</a> to
- <a for=URLUtils>query object</a>'s list of
- <a lt='URLSearchParams URL object'>url objects</a>.
+ <li><p>If <a for=URLUtils>query object</a> is null, set <a for=URLUtils>query object</a>
+ to a <a for=URLSearchParams>new</a> {{URLSearchParams}} object using <var>query</var>,
+ and then append the <a>context object</a> to <a for=URLUtils>query object</a>'s list of
+ <a for=URLSearchParams>url objects</a>.
 
- <li><p>Otherwise, set <a for=URLUtils>query object</a>'s
- <a lt='URLSearchParams list'>list</a> to the result of
- <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
+ <li><p>Otherwise, set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>
+ to the result of <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
 </ol>
 
 <p>To <dfn for=URLUtils>reset the input</dfn>, run these steps:
@@ -2716,12 +2712,9 @@ steps:
 <ol>
  <li><p>If <a for=URLUtils>url</a> is null, terminate these steps.
 
- <li><p>If the given value is the empty string, set
- <a for=URL>query</a> to null, empty
- <a for=URLUtils>query object</a>'s
- <a lt='URLSearchParams list'>list</a>, run its
- <a lt='URLSearchParams update'>update steps</a>, and terminate these
- steps.
+ <li><p>If the given value is the empty string, set <a for=URL>query</a> to null, empty
+ <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>, run its
+ <a for=URLSearchParams>update steps</a>, and terminate these steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading
  "<code>?</code>" removed, if any.
@@ -2734,17 +2727,15 @@ steps:
  associated <a for=URLUtils>query encoding</a> as
  <var>encoding override</var>.
 
- <li><p>Set <a for=URLUtils>query object</a>'s
- <a lt='URLSearchParams list'>list</a> to the result of
- <a lt='urlencoded string parser'>parsing</a> <var lt="">input</var>.
+ <li><p>Set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a> to the
+ result of <a lt='urlencoded string parser'>parsing</a> <var lt="">input</var>.
 
- <li><p>Run <a for=URLUtils>query object</a>'s
- <a lt='URLSearchParams update'>update steps</a>.
+ <li><p>Run <a for=URLUtils>query object</a>'s <a for=URLSearchParams>update steps</a>.
 </ol>
 
-<p class="note no-backref">The <a lt='URLSearchParams update'>update steps</a> of
+<p class="note no-backref">The <a for=URLSearchParams>update steps</a> of
 <a for=URLUtils>query object</a> are run to ensure all
-<a lt='URLSearchParams URL object'>url objects</a> remain synchronized.
+<a for=URLSearchParams>url objects</a> remain synchronized.
 
 <p>The <dfn attribute for=URLUtilsSearchParams><code>searchParams</code></dfn> attribute's
 getter must return the <a for=URLUtils>query object</a>.
@@ -2755,21 +2746,17 @@ setter must run these steps:
 <ol>
  <li><p>Let <var>object</var> be the given value.
 
- <li><p>Remove the <a>context object</a> from
- <a for=URLUtils>query object</a>'s list of
- <a lt='URLSearchParams URL object'>url objects</a>.
+ <li><p>Remove the <a>context object</a> from <a for=URLUtils>query object</a>'s list of
+ <a for=URLSearchParams>url objects</a>.
 
- <li><p>Append the <a>context object</a> to
- <var>object</var>'s list of
- <a lt='URLSearchParams URL object'>url objects</a>.
+ <li><p>Append the <a>context object</a> to <var>object</var>'s list of
+ <a for=URLSearchParams>url objects</a>.
 
  <li><p>Set <a for=URLUtils>query object</a> to
  <var>object</var>.
 
- <li><p>Set <a for=URL>query</a> to the
- <a lt='urlencoded serializer'>serialization</a> of the
- <a for=URLUtils>query object</a>'s
- <a lt='URLSearchParams list'>list</a>.
+ <li><p>Set <a for=URL>query</a> to the <a lt='urlencoded serializer'>serialization</a> of
+ the <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2810,7 +2797,7 @@ steps:
 </ol>
 
 
-<h3 id=interface-urlsearchparams>Interface <code><a interface>URLSearchParams</a></code></h3>
+<h3 id=interface-urlsearchparams>Interface {{URLSearchParams}}</h3>
 
 <pre class=idl>
 [Constructor(optional (USVString or URLSearchParams) init = ""),
@@ -2828,11 +2815,12 @@ interface URLSearchParams {
 </pre>
 
 <p>A {{URLSearchParams}} object has an associated
-<dfn id=concept-urlsearchparams-list lt='URLSearchParams list'>list</dfn> of name-value pairs, which is initially
-empty.
+<dfn for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
+which is initially empty.
 
 <p>A {{URLSearchParams}} object has an associated list of zero or more
-<dfn id=concept-urlsearchparams-url-object lt='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
+<dfn for=URLSearchParams id=concept-urlsearchparams-url-object>url objects</dfn>, which is
+initially empty.
 
 <p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as
 <a>encoding</a>, despite the existence of concepts such as
@@ -2841,28 +2829,26 @@ encourage developers to migrate towards
 <a>utf-8</a>, which they really ought to
 have done a long time ago now.
 
-<p>To create a
-<dfn id=concept-urlsearchparams-new lt='URLSearchParams new'>new <code>URLSearchParams</code> object</dfn>,
-optionally using <var>init</var>, run these steps:
+<p>To create a <dfn for=URLSearchParams id=concept-urlsearchparams-new>new</dfn>
+{{URLSearchParams}} object</dfn>, optionally using <var>init</var>, run these steps:
 
 <ol>
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
 
- <li><p>If <var>init</var> is a string,
- set <var>query</var>'s <a lt='URLSearchParams list'>list</a> to the
- result of <a lt='urlencoded string parser'>parsing</a>
- <var>init</var>.
+ <li><p>If <var>init</var> is a string, set <var>query</var>'s
+ <a for=URLSearchParams>list</a> to the result of
+ <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
 
- <li><p>If <var>init</var> is a {{URLSearchParams}} object, set
- <var>query</var>'s <a lt='URLSearchParams list'>list</a> to a copy
- of <var>init</var>'s <a lt='URLSearchParams list'>list</a>.
+ <li><p>If <var>init</var> is a {{URLSearchParams}} object, set <var>query</var>'s
+ <a for=URLSearchParams>list</a> to a copy of <var>init</var>'s
+ <a for=URLSearchParams>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
 
 <p>A {{URLSearchParams}} object's
-<dfn id=concept-urlsearchparams-update lt='URLSearchParams update'>update steps</dfn> are to run these steps for
-each associated  <a lt='URLSearchParams URL object'>url object</a>
+<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are to run
+these steps for each associated  <a for=URLSearchParams>url object</a>
 <var>urlObject</var>, in order:
 
 <ol>
@@ -2870,80 +2856,79 @@ each associated  <a lt='URLSearchParams URL object'>url object</a>
  <a for=URL>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of
  {{URLSearchParams}} object's
- <a lt='URLSearchParams list'>list</a>.
+ <a for=URLSearchParams>list</a>.
 
  <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
 </ol>
 
 <p>The
-<dfn constructor dfn-for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
-constructor, when invoked, must return a
-<a lt='URLSearchParams new'>new <code>URLSearchParams</code> object</a>
-using <var>init</var> if given.
+<dfn constructor for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
+constructor, when invoked, must return a <a for=URLSearchParams>new</a>
+{{URLSearchParams}} object, using <var>init</var> if given.
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
  <li><p>Append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a lt='URLSearchParams list'>list</a>.
+ value is <var>value</var>, to <a for=URLSearchParams>list</a>.
 
- <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>delete(<var>name</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>delete(<var>name</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
  <li><p>Remove all name-value pairs whose name is <var>name</var> from
- <a lt='URLSearchParams list'>list</a>.
+ <a for=URLSearchParams>list</a>.
 
- <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
 method, when invoked, must return the value of the first name-value pair whose name is
-<var>name</var> in <a lt='URLSearchParams list'>list</a>, and null if
+<var>name</var> in <a for=URLSearchParams>list</a>, and null if
 there is no such pair.
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
 method, when invoked, must return the values of all name-value pairs whose name is
-<var>name</var>, in <a lt='URLSearchParams list'>list</a>,
+<var>name</var>, in <a for=URLSearchParams>list</a>,
 in list order, and the empty sequence otherwise.
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
  <li><p>If there are any name-value pairs whose name is <var>name</var>, in
- <a lt='URLSearchParams list'>list</a>, set the value of the first such
+ <a for=URLSearchParams>list</a>, set the value of the first such
  name-value pair to <var>value</var> and remove the others.
 
  <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a lt='URLSearchParams list'>list</a>.
+ value is <var>value</var>, to <a for=URLSearchParams>list</a>.
 
- <li><p>Run the <a lt='URLSearchParams update'>update steps</a>.
+ <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
 
 <p>The
-<dfn method dfn-for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
+<dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
 method, when invoked, must return true if there is a name-value pair whose name is
-<var>name</var> in <a lt='URLSearchParams list'>list</a>, and false
+<var>name</var> in <a for=URLSearchParams>list</a>, and false
 otherwise.
 
 <p>The <a>value pairs to iterate over</a> are the
-<a lt='URLSearchParams list'>list</a> name-value pairs with the key being
+<a for=URLSearchParams>list</a> name-value pairs with the key being
 the name and the value being the value.
 
-<p>The <dfn dfn dfn-for=URLSearchParams>stringification behavior</dfn> must return the
+<p>The <dfn dfn for=URLSearchParams>stringification behavior</dfn> must return the
 <a lt='urlencoded serializer'>serialization</a> of the
 {{URLSearchParams}} object's
-<a lt='URLSearchParams list'>list</a>.
+<a for=URLSearchParams>list</a>.
 
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
