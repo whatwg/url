@@ -222,8 +222,10 @@ an <var>encode set</var>, run these steps:
      https://tools.ietf.org/html/rfc3492
      https://mothereff.in/punycode -->
 
-<p>A <dfn id=concept-host>host</dfn> is a network address in the form of a <a>domain</a>,
-an <a>IPv4 address</a>, or an <a>IPv6 address</a>.
+<p>A <dfn id=concept-host>host</dfn> is a <a>domain</a>, an <a>IPv4 address</a>, or an
+<a>IPv6 address</a>. Typically a <a>host</a> serves as a network address, but it is
+sometimes (ab)used as opaque identifier in <a for=URL>URLs</a> where a network address is
+not necessary.
 
 <p>A <dfn id=concept-domain>domain</dfn> identifies a realm within a network.
 [[RFC1034]]
