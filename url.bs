@@ -82,6 +82,11 @@ U+0061 to U+007A, inclusive.
 
 <hr>
 
+<p>To <dfn>serialize an integer</dfn>, represent it as the shortest possible decimal
+number.
+
+<hr>
+
 <p>A <dfn>potential Windows drive letter</dfn> is two code points, of which the first is
 an <a>ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
 
@@ -682,8 +687,8 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
   <p>Repeat four times:
 
   <ol>
-   <li><p>Prepend <var>n</var> % 256, represented as the shortest possible decimal
-   number, to <var>output</var>.
+   <li><p>Prepend <var>n</var> % 256, <a lt="serialize an integer">serialized</a>, to
+   <var>output</var>.
 
    <li><p>Unless this is the fourth time, prepend "<code>.</code>" to <var>output</var>.
 
@@ -778,8 +783,8 @@ null or an <a>ASCII string</a> identifying a user's credentials. It is initially
 <p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-host>host</dfn> is either null or a
 <a>host</a>. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-port>port</dfn> is an
-<a>ASCII string</a> that identifies a networking port. It is initially the empty string.
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-port>port</dfn> is either null or a
+16-bit integer that identifies a networking port. It is initially null.
 
 <p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-path>path</dfn> is a list of zero or
 more <a>ASCII string</a> holding data, usually identifying a location in hierarchical
@@ -814,13 +819,13 @@ corresponding <a for=URL>port</a> and is listed in the second column on the same
 <table>
  <tr><th><a for=URL>scheme</a>
      <th><a for=URL>port</a>
- <tr><td>"<code>ftp</code>"<td>"<code>21</code>"
+ <tr><td>"<code>ftp</code>"<td>21
  <tr><td>"<code>file</code>"<td>
- <tr><td>"<code>gopher</code>"<td>"<code>70</code>"
- <tr><td>"<code>http</code>"<td>"<code>80</code>"
- <tr><td>"<code>https</code>"<td>"<code>443</code>"
- <tr><td>"<code>ws</code>"<td>"<code>80</code>"
- <tr><td>"<code>wss</code>"<td>"<code>443</code>"
+ <tr><td>"<code>gopher</code>"<td>70
+ <tr><td>"<code>http</code>"<td>80
+ <tr><td>"<code>https</code>"<td>443
+ <tr><td>"<code>ws</code>"<td>80
+ <tr><td>"<code>wss</code>"<td>443
 </table>
 
 <!-- The best reason I have for listing "gopher" is Apple/Google:
@@ -1414,36 +1419,24 @@ optionally with an <a>encoding</a>
       "<code>?</code>", and "<code>#</code>", or <var>url</var> <a>is special</a> and
       <a>c</a> is "<code>\</code>", or <var>state override</var> is given, run these
       substeps:
+
       <ol>
-       <li>
-        <p>Remove leading U+0030 code points from <var>buffer</var>
-        until either the leading code point is not U+0030 or
-        <var>buffer</var> is one code point.
+       <li><p>Let <var>port</var> be the mathematical integer value that is represented by
+       <var>buffer</var> in radix-10 using <a>ASCII digits</a> for digits with values
+       0 through 9.
 
-        <div class=example><!-- putting class=example on table has side effects -->
-        <table>
-         <tr><th>Input<th>Output
-         <tr><td>"<code>42</code>"<td>"<code>42</code>"
-         <tr><td>"<code>031</code>"<td>"<code>31</code>"
-         <tr><td>"<code>080</code>"<td>"<code>80</code>"
-         <tr><td>"<code>0000</code>"<td>"<code>0</code>"
-        </table>
-        </div>
+       <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
+       <a>parse error</a>, return failure.
 
-       <li><p>If <var>buffer</var> is equal to
-       <var>url</var>'s <a for=URL>scheme</a>'s
-       <a>default port</a>, set <var>buffer</var> to the empty
-       string.
-
-       <li><p>Set <var>url</var>'s
-       <a for=URL>port</a> to <var>buffer</var>.
+       <li><p>Set <var>url</var>'s <a for=URL>port</a> to null, if <var>port</var> is
+       <var>url</var>'s <a for=URL>scheme</a>'s <a>default port</a>, and to
+       <var>port</var> otherwise.
 
        <li><p>If <var>state override</var> is given, terminate this
        algorithm.
 
-       <li><p>Set <var>buffer</var> to the empty string,
-       <var>state</var> to <a>path start state</a>, and
-       decrease <var>pointer</var> by one.
+       <li><p>Set <var>buffer</var> to the empty string, <var>state</var> to
+       <a>path start state</a>, and decrease <var>pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
@@ -1886,9 +1879,9 @@ these steps:
    <li><p>Append <var>url</var>'s <a for=URL>host</a>,
    <a lt="host serializer">serialized</a>, to <var>output</var>.
 
-   <li><p>If <var>url</var>'s <a for=URL>port</a> is not the empty string, append
-   "<code>:</code>" followed by <var>url</var>'s <a for=URL>port</a> to
-   <var>output</var>.
+   <li><p>If <var>url</var>'s <a for=URL>port</a> is non-null, append "<code>:</code>"
+   followed by <var>url</var>'s <a for=URL>port</a>,
+   <a lt="serialize an integer">serialized</a>, to <var>output</var>.
   </ol>
 
  <li><p>Otherwise, if <var>url</var>'s <a for=URL>host</a> is null and
@@ -1963,11 +1956,9 @@ necessary background information. [[!HTML]]
  <dt>"<code>https</code>"
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
- <dd><p>Return a tuple consisting of <a>URL</a>'s
- <a for=URL>scheme</a>, its
- <a for=URL>host</a>, and its <a>default port</a> if its
- <a for=URL>port</a> is the empty string, and its
- <a for=URL>port</a> otherwise.
+ <dd><p>Return a tuple consisting of <a>URL</a>'s <a for=URL>scheme</a>, its
+ <a for=URL>host</a>, and its <a>default port</a> if its <a for=URL>port</a> is null, and
+ its <a for=URL>port</a> otherwise.
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
@@ -2603,11 +2594,11 @@ getter must run these steps:
  <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>host</a> is null,
  return the empty string.
 
- <li><p>If <a for=URL>port</a> is the empty string, return
- <a for=URL>host</a>, <a lt="host serializer">serialized</a>.
+ <li><p>If <a for=URL>port</a> is null, return <a for=URL>host</a>,
+ <a lt="host serializer">serialized</a>.
 
- <li><p>Return <a for=URL>host</a>, <a lt="host serializer">serialized</a>, followed
- by "<code>:</code>" and <a for=URL>port</a>.
+ <li><p>Return <a for=URL>host</a>, <a lt="host serializer">serialized</a>, followed by
+ "<code>:</code>" and <a for=URL>port</a>, <a lt="serialize an integer">serialized</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>host</a></code> attribute's setter must run these
@@ -2650,15 +2641,15 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>port</code></dfn> attribute's getter must run
-these steps:
+<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>port</code></dfn> attribute's
+getter must run these steps:
 
 <ol>
  <li><p><a>Reset the input</a>.
 
  <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
- <li><p>Return <a for=URL>port</a>.
+ <li><p>Return <a for=URL>port</a>, <a lt="serialize an integer">serialized</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>port</a></code> attribute's setter must run these

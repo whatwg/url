@@ -213,6 +213,13 @@ U+0061 to U+007A, inclusive.
    <hr>
 
 
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="serialize-an-integer">serialize an integer<a class="self-link" href="#serialize-an-integer"></a></dfn>, represent it as the shortest possible decimal
+number.
+
+</p>
+   <hr>
+
+
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="potential-windows-drive-letter">potential Windows drive letter<a class="self-link" href="#potential-windows-drive-letter"></a></dfn> is two code points, of which the first is
 an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
 
@@ -1129,8 +1136,8 @@ then runs these steps:
      <ol>
    
       <li>
-       <p>Prepend <var>n</var> % 256, represented as the shortest possible decimal
-   number, to <var>output</var>.
+       <p>Prepend <var>n</var> % 256, <a data-link-type="dfn" href="#serialize-an-integer">serialized</a>, to
+   <var>output</var>.
 
    </p>
       <li>
@@ -1262,8 +1269,8 @@ null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identif
 <a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is an
-<a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies a networking port. It is initially the empty string.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is either null or a
+16-bit integer that identifies a networking port. It is initially null.
 
 </p>
    <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a list of zero or
@@ -1315,7 +1322,7 @@ corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is l
  
      <tr>
       <td>"<code>ftp</code>"
-      <td>"<code>21</code>"
+      <td>21
  
      <tr>
       <td>"<code>file</code>"
@@ -1323,23 +1330,23 @@ corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is l
  
      <tr>
       <td>"<code>gopher</code>"
-      <td>"<code>70</code>"
+      <td>70
  
      <tr>
       <td>"<code>http</code>"
-      <td>"<code>80</code>"
+      <td>80
  
      <tr>
       <td>"<code>https</code>"
-      <td>"<code>443</code>"
+      <td>443
  
      <tr>
       <td>"<code>ws</code>"
-      <td>"<code>80</code>"
+      <td>80
  
      <tr>
       <td>"<code>wss</code>"
-      <td>"<code>443</code>"
+      <td>443
 </table>
 
 
@@ -2218,58 +2225,25 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       "<code>?</code>", and "<code>#</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and
       <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", or <var>state override</var> is given, run these
       substeps:
+
       </p>
          <ol>
        
           <li>
-        
-           <p>Remove leading U+0030 code points from <var>buffer</var>
-        until either the leading code point is not U+0030 or
-        <var>buffer</var> is one code point.
-
-        </p>
-           <div class="example" id="example-a62bfcc9"><a class="self-link" href="#example-a62bfcc9"></a>
-        
-            <table>
-         
-             <tbody>
-              <tr>
-               <th>Input
-               <th>Output
-         
-              <tr>
-               <td>"<code>42</code>"
-               <td>"<code>42</code>"
-         
-              <tr>
-               <td>"<code>031</code>"
-               <td>"<code>31</code>"
-         
-              <tr>
-               <td>"<code>080</code>"
-               <td>"<code>80</code>"
-         
-              <tr>
-               <td>"<code>0000</code>"
-               <td>"<code>0</code>"
-        
-            </table>
-            
-        
-           </div>
-           
-
-       
-          <li>
-           <p>If <var>buffer</var> is equal to
-       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>’s
-       <a data-link-type="dfn" href="#default-port">default port</a>, set <var>buffer</var> to the empty
-       string.
+           <p>Let <var>port</var> be the mathematical integer value that is represented by
+       <var>buffer</var> in radix-10 using <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> for digits with values
+       0 through 9.
 
        </p>
           <li>
-           <p>Set <var>url</var>’s
-       <a data-link-type="dfn" href="#concept-url-port">port</a> to <var>buffer</var>.
+           <p>If <var>port</var> is greater than 2<sup>16</sup> − 1,
+       <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+
+       </p>
+          <li>
+           <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to null, if <var>port</var> is
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>’s <a data-link-type="dfn" href="#default-port">default port</a>, and to
+       <var>port</var> otherwise.
 
        </p>
           <li>
@@ -2278,9 +2252,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
        </p>
           <li>
-           <p>Set <var>buffer</var> to the empty string,
-       <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>, and
-       decrease <var>pointer</var> by one.
+           <p>Set <var>buffer</var> to the empty string, <var>state</var> to
+       <a data-link-type="dfn" href="#path-start-state">path start state</a>, and decrease <var>pointer</var> by one.
       </p>
          </ol>
          
@@ -3027,9 +3000,9 @@ these steps:
 
    </p>
       <li>
-       <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> is not the empty string, append
-   "<code>:</code>" followed by <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-   <var>output</var>.
+       <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> is non-null, append "<code>:</code>"
+   followed by <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+   <a data-link-type="dfn" href="#serialize-an-integer">serialized</a>, to <var>output</var>.
   </p>
      </ol>
      
@@ -3144,11 +3117,9 @@ necessary background information. <a data-link-type="biblio" href="#biblio-html"
     <dt>"<code>wss</code>"
  
     <dd>
-     <p>Return a tuple consisting of <a data-link-type="dfn" href="#concept-url">URL</a>’s
- <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, its
- <a data-link-type="dfn" href="#concept-url-host">host</a>, and its <a data-link-type="dfn" href="#default-port">default port</a> if its
- <a data-link-type="dfn" href="#concept-url-port">port</a> is the empty string, and its
- <a data-link-type="dfn" href="#concept-url-port">port</a> otherwise.
+     <p>Return a tuple consisting of <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, its
+ <a data-link-type="dfn" href="#concept-url-host">host</a>, and its <a data-link-type="dfn" href="#default-port">default port</a> if its <a data-link-type="dfn" href="#concept-url-port">port</a> is null, and
+ its <a data-link-type="dfn" href="#concept-url-port">port</a> otherwise.
 
  </p>
     <dt>"<code>file</code>"
@@ -4064,13 +4035,13 @@ getter must run these steps:
 
  </p>
     <li>
-     <p>If <a data-link-type="dfn" href="#concept-url-port">port</a> is the empty string, return
- <a data-link-type="dfn" href="#concept-url-host">host</a>, <a data-link-type="dfn" href="#concept-host-serializer">serialized</a>.
+     <p>If <a data-link-type="dfn" href="#concept-url-port">port</a> is null, return <a data-link-type="dfn" href="#concept-url-host">host</a>,
+ <a data-link-type="dfn" href="#concept-host-serializer">serialized</a>.
 
  </p>
     <li>
-     <p>Return <a data-link-type="dfn" href="#concept-url-host">host</a>, <a data-link-type="dfn" href="#concept-host-serializer">serialized</a>, followed
- by "<code>:</code>" and <a data-link-type="dfn" href="#concept-url-port">port</a>.
+     <p>Return <a data-link-type="dfn" href="#concept-url-host">host</a>, <a data-link-type="dfn" href="#concept-host-serializer">serialized</a>, followed by
+ "<code>:</code>" and <a data-link-type="dfn" href="#concept-url-port">port</a>, <a data-link-type="dfn" href="#serialize-an-integer">serialized</a>.
 </p></ol>
 
 
@@ -4138,8 +4109,8 @@ run these steps:
 </p></ol>
 
 
-   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-port"><code>port</code><a class="self-link" href="#dom-urlutils-port"></a></dfn> attribute’s getter must run
-these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-port"><code>port</code><a class="self-link" href="#dom-urlutils-port"></a></dfn> attribute’s
+getter must run these steps:
 
 </p>
    <ol>
@@ -4153,7 +4124,7 @@ these steps:
 
  </p>
     <li>
-     <p>Return <a data-link-type="dfn" href="#concept-url-port">port</a>.
+     <p>Return <a data-link-type="dfn" href="#concept-url-port">port</a>, <a data-link-type="dfn" href="#serialize-an-integer">serialized</a>.
 </p></ol>
 
 
@@ -4872,6 +4843,7 @@ neighboring rights to this work.
    <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
    <li><a href="#dom-urlutils-search">search</a><span>, in §6.3</span>
    <li><a href="#dom-urlutilssearchparams-searchparams">searchParams</a><span>, in §6.3</span>
+   <li><a href="#serialize-an-integer">serialize an integer</a><span>, in §1</span>
    <li><a href="#dom-urlsearchparams-set">set(name, value)</a><span>, in §6.4</span>
    <li><a href="#concept-urlutils-set-the-input">set the input</a><span>, in §6</span>
    <li><a href="#set-the-password">set the password</a><span>, in §4.2</span>
