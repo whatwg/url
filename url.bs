@@ -222,8 +222,8 @@ an <var>encode set</var>, run these steps:
      https://tools.ietf.org/html/rfc3492
      https://mothereff.in/punycode -->
 
-<p>A <dfn id=concept-host lt='host'>host</dfn> is a network address in the form of a
-<a>domain</a>, an <a>IPv4 address</a>, or an <a>IPv6 address</a>.
+<p>A <dfn id=concept-host>host</dfn> is a network address in the form of a <a>domain</a>,
+an <a>IPv4 address</a>, or an <a>IPv6 address</a>.
 
 <p>A <dfn id=concept-domain>domain</dfn> identifies a realm within a network.
 [[RFC1034]]
@@ -239,7 +239,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 
 <h3 id=idna>IDNA</h3>
 
-<p>The <dfn id=concept-domain-to-ascii lt='domain to ASCII'>domain to ASCII</dfn> given a
+<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> given a
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
@@ -254,7 +254,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
  <li><p>Return <var>result</var>.
 </ol>
 
-<p>The <dfn id=concept-domain-to-unicode lt='domain to Unicode'>domain to Unicode</dfn> given a
+<p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> given a
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
@@ -742,46 +742,45 @@ A Recommendation for IPv6 Address Text Representation.
 <!-- History behind URL as term:
      https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>A <dfn id=concept-url lt='URL'>URL</dfn> is a universal identifier.
+<p>A <dfn id=concept-url for=URL>URL</dfn> is a universal identifier.
 
 <p>A <a>URL</a> consists of components, namely a
-<a lt='URL scheme'>scheme</a>,
-<a lt='URL username'>username</a>,
-<a lt='URL password'>password</a>,
-<a lt='URL host'>host</a>,
-<a lt='URL port'>port</a>,
-<a lt='URL path'>path</a>,
-<a lt='URL query'>query</a>, and
-<a lt='URL fragment'>fragment</a>.
+<a for=URL>scheme</a>,
+<a for=URL>username</a>,
+<a for=URL>password</a>,
+<a for=URL>host</a>,
+<a for=URL>port</a>,
+<a for=URL>path</a>,
+<a for=URL>query</a>, and
+<a for=URL>fragment</a>.
 
-<p>A <a>URL</a>'s <dfn id=concept-url-scheme lt="URL scheme">scheme</dfn> is
-an <a>ASCII string</a> that identifies the type of <a>URL</a> and can be used to
-dispatch a <a>URL</a> for further processing after
-<a lt='URL parser'>parsing</a>. It is initially the empty string.
+<p>A <a>URL</a>'s <dfn export for=URL id=concept-url-scheme>scheme</dfn> is an
+<a>ASCII string</a> that identifies the type of <a>URL</a> and can be used to dispatch a
+<a>URL</a> for further processing after <a lt='URL parser'>parsing</a>. It is initially
+the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-username lt="URL username">username</dfn>
-is an <a>ASCII string</a> identifying a user. It is initially the empty string.
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-username>username</dfn> is an
+<a>ASCII string</a> identifying a user. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-password lt="URL password">password</dfn>
-is either null or an <a>ASCII string</a> identifying a user's credentials. It is initially
-null.
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-password>password</dfn> is either
+null or an <a>ASCII string</a> identifying a user's credentials. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-host lt="URL host">host</dfn> is either null or a
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-host>host</dfn> is either null or a
 <a>host</a>. It is initially null.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-port lt="URL port">port</dfn> is an
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-port>port</dfn> is an
 <a>ASCII string</a> that identifies a networking port. It is initially the empty string.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-path lt="URL path">path</dfn> is a list of zero or
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-path>path</dfn> is a list of zero or
 more <a>ASCII string</a> holding data, usually identifying a location in hierarchical
 form. It is initially the empty list.
 
-<p>A  <a>URL</a>'s <dfn id=concept-url-query lt='URL query'>query</dfn> is
-either null or an <a>ASCII string</a> holding data. It is initially null.
+<p>A  <a>URL</a>'s <dfn export for=URL id=concept-url-query>query</dfn> is either null or
+an <a>ASCII string</a> holding data. It is initially null.
 
-<p>A <a>URL</a>'s <dfn id=concept-url-fragment lt='URL fragment'>fragment</dfn>
-is either null or a string holding data that can be used for further processing on the
-resource the <a>URL</a>'s other components identify. It is initially null.
+<p>A <a>URL</a>'s <dfn export for=URL id=concept-url-fragment>fragment</dfn> is either
+null or a string holding data that can be used for further processing on the resource the
+<a>URL</a>'s other components identify. It is initially null.
 
 <p class="note no-backref">This is not an <a>ASCII string</a> on purpose.
 
@@ -789,23 +788,22 @@ resource the <a>URL</a>'s other components identify. It is initially null.
 unset.
 
 <p>A <a>URL</a> also has an associated
-<dfn id=concept-url-object lt="URL object">object</dfn> that is either null or a
-<code><a>Blob</a></code> object. It is initially null.
-[[!FILEAPI]]
+<dfn export for=URL id=concept-url-object>object</dfn> that is either null or a
+<code><a>Blob</a></code> object. It is initially null. [[!FILEAPI]]
 
 <p class="note no-backref">At this point this is used primarily to support
-"<code>blob</code>" <a>URLs</a>, but others can be added going forward, hence "object".
+"<code>blob</code>" <a for=URL>URLs</a>, but others can be added going forward, hence
+"object".
 
 <hr>
 
-<p>A <dfn>special scheme</dfn> is a <a lt="URL scheme">scheme</a> listed in the first
-column of the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s
-optional corresponding <a lt="URL port">port</a> and is listed in the second column on the
-same row.
+<p>A <dfn>special scheme</dfn> is a <a for=URL>scheme</a> listed in the first column of
+the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s optional
+corresponding <a for=URL>port</a> and is listed in the second column on the same row.
 
 <table>
- <tr><th><a lt="URL scheme">scheme</a>
-     <th><a lt="URL port">port</a>
+ <tr><th><a for=URL>scheme</a>
+     <th><a for=URL>port</a>
  <tr><td>"<code>ftp</code>"<td>"<code>21</code>"
  <tr><td>"<code>file</code>"<td>
  <tr><td>"<code>gopher</code>"<td>"<code>70</code>"
@@ -822,14 +820,14 @@ same row.
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
 
-<p>A <a>URL</a> <dfn>is special</dfn> if its <a lt="URL scheme">scheme</a> is a
+<p>A <a>URL</a> <dfn>is special</dfn> if its <a for=URL>scheme</a> is a
 <a>special scheme</a>.
 
-<p>A <dfn>local scheme</dfn> is a <a lt="URL scheme">scheme</a> that is one of
+<p>A <dfn>local scheme</dfn> is a <a for=URL>scheme</a> that is one of
 "<code>about</code>", "<code>blob</code>", "<code>data</code>", and
 "<code>filesystem</code>".
 
-<p>A <a>URL</a> <dfn>is local</dfn> if its <a lt="URL scheme">scheme</a> is a
+<p>A <a>URL</a> <dfn>is local</dfn> if its <a for=URL>scheme</a> is a
 <a>local scheme</a>.
 
 <p class=note>This definition is used externally. E.g., by the Fetch Standard and
@@ -838,8 +836,8 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 
 <p>A <a>URL</a>
 <dfn lt="include credentials">includes credentials</dfn> if either its
-<a lt='URL username'>username</a> is not the empty string or its
-<a lt='URL password'>password</a> is non-null.
+<a for=URL>username</a> is not the empty string or its
+<a for=URL>password</a> is non-null.
 <!-- used by Fetch -->
 
 <p>A <a>URL</a> can be designated as
@@ -851,9 +849,9 @@ input might be a <a>relative URL</a>.
 <hr>
 
 <p>To <dfn local-lt=pop>pop a <var>url</var>'s path</dfn>, if
-<var>url</var>'s <a lt="URL scheme">scheme</a> is not "<code>file</code>" or
-<var>url</var>'s <a lt="URL path">path</a> does not contain a single string that is a
-<a>Windows drive letter</a>, remove <var>url</var>'s <a lt="URL path">path</a>'s
+<var>url</var>'s <a for=URL>scheme</a> is not "<code>file</code>" or
+<var>url</var>'s <a for=URL>path</a> does not contain a single string that is a
+<a>Windows drive letter</a>, remove <var>url</var>'s <a for=URL>path</a>'s
 last string, if any.
 
 
@@ -862,42 +860,42 @@ last string, if any.
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
 <p>A <a>URL</a> must be written as either a <a>relative URL</a> or an <a>absolute URL</a>,
-optionally followed by "<code>#</code>" and a <a lt="URL fragment">fragment</a>.
+optionally followed by "<code>#</code>" and a <a for=URL>fragment</a>.
 
 <p>An <dfn id=concept-absolute-url lt="absolute URL">absolute URL</dfn> must be a
-<a lt="URL scheme">scheme</a>, followed by "<code>:</code>", followed by either a
+<a for=URL>scheme</a>, followed by "<code>:</code>", followed by either a
 <a>scheme-relative URL</a>, or if <a>URL</a>
-<a lt="is special">is <em>not</em> special</a>, a <a lt="URL path">path</a>, optionally
-followed by "<code>?</code>" and a <a lt="URL query">query</a>.
+<a lt="is special">is <em>not</em> special</a>, a <a for=URL>path</a>, optionally
+followed by "<code>?</code>" and a <a for=URL>query</a>.
 
-<p>A <a lt="URL scheme">scheme</a> must be one <a>ASCII alpha</a>, followed by zero or
+<p>A <a for=URL>scheme</a> must be one <a>ASCII alpha</a>, followed by zero or
 more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
-"<code>.</code>". Developers should ensure that all <a lt="URL scheme">schemes</a> that
+"<code>.</code>". Developers should ensure that all <a for=URL>schemes</a> that
 they use are registered in the IANA URI [sic] Schemes registry.
 [[!IANA-URI-SCHEMES]]
 [[RFC7595]]
 
 <p>A <dfn id=concept-relative-url lt="relative URL">relative URL</dfn> must be either a
-<a>scheme-relative URL</a>, or a <a lt="URL path">path</a> that does not start with a
-<a lt="URL scheme">scheme</a> and "<code>:</code>", optionally followed by a
-"<code>?</code>" and a <a lt="URL query">query</a>.
+<a>scheme-relative URL</a>, or a <a for=URL>path</a> that does not start with a
+<a for=URL>scheme</a> and "<code>:</code>", optionally followed by a
+"<code>?</code>" and a <a for=URL>query</a>.
 
 <p class="note no-backref">A non-null <a>base URL</a> is necessary when
 <a lt="URL parser">parsing</a> a <a>relative URL</a>.
 
 <p>A <dfn id=concept-scheme-relative-url>scheme-relative URL</dfn> must be
 "<code>//</code>", followed by a <a>host</a>, optionally followed by "<code>:</code>" and
-a <a lt="URL port">port</a>, optionally followed by a <a lt="URL path">path</a> that
+a <a for=URL>port</a>, optionally followed by a <a for=URL>path</a> that
 starts with "<code>/</code>".
 
-<p>A <a lt="URL port">port</a> must be zero or more <a>ASCII digits</a>.
+<p>A <a for=URL>port</a> must be zero or more <a>ASCII digits</a>.
 
-<p>A <a lt="URL path">path</a> must be zero or more <a>URL units</a>, excluding
+<p>A <a for=URL>path</a> must be zero or more <a>URL units</a>, excluding
 "<code>?</code>".
 
-<p>A <a lt="URL query">query</a> must be zero or more <a>URL units</a>.
+<p>A <a for=URL>query</a> must be zero or more <a>URL units</a>.
 
-<p>A <a lt="URL fragment">fragment</a> must be zero or more <a>URL units</a>.
+<p>A <a for=URL>fragment</a> must be zero or more <a>URL units</a>.
 
 <p>The <dfn>URL code points</dfn> are <a>ASCII alphanumeric</a>,
 "<code>!</code>",<!-- 0x21, sub-delims -->
@@ -944,7 +942,7 @@ U+100000 to U+10FFFD.
 <p class=note>Code points higher than U+009F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the
 <a>URL parser</a>, except for code points appearing in
-<a lt="URL fragment">fragments</a>.
+<a for=URL>fragments</a>.
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and
 <a lt="percent-encoded byte">percent-encoded bytes</a>.
@@ -952,7 +950,7 @@ U+100000 to U+10FFFD.
 <hr>
 
 <p class="note no-backref">There is no conforming way to express a
-<a lt="URL username">username</a> or <a lt="URL password">password</a> within a
+<a for=URL>username</a> or <a for=URL>password</a> within a
 <a>URL</a>.
 
 
@@ -974,15 +972,15 @@ U+100000 to U+10FFFD.
 
  <li><p>If <var>url</var> is failure, return failure.
 
- <li><p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
+ <li><p>If <var>url</var>'s <a for=URL>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>If the first string in <var>url</var>'s <a lt="URL path">path</a> is not in the
+ <li><p>If the first string in <var>url</var>'s <a for=URL>path</a> is not in the
  <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a lt="URL object">object</a> to a <a>structured clone</a> of
+ <li><p>Set <var>url</var>'s <a for=URL>object</a> to a <a>structured clone</a> of
  the entry in the <a>blob URL store</a> corresponding to the first string in
- <var>url</var>'s <a lt="URL path">path</a>. [[!HTML]]
+ <var>url</var>'s <a for=URL>path</a>. [[!HTML]]
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -1072,25 +1070,25 @@ optionally with an <a>encoding</a>
         <p>If <var>state override</var> is given, run these subsubsteps:
 
         <ol>
-         <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is a
+         <li><p>If <var>url</var>'s <a for=URL>scheme</a> is a
          <a>special scheme</a> and <var>buffer</var> is not, terminate this algorithm.
 
-         <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is not a
+         <li><p>If <var>url</var>'s <a for=URL>scheme</a> is not a
          <a>special scheme</a> and <var>buffer</var> is, terminate this algorithm.
         </ol>
 
-       <li><p>Set <var>url</var>'s <a lt="URL scheme">scheme</a> to <var>buffer</var>.
+       <li><p>Set <var>url</var>'s <a for=URL>scheme</a> to <var>buffer</var>.
 
        <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <var>state override</var> is given, terminate this algorithm.
 
-       <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is "<code>file</code>",
+       <li><p>If <var>url</var>'s <a for=URL>scheme</a> is "<code>file</code>",
        set <var>state</var> to <a>file state</a>.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null,
-       and <var>base</var>'s <a lt="URL scheme">scheme</a> is equal to <var>url</var>'s
-       <a lt="URL scheme">scheme</a>, set <var>state</var> to
+       and <var>base</var>'s <a for=URL>scheme</a> is equal to <var>url</var>'s
+       <a for=URL>scheme</a>, set <var>state</var> to
        <a>special relative or authority state</a>.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
@@ -1101,7 +1099,7 @@ optionally with an <a>encoding</a>
        by one.
 
        <li><p>Otherwise, set <var>url</var>'s <a>non-relative flag</a>, append an empty
-       string to <var>url</var>'s <a lt="URL path">path</a>, and set <var>state</var> to
+       string to <var>url</var>'s <a for=URL>path</a>, and set <var>state</var> to
        <a>non-relative path state</a>.
       </ol>
 
@@ -1120,17 +1118,17 @@ optionally with an <a>encoding</a>
      set and <a>c</a> is not "<code>#</code>", <a>parse error</a>, return failure.
 
      <li><p>Otherwise, if <var>base</var>'s <a>non-relative flag</a> is set and <a>c</a>
-     is "<code>#</code>", set <var>url</var>'s <a lt="URL scheme">scheme</a> to
-     <var>base</var>'s <a lt="URL scheme">scheme</a>,
-     <var>url</var>'s <a lt="URL path">path</a> to
-     <var>base</var>'s <a lt="URL path">path</a>,
-     <var>url</var>'s <a lt='URL query'>query</a> to
-     <var>base</var>'s <a lt='URL query'>query</a>,
-     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string, set
+     is "<code>#</code>", set <var>url</var>'s <a for=URL>scheme</a> to
+     <var>base</var>'s <a for=URL>scheme</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>,
+     <var>url</var>'s <a for=URL>query</a> to
+     <var>base</var>'s <a for=URL>query</a>,
+     <var>url</var>'s <a for=URL>fragment</a> to the empty string, set
      <var>url</var>'s <a>non-relative flag</a>, and set <var>state</var> to
      <a>fragment state</a>.
 
-     <li><p>Otherwise, if <var>base</var>'s <a lt="URL scheme">scheme</a> is not
+     <li><p>Otherwise, if <var>base</var>'s <a for=URL>scheme</a> is not
      "<code>file</code>", set <var>state</var> to <a>relative state</a> and decrease
      <var>pointer</var> by one.
 
@@ -1158,55 +1156,55 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>relative state</dfn>
    <dd>
-    <p>Set <var>url</var>'s <a lt='URL scheme'>scheme</a> to
-    <var>base</var>'s <a lt='URL scheme'>scheme</a>, and then, based on <a>c</a>:
+    <p>Set <var>url</var>'s <a for=URL>scheme</a> to
+    <var>base</var>'s <a for=URL>scheme</a>, and then, based on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
-     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
-     <var>base</var>'s <a lt='URL username'>username</a>,
-     <var>url</var>'s <a lt='URL password'>password</a> to
-     <var>base</var>'s <a lt='URL password'>password</a>,
-     <var>url</var>'s <a lt='URL host'>host</a> to
-     <var>base</var>'s <a lt='URL host'>host</a>,
-     <var>url</var>'s <a lt='URL port'>port</a> to
-     <var>base</var>'s <a lt='URL port'>port</a>,
-     <var>url</var>'s <a lt='URL path'>path</a> to
-     <var>base</var>'s <a lt='URL path'>path</a>, and
-     <var>url</var>'s <a lt='URL query'>query</a> to
-     <var>base</var>'s <a lt='URL query'>query</a>.
+     <dd><p>Set <var>url</var>'s <a for=URL>username</a> to
+     <var>base</var>'s <a for=URL>username</a>,
+     <var>url</var>'s <a for=URL>password</a> to
+     <var>base</var>'s <a for=URL>password</a>,
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>port</a> to
+     <var>base</var>'s <a for=URL>port</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>, and
+     <var>url</var>'s <a for=URL>query</a> to
+     <var>base</var>'s <a for=URL>query</a>.
 
      <dt>"<code>/</code>"
      <dd><p>Set <var>state</var> to <a>relative slash state</a>.
 
      <dt>"<code>?</code>"
-     <dd><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
-     <var>base</var>'s <a lt='URL username'>username</a>,
-     <var>url</var>'s <a lt='URL password'>password</a> to
-     <var>base</var>'s <a lt='URL password'>password</a>,
-     <var>url</var>'s <a lt='URL host'>host</a> to
-     <var>base</var>'s <a lt='URL host'>host</a>,
-     <var>url</var>'s <a lt='URL port'>port</a> to
-     <var>base</var>'s <a lt='URL port'>port</a>,
-     <var>url</var>'s <a lt='URL path'>path</a> to
-     <var>base</var>'s <a lt='URL path'>path</a>,
-     <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
+     <dd><p>Set <var>url</var>'s <a for=URL>username</a> to
+     <var>base</var>'s <a for=URL>username</a>,
+     <var>url</var>'s <a for=URL>password</a> to
+     <var>base</var>'s <a for=URL>password</a>,
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>port</a> to
+     <var>base</var>'s <a for=URL>port</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>,
+     <var>url</var>'s <a for=URL>query</a> to the empty string,
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
-     <dd><p>Set <var>url</var>'s <a lt="URL username">username</a> to
-     <var>base</var>'s <a lt="URL username">username</a>,
-     <var>url</var>'s <a lt="URL password">password</a> to
-     <var>base</var>'s <a lt="URL password">password</a>,
-     <var>url</var>'s <a lt="URL host">host</a> to
-     <var>base</var>'s <a lt="URL host">host</a>,
-     <var>url</var>'s <a lt="URL port">port</a> to
-     <var>base</var>'s <a lt="URL port">port</a>,
-     <var>url</var>'s <a lt="URL path">path</a> to
-     <var>base</var>'s <a lt="URL path">path</a>,
-     <var>url</var>'s <a lt="URL query">query</a> to
-     <var>base</var>'s <a lt="URL query">query</a>,
-     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
+     <dd><p>Set <var>url</var>'s <a for=URL>username</a> to
+     <var>base</var>'s <a for=URL>username</a>,
+     <var>url</var>'s <a for=URL>password</a> to
+     <var>base</var>'s <a for=URL>password</a>,
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>port</a> to
+     <var>base</var>'s <a for=URL>port</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>,
+     <var>url</var>'s <a for=URL>query</a> to
+     <var>base</var>'s <a for=URL>query</a>,
+     <var>url</var>'s <a for=URL>fragment</a> to the empty string,
      and <var>state</var> to <a>fragment state</a>.
 
      <dt>Otherwise
@@ -1217,17 +1215,17 @@ optionally with an <a>encoding</a>
       <p>Otherwise, run these steps:
 
       <ol>
-       <li><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
-       <var>base</var>'s <a lt='URL username'>username</a>,
-       <var>url</var>'s <a lt='URL password'>password</a> to
-       <var>base</var>'s <a lt='URL password'>password</a>,
-       <var>url</var>'s <a lt='URL host'>host</a> to
-       <var>base</var>'s <a lt='URL host'>host</a>,
-       <var>url</var>'s <a lt='URL port'>port</a> to
-       <var>base</var>'s <a lt='URL port'>port</a>,
-       <var>url</var>'s <a lt='URL path'>path</a> to
-       <var>base</var>'s <a lt='URL path'>path</a>, and then remove
-       <var>url</var>'s <a lt='URL path'>path</a>'s last entry, if any.
+       <li><p>Set <var>url</var>'s <a for=URL>username</a> to
+       <var>base</var>'s <a for=URL>username</a>,
+       <var>url</var>'s <a for=URL>password</a> to
+       <var>base</var>'s <a for=URL>password</a>,
+       <var>url</var>'s <a for=URL>host</a> to
+       <var>base</var>'s <a for=URL>host</a>,
+       <var>url</var>'s <a for=URL>port</a> to
+       <var>base</var>'s <a for=URL>port</a>,
+       <var>url</var>'s <a for=URL>path</a> to
+       <var>base</var>'s <a for=URL>path</a>, and then remove
+       <var>url</var>'s <a for=URL>path</a>'s last entry, if any.
 
        <li><p>Set <var>state</var> to <a>path state</a>,
        and decrease <var>pointer</var> by one.
@@ -1248,14 +1246,14 @@ optionally with an <a>encoding</a>
       </ol>
 
      <li><p>Otherwise, set
-     <var>url</var>'s <a lt="URL username">username</a> to
-     <var>base</var>'s <a lt="URL username">username</a>,
-     <var>url</var>'s <a lt="URL password">password</a> to
-     <var>base</var>'s <a lt="URL password">password</a>,
-     <var>url</var>'s <a lt="URL host">host</a> to
-     <var>base</var>'s <a lt="URL host">host</a>,
-     <var>url</var>'s <a lt="URL port">port</a> to
-     <var>base</var>'s <a lt="URL port">port</a>,
+     <var>url</var>'s <a for=URL>username</a> to
+     <var>base</var>'s <a for=URL>username</a>,
+     <var>url</var>'s <a for=URL>password</a> to
+     <var>base</var>'s <a for=URL>password</a>,
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>port</a> to
+     <var>base</var>'s <a for=URL>port</a>,
      <var>state</var> to <a>path state</a>, and then, decrease <var>pointer</var> by one.
     </ol>
 
@@ -1297,18 +1295,18 @@ optionally with an <a>encoding</a>
 
          <li><p>If <var>code point</var> is "<code>:</code>" and
          <var>url</var>'s
-         <a lt='URL password'>password</a> is null, set
-         <var>url</var>'s <a lt='URL password'>password</a>
+         <a for=URL>password</a> is null, set
+         <var>url</var>'s <a for=URL>password</a>
          to the empty string and continue.
 
-         <li><p>If <var>url</var>'s <a lt="URL password">password</a> is non-null,
+         <li><p>If <var>url</var>'s <a for=URL>password</a> is non-null,
          <a>utf-8 percent encode</a> <var>code point</var> using the
          <a>password encode set</a> and append the result to <var>url</var>'s
-         <a lt="URL password">password</a>.
+         <a for=URL>password</a>.
 
          <li><p>Otherwise, <a>utf-8 percent encode</a> <var>code point</var> using the
          <a>username encode set</a> and append the result to <var>url</var>'s
-         <a lt="URL username">username</a>.
+         <a for=URL>username</a>.
         </ol>
        <li><p>Set <var>buffer</var> to the empty string.
       </ol>
@@ -1343,7 +1341,7 @@ optionally with an <a>encoding</a>
 
        <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var>url</var>'s <a lt='URL host'>host</a> to
+       <li><p>Set <var>url</var>'s <a for=URL>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>port state</a>.
 
@@ -1367,7 +1365,7 @@ optionally with an <a>encoding</a>
 
        <li><p>If <var>host</var> is failure, return failure.
 
-       <li><p>Set <var>url</var>'s <a lt='URL host'>host</a> to
+       <li><p>Set <var>url</var>'s <a for=URL>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>path start state</a>.
 
@@ -1420,12 +1418,12 @@ optionally with an <a>encoding</a>
         </div>
 
        <li><p>If <var>buffer</var> is equal to
-       <var>url</var>'s <a lt='URL scheme'>scheme</a>'s
+       <var>url</var>'s <a for=URL>scheme</a>'s
        <a>default port</a>, set <var>buffer</var> to the empty
        string.
 
        <li><p>Set <var>url</var>'s
-       <a lt='URL port'>port</a> to <var>buffer</var>.
+       <a for=URL>port</a> to <var>buffer</var>.
 
        <li><p>If <var>state override</var> is given, terminate this
        algorithm.
@@ -1443,19 +1441,19 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>file state</dfn>
    <dd>
-    <p>Set <var>url</var>'s <a lt='URL scheme'>scheme</a> to "<code>file</code>",
+    <p>Set <var>url</var>'s <a for=URL>scheme</a> to "<code>file</code>",
     and then, based on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
      <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a lt='URL host'>host</a> to
-     <var>base</var>'s <a lt='URL host'>host</a>,
-     <var>url</var>'s <a lt='URL path'>path</a> to
-     <var>base</var>'s <a lt='URL path'>path</a>, and
-     <var>url</var>'s <a lt='URL query'>query</a> to
-     <var>base</var>'s <a lt='URL query'>query</a>.
+     <a for=URL>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>, and
+     <var>url</var>'s <a for=URL>query</a> to
+     <var>base</var>'s <a for=URL>query</a>.
 
      <dt>"<code>/</code>"
      <dt>"<code>\</code>"
@@ -1468,40 +1466,40 @@ optionally with an <a>encoding</a>
 
      <dt>"<code>?</code>"
      <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a lt='URL host'>host</a> to
-     <var>base</var>'s <a lt='URL host'>host</a>,
-     <var>url</var>'s <a lt='URL path'>path</a> to
-     <var>base</var>'s <a lt='URL path'>path</a>,
-     <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
+     <a for=URL>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>,
+     <var>url</var>'s <a for=URL>query</a> to the empty string,
      and <var>state</var> to <a>query state</a>.
 
      <dt>"<code>#</code>"
      <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a lt="URL host">host</a> to
-     <var>base</var>'s <a lt="URL host">host</a>,
-     <var>url</var>'s <a lt="URL path">path</a> to
-     <var>base</var>'s <a lt="URL path">path</a>,
-     <var>url</var>'s <a lt="URL query">query</a> to
-     <var>base</var>'s <a lt="URL query">query</a>,
-     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
+     <a for=URL>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a for=URL>host</a> to
+     <var>base</var>'s <a for=URL>host</a>,
+     <var>url</var>'s <a for=URL>path</a> to
+     <var>base</var>'s <a for=URL>path</a>,
+     <var>url</var>'s <a for=URL>query</a> to
+     <var>base</var>'s <a for=URL>query</a>,
+     <var>url</var>'s <a for=URL>fragment</a> to the empty string,
      and <var>state</var> to <a>fragment state</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
        <li>
-        <p>If <var>base</var> is non-null, <var>base</var>'s <a lt='URL scheme'>scheme</a>
+        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=URL>scheme</a>
         is "<code>file</code>", and one of <var>c</var> and the first code point of
         <a>remaining</a> are not a <a>potential Windows drive letter</a>, <a>remaining</a>
         consists of one code point, and <a>remaining</a>'s second code point is not one of
         "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", set
-        <var>url</var>'s <a lt='URL host'>host</a> to
-        <var>base</var>'s <a lt='URL host'>host</a>,
-        <var>url</var>'s <a lt='URL path'>path</a> to
-        <var>base</var>'s <a lt='URL path'>path</a>, and then <a>pop</a>
-        <var>url</var>'s <a lt='URL path'>path</a>.
+        <var>url</var>'s <a for=URL>host</a> to
+        <var>base</var>'s <a for=URL>host</a>,
+        <var>url</var>'s <a for=URL>path</a> to
+        <var>base</var>'s <a for=URL>path</a>, and then <a>pop</a>
+        <var>url</var>'s <a for=URL>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
@@ -1528,13 +1526,13 @@ optionally with an <a>encoding</a>
       <ol>
        <li>
         <p>If <var>base</var> is non-null, <var>base</var>'s
-        <a lt='URL scheme'>scheme</a> is "<code>file</code>", and <var>base</var>'s
-        <a lt='URL path'>path</a> first string is a <a>Windows drive letter</a>, append
-        <var>base</var>'s <a lt='URL path'>path</a> first string to
-        <var>url</var>'s <a lt='URL path'>path</a>.
+        <a for=URL>scheme</a> is "<code>file</code>", and <var>base</var>'s
+        <a for=URL>path</a> first string is a <a>Windows drive letter</a>, append
+        <var>base</var>'s <a for=URL>path</a> first string to
+        <var>url</var>'s <a for=URL>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
-        <var>url</var>'s and <var>base</var>'s <a lt="URL host">host</a> are null under
+        <var>url</var>'s and <var>base</var>'s <a for=URL>host</a> are null under
         these conditions and therefore not copied.
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
@@ -1573,7 +1571,7 @@ optionally with an <a>encoding</a>
          <li><p>If <var>host</var> is failure, return failure.
 
          <li><p>If <var>host</var> is not "<code title>localhost</code>", set
-         <var>url</var>'s <a lt='URL host'>host</a> to <var>host</var>.
+         <var>url</var>'s <a for=URL>host</a> to <var>host</var>.
 
          <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
          <a>path start state</a>.
@@ -1621,14 +1619,14 @@ optionally with an <a>encoding</a>
         </table>
 
        <li><p>If <var>buffer</var> is "<code>..</code>", <a>pop</a> <var>url</var>'s
-       <a lt="URL path">path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
+       <a for=URL>path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
        <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>", append the empty
-       string to <var>url</var>'s <a lt="URL path">path</a>.
+       string to <var>url</var>'s <a for=URL>path</a>.
 
        <li><p>Otherwise, if <var>buffer</var> is "<code>.</code>" and if neither <a>c</a>
        is "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
        "<code>\</code>", append the empty string to <var>url</var>'s
-       <a lt="URL path">path</a>.
+       <a for=URL>path</a>.
 
        <li>
         <p>Otherwise, if <var>buffer</var> is not
@@ -1636,26 +1634,26 @@ optionally with an <a>encoding</a>
 
         <ol>
          <li>
-          <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is
-          "<code>file</code>", <var>url</var>'s <a lt='URL path'>path</a>
+          <p>If <var>url</var>'s <a for=URL>scheme</a> is
+          "<code>file</code>", <var>url</var>'s <a for=URL>path</a>
           is empty, and <var>buffer</var> is a <a>potential Windows drive letter</a>, set
-          <var>url</var>'s <a lt="URL host">host</a> to null and replace the second
+          <var>url</var>'s <a for=URL>host</a> to null and replace the second
           code point in <var>buffer</var> with "<code>:</code>".
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
          <li><p>Append <var>buffer</var> to
-         <var>url</var>'s <a lt='URL path'>path</a>.
+         <var>url</var>'s <a for=URL>path</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code>?</code>", set
-       <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
+       <var>url</var>'s <a for=URL>query</a> to the empty string,
        and <var>state</var> to <a>query state</a>.
 
        <li><p>If <a>c</a> is "<code>#</code>", set
-       <var>url</var>'s <a lt='URL fragment'>fragment</a> to the empty string,
+       <var>url</var>'s <a for=URL>fragment</a> to the empty string,
        and <var>state</var> to <a>fragment state</a>.
       </ol>
 
@@ -1683,11 +1681,11 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li><p>If <a>c</a> is "<code>?</code>", set <var>url</var>'s
-     <a lt="URL query">query</a> to the empty string and <var>state</var> to
+     <a for=URL>query</a> to the empty string and <var>state</var> to
      <a>query state</a>.
 
      <li><p>Otherwise, if <a>c</a> is "<code>#</code>", set <var>url</var>'s
-     <a lt="URL fragment">fragment</a> to the empty string and <var>state</var> to
+     <a for=URL>fragment</a> to the empty string and <var>state</var> to
      <a>fragment state</a>.
 
      <li>
@@ -1705,7 +1703,7 @@ optionally with an <a>encoding</a>
        <a>EOF code point</a>, U+0009, U+000A, and U+000D,
        <a>utf-8 percent encode</a> <a>c</a> using the
        <a>simple encode set</a>, and append the result to the first string in
-       <var>url</var>'s <a lt="URL path">path</a>.
+       <var>url</var>'s <a for=URL>path</a>.
       </ol>
     </ol>
 
@@ -1719,7 +1717,7 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or
-       <var>url</var>'s <a lt="URL scheme">scheme</a> is either "<code>ws</code>" or
+       <var>url</var>'s <a for=URL>scheme</a> is either "<code>ws</code>" or
        "<code>wss</code>", set <var>encoding override</var> to <a>utf-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
@@ -1735,17 +1733,17 @@ optionally with an <a>encoding</a>
          <li><p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is one of
          0x22, 0x23, 0x3C, and 0x3E, append <var>byte</var>,
          <a lt="percent encode">percent encoded</a>, to <var>url</var>'s
-         <a lt="URL query">query</a>.
+         <a for=URL>query</a>.
 
          <li><p>Otherwise, append a code point whose value is <var>byte</var> to
-         <var>url</var>'s <a lt="URL query">query</a>.
+         <var>url</var>'s <a for=URL>query</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p>If <a>c</a> is "<code>#</code>", set
        <var>url</var>'s
-       <a lt='URL fragment'>fragment</a> to the empty string,
+       <a for=URL>fragment</a> to the empty string,
        and state to <a>fragment state</a>.
       </ol>
 
@@ -1790,7 +1788,7 @@ optionally with an <a>encoding</a>
        not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
 
        <li>
-        <p>Append <a>c</a> to <var>url</var>'s <a lt="URL fragment">fragment</a>.
+        <p>Append <a>c</a> to <var>url</var>'s <a for=URL>fragment</a>.
 
         <p class="note no-backref">Unfortunately not using
         <a lt="percent encode">percent-encoding</a> is intentional as implementations with
@@ -1810,13 +1808,13 @@ optionally with an <a>encoding</a>
 <var>username</var>, run these steps:
 
 <ol>
- <li><p>Set <var>url</var>'s <a lt='URL username'>username</a> to the
+ <li><p>Set <var>url</var>'s <a for=URL>username</a> to the
  empty string.
 
  <li><p>For each code point in <var>username</var>,
  <a>utf-8 percent encode</a> it using the <a>username encode set</a>, and
  append the result to <var>url</var>'s
- <a lt='URL username'>username</a>.
+ <a for=URL>username</a>.
 </ol>
 
 <p>To <dfn>set the password</dfn> given a <var>url</var> and
@@ -1824,19 +1822,19 @@ optionally with an <a>encoding</a>
 
 <ol>
  <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
- <a lt='URL password'>password</a> to null.
+ <a for=URL>password</a> to null.
 
  <li>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <var>url</var>'s <a lt='URL password'>password</a> to
+   <li><p>Set <var>url</var>'s <a for=URL>password</a> to
    the empty string.
 
    <li><p>For each code point in <var>password</var>,
    <a>utf-8 percent encode</a> it using the <a>password encode set</a>, and
    append the result to <var>url</var>'s
-   <a lt='URL password'>password</a>.
+   <a for=URL>password</a>.
   </ol>
 </ol>
 
@@ -1848,56 +1846,56 @@ optionally with an <a>encoding</a>
 these steps:
 
 <ol>
- <li><p>Let <var>output</var> be <var>url</var>'s <a lt="URL scheme">scheme</a> and
+ <li><p>Let <var>output</var> be <var>url</var>'s <a for=URL>scheme</a> and
  "<code>:</code>" concatenated.
 
  <li>
-  <p>If <var>url</var>'s <a lt="URL host">host</a> is non-null:
+  <p>If <var>url</var>'s <a for=URL>host</a> is non-null:
 
   <ol>
    <li><p>Append "<code>//</code>" to <var>output</var>.
 
    <li>
-    <p>If <var>url</var>'s <a lt="URL username">username</a> is not the empty string
-    or <var>url</var>'s <a lt="URL password">password</a> is non-null, run these substeps:
+    <p>If <var>url</var>'s <a for=URL>username</a> is not the empty string
+    or <var>url</var>'s <a for=URL>password</a> is non-null, run these substeps:
 
     <ol>
-     <li><p>Append <var>url</var>'s <a lt="URL username">username</a> to
+     <li><p>Append <var>url</var>'s <a for=URL>username</a> to
      <var>output</var>.
 
-     <li><p>If <var>url</var>'s <a lt="URL password">password</a> is non-null, append
-     "<code>:</code>", followed by <var>url</var>'s <a lt="URL password">password</a>, to
+     <li><p>If <var>url</var>'s <a for=URL>password</a> is non-null, append
+     "<code>:</code>", followed by <var>url</var>'s <a for=URL>password</a>, to
      <var>output</var>.
 
      <li><p>Append "<code>@</code>" to <var>output</var>.
     </ol>
 
-   <li><p>Append <var>url</var>'s <a lt="URL host">host</a>,
+   <li><p>Append <var>url</var>'s <a for=URL>host</a>,
    <a lt="host serializer">serialized</a>, to <var>output</var>.
 
-   <li><p>If <var>url</var>'s <a lt="URL port">port</a> is not the empty string, append
-   "<code>:</code>" followed by <var>url</var>'s <a lt="URL port">port</a> to
+   <li><p>If <var>url</var>'s <a for=URL>port</a> is not the empty string, append
+   "<code>:</code>" followed by <var>url</var>'s <a for=URL>port</a> to
    <var>output</var>.
   </ol>
 
- <li><p>Otherwise, if <var>url</var>'s <a lt="URL host">host</a> is null and
- <var>url</var>'s <a lt="URL scheme">scheme</a> is "<code>file</code>", append
+ <li><p>Otherwise, if <var>url</var>'s <a for=URL>host</a> is null and
+ <var>url</var>'s <a for=URL>scheme</a> is "<code>file</code>", append
  "<code>//</code>" to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a>non-relative flag</a> is set, append the first string in
- <var>url</var>'s <a lt="URL path">path</a> to <var>output</var>.
+ <var>url</var>'s <a for=URL>path</a> to <var>output</var>.
 
  <li><p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>'s
- <a lt="URL path">path</a> (including empty strings), separated from each other by
+ <a for=URL>path</a> (including empty strings), separated from each other by
  "<code>/</code>", to <var>output</var>.
 
- <li><p>If <var>url</var>'s <a lt="URL query">query</a> is non-null, append
- "<code>?</code>", followed by <var>url</var>'s <a lt="URL query">query</a>, to
+ <li><p>If <var>url</var>'s <a for=URL>query</a> is non-null, append
+ "<code>?</code>", followed by <var>url</var>'s <a for=URL>query</a>, to
  <var>output</var>.
 
  <li><p>If the <i title>exclude fragment flag</i> is unset and <var>url</var>'s
- <a lt="URL fragment">fragment</a> is non-null, append "<code>#</code>", followed by
- <var>url</var>'s <a lt="URL fragment">fragment</a>, to <var>output</var>.
+ <a for=URL>fragment</a> is non-null, append "<code>#</code>", followed by
+ <var>url</var>'s <a for=URL>fragment</a>, to <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -1930,13 +1928,13 @@ necessary background information. [[!HTML]]
 
 <p>A <a>URL</a>'s <dfn export for=URL id=concept-url-origin>origin</dfn> is the
 <a spec=html>origin</a> returned by running these steps, switching on <a>URL</a>'s
-<a lt='URL scheme'>scheme</a>:
+<a for=URL>scheme</a>:
 
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
   <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the first
-  string in <a>URL</a>'s <a lt="URL path">path</a>.
+  string in <a>URL</a>'s <a for=URL>path</a>.
 
   <p>If <var>url</var> is failure, return a new globally unique identifier. Otherwise,
   return <var>url</var>'s <a for=URL>origin</a>.
@@ -1953,10 +1951,10 @@ necessary background information. [[!HTML]]
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
  <dd><p>Return a tuple consisting of <a>URL</a>'s
- <a lt='URL scheme'>scheme</a>, its
- <a lt='URL host'>host</a>, and its <a>default port</a> if its
- <a lt='URL port'>port</a> is the empty string, and its
- <a lt='URL port'>port</a> otherwise.
+ <a for=URL>scheme</a>, its
+ <a for=URL>host</a>, and its <a>default port</a> if its
+ <a for=URL>port</a> is the empty string, and its
+ <a for=URL>port</a> otherwise.
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
@@ -1966,8 +1964,8 @@ necessary background information. [[!HTML]]
  <dd>
   <p>Return a new globally unique identifier.
 
-  <p class="note no-backref">This does indeed mean that these <a>URLs</a> cannot be
-  <a spec=html lt="same origin">same-origin</a> with themselves.
+  <p class="note no-backref">This does indeed mean that these <a for=URL>URLs</a> cannot
+  be <a spec=html lt="same origin">same-origin</a> with themselves.
 </dl>
 
 
@@ -2295,8 +2293,8 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
    <var>url</var>.
   </ol>
 
- <li><p>Let <var>query</var> be <a for=URLUtils>url</a>'s <a lt="URL query">query</a>
- if <a for=URLUtils>url</a> and its <a lt="URL query">query</a> are non-null, and the
+ <li><p>Let <var>query</var> be <a for=URLUtils>url</a>'s <a for=URL>query</a>
+ if <a for=URLUtils>url</a> and its <a for=URL>query</a> are non-null, and the
  empty string otherwise.
 
  <li><p>If <a for=URLUtils>query object</a> is null, set
@@ -2523,7 +2521,7 @@ attribute's getter must run these steps:
 
  <li><p>If <a for=URLUtils>url</a> is null, return "<code>:</code>".
 
- <li><p>Return <a lt="URL scheme">scheme</a>, followed by "<code>:</code>".
+ <li><p>Return <a for=URL>scheme</a>, followed by "<code>:</code>".
 </ol>
 
 <p>The <code><a attribute for=URLUtils>protocol</a></code> attribute's setter must run
@@ -2547,14 +2545,14 @@ attribute's getter must run these steps:
 
  <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
- <li><p>Return <a lt='URL username'>username</a>.
+ <li><p>Return <a for=URL>username</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>username</a></code> attribute's setter must
 run these steps:
 
 <ol>
- <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null, or its
+ <li><p>If <a for=URLUtils>url</a> is null, its <a for=URL>host</a> is null, or its
  <a>non-relative flag</a> is set, terminate these steps.
 
  <li><p><a>Set the username</a> given <a for=URLUtils>url</a> and the given value.
@@ -2568,17 +2566,17 @@ attribute's getter must run these steps:
 <ol>
  <li><p><a>Reset the input</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null or its <a lt="URL password">password</a>
+ <li><p>If <a for=URLUtils>url</a> is null or its <a for=URL>password</a>
  is null, return the empty string.
 
- <li><p>Return <a lt="URL password">password</a>.
+ <li><p>Return <a for=URL>password</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>password</a></code> attribute's setter must
 run these steps:
 
 <ol>
- <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null, or its
+ <li><p>If <a for=URLUtils>url</a> is null, its <a for=URL>host</a> is null, or its
  <a>non-relative flag</a> is set, terminate these steps.
 
  <li><p><a>Set the password</a> given <a for=URLUtils>url</a>
@@ -2593,14 +2591,14 @@ getter must run these steps:
 <ol>
  <li><p><a>Reset the input</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL host">host</a> is null,
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>host</a> is null,
  return the empty string.
 
- <li><p>If <a lt="URL port">port</a> is the empty string, return
- <a lt="URL host">host</a>, <a lt="host serializer">serialized</a>.
+ <li><p>If <a for=URL>port</a> is the empty string, return
+ <a for=URL>host</a>, <a lt="host serializer">serialized</a>.
 
- <li><p>Return <a lt="URL host">host</a>, <a lt="host serializer">serialized</a>, followed
- by "<code>:</code>" and <a lt='URL port'>port</a>.
+ <li><p>Return <a for=URL>host</a>, <a lt="host serializer">serialized</a>, followed
+ by "<code>:</code>" and <a for=URL>port</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>host</a></code> attribute's setter must run these
@@ -2623,10 +2621,10 @@ attribute's getter must run these steps:
 <ol>
  <li><p><a>Reset the input</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL host">host</a> is null,
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>host</a> is null,
  return the empty string.
 
- <li><p>Return <a lt="URL host">host</a>, <a lt="host serializer">serialized</a>.
+ <li><p>Return <a for=URL>host</a>, <a lt="host serializer">serialized</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>hostname</a></code> attribute's setter must
@@ -2651,15 +2649,15 @@ these steps:
 
  <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
- <li><p>Return <a lt="URL port">port</a>.
+ <li><p>Return <a for=URL>port</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>port</a></code> attribute's setter must run these
 steps:
 
 <ol>
- <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null,
- its <a>non-relative flag</a> is set, or its <a lt='URL scheme'>scheme</a> is
+ <li><p>If <a for=URLUtils>url</a> is null, its <a for=URL>host</a> is null,
+ its <a>non-relative flag</a> is set, or its <a for=URL>scheme</a> is
  "<code>file</code>", terminate these steps.
 
  <li><p>Otherwise, <a lt="basic URL parser">Basic URL parse</a> the given value with
@@ -2678,9 +2676,9 @@ attribute's getter must run these steps:
  <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
  <li><p>If the <a>non-relative flag</a> is set, return the first string in
- <a lt='URL path'>path</a>.
+ <a for=URL>path</a>.
 
- <li><p>Return "<code>/</code>", followed by the strings in <a lt="URL path">path</a>
+ <li><p>Return "<code>/</code>", followed by the strings in <a for=URL>path</a>
  (including empty strings), separated from each other by "<code>/</code>".
 </ol>
 
@@ -2691,7 +2689,7 @@ run these steps:
  <li><p>If <a for=URLUtils>url</a> is null, or its
  <a>non-relative flag</a> is set, terminate these steps.
 
- <li><p>Empty <a lt='URL path'>path</a>.
+ <li><p>Empty <a for=URL>path</a>.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with
  <a for=URLUtils>url</a> as <var>url</var> and <a>path start state</a> as
@@ -2706,10 +2704,10 @@ attribute's getter must run these steps:
 <ol>
  <li><p><a>Reset the input</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL query">query</a> is
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>query</a> is
  either null or the empty string, return the empty string.
 
- <li><p>Return "<code>?</code>", followed by <a lt="URL query">query</a>.
+ <li><p>Return "<code>?</code>", followed by <a for=URL>query</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>search</a></code> attribute's setter must run these
@@ -2719,7 +2717,7 @@ steps:
  <li><p>If <a for=URLUtils>url</a> is null, terminate these steps.
 
  <li><p>If the given value is the empty string, set
- <a lt='URL query'>query</a> to null, empty
+ <a for=URL>query</a> to null, empty
  <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a>, run its
  <a lt='URLSearchParams update'>update steps</a>, and terminate these
@@ -2728,7 +2726,7 @@ steps:
  <li><p>Let <var>input</var> be the given value with a single leading
  "<code>?</code>" removed, if any.
 
- <li><p>Set <a lt='URL query'>query</a> to the empty string.
+ <li><p>Set <a for=URL>query</a> to the empty string.
 
  <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var>
  with <a for=URLUtils>url</a> as <var>url</var>,
@@ -2768,7 +2766,7 @@ setter must run these steps:
  <li><p>Set <a for=URLUtils>query object</a> to
  <var>object</var>.
 
- <li><p>Set <a lt='URL query'>query</a> to the
+ <li><p>Set <a for=URL>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of the
  <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a>.
@@ -2781,28 +2779,28 @@ getter must run these steps:
 
 <ol>
  <li><p class="note no-backref">Running <a>reset the input</a> is not necessary as it
- cannot affect <a lt="URL fragment">fragment</a>.
+ cannot affect <a for=URL>fragment</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL fragment">fragment</a>
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>fragment</a>
  is either null or the empty string, return the empty string.
 
- <li><p>Return "<code>#</code>", followed by <a lt="URL fragment">fragment</a>.
+ <li><p>Return "<code>#</code>", followed by <a for=URL>fragment</a>.
 </ol>
 
 <p>The <code><a attribute for=URLUtils>hash</a></code> attribute's setter must run these
 steps:
 
 <ol>
- <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL scheme">scheme</a> is
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=URL>scheme</a> is
  "<code>javascript</code>", terminate these steps.
 
- <li><p>If the given value is the empty string, set <a lt="URL fragment">fragment</a> to
+ <li><p>If the given value is the empty string, set <a for=URL>fragment</a> to
  null, run the <a>pre-update steps</a>, and terminate these steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading "<code>#</code>"
  removed, if any.
 
- <li><p>Set <a lt="URL fragment">fragment</a> to the empty string.
+ <li><p>Set <a for=URL>fragment</a> to the empty string.
 
  <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with
  <a for=URLUtils>url</a> as <var>url</var> and <a>fragment state</a> as
@@ -2869,7 +2867,7 @@ each associated  <a lt='URLSearchParams URL object'>url object</a>
 
 <ol>
  <li><p>Set <var>urlObject</var>'s <a for=URLUtils>url</a>'s
- <a lt='URL query'>query</a> to the
+ <a for=URL>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of
  {{URLSearchParams}} object's
  <a lt='URLSearchParams list'>list</a>.
@@ -2950,11 +2948,10 @@ the name and the value being the value.
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
-<p>A standard that exposes <a lt='URL'>URLs</a>, should expose the
-<a>URL</a> as a string (by <a lt='URL serializer'>serializing</a> an internal
-<a>URL</a>). A standard should not expose a <a>URL</a> using a
-{{URL}} object. {{URL}} objects are
-meant for <a>URL</a> manipulation. In IDL the USVString type should be used.
+<p>A standard that exposes <a for=URL>URLs</a>, should expose the <a for=URL>URL</a> as a
+string  (by <a lt='URL serializer'>serializing</a> an internal <a for=URL>URL</a>). A
+standard should not expose a <a for=URL>URL</a> using a {{URL}} object. {{URL}} objects
+are meant for <a for=URL>URL</a> manipulation. In IDL the USVString type should be used.
 
 <p class=note>The higher-level notion here is that values are to be exposed as immutable
 data structures.
@@ -2973,7 +2970,7 @@ proper naming. [[!HTML]]
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 <p>There have been a lot of people that have helped make
-<a lt='URL' class=no-backref>URLs</a> more interoperable over the years and
+<a for=URL class=no-backref>URLs</a> more interoperable over the years and
 thereby furthered the goals of this standard. Likewise many people have helped making this
 standard what it is today.
 
