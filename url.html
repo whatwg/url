@@ -362,39 +362,40 @@ and
 "<code>}</code>". 
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="password-encode-set">password encode set<a class="self-link" href="#password-encode-set"></a></dfn> is the
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="userinfo-encode-set">userinfo encode set<a class="self-link" href="#userinfo-encode-set"></a></dfn> is the
 <a data-link-type="dfn" href="#default-encode-set">default encode set</a> and code points
 "<code>/</code>", 
+"<code>:</code>", 
+"<code>;</code>", 
+"<code>=</code>", 
 "<code>@</code>", 
+"<code>[</code>", 
+"<code>\</code>", 
+"<code>]</code>", 
+"<code>^</code>", 
 and
-"<code>\</code>". 
+"<code>|</code>". 
 
 </p>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="username-encode-set">username encode set<a class="self-link" href="#username-encode-set"></a></dfn> is the
-<a data-link-type="dfn" href="#password-encode-set">password encode set</a> and code point
-"<code>:</code>". 
-
-</p>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="utf_8-percent-encode">utf-8 percent encode<a class="self-link" href="#utf_8-percent-encode"></a></dfn> a <var>code point</var>, using
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="utf_8-percent-encode">utf-8 percent encode<a class="self-link" href="#utf_8-percent-encode"></a></dfn> a <var>codePoint</var>, using
 an <var>encode set</var>, run these steps:
 
 </p>
    <ol>
  
     <li>
-     <p>If <var>code point</var> is not in
- <var>encode set</var>, return <var>code point</var>.
+     <p>If <var>codePoint</var> is not in <var>encode set</var>, return
+ <var>codePoint</var>.
 
  </p>
     <li>
-     <p>Let <var>bytes</var> be the result of running
- <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
- <var>code point</var>.
+     <p>Let <var>bytes</var> be the result of running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on
+ <var>codePoint</var>.
 
  </p>
     <li>
-     <p><a data-link-type="dfn" href="#percent-encode">Percent encode</a> each byte in <var>bytes</var>, and
- then return them concatenated, in the same order.
+     <p><a data-link-type="dfn" href="#percent-encode">Percent encode</a> each byte in <var>bytes</var>, and then return the results
+ concatenated, in the same order.
 </p></ol>
 
 
@@ -2036,33 +2037,37 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        </p>
           <li>
         
-           <p>For each <var>code point</var> in <var>buffer</var>, run these substeps:
+           <p>For each <var>codePoint</var> in <var>buffer</var>, run these substeps:
 
         </p>
            <ol>
          
             <li>
-             <p>If <var>code point</var> is U+0009, U+000A, or U+000D, continue.
+             <p>If <var>codePoint</var> is U+0009, U+000A, or U+000D, run these substeps
+         for the next code point.
 
          </p>
             <li>
-             <p>If <var>code point</var> is "<code>:</code>" and
+             <p>If <var>codePoint</var> is "<code>:</code>" and
          <var>url</var>’s
          <a data-link-type="dfn" href="#concept-url-password">password</a> is null, set
          <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>
-         to the empty string and continue.
+         to the empty string and run these substeps for the next code point.
 
          </p>
             <li>
-             <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> is non-null,
-         <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>code point</var> using the
-         <a data-link-type="dfn" href="#password-encode-set">password encode set</a> and append the result to <var>url</var>’s
-         <a data-link-type="dfn" href="#concept-url-password">password</a>.
+             <p>Let <var>encodedCodePoints</var> be the result of running
+         <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>codePoint</var> using the
+         <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>.
 
          </p>
             <li>
-             <p>Otherwise, <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> <var>code point</var> using the
-         <a data-link-type="dfn" href="#username-encode-set">username encode set</a> and append the result to <var>url</var>’s
+             <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> is non-null, append
+         <var>encodedCodePoints</var> to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>.
+
+         </p>
+            <li>
+             <p>Otherwise, append <var>encodedCodePoints</var> to <var>url</var>’s
          <a data-link-type="dfn" href="#concept-url-username">username</a>.
         </p>
            </ol>
@@ -2888,27 +2893,25 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    <hr>
 
 
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-username">set the username<a class="self-link" href="#set-the-username"></a></dfn> given a <var>url</var> and
-<var>username</var>, run these steps:
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-username">set the username<a class="self-link" href="#set-the-username"></a></dfn> given a <var>url</var> and <var>username</var>, run
+these steps:
 
 </p>
    <ol>
  
     <li>
-     <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to the
- empty string.
+     <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to the empty string.
 
  </p>
     <li>
      <p>For each code point in <var>username</var>,
- <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#username-encode-set">username encode set</a>, and
- append the result to <var>url</var>’s
- <a data-link-type="dfn" href="#concept-url-username">username</a>.
+ <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and append the
+ result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>.
 </p></ol>
 
 
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-password">set the password<a class="self-link" href="#set-the-password"></a></dfn> given a <var>url</var> and
-<var>password</var>, run these steps:
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-password">set the password<a class="self-link" href="#set-the-password"></a></dfn> given a <var>url</var> and <var>password</var>, run
+these steps:
 
 </p>
    <ol>
@@ -2926,15 +2929,13 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      <ol>
    
       <li>
-       <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
-   the empty string.
+       <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to the empty string.
 
    </p>
       <li>
        <p>For each code point in <var>password</var>,
-   <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#password-encode-set">password encode set</a>, and
-   append the result to <var>url</var>’s
-   <a data-link-type="dfn" href="#concept-url-password">password</a>.
+   <a data-link-type="dfn" href="#utf_8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and
+   append the result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>.
   </p>
      </ol>
      
@@ -4807,7 +4808,6 @@ neighboring rights to this work.
      <li><a href="#concept-url-password">dfn for URL</a><span>, in §4</span>
      <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
-   <li><a href="#password-encode-set">password encode set</a><span>, in §2</span>
    <li><a href="#concept-url-path">path</a><span>, in §4</span>
    <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
@@ -4889,12 +4889,12 @@ neighboring rights to this work.
    <li><a href="#urlutils">URLUtils</a><span>, in §6</span>
    <li><a href="#urlutilsreadonly">URLUtilsReadOnly</a><span>, in §6</span>
    <li><a href="#urlutilssearchparams">URLUtilsSearchParams</a><span>, in §6</span>
+   <li><a href="#userinfo-encode-set">userinfo encode set</a><span>, in §2</span>
    <li>username
     <ul>
      <li><a href="#concept-url-username">dfn for URL</a><span>, in §4</span>
      <li><a href="#dom-urlutils-username">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
-   <li><a href="#username-encode-set">username encode set</a><span>, in §2</span>
    <li><a href="#utf_8-percent-encode">utf-8 percent encode</a><span>, in §2</span>
    <li><a href="#valid-domain">valid domain</a><span>, in §3.2</span>
    <li>value

@@ -193,30 +193,32 @@ than U+007E.
 and
 "<code>}</code>". <!-- 0x7D -->
 
-<p>The <dfn>password encode set</dfn> is the
+<p>The <dfn>userinfo encode set</dfn> is the
 <a>default encode set</a> and code points
 "<code>/</code>", <!-- 0x2F -->
+"<code>:</code>", <!-- 0x3A -->
+"<code>;</code>", <!-- 0x3B -->
+"<code>=</code>", <!-- 0x3D -->
 "<code>@</code>", <!-- 0x40 -->
+"<code>[</code>", <!-- 0x5B -->
+"<code>\</code>", <!-- 0x5C -->
+"<code>]</code>", <!-- 0x5D -->
+"<code>^</code>", <!-- 0x5E -->
 and
-"<code>\</code>". <!-- 0x5C -->
+"<code>|</code>". <!-- 0x7C -->
 
-<p>The <dfn>username encode set</dfn> is the
-<a>password encode set</a> and code point
-"<code>:</code>". <!-- 0x3A -->
-
-<p>To <dfn>utf-8 percent encode</dfn> a <var>code point</var>, using
+<p>To <dfn>utf-8 percent encode</dfn> a <var>codePoint</var>, using
 an <var>encode set</var>, run these steps:
 
 <ol>
- <li><p>If <var>code point</var> is not in
- <var>encode set</var>, return <var>code point</var>.
+ <li><p>If <var>codePoint</var> is not in <var>encode set</var>, return
+ <var>codePoint</var>.
 
- <li><p>Let <var>bytes</var> be the result of running
- <a>utf-8 encode</a> on
- <var>code point</var>.
+ <li><p>Let <var>bytes</var> be the result of running <a>utf-8 encode</a> on
+ <var>codePoint</var>.
 
- <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and
- then return them concatenated, in the same order.
+ <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and then return the results
+ concatenated, in the same order.
 </ol>
 
 
@@ -1306,24 +1308,26 @@ optionally with an <a>encoding</a>
        <li><p>Set the <var>@ flag</var>.
 
        <li>
-        <p>For each <var>code point</var> in <var>buffer</var>, run these substeps:
+        <p>For each <var>codePoint</var> in <var>buffer</var>, run these substeps:
 
         <ol>
-         <li><p>If <var>code point</var> is U+0009, U+000A, or U+000D, continue.
+         <li><p>If <var>codePoint</var> is U+0009, U+000A, or U+000D, run these substeps
+         for the next code point.
 
-         <li><p>If <var>code point</var> is "<code>:</code>" and
+         <li><p>If <var>codePoint</var> is "<code>:</code>" and
          <var>url</var>'s
          <a for=URL>password</a> is null, set
          <var>url</var>'s <a for=URL>password</a>
-         to the empty string and continue.
+         to the empty string and run these substeps for the next code point.
 
-         <li><p>If <var>url</var>'s <a for=URL>password</a> is non-null,
-         <a>utf-8 percent encode</a> <var>code point</var> using the
-         <a>password encode set</a> and append the result to <var>url</var>'s
-         <a for=URL>password</a>.
+         <li><p>Let <var>encodedCodePoints</var> be the result of running
+         <a>utf-8 percent encode</a> <var>codePoint</var> using the
+         <a>userinfo encode set</a>.
 
-         <li><p>Otherwise, <a>utf-8 percent encode</a> <var>code point</var> using the
-         <a>username encode set</a> and append the result to <var>url</var>'s
+         <li><p>If <var>url</var>'s <a for=URL>password</a> is non-null, append
+         <var>encodedCodePoints</var> to <var>url</var>'s <a for=URL>password</a>.
+
+         <li><p>Otherwise, append <var>encodedCodePoints</var> to <var>url</var>'s
          <a for=URL>username</a>.
         </ol>
        <li><p>Set <var>buffer</var> to the empty string.
@@ -1810,21 +1814,19 @@ optionally with an <a>encoding</a>
 
 <hr>
 
-<p>To <dfn>set the username</dfn> given a <var>url</var> and
-<var>username</var>, run these steps:
+<p>To <dfn>set the username</dfn> given a <var>url</var> and <var>username</var>, run
+these steps:
 
 <ol>
- <li><p>Set <var>url</var>'s <a for=URL>username</a> to the
- empty string.
+ <li><p>Set <var>url</var>'s <a for=URL>username</a> to the empty string.
 
  <li><p>For each code point in <var>username</var>,
- <a>utf-8 percent encode</a> it using the <a>username encode set</a>, and
- append the result to <var>url</var>'s
- <a for=URL>username</a>.
+ <a>utf-8 percent encode</a> it using the <a>userinfo encode set</a>, and append the
+ result to <var>url</var>'s <a for=URL>username</a>.
 </ol>
 
-<p>To <dfn>set the password</dfn> given a <var>url</var> and
-<var>password</var>, run these steps:
+<p>To <dfn>set the password</dfn> given a <var>url</var> and <var>password</var>, run
+these steps:
 
 <ol>
  <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
@@ -1834,13 +1836,11 @@ optionally with an <a>encoding</a>
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Set <var>url</var>'s <a for=URL>password</a> to
-   the empty string.
+   <li><p>Set <var>url</var>'s <a for=URL>password</a> to the empty string.
 
    <li><p>For each code point in <var>password</var>,
-   <a>utf-8 percent encode</a> it using the <a>password encode set</a>, and
-   append the result to <var>url</var>'s
-   <a for=URL>password</a>.
+   <a>utf-8 percent encode</a> it using the <a>userinfo encode set</a>, and
+   append the result to <var>url</var>'s <a for=URL>password</a>.
   </ol>
 </ol>
 
