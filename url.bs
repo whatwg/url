@@ -76,6 +76,10 @@ and in the range U+0061 to U+007A, inclusive.
 
 <p>An <dfn>ASCII string</dfn> is a <a>string</a> in the range U+0000 to U+007F, inclusive.
 
+<p>To <dfn>ASCII lowercase</dfn> a <a>string</a>, replace all code points in the range
+U+0041 to U+005A, inclusive, with the corresponding code points in the range
+U+0061 to U+007A, inclusive.
+
 <hr>
 
 <p>A <dfn>potential Windows drive letter</dfn> is two code points, of which the first is
@@ -1043,7 +1047,7 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII alpha</a>,
-     append <a>c</a>, lowercased, to <var>buffer</var>, and
+     append <a>c</a>, <a lt="ASCII lowercase">lowercased</a>, to <var>buffer</var>, and
      set <var>state</var> to <a>scheme state</a>.
 
      <li><p>Otherwise, if <var>state override</var> is not given, set
@@ -1057,8 +1061,8 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII alphanumeric</a>, "<code>+</code>",
-     "<code>-</code>", or "<code>.</code>", append <a>c</a>, lowercased, to
-     <var>buffer</var>.
+     "<code>-</code>", or "<code>.</code>", append <a>c</a>,
+     <a lt="ASCII lowercase">lowercased</a>, to <var>buffer</var>.
 
      <li>
       <p>Otherwise, if <a>c</a> is "<code>:</code>", run these substeps:
@@ -1605,10 +1609,9 @@ optionally with an <a>encoding</a>
        <a>parse error</a>.
 
        <li>
-        <p>If <var>buffer</var>, lowercased, matches any row in the first column of
-        the following table, set <var>buffer</var> to the contents of the cell in
-        the second column of the matched row:
-        <!-- XXX use ASCII lowercase from DOM -->
+        <p>If <var>buffer</var>, <a lt="ASCII lowercase">lowercased</a>, matches any row
+        in the first column of the following table, set <var>buffer</var> to the contents
+        of the cell in the second column of the matched row:
 
         <table>
          <tr><td>"<code>%2e</code>"   <td>"<code>.</code>"
