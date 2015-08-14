@@ -76,6 +76,14 @@ and in the range U+0061 to U+007A, inclusive.
 
 <p>An <dfn>ASCII string</dfn> is a <a>string</a> in the range U+0000 to U+007F, inclusive.
 
+<hr>
+
+<p>A <dfn>potential Windows drive letter</dfn> is two code points, of which the first is
+an <a>ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
+
+<p>A <dfn>Windows drive letter</dfn> is a <a>potential Windows drive letter</a> of which
+the second code point is "<code>:</code>".
+
 
 <h3 id=parsers>Parsers</h3>
 
@@ -503,7 +511,7 @@ then runs these steps:
     substeps:
 
     <ol>
-     <li><p>If <var>compress pointer</var> is not null,
+     <li><p>If <var>compress pointer</var> is non-null,
      <a>parse error</a>, return failure.
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
@@ -607,7 +615,7 @@ then runs these steps:
 
  <li>
   <p><dfn id=concept-ipv6-parser-finale lt='IPv6 parser Finale'>Finale</dfn>:
-  If <var>compress pointer</var> is not null, run these substeps:
+  If <var>compress pointer</var> is non-null, run these substeps:
 
   <ol>
    <li><p>Let <var>swaps</var> be
@@ -835,6 +843,14 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
 input might be a <a>relative URL</a>.
+
+<hr>
+
+<p>To <dfn local-lt=pop>pop a <var>url</var>'s path</dfn>, if
+<var>url</var>'s <a lt="URL scheme">scheme</a> is not "<code>file</code>" or
+<var>url</var>'s <a lt="URL path">path</a> does not contain a single string that is a
+<a>Windows drive letter</a>, remove <var>url</var>'s <a lt="URL path">path</a>'s
+last string, if any.
 
 
 <h3 id=url-writing>URL writing</h3>
@@ -1066,9 +1082,9 @@ optionally with an <a>encoding</a>
        <li><p>If <var>state override</var> is given, terminate this algorithm.
 
        <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is "<code>file</code>",
-       set <var>state</var> to <a>relative state</a>.
+       set <var>state</var> to <a>file state</a>.
 
-       <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is not null,
+       <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null,
        and <var>base</var>'s <a lt="URL scheme">scheme</a> is equal to <var>url</var>'s
        <a lt="URL scheme">scheme</a>, set <var>state</var> to
        <a>special relative or authority state</a>.
@@ -1095,22 +1111,28 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>no scheme state</dfn>
    <dd>
-    <p>If <var>base</var> is null, or <var>base</var>'s <a>non-relative flag</a> is set
-    and <a>c</a> is not "<code>#</code>", <a>parse error</a>, return failure.
+    <ol>
+     <li><p>If <var>base</var> is null, or <var>base</var>'s <a>non-relative flag</a> is
+     set and <a>c</a> is not "<code>#</code>", <a>parse error</a>, return failure.
 
-    <p>Otherwise, if <var>base</var>'s <a>non-relative flag</a> is set and <a>c</a> is
-    "<code>#</code>", set <var>url</var>'s <a lt="URL scheme">scheme</a> to
-    <var>base</var>'s <a lt="URL scheme">scheme</a>,
-    <var>url</var>'s <a lt="URL path">path</a> to
-    <var>base</var>'s <a lt="URL path">path</a>,
-    <var>url</var>'s <a lt='URL query'>query</a> to
-    <var>base</var>'s <a lt='URL query'>query</a>,
-    <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string, set
-    <var>url</var>'s <a>non-relative flag</a>, and set <var>state</var> to
-    <a>fragment state</a>.
+     <li><p>Otherwise, if <var>base</var>'s <a>non-relative flag</a> is set and <a>c</a>
+     is "<code>#</code>", set <var>url</var>'s <a lt="URL scheme">scheme</a> to
+     <var>base</var>'s <a lt="URL scheme">scheme</a>,
+     <var>url</var>'s <a lt="URL path">path</a> to
+     <var>base</var>'s <a lt="URL path">path</a>,
+     <var>url</var>'s <a lt='URL query'>query</a> to
+     <var>base</var>'s <a lt='URL query'>query</a>,
+     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string, set
+     <var>url</var>'s <a>non-relative flag</a>, and set <var>state</var> to
+     <a>fragment state</a>.
 
-    <p>Otherwise, set <var>state</var> to <a>relative state</a>,
-    and decrease <var>pointer</var> by one.
+     <li><p>Otherwise, if <var>base</var>'s <a lt="URL scheme">scheme</a> is not
+     "<code>file</code>", set <var>state</var> to <a>relative state</a> and decrease
+     <var>pointer</var> by one.
+
+     <li><p>Otherwise, set <var>state</var> to <a>file state</a> and decrease
+     <var>pointer</var> by one.
+    </ol>
 
    <dt><dfn>special relative or authority state</dfn>
    <dd>
@@ -1133,9 +1155,7 @@ optionally with an <a>encoding</a>
    <dt><dfn>relative state</dfn>
    <dd>
     <p>Set <var>url</var>'s <a lt='URL scheme'>scheme</a> to
-    <var>base</var>'s <a lt='URL scheme'>scheme</a> if
-    <var>url</var>'s <a lt='URL scheme'>scheme</a> is not
-    "<code>file</code>", and then, based on <a>c</a>:
+    <var>base</var>'s <a lt='URL scheme'>scheme</a>, and then, based on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
@@ -1193,29 +1213,17 @@ optionally with an <a>encoding</a>
       <p>Otherwise, run these steps:
 
       <ol>
-       <li>
-        <p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is not "<code>file</code>",
-        or <var>c</var> is not an <a>ASCII alpha</a>, or <a>remaining</a> does not start
-        with either "<code>:</code>" or "<code>|</code>", or <a>remaining</a> consists of
-        one code point, or <a>remaining</a>'s second code point is not one of
-        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", then
-        set <var>url</var>'s <a lt='URL username'>username</a> to
-        <var>base</var>'s <a lt='URL username'>username</a>,
-        <var>url</var>'s <a lt='URL password'>password</a> to
-        <var>base</var>'s <a lt='URL password'>password</a>,
-        <var>url</var>'s <a lt='URL host'>host</a> to
-        <var>base</var>'s <a lt='URL host'>host</a>,
-        <var>url</var>'s <a lt='URL port'>port</a> to
-        <var>base</var>'s <a lt='URL port'>port</a>,
-        <var>url</var>'s <a lt='URL path'>path</a> to
-        <var>base</var>'s <a lt='URL path'>path</a>, and then remove
-        <var>url</var>'s <a lt='URL path'>path</a>'s last entry.
-        <!-- base's path cannot be empty so pop does not need a non-empty check -->
-
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        When found at the start of a <code>file</code> URL it is treated as an
-        absolute path rather than one relative to
-        <var>base</var>'s <a lt='URL path'>path</a>.
+       <li><p>Set <var>url</var>'s <a lt='URL username'>username</a> to
+       <var>base</var>'s <a lt='URL username'>username</a>,
+       <var>url</var>'s <a lt='URL password'>password</a> to
+       <var>base</var>'s <a lt='URL password'>password</a>,
+       <var>url</var>'s <a lt='URL host'>host</a> to
+       <var>base</var>'s <a lt='URL host'>host</a>,
+       <var>url</var>'s <a lt='URL port'>port</a> to
+       <var>base</var>'s <a lt='URL port'>port</a>,
+       <var>url</var>'s <a lt='URL path'>path</a> to
+       <var>base</var>'s <a lt='URL path'>path</a>, and then remove
+       <var>url</var>'s <a lt='URL path'>path</a>'s last entry, if any.
 
        <li><p>Set <var>state</var> to <a>path state</a>,
        and decrease <var>pointer</var> by one.
@@ -1224,39 +1232,27 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>relative slash state</dfn>
    <dd>
-    <p>If either <a>c</a> is "<code>/</code>", or <var>url</var> <a>is special</a> and
-    <a>c</a> is "<code>\</code>", run these steps:
-
-    <ol>
-     <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
-
-     <li><p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is "<code>file</code>", set
-     <var>state</var> to <a>file host state</a>.
-
-     <li><p>Otherwise, set <var>state</var> to
-     <a>special authority ignore slashes state</a>.
-    </ol>
-
-    <p>Otherwise, run these steps:
-
     <ol>
      <li>
-      <p>If <var>url</var>'s <a lt="URL scheme">scheme</a> is not
-      "<code>file</code>", set
-      <var>url</var>'s <a lt="URL username">username</a> to
-      <var>base</var>'s <a lt="URL username">username</a>,
-      <var>url</var>'s <a lt="URL password">password</a> to
-      <var>base</var>'s <a lt="URL password">password</a>,
-      <var>url</var>'s <a lt="URL host">host</a> to
-      <var>base</var>'s <a lt="URL host">host</a>, and
-      <var>url</var>'s <a lt="URL port">port</a> to
-      <var>base</var>'s <a lt="URL port">port</a>.
+      <p>If either <a>c</a> is "<code>/</code>", or <var>url</var> <a>is special</a> and
+      <a>c</a> is "<code>\</code>", run these substeps:
 
-      <p class="example no-backref"><code>file:/path/</code> will not inherit
-      <var>base</var>'s <a lt="URL host">host</a>.
+      <ol>
+       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
 
-     <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by
-     one.
+       <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
+      </ol>
+
+     <li><p>Otherwise, set
+     <var>url</var>'s <a lt="URL username">username</a> to
+     <var>base</var>'s <a lt="URL username">username</a>,
+     <var>url</var>'s <a lt="URL password">password</a> to
+     <var>base</var>'s <a lt="URL password">password</a>,
+     <var>url</var>'s <a lt="URL host">host</a> to
+     <var>base</var>'s <a lt="URL host">host</a>,
+     <var>url</var>'s <a lt="URL port">port</a> to
+     <var>base</var>'s <a lt="URL port">port</a>,
+     <var>state</var> to <a>path state</a>, and then, decrease <var>pointer</var> by one.
     </ol>
 
    <dt><dfn>special authority slashes state</dfn>
@@ -1392,52 +1388,6 @@ optionally with an <a>encoding</a>
       </ol>
     </ol>
 
-   <dt><dfn>file host state</dfn>
-   <dd>
-    <ol>
-     <li>
-      <p>If <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps:
-
-      <ol>
-       <li>
-        <p>If <var>buffer</var> consists of two code points, of
-        which the first is an <a>ASCII alpha</a> and the second is
-        either "<code>:</code>" or "<code>|</code>", set
-        <var>state</var> to <a>path state</a>.
-
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
-        <a>path state</a>.
-
-       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a>path start state</a>.
-
-       <li>
-        <p>Otherwise, run these steps:
-
-        <ol>
-         <li><p>Let <var>host</var> be the result of
-         <a lt='host parser'>host parsing</a>
-         <var>buffer</var>.
-
-         <li><p>If <var>host</var> is failure, return failure.
-
-         <li><p>If <var>host</var> is not "<code title>localhost</code>", set
-         <var>url</var>'s <a lt='URL host'>host</a> to <var>host</var>.
-
-         <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
-         <a>path start state</a>.
-        </ol>
-      </ol>
-
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
-
-     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
-    </ol>
-
    <dt><dfn>port state</dfn>
    <dd>
     <ol>
@@ -1487,6 +1437,151 @@ optionally with an <a>encoding</a>
      <li><p>Otherwise, <a>parse error</a>, return failure.
     </ol>
 
+   <dt><dfn>file state</dfn>
+   <dd>
+    <p>Set <var>url</var>'s <a lt='URL scheme'>scheme</a> to "<code>file</code>",
+    and then, based on <a>c</a>:
+
+    <dl class=switch>
+     <dt><a>EOF code point</a>
+     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
+     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a lt='URL host'>host</a> to
+     <var>base</var>'s <a lt='URL host'>host</a>,
+     <var>url</var>'s <a lt='URL path'>path</a> to
+     <var>base</var>'s <a lt='URL path'>path</a>, and
+     <var>url</var>'s <a lt='URL query'>query</a> to
+     <var>base</var>'s <a lt='URL query'>query</a>.
+
+     <dt>"<code>/</code>"
+     <dt>"<code>\</code>"
+     <dd>
+      <ol>
+       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
+
+       <li><p>Set <var>state</var> to <a>file slash state</a>.
+      </ol>
+
+     <dt>"<code>?</code>"
+     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
+     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a lt='URL host'>host</a> to
+     <var>base</var>'s <a lt='URL host'>host</a>,
+     <var>url</var>'s <a lt='URL path'>path</a> to
+     <var>base</var>'s <a lt='URL path'>path</a>,
+     <var>url</var>'s <a lt='URL query'>query</a> to the empty string,
+     and <var>state</var> to <a>query state</a>.
+
+     <dt>"<code>#</code>"
+     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
+     <a lt='URL scheme'>scheme</a> is "<code>file</code>", set
+     <var>url</var>'s <a lt="URL host">host</a> to
+     <var>base</var>'s <a lt="URL host">host</a>,
+     <var>url</var>'s <a lt="URL path">path</a> to
+     <var>base</var>'s <a lt="URL path">path</a>,
+     <var>url</var>'s <a lt="URL query">query</a> to
+     <var>base</var>'s <a lt="URL query">query</a>,
+     <var>url</var>'s <a lt="URL fragment">fragment</a> to the empty string,
+     and <var>state</var> to <a>fragment state</a>.
+
+     <dt>Otherwise
+     <dd>
+      <ol>
+       <li>
+        <p>If <var>base</var> is non-null, <var>base</var>'s <a lt='URL scheme'>scheme</a>
+        is "<code>file</code>", and one of <var>c</var> and the first code point of
+        <a>remaining</a> are not a <a>potential Windows drive letter</a>, <a>remaining</a>
+        consists of one code point, and <a>remaining</a>'s second code point is not one of
+        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", set
+        <var>url</var>'s <a lt='URL host'>host</a> to
+        <var>base</var>'s <a lt='URL host'>host</a>,
+        <var>url</var>'s <a lt='URL path'>path</a> to
+        <var>base</var>'s <a lt='URL path'>path</a>, and then <a>pop</a>
+        <var>url</var>'s <a lt='URL path'>path</a>.
+
+        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+
+       <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
+       by one.
+      </ol>
+    </dl>
+
+   <dt><dfn>file slash state</dfn>
+   <dd>
+    <ol>
+     <li>
+      <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", run these substeps:
+
+      <ol>
+       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
+
+       <li><p>Set <var>state</var> to <a>file host state</a>.
+      </ol>
+
+     <li>
+      <p>Otherwise, run these substeps:
+
+      <ol>
+       <li>
+        <p>If <var>base</var> is non-null, <var>base</var>'s
+        <a lt='URL scheme'>scheme</a> is "<code>file</code>", and <var>base</var>'s
+        <a lt='URL path'>path</a> first string is a <a>Windows drive letter</a>, append
+        <var>base</var>'s <a lt='URL path'>path</a> first string to
+        <var>url</var>'s <a lt='URL path'>path</a>.
+
+        <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
+        <var>url</var>'s and <var>base</var>'s <a>host</a> are null under these conditions
+        and therefore not copied.
+
+       <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
+       by one.
+      </ol>
+    </ol>
+
+   <dt><dfn>file host state</dfn>
+   <dd>
+    <ol>
+     <li>
+      <p>If <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>", "<code>\</code>",
+      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
+      these substeps:
+
+      <ol>
+       <li>
+        <p>If <var>buffer</var> is a <a>potential Windows drive letter</a>, set
+        <var>state</var> to <a>path state</a>.
+
+        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+        <var>buffer</var> is not reset here and instead used in the
+        <a>path state</a>.
+
+       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
+       <var>state</var> to <a>path start state</a>.
+
+       <li>
+        <p>Otherwise, run these steps:
+
+        <ol>
+         <li><p>Let <var>host</var> be the result of
+         <a lt='host parser'>host parsing</a>
+         <var>buffer</var>.
+
+         <li><p>If <var>host</var> is failure, return failure.
+
+         <li><p>If <var>host</var> is not "<code title>localhost</code>", set
+         <var>url</var>'s <a lt='URL host'>host</a> to <var>host</var>.
+
+         <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
+         <a>path start state</a>.
+        </ol>
+      </ol>
+
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
+     <a>parse error</a>.
+
+     <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
+    </ol>
+
    <dt><dfn>path start state</dfn>
    <dd>
     <ol>
@@ -1522,11 +1617,10 @@ optionally with an <a>encoding</a>
          <tr><td>"<code>%2e%2e</code>"
         </table>
 
-       <li><p>If <var>buffer</var> is "<code>..</code>", remove <var>url</var>'s
-       <a lt="URL path">path</a>'s last string, if any, and then if neither <a>c</a> is
-       "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
-       "<code>\</code>", append the empty string to <var>url</var>'s
-       <a lt="URL path">path</a>.
+       <li><p>If <var>buffer</var> is "<code>..</code>", <a>pop</a> <var>url</var>'s
+       <a lt="URL path">path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
+       <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>", append the empty
+       string to <var>url</var>'s <a lt="URL path">path</a>.
 
        <li><p>Otherwise, if <var>buffer</var> is "<code>.</code>" and if neither <a>c</a>
        is "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
@@ -1541,13 +1635,11 @@ optionally with an <a>encoding</a>
          <li>
           <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is
           "<code>file</code>", <var>url</var>'s <a lt='URL path'>path</a>
-          is empty, <var>buffer</var> consists of two
-          code points, of which the first is an <a>ASCII alpha</a>,
-          and the second is "<code>|</code>", replace the second code point in
+          is empty, and <var>buffer</var> is a <a>potential Windows drive letter</a>, set
+          <var>url</var>'s <a>host</a> to null and replace the second code point in
           <var>buffer</var> with "<code>:</code>".
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
-          They are beautiful, no?
 
          <li><p>Append <var>buffer</var> to
          <var>url</var>'s <a lt='URL path'>path</a>.
@@ -1629,7 +1721,7 @@ optionally with an <a>encoding</a>
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
-       <a lt='encode'>encoding</a>
+       <a lt=encode>encoding</a>
        <var>buffer</var> using <var>encoding override</var>.
 
        <li>
@@ -1697,8 +1789,9 @@ optionally with an <a>encoding</a>
        <li>
         <p>Append <a>c</a> to <var>url</var>'s <a lt="URL fragment">fragment</a>.
 
-        <p class=note>Unfortunately not using <a lt="percent encode">percent-encoding</a> is intentional as
-        implementations with majority market share exhibit this behavior.
+        <p class="note no-backref">Unfortunately not using
+        <a lt="percent encode">percent-encoding</a> is intentional as implementations with
+        majority market share exhibit this behavior.
         <!-- Chrome does percent-encoding if the scheme is not a special scheme,
              hopefully that can be aligned since flip-flopping is not great. -->
       </ol>
@@ -1783,6 +1876,10 @@ these steps:
    "<code>:</code>" followed by <var>url</var>'s <a lt="URL port">port</a> to
    <var>output</var>.
   </ol>
+
+ <li><p>Otherwise, if <a>host</a> is null and <var>url</var>'s
+ <a lt="URL scheme">scheme</a> is "<code>file</code>", append "<code>//</code>" to
+ <var>output</var>.
 
  <li><p>If <var>url</var>'s <a>non-relative flag</a> is set, append the first string in
  <var>url</var>'s <a lt="URL path">path</a> to <var>output</var>.
@@ -2018,7 +2115,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
    <li><p>Let <var>outputPair</var> be a new name-value pair.
 
    <li><p>Set <var>outputPair</var>'s name and value, to the result of
-   <a lt='urlencoded byte serializer'>serializing</a> the result of
+   <a lt="urlencoded byte serializer">serializing</a> the result of
    <a lt=encode>encoding</a> <var>pair</var>'s name and value, respectively, using
    <var>encoding override</var>.
 
@@ -2702,8 +2799,8 @@ empty.
 <p>A {{URLSearchParams}} object has an associated list of zero or more
 <dfn id=concept-urlsearchparams-url-object lt='URLSearchParams URL object'>url objects</dfn>, which is initially empty.
 
-<p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as <a>encoding</a>,
-despite the existence of concepts such as
+<p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as
+<a>encoding</a>, despite the existence of concepts such as
 <a lt='URLUtils query encoding'>query encoding</a>. This is to
 encourage developers to migrate towards
 <a>utf-8</a>, which they really ought to
@@ -2942,7 +3039,7 @@ neighboring rights to this work.
             "Arun Ranganathan",
             "Jonas Sicking"
         ],
-        "href": "http://dev.w3.org/2006/webapi/FileAPI/",
+        "href": "https://w3c.github.io/FileAPI/",
         "title": "File API",
         "publisher": "W3C"
     },
@@ -2959,7 +3056,7 @@ neighboring rights to this work.
 </pre>
 
 <pre class="anchors">
-urlPrefix: http://dev.w3.org/2006/webapi/FileAPI/; type: dfn
+urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
   text: blob
   text: blob url store; url: #BlobURLStore
 urlPrefix: https://dom.spec.whatwg.org/; type: dfn

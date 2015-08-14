@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-13">13 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-14">14 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -202,6 +202,17 @@ and in the range U+0061 to U+007A, inclusive.
 
 </p>
    <p>An <dfn data-dfn-type="dfn" data-noexport="" id="ascii-string">ASCII string<a class="self-link" href="#ascii-string"></a></dfn> is a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#string">string</a> in the range U+0000 to U+007F, inclusive.
+
+</p>
+   <hr>
+
+
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="potential-windows-drive-letter">potential Windows drive letter<a class="self-link" href="#potential-windows-drive-letter"></a></dfn> is two code points, of which the first is
+an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
+
+</p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="windows-drive-letter">Windows drive letter<a class="self-link" href="#windows-drive-letter"></a></dfn> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a> of which
+the second code point is "<code>:</code>".
 
 
 </p>
@@ -835,7 +846,7 @@ then runs these steps:
        <ol>
      
         <li>
-         <p>If <var>compress pointer</var> is not null,
+         <p>If <var>compress pointer</var> is non-null,
      <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
      </p>
@@ -1013,7 +1024,7 @@ then runs these steps:
     <li>
   
      <p><dfn data-dfn-type="dfn" data-lt="IPv6 parser Finale" data-noexport="" id="concept-ipv6-parser-finale">Finale<a class="self-link" href="#concept-ipv6-parser-finale"></a></dfn>:
-  If <var>compress pointer</var> is not null, run these substeps:
+  If <var>compress pointer</var> is non-null, run these substeps:
 
   </p>
      <ol>
@@ -1260,7 +1271,7 @@ unset.
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated
 <dfn data-dfn-type="dfn" data-lt="URL object" data-noexport="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a
-<code><a data-link-type="dfn" href="http://dev.w3.org/2006/webapi/FileAPI/#blob">Blob</a></code> object. It is initially null.
+<code><a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#blob">Blob</a></code> object. It is initially null.
 <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a>
 
 </p>
@@ -1349,6 +1360,16 @@ Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a 
 </p>
    <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is useful for the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a> when the
 input might be a <a data-link-type="dfn" href="#concept-relative-url">relative URL</a>.
+
+</p>
+   <hr>
+
+
+   <p>To <dfn data-dfn-type="dfn" data-local-lt="pop" data-noexport="" id="pop-a-urls-path">pop a <var>url</var>’s path<a class="self-link" href="#pop-a-urls-path"></a></dfn>, if
+<var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or
+<var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a
+<a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s
+last string, if any.
 
 
 </p>
@@ -1500,12 +1521,12 @@ U+100000 to U+10FFFD.
  </p>
     <li>
      <p>If the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> is not in the
- <a data-link-type="dfn" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a>, return <var>url</var>. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a>
+ <a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#BlobURLStore">blob URL store</a>, return <var>url</var>. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a>
 
  </p>
     <li>
      <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-object">object</a> to a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a> of
- the entry in the <a data-link-type="dfn" href="http://dev.w3.org/2006/webapi/FileAPI/#BlobURLStore">blob URL store</a> corresponding to the first string in
+ the entry in the <a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#BlobURLStore">blob URL store</a> corresponding to the first string in
  <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
  </p>
@@ -1678,11 +1699,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        </p>
           <li>
            <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>",
-       set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a>.
+       set <var>state</var> to <a data-link-type="dfn" href="#file-state">file state</a>.
 
        </p>
           <li>
-           <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is not null,
+           <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is non-null,
        and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is equal to <var>url</var>’s
        <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, set <var>state</var> to
        <a data-link-type="dfn" href="#special-relative-or-authority-state">special relative or authority state</a>.
@@ -1726,26 +1747,40 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    
       <dd>
     
-       <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is set
-    and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+       <ol>
+     
+        <li>
+         <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is
+     set and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
 
+     </p>
+        <li>
+         <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is set and <a data-link-type="dfn" href="#c">c</a>
+     is "<code>#</code>", set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, set
+     <var>url</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a>, and set <var>state</var> to
+     <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+
+     </p>
+        <li>
+         <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is
+     "<code>file</code>", set <var>state</var> to <a data-link-type="dfn" href="#file-state">file state</a> and decrease
+     <var>pointer</var> by one.
+
+     </p>
+        <li>
+         <p>Otherwise, set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a> and decrease
+     <var>pointer</var> by one.
     </p>
-       <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is set and <a data-link-type="dfn" href="#c">c</a> is
-    "<code>#</code>", set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
-    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
-    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
-    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, set
-    <var>url</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a>, and set <var>state</var> to
-    <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+       </ol>
+       
 
-    </p>
-       <p>Otherwise, set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a>,
-    and decrease <var>pointer</var> by one.
-
-   </p>
+   
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="special-relative-or-authority-state">special relative or authority state<a class="self-link" href="#special-relative-or-authority-state"></a></dfn>
    
       <dd>
@@ -1777,9 +1812,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
     
        <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> if
-    <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not
-    "<code>file</code>", and then, based on <a data-link-type="dfn" href="#c">c</a>:
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, and then, based on <a data-link-type="dfn" href="#c">c</a>:
 
     </p>
        <dl class="switch">
@@ -1857,30 +1890,17 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-        
-           <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>",
-        or <var>c</var> is not an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, or <a data-link-type="dfn" href="#remaining">remaining</a> does not start
-        with either "<code>:</code>" or "<code>|</code>", or <a data-link-type="dfn" href="#remaining">remaining</a> consists of
-        one code point, or <a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is not one of
-        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", then
-        set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then remove
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s last entry.
-        
-
-        </p>
-           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
-        When found at the start of a <code>file</code> URL it is treated as an
-        absolute path rather than one relative to
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
+           <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+       <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then remove
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s last entry, if any.
 
        </p>
           <li>
@@ -1898,55 +1918,38 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    
       <dd>
     
-       <p>If either <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and
-    <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", run these steps:
-
-    </p>
-       <ol>
-     
-        <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-     </p>
-        <li>
-         <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", set
-     <var>state</var> to <a data-link-type="dfn" href="#file-host-state">file host state</a>.
-
-     </p>
-        <li>
-         <p>Otherwise, set <var>state</var> to
-     <a data-link-type="dfn" href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a>.
-    </p>
-       </ol>
-       
-
-    
-       <p>Otherwise, run these steps:
-
-    </p>
        <ol>
      
         <li>
       
-         <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not
-      "<code>file</code>", set
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>, and
-      <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>.
+         <p>If either <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and
+      <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", run these substeps:
 
       </p>
-         <p class="example no-backref" id="example-232b2bfb"><a class="self-link" href="#example-232b2bfb"></a><code>file:/path/</code> will not inherit
-      <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>.
+         <ol>
+       
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
 
-     </p>
+       </p>
+          <li>
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a>.
+      </p>
+         </ol>
+         
+
+     
         <li>
-         <p>Set <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>, and decrease <var>pointer</var> by
-     one.
+         <p>Otherwise, set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a>,
+     <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>, and then, decrease <var>pointer</var> by one.
     </p>
        </ol>
        
@@ -2176,84 +2179,6 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
 
    
-      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-host-state">file host state<a class="self-link" href="#file-host-state"></a></dfn>
-   
-      <dd>
-    
-       <ol>
-     
-        <li>
-      
-         <p>If <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps:
-
-      </p>
-         <ol>
-       
-          <li>
-        
-           <p>If <var>buffer</var> consists of two code points, of
-        which the first is an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is
-        either "<code>:</code>" or "<code>|</code>", set
-        <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
-
-        </p>
-           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
-        <a data-link-type="dfn" href="#path-state">path state</a>.
-
-       </p>
-          <li>
-           <p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
-
-       </p>
-          <li>
-        
-           <p>Otherwise, run these steps:
-
-        </p>
-           <ol>
-         
-            <li>
-             <p>Let <var>host</var> be the result of
-         <a data-link-type="dfn" href="#concept-host-parser">host parsing</a>
-         <var>buffer</var>.
-
-         </p>
-            <li>
-             <p>If <var>host</var> is failure, return failure.
-
-         </p>
-            <li>
-             <p>If <var>host</var> is not "<code title="">localhost</code>", set
-         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to <var>host</var>.
-
-         </p>
-            <li>
-             <p>Set <var>buffer</var> to the empty string and <var>state</var> to
-         <a data-link-type="dfn" href="#path-start-state">path start state</a>.
-        </p>
-           </ol>
-           
-      
-         </ol>
-         
-
-     
-        <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
-
-     </p>
-        <li>
-         <p>Otherwise, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
-    </p>
-       </ol>
-       
-
-   
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="port-state">port state<a class="self-link" href="#port-state"></a></dfn>
    
       <dd>
@@ -2351,6 +2276,242 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
 
    
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-state">file state<a class="self-link" href="#file-state"></a></dfn>
+   
+      <dd>
+    
+       <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to "<code>file</code>",
+    and then, based on <a data-link-type="dfn" href="#c">c</a>:
+
+    </p>
+       <dl class="switch">
+     
+        <dt><a data-link-type="dfn" href="#eof-code-point">EOF code point</a>
+     
+        <dd>
+         <p>If <var>base</var> is non-null and <var>base</var>’s
+     <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>.
+
+     </p>
+        <dt>"<code>/</code>"
+     
+        <dt>"<code>\</code>"
+     
+        <dd>
+      
+         <ol>
+       
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+       </p>
+          <li>
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#file-slash-state">file slash state</a>.
+      </p>
+         </ol>
+         
+
+     
+        <dt>"<code>?</code>"
+     
+        <dd>
+         <p>If <var>base</var> is non-null and <var>base</var>’s
+     <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to the empty string,
+     and <var>state</var> to <a data-link-type="dfn" href="#query-state">query state</a>.
+
+     </p>
+        <dt>"<code>#</code>"
+     
+        <dd>
+         <p>If <var>base</var> is non-null and <var>base</var>’s
+     <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", set
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to
+     <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
+     <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string,
+     and <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>.
+
+     </p>
+        <dt>Otherwise
+     
+        <dd>
+      
+         <ol>
+       
+          <li>
+        
+           <p></p>
+           <p>If <var>base</var> is non-null, <var>base</var>’s
+        <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", and one of <var>c</var>
+        and the first code point of <a data-link-type="dfn" href="#remaining">remaining</a> are not a
+        <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, <a data-link-type="dfn" href="#remaining">remaining</a> consists of
+        one code point, and <a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is not one of
+        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", set
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then <a data-link-type="dfn" href="#pop-a-urls-path">pop</a>
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
+
+        </p>
+           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
+
+       </p>
+          <li>
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>, and decrease <var>pointer</var>
+       by one.
+      </p>
+         </ol>
+         
+    
+       </dl>
+       
+
+   
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-slash-state">file slash state<a class="self-link" href="#file-slash-state"></a></dfn>
+   
+      <dd>
+    
+       <ol>
+     
+        <li>
+      
+         <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>" or "<code>\</code>", run these substeps:
+
+      </p>
+         <ol>
+       
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+       </p>
+          <li>
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#file-host-state">file host state</a>.
+      </p>
+         </ol>
+         
+
+     
+        <li>
+      
+         <p>Otherwise, run these substeps:
+
+      </p>
+         <ol>
+       
+          <li>
+        
+           <p>If <var>base</var> is non-null, <var>base</var>’s
+        <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", and <var>base</var>’s
+        <a data-link-type="dfn" href="#concept-url-path">path</a> first string is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, append
+        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> first string to
+        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
+
+        </p>
+           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
+
+       </p>
+          <li>
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>, and decrease <var>pointer</var>
+       by one.
+      </p>
+         </ol>
+         
+    
+       </ol>
+       
+
+   
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="file-host-state">file host state<a class="self-link" href="#file-host-state"></a></dfn>
+   
+      <dd>
+    
+       <ol>
+     
+        <li>
+      
+         <p>If <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>",
+      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
+      these substeps:
+
+      </p>
+         <ol>
+       
+          <li>
+        
+           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, set
+        <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
+
+        </p>
+           <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
+        <var>buffer</var> is not reset here and instead used in the
+        <a data-link-type="dfn" href="#path-state">path state</a>.
+
+       </p>
+          <li>
+           <p>Otherwise, if <var>buffer</var> is the empty string, set
+       <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>.
+
+       </p>
+          <li>
+        
+           <p>Otherwise, run these steps:
+
+        </p>
+           <ol>
+         
+            <li>
+             <p>Let <var>host</var> be the result of
+         <a data-link-type="dfn" href="#concept-host-parser">host parsing</a>
+         <var>buffer</var>.
+
+         </p>
+            <li>
+             <p>If <var>host</var> is failure, return failure.
+
+         </p>
+            <li>
+             <p>If <var>host</var> is not "<code title="">localhost</code>", set
+         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to <var>host</var>.
+
+         </p>
+            <li>
+             <p>Set <var>buffer</var> to the empty string and <var>state</var> to
+         <a data-link-type="dfn" href="#path-start-state">path start state</a>.
+        </p>
+           </ol>
+           
+      
+         </ol>
+         
+
+     
+        <li>
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
+     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+
+     </p>
+        <li>
+         <p>Otherwise, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
+    </p>
+       </ol>
+       
+
+   
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="path-start-state">path start state<a class="self-link" href="#path-start-state"></a></dfn>
    
       <dd>
@@ -2420,11 +2581,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
        
           <li>
-           <p>If <var>buffer</var> is "<code>..</code>", remove <var>url</var>’s
-       <a data-link-type="dfn" href="#concept-url-path">path</a>’s last string, if any, and then if neither <a data-link-type="dfn" href="#c">c</a> is
-       "<code>/</code>", nor <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is
-       "<code>\</code>", append the empty string to <var>url</var>’s
-       <a data-link-type="dfn" href="#concept-url-path">path</a>.
+           <p>If <var>buffer</var> is "<code>..</code>", <a data-link-type="dfn" href="#pop-a-urls-path">pop</a> <var>url</var>’s
+       <a data-link-type="dfn" href="#concept-url-path">path</a>, and then if neither <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>", nor
+       <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", append the empty
+       string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
 
        </p>
           <li>
@@ -2446,14 +2606,12 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           
              <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is
           "<code>file</code>", <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>
-          is empty, <var>buffer</var> consists of two
-          code points, of which the first is an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>,
-          and the second is "<code>|</code>", replace the second code point in
+          is empty, and <var>buffer</var> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, set
+          <var>url</var>’s <a data-link-type="dfn" href="#concept-host">host</a> to null and replace the second code point in
           <var>buffer</var> with "<code>:</code>".
 
           </p>
              <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
-          They are beautiful, no?
 
          </p>
             <li>
@@ -2713,8 +2871,9 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p>Append <a data-link-type="dfn" href="#c">c</a> to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a>.
 
         </p>
-           <p class="note" role="note">Unfortunately not using <a data-link-type="dfn" href="#percent-encode">percent-encoding</a> is intentional as
-        implementations with majority market share exhibit this behavior.
+           <p class="note no-backref" role="note">Unfortunately not using
+        <a data-link-type="dfn" href="#percent-encode">percent-encoding</a> is intentional as implementations with
+        majority market share exhibit this behavior.
         
       </p>
          </ol>
@@ -2855,6 +3014,12 @@ these steps:
      
 
  
+    <li>
+     <p>Otherwise, if <a data-link-type="dfn" href="#concept-host">host</a> is null and <var>url</var>’s
+ <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", append "<code>//</code>" to
+ <var>output</var>.
+
+ </p>
     <li>
      <p>If <var>url</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is set, append the first string in
  <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>output</var>.
@@ -4183,8 +4348,8 @@ empty.
 <dfn data-dfn-type="dfn" data-lt="URLSearchParams URL object" data-noexport="" id="concept-urlsearchparams-url-object">url objects<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is initially empty.
 
 </p>
-   <p class="note" role="note"><code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> objects always use <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>,
-despite the existence of concepts such as
+   <p class="note" role="note"><code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> objects always use <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
+<a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a>, despite the existence of concepts such as
 <a data-link-type="dfn" href="#concept-urlutils-query-encoding">query encoding</a>. This is to
 encourage developers to migrate towards
 <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>, which they really ought to
@@ -4498,6 +4663,8 @@ neighboring rights to this work.
    <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §6.2</span>
    <li><a href="#eof-code-point">EOF code point</a><span>, in §1.1</span>
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
+   <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
+   <li><a href="#file-state">file state</a><span>, in §4.2</span>
    <li><a href="#fragment-state">fragment state</a><span>, in §4.2</span>
    <li><a href="#dom-urlsearchparams-getall">getAll(name)</a><span>, in §6.4</span>
    <li><a href="#dom-urlsearchparams-get">get(name)</a><span>, in §6.4</span>
@@ -4554,8 +4721,11 @@ neighboring rights to this work.
    <li><a href="#percent-decode">percent decode</a><span>, in §2</span>
    <li><a href="#percent-encode">percent encode</a><span>, in §2</span>
    <li><a href="#percent_encoded-byte">percent-encoded byte</a><span>, in §2</span>
+   <li><a href="#pop-a-urls-path">pop</a><span>, in §4</span>
+   <li><a href="#pop-a-urls-path">pop a url’s path</a><span>, in §4</span>
    <li><a href="#dom-urlutils-port">port</a><span>, in §6.3</span>
    <li><a href="#port-state">port state</a><span>, in §4.2</span>
+   <li><a href="#potential-windows-drive-letter">potential Windows drive letter</a><span>, in §1</span>
    <li><a href="#pre_update-steps">pre-update steps</a><span>, in §6</span>
    <li><a href="#dom-urlutils-protocol">protocol</a><span>, in §6.3</span>
    <li><a href="#query-state">query state</a><span>, in §4.2</span>
@@ -4630,7 +4800,8 @@ neighboring rights to this work.
     <ul>
      <li><a href="#dom-urlsearchparams-append-name-value-value">argument for URLSearchParams/append(name, value)</a><span>, in §6.4</span>
      <li><a href="#dom-urlsearchparams-set-name-value-value">argument for URLSearchParams/set(name, value)</a><span>, in §6.4</span>
-    </ul></ul>
+    </ul>
+   <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
@@ -4646,7 +4817,7 @@ neighboring rights to this work.
    <dt id="biblio-encoding"><a class="self-link" href="#biblio-encoding"></a>[ENCODING]
    <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding</a>. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
    <dt id="biblio-fileapi"><a class="self-link" href="#biblio-fileapi"></a>[FILEAPI]
-   <dd>Arun Ranganathan; Jonas Sicking. <a href="http://dev.w3.org/2006/webapi/FileAPI/">File API</a>. URL: <a href="http://dev.w3.org/2006/webapi/FileAPI/">http://dev.w3.org/2006/webapi/FileAPI/</a>
+   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-iana-uri-schemes"><a class="self-link" href="#biblio-iana-uri-schemes"></a>[IANA-URI-SCHEMES]
