@@ -1534,8 +1534,8 @@ optionally with an <a>encoding</a>
         <var>url</var>'s <a lt='URL path'>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
-        <var>url</var>'s and <var>base</var>'s <a>host</a> are null under these conditions
-        and therefore not copied.
+        <var>url</var>'s and <var>base</var>'s <a lt="URL host">host</a> are null under
+        these conditions and therefore not copied.
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
        by one.
@@ -1639,8 +1639,8 @@ optionally with an <a>encoding</a>
           <p>If <var>url</var>'s <a lt='URL scheme'>scheme</a> is
           "<code>file</code>", <var>url</var>'s <a lt='URL path'>path</a>
           is empty, and <var>buffer</var> is a <a>potential Windows drive letter</a>, set
-          <var>url</var>'s <a>host</a> to null and replace the second code point in
-          <var>buffer</var> with "<code>:</code>".
+          <var>url</var>'s <a lt="URL host">host</a> to null and replace the second
+          code point in <var>buffer</var> with "<code>:</code>".
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
@@ -1852,7 +1852,7 @@ these steps:
  "<code>:</code>" concatenated.
 
  <li>
-  <p>If <var>url</var>'s <a>host</a> is non-null:
+  <p>If <var>url</var>'s <a lt="URL host">host</a> is non-null:
 
   <ol>
    <li><p>Append "<code>//</code>" to <var>output</var>.
@@ -1880,9 +1880,9 @@ these steps:
    <var>output</var>.
   </ol>
 
- <li><p>Otherwise, if <a>host</a> is null and <var>url</var>'s
- <a lt="URL scheme">scheme</a> is "<code>file</code>", append "<code>//</code>" to
- <var>output</var>.
+ <li><p>Otherwise, if <var>url</var>'s <a lt="URL host">host</a> is null and
+ <var>url</var>'s <a lt="URL scheme">scheme</a> is "<code>file</code>", append
+ "<code>//</code>" to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a>non-relative flag</a> is set, append the first string in
  <var>url</var>'s <a lt="URL path">path</a> to <var>output</var>.
@@ -1928,9 +1928,9 @@ these steps:
 <p class=note>See <a spec=html>origin</a>'s definition in HTML for the
 necessary background information. [[!HTML]]
 
-<p>A <a>URL</a>'s <dfn id=concept-url-origin lt='URL origin'>origin</dfn> is
-the <a spec=html>origin</a> returned by running these steps, switching
-on <a>URL</a>'s <a lt='URL scheme'>scheme</a>:
+<p>A <a>URL</a>'s <dfn export for=URL id=concept-url-origin>origin</dfn> is the
+<a spec=html>origin</a> returned by running these steps, switching on <a>URL</a>'s
+<a lt='URL scheme'>scheme</a>:
 
 <dl class=switch>
  <dt>"<code>blob</code>"
@@ -1939,10 +1939,10 @@ on <a>URL</a>'s <a lt='URL scheme'>scheme</a>:
   string in <a>URL</a>'s <a lt="URL path">path</a>.
 
   <p>If <var>url</var> is failure, return a new globally unique identifier. Otherwise,
-  return <var>url</var>'s <a lt="URL origin">origin</a>.
+  return <var>url</var>'s <a for=URL>origin</a>.
   <!-- Did you mean: recursion -->
 
-  <p class="example no-backref">The <a lt="URL origin">origin</a> of
+  <p class="example no-backref">The <a for=URL>origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
   (<code>https</code>, <code>whatwg.org</code>, <code>443</code>).
 
@@ -2245,87 +2245,84 @@ URLPath would be a subclassed Array? -->
 appropriate <a>base URL</a> for the object.
 
 <p>Specifications defining objects implementing {{URLUtils}} may define
-<dfn id=concept-urlutils-update lt='URLUtils update'>update steps</dfn> to make it
-possible for an underlying string (such as an
-<a lt=concept-attribute-value>attribute value</a>)
-to be updated. The <a lt='URLUtils update'>update steps</a> are passed a string
-<var>value</var> for this purpose.
+<dfn export for=URLUtils id=concept-urlutils-update>update steps</dfn> to make it possible
+for an underlying string (such as an <a lt=concept-attribute-value>attribute value</a>) to
+be updated. The <a for=URLUtils>update steps</a> are passed a string <var>value</var> for
+this purpose.
 
-<p>An object implementing {{URLUtils}} or {{URLUtilsReadOnly}} has an
-associated <dfn id=concept-urlutils-input lt='URLUtils input'>input</dfn> (a string),
-<dfn id=concept-urlutils-query-encoding lt='URLUtils query encoding'>query encoding</dfn>
-(an <a>encoding</a>),
-<dfn id=concept-urlutils-query-object lt='URLUtils query object'>query object</dfn>
-(a {{URLSearchParams}} object or null), and a
-<dfn id=concept-urlutils-url lt='URLUtils URL'>url</dfn> (a <a>URL</a> or null).
+<p>An object implementing {{URLUtils}} or {{URLUtilsReadOnly}} has an associated
+<dfn id=concept-urlutils-input for=URLUtils>input</dfn> (a string or null),
+<dfn id=concept-urlutils-query-encoding for=URLUtils>query encoding</dfn> (an
+<a>encoding</a>), <dfn id=concept-urlutils-query-object for=URLUtils>query object</dfn> (a
+{{URLSearchParams}} object or null), and a
+<dfn id=concept-urlutils-url for=URLUtils>url</dfn> (a <a>URL</a> or null).
 
-Unless stated otherwise, <a lt='URLUtils query encoding'>query encoding</a> is
-<a>utf-8</a> and
-<a lt='URLUtils query object'>query object</a> is null. The others follow
-from the <a lt='URLUtils set the input'>set the input</a> algorithm.
+Unless stated otherwise, <a for=URLUtils>query encoding</a> is <a>utf-8</a> and
+<a for=URLUtils>query object</a> is null. The others follow from the <a>set the input</a>
+algorithm.
 
 <p class=note>The associated
-<a lt='URLUtils query encoding'>query encoding</a> is a legacy
+<a for=URLUtils>query encoding</a> is a legacy
 concept only relevant for HTML.
 [[!HTML]]
 
 <p>Specifications defining objects implementing {{URLUtils}}/{{URLUtilsSearchParams}} or
-{{URLUtilsReadOnly}} must use the <a lt='URLUtils set the input'>set the input</a>
-algorithms to set <a lt='URLUtils input'>input</a>, <a lt='URLUtils URL'>url</a>, and
-<a lt='URLUtils query object'>query object</a>. To
-<dfn id=concept-urlutils-set-the-input lt='URLUtils set the input'>set the input</dfn>
+{{URLUtilsReadOnly}} must use the <a>set the input</a>
+algorithms to set <a for=URLUtils>input</a>, <a for=URLUtils>url</a>, and
+<a for=URLUtils>query object</a>. To
+<dfn id=concept-urlutils-set-the-input for=URLUtils>set the input</dfn>
 given <var>input</var> and optionally a <var>url</var>, run these steps:
 
 <ol>
- <li><p>If <var>url</var> is given, set <a lt='URLUtils URL'>url</a>
- to <var>url</var> and <a lt='URLUtils input'>input</a> to
- <var>input</var>.
+ <li><p>Set <a for=URLUtils>input</a> to <var>input</var>.
+
+ <li><p>Set <a for=URLUtils>url</a> to <var>url</var>, if <var>url is given</var>,
+ and to null otherwise.
 
  <li>
-  <p>Otherwise, run these substeps:
+  <p>If <a for=URLUtils>input</a> is non-null, run these substeps:
 
   <ol>
-   <li><p>Set <a lt='URLUtils URL'>url</a> to null.
+   <li><p>Set <a for=URLUtils>input</a> to <var>input</var>.
 
-   <li><p>If <var>input</var> is null, set
-   <a lt='URLUtils input'>input</a> to the empty string.
+   <li><p>Let <var>url</var> be the result of running the <a>URL parser</a> on
+   <a for=URLUtils>input</a> with <a>base URL</a> being the result of running
+   <a>get the base</a> and <a for=URLUtils>query encoding</a> as
+   <var>encoding override</var>.
+   <!-- support blob URLs at this level -->
 
-   <li>
-    <p>Otherwise, run these subsubsteps:
-
-    <ol>
-     <li><p>Set <a lt='URLUtils input'>input</a> to <var>input</var>.
-
-     <li><p>Let <var>url</var> be the result of running the
-     <a>URL parser</a> on
-     <a lt='URLUtils input'>input</a> with
-     <a>base URL</a> being the result of running
-     <a>get the base</a> and
-     <a lt='URLUtils query encoding'>query encoding</a> as
-     <var>encoding override</var>.
-     <!-- support blob URLs at this level -->
-
-     <li><p>If <var>url</var> is not failure, set
-     <a lt='URLUtils URL'>url</a> to <var>url</var>.
-    </ol>
+   <li><p>If <var>url</var> is not failure, set <a for=URLUtils>url</a> to
+   <var>url</var>.
   </ol>
 
- <li><p>Let <var>query</var> be <a lt="URLUtils URL">url</a>'s <a lt="URL query">query</a>
- if <a lt="URLUtils URL">url</a> and its <a lt="URL query">query</a> are non-null, and the
+ <li><p>Let <var>query</var> be <a for=URLUtils>url</a>'s <a lt="URL query">query</a>
+ if <a for=URLUtils>url</a> and its <a lt="URL query">query</a> are non-null, and the
  empty string otherwise.
 
- <li><p>If <a lt='URLUtils query object'>query object</a> is null, set
- <a lt='URLUtils query object'>query object</a> to a
+ <li><p>If <a for=URLUtils>query object</a> is null, set
+ <a for=URLUtils>query object</a> to a
  <a lt='URLSearchParams new'>new <code>URLSearchParams</code> object</a>
  using <var>query</var>, and then append the
  <a>context object</a> to
- <a lt='URLUtils query object'>query object</a>'s list of
+ <a for=URLUtils>query object</a>'s list of
  <a lt='URLSearchParams URL object'>url objects</a>.
 
- <li><p>Otherwise, set <a lt='URLUtils query object'>query object</a>'s
+ <li><p>Otherwise, set <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a> to the result of
  <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
 </ol>
+
+<p>To <dfn for=URLUtils>reset the input</dfn>, run these steps:
+
+<ol>
+ <li><p>If <a>context object</a> is a {{URL}} object or <a for=URLUtils>input</a> is null,
+ terminate these steps.
+
+ <li><p><a>Set the input</a> using <a for=URLUtils>input</a> and <a for=URLUtils>url</a>.
+</ol>
+
+<p class="note no-backref">This algorithm is necessary as <a>get the base</a> can return a
+new result.
 
 <p>To run the <dfn>pre-update steps</dfn> for an object implementing {{URLUtils}},
 optionally given a <var>value</var>, run these steps:
@@ -2333,11 +2330,10 @@ optionally given a <var>value</var>, run these steps:
 <ol>
  <li><p>If <var>value</var> is not given, let <var>value</var> be the result
  of <a lt='URL serializer'>serializing</a> the associated
- <a lt='URLUtils URL'>url</a>.
+ <a for=URLUtils>url</a>.
  <!-- these steps are always invoked with a value if url can be null -->
 
- <li><p>Run the <a lt='URLUtils update'>update steps</a> with
- <var>value</var>.
+ <li><p>Run the <a for=URLUtils>update steps</a> with <var>value</var>.
 </ol>
 
 
@@ -2372,12 +2368,11 @@ constructor, when invoked, must run these steps:
  <li><p>Let <var>result</var>'s <a>get the base</a> return <var>parsedBase</var>.
 
  <li>
-  <p>Run <var>result</var>'s
-  <a lt='URLUtils set the input'>set the input</a> given the empty string
-  and <var>parsedURL</var>.
+  <p>Run <var>result</var>'s <a>set the input</a> given the empty string and
+  <var>parsedURL</var>.
 
-  <p class="note no-backref">A {{URL}} object's
-  <a lt='URLUtils input'>input</a> is never exposed.
+  <p class="note no-backref">A {{URL}} object's <a for=URLUtils>input</a> is never
+  exposed.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -2447,11 +2442,13 @@ as {{URL}}.
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt='URLUtils URL'>url</a> is null, return
- <a lt='URLUtils input'>input</a>.
+ <li><p><a>Reset the input</a>.
 
- <li><p>Return the <a lt='URL serializer'>serialization</a>
- of <a lt='URLUtils URL'>url</a>.
+ <li><p>If <a for=URLUtils>input</a> is null, return the empty string.
+
+ <li><p>If <a for=URLUtils>url</a> is null, return <a for=URLUtils>input</a>.
+
+ <li><p>Return the <a lt='URL serializer'>serialization</a> of <a for=URLUtils>url</a>.
 </ol>
 
 <p>The <code><a attribute for="URLUtils">href</a></code> attribute's
@@ -2461,7 +2458,7 @@ setter must run these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <code><a>context object</a></code> is a {{URL}} object, run these substeps:
+  <p>If the <a>context object</a> is a {{URL}} object, run these substeps:
 
   <ol>
    <li><p>Let <var>parsedURL</var> be the result of running the
@@ -2473,10 +2470,10 @@ setter must run these steps:
    <a>throw</a> a <code>TypeError</code> exception.
 
    <li>
-    <p>Run <a lt='URLUtils set the input'>set the input</a> given the empty
+    <p>Run <a>set the input</a> given the empty
     string and <var>parsedURL</var>.
 
-    <p class="note no-backref">A {{URL}} object's <a lt='URLUtils input'>input</a> is
+    <p class="note no-backref">A {{URL}} object's <a for=URLUtils>input</a> is
     never exposed.
   </ol>
 
@@ -2484,7 +2481,7 @@ setter must run these steps:
   <p>Otherwise, run these substeps:
 
   <ol>
-   <li><p>Run the <a lt='URLUtils set the input'>set the input</a>
+   <li><p>Run the <a>set the input</a>
    algorithm for <var>input</var>.
 
    <li><p>Run the <a>pre-update steps</a> with the <var>input</var>.
@@ -2507,24 +2504,24 @@ a.href === test // true</pre>
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt='URLUtils URL'>url</a> is null, return the empty
- string.
+ <li><p><a>Reset the input</a>.
 
- <li><p>Return the
- <a lt="Unicode serialisation of an origin">Unicode serialization</a>
- of <a lt='URLUtils URL'>url</a>'s <a lt='URL origin'>origin</a>.
- [[!HTML]]
+ <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
+
+ <li><p>Return the <a lt="Unicode serialisation of an origin">Unicode serialization</a>
+ of <a for=URLUtils>url</a>'s <a for=URL>origin</a>. [[!HTML]]
 </ol>
 
-<p class=note>It returns the Unicode rather than the ASCII serialization for
-compatibility with HTML's <code>MessageEvent</code> feature.
-[[!HTML]]
+<p class="note no-backref">It returns the Unicode rather than the ASCII serialization for
+compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>protocol</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, return "<code>:</code>".
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, return "<code>:</code>".
 
  <li><p>Return <a lt="URL scheme">scheme</a>, followed by "<code>:</code>".
 </ol>
@@ -2533,10 +2530,10 @@ attribute's getter must run these steps:
 these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, terminate these steps.
+ <li><p>If <a for=URLUtils>url</a> is null, terminate these steps.
 
  <li><p><a lt='basic URL parser'>Basic URL parse</a> the given value, followed by
- "<code>:</code>", with <a lt="URLUtils URL">url</a> as <var>url</var> and
+ "<code>:</code>", with <a for=URLUtils>url</a> as <var>url</var> and
  <a>scheme start state</a> as <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2546,7 +2543,9 @@ these steps:
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, return the empty string.
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
  <li><p>Return <a lt='URL username'>username</a>.
 </ol>
@@ -2555,10 +2554,10 @@ attribute's getter must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, its <a lt="URL host">host</a> is null, or
- its <a>non-relative flag</a> is set, terminate these steps.
+ <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null, or its
+ <a>non-relative flag</a> is set, terminate these steps.
 
- <li><p><a>Set the username</a> given <a lt='URLUtils URL'>url</a> and the given value.
+ <li><p><a>Set the username</a> given <a for=URLUtils>url</a> and the given value.
 
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
@@ -2567,7 +2566,9 @@ run these steps:
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt='URLUtils URL'>url</a> is null or its <a lt="URL password">password</a>
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null or its <a lt="URL password">password</a>
  is null, return the empty string.
 
  <li><p>Return <a lt="URL password">password</a>.
@@ -2577,10 +2578,10 @@ attribute's getter must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, its <a lt="URL host">host</a> is null, or
- its <a>non-relative flag</a> is set, terminate these steps.
+ <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null, or its
+ <a>non-relative flag</a> is set, terminate these steps.
 
- <li><p><a>Set the password</a> given <a lt='URLUtils URL'>url</a>
+ <li><p><a>Set the password</a> given <a for=URLUtils>url</a>
  and the given value.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2590,7 +2591,9 @@ run these steps:
 getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL host">host</a> is null,
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL host">host</a> is null,
  return the empty string.
 
  <li><p>If <a lt="URL port">port</a> is the empty string, return
@@ -2604,11 +2607,11 @@ getter must run these steps:
 steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a>non-relative flag</a> is set,
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a>non-relative flag</a> is set,
  terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with
- <a lt="URLUtils URL">url</a> as <var>url</var> and <a>host state</a> as
+ <a for=URLUtils>url</a> as <var>url</var> and <a>host state</a> as
  <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2618,7 +2621,9 @@ steps:
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL host">host</a> is null,
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL host">host</a> is null,
  return the empty string.
 
  <li><p>Return <a lt="URL host">host</a>, <a lt="host serializer">serialized</a>.
@@ -2628,11 +2633,11 @@ attribute's getter must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a>non-relative flag</a> is set,
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a>non-relative flag</a> is set,
  terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with
- <a lt="URLUtils URL">url</a> as <var>url</var> and <a>hostname state</a> as
+ <a for=URLUtils>url</a> as <var>url</var> and <a>hostname state</a> as
  <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2642,7 +2647,9 @@ run these steps:
 these steps:
 
 <ol>
- <li><p>If <a lt='URLUtils URL'>url</a> is null, return the empty string.
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
  <li><p>Return <a lt="URL port">port</a>.
 </ol>
@@ -2651,12 +2658,12 @@ these steps:
 steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, its <a lt="URL host">host</a> is null,
+ <li><p>If <a for=URLUtils>url</a> is null, its <a lt="URL host">host</a> is null,
  its <a>non-relative flag</a> is set, or its <a lt='URL scheme'>scheme</a> is
  "<code>file</code>", terminate these steps.
 
  <li><p>Otherwise, <a lt="basic URL parser">Basic URL parse</a> the given value with
- <a lt="URLUtils URL">url</a> as <var>url</var> and <a>port state</a> as
+ <a for=URLUtils>url</a> as <var>url</var> and <a>port state</a> as
  <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2666,7 +2673,9 @@ steps:
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, return the empty string.
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
 
  <li><p>If the <a>non-relative flag</a> is set, return the first string in
  <a lt='URL path'>path</a>.
@@ -2679,13 +2688,13 @@ attribute's getter must run these steps:
 run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its
+ <li><p>If <a for=URLUtils>url</a> is null, or its
  <a>non-relative flag</a> is set, terminate these steps.
 
  <li><p>Empty <a lt='URL path'>path</a>.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with
- <a lt="URLUtils URL">url</a> as <var>url</var> and <a>path start state</a> as
+ <a for=URLUtils>url</a> as <var>url</var> and <a>path start state</a> as
  <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2695,7 +2704,9 @@ run these steps:
 attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL query">query</a> is
+ <li><p><a>Reset the input</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL query">query</a> is
  either null or the empty string, return the empty string.
 
  <li><p>Return "<code>?</code>", followed by <a lt="URL query">query</a>.
@@ -2705,11 +2716,11 @@ attribute's getter must run these steps:
 steps:
 
 <ol>
- <li><p>If <a lt='URLUtils URL'>url</a> is null, terminate these steps.
+ <li><p>If <a for=URLUtils>url</a> is null, terminate these steps.
 
  <li><p>If the given value is the empty string, set
  <a lt='URL query'>query</a> to null, empty
- <a lt='URLUtils query object'>query object</a>'s
+ <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a>, run its
  <a lt='URLSearchParams update'>update steps</a>, and terminate these
  steps.
@@ -2720,25 +2731,25 @@ steps:
  <li><p>Set <a lt='URL query'>query</a> to the empty string.
 
  <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var>
- with <a lt='URLUtils URL'>url</a> as <var>url</var>,
+ with <a for=URLUtils>url</a> as <var>url</var>,
  <a>query state</a> as <var>state override</var>, and the
- associated <a lt='URLUtils query encoding'>query encoding</a> as
+ associated <a for=URLUtils>query encoding</a> as
  <var>encoding override</var>.
 
- <li><p>Set <a lt='URLUtils query object'>query object</a>'s
+ <li><p>Set <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a> to the result of
  <a lt='urlencoded string parser'>parsing</a> <var lt="">input</var>.
 
- <li><p>Run <a lt='URLUtils query object'>query object</a>'s
+ <li><p>Run <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams update'>update steps</a>.
 </ol>
 
 <p class="note no-backref">The <a lt='URLSearchParams update'>update steps</a> of
-<a lt='URLUtils query object'>query object</a> are run to ensure all
+<a for=URLUtils>query object</a> are run to ensure all
 <a lt='URLSearchParams URL object'>url objects</a> remain synchronized.
 
 <p>The <dfn attribute for=URLUtilsSearchParams><code>searchParams</code></dfn> attribute's
-getter must return the <a lt="URLUtils query object">query object</a>.
+getter must return the <a for=URLUtils>query object</a>.
 
 <p>The <code><a attribute for=URLUtilsSearchParams>searchParams</a></code> attribute's
 setter must run these steps:
@@ -2747,19 +2758,19 @@ setter must run these steps:
  <li><p>Let <var>object</var> be the given value.
 
  <li><p>Remove the <a>context object</a> from
- <a lt='URLUtils query object'>query object</a>'s list of
+ <a for=URLUtils>query object</a>'s list of
  <a lt='URLSearchParams URL object'>url objects</a>.
 
  <li><p>Append the <a>context object</a> to
  <var>object</var>'s list of
  <a lt='URLSearchParams URL object'>url objects</a>.
 
- <li><p>Set <a lt='URLUtils query object'>query object</a> to
+ <li><p>Set <a for=URLUtils>query object</a> to
  <var>object</var>.
 
  <li><p>Set <a lt='URL query'>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of the
- <a lt='URLUtils query object'>query object</a>'s
+ <a for=URLUtils>query object</a>'s
  <a lt='URLSearchParams list'>list</a>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2769,7 +2780,10 @@ setter must run these steps:
 getter must run these steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL fragment">fragment</a>
+ <li><p class="note no-backref">Running <a>reset the input</a> is not necessary as it
+ cannot affect <a lt="URL fragment">fragment</a>.
+
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL fragment">fragment</a>
  is either null or the empty string, return the empty string.
 
  <li><p>Return "<code>#</code>", followed by <a lt="URL fragment">fragment</a>.
@@ -2779,7 +2793,7 @@ getter must run these steps:
 steps:
 
 <ol>
- <li><p>If <a lt="URLUtils URL">url</a> is null, or its <a lt="URL scheme">scheme</a> is
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a lt="URL scheme">scheme</a> is
  "<code>javascript</code>", terminate these steps.
 
  <li><p>If the given value is the empty string, set <a lt="URL fragment">fragment</a> to
@@ -2791,7 +2805,7 @@ steps:
  <li><p>Set <a lt="URL fragment">fragment</a> to the empty string.
 
  <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with
- <a lt="URLUtils URL">url</a> as <var>url</var> and <a>fragment state</a> as
+ <a for=URLUtils>url</a> as <var>url</var> and <a>fragment state</a> as
  <var>state override</var>.
 
  <li><p>Run the <a>pre-update steps</a>.
@@ -2824,7 +2838,7 @@ empty.
 
 <p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as
 <a>encoding</a>, despite the existence of concepts such as
-<a lt='URLUtils query encoding'>query encoding</a>. This is to
+<a for=URLUtils>query encoding</a>. This is to
 encourage developers to migrate towards
 <a>utf-8</a>, which they really ought to
 have done a long time ago now.
@@ -2854,7 +2868,7 @@ each associated  <a lt='URLSearchParams URL object'>url object</a>
 <var>urlObject</var>, in order:
 
 <ol>
- <li><p>Set <var>urlObject</var>'s <a lt='URLUtils URL'>url</a>'s
+ <li><p>Set <var>urlObject</var>'s <a for=URLUtils>url</a>'s
  <a lt='URL query'>query</a> to the
  <a lt='urlencoded serializer'>serialization</a> of
  {{URLSearchParams}} object's
