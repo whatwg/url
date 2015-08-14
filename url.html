@@ -3466,7 +3466,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
 [NoInterfaceObject,
  Exposed=(Window, Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlutilssearchparams">URLUtilsSearchParams<a class="self-link" href="#urlutilssearchparams"></a></dfn> {
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
 };
 
 [NoInterfaceObject,
@@ -3577,7 +3577,7 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
 
  
     <li>
-     <p>Let <var>query</var> be <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a>
+     <p>Let <var>query</var> be <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a>,
  if <a data-link-type="dfn" href="#concept-urlutils-url">url</a> and its <a data-link-type="dfn" href="#concept-url-query">query</a> are non-null, and the
  empty string otherwise.
 
@@ -3585,8 +3585,8 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
     <li>
      <p>If <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a> is null, set <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>
  to a <a data-link-type="dfn" href="#concept-urlsearchparams-new">new</a> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object using <var>query</var>,
- and then append the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> to <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>’s list of
- <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a>.
+ and then set <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a> to
+ the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>.
 
  </p>
     <li>
@@ -4277,49 +4277,14 @@ steps:
 
 
    <p class="note no-backref" role="note">The <a data-link-type="dfn" href="#concept-urlsearchparams-update">update steps</a> of
-<a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a> are run to ensure all
-<a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a> remain synchronized.
+<a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a> are run to ensure its
+<a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a> remains synchronized.
 
 </p>
    <p>The <dfn class="idl-code" data-dfn-for="URLUtilsSearchParams" data-dfn-type="attribute" data-export="" id="dom-urlutilssearchparams-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlutilssearchparams-searchparams"></a></dfn> attribute’s
 getter must return the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>.
 
 </p>
-   <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-urlutilssearchparams-searchparams">searchParams</a></code> attribute’s
-setter must run these steps:
-
-</p>
-   <ol>
- 
-    <li>
-     <p>Let <var>object</var> be the given value.
-
- </p>
-    <li>
-     <p>Remove the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> from <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>’s list of
- <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a>.
-
- </p>
-    <li>
-     <p>Append the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a> to <var>object</var>’s list of
- <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url objects</a>.
-
- </p>
-    <li>
-     <p>Set <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a> to
- <var>object</var>.
-
- </p>
-    <li>
-     <p>Set <a data-link-type="dfn" href="#concept-url-query">query</a> to the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of
- the <a data-link-type="dfn" href="#concept-urlutils-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
-
- </p>
-    <li>
-     <p>Run the <a data-link-type="dfn" href="#pre_update-steps">pre-update steps</a>.
-</p></ol>
-
-
    <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-hash"><code>hash</code><a class="self-link" href="#dom-urlutils-hash"></a></dfn> attribute’s
 getter must run these steps:
 
@@ -4401,9 +4366,9 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
 which is initially empty.
 
 </p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated list of zero or more
-<dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-url-object">url objects<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is
-initially empty.
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated
+<dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-url-object">url object<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is
+initially null.
 
 </p>
    <p class="note" role="note"><code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> objects always use <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> as
@@ -4441,24 +4406,37 @@ have done a long time ago now.
 </p></ol>
 
 
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s
-<dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-update">update steps<a class="self-link" href="#concept-urlsearchparams-update"></a></dfn> are to run
-these steps for each associated  <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>
-<var>urlObject</var>, in order:
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="reset-steps">reset steps<a class="self-link" href="#reset-steps"></a></dfn> are these
+steps:
 
 </p>
    <ol>
  
     <li>
-     <p>Set <var>urlObject</var>’s <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s
- <a data-link-type="dfn" href="#concept-url-query">query</a> to the
- <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of
- <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s
- <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
+     <p>If <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a> is null, return.
 
  </p>
     <li>
-     <p>Run <var>urlObject</var>’s <a data-link-type="dfn" href="#pre_update-steps">pre-update steps</a>.
+     <p>Run <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>’s <a data-link-type="dfn" href="#reset-the-input">reset the input</a>
+ steps.
+</p></ol>
+
+
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s
+<dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-update">update steps<a class="self-link" href="#concept-urlsearchparams-update"></a></dfn> are these
+steps:
+
+</p>
+   <ol>
+ 
+    <li>
+     <p>Set <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>’s <a data-link-type="dfn" href="#concept-urlutils-url">url</a>’s
+ <a data-link-type="dfn" href="#concept-url-query">query</a> to the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of
+ <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
+
+ </p>
+    <li>
+     <p>Run <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>’s <a data-link-type="dfn" href="#pre_update-steps">pre-update steps</a>.
 </p></ol>
 
 
@@ -4475,6 +4453,10 @@ method, when invoked, must run these steps:
 </p>
    <ol>
  
+    <li>
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
     <li>
      <p>Append a new name-value pair whose name is <var>name</var> and
  value is <var>value</var>, to <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
@@ -4493,6 +4475,10 @@ method, when invoked, must run these steps:
    <ol>
  
     <li>
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
+    <li>
      <p>Remove all name-value pairs whose name is <var>name</var> from
  <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
 
@@ -4504,18 +4490,38 @@ method, when invoked, must run these steps:
 
    <p>The
 <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-get"><code>get(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-get"></a></dfn>
-method, when invoked, must return the value of the first name-value pair whose name is
-<var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and null if
-there is no such pair.
+method, when invoked, must run these steps:
 
 </p>
+   <ol>
+ 
+    <li>
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
+    <li>
+     <p>Return the value of the first name-value pair whose name is <var>name</var> in
+ <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, if there is such a pair, and null otherwise.
+</p></ol>
+
+
    <p>The
 <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-getall"><code>getAll(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-getall"></a></dfn>
-method, when invoked, must return the values of all name-value pairs whose name is
-<var>name</var>, in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>,
-in list order, and the empty sequence otherwise.
+method, when invoked, must run these steps:
 
 </p>
+   <ol>
+ 
+    <li>
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
+    <li>
+     <p>Return the values of all name-value pairs whose name is <var>name</var>, in
+ <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, in list order, and the empty sequence otherwise.
+</p></ol>
+
+
    <p>The
 <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-set"><code>set(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-set"></a></dfn>
 method, when invoked, must run these steps:
@@ -4524,14 +4530,18 @@ method, when invoked, must run these steps:
    <ol>
  
     <li>
-     <p>If there are any name-value pairs whose name is <var>name</var>, in
- <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, set the value of the first such
- name-value pair to <var>value</var> and remove the others.
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
 
  </p>
     <li>
-     <p>Otherwise, append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
+     <p>If there are any name-value pairs whose name is <var>name</var>, in
+ <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, set the value of the first such name-value pair to
+ <var>value</var> and remove the others.
+
+ </p>
+    <li>
+     <p>Otherwise, append a new name-value pair whose name is <var>name</var> and value is
+ <var>value</var>, to <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
 
  </p>
     <li>
@@ -4541,59 +4551,81 @@ method, when invoked, must run these steps:
 
    <p>The
 <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-has"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-has"></a></dfn>
-method, when invoked, must return true if there is a name-value pair whose name is
-<var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and false
-otherwise.
+method, when invoked, must run these steps:
 
 </p>
-   <p>The <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
+   <ol>
+ 
+    <li>
+     <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
+    <li>
+     <p>Return true if there is a name-value pair whose name is <var>name</var> in
+ <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and false otherwise.
+
+</p>
+     <p>The <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the
 <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a> name-value pairs with the key being
 the name and the value being the value.
 
 </p>
-   <p>The <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="stringification-behavior">stringification behavior<a class="self-link" href="#stringification-behavior"></a></dfn> must return the
-<a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of the
-<code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s
-<a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
-
+     <p>The <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="stringification-behavior">stringification behavior<a class="self-link" href="#stringification-behavior"></a></dfn> must run these steps:
 
 </p>
-   <h3 class="heading settled" data-level="6.5" id="url-apis-elsewhere"><span class="secno">6.5. </span><span class="content">URL APIs elsewhere</span><a class="self-link" href="#url-apis-elsewhere"></a></h3>
+     <ol>
+ 
+      <li>
+       <p>Run the <a data-link-type="dfn" href="#reset-steps">reset steps</a>.
+
+ </p>
+      <li>
+       <p>Return the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of the
+ <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>.
+</p>
+     </ol>
+     
 
 
-   <p>A standard that exposes <a data-link-type="dfn" href="#concept-url">URLs</a>, should expose the <a data-link-type="dfn" href="#concept-url">URL</a> as a
+
+     <h3 class="heading settled" data-level="6.5" id="url-apis-elsewhere"><span class="secno">6.5. </span><span class="content">URL APIs elsewhere</span><a class="self-link" href="#url-apis-elsewhere"></a></h3>
+     
+
+
+     <p>A standard that exposes <a data-link-type="dfn" href="#concept-url">URLs</a>, should expose the <a data-link-type="dfn" href="#concept-url">URL</a> as a
 string  (by <a data-link-type="dfn" href="#concept-url-serializer">serializing</a> an internal <a data-link-type="dfn" href="#concept-url">URL</a>). A
 standard should not expose a <a data-link-type="dfn" href="#concept-url">URL</a> using a <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object. <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> objects
 are meant for <a data-link-type="dfn" href="#concept-url">URL</a> manipulation. In IDL the USVString type should be used.
 
 </p>
-   <p class="note" role="note">The higher-level notion here is that values are to be exposed as immutable
+     <p class="note" role="note">The higher-level notion here is that values are to be exposed as immutable
 data structures.
 
 </p>
-   <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
+     <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
 should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
 (i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
 
 </p>
-   <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and
+     <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and
 <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent">HashChangeEvent</a></code> interfaces in HTML are examples of
 proper naming. <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 
 
 </p>
-   <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+     <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+     
 
 
-   <p>There have been a lot of people that have helped make
+     <p>There have been a lot of people that have helped make
 <a class="no-backref" data-link-type="dfn" href="#concept-url">URLs</a> more interoperable over the years and
 thereby furthered the goals of this standard. Likewise many people have helped making this
 standard what it is today.
 
 </p>
-   <p>With that, many thanks to
+     <p>With that, many thanks to
 Adam Barth,
 Albert Wiersch,
 Alexandre Morgaut,
@@ -4648,7 +4680,7 @@ Vyacheslav Matva, and
 for being awesome!
 
 </p>
-   <p>This standard is written by
+     <p>This standard is written by
 <a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
 (<a href="https://www.mozilla.org/">Mozilla</a>,
 <a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>)
@@ -4658,7 +4690,7 @@ and
 <a href="mailto:rubys@intertwingly.net">rubys@intertwingly.net</a>).
 
 </p>
-   <p>Per <a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
+     <p>Per <a href="//creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to
 the extent possible under law, the editors have waived all copyright and related or
 neighboring rights to this work.
 
@@ -4666,7 +4698,7 @@ neighboring rights to this work.
 
 
 
-</p></main>
+</p></ol></main>
   
 
   <div data-fill-with="conformance">
@@ -4811,6 +4843,7 @@ neighboring rights to this work.
    <li><a href="#relative-state">relative state</a><span>, in §4.2</span>
    <li><a href="#concept-relative-url">relative URL</a><span>, in §4.1</span>
    <li><a href="#remaining">remaining</a><span>, in §1.1</span>
+   <li><a href="#reset-steps">reset steps</a><span>, in §6.4</span>
    <li><a href="#reset-the-input">reset the input</a><span>, in §6</span>
    <li><a href="#concept-url-scheme">scheme</a><span>, in §4</span>
    <li><a href="#concept-scheme-relative-url">scheme-relative URL</a><span>, in §4.1</span>
@@ -4853,7 +4886,7 @@ neighboring rights to this work.
    <li><a href="#concept-urlencoded-parser">urlencoded parser</a><span>, in §5.1</span>
    <li><a href="#concept-urlencoded-serializer">urlencoded serializer</a><span>, in §5.2</span>
    <li><a href="#concept-urlencoded-string-parser">urlencoded string parser</a><span>, in §5.3</span>
-   <li><a href="#concept-urlsearchparams-url-object">url objects</a><span>, in §6.4</span>
+   <li><a href="#concept-urlsearchparams-url-object">url object</a><span>, in §6.4</span>
    <li><a href="#concept-url-parser">URL parser</a><span>, in §4.2</span>
    <li><a href="#urlsearchparams">URLSearchParams</a><span>, in §6.4</span>
    <li><a href="#dom-urlsearchparams-urlsearchparams">URLSearchParams(init)</a><span>, in §6.4</span>
@@ -4955,7 +4988,7 @@ interface <a href="#urlutils">URLUtils</a> {
 [NoInterfaceObject,
  Exposed=(Window, Worker)]
 interface <a href="#urlutilssearchparams">URLUtilsSearchParams</a> {
-           attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-urlutilssearchparams-searchparams">searchParams</a>;
 };
 
 [NoInterfaceObject,

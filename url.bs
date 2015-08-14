@@ -2194,7 +2194,7 @@ interface URLUtils {
 [NoInterfaceObject,
  Exposed=(Window, Worker)]
 interface URLUtilsSearchParams {
-           attribute URLSearchParams searchParams;
+  readonly attribute URLSearchParams searchParams;
 };
 
 [NoInterfaceObject,
@@ -2293,14 +2293,14 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
    <var>url</var>.
   </ol>
 
- <li><p>Let <var>query</var> be <a for=URLUtils>url</a>'s <a for=URL>query</a>
+ <li><p>Let <var>query</var> be <a for=URLUtils>url</a>'s <a for=URL>query</a>,
  if <a for=URLUtils>url</a> and its <a for=URL>query</a> are non-null, and the
  empty string otherwise.
 
  <li><p>If <a for=URLUtils>query object</a> is null, set <a for=URLUtils>query object</a>
  to a <a for=URLSearchParams>new</a> {{URLSearchParams}} object using <var>query</var>,
- and then append the <a>context object</a> to <a for=URLUtils>query object</a>'s list of
- <a for=URLSearchParams>url objects</a>.
+ and then set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>url object</a> to
+ the <a>context object</a>.
 
  <li><p>Otherwise, set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>
  to the result of <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
@@ -2734,32 +2734,11 @@ steps:
 </ol>
 
 <p class="note no-backref">The <a for=URLSearchParams>update steps</a> of
-<a for=URLUtils>query object</a> are run to ensure all
-<a for=URLSearchParams>url objects</a> remain synchronized.
+<a for=URLUtils>query object</a> are run to ensure its
+<a for=URLSearchParams>url object</a> remains synchronized.
 
 <p>The <dfn attribute for=URLUtilsSearchParams><code>searchParams</code></dfn> attribute's
 getter must return the <a for=URLUtils>query object</a>.
-
-<p>The <code><a attribute for=URLUtilsSearchParams>searchParams</a></code> attribute's
-setter must run these steps:
-
-<ol>
- <li><p>Let <var>object</var> be the given value.
-
- <li><p>Remove the <a>context object</a> from <a for=URLUtils>query object</a>'s list of
- <a for=URLSearchParams>url objects</a>.
-
- <li><p>Append the <a>context object</a> to <var>object</var>'s list of
- <a for=URLSearchParams>url objects</a>.
-
- <li><p>Set <a for=URLUtils>query object</a> to
- <var>object</var>.
-
- <li><p>Set <a for=URL>query</a> to the <a lt='urlencoded serializer'>serialization</a> of
- the <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>.
-
- <li><p>Run the <a>pre-update steps</a>.
-</ol>
 
 <p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>hash</code></dfn> attribute's
 getter must run these steps:
@@ -2818,9 +2797,9 @@ interface URLSearchParams {
 <dfn for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
 which is initially empty.
 
-<p>A {{URLSearchParams}} object has an associated list of zero or more
-<dfn for=URLSearchParams id=concept-urlsearchparams-url-object>url objects</dfn>, which is
-initially empty.
+<p>A {{URLSearchParams}} object has an associated
+<dfn for=URLSearchParams id=concept-urlsearchparams-url-object>url object</dfn>, which is
+initially null.
 
 <p class=note>{{URLSearchParams}} objects always use <a>utf-8</a> as
 <a>encoding</a>, despite the existence of concepts such as
@@ -2846,19 +2825,26 @@ have done a long time ago now.
  <li><p>Return <var>query</var>.
 </ol>
 
-<p>A {{URLSearchParams}} object's
-<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are to run
-these steps for each associated  <a for=URLSearchParams>url object</a>
-<var>urlObject</var>, in order:
+<p>A {{URLSearchParams}} object's <dfn for=URLSearchParams>reset steps</dfn> are these
+steps:
 
 <ol>
- <li><p>Set <var>urlObject</var>'s <a for=URLUtils>url</a>'s
- <a for=URL>query</a> to the
- <a lt='urlencoded serializer'>serialization</a> of
- {{URLSearchParams}} object's
- <a for=URLSearchParams>list</a>.
+ <li><p>If <a for=URLSearchParams>url object</a> is null, return.
 
- <li><p>Run <var>urlObject</var>'s <a>pre-update steps</a>.
+ <li><p>Run <a for=URLSearchParams>url object</a>'s <a for=URLUtils>reset the input</a>
+ steps.
+</ol>
+
+<p>A {{URLSearchParams}} object's
+<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are these
+steps:
+
+<ol>
+ <li><p>Set <a for=URLSearchParams>url object</a>'s <a for=URLUtils>url</a>'s
+ <a for=URL>query</a> to the <a lt='urlencoded serializer'>serialization</a> of
+ {{URLSearchParams}} object's <a for=URLSearchParams>list</a>.
+
+ <li><p>Run <a for=URLSearchParams>url object</a>'s <a>pre-update steps</a>.
 </ol>
 
 <p>The
@@ -2871,6 +2857,8 @@ constructor, when invoked, must return a <a for=URLSearchParams>new</a>
 method, when invoked, must run these steps:
 
 <ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
  <li><p>Append a new name-value pair whose name is <var>name</var> and
  value is <var>value</var>, to <a for=URLSearchParams>list</a>.
 
@@ -2882,6 +2870,8 @@ method, when invoked, must run these steps:
 method, when invoked, must run these steps:
 
 <ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
  <li><p>Remove all name-value pairs whose name is <var>name</var> from
  <a for=URLSearchParams>list</a>.
 
@@ -2890,45 +2880,65 @@ method, when invoked, must run these steps:
 
 <p>The
 <dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
-method, when invoked, must return the value of the first name-value pair whose name is
-<var>name</var> in <a for=URLSearchParams>list</a>, and null if
-there is no such pair.
+method, when invoked, must run these steps:
+
+<ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
+ <li><p>Return the value of the first name-value pair whose name is <var>name</var> in
+ <a for=URLSearchParams>list</a>, if there is such a pair, and null otherwise.
+</ol>
 
 <p>The
 <dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
-method, when invoked, must return the values of all name-value pairs whose name is
-<var>name</var>, in <a for=URLSearchParams>list</a>,
-in list order, and the empty sequence otherwise.
+method, when invoked, must run these steps:
+
+<ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
+ <li><p>Return the values of all name-value pairs whose name is <var>name</var>, in
+ <a for=URLSearchParams>list</a>, in list order, and the empty sequence otherwise.
+</ol>
 
 <p>The
 <dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
 <ol>
- <li><p>If there are any name-value pairs whose name is <var>name</var>, in
- <a for=URLSearchParams>list</a>, set the value of the first such
- name-value pair to <var>value</var> and remove the others.
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
 
- <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a for=URLSearchParams>list</a>.
+ <li><p>If there are any name-value pairs whose name is <var>name</var>, in
+ <a for=URLSearchParams>list</a>, set the value of the first such name-value pair to
+ <var>value</var> and remove the others.
+
+ <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and value is
+ <var>value</var>, to <a for=URLSearchParams>list</a>.
 
  <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
 
 <p>The
 <dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
-method, when invoked, must return true if there is a name-value pair whose name is
-<var>name</var> in <a for=URLSearchParams>list</a>, and false
-otherwise.
+method, when invoked, must run these steps:
+
+<ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
+ <li><p>Return true if there is a name-value pair whose name is <var>name</var> in
+ <a for=URLSearchParams>list</a>, and false otherwise.
 
 <p>The <a>value pairs to iterate over</a> are the
 <a for=URLSearchParams>list</a> name-value pairs with the key being
 the name and the value being the value.
 
-<p>The <dfn dfn for=URLSearchParams>stringification behavior</dfn> must return the
-<a lt='urlencoded serializer'>serialization</a> of the
-{{URLSearchParams}} object's
-<a for=URLSearchParams>list</a>.
+<p>The <dfn dfn for=URLSearchParams>stringification behavior</dfn> must run these steps:
+
+<ol>
+ <li><p>Run the <a for=URLSearchParams>reset steps</a>.
+
+ <li><p>Return the <a lt='urlencoded serializer'>serialization</a> of the
+ {{URLSearchParams}} object's <a for=URLSearchParams>list</a>.
+</ol>
 
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
