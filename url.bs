@@ -433,6 +433,12 @@ runs these steps:
   <p>For each <var>part</var> in <var>parts</var>:
 
   <ol>
+   <li>
+    <p>If <var>part</var> is the empty string, return <var>input</var>.
+
+    <p class="example no-backref"><code>0..0x300</code> is a <a>domain</a>, not an
+    <a>IPv4 address</a>.
+
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
    <var>part</var>.
 
@@ -2970,6 +2976,7 @@ thereby furthered the goals of this standard. Likewise many people have helped m
 standard what it is today.
 
 <p>With that, many thanks to
+100の人,<!-- https://twitter.com/esperecyan -->
 Adam Barth,
 Albert Wiersch,
 Alexandre Morgaut,
@@ -2985,6 +2992,7 @@ David Håsäther,
 David Sheets,
 David Singer,
 David Walp,
+Domenic Denicola,
 Erik Arvidsson,
 Gavin Carothers,
 Geoff Richards,
