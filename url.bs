@@ -765,7 +765,9 @@ A Recommendation for IPv6 Address Text Representation.
 <!-- History behind URL as term:
      https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>A <dfn export for=url id=concept-url>URL</dfn> is a universal identifier.
+<p>A <dfn export for=url id=concept-url lt="URL|URL record">URL</dfn> is a universal
+identifier. To disambiguate from a <a>URL string</a> it can also be referred to as a
+<a>URL record</a>.
 
 <p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=url>URL</a> and can be used to
@@ -871,8 +873,9 @@ last string, if any.
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
-<p>A <dfn export for=urlsyntax id=syntax-url>URL</dfn> must be either a
-<a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>.
+<p>A <dfn export for=urlsyntax id=syntax-url lt="URL|URL string">URL</dfn> must be either
+a <a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>. To
+disambiguate from a <a>URL record</a> it can also be referred to as a <a>URL string</a>.
 
 <p>A
 <dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
@@ -887,10 +890,10 @@ the following
  match for a <a>special scheme</a>, followed by a <a>scheme-relative URL</a>
  <li><p>a <a for=urlsyntax>scheme</a> that is <em>not</em> an
  <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by a
- <a>relative URL</a>.
+ <a>relative URL</a>
 </ul>
 
-<p>optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
+<p>either optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-scheme>scheme</dfn> must be one
 <a>ASCII alpha</a>, followed by zero or more of <a>ASCII alphanumeric</a>,
@@ -987,8 +990,8 @@ U+100000 to U+10FFFD.
 <hr>
 
 <p class="note no-backref">There is no conforming way to express a
-<a for=url>username</a> or <a for=url>password</a> of a <a for=url>URL</a> within a
-<a for=urlsyntax>URL</a>.
+<a for=url>username</a> or <a for=url>password</a> of a <a for=url>URL record</a> within a
+<a for=urlsyntax>URL string</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>

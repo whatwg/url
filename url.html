@@ -1256,7 +1256,9 @@ A Recommendation for IPv6 Address Text Representation.
 
 
 
-   <p>A <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url">URL<a class="self-link" href="#concept-url"></a></dfn> is a universal identifier.
+   <p>A <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" data-lt="URL|URL record" id="concept-url">URL<a class="self-link" href="#concept-url"></a></dfn> is a universal
+identifier. To disambiguate from a <a data-link-type="dfn" href="#syntax-url">URL string</a> it can also be referred to as a
+<a data-link-type="dfn" href="#concept-url">URL record</a>.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is an
@@ -1409,8 +1411,9 @@ last string, if any.
 
 
 
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either a
-<a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" data-lt="URL|URL string" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either
+a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>. To
+disambiguate from a <a data-link-type="dfn" href="#concept-url">URL record</a> it can also be referred to as a <a data-link-type="dfn" href="#syntax-url">URL string</a>.
 
 </p>
    <p>A
@@ -1432,11 +1435,11 @@ the following
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is <em>not</em> an
  <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by a
- <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>.
+ <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>
 </p></ul>
 
 
-   <p>optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
+   <p>either optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme">scheme<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one
@@ -1547,8 +1550,8 @@ U+100000 to U+10FFFD.
 
 
    <p class="note no-backref" role="note">There is no conforming way to express a
-<a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL</a> within a
-<a data-link-type="dfn" href="#syntax-url">URL</a>.
+<a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL record</a> within a
+<a data-link-type="dfn" href="#syntax-url">URL string</a>.
 
 
 </p>
@@ -4938,9 +4941,11 @@ neighboring rights to this work.
    <li><a href="#concept-urlencoded-string-parser">urlencoded string parser</a><span>, in §5.3</span>
    <li><a href="#concept-urlsearchparams-url-object">url object</a><span>, in §6.4</span>
    <li><a href="#concept-url-parser">URL parser</a><span>, in §4.2</span>
+   <li><a href="#concept-url">URL record</a><span>, in §4</span>
    <li><a href="#urlsearchparams">URLSearchParams</a><span>, in §6.4</span>
    <li><a href="#dom-urlsearchparams-urlsearchparams">URLSearchParams(init)</a><span>, in §6.4</span>
    <li><a href="#concept-url-serializer">URL serializer</a><span>, in §4.3</span>
+   <li><a href="#syntax-url">URL string</a><span>, in §4.1</span>
    <li><a href="#url-units">URL units</a><span>, in §4.1</span>
    <li><a href="#dom-url-url">URL(url, base)</a><span>, in §6.1</span>
    <li><a href="#urlutils">URLUtils</a><span>, in §6</span>
