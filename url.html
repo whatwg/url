@@ -75,13 +75,13 @@
     <li><a href="#hosts-(domains-and-ip-addresses)"><span class="secno">3</span> <span class="content">Hosts (domains and IP addresses)</span></a>
      <ul class="toc">
       <li><a href="#idna"><span class="secno">3.1</span> <span class="content">IDNA</span></a>
-      <li><a href="#host-writing"><span class="secno">3.2</span> <span class="content">Host writing</span></a>
+      <li><a href="#host-syntax"><span class="secno">3.2</span> <span class="content">Host syntax</span></a>
       <li><a href="#host-parsing"><span class="secno">3.3</span> <span class="content">Host parsing</span></a>
       <li><a href="#host-serializing"><span class="secno">3.4</span> <span class="content">Host serializing</span></a>
      </ul>
     <li><a href="#urls"><span class="secno">4</span> <span class="content">URLs</span></a>
      <ul class="toc">
-      <li><a href="#url-writing"><span class="secno">4.1</span> <span class="content">URL writing</span></a>
+      <li><a href="#url-syntax"><span class="secno">4.1</span> <span class="content">URL syntax</span></a>
       <li><a href="#url-parsing"><span class="secno">4.2</span> <span class="content">URL parsing</span></a>
       <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
       <li><a href="#url-equivalence"><span class="secno">4.4</span> <span class="content">URL equivalence</span></a>
@@ -410,21 +410,22 @@ an <var>encode set</var>, run these steps:
 
 
 
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an
-<a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>. Typically a <a data-link-type="dfn" href="#concept-host">host</a> serves as a network address, but it is
-sometimes (ab)used as opaque identifier in <a data-link-type="dfn" href="#concept-url">URLs</a> where a network address is
-not necessary.
+   <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, an
+<a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>. Typically a
+<a data-link-type="dfn" href="#concept-host">host</a> serves as a network address, but it is sometimes (ab)used as opaque
+identifier in <a data-link-type="dfn" href="#concept-url">URLs</a> where a network address is not necessary.
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a network.
+   <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a
+network.
 <a data-link-type="biblio" href="#biblio-rfc1034">[RFC1034]</a>
 
 </p>
-   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv4">IPv4 address<a class="self-link" href="#concept-ipv4"></a></dfn> is a 32-bit identifier.
+   <p>An <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-ipv4">IPv4 address<a class="self-link" href="#concept-ipv4"></a></dfn> is a 32-bit identifier.
 <a data-link-type="biblio" href="#biblio-rfc791">[RFC791]</a>
 
 </p>
-   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
+   <p>An <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept-ipv6-piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>.
 <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a>
@@ -481,11 +482,12 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 
 
 
-   <h3 class="heading settled" data-level="3.2" id="host-writing"><span class="secno">3.2. </span><span class="content">Host writing</span><a class="self-link" href="#host-writing"></a></h3>
+   <h3 class="heading settled" data-level="3.2" id="host-syntax"><span class="secno">3.2. </span><span class="content">Host syntax</span><a class="self-link" href="#host-syntax"></a></h3>
 
 
-   <p>A <a data-link-type="dfn" href="#concept-host">host</a> must be a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or
-"<code>[</code>", followed by an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, followed by "<code>]</code>".
+   <p>A <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host">host<a class="self-link" href="#syntax-host"></a></dfn> must be a
+<a data-link-type="dfn" href="#syntax-host-domain">domain</a>, an <a data-link-type="dfn" href="#syntax-host-ipv4">IPv4 address</a>, or "<code>[</code>",
+followed by an <a data-link-type="dfn" href="#syntax-host-ipv6">IPv6 address</a>, followed by "<code>]</code>".
 
 </p>
    <p>A <var>domain</var> is a <dfn data-dfn-type="dfn" data-noexport="" id="valid-domain">valid domain<a class="self-link" href="#valid-domain"></a></dfn> if these steps return success:
@@ -526,15 +528,16 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334">bug 25334</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-domain">domain</a> must be a string that is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>.
+   <p>A <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-domain">domain<a class="self-link" href="#syntax-host-domain"></a></dfn> must be a string that
+is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>.
 
 </p>
-   <p>An <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a> must be four sequences of up to three <span>ASCII digits</span>
-per sequence, each representing a number no greater than 255, and separated from each
-other by "<code>.</code>".
+   <p>An <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-ipv4">IPv4 address<a class="self-link" href="#syntax-host-ipv4"></a></dfn> must be four
+sequences of up to three <span>ASCII digits</span> per sequence, each representing a
+number no greater than 255, and separated from each other by "<code>.</code>".
 
 </p>
-   <p>An <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> is defined in the
+   <p>An <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-ipv6">IPv6 address<a class="self-link" href="#syntax-host-ipv6"></a></dfn> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a>
 </p>
@@ -731,8 +734,8 @@ runs these steps:</p>
        <p>If <var>part</var> is the empty string, return <var>input</var>.
 
     </p>
-       <p class="example no-backref" id="example-3e4efae3"><a class="self-link" href="#example-3e4efae3"></a><code>0..0x300</code> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, not an
-    <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>.
+       <p class="example no-backref" id="example-c2afe535"><a class="self-link" href="#example-c2afe535"></a><code>0..0x300</code> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, not
+    an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>.
 
    </p>
       <li>
@@ -805,8 +808,7 @@ then runs these steps:
    <ol>
  
     <li>
-     <p>Let <var>address</var> be a new
- <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> with its
+     <p>Let <var>address</var> be a new <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> with its
  <a data-link-type="dfn" href="#concept-ipv6-piece">16-bit pieces</a> initialized to 0.
 
  </p>
@@ -1115,8 +1117,8 @@ then runs these steps:
    <ol>
  
     <li>
-     <p>If <var>host</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, return the result of running the
- <a data-link-type="dfn" href="#concept-ipv4-serializer">IPv4 serializer</a> on <var>host</var>.
+     <p>If <var>host</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, return the result of
+ running the <a data-link-type="dfn" href="#concept-ipv4-serializer">IPv4 serializer</a> on <var>host</var>.
 
  </p>
     <li>
@@ -1127,13 +1129,12 @@ then runs these steps:
 
  </p>
     <li>
-     <p>Otherwise, <var>host</var> is a <a data-link-type="dfn" href="#concept-domain">domain</a>,
- return <var>host</var>.
+     <p>Otherwise, <var>host</var> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, return <var>host</var>.
 </p></ol>
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv4-serializer">IPv4 serializer<a class="self-link" href="#concept-ipv4-serializer"></a></dfn> takes an
-<span>IPv4 address</span> <var>address</var> and then runs these steps:</p>
+<a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a> <var>address</var> and then runs these steps:</p>
 
 
    <ol>
@@ -1174,8 +1175,8 @@ then runs these steps:
 </p></ol>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-serializer">IPv6 serializer<a class="self-link" href="#concept-ipv6-serializer"></a></dfn> takes an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>
-<var>address</var> and then runs these steps:
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-ipv6-serializer">IPv6 serializer<a class="self-link" href="#concept-ipv6-serializer"></a></dfn> takes an
+<a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a> <var>address</var> and then runs these steps:
 
 </p>
    <ol>
@@ -1255,65 +1256,55 @@ A Recommendation for IPv6 Address Text Representation.
 
 
 
-   <p>A <dfn data-dfn-for="URL" data-dfn-type="dfn" data-noexport="" id="concept-url">URL<a class="self-link" href="#concept-url"></a></dfn> is a universal identifier.
+   <p>A <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url">URL<a class="self-link" href="#concept-url"></a></dfn> is a universal identifier.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> consists of components, namely a
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
-<a data-link-type="dfn" href="#concept-url-username">username</a>,
-<a data-link-type="dfn" href="#concept-url-password">password</a>,
-<a data-link-type="dfn" href="#concept-url-host">host</a>,
-<a data-link-type="dfn" href="#concept-url-port">port</a>,
-<a data-link-type="dfn" href="#concept-url-path">path</a>,
-<a data-link-type="dfn" href="#concept-url-query">query</a>, and
-<a data-link-type="dfn" href="#concept-url-fragment">fragment</a>.
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is an
+<a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to
+dispatch a <a data-link-type="dfn" href="#concept-url">URL</a> for further processing after <a data-link-type="dfn" href="#concept-url-parser">parsing</a>.
+It is initially the empty string.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is an
-<a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to dispatch a
-<a data-link-type="dfn" href="#concept-url">URL</a> for further processing after <a data-link-type="dfn" href="#concept-url-parser">parsing</a>. It is initially
-the empty string.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn> is
+an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user. It is initially the empty string.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-username">username<a class="self-link" href="#concept-url-username"></a></dfn> is an
-<a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user. It is initially the empty string.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-password">password<a class="self-link" href="#concept-url-password"></a></dfn> is
+either null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user’s credentials. It is initially
+null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-password">password<a class="self-link" href="#concept-url-password"></a></dfn> is either
-null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> identifying a user’s credentials. It is initially null.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-host">host<a class="self-link" href="#concept-url-host"></a></dfn> is either
+null or a <a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-host">host<a class="self-link" href="#concept-url-host"></a></dfn> is either null or a
-<a data-link-type="dfn" href="#concept-host">host</a>. It is initially null.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is either
+null or a 16-bit integer that identifies a networking port. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-port">port<a class="self-link" href="#concept-url-port"></a></dfn> is either null or a
-16-bit integer that identifies a networking port. It is initially null.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a list of
+zero or more <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data, usually identifying a location in
+hierarchical form. It is initially the empty list.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-path">path<a class="self-link" href="#concept-url-path"></a></dfn> is a list of zero or
-more <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data, usually identifying a location in hierarchical
-form. It is initially the empty list.
+   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-query">query<a class="self-link" href="#concept-url-query"></a></dfn> is either
+null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data. It is initially null.
 
 </p>
-   <p>A  <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-query">query<a class="self-link" href="#concept-url-query"></a></dfn> is either null or
-an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding data. It is initially null.
-
-</p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-fragment">fragment<a class="self-link" href="#concept-url-fragment"></a></dfn> is either
-null or a string holding data that can be used for further processing on the resource the
-<a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify. It is initially null.
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-fragment">fragment<a class="self-link" href="#concept-url-fragment"></a></dfn> is
+either null or a string holding data that can be used for further processing on the
+resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify. It is initially null.
 
 </p>
    <p class="note no-backref" role="note">This is not an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> on purpose.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-type="dfn" data-noexport="" id="non_relative-flag">non-relative flag<a class="self-link" href="#non_relative-flag"></a></dfn>. It is initially
-unset.
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-type="dfn" data-noexport="" id="non_relative-flag">non-relative flag<a class="self-link" href="#non_relative-flag"></a></dfn>. It is
+initially unset.
 
 </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated
-<dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a
+<dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a
 <code><a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#blob">Blob</a></code> object. It is initially null. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a>
 
 </p>
@@ -1389,19 +1380,17 @@ Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a 
 
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>
-<dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either its
-<a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its
-<a data-link-type="dfn" href="#concept-url-password">password</a> is non-null.
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either
+its <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its <a data-link-type="dfn" href="#concept-url-password">password</a> is
+non-null.
 
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> can be designated as
-<dfn data-dfn-type="dfn" data-noexport="" id="concept-base-url">base URL<a class="self-link" href="#concept-base-url"></a></dfn>.
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> can be designated as <dfn data-dfn-type="dfn" data-noexport="" id="concept-base-url">base URL<a class="self-link" href="#concept-base-url"></a></dfn>.
 
 </p>
    <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is useful for the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a> when the
-input might be a <a data-link-type="dfn" href="#concept-relative-url">relative URL</a>.
+input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>.
 
 </p>
    <hr>
@@ -1415,57 +1404,91 @@ last string, if any.
 
 
 </p>
-   <h3 class="heading settled" data-level="4.1" id="url-writing"><span class="secno">4.1. </span><span class="content">URL writing</span><a class="self-link" href="#url-writing"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="url-syntax"><span class="secno">4.1. </span><span class="content">URL syntax</span><a class="self-link" href="#url-syntax"></a></h3>
 
 
 
 
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> must be written as either a <a data-link-type="dfn" href="#concept-relative-url">relative URL</a> or an <a data-link-type="dfn" href="#concept-absolute-url">absolute URL</a>,
-optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#concept-url-fragment">fragment</a>.
-
-</p>
-   <p>An <dfn data-dfn-type="dfn" data-noexport="" id="concept-absolute-url">absolute URL<a class="self-link" href="#concept-absolute-url"></a></dfn> must be a
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, followed by "<code>:</code>", followed by either a
-<a data-link-type="dfn" href="#concept-scheme-relative-url">scheme-relative URL</a>, or if <a data-link-type="dfn" href="#concept-url">URL</a>
-<a data-link-type="dfn" href="#is-special">is <em>not</em> special</a>, a <a data-link-type="dfn" href="#concept-url-path">path</a>, optionally
-followed by "<code>?</code>" and a <a data-link-type="dfn" href="#concept-url-query">query</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either a
+<a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> must be one <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or
-more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
-"<code>.</code>". Developers should ensure that all <a data-link-type="dfn" href="#concept-url-scheme">schemes</a> that
-they use are registered in the IANA URI [sic] Schemes registry.
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute-with-fragment">absolute URL with fragment<a class="self-link" href="#syntax-url-absolute-with-fragment"></a></dfn>
+must be an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>, followed by "<code>#</code>" and a
+<a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>.
+
+</p>
+   <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute">absolute URL<a class="self-link" href="#syntax-url-absolute"></a></dfn> must be one of
+the following
+
+</p>
+   <ul class="brief">
+ 
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a>
+ match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is <em>not</em> an
+ <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by a
+ <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>.
+</p></ul>
+
+
+   <p>optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
+
+</p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme">scheme<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one
+<a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
+"<code>+</code>", "<code>-</code>", and "<code>.</code>". <a data-link-type="dfn" href="#syntax-url-scheme">Schemes</a>
+should be registered in the <cite>IANA URI [sic] Schemes</cite> registry.
 <a data-link-type="biblio" href="#biblio-iana-uri-schemes">[IANA-URI-SCHEMES]</a>
 <a data-link-type="biblio" href="#biblio-rfc7595">[RFC7595]</a>
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-relative-url">relative URL<a class="self-link" href="#concept-relative-url"></a></dfn> must be either a
-<a data-link-type="dfn" href="#concept-scheme-relative-url">scheme-relative URL</a>, or a <a data-link-type="dfn" href="#concept-url-path">path</a> that does not start with a
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a> and "<code>:</code>", optionally followed by a
-"<code>?</code>" and a <a data-link-type="dfn" href="#concept-url-query">query</a>.
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative-with-fragment">relative URL with fragment<a class="self-link" href="#syntax-url-relative-with-fragment"></a></dfn>
+must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, followed by "<code>#</code>" and a
+<a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>.
+
+</p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be either a
+<a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>, or a <a data-link-type="dfn" href="#syntax-url-path">path</a> that does not start with a
+<a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> and "<code>:</code>", optionally followed by a
+"<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
+
 
 </p>
    <p class="note no-backref" role="note">A non-null <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary when
-<a data-link-type="dfn" href="#concept-url-parser">parsing</a> a <a data-link-type="dfn" href="#concept-relative-url">relative URL</a>.
+<a data-link-type="dfn" href="#concept-url-parser">parsing</a> a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>.
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="concept-scheme-relative-url">scheme-relative URL<a class="self-link" href="#concept-scheme-relative-url"></a></dfn> must be
-"<code>//</code>", followed by a <a data-link-type="dfn" href="#concept-host">host</a>, optionally followed by "<code>:</code>" and
-a <a data-link-type="dfn" href="#concept-url-port">port</a>, optionally followed by a <a data-link-type="dfn" href="#concept-url-path">path</a> that
-starts with "<code>/</code>".
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme-relative">scheme-relative URL<a class="self-link" href="#syntax-url-scheme-relative"></a></dfn>
+must be "<code>//</code>", followed by a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed
+by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-port">port</a>, optionally followed by a
+<a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-port">port</a> must be zero or more <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-port">port<a class="self-link" href="#syntax-url-port"></a></dfn> must be zero or more
+<a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>.
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-path">path</a> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>, excluding
-"<code>?</code>".
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-absolute">path-absolute URL<a class="self-link" href="#syntax-url-path-absolute"></a></dfn> must be
+a <a data-link-type="dfn" href="#syntax-url-path">path</a> that starts with "<code>/</code>" and does not start with
+"<code>//</code>".
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-query">query</a> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path">path<a class="self-link" href="#syntax-url-path"></a></dfn> must be zero or more
+<a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>?</code>".
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-query">query<a class="self-link" href="#syntax-url-query"></a></dfn> must be zero or more
+<a data-link-type="dfn" href="#url-units">URL units</a>.
+
+</p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-fragment">fragment<a class="self-link" href="#syntax-url-fragment"></a></dfn> must be zero or more
+<a data-link-type="dfn" href="#url-units">URL units</a>.
 
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-code-points">URL code points<a class="self-link" href="#url-code-points"></a></dfn> are <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
@@ -1524,8 +1547,8 @@ U+100000 to U+10FFFD.
 
 
    <p class="note no-backref" role="note">There is no conforming way to express a
-<a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> within a
-<a data-link-type="dfn" href="#concept-url">URL</a>.
+<a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL</a> within a
+<a data-link-type="dfn" href="#syntax-url">URL</a>.
 
 
 </p>
@@ -1595,8 +1618,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
  </p>
     <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
- <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a> returns either a new <a data-link-type="dfn" href="#concept-url">URL</a> or failure. If they are passed
- the algorithm simply modifies the passed <var>url</var> and can terminate without
+ <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a> returns either a new <a data-link-type="dfn" href="#concept-url">URL</a> or failure. If they are
+ passed, the algorithm simply modifies the passed <var>url</var> and can terminate without
  returning anything.
 </p></div>
 
@@ -2954,8 +2977,8 @@ these steps:
 
 
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-serializer">URL serializer<a class="self-link" href="#concept-url-serializer"></a></dfn> takes a
-<a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var>, an optional <i title="">exclude fragment flag</i>, and then runs
-these steps:
+<a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var>, an optional <i title="">exclude fragment flag</i>, and
+then runs these steps:
 
 </p>
    <ol>
@@ -3054,7 +3077,7 @@ these steps:
    <h3 class="heading settled" data-level="4.4" id="url-equivalence"><span class="secno">4.4. </span><span class="content">URL equivalence</span><a class="self-link" href="#url-equivalence"></a></h3>
 
 
-   <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a> <var>A</var> <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="equals">equals<a class="self-link" href="#equals"></a></dfn>
+   <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a> <var>A</var> <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="equals">equals<a class="self-link" href="#equals"></a></dfn>
 <var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps:
 
 </p>
@@ -3087,9 +3110,9 @@ these steps:
 necessary background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
 </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="URL" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s
-<a data-link-type="dfn" href="#concept-url-scheme">scheme</a>:
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> returned by running these steps, switching on
+<a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>:
 
 </p>
    <dl class="switch">
@@ -3107,7 +3130,7 @@ necessary background information. <a data-link-type="biblio" href="#biblio-html"
   
 
   </p>
-     <p class="example no-backref" id="example-a008cee1"><a class="self-link" href="#example-a008cee1"></a>The <a data-link-type="dfn" href="#concept-url-origin">origin</a> of
+     <p class="example no-backref" id="example-f4c8ee39"><a class="self-link" href="#example-f4c8ee39"></a>The <a data-link-type="dfn" href="#concept-url-origin">origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
   (<code>https</code>, <code>whatwg.org</code>, <code>443</code>).
 
@@ -3633,8 +3656,7 @@ optionally given a <var>value</var>, run these steps:
    <h3 class="heading settled" data-level="6.1" id="constructors"><span class="secno">6.1. </span><span class="content">Constructors</span><a class="self-link" href="#constructors"></a></h3> 
 
 
-   <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn>
+   <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn>
 constructor, when invoked, must run these steps:
 
 </p>
@@ -3697,12 +3719,10 @@ constructor, when invoked, must run these steps:
 </p></ol>
 
 
-   <div class="example" id="example-d32a71ef"><a class="self-link" href="#example-d32a71ef"></a>
+   <div class="example" id="example-200e3093"><a class="self-link" href="#example-200e3093"></a>
  
-    <p>To <a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> a string into a
- <a data-link-type="dfn" href="#concept-url">URL</a> without using a
- <a data-link-type="dfn" href="#concept-base-url">base URL</a>, invoke the constructor with a single
- argument:
+    <p>To <a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> a string into a <a data-link-type="dfn" href="#concept-url">URL</a>
+ without using a <a data-link-type="dfn" href="#concept-base-url">base URL</a>, invoke the constructor with a single argument:
 
  </p>
     <pre>var input = "https://example.org/💩",    url = new URL(input)
@@ -3723,9 +3743,8 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
    <h3 class="heading settled" data-level="6.2" id="url-statics"><span class="secno">6.2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#url">URL</a></code> statics</span><a class="self-link" href="#url-statics"></a></h3>
 
 
-   <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoascii"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn>
-static method, when invoked, must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoascii"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn> static
+method, when invoked, must run these steps:
 
 </p>
    <ol>
@@ -3736,8 +3755,8 @@ static method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>asciiDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or
- failure, return the empty string.
+     <p>If <var>asciiDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>,
+ <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or failure, return the empty string.
 
  </p>
     <li>
@@ -3745,9 +3764,8 @@ static method, when invoked, must run these steps:
 </p></ol>
 
 
-   <p>The
-<dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintounicode"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicode"></a></dfn>
-static method, when invoked, must run these steps:
+   <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintounicode"><code>domainToUnicode(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintounicode"></a></dfn> static
+method, when invoked, must run these steps:
 
 </p>
    <ol>
@@ -3759,8 +3777,8 @@ static method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>unicodeDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or
- failure, return the empty string.
+     <p>If <var>unicodeDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>,
+ <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or failure, return the empty string.
 
  </p>
     <li>
@@ -4720,7 +4738,8 @@ neighboring rights to this work.
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li><a href="#concept-absolute-url">absolute URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §4.1</span>
    <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §6.4</span>
    <li><a href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a><span>, in §5</span>
    <li><a href="#ascii-alpha">ASCII alpha</a><span>, in §1</span>
@@ -4741,7 +4760,8 @@ neighboring rights to this work.
    <li><a href="#dom-urlsearchparams-delete">delete(name)</a><span>, in §6.4</span>
    <li>domain
     <ul>
-     <li><a href="#concept-domain">definition of</a><span>, in §3</span>
+     <li><a href="#concept-domain">dfn for host</a><span>, in §3</span>
+     <li><a href="#syntax-host-domain">dfn for hostsyntax</a><span>, in §3.2</span>
      <li><a href="#dom-url-domaintoascii-domain-domain">argument for URL/domainToASCII(domain)</a><span>, in §6</span>
      <li><a href="#dom-url-domaintounicode-domain-domain">argument for URL/domainToUnicode(domain)</a><span>, in §6</span>
     </ul>
@@ -4754,7 +4774,11 @@ neighboring rights to this work.
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
    <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
    <li><a href="#file-state">file state</a><span>, in §4.2</span>
-   <li><a href="#concept-url-fragment">fragment</a><span>, in §4</span>
+   <li>fragment
+    <ul>
+     <li><a href="#concept-url-fragment">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url-fragment">dfn for urlsyntax</a><span>, in §4.1</span>
+    </ul>
    <li><a href="#fragment-state">fragment state</a><span>, in §4.2</span>
    <li><a href="#dom-urlsearchparams-getall">getAll(name)</a><span>, in §6.4</span>
    <li><a href="#dom-urlsearchparams-get">get(name)</a><span>, in §6.4</span>
@@ -4763,8 +4787,9 @@ neighboring rights to this work.
    <li><a href="#dom-urlsearchparams-has">has(name)</a><span>, in §6.4</span>
    <li>host
     <ul>
-     <li><a href="#concept-host">definition of</a><span>, in §3</span>
-     <li><a href="#concept-url-host">dfn for URL</a><span>, in §4</span>
+     <li><a href="#concept-host">dfn for host</a><span>, in §3</span>
+     <li><a href="#syntax-host">dfn for hostsyntax</a><span>, in §3.2</span>
+     <li><a href="#concept-url-host">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-urlutils-host">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li><a href="#dom-urlutils-hostname">hostname</a><span>, in §6.3</span>
@@ -4776,11 +4801,19 @@ neighboring rights to this work.
    <li><a href="#include-credentials">include credentials</a><span>, in §4</span>
    <li><a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a><span>, in §6.4</span>
    <li><a href="#concept-urlutils-input">input</a><span>, in §6</span>
-   <li><a href="#concept-ipv4">IPv4 address</a><span>, in §3</span>
+   <li>IPv4 address
+    <ul>
+     <li><a href="#concept-ipv4">dfn for host</a><span>, in §3</span>
+     <li><a href="#syntax-host-ipv4">dfn for hostsyntax</a><span>, in §3.2</span>
+    </ul>
    <li><a href="#ipv4-number-parser">IPv4 number parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv4-parser">IPv4 parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv4-serializer">IPv4 serializer</a><span>, in §3.4</span>
-   <li><a href="#concept-ipv6">IPv6 address</a><span>, in §3</span>
+   <li>IPv6 address
+    <ul>
+     <li><a href="#concept-ipv6">dfn for host</a><span>, in §3</span>
+     <li><a href="#syntax-host-ipv6">dfn for hostsyntax</a><span>, in §3.2</span>
+    </ul>
    <li><a href="#concept-ipv6-parser">IPv6 parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv6-parser-finale">IPv6 parser Finale</a><span>, in §3.3</span>
    <li><a href="#concept-ipv6-parser-ipv4">IPv6 parser IPv4</a><span>, in §3.3</span>
@@ -4807,15 +4840,20 @@ neighboring rights to this work.
    <li><a href="#concept-url-object">object</a><span>, in §4</span>
    <li>origin
     <ul>
-     <li><a href="#concept-url-origin">dfn for URL</a><span>, in §4.5</span>
+     <li><a href="#concept-url-origin">dfn for url</a><span>, in §4.5</span>
      <li><a href="#dom-urlutils-origin">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li>password
     <ul>
-     <li><a href="#concept-url-password">dfn for URL</a><span>, in §4</span>
+     <li><a href="#concept-url-password">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
-   <li><a href="#concept-url-path">path</a><span>, in §4</span>
+   <li>path
+    <ul>
+     <li><a href="#concept-url-path">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url-path">dfn for urlsyntax</a><span>, in §4.1</span>
+    </ul>
+   <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
    <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
    <li><a href="#path-start-state">path start state</a><span>, in §4.2</span>
@@ -4827,25 +4865,35 @@ neighboring rights to this work.
    <li><a href="#pop-a-urls-path">pop a url’s path</a><span>, in §4</span>
    <li>port
     <ul>
-     <li><a href="#concept-url-port">dfn for URL</a><span>, in §4</span>
+     <li><a href="#concept-url-port">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url-port">dfn for urlsyntax</a><span>, in §4.1</span>
      <li><a href="#dom-urlutils-port">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li><a href="#port-state">port state</a><span>, in §4.2</span>
    <li><a href="#potential-windows-drive-letter">potential Windows drive letter</a><span>, in §1</span>
    <li><a href="#pre_update-steps">pre-update steps</a><span>, in §6</span>
    <li><a href="#dom-urlutils-protocol">protocol</a><span>, in §6.3</span>
-   <li><a href="#concept-url-query">query</a><span>, in §4</span>
+   <li>query
+    <ul>
+     <li><a href="#concept-url-query">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url-query">dfn for urlsyntax</a><span>, in §4.1</span>
+    </ul>
    <li><a href="#concept-urlutils-query-encoding">query encoding</a><span>, in §6</span>
    <li><a href="#concept-urlutils-query-object">query object</a><span>, in §6</span>
    <li><a href="#query-state">query state</a><span>, in §4.2</span>
    <li><a href="#relative-slash-state">relative slash state</a><span>, in §4.2</span>
    <li><a href="#relative-state">relative state</a><span>, in §4.2</span>
-   <li><a href="#concept-relative-url">relative URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-relative">relative URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-relative-with-fragment">relative URL with fragment</a><span>, in §4.1</span>
    <li><a href="#remaining">remaining</a><span>, in §1.1</span>
    <li><a href="#reset-steps">reset steps</a><span>, in §6.4</span>
    <li><a href="#reset-the-input">reset the input</a><span>, in §6</span>
-   <li><a href="#concept-url-scheme">scheme</a><span>, in §4</span>
-   <li><a href="#concept-scheme-relative-url">scheme-relative URL</a><span>, in §4.1</span>
+   <li>scheme
+    <ul>
+     <li><a href="#concept-url-scheme">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url-scheme">dfn for urlsyntax</a><span>, in §4.1</span>
+    </ul>
+   <li><a href="#syntax-url-scheme-relative">scheme-relative URL</a><span>, in §4.1</span>
    <li><a href="#scheme-start-state">scheme start state</a><span>, in §4.2</span>
    <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
    <li><a href="#dom-urlutils-search">search</a><span>, in §6.3</span>
@@ -4874,7 +4922,8 @@ neighboring rights to this work.
     </ul>
    <li>URL
     <ul>
-     <li><a href="#concept-url">dfn for URL</a><span>, in §4</span>
+     <li><a href="#concept-url">dfn for url</a><span>, in §4</span>
+     <li><a href="#syntax-url">dfn for urlsyntax</a><span>, in §4.1</span>
      <li><a href="#url">(interface)</a><span>, in §6</span>
     </ul>
    <li>url
@@ -4900,7 +4949,7 @@ neighboring rights to this work.
    <li><a href="#userinfo-encode-set">userinfo encode set</a><span>, in §2</span>
    <li>username
     <ul>
-     <li><a href="#concept-url-username">dfn for URL</a><span>, in §4</span>
+     <li><a href="#concept-url-username">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-urlutils-username">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li><a href="#utf_8-percent-encode">utf-8 percent encode</a><span>, in §2</span>
@@ -4913,6 +4962,10 @@ neighboring rights to this work.
    <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
+   <li><a data-link-type="biblio" href="#biblio-dom-ls">[dom-ls]</a> defines the following terms:
+    <ul>
+     <li><a href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ascii case-insensitive</a>
+    </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#location">Location</a>
@@ -4935,6 +4988,8 @@ neighboring rights to this work.
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WEBIDL]
    <dd>Boris Zbarsky; Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]
+   <dd>Document Object Model URL: <a href="http://dom.spec.whatwg.org/">http://dom.spec.whatwg.org/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-rfc4291"><a class="self-link" href="#biblio-rfc4291"></a>[RFC4291]
