@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-14">14 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-15">15 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -137,7 +137,7 @@
  
     <li>
      <p>Align RFC 3986 and RFC 3987 with contemporary implementations and
- obsolete them in the process. (E.g. spaces, other "illegal" code points,
+ obsolete them in the process. (E.g., spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
  <a data-link-type="biblio" href="#biblio-rfc3986">[RFC3986]</a>
@@ -189,7 +189,6 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-digits">ASCII digits<a class="self-link" href="#ascii-digits"></a></dfn> are code points in the range U+0030 to U+0039, inclusive.
 
-
 </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ascii-hex-digits">ASCII hex digits<a class="self-link" href="#ascii-hex-digits"></a></dfn> are <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>, code points in the range
 U+0041 to U+0046, inclusive, and code points in the range U+0061 to U+0066, inclusive.
@@ -236,11 +235,6 @@ the second code point is "<code>:</code>".
 string or code point stream.
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="parse-error">parse error<a class="self-link" href="#parse-error"></a></dfn> indicates a non-fatal mismatch between input and requirements.
-User agents are encouraged to expose <a data-link-type="dfn" href="#parse-error">parse errors</a>
-somehow.
-
-</p>
    <p>Within a parser algorithm that uses a <var>pointer</var> variable, <dfn data-dfn-type="dfn" data-noexport="" id="c">c<a class="self-link" href="#c"></a></dfn>
 references the code point the <var>pointer</var> variable points to.
 
@@ -254,6 +248,16 @@ being processed.
 processed and <var>pointer</var> points to "<code>@</code>",
 <a data-link-type="dfn" href="#c">c</a> is "<code>@</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> is
 "<code>example</code>".
+
+</p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="syntax-violation">syntax violation<a class="self-link" href="#syntax-violation"></a></dfn> indicates a non-fatal mismatch between input and syntax
+requirements. User agents, especially conformance checkers are encouraged to report them
+somewhere.
+
+</p>
+   <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#syntax-violation">syntax violation</a> does not mean that the parser
+terminates. Termination of a parser is always stated explicitly. E.g., through a return
+statement.
 
 
 
@@ -449,7 +453,7 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 
  </p>
     <li>
-     <p>If <var>result</var> is a failure value, <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+     <p>If <var>result</var> is a failure value, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
  </p>
     <li>
@@ -471,7 +475,7 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
 
  </p>
     <li>
-     <p>Signify <a data-link-type="dfn" href="#parse-error">parse errors</a> any returned errors, and then, return
+     <p>Signify <a data-link-type="dfn" href="#syntax-violation">syntax violations</a> for any returned errors, and then, return
  <var>result</var>.
 </p></ol>
 
@@ -557,7 +561,7 @@ steps:
    
       <li>
        <p>If <var>input</var> does not end with
-   "<code>]</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+   "<code>]</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
    </p>
       <li>
@@ -605,7 +609,7 @@ steps:
   "<code>\</code>",
   and
   "<code>]</code>",
-  <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+  <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
  </p>
     <li>
@@ -749,13 +753,13 @@ runs these steps:</p>
  
     <li>
      <p>If any but the last item in <var>numbers</var> is greater than 255,
- <a data-link-type="dfn" href="#parse-error">parse error</a> return failure.
+ <a data-link-type="dfn" href="#syntax-violation">syntax violation</a> return failure.
 
  </p>
     <li>
      <p>If the last item in <var>numbers</var> is greater than or equal to
  256<sup>(5 − the number of items in <var>numbers</var>)</sup>,
- <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+ <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
  </p>
     <li>
@@ -834,8 +838,8 @@ then runs these steps:
      <ol>
    
       <li>
-       <p>If <a data-link-type="dfn" href="#remaining">remaining</a> does not start with
-   "<code>:</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+       <p>If <a data-link-type="dfn" href="#remaining">remaining</a> does not start with "<code>:</code>",
+   <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
    </p>
       <li>
@@ -860,8 +864,7 @@ then runs these steps:
      <ol>
    
       <li>
-       <p>If <var>piece pointer</var> is eight,
-   <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+       <p>If <var>piece pointer</var> is eight, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
    </p>
       <li>
@@ -873,8 +876,8 @@ then runs these steps:
        <ol>
      
         <li>
-         <p>If <var>compress pointer</var> is non-null,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+         <p>If <var>compress pointer</var> is non-null, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
+     return failure.
 
      </p>
         <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
@@ -900,7 +903,7 @@ then runs these steps:
    </p>
       <li>
     
-       <p>Based on <a data-link-type="dfn" href="#c">c</a>:
+       <p>Switching on <a data-link-type="dfn" href="#c">c</a>:
 
     </p>
        <dl class="switch">
@@ -909,28 +912,45 @@ then runs these steps:
      
         <dd>
       
-         <p>If <var>length</var> is 0, <a data-link-type="dfn" href="#parse-error">parse error</a>,
-      return failure.
-      </p>
-         <p>Decrease <var>pointer</var> by <var>length</var>.
-      </p>
-         <p>Jump to <a data-link-type="dfn" href="#concept-ipv6-parser-ipv4">IPv4</a>.
+         <ol>
+       
+          <li>
+           <p>If <var>length</var> is 0, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
-     </p>
+       </p>
+          <li>
+           <p>Decrease <var>pointer</var> by <var>length</var>.
+
+       </p>
+          <li>
+           <p>Jump to <a data-link-type="dfn" href="#concept-ipv6-parser-ipv4">IPv4</a>.
+      </p>
+         </ol>
+         
+
+     
         <dt>"<code>:</code>"
      
         <dd>
       
-         <p>Increase <var>pointer</var> by one.
-      </p>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>,
-      <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+         <ol>
+       
+          <li>
+           <p>Increase <var>pointer</var> by one.
 
-     </p>
+       </p>
+          <li>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
+       return failure.
+      </p>
+         </ol>
+         
+
+     
         <dt>Anything but the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>
      
         <dd>
-         <p><a data-link-type="dfn" href="#parse-error">Parse error</a>, return failure.
+         <p><a data-link-type="dfn" href="#syntax-violation">Syntax violation</a>, return failure.
     </p>
        </dl>
        
@@ -954,8 +974,7 @@ then runs these steps:
  </p>
     <li>
      <p><dfn data-dfn-type="dfn" data-lt="IPv6 parser IPv4" data-noexport="" id="concept-ipv6-parser-ipv4">IPv4<a class="self-link" href="#concept-ipv6-parser-ipv4"></a></dfn>:
- If <var>piece pointer</var> is greater than six,
- <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+ If <var>piece pointer</var> is greater than six, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
  </p>
     <li>
@@ -975,14 +994,13 @@ then runs these steps:
 
    </p>
       <li>
-       <p>If <a data-link-type="dfn" href="#c">c</a> is not an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>,
-   <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure. 
+       <p>If <a data-link-type="dfn" href="#c">c</a> is not an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
+   return failure. 
 
    </p>
       <li>
     
-       <p>While <a data-link-type="dfn" href="#c">c</a> is an
-    <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>, run these subsubsteps:
+       <p>While <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>, run these subsubsteps:
 
     </p>
        <ol>
@@ -996,7 +1014,7 @@ then runs these steps:
          <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
 
       </p>
-         <p>Otherwise, if <var>value</var> is 0, <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+         <p>Otherwise, if <var>value</var> is 0, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
       </p>
          <p>Otherwise, set <var>value</var> to <var>value</var> × 10 + <var>number</var>.
@@ -1007,7 +1025,7 @@ then runs these steps:
 
      </p>
         <li>
-         <p>If <var>value</var> is greater than 255, <a data-link-type="dfn" href="#parse-error">parse error</a>,
+         <p>If <var>value</var> is greater than 255, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
      return failure.
     </p>
        </ol>
@@ -1017,7 +1035,7 @@ then runs these steps:
       <li>
        <p>If <var>dots seen</var> is less than 3 and
    <a data-link-type="dfn" href="#c">c</a> is not a "<code>.</code>",
-   <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+   <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
    </p>
       <li>
@@ -1038,7 +1056,7 @@ then runs these steps:
       <li>
        <p>If <var>dots seen</var> is 3 and <a data-link-type="dfn" href="#c">c</a> is not
    the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>,
-   <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+   <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
    </p>
       <li>
@@ -1077,9 +1095,8 @@ then runs these steps:
 
  
     <li>
-     <p>Otherwise, if <var>compress pointer</var> is null and
- <var>piece pointer</var> is not eight, <a data-link-type="dfn" href="#parse-error">parse error</a>,
- return failure.
+     <p>Otherwise, if <var>compress pointer</var> is null and <var>piece pointer</var> is
+ not eight, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
  </p>
     <li>
@@ -1515,9 +1532,6 @@ U+100000 to U+10FFFD.
    <h3 class="heading settled" data-level="4.2" id="url-parsing"><span class="secno">4.2. </span><span class="content">URL parsing</span><a class="self-link" href="#url-parsing"></a></h3>
 
 
-   <p class="XXX">Add the ability to halt on the first conformance error.
-
-</p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string
 <var>input</var>, with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional
 <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps:
@@ -1602,7 +1616,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    </p>
       <li>
        <p>If <var>input</var> contains any leading or trailing
-   <a data-link-type="dfn" href="#c0-controls-and-space">C0 controls and space</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+   <a data-link-type="dfn" href="#c0-controls-and-space">C0 controls and space</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
    </p>
       <li>
@@ -1670,7 +1684,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      </p>
         <li>
-         <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>, terminate this algorithm.
+         <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, terminate this algorithm.
     </p>
        </ol>
        
@@ -1767,7 +1781,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      </p>
         <li>
-         <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>, terminate this algorithm.
+         <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, terminate this algorithm.
     </p>
        </ol>
        
@@ -1781,7 +1795,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      
         <li>
          <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#non_relative-flag">non-relative flag</a> is
-     set and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+     set and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
      </p>
         <li>
@@ -1821,9 +1835,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     and increase <var>pointer</var> by one.
 
     </p>
-       <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>, set <var>state</var> to
-    <a data-link-type="dfn" href="#relative-state">relative state</a> and decrease <var>pointer</var> by
-    one.
+       <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a>
+    and decrease <var>pointer</var> by one.
 
    </p>
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="path-or-authority-state">path or authority state<a class="self-link" href="#path-or-authority-state"></a></dfn>
@@ -1842,7 +1855,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
     
        <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to
-    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, and then, based on <a data-link-type="dfn" href="#c">c</a>:
+    <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, and then, switching on <a data-link-type="dfn" href="#c">c</a>:
 
     </p>
        <dl class="switch">
@@ -1911,7 +1924,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dd>
       
          <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>",
-      <a data-link-type="dfn" href="#parse-error">parse error</a>, set <var>state</var> to <a data-link-type="dfn" href="#relative-slash-state">relative slash state</a>.
+      <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, set <var>state</var> to <a data-link-type="dfn" href="#relative-slash-state">relative slash state</a>.
 
       </p>
          <p>Otherwise, run these steps:
@@ -1959,7 +1972,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -1994,7 +2007,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <var>pointer</var> by one.
 
     </p>
-       <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>, set <var>state</var> to
+       <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, set <var>state</var> to
     <a data-link-type="dfn" href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a>, and decrease <var>pointer</var> by one.
 
    </p>
@@ -2006,7 +2019,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     to <a data-link-type="dfn" href="#authority-state">authority state</a>, and decrease <var>pointer</var> by one.
 
     </p>
-       <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
    </p>
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="authority-state">authority state<a class="self-link" href="#authority-state"></a></dfn>
@@ -2023,7 +2036,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p><a data-link-type="dfn" href="#parse-error">Parse error</a>.
+           <p><a data-link-type="dfn" href="#syntax-violation">Syntax violation</a>.
 
        </p>
           <li>
@@ -2182,8 +2195,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
@@ -2220,8 +2232,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        <ol>
      
         <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>,
-     append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
+         <p>If <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>.
 
      </p>
         <li>
@@ -2242,7 +2253,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        </p>
           <li>
            <p>If <var>port</var> is greater than 2<sup>16</sup> − 1,
-       <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+       <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
 
        </p>
           <li>
@@ -2265,12 +2276,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
-         <p>Otherwise, <a data-link-type="dfn" href="#parse-error">parse error</a>, return failure.
+         <p>Otherwise, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
     </p>
        </ol>
        
@@ -2281,7 +2291,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
     
        <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to "<code>file</code>",
-    and then, based on <a data-link-type="dfn" href="#c">c</a>:
+    and then, switching on <a data-link-type="dfn" href="#c">c</a>:
 
     </p>
        <dl class="switch">
@@ -2308,7 +2318,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2394,7 +2404,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2501,8 +2511,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
@@ -2520,7 +2529,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
      
         <li>
          <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>",
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+     <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
@@ -2548,7 +2557,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>",
-       <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2641,8 +2650,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
@@ -2655,12 +2663,12 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is not a
        <a data-link-type="dfn" href="#url-code-points">URL code point</a> and not "<code>%</code>",
-       <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
-       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2703,12 +2711,12 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, not a
        <a data-link-type="dfn" href="#url-code-points">URL code point</a>, and not
-       "<code>%</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       "<code>%</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
-       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2791,8 +2799,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
      
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D,
-     <a data-link-type="dfn" href="#parse-error">parse error</a>.
+         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is U+0009, U+000A, or U+000D, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
      </p>
         <li>
@@ -2805,12 +2812,12 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is not a
        <a data-link-type="dfn" href="#url-code-points">URL code point</a> and not "<code>%</code>",
-       <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
-       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2827,7 +2834,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
    
       <dd>
     
-       <p>Based on <a data-link-type="dfn" href="#c">c</a>:
+       <p>Switching on <a data-link-type="dfn" href="#c">c</a>:
     </p>
        <dl class="switch">
      
@@ -2846,7 +2853,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <dt>U+000D
      
         <dd>
-         <p><a data-link-type="dfn" href="#parse-error">Parse error</a>.
+         <p><a data-link-type="dfn" href="#syntax-violation">Syntax violation</a>.
 
      </p>
         <dt>Otherwise
@@ -2857,12 +2864,12 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is not a <a data-link-type="dfn" href="#url-code-points">URL code point</a> and not
-       "<code>%</code>", <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       "<code>%</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
-       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#parse-error">parse error</a>.
+       not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -4593,9 +4600,9 @@ data structures.
 
 </p>
      <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
-should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
+should name such a feature "url" (i.e., lowercase and with an "l" at the end). Names such
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
-(i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
+(i.e., uppercase) is preferred, e.g., "newURL" and "oldURL".
 
 </p>
      <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and
@@ -4624,6 +4631,7 @@ Arkadiusz Michalski,
 Behnam Esfahbod,
 Bobby Holley,
 Boris Zbarsky,
+Brad Hill,
 Brandon Ross,
 Chris Rebert,
 Dan Appelquist,
@@ -4802,7 +4810,6 @@ neighboring rights to this work.
      <li><a href="#concept-url-origin">dfn for URL</a><span>, in §4.5</span>
      <li><a href="#dom-urlutils-origin">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
-   <li><a href="#parse-error">parse error</a><span>, in §1.1</span>
    <li>password
     <ul>
      <li><a href="#concept-url-password">dfn for URL</a><span>, in §4</span>
@@ -4859,6 +4866,7 @@ neighboring rights to this work.
      <li><a href="#URLUtilsReadOnly-stringification-behavior">dfn for URLUtilsReadOnly</a><span>, in §6</span>
      <li><a href="#stringification-behavior">dfn for URLSearchParams</a><span>, in §6.4</span>
     </ul>
+   <li><a href="#syntax-violation">syntax violation</a><span>, in §1.1</span>
    <li>update steps
     <ul>
      <li><a href="#concept-urlutils-update">dfn for URLUtils</a><span>, in §6</span>

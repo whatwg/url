@@ -25,7 +25,7 @@ Boilerplate: omit feedback-header
 
 <ul>
  <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
- obsolete them in the process. (E.g. spaces, other "illegal" code points,
+ obsolete them in the process. (E.g., spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
  [[RFC3986]]
@@ -64,7 +64,6 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 <p>The <dfn>C0 controls and space</dfn> are <a>C0 controls</a> and code point U+0020.
 
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039, inclusive.
-<!-- XXX ref Encoding? -->
 
 <p>The <dfn>ASCII hex digits</dfn> are <a>ASCII digits</a>, code points in the range
 U+0041 to U+0046, inclusive, and code points in the range U+0061 to U+0066, inclusive.
@@ -99,10 +98,6 @@ the second code point is "<code>:</code>".
 <p>The <dfn>EOF code point</dfn> is a conceptual code point that signifies the end of a
 string or code point stream.
 
-<p>A <dfn>parse error</dfn> indicates a non-fatal mismatch between input and requirements.
-User agents are encouraged to expose <a lt="parse error">parse errors</a>
-somehow.
-
 <p>Within a parser algorithm that uses a <var>pointer</var> variable, <dfn>c</dfn>
 references the code point the <var>pointer</var> variable points to.
 
@@ -114,6 +109,14 @@ being processed.
 processed and <var>pointer</var> points to "<code>@</code>",
 <a>c</a> is "<code>@</code>" and <a>remaining</a> is
 "<code>example</code>".
+
+<p>A <dfn>syntax violation</dfn> indicates a non-fatal mismatch between input and syntax
+requirements. User agents, especially conformance checkers are encouraged to report them
+somewhere.
+
+<p class="note no-backref">A <a>syntax violation</a> does not mean that the parser
+terminates. Termination of a parser is always stated explicitly. E.g., through a return
+statement.
 
 
 
@@ -261,7 +264,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>If <var>result</var> is a failure value, <a>parse error</a>, return failure.
+ <li><p>If <var>result</var> is a failure value, <a>syntax violation</a>, return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -275,7 +278,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
- <li><p>Signify <a>parse errors</a> any returned errors, and then, return
+ <li><p>Signify <a>syntax violations</a> for any returned errors, and then, return
  <var>result</var>.
 </ol>
 
@@ -338,7 +341,7 @@ steps:
 
   <ol>
    <li><p>If <var>input</var> does not end with
-   "<code>]</code>", <a>parse error</a>, return failure.
+   "<code>]</code>", <a>syntax violation</a>, return failure.
 
    <li><p>Return the result of
    <a lt="IPv6 parser">IPv6 parsing</a> <var>input</var>
@@ -374,7 +377,7 @@ steps:
   "<code>\</code>",<!-- 5C -->
   and
   "<code>]</code>",<!-- 5D -->
-  <a>parse error</a>, return failure.
+  <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -458,11 +461,11 @@ runs these steps:
   </ol>
 
  <li><p>If any but the last item in <var>numbers</var> is greater than 255,
- <a>parse error</a> return failure.
+ <a>syntax violation</a> return failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
  256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>,
- <a>parse error</a>, return failure.
+ <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
 
@@ -509,8 +512,8 @@ then runs these steps:
   <p>If <a>c</a> is "<code>:</code>", run these substeps:
 
   <ol>
-   <li><p>If <a>remaining</a> does not start with
-   "<code>:</code>", <a>parse error</a>, return failure.
+   <li><p>If <a>remaining</a> does not start with "<code>:</code>",
+   <a>syntax violation</a>, return failure.
 
    <li><p>Increase <var>pointer</var> by two.
 
@@ -524,16 +527,15 @@ then runs these steps:
   substeps:
 
   <ol>
-   <li><p>If <var>piece pointer</var> is eight,
-   <a>parse error</a>, return failure.
+   <li><p>If <var>piece pointer</var> is eight, <a>syntax violation</a>, return failure.
 
    <li>
     <p>If <a>c</a> is "<code>:</code>", run these inner
     substeps:
 
     <ol>
-     <li><p>If <var>compress pointer</var> is non-null,
-     <a>parse error</a>, return failure.
+     <li><p>If <var>compress pointer</var> is non-null, <a>syntax violation</a>,
+     return failure.
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
      <var>compress pointer</var> to <var>piece pointer</var>,
@@ -550,24 +552,30 @@ then runs these steps:
    and increase <var>pointer</var> and <var>length</var> by one.
 
    <li>
-    <p>Based on <a>c</a>:
+    <p>Switching on <a>c</a>:
 
     <dl class=switch>
      <dt>"<code>.</code>"
      <dd>
-      <p>If <var>length</var> is 0, <a>parse error</a>,
-      return failure.
-      <p>Decrease <var>pointer</var> by <var>length</var>.
-      <p>Jump to <a lt='IPv6 parser IPv4'>IPv4</a>.
+      <ol>
+       <li><p>If <var>length</var> is 0, <a>syntax violation</a>, return failure.
+
+       <li><p>Decrease <var>pointer</var> by <var>length</var>.
+
+       <li><p>Jump to <a lt='IPv6 parser IPv4'>IPv4</a>.
+      </ol>
 
      <dt>"<code>:</code>"
      <dd>
-      <p>Increase <var>pointer</var> by one.
-      <p>If <a>c</a> is the <a>EOF code point</a>,
-      <a>parse error</a>, return failure.
+      <ol>
+       <li><p>Increase <var>pointer</var> by one.
+
+       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>syntax violation</a>,
+       return failure.
+      </ol>
 
      <dt>Anything but the <a>EOF code point</a>
-     <dd><p><a>Parse error</a>, return failure.
+     <dd><p><a>Syntax violation</a>, return failure.
     </dl>
 
    <li><p>Set <var>piece</var> to <var>value</var>.
@@ -579,8 +587,7 @@ then runs these steps:
  <a lt='IPv6 parser Finale'>Finale</a>.
 
  <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>:
- If <var>piece pointer</var> is greater than six,
- <a>parse error</a>, return failure.
+ If <var>piece pointer</var> is greater than six, <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>dots seen</var> be 0.
 
@@ -591,12 +598,11 @@ then runs these steps:
   <ol>
    <li><p>Let <var>value</var> be null.
 
-   <li><p>If <a>c</a> is not an <a lt="ASCII digits">ASCII digit</a>,
-   <a>parse error</a>, return failure. <!-- prevent the empty string -->
+   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>syntax violation</a>,
+   return failure. <!-- prevent the empty string -->
 
    <li>
-    <p>While <a>c</a> is an
-    <a lt="ASCII digits">ASCII digit</a>, run these subsubsteps:
+    <p>While <a>c</a> is an <a>ASCII digit</a>, run these subsubsteps:
 
     <ol>
      <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
@@ -604,19 +610,19 @@ then runs these steps:
      <li>
       <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
 
-      <p>Otherwise, if <var>value</var> is 0, <a>parse error</a>, return failure.
+      <p>Otherwise, if <var>value</var> is 0, <a>syntax violation</a>, return failure.
 
       <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
 
      <li><p>Increase <var>pointer</var> by one.
 
-     <li><p>If <var>value</var> is greater than 255, <a>parse error</a>,
+     <li><p>If <var>value</var> is greater than 255, <a>syntax violation</a>,
      return failure.
     </ol>
 
    <li><p>If <var>dots seen</var> is less than 3 and
    <a>c</a> is not a "<code>.</code>",
-   <a>parse error</a>, return failure.
+   <a>syntax violation</a>, return failure.
 
    <li><p>Set <var>piece</var> to
    <var>piece</var> &times; 0x100 + <var>value</var>.
@@ -629,7 +635,7 @@ then runs these steps:
 
    <li><p>If <var>dots seen</var> is 3 and <a>c</a> is not
    the <a>EOF code point</a>,
-   <a>parse error</a>, return failure.
+   <a>syntax violation</a>, return failure.
 
    <li><p>Increase <var>dots seen</var> by one.
   </ol>
@@ -651,9 +657,8 @@ then runs these steps:
    decrease both <var>piece pointer</var> and <var>swaps</var> by one.
   </ol>
 
- <li><p>Otherwise, if <var>compress pointer</var> is null and
- <var>piece pointer</var> is not eight, <a>parse error</a>,
- return failure.
+ <li><p>Otherwise, if <var>compress pointer</var> is null and <var>piece pointer</var> is
+ not eight, <a>syntax violation</a>, return failure.
 
  <li><p>Return <var>address</var>.
 </ol>
@@ -973,8 +978,6 @@ U+100000 to U+10FFFD.
 
 <h3 id=url-parsing>URL parsing</h3>
 
-<p class=XXX>Add the ability to halt on the first conformance error.
-
 <p>The <dfn id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
 <var>input</var>, with an optional <a>base URL</a> <var>base</var> and an optional
 <a>encoding</a> <var>encoding override</var>, and then runs these steps:
@@ -1032,7 +1035,7 @@ optionally with an <a>encoding</a>
    <li><p>Set <var>url</var> to a new <a>URL</a>.
 
    <li><p>If <var>input</var> contains any leading or trailing
-   <a>C0 controls and space</a>, <a>parse error</a>.
+   <a>C0 controls and space</a>, <a>syntax violation</a>.
 
    <li><p>Remove any leading and trailing <a>C0 controls and space</a> from
    <var>input</var>.
@@ -1072,7 +1075,7 @@ optionally with an <a>encoding</a>
      <var>state</var> to <a>no scheme state</a>, and decrease
      <var>pointer</var> by one.
 
-     <li><p>Otherwise, <a>parse error</a>, terminate this algorithm.
+     <li><p>Otherwise, <a>syntax violation</a>, terminate this algorithm.
     </ol>
 
    <dt><dfn>scheme state</dfn>
@@ -1128,14 +1131,14 @@ optionally with an <a>encoding</a>
      <a>no scheme state</a>, and start over (from the first code point
      in <var>input</var>).
 
-     <li><p>Otherwise, <a>parse error</a>, terminate this algorithm.
+     <li><p>Otherwise, <a>syntax violation</a>, terminate this algorithm.
     </ol>
 
    <dt><dfn>no scheme state</dfn>
    <dd>
     <ol>
      <li><p>If <var>base</var> is null, or <var>base</var>'s <a>non-relative flag</a> is
-     set and <a>c</a> is not "<code>#</code>", <a>parse error</a>, return failure.
+     set and <a>c</a> is not "<code>#</code>", <a>syntax violation</a>, return failure.
 
      <li><p>Otherwise, if <var>base</var>'s <a>non-relative flag</a> is set and <a>c</a>
      is "<code>#</code>", set <var>url</var>'s <a for=URL>scheme</a> to
@@ -1163,9 +1166,8 @@ optionally with an <a>encoding</a>
     <var>state</var> to <a>special authority ignore slashes state</a>
     and increase <var>pointer</var> by one.
 
-    <p>Otherwise, <a>parse error</a>, set <var>state</var> to
-    <a>relative state</a> and decrease <var>pointer</var> by
-    one.
+    <p>Otherwise, <a>syntax violation</a>, set <var>state</var> to <a>relative state</a>
+    and decrease <var>pointer</var> by one.
 
    <dt><dfn>path or authority state</dfn>
    <dd>
@@ -1177,7 +1179,7 @@ optionally with an <a>encoding</a>
    <dt><dfn>relative state</dfn>
    <dd>
     <p>Set <var>url</var>'s <a for=URL>scheme</a> to
-    <var>base</var>'s <a for=URL>scheme</a>, and then, based on <a>c</a>:
+    <var>base</var>'s <a for=URL>scheme</a>, and then, switching on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
@@ -1230,7 +1232,7 @@ optionally with an <a>encoding</a>
      <dt>Otherwise
      <dd>
       <p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-      <a>parse error</a>, set <var>state</var> to <a>relative slash state</a>.
+      <a>syntax violation</a>, set <var>state</var> to <a>relative slash state</a>.
 
       <p>Otherwise, run these steps:
 
@@ -1260,7 +1262,7 @@ optionally with an <a>encoding</a>
       <a>c</a> is "<code>\</code>", run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
@@ -1283,7 +1285,7 @@ optionally with an <a>encoding</a>
     set <var>state</var> to <a>special authority ignore slashes state</a>, and increase
     <var>pointer</var> by one.
 
-    <p>Otherwise, <a>parse error</a>, set <var>state</var> to
+    <p>Otherwise, <a>syntax violation</a>, set <var>state</var> to
     <a>special authority ignore slashes state</a>, and decrease <var>pointer</var> by one.
 
    <dt><dfn>special authority ignore slashes state</dfn>
@@ -1291,7 +1293,7 @@ optionally with an <a>encoding</a>
     <p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", set <var>state</var>
     to <a>authority state</a>, and decrease <var>pointer</var> by one.
 
-    <p>Otherwise, <a>parse error</a>.
+    <p>Otherwise, <a>syntax violation</a>.
 
    <dt><dfn>authority state</dfn>
    <dd>
@@ -1300,7 +1302,7 @@ optionally with an <a>encoding</a>
       <p>If <a>c</a> is "<code>@</code>", run these substeps:
 
       <ol>
-       <li><p><a>Parse error</a>.
+       <li><p><a>Syntax violation</a>.
 
        <li><p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
        <var>buffer</var>.
@@ -1395,8 +1397,7 @@ optionally with an <a>encoding</a>
        algorithm.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
      <li>
       <p>Otherwise, run these substeps:
@@ -1415,8 +1416,7 @@ optionally with an <a>encoding</a>
    <dt><dfn>port state</dfn>
    <dd>
     <ol>
-     <li><p>If <a>c</a> is an <a lt="ASCII digits">ASCII digit</a>,
-     append <a>c</a> to <var>buffer</var>.
+     <li><p>If <a>c</a> is an <a>ASCII digit</a>, append <a>c</a> to <var>buffer</var>.
 
      <li>
       <p>Otherwise, if <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>",
@@ -1430,7 +1430,7 @@ optionally with an <a>encoding</a>
        0 through 9.
 
        <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
-       <a>parse error</a>, return failure.
+       <a>syntax violation</a>, return failure.
 
        <li><p>Set <var>url</var>'s <a for=URL>port</a> to null, if <var>port</var> is
        <var>url</var>'s <a for=URL>scheme</a>'s <a>default port</a>, and to
@@ -1443,16 +1443,15 @@ optionally with an <a>encoding</a>
        <a>path start state</a>, and decrease <var>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
-     <li><p>Otherwise, <a>parse error</a>, return failure.
+     <li><p>Otherwise, <a>syntax violation</a>, return failure.
     </ol>
 
    <dt><dfn>file state</dfn>
    <dd>
     <p>Set <var>url</var>'s <a for=URL>scheme</a> to "<code>file</code>",
-    and then, based on <a>c</a>:
+    and then, switching on <a>c</a>:
 
     <dl class=switch>
      <dt><a>EOF code point</a>
@@ -1469,7 +1468,7 @@ optionally with an <a>encoding</a>
      <dt>"<code>\</code>"
      <dd>
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>file slash state</a>.
       </ol>
@@ -1525,7 +1524,7 @@ optionally with an <a>encoding</a>
       <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>parse error</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>file host state</a>.
       </ol>
@@ -1588,8 +1587,7 @@ optionally with an <a>encoding</a>
         </ol>
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
@@ -1598,7 +1596,7 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-     <a>parse error</a>.
+     <a>syntax violation</a>.
 
      <li><p>Set <var>state</var> to <a>path state</a>, and if neither <a>c</a> is
      "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
@@ -1614,7 +1612,7 @@ optionally with an <a>encoding</a>
       not given and <a>c</a> is "<code>?</code>" or "<code>#</code>", run these substeps:
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-       <a>parse error</a>.
+       <a>syntax violation</a>.
 
        <li>
         <p>If <var>buffer</var>, <a lt="ASCII lowercase">lowercased</a>, matches any row
@@ -1667,8 +1665,7 @@ optionally with an <a>encoding</a>
        and <var>state</var> to <a>fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
      <li>
       <p>Otherwise, run these steps:
@@ -1676,10 +1673,10 @@ optionally with an <a>encoding</a>
       <ol>
        <li><p>If <a>c</a> is not a
        <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>parse error</a>.
+       <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
+       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
        <li><p><a>utf-8 percent encode</a> <a>c</a> using the
        <a>default encode set</a>, and append the result to
@@ -1704,10 +1701,10 @@ optionally with an <a>encoding</a>
       <ol>
        <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a
        <a lt="URL code points">URL code point</a>, and not
-       "<code>%</code>", <a>parse error</a>.
+       "<code>%</code>", <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
+       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is none of
        <a>EOF code point</a>, U+0009, U+000A, and U+000D,
@@ -1757,8 +1754,7 @@ optionally with an <a>encoding</a>
        and state to <a>fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D,
-     <a>parse error</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
      <li>
       <p>Otherwise, run these substeps:
@@ -1766,10 +1762,10 @@ optionally with an <a>encoding</a>
       <ol>
        <li><p>If <a>c</a> is not a
        <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>parse error</a>.
+       <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
+       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
@@ -1777,7 +1773,7 @@ optionally with an <a>encoding</a>
 
    <dt><dfn>fragment state</dfn>
    <dd>
-    <p>Based on <a>c</a>:
+    <p>Switching on <a>c</a>:
     <dl class=switch>
      <dt><a>EOF code point</a>
      <dd><p>Do nothing.
@@ -1786,16 +1782,16 @@ optionally with an <a>encoding</a>
      <dt>U+0009
      <dt>U+000A
      <dt>U+000D
-     <dd><p><a>Parse error</a>.
+     <dd><p><a>Syntax violation</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
        <li><p>If <a>c</a> is not a <a lt="URL code points">URL code point</a> and not
-       "<code>%</code>", <a>parse error</a>.
+       "<code>%</code>", <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>parse error</a>.
+       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
        <li>
         <p>Append <a>c</a> to <var>url</var>'s <a for=URL>fragment</a>.
@@ -2956,9 +2952,9 @@ are meant for <a for=URL>URL</a> manipulation. In IDL the USVString type should 
 data structures.
 
 <p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
-should name such a feature "url" (i.e. lowercase and with an "l" at the end). Names such
+should name such a feature "url" (i.e., lowercase and with an "l" at the end). Names such
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
-(i.e. uppercase) is preferred, e.g. "newURL" and "oldURL".
+(i.e., uppercase) is preferred, e.g., "newURL" and "oldURL".
 
 <p class=note>The {{EventSource}} and
 {{HashChangeEvent}} interfaces in HTML are examples of
@@ -2982,6 +2978,7 @@ Arkadiusz Michalski,
 Behnam Esfahbod,
 Bobby Holley,
 Boris Zbarsky,
+Brad Hill,
 Brandon Ross,
 Chris Rebert,
 Dan Appelquist,
