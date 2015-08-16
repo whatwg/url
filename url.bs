@@ -887,10 +887,11 @@ the following
 
 <ul class=brief>
  <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
- match for a <a>special scheme</a>, followed by a <a>scheme-relative URL</a>
+ match for a <a>special scheme</a>, followed by "<code>:</code>" and a
+ <a>scheme-relative URL</a>
  <li><p>a <a for=urlsyntax>scheme</a> that is <em>not</em> an
- <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by a
- <a>relative URL</a>
+ <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by
+ "<code>:</code>" and a <a>relative URL</a>
 </ul>
 
 <p>either optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
@@ -907,11 +908,17 @@ should be registered in the <cite>IANA URI [sic] Schemes</cite> registry.
 must be a <a>relative URL</a>, followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be either a
-<a>scheme-relative URL</a>, or a <a for=urlsyntax>path</a> that does not start with a
-<a for=urlsyntax>scheme</a> and "<code>:</code>", optionally followed by a
-"<code>?</code>" and a <a for=urlsyntax>query</a>.
-<!-- XXX should really explain "." and ".." -->
+<p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be one of
+the following
+
+<ul class=brief>
+ <li><p>a <a>scheme-relative URL</a>
+ <li><p>a <a>path-absolute URL</a>
+ <li><p>a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
+ and "<code>:</code>"
+</ul>
+
+<p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
 
 <p class="note no-backref">A non-null <a>base URL</a> is necessary when
 <a lt="URL parser">parsing</a> a <a>relative URL</a>.
@@ -925,11 +932,32 @@ by "<code>:</code>" and a <a for=urlsyntax>port</a>, optionally followed by a
 <a>ASCII digits</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-path-absolute>path-absolute URL</dfn> must be
-a <a for=urlsyntax>path</a> that starts with "<code>/</code>" and does not start with
-"<code>//</code>".
+"<code>/</code>" followed by a <a>path-relative URL</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-path>path</dfn> must be zero or more
-<a>URL units</a>, excluding "<code>?</code>".
+<p>A <dfn export for=urlsyntax id=syntax-url-path-relative>path-relative URL</dfn> must be
+zero or more <a>path segments</a>, separated from each other by "<code>/</code>", and not
+start with "<code>/</code>".
+
+<p>A <dfn export for=urlsyntax id=syntax-url-path-segment>path segment</dfn> must be one
+of the following
+
+<ul class=brief>
+ <li><p>zero or more <a>URL units</a>, excluding "<code>/</code>" and "<code>?</code>",
+ that together are not a <a>single-dot path segment</a> or a
+ <a>double-dot path segment</a>.
+ <li><p>a <a>single-dot path segment</a>
+ <li><p>a <a>double-dot path segment</a>.
+</ul>
+
+<p>A
+<dfn export for=urlsyntax id=syntax-url-path-segment-dot>single-dot path segment</dfn>
+must be "<code>.</code>" or an <a spec=dom>ASCII case-insensitive</a> match for
+"<code>%2e</code>".
+
+<p>A
+<dfn export for=urlsyntax id=syntax-url-path-segment-dotdot>double-dot path segment</dfn>
+must be "<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for one of
+"<code>.%2e</code>", "<code>%2e.</code>", and "<code>%2e%2e</code>".
 
 <p>A <dfn export for=urlsyntax id=syntax-url-query>query</dfn> must be zero or more
 <a>URL units</a>.
@@ -1632,31 +1660,19 @@ optionally with an <a>encoding</a>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
        <a>syntax violation</a>.
 
-       <li>
-        <p>If <var>buffer</var>, <a lt="ASCII lowercase">lowercased</a>, matches any row
-        in the first column of the following table, set <var>buffer</var> to the contents
-        of the cell in the second column of the matched row:
+       <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>pop</a>
+       <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is
+       "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
+       "<code>\</code>", append the empty string to <var>url</var>'s <a for=url>path</a>.
 
-        <table>
-         <tr><td>"<code>%2e</code>"   <td>"<code>.</code>"
-         <tr><td>"<code>.%2e</code>"  <td rowspan=3>"<code>..</code>"
-         <tr><td>"<code>%2e.</code>"
-         <tr><td>"<code>%2e%2e</code>"
-        </table>
-
-       <li><p>If <var>buffer</var> is "<code>..</code>", <a>pop</a> <var>url</var>'s
-       <a for=url>path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
-       <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>", append the empty
-       string to <var>url</var>'s <a for=url>path</a>.
-
-       <li><p>Otherwise, if <var>buffer</var> is "<code>.</code>" and if neither <a>c</a>
-       is "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
-       "<code>\</code>", append the empty string to <var>url</var>'s
+       <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if
+       neither <a>c</a> is "<code>/</code>", nor <var>url</var> <a>is special</a> and
+       <a>c</a> is "<code>\</code>", append the empty string to <var>url</var>'s
        <a for=url>path</a>.
 
        <li>
-        <p>Otherwise, if <var>buffer</var> is not
-        "<code>.</code>", run these subsubsteps:
+        <p>Otherwise, if <var>buffer</var> is not a <a>single-dot path segment</a>, run
+        these subsubsteps:
 
         <ol>
          <li>

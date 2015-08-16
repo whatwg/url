@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-15">15 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-16">16 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1430,12 +1430,13 @@ the following
  
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a>
- match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
+ match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by "<code>:</code>" and a
+ <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
  </p>
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is <em>not</em> an
- <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by a
- <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>
+ <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by
+ "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>
 </p></ul>
 
 
@@ -1456,11 +1457,25 @@ must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, 
 <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>.
 
 </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be either a
-<a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>, or a <a data-link-type="dfn" href="#syntax-url-path">path</a> that does not start with a
-<a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> and "<code>:</code>", optionally followed by a
-"<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be one of
+the following
 
+</p>
+   <ul class="brief">
+ 
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a>
+ and "<code>:</code>"
+</p></ul>
+
+
+   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
 
 </p>
    <p class="note no-backref" role="note">A non-null <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary when
@@ -1478,12 +1493,43 @@ by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-port">port</
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-absolute">path-absolute URL<a class="self-link" href="#syntax-url-path-absolute"></a></dfn> must be
-a <a data-link-type="dfn" href="#syntax-url-path">path</a> that starts with "<code>/</code>" and does not start with
-"<code>//</code>".
+"<code>/</code>" followed by a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a>.
 
 </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path">path<a class="self-link" href="#syntax-url-path"></a></dfn> must be zero or more
-<a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>?</code>".
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative URL<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be
+zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">path segments</a>, separated from each other by "<code>/</code>", and not
+start with "<code>/</code>".
+
+</p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment">path segment<a class="self-link" href="#syntax-url-path-segment"></a></dfn> must be one
+of the following
+
+</p>
+   <ul class="brief">
+ 
+    <li>
+     <p>zero or more <a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>/</code>" and "<code>?</code>",
+ that together are not a <a data-link-type="dfn" href="#syntax-url-path-segment-dot">single-dot path segment</a> or a
+ <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>.
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-segment-dot">single-dot path segment</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>.
+</p></ul>
+
+
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dot">single-dot path segment<a class="self-link" href="#syntax-url-path-segment-dot"></a></dfn>
+must be "<code>.</code>" or an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for
+"<code>%2e</code>".
+
+</p>
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dotdot">double-dot path segment<a class="self-link" href="#syntax-url-path-segment-dotdot"></a></dfn>
+must be "<code>..</code>" or an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for one of
+"<code>.%2e</code>", "<code>%2e.</code>", and "<code>%2e%2e</code>".
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-query">query<a class="self-link" href="#syntax-url-query"></a></dfn> must be zero or more
@@ -2587,51 +2633,23 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
        </p>
           <li>
-        
-           <p>If <var>buffer</var>, <a data-link-type="dfn" href="#ascii-lowercase">lowercased</a>, matches any row
-        in the first column of the following table, set <var>buffer</var> to the contents
-        of the cell in the second column of the matched row:
-
-        </p>
-           <table>
-         
-            <tbody>
-             <tr>
-              <td>"<code>%2e</code>"   
-              <td>"<code>.</code>"
-         
-             <tr>
-              <td>"<code>.%2e</code>"  
-              <td rowspan="3">"<code>..</code>"
-         
-             <tr>
-              <td>"<code>%2e.</code>"
-         
-             <tr>
-              <td>"<code>%2e%2e</code>"
-        
-           </table>
-           
-
-       
-          <li>
-           <p>If <var>buffer</var> is "<code>..</code>", <a data-link-type="dfn" href="#pop-a-urls-path">pop</a> <var>url</var>’s
-       <a data-link-type="dfn" href="#concept-url-path">path</a>, and then if neither <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>", nor
-       <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", append the empty
-       string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
+           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>, <a data-link-type="dfn" href="#pop-a-urls-path">pop</a>
+       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then if neither <a data-link-type="dfn" href="#c">c</a> is
+       "<code>/</code>", nor <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is
+       "<code>\</code>", append the empty string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
 
        </p>
           <li>
-           <p>Otherwise, if <var>buffer</var> is "<code>.</code>" and if neither <a data-link-type="dfn" href="#c">c</a>
-       is "<code>/</code>", nor <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is
-       "<code>\</code>", append the empty string to <var>url</var>’s
+           <p>Otherwise, if <var>buffer</var> is a <a data-link-type="dfn" href="#syntax-url-path-segment-dot">single-dot path segment</a> and if
+       neither <a data-link-type="dfn" href="#c">c</a> is "<code>/</code>", nor <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and
+       <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", append the empty string to <var>url</var>’s
        <a data-link-type="dfn" href="#concept-url-path">path</a>.
 
        </p>
           <li>
         
-           <p>Otherwise, if <var>buffer</var> is not
-        "<code>.</code>", run these subsubsteps:
+           <p>Otherwise, if <var>buffer</var> is not a <a data-link-type="dfn" href="#syntax-url-path-segment-dot">single-dot path segment</a>, run
+        these subsubsteps:
 
         </p>
            <ol>
@@ -4772,6 +4790,7 @@ neighboring rights to this work.
    <li><a href="#dom-url-domaintoascii">domainToASCII(domain)</a><span>, in §6.2</span>
    <li><a href="#concept-domain-to-unicode">domain to Unicode</a><span>, in §3.1</span>
    <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §6.2</span>
+   <li><a href="#syntax-url-path-segment-dotdot">double-dot path segment</a><span>, in §4.1</span>
    <li><a href="#eof-code-point">EOF code point</a><span>, in §1.1</span>
    <li><a href="#equals">equals</a><span>, in §4.4</span>
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
@@ -4851,14 +4870,12 @@ neighboring rights to this work.
      <li><a href="#concept-url-password">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
-   <li>path
-    <ul>
-     <li><a href="#concept-url-path">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-path">dfn for urlsyntax</a><span>, in §4.1</span>
-    </ul>
+   <li><a href="#concept-url-path">path</a><span>, in §4</span>
    <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
    <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
+   <li><a href="#syntax-url-path-relative">path-relative URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-path-segment">path segment</a><span>, in §4.1</span>
    <li><a href="#path-start-state">path start state</a><span>, in §4.2</span>
    <li><a href="#path-state">path state</a><span>, in §4.2</span>
    <li><a href="#percent-decode">percent decode</a><span>, in §2</span>
@@ -4907,6 +4924,7 @@ neighboring rights to this work.
    <li><a href="#set-the-password">set the password</a><span>, in §4.2</span>
    <li><a href="#set-the-username">set the username</a><span>, in §4.2</span>
    <li><a href="#simple-encode-set">simple encode set</a><span>, in §2</span>
+   <li><a href="#syntax-url-path-segment-dot">single-dot path segment</a><span>, in §4.1</span>
    <li><a href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a><span>, in §4.2</span>
    <li><a href="#special-authority-slashes-state">special authority slashes state</a><span>, in §4.2</span>
    <li><a href="#special-relative-or-authority-state">special relative or authority state</a><span>, in §4.2</span>
