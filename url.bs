@@ -319,7 +319,7 @@ followed by an <a for=hostsyntax>IPv6 address</a>, followed by "<code>]</code>".
 is a <a>valid domain</a>.
 
 <p>An <dfn export for=hostsyntax id=syntax-host-ipv4>IPv4 address</dfn> must be four
-sequences of up to three <span>ASCII digits</span> per sequence, each representing a
+sequences of up to three <a>ASCII digits</a> per sequence, each representing a decimal
 number no greater than 255, and separated from each other by "<code>.</code>".
 
 <p>An <dfn export for=hostsyntax id=syntax-host-ipv6>IPv6 address</dfn> is defined in the
