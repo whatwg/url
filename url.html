@@ -3776,12 +3776,8 @@ method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>asciiDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>,
- <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or failure, return the empty string.
-
- </p>
-    <li>
-     <p>Return <var>asciiDomain</var>.
+     <p>Return the empty string if <var>asciiDomain</var> is not a <a data-link-type="dfn" href="#concept-domain">domain</a>,
+ and <var>asciiDomain</var> otherwise.
 </p></ol>
 
 
@@ -3798,20 +3794,12 @@ method, when invoked, must run these steps:
 
  </p>
     <li>
-     <p>If <var>unicodeDomain</var> is an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>,
- <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>, or failure, return the empty string.
-
- </p>
-    <li>
-     <p>Return <var>unicodeDomain</var>.
+     <p>Return the empty string if <var>unicodeDomain</var> is not a
+ <a data-link-type="dfn" href="#concept-domain">domain</a>, and <var>unicodeDomain</var> otherwise.
 </p></ol>
 
 
-   <p class="XXX">Add domainToUI() which follows the UA conventions for when to use the Unicode
-representation?
 
-
-</p>
    <h3 class="heading settled" data-level="6.3" id="urlutils-and-urlutilsreadonly-members"><span class="secno">6.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> members</span><a class="self-link" href="#urlutils-and-urlutilsreadonly-members"></a></h3>
 
 

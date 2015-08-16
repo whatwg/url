@@ -2431,10 +2431,8 @@ method, when invoked, must run these steps:
  <li><p>Let <var>asciiDomain</var> be the result of
  <a lt='host parser'>host parsing</a> <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is an <a for=host>IPv4 address</a>,
- <a for=host>IPv6 address</a>, or failure, return the empty string.
-
- <li><p>Return <var>asciiDomain</var>.
+ <li><p>Return the empty string if <var>asciiDomain</var> is not a <a for=host>domain</a>,
+ and <var>asciiDomain</var> otherwise.
 </ol>
 
 <p>The <dfn method for=URL><code>domainToUnicode(<var>domain</var>)</code></dfn> static
@@ -2445,14 +2443,9 @@ method, when invoked, must run these steps:
  <a lt='host parser'>host parsing</a> <var>domain</var> with the
  <var>Unicode flag</var> set.
 
- <li><p>If <var>unicodeDomain</var> is an <a for=host>IPv4 address</a>,
- <a for=host>IPv6 address</a>, or failure, return the empty string.
-
- <li><p>Return <var>unicodeDomain</var>.
+ <li><p>Return the empty string if <var>unicodeDomain</var> is not a
+ <a for=host>domain</a>, and <var>unicodeDomain</var> otherwise.
 </ol>
-
-<p class=XXX>Add domainToUI() which follows the UA conventions for when to use the Unicode
-representation?
 
 
 <h3 id=urlutils-and-urlutilsreadonly-members>{{URLUtils}}/{{URLUtilsSearchParams}} and {{URLUtilsReadOnly}} members</h3>
