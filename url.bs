@@ -2315,8 +2315,6 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
   <p>If <a for=URLUtils>input</a> is non-null, run these substeps:
 
   <ol>
-   <li><p>Set <a for=URLUtils>input</a> to <var>input</var>.
-
    <li><p>Let <var>url</var> be the result of running the <a>URL parser</a> on
    <a for=URLUtils>input</a> with <a>base URL</a> being the result of running
    <a>get the base</a> and <a for=URLUtils>query encoding</a> as
