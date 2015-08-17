@@ -392,8 +392,8 @@ steps:
  result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </ol>
 
-The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these
-steps:
+The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
+<var>syntaxViolationFlag</var> pointer, and then runs these steps:
 
 <ol>
  <li><p>Let <var>R</var> be 10.
@@ -403,13 +403,15 @@ steps:
   are either "<code>0x</code>" or "<code>0X</code>", run these substeps:
 
   <ol>
+   <li><p>Set <var>syntaxViolationFlag</var>.
+
    <li><p>Remove the first two code points from <var>input</var>.
 
    <li><p>Set <var>R</var> to 16.
   </ol>
 
  <li><p>If <var>input</var> is the empty string, return zero.
- <!-- 0x/0X is a valid IPv4 number apparently -->
+ <!-- 0x/0X is an IPv4 number apparently -->
 
  <li>
   <p>Otherwise, if <var>input</var> contains at least two code points and the first code
@@ -417,14 +419,17 @@ steps:
   <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
 
   <ol>
+   <li><p>Set <var>syntaxViolationFlag</var>.
+
    <li><p>Remove the first code point from <var>input</var>.
 
    <li><p>Set <var>R</var> to 8.
   </ol>
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
- return failure.
- <!-- XXX radix-R digit, hahaha, that's not a thing -->
+ and return failure.
+ <!-- There is no need to set syntaxViolationFlag here since it will be used.
+      XXX radix-R digit, hahaha, that's not a thing -->
 
  <li><p>Return the mathematical integer value that is represented by <var>input</var> in
  radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with values 0
@@ -436,10 +441,12 @@ The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var
 runs these steps:
 
 <ol>
+ <li><p>Let <var>syntaxViolationFlag</var> be unset.
+
  <li><p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
 
- <li><p>If the last item in <var>parts</var> is the empty string, remove it from
- <var>parts</var>.
+ <li><p>If the last item in <var>parts</var> is the empty string, set
+ <var>syntaxViolationFlag</var> and remove the last item from <var>parts</var>.
 
  <li><p>If <var>parts</var> has more than four items, return <var>input</var>.
 
@@ -456,15 +463,19 @@ runs these steps:
     an <a for=host>IPv4 address</a>.
 
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
-   <var>part</var>.
+   <var>part</var> using <var>syntaxViolationFlag</var>.
 
    <li><p>If <var>n</var> is failure, return <var>input</var>.
 
    <li><p>Append <var>n</var> to <var>numbers</var>.
   </ol>
 
- <li><p>If any but the last item in <var>numbers</var> is greater than 255,
- <a>syntax violation</a> return failure.
+ <li><p>If <var>syntaxViolationFlag</var> is set, <a>syntax violation</a>.
+
+ <li><p>If any item in <var>numbers</var> is greater than 255, <a>syntax violation</a>.
+
+ <li><p>If any but the last item in <var>numbers</var> is greater than 255, return
+ failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
  256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>,

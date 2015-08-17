@@ -631,8 +631,8 @@ steps:
 </p></ol>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ipv4-number-parser">IPv4 number parser<a class="self-link" href="#ipv4-number-parser"></a></dfn> takes a string <var>input</var> and then runs these
-steps:</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="ipv4-number-parser">IPv4 number parser<a class="self-link" href="#ipv4-number-parser"></a></dfn> takes a string <var>input</var> and a
+<var>syntaxViolationFlag</var> pointer, and then runs these steps:</p>
 
 
    <ol>
@@ -649,6 +649,10 @@ steps:</p>
   </p>
      <ol>
    
+      <li>
+       <p>Set <var>syntaxViolationFlag</var>.
+
+   </p>
       <li>
        <p>Remove the first two code points from <var>input</var>.
 
@@ -675,6 +679,10 @@ steps:</p>
      <ol>
    
       <li>
+       <p>Set <var>syntaxViolationFlag</var>.
+
+   </p>
+      <li>
        <p>Remove the first code point from <var>input</var>.
 
    </p>
@@ -687,7 +695,7 @@ steps:</p>
  
     <li>
      <p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
- return failure.
+ and return failure.
  
 
  </p>
@@ -706,12 +714,16 @@ runs these steps:</p>
    <ol>
  
     <li>
+     <p>Let <var>syntaxViolationFlag</var> be unset.
+
+ </p>
+    <li>
      <p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
 
  </p>
     <li>
-     <p>If the last item in <var>parts</var> is the empty string, remove it from
- <var>parts</var>.
+     <p>If the last item in <var>parts</var> is the empty string, set
+ <var>syntaxViolationFlag</var> and remove the last item from <var>parts</var>.
 
  </p>
     <li>
@@ -740,7 +752,7 @@ runs these steps:</p>
    </p>
       <li>
        <p>Let <var>n</var> be the result of <a data-link-type="dfn" href="#ipv4-number-parser">parsing</a>
-   <var>part</var>.
+   <var>part</var> using <var>syntaxViolationFlag</var>.
 
    </p>
       <li>
@@ -755,8 +767,16 @@ runs these steps:</p>
 
  
     <li>
-     <p>If any but the last item in <var>numbers</var> is greater than 255,
- <a data-link-type="dfn" href="#syntax-violation">syntax violation</a> return failure.
+     <p>If <var>syntaxViolationFlag</var> is set, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
+
+ </p>
+    <li>
+     <p>If any item in <var>numbers</var> is greater than 255, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
+
+ </p>
+    <li>
+     <p>If any but the last item in <var>numbers</var> is greater than 255, return
+ failure.
 
  </p>
     <li>
