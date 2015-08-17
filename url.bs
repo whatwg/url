@@ -86,10 +86,10 @@ number.
 
 <hr>
 
-<p>A <dfn>potential Windows drive letter</dfn> is two code points, of which the first is
+<p>A <dfn>Windows drive letter</dfn> is two code points, of which the first is
 an <a>ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
 
-<p>A <dfn>Windows drive letter</dfn> is a <a>potential Windows drive letter</a> of which
+<p>A <dfn>normalized Windows drive letter</dfn> is a <a>Windows drive letter</a> of which
 the second code point is "<code>:</code>".
 
 
@@ -865,7 +865,7 @@ input might be a <a>relative URL</a>.
 <p>To <dfn local-lt=pop>pop a <var>url</var>'s path</dfn>, if
 <var>url</var>'s <a for=url>scheme</a> is not "<code>file</code>" or
 <var>url</var>'s <a for=url>path</a> does not contain a single string that is a
-<a>Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s
+<a>normalized Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s
 last string, if any.
 
 
@@ -887,14 +887,17 @@ the following
 
 <ul class=brief>
  <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
- match for a <a>special scheme</a>, followed by "<code>:</code>" and a
- <a>scheme-relative URL</a>
+ match for a <a>special scheme</a> and not an <a spec=dom>ASCII case-insensitive</a> match
+ for "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative URL</a>
  <li><p>a <a for=urlsyntax>scheme</a> that is <em>not</em> an
  <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by
  "<code>:</code>" and a <a>relative URL</a>
+ <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
+ match for "<code>file</code>", followed by "<code>:</code>" and a
+ <a>scheme-relative file URL</a>
 </ul>
 
-<p>either optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
+<p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-scheme>scheme</dfn> must be one
 <a>ASCII alpha</a>, followed by zero or more of <a>ASCII alphanumeric</a>,
@@ -909,14 +912,21 @@ must be a <a>relative URL</a>, followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be one of
-the following
+the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
-<ul class=brief>
- <li><p>a <a>scheme-relative URL</a>
- <li><p>a <a>path-absolute URL</a>
- <li><p>a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
+<dl class=switch>
+ <dt>Not "<code>file</code>"
+ <dd><p>a <a>scheme-relative URL</a>
+ <dd><p>a <a>path-absolute URL</a>
+ <dd><p>a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
  and "<code>:</code>"
-</ul>
+ <dt>"<code>file</code>"
+ <dd><p>a <a>scheme-relative file URL</a>
+ <dd><p>a <a>path-absolute URL</a> if <a>base URL</a>'s <a for=url>host</a> is null
+ <dd><p>a <a>path-absolute non-Windows-file URL</a> if <a>base URL</a>'s
+ <a for=url>host</a> is non-null
+ <dd><p>a <a>path-relative URL</a>
+</dl>
 
 <p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
 
@@ -931,8 +941,23 @@ by "<code>:</code>" and a <a for=urlsyntax>port</a>, optionally followed by a
 <p>A <dfn export for=urlsyntax id=syntax-url-port>port</dfn> must be zero or more
 <a>ASCII digits</a>.
 
+<p>A
+<dfn export for=urlsyntax id=syntax-url-file-scheme-relative>scheme-relative file URL</dfn>
+must be "<code>//</code>", followed by one of the following
+
+<ul class=brief>
+ <li><p>a <a for=hostsyntax>host</a>, optionally followed by a
+ <a>path-absolute non-Windows-file URL</a>
+ <li><p>a <a>path-absolute URL</a>.
+</ul>
+
 <p>A <dfn export for=urlsyntax id=syntax-url-path-absolute>path-absolute URL</dfn> must be
 "<code>/</code>" followed by a <a>path-relative URL</a>.
+
+<p>A
+<dfn export for=urlsyntax id=syntax-url-file-path-absolute>path-absolute non-Windows-file URL</dfn>
+must be a <a>path-absolute URL</a> that does not start with "<code>/</code>", followed by
+a <a>Windows drive letter</a>, followed by "<code>/</code>".
 
 <p>A <dfn export for=urlsyntax id=syntax-url-path-relative>path-relative URL</dfn> must be
 zero or more <a>path segments</a>, separated from each other by "<code>/</code>", and not
@@ -1152,8 +1177,16 @@ optionally with an <a>encoding</a>
 
        <li><p>If <var>state override</var> is given, terminate this algorithm.
 
-       <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>",
-       set <var>state</var> to <a>file state</a>.
+       <li>
+        <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
+        subsubsteps:
+
+        <ol>
+         <li><p>If <a>remaining</a> does not start with "<code>//</code>",
+         <a>syntax violation</a>.
+
+         <li><p>Set <var>state</var> to <a>file state</a>.
+        </ol>
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null,
        and <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s
@@ -1552,17 +1585,26 @@ optionally with an <a>encoding</a>
       <ol>
        <li>
         <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a>
-        is "<code>file</code>", and one of <var>c</var> and the first code point of
-        <a>remaining</a> are not a <a>potential Windows drive letter</a>, <a>remaining</a>
-        consists of one code point, and <a>remaining</a>'s second code point is not one of
-        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", set
-        <var>url</var>'s <a for=url>host</a> to
+        is "<code>file</code>", and at least one of the following is true
+
+        <ul class=brief>
+         <li><p><var>c</var> and the first code point of <a>remaining</a> are not a
+         <a>Windows drive letter</a>
+         <li><p><a>remaining</a> consists of one code point
+         <li><a>remaining</a>'s second code point is not one of "<code>/</code>",
+         "<code>\</code>", "<code>?</code>", and "<code>#</code>"
+        </ul>
+
+        <p>then set <var>url</var>'s <a for=url>host</a> to
         <var>base</var>'s <a for=url>host</a>,
         <var>url</var>'s <a for=url>path</a> to
         <var>base</var>'s <a for=url>path</a>, and then <a>pop</a>
         <var>url</var>'s <a for=url>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
+
+       <li><p>Otherwise, if <var>base</var> is non-null and <var>base</var>'s
+       <a for=url>scheme</a> is "<code>file</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
        by one.
@@ -1588,8 +1630,8 @@ optionally with an <a>encoding</a>
        <li>
         <p>If <var>base</var> is non-null, <var>base</var>'s
         <a for=url>scheme</a> is "<code>file</code>", and <var>base</var>'s
-        <a for=url>path</a> first string is a <a>Windows drive letter</a>, append
-        <var>base</var>'s <a for=url>path</a> first string to
+        <a for=url>path</a> first string is a <a>normalized Windows drive letter</a>,
+        append <var>base</var>'s <a for=url>path</a> first string to
         <var>url</var>'s <a for=url>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
@@ -1611,8 +1653,8 @@ optionally with an <a>encoding</a>
 
       <ol>
        <li>
-        <p>If <var>buffer</var> is a <a>potential Windows drive letter</a>, set
-        <var>state</var> to <a>path state</a>.
+        <p>If <var>buffer</var> is a <a>Windows drive letter</a>, <a>syntax violation</a>,
+        set <var>state</var> to <a>path state</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
         <var>buffer</var> is not reset here and instead used in the
@@ -1684,14 +1726,20 @@ optionally with an <a>encoding</a>
          <li>
           <p>If <var>url</var>'s <a for=url>scheme</a> is
           "<code>file</code>", <var>url</var>'s <a for=url>path</a>
-          is empty, and <var>buffer</var> is a <a>potential Windows drive letter</a>, set
-          <var>url</var>'s <a for=url>host</a> to null and replace the second
-          code point in <var>buffer</var> with "<code>:</code>".
+          is empty, and <var>buffer</var> is a <a>Windows drive letter</a>, run these
+          subsubsubsteps:
+
+          <ol>
+           <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
+           <a>syntax violation</a>.
+
+           <li><p>Set <var>url</var>'s <a for=url>host</a> to null and replace the second
+           code point in <var>buffer</var> with "<code>:</code>".
+          </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Append <var>buffer</var> to
-         <var>url</var>'s <a for=url>path</a>.
+         <li><p>Append <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.

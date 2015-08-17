@@ -219,11 +219,11 @@ number.
    <hr>
 
 
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="potential-windows-drive-letter">potential Windows drive letter<a class="self-link" href="#potential-windows-drive-letter"></a></dfn> is two code points, of which the first is
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="windows-drive-letter">Windows drive letter<a class="self-link" href="#windows-drive-letter"></a></dfn> is two code points, of which the first is
 an <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
 
 </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="windows-drive-letter">Windows drive letter<a class="self-link" href="#windows-drive-letter"></a></dfn> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a> of which
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="normalized-windows-drive-letter">normalized Windows drive letter<a class="self-link" href="#normalized-windows-drive-letter"></a></dfn> is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a> of which
 the second code point is "<code>:</code>".
 
 
@@ -1401,7 +1401,7 @@ input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative UR
    <p>To <dfn data-dfn-type="dfn" data-local-lt="pop" data-noexport="" id="pop-a-urls-path">pop a <var>url</var>’s path<a class="self-link" href="#pop-a-urls-path"></a></dfn>, if
 <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or
 <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a
-<a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s
+<a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s
 last string, if any.
 
 
@@ -1430,17 +1430,22 @@ the following
  
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a>
- match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by "<code>:</code>" and a
- <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
+ match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a> and not an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match
+ for "<code>file</code>", followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
  </p>
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is <em>not</em> an
  <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by
  "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#ascii-case_insensitive">ASCII case-insensitive</a>
+ match for "<code>file</code>", followed by "<code>:</code>" and a
+ <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative file URL</a>
 </p></ul>
 
 
-   <p>either optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
+   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme">scheme<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one
@@ -1458,21 +1463,38 @@ must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, 
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be one of
-the following
+the following, switching on <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>:
 
 </p>
-   <ul class="brief">
+   <dl class="switch">
  
-    <li>
+    <dt>Not "<code>file</code>"
+ 
+    <dd>
      <p>a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a>
  </p>
-    <li>
+    <dd>
      <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>
  </p>
-    <li>
+    <dd>
      <p>a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a>
  and "<code>:</code>"
-</p></ul>
+ </p>
+    <dt>"<code>file</code>"
+ 
+    <dd>
+     <p>a <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative file URL</a>
+ </p>
+    <dd>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null
+ </p>
+    <dd>
+     <p>a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s
+ <a data-link-type="dfn" href="#concept-url-host">host</a> is non-null
+ </p>
+    <dd>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a>
+</p></dl>
 
 
    <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>.
@@ -1492,8 +1514,30 @@ by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-port">port</
 <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>.
 
 </p>
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-file-scheme-relative">scheme-relative file URL<a class="self-link" href="#syntax-url-file-scheme-relative"></a></dfn>
+must be "<code>//</code>", followed by one of the following
+
+</p>
+   <ul class="brief">
+ 
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by a
+ <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a>
+ </p>
+    <li>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>.
+</p></ul>
+
+
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-absolute">path-absolute URL<a class="self-link" href="#syntax-url-path-absolute"></a></dfn> must be
 "<code>/</code>" followed by a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a>.
+
+</p>
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-file-path-absolute">path-absolute non-Windows-file URL<a class="self-link" href="#syntax-url-file-path-absolute"></a></dfn>
+must be a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a> that does not start with "<code>/</code>", followed by
+a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, followed by "<code>/</code>".
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative URL<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be
@@ -1814,10 +1858,25 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
        </p>
           <li>
-           <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>",
-       set <var>state</var> to <a data-link-type="dfn" href="#file-state">file state</a>.
+        
+           <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", run these
+        subsubsteps:
 
-       </p>
+        </p>
+           <ol>
+         
+            <li>
+             <p>If <a data-link-type="dfn" href="#remaining">remaining</a> does not start with "<code>//</code>",
+         <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
+
+         </p>
+            <li>
+             <p>Set <var>state</var> to <a data-link-type="dfn" href="#file-state">file state</a>.
+        </p>
+           </ol>
+           
+
+       
           <li>
            <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is non-null,
        and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is equal to <var>url</var>’s
@@ -2450,11 +2509,26 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
         
            <p>If <var>base</var> is non-null, <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>
-        is "<code>file</code>", and one of <var>c</var> and the first code point of
-        <a data-link-type="dfn" href="#remaining">remaining</a> are not a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, <a data-link-type="dfn" href="#remaining">remaining</a>
-        consists of one code point, and <a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is not one of
-        "<code>/</code>", "<code>\</code>", "<code>?</code>", and "<code>#</code>", set
-        <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
+        is "<code>file</code>", and at least one of the following is true
+
+        </p>
+           <ul class="brief">
+         
+            <li>
+             <p><var>c</var> and the first code point of <a data-link-type="dfn" href="#remaining">remaining</a> are not a
+         <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>
+         </p>
+            <li>
+             <p><a data-link-type="dfn" href="#remaining">remaining</a> consists of one code point
+         </p>
+            <li><a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is not one of "<code>/</code>",
+         "<code>\</code>", "<code>?</code>", and "<code>#</code>"
+        
+           </ul>
+           
+
+        
+           <p>then set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to
         <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>,
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to
         <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then <a data-link-type="dfn" href="#pop-a-urls-path">pop</a>
@@ -2462,6 +2536,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
 
         </p>
            <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
+
+       </p>
+          <li>
+           <p>Otherwise, if <var>base</var> is non-null and <var>base</var>’s
+       <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
 
        </p>
           <li>
@@ -2510,8 +2589,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         
            <p>If <var>base</var> is non-null, <var>base</var>’s
         <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", and <var>base</var>’s
-        <a data-link-type="dfn" href="#concept-url-path">path</a> first string is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, append
-        <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> first string to
+        <a data-link-type="dfn" href="#concept-url-path">path</a> first string is a <a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>,
+        append <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> first string to
         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
 
         </p>
@@ -2548,8 +2627,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        
           <li>
         
-           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, set
-        <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
+           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
+        set <var>state</var> to <a data-link-type="dfn" href="#path-state">path state</a>.
 
         </p>
            <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
@@ -2671,17 +2750,30 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           
              <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is
           "<code>file</code>", <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>
-          is empty, and <var>buffer</var> is a <a data-link-type="dfn" href="#potential-windows-drive-letter">potential Windows drive letter</a>, set
-          <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to null and replace the second
-          code point in <var>buffer</var> with "<code>:</code>".
+          is empty, and <var>buffer</var> is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, run these
+          subsubsubsteps:
 
           </p>
+             <ol>
+           
+              <li>
+               <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is non-null,
+           <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>.
+
+           </p>
+              <li>
+               <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to null and replace the second
+           code point in <var>buffer</var> with "<code>:</code>".
+          </p>
+             </ol>
+             
+
+          
              <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk.
 
          </p>
             <li>
-             <p>Append <var>buffer</var> to
-         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
+             <p>Append <var>buffer</var> to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>.
         </p>
            </ol>
            
@@ -4856,6 +4948,7 @@ neighboring rights to this work.
    <li><a href="#concept-urlsearchparams-new">new</a><span>, in §6.4</span>
    <li><a href="#non_relative-flag">non-relative flag</a><span>, in §4</span>
    <li><a href="#non_relative-path-state">non-relative path state</a><span>, in §4.2</span>
+   <li><a href="#normalized-windows-drive-letter">normalized Windows drive letter</a><span>, in §1</span>
    <li><a href="#no-scheme-state">no scheme state</a><span>, in §4.2</span>
    <li><a href="#concept-url-object">object</a><span>, in §4</span>
    <li>origin
@@ -4869,6 +4962,7 @@ neighboring rights to this work.
      <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li><a href="#concept-url-path">path</a><span>, in §4</span>
+   <li><a href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
    <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
@@ -4888,7 +4982,6 @@ neighboring rights to this work.
      <li><a href="#dom-urlutils-port">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
     </ul>
    <li><a href="#port-state">port state</a><span>, in §4.2</span>
-   <li><a href="#potential-windows-drive-letter">potential Windows drive letter</a><span>, in §1</span>
    <li><a href="#pre_update-steps">pre-update steps</a><span>, in §6</span>
    <li><a href="#dom-urlutils-protocol">protocol</a><span>, in §6.3</span>
    <li>query
@@ -4911,6 +5004,7 @@ neighboring rights to this work.
      <li><a href="#concept-url-scheme">dfn for url</a><span>, in §4</span>
      <li><a href="#syntax-url-scheme">dfn for urlsyntax</a><span>, in §4.1</span>
     </ul>
+   <li><a href="#syntax-url-file-scheme-relative">scheme-relative file URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-scheme-relative">scheme-relative URL</a><span>, in §4.1</span>
    <li><a href="#scheme-start-state">scheme start state</a><span>, in §4.2</span>
    <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
