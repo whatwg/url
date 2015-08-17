@@ -1471,22 +1471,28 @@ optionally with an <a>encoding</a>
       substeps:
 
       <ol>
-       <li><p>Let <var>port</var> be the mathematical integer value that is represented by
-       <var>buffer</var> in radix-10 using <a>ASCII digits</a> for digits with values
-       0 through 9.
+       <li>
+        <p>If <var>buffer</var> is not the empty string, run these subsubsteps:
 
-       <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
-       <a>syntax violation</a>, return failure.
+        <ol>
+         <li><p>Let <var>port</var> be the mathematical integer value that is represented
+         by <var>buffer</var> in radix-10 using <a>ASCII digits</a> for digits with values
+         0 through 9.
 
-       <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
-       <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>, and to
-       <var>port</var> otherwise.
+         <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
+         <a>syntax violation</a>, return failure.
 
-       <li><p>If <var>state override</var> is given, terminate this
-       algorithm.
+         <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
+         <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>, and to
+         <var>port</var> otherwise.
 
-       <li><p>Set <var>buffer</var> to the empty string, <var>state</var> to
-       <a>path start state</a>, and decrease <var>pointer</var> by one.
+         <li><p>Set <var>buffer</var> to the empty string.
+        </ol>
+
+       <li><p>If <var>state override</var> is given, terminate this algorithm.
+
+       <li><p>Set <var>state</var> to <a>path start state</a>, and decrease
+       <var>pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
@@ -2663,7 +2669,8 @@ getter must run these steps:
 <ol>
  <li><p><a>Reset the input</a>.
 
- <li><p>If <a for=URLUtils>url</a> is null, return the empty string.
+ <li><p>If <a for=URLUtils>url</a> is null, or its <a for=url>port</a> is null, return
+ the empty string.
 
  <li><p>Return <a for=url>port</a>, <a lt="serialize an integer">serialized</a>.
 </ol>

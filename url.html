@@ -2318,30 +2318,43 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
        
           <li>
-           <p>Let <var>port</var> be the mathematical integer value that is represented by
-       <var>buffer</var> in radix-10 using <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> for digits with values
-       0 through 9.
+        
+           <p>If <var>buffer</var> is not the empty string, run these subsubsteps:
+
+        </p>
+           <ol>
+         
+            <li>
+             <p>Let <var>port</var> be the mathematical integer value that is represented
+         by <var>buffer</var> in radix-10 using <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> for digits with values
+         0 through 9.
+
+         </p>
+            <li>
+             <p>If <var>port</var> is greater than 2<sup>16</sup> − 1,
+         <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
+
+         </p>
+            <li>
+             <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to null, if <var>port</var> is
+         <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>’s <a data-link-type="dfn" href="#default-port">default port</a>, and to
+         <var>port</var> otherwise.
+
+         </p>
+            <li>
+             <p>Set <var>buffer</var> to the empty string.
+        </p>
+           </ol>
+           
+
+       
+          <li>
+           <p>If <var>state override</var> is given, terminate this algorithm.
 
        </p>
           <li>
-           <p>If <var>port</var> is greater than 2<sup>16</sup> − 1,
-       <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure.
-
-       </p>
-          <li>
-           <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to null, if <var>port</var> is
-       <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>’s <a data-link-type="dfn" href="#default-port">default port</a>, and to
-       <var>port</var> otherwise.
-
-       </p>
-          <li>
-           <p>If <var>state override</var> is given, terminate this
-       algorithm.
-
-       </p>
-          <li>
-           <p>Set <var>buffer</var> to the empty string, <var>state</var> to
-       <a data-link-type="dfn" href="#path-start-state">path start state</a>, and decrease <var>pointer</var> by one.
+           <p>Set <var>state</var> to <a data-link-type="dfn" href="#path-start-state">path start state</a>, and decrease
+       <var>pointer</var> by one.
       </p>
          </ol>
          
@@ -4151,7 +4164,8 @@ getter must run these steps:
 
  </p>
     <li>
-     <p>If <a data-link-type="dfn" href="#concept-urlutils-url">url</a> is null, return the empty string.
+     <p>If <a data-link-type="dfn" href="#concept-urlutils-url">url</a> is null, or its <a data-link-type="dfn" href="#concept-url-port">port</a> is null, return
+ the empty string.
 
  </p>
     <li>
