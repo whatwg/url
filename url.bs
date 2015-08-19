@@ -929,14 +929,13 @@ the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
  <dt>Not "<code>file</code>"
  <dd><p>a <a>scheme-relative URL</a>
  <dd><p>a <a>path-absolute URL</a>
- <dd><p>a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
- and "<code>:</code>"
+ <dd><p>a <a>path-relative scheme-less URL</a>
  <dt>"<code>file</code>"
  <dd><p>a <a>scheme-relative file URL</a>
  <dd><p>a <a>path-absolute URL</a> if <a>base URL</a>'s <a for=url>host</a> is null
  <dd><p>a <a>path-absolute non-Windows-file URL</a> if <a>base URL</a>'s
  <a for=url>host</a> is non-null
- <dd><p>a <a>path-relative URL</a>
+ <dd><p>a <a>path-relative scheme-less URL</a>
 </dl>
 
 <p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
@@ -973,6 +972,11 @@ a <a>Windows drive letter</a>, followed by "<code>/</code>".
 <p>A <dfn export for=urlsyntax id=syntax-url-path-relative>path-relative URL</dfn> must be
 zero or more <a>path segments</a>, separated from each other by "<code>/</code>", and not
 start with "<code>/</code>".
+
+<p>A
+<dfn export for=urlsyntax id=syntax-url-path-relative-scheme-less>path-relative scheme-less URL</dfn>
+must be a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
+and "<code>:</code>".
 
 <p>A <dfn export for=urlsyntax id=syntax-url-path-segment>path segment</dfn> must be one
 of the following

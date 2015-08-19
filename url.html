@@ -30,7 +30,7 @@
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
   
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-17">17 August 2015</time></span></h2>
+    <time class="dt-updated" datetime="2015-08-19">19 August 2015</time></span></h2>
   
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1497,8 +1497,7 @@ the following, switching on <a data-link-type="dfn" href="#concept-base-url">bas
      <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>
  </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a>
- and "<code>:</code>"
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a>
  </p>
     <dt>"<code>file</code>"
  
@@ -1513,7 +1512,7 @@ the following, switching on <a data-link-type="dfn" href="#concept-base-url">bas
  <a data-link-type="dfn" href="#concept-url-host">host</a> is non-null
  </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a>
 </p></dl>
 
 
@@ -1563,6 +1562,12 @@ a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>,
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative URL<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be
 zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">path segments</a>, separated from each other by "<code>/</code>", and not
 start with "<code>/</code>".
+
+</p>
+   <p>A
+<dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative-scheme-less">path-relative scheme-less URL<a class="self-link" href="#syntax-url-path-relative-scheme-less"></a></dfn>
+must be a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a>
+and "<code>:</code>".
 
 </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment">path segment<a class="self-link" href="#syntax-url-path-segment"></a></dfn> must be one
@@ -4986,6 +4991,7 @@ neighboring rights to this work.
    <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
    <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
+   <li><a href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-path-relative">path-relative URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-path-segment">path segment</a><span>, in §4.1</span>
    <li><a href="#path-start-state">path start state</a><span>, in §4.2</span>
