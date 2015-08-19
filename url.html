@@ -78,6 +78,7 @@
       <li><a href="#host-syntax"><span class="secno">3.2</span> <span class="content">Host syntax</span></a>
       <li><a href="#host-parsing"><span class="secno">3.3</span> <span class="content">Host parsing</span></a>
       <li><a href="#host-serializing"><span class="secno">3.4</span> <span class="content">Host serializing</span></a>
+      <li><a href="#host-equivalence"><span class="secno">3.5</span> <span class="content">Host equivalence</span></a>
      </ul>
     <li><a href="#urls"><span class="secno">4</span> <span class="content">URLs</span></a>
      <ul class="toc">
@@ -1267,6 +1268,21 @@ A Recommendation for IPv6 Address Text Representation.
 <a data-link-type="biblio" href="#biblio-rfc5952">[RFC5952]</a>
 
 
+
+
+</p>
+   <h3 class="heading settled" data-level="3.5" id="host-equivalence"><span class="secno">3.5. </span><span class="content">Host equivalence</span><a class="self-link" href="#host-equivalence"></a></h3>
+
+
+   <p>To determine whether a <a data-link-type="dfn" href="#concept-host">host</a> <var>A</var> <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="equals">equals<a class="self-link" href="#equals"></a></dfn>
+<var>B</var>, return true if <var>A</var> is <var>B</var>, and false otherwise.</p>
+
+
+   <p class="XXX">Certificate comparison requires a host equivalence check that ignores the
+trailing dot of a domain (if any). However, those hosts have also various other facets
+enforced, such as DNS length, that are not enforced here, as URLs do not enforce them. If
+anyone has a good suggestion for how to bring these two closer together, or what a good
+unified model would be, please file an issue.
 
 
 
@@ -3231,7 +3247,7 @@ then runs these steps:
    <h3 class="heading settled" data-level="4.4" id="url-equivalence"><span class="secno">4.4. </span><span class="content">URL equivalence</span><a class="self-link" href="#url-equivalence"></a></h3>
 
 
-   <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a> <var>A</var> <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="equals">equals<a class="self-link" href="#equals"></a></dfn>
+   <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a> <var>A</var> <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="equals0">equals<a class="self-link" href="#equals0"></a></dfn>
 <var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps:
 
 </p>
@@ -4911,7 +4927,11 @@ neighboring rights to this work.
    <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §6.2</span>
    <li><a href="#syntax-url-path-segment-dotdot">double-dot path segment</a><span>, in §4.1</span>
    <li><a href="#eof-code-point">EOF code point</a><span>, in §1.1</span>
-   <li><a href="#equals">equals</a><span>, in §4.4</span>
+   <li>equals
+    <ul>
+     <li><a href="#equals">dfn for host</a><span>, in §3.5</span>
+     <li><a href="#equals0">dfn for url</a><span>, in §4.4</span>
+    </ul>
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
    <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
    <li><a href="#file-state">file state</a><span>, in §4.2</span>

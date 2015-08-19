@@ -770,6 +770,18 @@ A Recommendation for IPv6 Address Text Representation.
      follows Chrome because we normalize domains too. -->
 
 
+<h3 id=host-equivalence>Host equivalence</h3>
+
+To determine whether a <a for=host>host</a> <var>A</var> <dfn export for=host>equals</dfn>
+<var>B</var>, return true if <var>A</var> is <var>B</var>, and false otherwise.
+
+<p class=XXX>Certificate comparison requires a host equivalence check that ignores the
+trailing dot of a domain (if any). However, those hosts have also various other facets
+enforced, such as DNS length, that are not enforced here, as URLs do not enforce them. If
+anyone has a good suggestion for how to bring these two closer together, or what a good
+unified model would be, please file an issue.
+
+
 
 <h2 id=urls>URLs</h2>
 
