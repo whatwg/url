@@ -1052,8 +1052,10 @@ U+100000 to U+10FFFD.
 <a>URL parser</a>, except for code points appearing in
 <a for=url>fragments</a>.
 
-<p>The <dfn>URL units</dfn> are <a>URL code points</a> and
-<a lt="percent-encoded byte">percent-encoded bytes</a>.
+<p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
+
+<p class=note><a>Percent-encoded bytes</a> can be used to encode code points that are not
+<a>URL code points</a> or are excluded from a syntax production.
 
 <hr>
 
@@ -3091,6 +3093,7 @@ Joshua Bell,
 Jxck,
 Kevin Grandon,
 Larry Masinter,
+Leif Halvard Silli,
 Mark Davis,
 Marcos Cáceres,
 Martin Dürst,
