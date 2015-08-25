@@ -772,8 +772,9 @@ A Recommendation for IPv6 Address Text Representation.
 
 <h3 id=host-equivalence>Host equivalence</h3>
 
-To determine whether a <a for=host>host</a> <var>A</var> <dfn export for=host>equals</dfn>
-<var>B</var>, return true if <var>A</var> is <var>B</var>, and false otherwise.
+To determine whether a <a for=host>host</a> <var>A</var>
+<dfn export for=host id=concept-host-equals>equals</dfn> <var>B</var>, return true if
+<var>A</var> is <var>B</var>, and false otherwise.
 
 <p class=XXX>Certificate comparison requires a host equivalence check that ignores the
 trailing dot of a domain (if any). However, those hosts have also various other facets
@@ -2022,8 +2023,9 @@ then runs these steps:
 
 <h3 id=url-equivalence>URL equivalence</h3>
 
-<p>To determine whether a <a for=url>URL</a> <var>A</var> <dfn export for=url>equals</dfn>
-<var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps:
+<p>To determine whether a <a for=url>URL</a> <var>A</var>
+<dfn export for=url id=concept-url-equals>equals</dfn> <var>B</var>, optionally with an
+<i>exclude fragments flag</i>, run these steps:
 
 <ol>
  <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
@@ -2415,7 +2417,7 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
  <li><p>If <a for=URLUtils>query object</a> is null, set <a for=URLUtils>query object</a>
  to a <a for=URLSearchParams>new</a> {{URLSearchParams}} object using <var>query</var>,
  and then set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>url object</a> to
- the <a>context object</a>.
+ the <a spec=dom>context object</a>.
 
  <li><p>Otherwise, set <a for=URLUtils>query object</a>'s <a for=URLSearchParams>list</a>
  to the result of <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
@@ -2424,8 +2426,8 @@ given <var>input</var> and optionally a <var>url</var>, run these steps:
 <p>To <dfn for=URLUtils>reset the input</dfn>, run these steps:
 
 <ol>
- <li><p>If <a>context object</a> is a {{URL}} object or <a for=URLUtils>input</a> is null,
- terminate these steps.
+ <li><p>If <a spec=dom>context object</a> is a {{URL}} object or <a for=URLUtils>input</a>
+ is null, terminate these steps.
 
  <li><p><a>Set the input</a> using <a for=URLUtils>input</a> and <a for=URLUtils>url</a>.
 </ol>
@@ -2555,7 +2557,7 @@ setter must run these steps:
  <li><p>Let <var>input</var> be the given value.
 
  <li>
-  <p>If the <a>context object</a> is a {{URL}} object, run these substeps:
+  <p>If the <a spec=dom>context object</a> is a {{URL}} object, run these substeps:
 
   <ol>
    <li><p>Let <var>parsedURL</var> be the result of running the
@@ -2590,7 +2592,8 @@ setter must run these steps:
    failure, that value is still passed through unchanged. This is one of those unfortunate
    legacy incidents.
 
-   <pre>var a = document.createElement("a"),
+   <pre>
+var a = document.createElement("a"),
     input = "https://test:test/" // invalid port makes the parser return failure
 a.href = test
 a.href === test // true</pre>
@@ -3200,7 +3203,6 @@ urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
 urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: concept-attribute-value; url: concept-attribute-value
   text: concept-document; url: concept-document
-  text: context object
   text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: string
