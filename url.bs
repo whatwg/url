@@ -50,7 +50,7 @@ might increase in scope somewhat.
 
 
 
-<h2 id=terminology>Terminology</h2>
+<h2 id=infrastructure>Infrastructure</h2>
 
 <p>Some terms used in this specification are defined in the
 DOM, Encoding, IDNA, and Web IDL Standards.
@@ -119,8 +119,7 @@ terminates. Termination of a parser is always stated explicitly. E.g., through a
 statement.
 
 
-
-<h2 id=percent-encoded-bytes>Percent-encoded bytes</h2>
+<h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
 <p>A <dfn>percent-encoded byte</dfn> is "<code>%</code>", followed by
 two <a>ASCII hex digits</a>. Sequences of
@@ -1099,8 +1098,8 @@ U+100000 to U+10FFFD.
  <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
  <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a>structured clone</a> of
- the entry in the <a>blob URL store</a> corresponding to the first string in
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a spec=html>structured clone</a>
+ of the entry in the <a>blob URL store</a> corresponding to the first string in
  <var>url</var>'s <a for=url>path</a>. [[!HTML]]
 
  <li><p>Return <var>url</var>.
@@ -2044,8 +2043,8 @@ then runs these steps:
 <h3 id=origin>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class=note>See <a spec=html for=/>origin</a>'s definition in HTML for the
-necessary background information. [[!HTML]]
+<p class=note>See <a spec=html for=/>origin</a>'s definition in HTML for the necessary
+background information. [[!HTML]]
 
 <p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-origin>origin</dfn> is the
 <a spec=html for=/>origin</a> returned by running these steps, switching on
@@ -3216,14 +3215,9 @@ urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: utf-8 encode; url: utf-8-encode
   text: utf-8 decoder; url: utf-8-decoder
 urlPrefix: https://html.spec.whatwg.org/multipage/
-  urlPrefix: comms.html; type: interface;
-    text: EventSource
-    text: HashChangeEvent
   urlPrefix: browsers.html; type: dfn;
     text: origin
     text: unicode serialisation of an origin
-  urlPrefix: infrastructure.html; type: dfn;
-    text: structured clone
 urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
   text: throw
   text: value pairs to iterate over

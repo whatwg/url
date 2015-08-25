@@ -34,44 +34,44 @@
    <ul class="toc" role="directory">
     <li><a href="#goals"><span class="secno"></span> <span class="content">Goals</span></a>
     <li>
-     <a href="#terminology"><span class="secno">1</span> <span class="content">Terminology</span></a>
+     <a href="#infrastructure"><span class="secno">1</span> <span class="content">Infrastructure</span></a>
      <ul class="toc">
       <li><a href="#parsers"><span class="secno">1.1</span> <span class="content">Parsers</span></a>
-     </ul>
-    <li><a href="#percent-encoded-bytes"><span class="secno">2</span> <span class="content">Percent-encoded bytes</span></a>
-    <li>
-     <a href="#hosts-(domains-and-ip-addresses)"><span class="secno">3</span> <span class="content">Hosts (domains and IP addresses)</span></a>
-     <ul class="toc">
-      <li><a href="#idna"><span class="secno">3.1</span> <span class="content">IDNA</span></a>
-      <li><a href="#host-syntax"><span class="secno">3.2</span> <span class="content">Host syntax</span></a>
-      <li><a href="#host-parsing"><span class="secno">3.3</span> <span class="content">Host parsing</span></a>
-      <li><a href="#host-serializing"><span class="secno">3.4</span> <span class="content">Host serializing</span></a>
-      <li><a href="#host-equivalence"><span class="secno">3.5</span> <span class="content">Host equivalence</span></a>
+      <li><a href="#percent-encoded-bytes"><span class="secno">1.2</span> <span class="content">Percent-encoded bytes</span></a>
      </ul>
     <li>
-     <a href="#urls"><span class="secno">4</span> <span class="content">URLs</span></a>
+     <a href="#hosts-(domains-and-ip-addresses)"><span class="secno">2</span> <span class="content">Hosts (domains and IP addresses)</span></a>
      <ul class="toc">
-      <li><a href="#url-syntax"><span class="secno">4.1</span> <span class="content">URL syntax</span></a>
-      <li><a href="#url-parsing"><span class="secno">4.2</span> <span class="content">URL parsing</span></a>
-      <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
-      <li><a href="#url-equivalence"><span class="secno">4.4</span> <span class="content">URL equivalence</span></a>
-      <li><a href="#origin"><span class="secno">4.5</span> <span class="content">Origin</span></a>
+      <li><a href="#idna"><span class="secno">2.1</span> <span class="content">IDNA</span></a>
+      <li><a href="#host-syntax"><span class="secno">2.2</span> <span class="content">Host syntax</span></a>
+      <li><a href="#host-parsing"><span class="secno">2.3</span> <span class="content">Host parsing</span></a>
+      <li><a href="#host-serializing"><span class="secno">2.4</span> <span class="content">Host serializing</span></a>
+      <li><a href="#host-equivalence"><span class="secno">2.5</span> <span class="content">Host equivalence</span></a>
      </ul>
     <li>
-     <a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
+     <a href="#urls"><span class="secno">3</span> <span class="content">URLs</span></a>
      <ul class="toc">
-      <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
-      <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
-      <li><a href="#urlencoded-hooks"><span class="secno">5.3</span> <span class="content">Hooks</span></a>
+      <li><a href="#url-syntax"><span class="secno">3.1</span> <span class="content">URL syntax</span></a>
+      <li><a href="#url-parsing"><span class="secno">3.2</span> <span class="content">URL parsing</span></a>
+      <li><a href="#url-serializing"><span class="secno">3.3</span> <span class="content">URL serializing</span></a>
+      <li><a href="#url-equivalence"><span class="secno">3.4</span> <span class="content">URL equivalence</span></a>
+      <li><a href="#origin"><span class="secno">3.5</span> <span class="content">Origin</span></a>
      </ul>
     <li>
-     <a href="#api"><span class="secno">6</span> <span class="content">API</span></a>
+     <a href="#application/x-www-form-urlencoded"><span class="secno">4</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
      <ul class="toc">
-      <li><a href="#constructors"><span class="secno">6.1</span> <span class="content">Constructors</span></a>
-      <li><a href="#url-statics"><span class="secno">6.2</span> <span class="content"><code class="idl"><span>URL</span></code> statics</span></a>
-      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">6.3</span> <span class="content"><code class="idl"><span>URLUtils</span></code>/<code class="idl"><span>URLUtilsSearchParams</span></code> and <code class="idl"><span>URLUtilsReadOnly</span></code> members</span></a>
-      <li><a href="#interface-urlsearchparams"><span class="secno">6.4</span> <span class="content">Interface <code class="idl"><span>URLSearchParams</span></code></span></a>
-      <li><a href="#url-apis-elsewhere"><span class="secno">6.5</span> <span class="content">URL APIs elsewhere</span></a>
+      <li><a href="#urlencoded-parsing"><span class="secno">4.1</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
+      <li><a href="#urlencoded-serializing"><span class="secno">4.2</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
+      <li><a href="#urlencoded-hooks"><span class="secno">4.3</span> <span class="content">Hooks</span></a>
+     </ul>
+    <li>
+     <a href="#api"><span class="secno">5</span> <span class="content">API</span></a>
+     <ul class="toc">
+      <li><a href="#constructors"><span class="secno">5.1</span> <span class="content">Constructors</span></a>
+      <li><a href="#url-statics"><span class="secno">5.2</span> <span class="content"><code class="idl"><span>URL</span></code> statics</span></a>
+      <li><a href="#urlutils-and-urlutilsreadonly-members"><span class="secno">5.3</span> <span class="content"><code class="idl"><span>URLUtils</span></code>/<code class="idl"><span>URLUtilsSearchParams</span></code> and <code class="idl"><span>URLUtilsReadOnly</span></code> members</span></a>
+      <li><a href="#interface-urlsearchparams"><span class="secno">5.4</span> <span class="content">Interface <code class="idl"><span>URLSearchParams</span></code></span></a>
+      <li><a href="#url-apis-elsewhere"><span class="secno">5.5</span> <span class="content">URL APIs elsewhere</span></a>
      </ul>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
@@ -114,7 +114,7 @@
    </ul>
    <p class="note" role="note">As the editors learn more about the subject matter the goals
 might increase in scope somewhat. </p>
-   <h2 class="heading settled" data-level="1" id="terminology"><span class="secno">1. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
+   <h2 class="heading settled" data-level="1" id="infrastructure"><span class="secno">1. </span><span class="content">Infrastructure</span><a class="self-link" href="#infrastructure"></a></h2>
    <p>Some terms used in this specification are defined in the
 DOM, Encoding, IDNA, and Web IDL Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a><a data-link-type="biblio" href="#biblio-encoding">[ENCODING]</a><a data-link-type="biblio" href="#biblio-idna">[IDNA]</a><a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a></p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="c0-controls">C0 controls<a class="self-link" href="#c0-controls"></a></dfn> are code points in the range U+0000 to U+001F, inclusive. </p>
@@ -152,7 +152,7 @@ somewhere. </p>
    <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#syntax-violation">syntax violation</a> does not mean that the parser
 terminates. Termination of a parser is always stated explicitly. E.g., through a return
 statement. </p>
-   <h2 class="heading settled" data-level="2" id="percent-encoded-bytes"><span class="secno">2. </span><span class="content">Percent-encoded bytes</span><a class="self-link" href="#percent-encoded-bytes"></a></h2>
+   <h3 class="heading settled" data-level="1.2" id="percent-encoded-bytes"><span class="secno">1.2. </span><span class="content">Percent-encoded bytes</span><a class="self-link" href="#percent-encoded-bytes"></a></h3>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="percent_encoded-byte">percent-encoded byte<a class="self-link" href="#percent_encoded-byte"></a></dfn> is "<code>%</code>", followed by
 two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of <a data-link-type="dfn" href="#percent_encoded-byte">percent-encoded bytes</a>, after
 conversion to bytes, should not cause a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> to run into any <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#error">errors</a>. </p>
@@ -225,7 +225,7 @@ an <var>encode set</var>, run these steps: </p>
      <p><a data-link-type="dfn" href="#percent-encode">Percent encode</a> each byte in <var>bytes</var>, and then return the results
  concatenated, in the same order. </p>
    </ol>
-   <h2 class="heading settled" data-level="3" id="hosts-(domains-and-ip-addresses)"><span class="secno">3. </span><span class="content">Hosts (domains and IP addresses)</span><a class="self-link" href="#hosts-%28domains-and-ip-addresses%29"></a></h2>
+   <h2 class="heading settled" data-level="2" id="hosts-(domains-and-ip-addresses)"><span class="secno">2. </span><span class="content">Hosts (domains and IP addresses)</span><a class="self-link" href="#hosts-%28domains-and-ip-addresses%29"></a></h2>
    <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>. Typically a <a data-link-type="dfn" href="#concept-host">host</a> serves as a network address, but it is sometimes (ab)used as opaque
 identifier in <a data-link-type="dfn" href="#concept-url">URLs</a> where a network address is not necessary. </p>
    <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a
@@ -235,7 +235,7 @@ network. <a data-link-type="biblio" href="#biblio-rfc1034">[RFC1034]</a></p>
 for the purposes of this specification represented as an ordered list of
 eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept-ipv6-piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>. <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a></p>
    <p class="note" role="note">Support for <code>&lt;zone_id></code> is <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>. </p>
-   <h3 class="heading settled" data-level="3.1" id="idna"><span class="secno">3.1. </span><span class="content">IDNA</span><a class="self-link" href="#idna"></a></h3>
+   <h3 class="heading settled" data-level="2.1" id="idna"><span class="secno">2.1. </span><span class="content">IDNA</span><a class="self-link" href="#idna"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-domain-to-ascii">domain to ASCII<a class="self-link" href="#concept-domain-to-ascii"></a></dfn> given a <a data-link-type="dfn" href="#concept-domain">domain</a><var>domain</var>, runs these steps: </p>
    <ol>
     <li>
@@ -252,7 +252,7 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
     <li>
      <p>Signify <a data-link-type="dfn" href="#syntax-violation">syntax violations</a> for any returned errors, and then, return <var>result</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="3.2" id="host-syntax"><span class="secno">3.2. </span><span class="content">Host syntax</span><a class="self-link" href="#host-syntax"></a></h3>
+   <h3 class="heading settled" data-level="2.2" id="host-syntax"><span class="secno">2.2. </span><span class="content">Host syntax</span><a class="self-link" href="#host-syntax"></a></h3>
    <p>A <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host">host<a class="self-link" href="#syntax-host"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-host-domain">domain</a>, an <a data-link-type="dfn" href="#syntax-host-ipv4">IPv4 address</a>, or "<code>[</code>",
 followed by an <a data-link-type="dfn" href="#syntax-host-ipv6">IPv6 address</a>, followed by "<code>]</code>". </p>
    <p>A <var>domain</var> is a <dfn data-dfn-type="dfn" data-noexport="" id="valid-domain">valid domain<a class="self-link" href="#valid-domain"></a></dfn> if these steps return success: </p>
@@ -275,7 +275,7 @@ is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>. </p>
 sequences of up to three <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> per sequence, each representing a decimal
 number no greater than 255, and separated from each other by "<code>.</code>". </p>
    <p>An <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-ipv6">IPv6 address<a class="self-link" href="#syntax-host-ipv6"></a></dfn> is defined in the <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>. <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a></p>
-   <h3 class="heading settled" data-level="3.3" id="host-parsing"><span class="secno">3.3. </span><span class="content">Host parsing</span><a class="self-link" href="#host-parsing"></a></h3>
+   <h3 class="heading settled" data-level="2.3" id="host-parsing"><span class="secno">2.3. </span><span class="content">Host parsing</span><a class="self-link" href="#host-parsing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-host-parser">host parser<a class="self-link" href="#concept-host-parser"></a></dfn> takes a string <var>input</var> and
 an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
 steps: </p>
@@ -555,7 +555,7 @@ then runs these steps: </p>
     <li>
      <p>Return <var>address</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="3.4" id="host-serializing"><span class="secno">3.4. </span><span class="content">Host serializing</span><a class="self-link" href="#host-serializing"></a></h3>
+   <h3 class="heading settled" data-level="2.4" id="host-serializing"><span class="secno">2.4. </span><span class="content">Host serializing</span><a class="self-link" href="#host-serializing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-host-serializer">host serializer<a class="self-link" href="#concept-host-serializer"></a></dfn> takes a <a data-link-type="dfn" href="#concept-host">host</a><var>host</var> and then runs these steps: </p>
    <ol>
     <li>
@@ -619,14 +619,14 @@ then runs these steps: </p>
    </ol>
    <p class="note" role="note">This algorithm requires the recommendation from
 A Recommendation for IPv6 Address Text Representation. <a data-link-type="biblio" href="#biblio-rfc5952">[RFC5952]</a></p>
-   <h3 class="heading settled" data-level="3.5" id="host-equivalence"><span class="secno">3.5. </span><span class="content">Host equivalence</span><a class="self-link" href="#host-equivalence"></a></h3>
+   <h3 class="heading settled" data-level="2.5" id="host-equivalence"><span class="secno">2.5. </span><span class="content">Host equivalence</span><a class="self-link" href="#host-equivalence"></a></h3>
    <p>To determine whether a <a data-link-type="dfn" href="#concept-host">host</a><var>A</var><dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-host-equals">equals<a class="self-link" href="#concept-host-equals"></a></dfn><var>B</var>, return true if <var>A</var> is <var>B</var>, and false otherwise.</p>
    <p class="XXX">Certificate comparison requires a host equivalence check that ignores the
 trailing dot of a domain (if any). However, those hosts have also various other facets
 enforced, such as DNS length, that are not enforced here, as URLs do not enforce them. If
 anyone has a good suggestion for how to bring these two closer together, or what a good
 unified model would be, please file an issue. </p>
-   <h2 class="heading settled" data-level="4" id="urls"><span class="secno">4. </span><span class="content">URLs</span><a class="self-link" href="#urls"></a></h2>
+   <h2 class="heading settled" data-level="3" id="urls"><span class="secno">3. </span><span class="content">URLs</span><a class="self-link" href="#urls"></a></h2>
    <p>A <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" data-lt="URL|URL record" id="concept-url">URL<a class="self-link" href="#concept-url"></a></dfn> is a universal
 identifier. To disambiguate from a <a data-link-type="dfn" href="#syntax-url">URL string</a> it can also be referred to as a <a data-link-type="dfn" href="#concept-url">URL record</a>. </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-scheme">scheme<a class="self-link" href="#concept-url-scheme"></a></dfn> is an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> that identifies the type of <a data-link-type="dfn" href="#concept-url">URL</a> and can be used to
@@ -704,7 +704,7 @@ input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative UR
    <hr>
    <p>To <dfn data-dfn-type="dfn" data-local-lt="pop" data-noexport="" id="pop-a-urls-path">pop a <var>url</var>’s path<a class="self-link" href="#pop-a-urls-path"></a></dfn>, if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a <a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s
 last string, if any. </p>
-   <h3 class="heading settled" data-level="4.1" id="url-syntax"><span class="secno">4.1. </span><span class="content">URL syntax</span><a class="self-link" href="#url-syntax"></a></h3>
+   <h3 class="heading settled" data-level="3.1" id="url-syntax"><span class="secno">3.1. </span><span class="content">URL syntax</span><a class="self-link" href="#url-syntax"></a></h3>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" data-lt="URL|URL string" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either
 a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>. To
 disambiguate from a <a data-link-type="dfn" href="#concept-url">URL record</a> it can also be referred to as a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
@@ -827,7 +827,7 @@ U+100000 to U+10FFFD. </p>
    <p class="note" role="note"><a data-link-type="dfn" href="#percent_encoded-byte">Percent-encoded bytes</a> can be used to encode code points that are not <a data-link-type="dfn" href="#url-code-points">URL code points</a> or are excluded from a syntax production. </p>
    <hr>
    <p class="note no-backref" role="note">There is no conforming way to express a <a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL record</a> within a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
-   <h3 class="heading settled" data-level="4.2" id="url-parsing"><span class="secno">4.2. </span><span class="content">URL parsing</span><a class="self-link" href="#url-parsing"></a></h3>
+   <h3 class="heading settled" data-level="3.2" id="url-parsing"><span class="secno">3.2. </span><span class="content">URL parsing</span><a class="self-link" href="#url-parsing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string <var>input</var>, with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a><var>base</var> and an optional <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a><var>encoding override</var>, and then runs these steps: </p>
    <p class="note no-backref" role="note">Non-web-browser implementations only need to implement the <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a>. </p>
    <ol>
@@ -841,8 +841,7 @@ U+100000 to U+10FFFD. </p>
     <li>
      <p>If the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> is not in the <a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#BlobURLStore">blob URL store</a>, return <var>url</var>. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a></p>
     <li>
-     <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-object">object</a> to a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a> of
- the entry in the <a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#BlobURLStore">blob URL store</a> corresponding to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
+     <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-object">object</a> to a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a> of the entry in the <a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#BlobURLStore">blob URL store</a> corresponding to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
     <li>
      <p>Return <var>url</var>. </p>
    </ol>
@@ -1435,7 +1434,7 @@ these steps: </p>
    append the result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>. </p>
      </ol>
    </ol>
-   <h3 class="heading settled" data-level="4.3" id="url-serializing"><span class="secno">4.3. </span><span class="content">URL serializing</span><a class="self-link" href="#url-serializing"></a></h3>
+   <h3 class="heading settled" data-level="3.3" id="url-serializing"><span class="secno">3.3. </span><span class="content">URL serializing</span><a class="self-link" href="#url-serializing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-serializer">URL serializer<a class="self-link" href="#concept-url-serializer"></a></dfn> takes a <a data-link-type="dfn" href="#concept-url">URL</a><var>url</var>, an optional <i title="">exclude fragment flag</i>, and
 then runs these steps: </p>
    <ol>
@@ -1481,7 +1480,7 @@ then runs these steps: </p>
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="4.4" id="url-equivalence"><span class="secno">4.4. </span><span class="content">URL equivalence</span><a class="self-link" href="#url-equivalence"></a></h3>
+   <h3 class="heading settled" data-level="3.4" id="url-equivalence"><span class="secno">3.4. </span><span class="content">URL equivalence</span><a class="self-link" href="#url-equivalence"></a></h3>
    <p>To determine whether a <a data-link-type="dfn" href="#concept-url">URL</a><var>A</var><dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-equals">equals<a class="self-link" href="#concept-url-equals"></a></dfn><var>B</var>, optionally with an <i>exclude fragments flag</i>, run these steps: </p>
    <ol>
     <li>
@@ -1492,9 +1491,9 @@ then runs these steps: </p>
      <p>Return true if <var>serializedA</var> is <var>serializedB</var>, and false
  otherwise. </p>
    </ol>
-   <h3 class="heading settled" data-level="4.5" id="origin"><span class="secno">4.5. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
-   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>’s definition in HTML for the
-necessary background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
+   <h3 class="heading settled" data-level="3.5" id="origin"><span class="secno">3.5. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
+   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>’s definition in HTML for the necessary
+background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
    <dl class="switch">
     <dt>"<code>blob</code>" 
@@ -1524,12 +1523,12 @@ necessary background information. <a data-link-type="biblio" href="#biblio-html"
      <p class="note no-backref" role="note">This does indeed mean that these <a data-link-type="dfn" href="#concept-url">URLs</a> cannot
   be <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same-origin</a> with themselves. </p>
    </dl>
-   <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
+   <h2 class="heading settled" data-level="4" id="application/x-www-form-urlencoded"><span class="secno">4. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="application-x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#application-x-www-form-urlencoded-0"></a></dfn> format is a simple way to
 encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range. </p>
    <p class="note no-backref" role="note">While this description makes <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
 format is in widespread use due to its prevalence of HTML forms. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
-   <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="urlencoded-parsing"><span class="secno">4.1. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
    <p class="note no-backref" role="note">The features provided by the <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parser
 are mainly relevant for server-oriented implementations. A browser-based implementation
 only needs what the <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-string-parser">application/x-www-form-urlencoded</a></code> string parser
@@ -1588,7 +1587,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="5.2" id="urlencoded-serializing"><span class="secno">5.2. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
+   <h3 class="heading settled" data-level="4.2" id="urlencoded-serializing"><span class="secno">4.2. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded byte serializer" data-noexport="" id="concept-urlencoded-byte-serializer"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> byte serializer<a class="self-link" href="#concept-urlencoded-byte-serializer"></a></dfn> takes a byte sequence <var>input</var> and then runs these steps: </p>
    <ol>
     <li>
@@ -1638,11 +1637,11 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
      </ol>
     <li>Return <var>output</var>. 
    </ol>
-   <h3 class="heading settled" data-level="5.3" id="urlencoded-hooks"><span class="secno">5.3. </span><span class="content">Hooks</span><a class="self-link" href="#urlencoded-hooks"></a></h3>
+   <h3 class="heading settled" data-level="4.3" id="urlencoded-hooks"><span class="secno">4.3. </span><span class="content">Hooks</span><a class="self-link" href="#urlencoded-hooks"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn> takes a string <var>input</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encodes</a> it, and then
 returns the result of <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parsing
 it. </p>
-   <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
+   <h2 class="heading settled" data-level="5" id="api"><span class="secno">5. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-url">url<a class="self-link" href="#dom-url-url-url-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-base">base<a class="self-link" href="#dom-url-url-url-base-base"></a></dfn>),
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
@@ -1749,7 +1748,7 @@ optionally given a <var>value</var>, run these steps: </p>
     <li>
      <p>Run the <a data-link-type="dfn" href="#concept-urlutils-update">update steps</a> with <var>value</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="6.1" id="constructors"><span class="secno">6.1. </span><span class="content">Constructors</span><a class="self-link" href="#constructors"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="constructors"><span class="secno">5.1. </span><span class="content">Constructors</span><a class="self-link" href="#constructors"></a></h3>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn> constructor, when invoked, must run these steps: </p>
    <ol>
     <li>
@@ -1786,7 +1785,7 @@ url.pathname // "/%F0%9F%92%A9"</pre>
 <pre>var input = "/💩",    url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
    </div>
-   <h3 class="heading settled" data-level="6.2" id="url-statics"><span class="secno">6.2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#url">URL</a></code> statics</span><a class="self-link" href="#url-statics"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="url-statics"><span class="secno">5.2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#url">URL</a></code> statics</span><a class="self-link" href="#url-statics"></a></h3>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="method" data-export="" id="dom-url-domaintoascii"><code>domainToASCII(<var>domain</var>)</code><a class="self-link" href="#dom-url-domaintoascii"></a></dfn> static
 method, when invoked, must run these steps: </p>
    <ol>
@@ -1804,7 +1803,7 @@ method, when invoked, must run these steps: </p>
     <li>
      <p>Return the empty string if <var>unicodeDomain</var> is not a <a data-link-type="dfn" href="#concept-domain">domain</a>, and <var>unicodeDomain</var> otherwise. </p>
    </ol>
-   <h3 class="heading settled" data-level="6.3" id="urlutils-and-urlutilsreadonly-members"><span class="secno">6.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> members</span><a class="self-link" href="#urlutils-and-urlutilsreadonly-members"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="urlutils-and-urlutilsreadonly-members"><span class="secno">5.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> members</span><a class="self-link" href="#urlutils-and-urlutilsreadonly-members"></a></h3>
    <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code>/<code class="idl"><a data-link-type="idl" href="#urlutilssearchparams">URLUtilsSearchParams</a></code> and <code class="idl"><a data-link-type="idl" href="#urlutilsreadonly">URLUtilsReadOnly</a></code> interfaces are not exposed on the global object. They are mixins for other objects, such
 as <code class="idl"><a data-link-type="idl" href="#url">URL</a></code>. </p>
    <p>The <dfn class="idl-code" data-dfn-for="URLUtils, URLUtilsReadOnly" data-dfn-type="attribute" data-export="" id="dom-urlutils-href"><code>href</code><a class="self-link" href="#dom-urlutils-href"></a></dfn> attribute’s getter must run these steps: </p>
@@ -2081,7 +2080,7 @@ steps: </p>
     <li>
      <p>Run the <a data-link-type="dfn" href="#pre_update-steps">pre-update steps</a>. </p>
    </ol>
-   <h3 class="heading settled" data-level="6.4" id="interface-urlsearchparams"><span class="secno">6.4. </span><span class="content">Interface <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code></span><a class="self-link" href="#interface-urlsearchparams"></a></h3>
+   <h3 class="heading settled" data-level="5.4" id="interface-urlsearchparams"><span class="secno">5.4. </span><span class="content">Interface <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code></span><a class="self-link" href="#interface-urlsearchparams"></a></h3>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparams">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <dfn class="idl-code" data-dfn-for="URLSearchParams/URLSearchParams(init)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-urlsearchparams-init-init">init<a class="self-link" href="#dom-urlsearchparams-urlsearchparams-init-init"></a></dfn> = ""),
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="urlsearchparams">URLSearchParams<a class="self-link" href="#urlsearchparams"></a></dfn> {
@@ -2189,7 +2188,7 @@ the name and the value being the value. </p>
       <li>
        <p>Return the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>. </p>
      </ol>
-     <h3 class="heading settled" data-level="6.5" id="url-apis-elsewhere"><span class="secno">6.5. </span><span class="content">URL APIs elsewhere</span><a class="self-link" href="#url-apis-elsewhere"></a></h3>
+     <h3 class="heading settled" data-level="5.5" id="url-apis-elsewhere"><span class="secno">5.5. </span><span class="content">URL APIs elsewhere</span><a class="self-link" href="#url-apis-elsewhere"></a></h3>
      <p>A standard that exposes <a data-link-type="dfn" href="#concept-url">URLs</a>, should expose the <a data-link-type="dfn" href="#concept-url">URL</a> as a
 string  (by <a data-link-type="dfn" href="#concept-url-serializer">serializing</a> an internal <a data-link-type="dfn" href="#concept-url">URL</a>). A
 standard should not expose a <a data-link-type="dfn" href="#concept-url">URL</a> using a <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object. <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> objects
@@ -2200,7 +2199,7 @@ data structures. </p>
 should name such a feature "url" (i.e., lowercase and with an "l" at the end). Names such
 as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
 (i.e., uppercase) is preferred, e.g., "newURL" and "oldURL". </p>
-     <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#hashchangeevent">HashChangeEvent</a></code> interfaces in HTML are examples of
+     <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a></code> interfaces in HTML are examples of
 proper naming. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
      <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
      <p>There have been a lot of people that have helped make <a class="no-backref" data-link-type="dfn" href="#concept-url">URLs</a> more interoperable over the years and
@@ -2280,253 +2279,253 @@ neighboring rights to this work. </p>
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
-   <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §4.1</span>
-   <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §6.4</span>
-   <li><a href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a><span>, in §5</span>
+   <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §3.1</span>
+   <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §5.4</span>
+   <li><a href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a><span>, in §4</span>
    <li><a href="#ascii-alpha">ASCII alpha</a><span>, in §1</span>
    <li><a href="#ascii-alphanumeric">ASCII alphanumeric</a><span>, in §1</span>
    <li><a href="#ascii-digits">ASCII digits</a><span>, in §1</span>
    <li><a href="#ascii-hex-digits">ASCII hex digits</a><span>, in §1</span>
    <li><a href="#ascii-lowercase">ASCII lowercase</a><span>, in §1</span>
    <li><a href="#ascii-string">ASCII string</a><span>, in §1</span>
-   <li><a href="#authority-state">authority state</a><span>, in §4.2</span>
-   <li><a href="#dom-url-url-url-base-base">base</a><span>, in §6</span>
-   <li><a href="#concept-base-url">base URL</a><span>, in §4</span>
-   <li><a href="#concept-basic-url-parser">basic URL parser</a><span>, in §4.2</span>
+   <li><a href="#authority-state">authority state</a><span>, in §3.2</span>
+   <li><a href="#dom-url-url-url-base-base">base</a><span>, in §5</span>
+   <li><a href="#concept-base-url">base URL</a><span>, in §3</span>
+   <li><a href="#concept-basic-url-parser">basic URL parser</a><span>, in §3.2</span>
    <li><a href="#c">c</a><span>, in §1.1</span>
    <li><a href="#c0-controls">C0 controls</a><span>, in §1</span>
    <li><a href="#c0-controls-and-space">C0 controls and space</a><span>, in §1</span>
-   <li><a href="#default-encode-set">default encode set</a><span>, in §2</span>
-   <li><a href="#default-port">default port</a><span>, in §4</span>
-   <li><a href="#dom-urlsearchparams-delete">delete(name)</a><span>, in §6.4</span>
+   <li><a href="#default-encode-set">default encode set</a><span>, in §1.2</span>
+   <li><a href="#default-port">default port</a><span>, in §3</span>
+   <li><a href="#dom-urlsearchparams-delete">delete(name)</a><span>, in §5.4</span>
    <li>
     domain
     <ul>
-     <li><a href="#concept-domain">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-domain">dfn for hostsyntax</a><span>, in §3.2</span>
-     <li><a href="#dom-url-domaintoascii-domain-domain">argument for URL/domainToASCII(domain)</a><span>, in §6</span>
-     <li><a href="#dom-url-domaintounicode-domain-domain">argument for URL/domainToUnicode(domain)</a><span>, in §6</span>
+     <li><a href="#concept-domain">dfn for host</a><span>, in §2</span>
+     <li><a href="#syntax-host-domain">dfn for hostsyntax</a><span>, in §2.2</span>
+     <li><a href="#dom-url-domaintoascii-domain-domain">argument for URL/domainToASCII(domain)</a><span>, in §5</span>
+     <li><a href="#dom-url-domaintounicode-domain-domain">argument for URL/domainToUnicode(domain)</a><span>, in §5</span>
     </ul>
-   <li><a href="#concept-domain-to-ascii">domain to ASCII</a><span>, in §3.1</span>
-   <li><a href="#dom-url-domaintoascii">domainToASCII(domain)</a><span>, in §6.2</span>
-   <li><a href="#concept-domain-to-unicode">domain to Unicode</a><span>, in §3.1</span>
-   <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §6.2</span>
-   <li><a href="#syntax-url-path-segment-dotdot">double-dot path segment</a><span>, in §4.1</span>
+   <li><a href="#concept-domain-to-ascii">domain to ASCII</a><span>, in §2.1</span>
+   <li><a href="#dom-url-domaintoascii">domainToASCII(domain)</a><span>, in §5.2</span>
+   <li><a href="#concept-domain-to-unicode">domain to Unicode</a><span>, in §2.1</span>
+   <li><a href="#dom-url-domaintounicode">domainToUnicode(domain)</a><span>, in §5.2</span>
+   <li><a href="#syntax-url-path-segment-dotdot">double-dot path segment</a><span>, in §3.1</span>
    <li><a href="#eof-code-point">EOF code point</a><span>, in §1.1</span>
    <li>
     equals
     <ul>
-     <li><a href="#concept-host-equals">dfn for host</a><span>, in §3.5</span>
-     <li><a href="#concept-url-equals">dfn for url</a><span>, in §4.4</span>
+     <li><a href="#concept-host-equals">dfn for host</a><span>, in §2.5</span>
+     <li><a href="#concept-url-equals">dfn for url</a><span>, in §3.4</span>
     </ul>
-   <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
-   <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
-   <li><a href="#file-state">file state</a><span>, in §4.2</span>
+   <li><a href="#file-host-state">file host state</a><span>, in §3.2</span>
+   <li><a href="#file-slash-state">file slash state</a><span>, in §3.2</span>
+   <li><a href="#file-state">file state</a><span>, in §3.2</span>
    <li>
     fragment
     <ul>
-     <li><a href="#concept-url-fragment">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-fragment">dfn for urlsyntax</a><span>, in §4.1</span>
+     <li><a href="#concept-url-fragment">dfn for url</a><span>, in §3</span>
+     <li><a href="#syntax-url-fragment">dfn for urlsyntax</a><span>, in §3.1</span>
     </ul>
-   <li><a href="#fragment-state">fragment state</a><span>, in §4.2</span>
-   <li><a href="#dom-urlsearchparams-getall">getAll(name)</a><span>, in §6.4</span>
-   <li><a href="#dom-urlsearchparams-get">get(name)</a><span>, in §6.4</span>
-   <li><a href="#concept-urlutils-get-the-base">get the base</a><span>, in §6</span>
-   <li><a href="#dom-urlutils-hash">hash</a><span>, in §6.3</span>
-   <li><a href="#dom-urlsearchparams-has">has(name)</a><span>, in §6.4</span>
+   <li><a href="#fragment-state">fragment state</a><span>, in §3.2</span>
+   <li><a href="#dom-urlsearchparams-getall">getAll(name)</a><span>, in §5.4</span>
+   <li><a href="#dom-urlsearchparams-get">get(name)</a><span>, in §5.4</span>
+   <li><a href="#concept-urlutils-get-the-base">get the base</a><span>, in §5</span>
+   <li><a href="#dom-urlutils-hash">hash</a><span>, in §5.3</span>
+   <li><a href="#dom-urlsearchparams-has">has(name)</a><span>, in §5.4</span>
    <li>
     host
     <ul>
-     <li><a href="#concept-host">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host">dfn for hostsyntax</a><span>, in §3.2</span>
-     <li><a href="#concept-url-host">dfn for url</a><span>, in §4</span>
-     <li><a href="#dom-urlutils-host">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
+     <li><a href="#concept-host">dfn for host</a><span>, in §2</span>
+     <li><a href="#syntax-host">dfn for hostsyntax</a><span>, in §2.2</span>
+     <li><a href="#concept-url-host">dfn for url</a><span>, in §3</span>
+     <li><a href="#dom-urlutils-host">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §5.3</span>
     </ul>
-   <li><a href="#dom-urlutils-hostname">hostname</a><span>, in §6.3</span>
-   <li><a href="#hostname-state">hostname state</a><span>, in §4.2</span>
-   <li><a href="#concept-host-parser">host parser</a><span>, in §3.3</span>
-   <li><a href="#concept-host-serializer">host serializer</a><span>, in §3.4</span>
-   <li><a href="#host-state">host state</a><span>, in §4.2</span>
-   <li><a href="#dom-urlutils-href">href</a><span>, in §6.3</span>
-   <li><a href="#include-credentials">include credentials</a><span>, in §4</span>
-   <li><a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a><span>, in §6.4</span>
-   <li><a href="#concept-urlutils-input">input</a><span>, in §6</span>
+   <li><a href="#dom-urlutils-hostname">hostname</a><span>, in §5.3</span>
+   <li><a href="#hostname-state">hostname state</a><span>, in §3.2</span>
+   <li><a href="#concept-host-parser">host parser</a><span>, in §2.3</span>
+   <li><a href="#concept-host-serializer">host serializer</a><span>, in §2.4</span>
+   <li><a href="#host-state">host state</a><span>, in §3.2</span>
+   <li><a href="#dom-urlutils-href">href</a><span>, in §5.3</span>
+   <li><a href="#include-credentials">include credentials</a><span>, in §3</span>
+   <li><a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a><span>, in §5.4</span>
+   <li><a href="#concept-urlutils-input">input</a><span>, in §5</span>
    <li>
     IPv4 address
     <ul>
-     <li><a href="#concept-ipv4">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-ipv4">dfn for hostsyntax</a><span>, in §3.2</span>
+     <li><a href="#concept-ipv4">dfn for host</a><span>, in §2</span>
+     <li><a href="#syntax-host-ipv4">dfn for hostsyntax</a><span>, in §2.2</span>
     </ul>
-   <li><a href="#ipv4-number-parser">IPv4 number parser</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv4-parser">IPv4 parser</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv4-serializer">IPv4 serializer</a><span>, in §3.4</span>
+   <li><a href="#ipv4-number-parser">IPv4 number parser</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv4-parser">IPv4 parser</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv4-serializer">IPv4 serializer</a><span>, in §2.4</span>
    <li>
     IPv6 address
     <ul>
-     <li><a href="#concept-ipv6">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-ipv6">dfn for hostsyntax</a><span>, in §3.2</span>
+     <li><a href="#concept-ipv6">dfn for host</a><span>, in §2</span>
+     <li><a href="#syntax-host-ipv6">dfn for hostsyntax</a><span>, in §2.2</span>
     </ul>
-   <li><a href="#concept-ipv6-parser">IPv6 parser</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv6-parser-finale">IPv6 parser Finale</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv6-parser-ipv4">IPv6 parser IPv4</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv6-parser-main">IPv6 parser Main</a><span>, in §3.3</span>
-   <li><a href="#concept-ipv6-piece">IPv6 piece</a><span>, in §3</span>
-   <li><a href="#concept-ipv6-serializer">IPv6 serializer</a><span>, in §3.4</span>
-   <li><a href="#is-local">is local</a><span>, in §4</span>
-   <li><a href="#is-special">is special</a><span>, in §4</span>
-   <li><a href="#concept-urlsearchparams-list">list</a><span>, in §6.4</span>
-   <li><a href="#local-scheme">local scheme</a><span>, in §4</span>
+   <li><a href="#concept-ipv6-parser">IPv6 parser</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv6-parser-finale">IPv6 parser Finale</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv6-parser-ipv4">IPv6 parser IPv4</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv6-parser-main">IPv6 parser Main</a><span>, in §2.3</span>
+   <li><a href="#concept-ipv6-piece">IPv6 piece</a><span>, in §2</span>
+   <li><a href="#concept-ipv6-serializer">IPv6 serializer</a><span>, in §2.4</span>
+   <li><a href="#is-local">is local</a><span>, in §3</span>
+   <li><a href="#is-special">is special</a><span>, in §3</span>
+   <li><a href="#concept-urlsearchparams-list">list</a><span>, in §5.4</span>
+   <li><a href="#local-scheme">local scheme</a><span>, in §3</span>
    <li>
     name
     <ul>
-     <li><a href="#dom-urlsearchparams-append-name-value-name">argument for URLSearchParams/append(name, value)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-delete-name-name">argument for URLSearchParams/delete(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-get-name-name">argument for URLSearchParams/get(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-getall-name-name">argument for URLSearchParams/getAll(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-has-name-name">argument for URLSearchParams/has(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-set-name-value-name">argument for URLSearchParams/set(name, value)</a><span>, in §6.4</span>
+     <li><a href="#dom-urlsearchparams-append-name-value-name">argument for URLSearchParams/append(name, value)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-delete-name-name">argument for URLSearchParams/delete(name)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-get-name-name">argument for URLSearchParams/get(name)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-getall-name-name">argument for URLSearchParams/getAll(name)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-has-name-name">argument for URLSearchParams/has(name)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-set-name-value-name">argument for URLSearchParams/set(name, value)</a><span>, in §5.4</span>
     </ul>
-   <li><a href="#concept-urlsearchparams-new">new</a><span>, in §6.4</span>
-   <li><a href="#non_relative-flag">non-relative flag</a><span>, in §4</span>
-   <li><a href="#non_relative-path-state">non-relative path state</a><span>, in §4.2</span>
+   <li><a href="#concept-urlsearchparams-new">new</a><span>, in §5.4</span>
+   <li><a href="#non_relative-flag">non-relative flag</a><span>, in §3</span>
+   <li><a href="#non_relative-path-state">non-relative path state</a><span>, in §3.2</span>
    <li><a href="#normalized-windows-drive-letter">normalized Windows drive letter</a><span>, in §1</span>
-   <li><a href="#no-scheme-state">no scheme state</a><span>, in §4.2</span>
-   <li><a href="#concept-url-object">object</a><span>, in §4</span>
+   <li><a href="#no-scheme-state">no scheme state</a><span>, in §3.2</span>
+   <li><a href="#concept-url-object">object</a><span>, in §3</span>
    <li>
     origin
     <ul>
-     <li><a href="#concept-url-origin">dfn for url</a><span>, in §4.5</span>
-     <li><a href="#dom-urlutils-origin">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
+     <li><a href="#concept-url-origin">dfn for url</a><span>, in §3.5</span>
+     <li><a href="#dom-urlutils-origin">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §5.3</span>
     </ul>
    <li>
     password
     <ul>
-     <li><a href="#concept-url-password">dfn for url</a><span>, in §4</span>
-     <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
+     <li><a href="#concept-url-password">dfn for url</a><span>, in §3</span>
+     <li><a href="#dom-urlutils-password">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §5.3</span>
     </ul>
-   <li><a href="#concept-url-path">path</a><span>, in §4</span>
-   <li><a href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
-   <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §6.3</span>
-   <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
-   <li><a href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-relative">path-relative URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-segment">path segment</a><span>, in §4.1</span>
-   <li><a href="#path-start-state">path start state</a><span>, in §4.2</span>
-   <li><a href="#path-state">path state</a><span>, in §4.2</span>
-   <li><a href="#percent-decode">percent decode</a><span>, in §2</span>
-   <li><a href="#percent-encode">percent encode</a><span>, in §2</span>
-   <li><a href="#percent_encoded-byte">percent-encoded byte</a><span>, in §2</span>
-   <li><a href="#pop-a-urls-path">pop</a><span>, in §4</span>
-   <li><a href="#pop-a-urls-path">pop a url’s path</a><span>, in §4</span>
+   <li><a href="#concept-url-path">path</a><span>, in §3</span>
+   <li><a href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §3.1</span>
+   <li><a href="#dom-urlutils-pathname">pathname</a><span>, in §5.3</span>
+   <li><a href="#path-or-authority-state">path or authority state</a><span>, in §3.2</span>
+   <li><a href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-path-relative">path-relative URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-path-segment">path segment</a><span>, in §3.1</span>
+   <li><a href="#path-start-state">path start state</a><span>, in §3.2</span>
+   <li><a href="#path-state">path state</a><span>, in §3.2</span>
+   <li><a href="#percent-decode">percent decode</a><span>, in §1.2</span>
+   <li><a href="#percent-encode">percent encode</a><span>, in §1.2</span>
+   <li><a href="#percent_encoded-byte">percent-encoded byte</a><span>, in §1.2</span>
+   <li><a href="#pop-a-urls-path">pop</a><span>, in §3</span>
+   <li><a href="#pop-a-urls-path">pop a url’s path</a><span>, in §3</span>
    <li>
     port
     <ul>
-     <li><a href="#concept-url-port">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-port">dfn for urlsyntax</a><span>, in §4.1</span>
-     <li><a href="#dom-urlutils-port">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
+     <li><a href="#concept-url-port">dfn for url</a><span>, in §3</span>
+     <li><a href="#syntax-url-port">dfn for urlsyntax</a><span>, in §3.1</span>
+     <li><a href="#dom-urlutils-port">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §5.3</span>
     </ul>
-   <li><a href="#port-state">port state</a><span>, in §4.2</span>
-   <li><a href="#pre_update-steps">pre-update steps</a><span>, in §6</span>
-   <li><a href="#dom-urlutils-protocol">protocol</a><span>, in §6.3</span>
+   <li><a href="#port-state">port state</a><span>, in §3.2</span>
+   <li><a href="#pre_update-steps">pre-update steps</a><span>, in §5</span>
+   <li><a href="#dom-urlutils-protocol">protocol</a><span>, in §5.3</span>
    <li>
     query
     <ul>
-     <li><a href="#concept-url-query">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-query">dfn for urlsyntax</a><span>, in §4.1</span>
+     <li><a href="#concept-url-query">dfn for url</a><span>, in §3</span>
+     <li><a href="#syntax-url-query">dfn for urlsyntax</a><span>, in §3.1</span>
     </ul>
-   <li><a href="#concept-urlutils-query-encoding">query encoding</a><span>, in §6</span>
-   <li><a href="#concept-urlutils-query-object">query object</a><span>, in §6</span>
-   <li><a href="#query-state">query state</a><span>, in §4.2</span>
-   <li><a href="#relative-slash-state">relative slash state</a><span>, in §4.2</span>
-   <li><a href="#relative-state">relative state</a><span>, in §4.2</span>
-   <li><a href="#syntax-url-relative">relative URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-relative-with-fragment">relative URL with fragment</a><span>, in §4.1</span>
+   <li><a href="#concept-urlutils-query-encoding">query encoding</a><span>, in §5</span>
+   <li><a href="#concept-urlutils-query-object">query object</a><span>, in §5</span>
+   <li><a href="#query-state">query state</a><span>, in §3.2</span>
+   <li><a href="#relative-slash-state">relative slash state</a><span>, in §3.2</span>
+   <li><a href="#relative-state">relative state</a><span>, in §3.2</span>
+   <li><a href="#syntax-url-relative">relative URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-relative-with-fragment">relative URL with fragment</a><span>, in §3.1</span>
    <li><a href="#remaining">remaining</a><span>, in §1.1</span>
-   <li><a href="#reset-steps">reset steps</a><span>, in §6.4</span>
-   <li><a href="#reset-the-input">reset the input</a><span>, in §6</span>
+   <li><a href="#reset-steps">reset steps</a><span>, in §5.4</span>
+   <li><a href="#reset-the-input">reset the input</a><span>, in §5</span>
    <li>
     scheme
     <ul>
-     <li><a href="#concept-url-scheme">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-scheme">dfn for urlsyntax</a><span>, in §4.1</span>
+     <li><a href="#concept-url-scheme">dfn for url</a><span>, in §3</span>
+     <li><a href="#syntax-url-scheme">dfn for urlsyntax</a><span>, in §3.1</span>
     </ul>
-   <li><a href="#syntax-url-file-scheme-relative">scheme-relative file URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-scheme-relative">scheme-relative URL</a><span>, in §4.1</span>
-   <li><a href="#scheme-start-state">scheme start state</a><span>, in §4.2</span>
-   <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
-   <li><a href="#dom-urlutils-search">search</a><span>, in §6.3</span>
-   <li><a href="#dom-urlutilssearchparams-searchparams">searchParams</a><span>, in §6.3</span>
+   <li><a href="#syntax-url-file-scheme-relative">scheme-relative file URL</a><span>, in §3.1</span>
+   <li><a href="#syntax-url-scheme-relative">scheme-relative URL</a><span>, in §3.1</span>
+   <li><a href="#scheme-start-state">scheme start state</a><span>, in §3.2</span>
+   <li><a href="#scheme-state">scheme state</a><span>, in §3.2</span>
+   <li><a href="#dom-urlutils-search">search</a><span>, in §5.3</span>
+   <li><a href="#dom-urlutilssearchparams-searchparams">searchParams</a><span>, in §5.3</span>
    <li><a href="#serialize-an-integer">serialize an integer</a><span>, in §1</span>
-   <li><a href="#dom-urlsearchparams-set">set(name, value)</a><span>, in §6.4</span>
-   <li><a href="#concept-urlutils-set-the-input">set the input</a><span>, in §6</span>
-   <li><a href="#set-the-password">set the password</a><span>, in §4.2</span>
-   <li><a href="#set-the-username">set the username</a><span>, in §4.2</span>
-   <li><a href="#simple-encode-set">simple encode set</a><span>, in §2</span>
-   <li><a href="#syntax-url-path-segment-dot">single-dot path segment</a><span>, in §4.1</span>
-   <li><a href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a><span>, in §4.2</span>
-   <li><a href="#special-authority-slashes-state">special authority slashes state</a><span>, in §4.2</span>
-   <li><a href="#special-relative-or-authority-state">special relative or authority state</a><span>, in §4.2</span>
-   <li><a href="#special-scheme">special scheme</a><span>, in §4</span>
+   <li><a href="#dom-urlsearchparams-set">set(name, value)</a><span>, in §5.4</span>
+   <li><a href="#concept-urlutils-set-the-input">set the input</a><span>, in §5</span>
+   <li><a href="#set-the-password">set the password</a><span>, in §3.2</span>
+   <li><a href="#set-the-username">set the username</a><span>, in §3.2</span>
+   <li><a href="#simple-encode-set">simple encode set</a><span>, in §1.2</span>
+   <li><a href="#syntax-url-path-segment-dot">single-dot path segment</a><span>, in §3.1</span>
+   <li><a href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a><span>, in §3.2</span>
+   <li><a href="#special-authority-slashes-state">special authority slashes state</a><span>, in §3.2</span>
+   <li><a href="#special-relative-or-authority-state">special relative or authority state</a><span>, in §3.2</span>
+   <li><a href="#special-scheme">special scheme</a><span>, in §3</span>
    <li>
     stringification behavior
     <ul>
-     <li><a href="#URLUtils-stringification-behavior">dfn for URLUtils</a><span>, in §6</span>
-     <li><a href="#URLUtilsReadOnly-stringification-behavior">dfn for URLUtilsReadOnly</a><span>, in §6</span>
-     <li><a href="#stringification-behavior">dfn for URLSearchParams</a><span>, in §6.4</span>
+     <li><a href="#URLUtils-stringification-behavior">dfn for URLUtils</a><span>, in §5</span>
+     <li><a href="#URLUtilsReadOnly-stringification-behavior">dfn for URLUtilsReadOnly</a><span>, in §5</span>
+     <li><a href="#stringification-behavior">dfn for URLSearchParams</a><span>, in §5.4</span>
     </ul>
    <li><a href="#syntax-violation">syntax violation</a><span>, in §1.1</span>
    <li>
     update steps
     <ul>
-     <li><a href="#concept-urlutils-update">dfn for URLUtils</a><span>, in §6</span>
-     <li><a href="#concept-urlsearchparams-update">dfn for URLSearchParams</a><span>, in §6.4</span>
+     <li><a href="#concept-urlutils-update">dfn for URLUtils</a><span>, in §5</span>
+     <li><a href="#concept-urlsearchparams-update">dfn for URLSearchParams</a><span>, in §5.4</span>
     </ul>
    <li>
     URL
     <ul>
-     <li><a href="#concept-url">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url">dfn for urlsyntax</a><span>, in §4.1</span>
-     <li><a href="#url">(interface)</a><span>, in §6</span>
+     <li><a href="#concept-url">dfn for url</a><span>, in §3</span>
+     <li><a href="#syntax-url">dfn for urlsyntax</a><span>, in §3.1</span>
+     <li><a href="#url">(interface)</a><span>, in §5</span>
     </ul>
    <li>
     url
     <ul>
-     <li><a href="#dom-url-url-url-base-url">argument for URL/URL(url, base)</a><span>, in §6</span>
-     <li><a href="#concept-urlutils-url">dfn for URLUtils</a><span>, in §6</span>
+     <li><a href="#dom-url-url-url-base-url">argument for URL/URL(url, base)</a><span>, in §5</span>
+     <li><a href="#concept-urlutils-url">dfn for URLUtils</a><span>, in §5</span>
     </ul>
-   <li><a href="#url-code-points">URL code points</a><span>, in §4.1</span>
-   <li><a href="#concept-urlencoded-byte-serializer">urlencoded byte serializer</a><span>, in §5.2</span>
-   <li><a href="#concept-urlencoded-parser">urlencoded parser</a><span>, in §5.1</span>
-   <li><a href="#concept-urlencoded-serializer">urlencoded serializer</a><span>, in §5.2</span>
-   <li><a href="#concept-urlencoded-string-parser">urlencoded string parser</a><span>, in §5.3</span>
-   <li><a href="#concept-urlsearchparams-url-object">url object</a><span>, in §6.4</span>
-   <li><a href="#concept-url-parser">URL parser</a><span>, in §4.2</span>
-   <li><a href="#concept-url">URL record</a><span>, in §4</span>
-   <li><a href="#urlsearchparams">URLSearchParams</a><span>, in §6.4</span>
-   <li><a href="#dom-urlsearchparams-urlsearchparams">URLSearchParams(init)</a><span>, in §6.4</span>
-   <li><a href="#concept-url-serializer">URL serializer</a><span>, in §4.3</span>
-   <li><a href="#syntax-url">URL string</a><span>, in §4.1</span>
-   <li><a href="#url-units">URL units</a><span>, in §4.1</span>
-   <li><a href="#dom-url-url">URL(url, base)</a><span>, in §6.1</span>
-   <li><a href="#urlutils">URLUtils</a><span>, in §6</span>
-   <li><a href="#urlutilsreadonly">URLUtilsReadOnly</a><span>, in §6</span>
-   <li><a href="#urlutilssearchparams">URLUtilsSearchParams</a><span>, in §6</span>
-   <li><a href="#userinfo-encode-set">userinfo encode set</a><span>, in §2</span>
+   <li><a href="#url-code-points">URL code points</a><span>, in §3.1</span>
+   <li><a href="#concept-urlencoded-byte-serializer">urlencoded byte serializer</a><span>, in §4.2</span>
+   <li><a href="#concept-urlencoded-parser">urlencoded parser</a><span>, in §4.1</span>
+   <li><a href="#concept-urlencoded-serializer">urlencoded serializer</a><span>, in §4.2</span>
+   <li><a href="#concept-urlencoded-string-parser">urlencoded string parser</a><span>, in §4.3</span>
+   <li><a href="#concept-urlsearchparams-url-object">url object</a><span>, in §5.4</span>
+   <li><a href="#concept-url-parser">URL parser</a><span>, in §3.2</span>
+   <li><a href="#concept-url">URL record</a><span>, in §3</span>
+   <li><a href="#urlsearchparams">URLSearchParams</a><span>, in §5.4</span>
+   <li><a href="#dom-urlsearchparams-urlsearchparams">URLSearchParams(init)</a><span>, in §5.4</span>
+   <li><a href="#concept-url-serializer">URL serializer</a><span>, in §3.3</span>
+   <li><a href="#syntax-url">URL string</a><span>, in §3.1</span>
+   <li><a href="#url-units">URL units</a><span>, in §3.1</span>
+   <li><a href="#dom-url-url">URL(url, base)</a><span>, in §5.1</span>
+   <li><a href="#urlutils">URLUtils</a><span>, in §5</span>
+   <li><a href="#urlutilsreadonly">URLUtilsReadOnly</a><span>, in §5</span>
+   <li><a href="#urlutilssearchparams">URLUtilsSearchParams</a><span>, in §5</span>
+   <li><a href="#userinfo-encode-set">userinfo encode set</a><span>, in §1.2</span>
    <li>
     username
     <ul>
-     <li><a href="#concept-url-username">dfn for url</a><span>, in §4</span>
-     <li><a href="#dom-urlutils-username">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §6.3</span>
+     <li><a href="#concept-url-username">dfn for url</a><span>, in §3</span>
+     <li><a href="#dom-urlutils-username">attribute for URLUtils, URLUtilsReadOnly</a><span>, in §5.3</span>
     </ul>
-   <li><a href="#utf_8-percent-encode">utf-8 percent encode</a><span>, in §2</span>
-   <li><a href="#valid-domain">valid domain</a><span>, in §3.2</span>
+   <li><a href="#utf_8-percent-encode">utf-8 percent encode</a><span>, in §1.2</span>
+   <li><a href="#valid-domain">valid domain</a><span>, in §2.2</span>
    <li>
     value
     <ul>
-     <li><a href="#dom-urlsearchparams-append-name-value-value">argument for URLSearchParams/append(name, value)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-set-name-value-value">argument for URLSearchParams/set(name, value)</a><span>, in §6.4</span>
+     <li><a href="#dom-urlsearchparams-append-name-value-value">argument for URLSearchParams/append(name, value)</a><span>, in §5.4</span>
+     <li><a href="#dom-urlsearchparams-set-name-value-value">argument for URLSearchParams/set(name, value)</a><span>, in §5.4</span>
     </ul>
    <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span>
   </ul>
@@ -2541,8 +2540,11 @@ neighboring rights to this work. </p>
    <li>
     <a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
+     <li><a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#location">Location</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a>
     </ul>
   </ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
