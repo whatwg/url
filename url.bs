@@ -225,6 +225,30 @@ an <var>encode set</var>, run these steps:
 
 
 
+<h2 id=security-considerations>Security considerations</h2>
+
+<p>The security of a <a for=url>URL</a> is a function of its environment. Care is to be
+taken when displaying, interpreting, and passing <a for=url>URLs</a> around.
+
+<p>When displaying and allocating new <a for=url>URLs</a> "spoofing" needs to be
+considered. An attack whereby one <a for=host>host</a> or <a for=url>URL</a> can be
+confused for another. E.g., consider how 1/l/I, m/rn/rrn, 0/O, and а/a can all appear
+eerily similar.
+
+<p>When displaying <a for=url>URLs</a>, a <a for=url>URL</a>'s <a for=url>username</a> and
+<a for=url>password</a> are best not displayed or at the very least displayed
+significantly differently from a <a for=url>URL</a>'s <a for=url>host</a> as otherwise
+they can similarly be abused for "spoofing". E.g., consider
+<code>https://examplecorp.com@attacker.example/</code>.
+
+<p>When passing a <a for=url>URL</a> from party <var>A</var> to <var>B</var>, both need to
+carefully consider what is happening. <var>A</var> might end up leaking data it does not
+want to leak. <var>B</var> might receive input it did not expect and take an action that
+harms the user. In particular, <var>B</var> should never trust <var>A</var>, as at some
+point <a for=url>URLs</a> from <var>A</var> can come from untrusted sources.
+
+
+
 <h2 id="hosts-(domains-and-ip-addresses)">Hosts (domains and IP addresses)</h2>
 
 <!-- Punycode:
