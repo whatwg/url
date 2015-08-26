@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a></p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-08-25">25 August 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-08-26">26 August 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -57,6 +57,7 @@
       <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
       <li><a href="#url-equivalence"><span class="secno">4.4</span> <span class="content">URL equivalence</span></a>
       <li><a href="#origin"><span class="secno">4.5</span> <span class="content">Origin</span></a>
+      <li><a href="#url-rendering"><span class="secno">4.6</span> <span class="content">URL rendering</span></a>
      </ul>
     <li>
      <a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
@@ -228,14 +229,11 @@ an <var>encode set</var>, run these steps: </p>
    </ol>
    <h2 class="heading settled" data-level="2" id="security-considerations"><span class="secno">2. </span><span class="content">Security considerations</span><a class="self-link" href="#security-considerations"></a></h2>
    <p>The security of a <a data-link-type="dfn" href="#concept-url">URL</a> is a function of its environment. Care is to be
-taken when displaying, interpreting, and passing <a data-link-type="dfn" href="#concept-url">URLs</a> around. </p>
-   <p>When displaying and allocating new <a data-link-type="dfn" href="#concept-url">URLs</a> "spoofing" needs to be
+taken when rendering, interpreting, and passing <a data-link-type="dfn" href="#concept-url">URLs</a> around. </p>
+   <p>When rendering and allocating new <a data-link-type="dfn" href="#concept-url">URLs</a> "spoofing" needs to be
 considered. An attack whereby one <a data-link-type="dfn" href="#concept-host">host</a> or <a data-link-type="dfn" href="#concept-url">URL</a> can be
-confused for another. E.g., consider how 1/l/I, m/rn/rrn, 0/O, and а/a can all appear
-eerily similar. </p>
-   <p>When displaying <a data-link-type="dfn" href="#concept-url">URLs</a>, a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-username">username</a> and <a data-link-type="dfn" href="#concept-url-password">password</a> are best not displayed or at the very least displayed
-significantly differently from a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> as otherwise
-they can similarly be abused for "spoofing". E.g., consider <code>https://examplecorp.com@attacker.example/</code>. </p>
+confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
+eerily similar. Or worse, consider how U+202A and similar code points are invisible. </p>
    <p>When passing a <a data-link-type="dfn" href="#concept-url">URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
 want to leak. <var>B</var> might receive input it did not expect and take an action that
@@ -1539,6 +1537,26 @@ background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a
      <p class="note no-backref" role="note">This does indeed mean that these <a data-link-type="dfn" href="#concept-url">URLs</a> cannot
   be <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same-origin</a> with themselves. </p>
    </dl>
+   <h3 class="heading settled" data-level="4.6" id="url-rendering"><span class="secno">4.6. </span><span class="content">URL rendering</span><a class="self-link" href="#url-rendering"></a></h3>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> should be rendered in its <a data-link-type="dfn" href="#concept-url-serializer">serialized</a> form, with these modifications: </p>
+   <ul class="brief">
+    <li>
+     <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-username">username</a> and <a data-link-type="dfn" href="#concept-url-password">password</a> should
+ not be rendered as they can be mistaken for a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a>.
+ E.g., consider <code>https://examplecorp.com@attacker.example/</code></p>
+    <li>
+     <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> should be rendered using <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a>. </p>
+    <li>
+     <p>Other parts of the <a data-link-type="dfn" href="#syntax-url">URL</a> should have their sequences of <a data-link-type="dfn" href="#percent_encoded-byte">percent-encoded bytes</a> replaced with code points resulting from <a data-link-type="dfn" href="#percent-decode">percent decoding</a> those sequences converted to bytes, unless that renders those
+ sequences invisible. </p>
+   </ul>
+   <p>For the purposes of bidirectional text it should be rendered as if it were in a
+left-to-right embedding. <a data-link-type="biblio" href="#biblio-bidi">[BIDI]</a></p>
+   <p class="note no-backref" role="note">Unfortunately, as rendered <a data-link-type="dfn" href="#concept-url">URLs</a> are simply
+strings and can appear anywhere, producing a specific bidirectional algorithm for <a data-link-type="dfn" href="#concept-url">URLs</a> would unlikely see wide adoption and therefore it is better to embrace
+how they are rendered today. </p>
+   <p>Due to the confusion that can arise between a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and <a data-link-type="dfn" href="#concept-url-path">path</a> with bidirectional text, browsers are encouraged to only render a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> in places where it is important for users to
+distinguish between the two. E.g., users are expected to make trust decisions based on a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> rendered in the address bar. </p>
    <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="application-x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#application-x-www-form-urlencoded-0"></a></dfn> format is a simple way to
 encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range. </p>
@@ -2226,6 +2244,7 @@ standard what it is today. </p>
 Adam Barth,
 Albert Wiersch,
 Alexandre Morgaut,
+Andrew Sullivan,
 Arkadiusz Michalski,
 Behnam Esfahbod,
 Bobby Holley,
@@ -2566,6 +2585,8 @@ neighboring rights to this work. </p>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-bidi"><a class="self-link" href="#biblio-bidi"></a>[BIDI]
+   <dd>Mark Davis; Aharon Lanin; Andrew Glass. <a href="http://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</a>. 5 June 2014. Unicode Standard Annex #9. URL: <a href="http://www.unicode.org/reports/tr9/">http://www.unicode.org/reports/tr9/</a>
    <dt id="biblio-dom"><a class="self-link" href="#biblio-dom"></a>[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM</a>. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-encoding"><a class="self-link" href="#biblio-encoding"></a>[ENCODING]

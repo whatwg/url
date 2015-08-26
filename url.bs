@@ -228,18 +228,12 @@ an <var>encode set</var>, run these steps:
 <h2 id=security-considerations>Security considerations</h2>
 
 <p>The security of a <a for=url>URL</a> is a function of its environment. Care is to be
-taken when displaying, interpreting, and passing <a for=url>URLs</a> around.
+taken when rendering, interpreting, and passing <a for=url>URLs</a> around.
 
-<p>When displaying and allocating new <a for=url>URLs</a> "spoofing" needs to be
+<p>When rendering and allocating new <a for=url>URLs</a> "spoofing" needs to be
 considered. An attack whereby one <a for=host>host</a> or <a for=url>URL</a> can be
-confused for another. E.g., consider how 1/l/I, m/rn/rrn, 0/O, and а/a can all appear
-eerily similar.
-
-<p>When displaying <a for=url>URLs</a>, a <a for=url>URL</a>'s <a for=url>username</a> and
-<a for=url>password</a> are best not displayed or at the very least displayed
-significantly differently from a <a for=url>URL</a>'s <a for=url>host</a> as otherwise
-they can similarly be abused for "spoofing". E.g., consider
-<code>https://examplecorp.com@attacker.example/</code>.
+confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
+eerily similar. Or worse, consider how U+202A and similar code points are invisible.
 
 <p>When passing a <a for=url>URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
@@ -2111,6 +2105,42 @@ background information. [[!HTML]]
 </dl>
 
 
+<h3 id=url-rendering>URL rendering</h3>
+<!-- See https://www.w3.org/Bugs/Public/show_bug.cgi?id=27641 for context -->
+
+<p>A <a for=url>URL</a> should be rendered in its <a lt="URL serializer">serialized</a>
+form, with these modifications:
+
+<ul class=brief>
+ <li><p>A <a for=url>URL</a>'s <a for=url>username</a> and <a for=url>password</a> should
+ not be rendered as they can be mistaken for a <a for=url>URL</a>'s <a for=url>host</a>.
+ E.g., consider <code>https://examplecorp.com@attacker.example/</code>
+
+ <li><p>A <a for=url>URL</a>'s <a for=url>host</a> should be rendered using
+ <a>domain to Unicode</a>.
+
+ <li><p>Other parts of the <a for=urlsyntax>URL</a> should have their sequences of
+ <a>percent-encoded bytes</a> replaced with code points resulting from
+ <a>percent decoding</a> those sequences converted to bytes, unless that renders those
+ sequences invisible.
+</ul>
+
+<p>For the purposes of bidirectional text it should be rendered as if it were in a
+left-to-right embedding. [[!BIDI]]
+
+<p class="note no-backref">Unfortunately, as rendered <a for=url>URLs</a> are simply
+strings and can appear anywhere, producing a specific bidirectional algorithm for
+<a for=url>URLs</a> would unlikely see wide adoption and therefore it is better to embrace
+how they are rendered today.
+
+<p>Due to the confusion that can arise between a <a for=url>URL</a>'s <a for=url>host</a>
+and <a for=url>path</a> with bidirectional text, browsers are encouraged to only render a
+<a for=url>URL</a>'s <a for=url>host</a> in places where it is important for users to
+distinguish between the two. E.g., users are expected to make trust decisions based on a
+<a for=url>URL</a>'s <a for=url>host</a> rendered in the address bar.
+
+
+
 <h2 id="application/x-www-form-urlencoded"><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code></h2>
 
 <p>The <dfn id=application-x-www-form-urlencoded-0><code>application/x-www-form-urlencoded</code></dfn> format is a simple way to
@@ -3104,6 +3134,7 @@ standard what it is today.
 Adam Barth,
 Albert Wiersch,
 Alexandre Morgaut,
+Andrew Sullivan,
 Arkadiusz Michalski,
 Behnam Esfahbod,
 Bobby Holley,
