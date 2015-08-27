@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a></p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-08-26">26 August 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-08-27">27 August 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -233,7 +233,7 @@ taken when rendering, interpreting, and passing <a data-link-type="dfn" href="#c
    <p>When rendering and allocating new <a data-link-type="dfn" href="#concept-url">URLs</a> "spoofing" needs to be
 considered. An attack whereby one <a data-link-type="dfn" href="#concept-host">host</a> or <a data-link-type="dfn" href="#concept-url">URL</a> can be
 confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
-eerily similar. Or worse, consider how U+202A and similar code points are invisible. </p>
+eerily similar. Or worse, consider how U+202A and similar code points are invisible. <a data-link-type="biblio" href="#biblio-uts36">[UTS36]</a></p>
    <p>When passing a <a data-link-type="dfn" href="#concept-url">URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
 want to leak. <var>B</var> might receive input it did not expect and take an action that
@@ -1543,7 +1543,7 @@ background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a
     <li>
      <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-username">username</a> and <a data-link-type="dfn" href="#concept-url-password">password</a> should
  not be rendered as they can be mistaken for a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a>.
- E.g., consider <code>https://examplecorp.com@attacker.example/</code></p>
+ E.g., consider <code>https://examplecorp.com@attacker.example/</code>. </p>
     <li>
      <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> should be rendered using <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a>. </p>
     <li>
@@ -1553,8 +1553,10 @@ background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a
    <p>For the purposes of bidirectional text it should be rendered as if it were in a
 left-to-right embedding. <a data-link-type="biblio" href="#biblio-bidi">[BIDI]</a></p>
    <p class="note no-backref" role="note">Unfortunately, as rendered <a data-link-type="dfn" href="#concept-url">URLs</a> are simply
-strings and can appear anywhere, producing a specific bidirectional algorithm for <a data-link-type="dfn" href="#concept-url">URLs</a> would unlikely see wide adoption and therefore it is better to embrace
-how they are rendered today. </p>
+strings and can appear anywhere, a specific bidirectional algorithm for rendered <a data-link-type="dfn" href="#concept-url">URLs</a> would not see wide adoption. Bidirectional text interacts with the
+parts of a <a data-link-type="dfn" href="#concept-url">URL</a> in ways that can cause the rendering to be different from
+the model. Users of bidirectional languages are thus cautioned that this is to be
+expected, particularly in plain text environments. </p>
    <p>Due to the confusion that can arise between a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and <a data-link-type="dfn" href="#concept-url-path">path</a> with bidirectional text, browsers are encouraged to only render a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> in places where it is important for users to
 distinguish between the two. E.g., users are expected to make trust decisions based on a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> rendered in the address bar. </p>
    <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
@@ -2242,6 +2244,7 @@ standard what it is today. </p>
      <p>With that, many thanks to
 100の人,
 Adam Barth,
+Addison Phillips,
 Albert Wiersch,
 Alexandre Morgaut,
 Andrew Sullivan,
@@ -2599,6 +2602,8 @@ neighboring rights to this work. </p>
    <dd><a href="http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">Uniform Resource Identifier (URI) Schemes</a>. URL: <a href="http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</a>
    <dt id="biblio-idna"><a class="self-link" href="#biblio-idna"></a>[IDNA]
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
+   <dt id="biblio-uts36"><a class="self-link" href="#biblio-uts36"></a>[UTS36]
+   <dd>Mark Davis; Michel Suignard. <a href="http://unicode.org/reports/tr36/">Unicode Security Considerations</a>. URL: <a href="http://unicode.org/reports/tr36/">http://unicode.org/reports/tr36/</a>
    <dt id="biblio-webidl"><a class="self-link" href="#biblio-webidl"></a>[WEBIDL]
    <dd>Boris Zbarsky; Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]

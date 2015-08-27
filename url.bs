@@ -234,6 +234,7 @@ taken when rendering, interpreting, and passing <a for=url>URLs</a> around.
 considered. An attack whereby one <a for=host>host</a> or <a for=url>URL</a> can be
 confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
 eerily similar. Or worse, consider how U+202A and similar code points are invisible.
+[[!UTS36]]
 
 <p>When passing a <a for=url>URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
@@ -2114,7 +2115,7 @@ form, with these modifications:
 <ul class=brief>
  <li><p>A <a for=url>URL</a>'s <a for=url>username</a> and <a for=url>password</a> should
  not be rendered as they can be mistaken for a <a for=url>URL</a>'s <a for=url>host</a>.
- E.g., consider <code>https://examplecorp.com@attacker.example/</code>
+ E.g., consider <code>https://examplecorp.com@attacker.example/</code>.
 
  <li><p>A <a for=url>URL</a>'s <a for=url>host</a> should be rendered using
  <a>domain to Unicode</a>.
@@ -2129,9 +2130,11 @@ form, with these modifications:
 left-to-right embedding. [[!BIDI]]
 
 <p class="note no-backref">Unfortunately, as rendered <a for=url>URLs</a> are simply
-strings and can appear anywhere, producing a specific bidirectional algorithm for
-<a for=url>URLs</a> would unlikely see wide adoption and therefore it is better to embrace
-how they are rendered today.
+strings and can appear anywhere, a specific bidirectional algorithm for rendered
+<a for=url>URLs</a> would not see wide adoption. Bidirectional text interacts with the
+parts of a <a for=url>URL</a> in ways that can cause the rendering to be different from
+the model. Users of bidirectional languages are thus cautioned that this is to be
+expected, particularly in plain text environments.
 
 <p>Due to the confusion that can arise between a <a for=url>URL</a>'s <a for=url>host</a>
 and <a for=url>path</a> with bidirectional text, browsers are encouraged to only render a
@@ -3132,6 +3135,7 @@ standard what it is today.
 <p>With that, many thanks to
 100の人,<!-- https://twitter.com/esperecyan -->
 Adam Barth,
+Addison Phillips,
 Albert Wiersch,
 Alexandre Morgaut,
 Andrew Sullivan,
@@ -3237,6 +3241,12 @@ neighboring rights to this work.
         "href": "https://w3c.github.io/FileAPI/",
         "title": "File API",
         "publisher": "W3C"
+    },
+    "UTS36": {
+      "href": "http://unicode.org/reports/tr36/",
+      "authors" : ["Mark Davis", "Michel Suignard"],
+      "title": "Unicode Security Considerations",
+      "publisher" : "Unicode Consortium"
     },
     "WEBIDL": {
         "authors": [
