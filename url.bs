@@ -2339,6 +2339,9 @@ it.
 
 <h2 id=api>API</h2>
 
+<p class=XXX><a href=https://github.com/whatwg/url/issues/62>Significant issues</a> have been found
+with the {{URLUtils}} setup, please refrain from implementing at this point in time.
+
 <pre class=idl>
 [Constructor(USVString url, optional USVString base),
  Exposed=(Window,Worker)]

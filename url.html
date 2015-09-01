@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a></p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-08-27">27 August 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-09-01">1 September 2015</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -1678,6 +1678,8 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
 returns the result of <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parsing
 it. </p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
+   <p class="XXX"><a href="https://github.com/whatwg/url/issues/62">Significant issues</a> have been found
+with the <code class="idl"><a data-link-type="idl" href="#urlutils">URLUtils</a></code> setup, please refrain from implementing at this point in time. </p>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-url">url<a class="self-link" href="#dom-url-url-url-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-base">base<a class="self-link" href="#dom-url-url-url-base-base"></a></dfn>),
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url">URL<a class="self-link" href="#url"></a></dfn> {
