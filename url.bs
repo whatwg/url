@@ -694,6 +694,10 @@ then runs these steps:
  <li><p>Return <var>address</var>.
 </ol>
 
+<p class="note no-backref">To be clear, <a lt='IPv6 parser Main'>Main</a>,
+<a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are simple markers.
+They serve no purpose other than being a location the algorithm can jump to.
+
 
 <h3 id=host-serializing>Host serializing</h3>
 
@@ -3190,6 +3194,7 @@ Sven Uhlig,
 Tab Atkins,
 Tantek Çelik,
 Tim Berners-Lee,
+Titi_Alone,
 Tomek Wytrębowicz,
 Valentin Gosu,
 Vyacheslav Matva, and
