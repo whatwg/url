@@ -2550,21 +2550,27 @@ constructor, when invoked, must run these steps:
  <li><p>Return <var>result</var>.
 </ol>
 
-<div class=example>
- <p>To <a lt='basic URL parser'>Basic URL parse</a> a string into a <a for=url>URL</a>
- without using a <a>base URL</a>, invoke the constructor with a single argument:
+<div class="example no-backref">
+ <p>To <a lt="basic URL parser">parse</a> a string into a <a for=url>URL</a> without using a
+ <a>base URL</a>, invoke the {{URL}} constructor with a single argument:
 
  <pre>var input = "https://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
 
- <p>Alternatively you can use the <a>base URL</a> of a
- <a lt=concept-document>document</a> through
- <code><a lt=dom-Node-baseURI>baseURI</a></code>:
+ <p>This throws an exception if the input is not an <a for=urlsyntax>absolute URL</a>:
 
- <pre>var input = "/💩",
+ <pre>try {
+  var url = new URL("/🍣🍺")
+} catch(e) {
+  // that happened
+}</pre>
+
+ <p>A <a>base URL</a> is necessary if the input is a <a for=urlsyntax>relative URL</a>:
+
+ <pre>var input = "/🍣🍺",
     url = new URL(input, document.baseURI)
-url.href // "https://url.spec.whatwg.org/%F0%9F%92%A9"</pre>
+url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
 </div>
 
 
@@ -3197,7 +3203,8 @@ Tim Berners-Lee,
 Titi_Alone,
 Tomek Wytrębowicz,
 Valentin Gosu,
-Vyacheslav Matva, and
+Vyacheslav Matva,
+山岸和利 (Yamagishi Kazutoshi), and
 成瀬ゆい (Yui Naruse)
 for being awesome!
 
