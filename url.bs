@@ -2378,29 +2378,10 @@ interface URLUtils {
 interface URLUtilsSearchParams {
   readonly attribute URLSearchParams searchParams;
 };
-
-[NoInterfaceObject,
- Exposed=(Window,Worker)]
-interface URLUtilsReadOnly {
-  stringifier readonly attribute USVString href;
-  readonly attribute USVString origin;
-
-  readonly attribute USVString protocol;<!--
-  readonly attribute USVString username;
-  readonly attribute USVString password;-->
-  readonly attribute USVString host;
-  readonly attribute USVString hostname;
-  readonly attribute USVString port;
-  readonly attribute USVString pathname;
-  readonly attribute USVString search;<!--
-  readonly attribute URLSearchParams searchParams;-->
-  readonly attribute USVString hash;
-};
 </pre>
 
-<p>Except where different objects implementing {{URLUtilsReadOnly}} are identical to
-objects implementing {{URLUtils}}. {{URLUtilsSearchParams/searchParams}} is on its own
-interface since {{Location}} cannot support it. [[!HTML]]
+<p>{{URLUtilsSearchParams/searchParams}} is on its own interface since {{Location}} cannot support
+it. [[!HTML]]
 
 <p class=note>Since all members are readonly and certain members from {{URLUtils}} are not
 exposed a number of potential optimizations is possible compared to objects implementing
@@ -2419,8 +2400,7 @@ dictionary URLEqualOptions {
 
 URLPath would be a subclassed Array? -->
 
-<p>Specifications defining objects implementing {{URLUtils}}/{{URLUtilsSearchParams}} or
-{{URLUtilsReadOnly}} must define a
+<p>Specifications defining objects implementing {{URLUtils}}/{{URLUtilsSearchParams}} must define a
 <dfn id=concept-urlutils-get-the-base>get the base</dfn> algorithm, which must return the
 appropriate <a>base URL</a> for the object.
 
@@ -2430,7 +2410,7 @@ for an underlying string (such as an <a lt=concept-attribute-value>attribute val
 be updated. The <a for=URLUtils>update steps</a> are passed a string <var>value</var> for
 this purpose.
 
-<p>An object implementing {{URLUtils}} or {{URLUtilsReadOnly}} has an associated
+<p>An object implementing {{URLUtils}} has an associated
 <dfn id=concept-urlutils-input for=URLUtils>input</dfn> (a string or null),
 <dfn id=concept-urlutils-query-encoding for=URLUtils>query encoding</dfn> (an
 <a>encoding</a>), <dfn id=concept-urlutils-query-object for=URLUtils>query object</dfn> (a
@@ -2446,9 +2426,8 @@ algorithm.
 concept only relevant for HTML.
 [[!HTML]]
 
-<p>Specifications defining objects implementing {{URLUtils}}/{{URLUtilsSearchParams}} or
-{{URLUtilsReadOnly}} must use the <a>set the input</a>
-algorithms to set <a for=URLUtils>input</a>, <a for=URLUtils>url</a>, and
+<p>Specifications defining objects implementing {{URLUtils}}/{{URLUtilsSearchParams}} must use the
+<a>set the input</a> algorithms to set <a for=URLUtils>input</a>, <a for=URLUtils>url</a>, and
 <a for=URLUtils>query object</a>. To
 <dfn id=concept-urlutils-set-the-input for=URLUtils>set the input</dfn>
 given <var>input</var> and optionally a <var>url</var>, run these steps:
@@ -2600,13 +2579,12 @@ method, when invoked, must run these steps:
 </ol>
 
 
-<h3 id=urlutils-and-urlutilsreadonly-members>{{URLUtils}}/{{URLUtilsSearchParams}} and {{URLUtilsReadOnly}} members</h3>
+<h3 id=urlutils-members>{{URLUtils}}/{{URLUtilsSearchParams}} members</h3>
 
-<p class=note>The {{URLUtils}}/{{URLUtilsSearchParams}} and {{URLUtilsReadOnly}}
-interfaces are not exposed on the global object. They are mixins for other objects, such
-as {{URL}}.
+<p class=note>The {{URLUtils}}/{{URLUtilsSearchParams}} interfaces are not exposed on the global
+object. They are mixins for other objects, such as {{URL}}.
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>href</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>href</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2669,7 +2647,7 @@ a.href === test // true</pre>
   </div>
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>origin</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>origin</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2684,7 +2662,7 @@ attribute's getter must run these steps:
 <p class="note no-backref">It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>protocol</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>protocol</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2708,7 +2686,7 @@ these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>username</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>username</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2731,7 +2709,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>password</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>password</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2756,7 +2734,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>host</code></dfn> attribute's
+<p>The <dfn attribute for=URLUtils><code>host</code></dfn> attribute's
 getter must run these steps:
 
 <ol>
@@ -2786,7 +2764,7 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>hostname</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>hostname</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2812,7 +2790,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>port</code></dfn> attribute's
+<p>The <dfn attribute for=URLUtils><code>port</code></dfn> attribute's
 getter must run these steps:
 
 <ol>
@@ -2839,7 +2817,7 @@ steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>pathname</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>pathname</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2870,7 +2848,7 @@ run these steps:
  <li><p>Run the <a>pre-update steps</a>.
 </ol>
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>search</code></dfn>
+<p>The <dfn attribute for=URLUtils><code>search</code></dfn>
 attribute's getter must run these steps:
 
 <ol>
@@ -2916,7 +2894,7 @@ steps:
 <p>The <dfn attribute for=URLUtilsSearchParams><code>searchParams</code></dfn> attribute's
 getter must return the <a for=URLUtils>query object</a>.
 
-<p>The <dfn attribute for="URLUtils, URLUtilsReadOnly"><code>hash</code></dfn> attribute's
+<p>The <dfn attribute for=URLUtils><code>hash</code></dfn> attribute's
 getter must run these steps:
 
 <ol>
