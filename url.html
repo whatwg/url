@@ -1695,7 +1695,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-port">port</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-pathname">pathname</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-search">search</a>;
-  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" data-readonly="" data-type="URLSearchParams " id="dom-url-searchparams">searchParams<a class="self-link" href="#dom-url-searchparams"></a></dfn>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-url-searchparams">searchParams</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hash">hash</a>;
 };
 </pre>
@@ -1727,7 +1727,7 @@ when invoked, must run these steps: </p>
     <li>
      <p>Set <var>result</var>’s <a data-link-type="dfn" href="#concept-url-url">url</a> to <var>parsedURL</var>. </p>
     <li>
-     <p>Set <var>result</var>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a> to a <a data-link-type="dfn" href="#concept-urlsearchparams-new">new</a> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object using <var>query</var>, and then set that <a data-link-type="dfn" href="#concept-url-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a> to the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>. </p>
+     <p>Set <var>result</var>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a> to a <a data-link-type="dfn" href="#concept-urlsearchparams-new">new</a> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object using <var>query</var>, and then set that <a data-link-type="dfn" href="#concept-url-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a> to <var>result</var>. </p>
     <li>
      <p>Return <var>result</var>. </p>
    </ol>
@@ -1904,8 +1904,7 @@ steps: </p>
      <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a> to the
  result of <a data-link-type="dfn" href="#concept-urlencoded-string-parser">parsing</a> <var>input</var>. </p>
    </ol>
-   <p>The <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="attribute" data-export="" id="dom-urlsearchparams-searchparams"><code>searchParams</code><a class="self-link" href="#dom-urlsearchparams-searchparams"></a></dfn> attribute’s getter must
-return <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a>. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-searchparams"><code>searchParams</code><a class="self-link" href="#dom-url-searchparams"></a></dfn> attribute’s getter must return <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a>. </p>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-hash"><code>hash</code><a class="self-link" href="#dom-url-hash"></a></dfn> attribute’s
 getter must run these steps: </p>
    <ol>
@@ -2261,12 +2260,7 @@ neighboring rights to this work. </p>
    <li><a href="#scheme-start-state">scheme start state</a><span>, in §4.2</span>
    <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
    <li><a href="#dom-url-search">search</a><span>, in §6.3</span>
-   <li>
-    searchParams
-    <ul>
-     <li><a href="#dom-url-searchparams">attribute for URL</a><span>, in §6</span>
-     <li><a href="#dom-urlsearchparams-searchparams">attribute for URLSearchParams</a><span>, in §6.3</span>
-    </ul>
+   <li><a href="#dom-url-searchparams">searchParams</a><span>, in §6.3</span>
    <li><a href="#serialize-an-integer">serialize an integer</a><span>, in §1</span>
    <li><a href="#dom-urlsearchparams-set">set(name, value)</a><span>, in §6.4</span>
    <li><a href="#set-the-password">set the password</a><span>, in §4.2</span>
@@ -2412,7 +2406,7 @@ interface <a href="#url">URL</a> {
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-port">port</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-pathname">pathname</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-search">search</a>;
-  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a data-readonly="" data-type="URLSearchParams " href="#dom-url-searchparams">searchParams</a>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-url-searchparams">searchParams</a>;
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hash">hash</a>;
 };
 

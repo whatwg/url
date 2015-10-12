@@ -2416,7 +2416,7 @@ when invoked, must run these steps:
 
  <li><p>Set <var>result</var>'s <a for=URL>query object</a> to a <a for=URLSearchParams>new</a>
  {{URLSearchParams}} object using <var>query</var>, and then set that <a for=URL>query object</a>'s
- <a for=URLSearchParams>url object</a> to the <a>context object</a>.
+ <a for=URLSearchParams>url object</a> to <var>result</var>.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -2476,8 +2476,7 @@ method, when invoked, must run these steps:
 <p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter must return the
 <a lt='URL serializer'>serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
 
-<p>The <code><a attribute for="URLUtils">href</a></code> attribute's
-setter must run these steps:
+<p>The <code><a attribute for=URL>href</a></code> attribute's setter must run these steps:
 
 <ol>
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on the given
@@ -2656,8 +2655,8 @@ steps:
  result of <a lt='urlencoded string parser'>parsing</a> <var>input</var>.
 </ol>
 
-<p>The <dfn attribute for=URLSearchParams><code>searchParams</code></dfn> attribute's getter must
-return <a>context object</a>'s <a for=URL>query object</a>.
+<p>The <dfn attribute for=URL><code>searchParams</code></dfn> attribute's getter must return
+<a>context object</a>'s <a for=URL>query object</a>.
 
 <p>The <dfn attribute for=URL><code>hash</code></dfn> attribute's
 getter must run these steps:
@@ -2716,8 +2715,8 @@ which is initially empty.
 <dfn for=URLSearchParams id=concept-urlsearchparams-url-object>url object</dfn>, which is
 initially null.
 
-<p>To create a <dfn for=URLSearchParams id=concept-urlsearchparams-new>new</dfn>
-{{URLSearchParams}} object</dfn>, optionally using <var>init</var>, run these steps:
+<p>To create a <dfn for=URLSearchParams id=concept-urlsearchparams-new>new</dfn> {{URLSearchParams}}
+object, optionally using <var>init</var>, run these steps:
 
 <ol>
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
