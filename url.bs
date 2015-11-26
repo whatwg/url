@@ -1639,7 +1639,7 @@ optionally with an <a>encoding</a>
         is "<code>file</code>", and at least one of the following is true
 
         <ul class=brief>
-         <li><p><var>c</var> and the first code point of <a>remaining</a> are not a
+         <li><p><a>c</a> and the first code point of <a>remaining</a> are not a
          <a>Windows drive letter</a>
          <li><p><a>remaining</a> consists of one code point
          <li><a>remaining</a>'s second code point is not one of "<code>/</code>",
@@ -2559,6 +2559,11 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
  <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
 </ol>
 
+<p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
+attribute's setter lacks a <a for=urlsyntax>port</a>, <a>context object</a>'s <a for=URL>url</a>'s
+<a for=url>port</a> will not change. This can be unexpected as <code>host</code> attribute's getter
+does return a <a for=urlsyntax>port</a> so one might have assumed the setter to always "reset" both.
+
 <p>The <dfn attribute for=URL><code>hostname</code></dfn> attribute's getter must run these steps:
 
 <ol>
@@ -2884,6 +2889,7 @@ Simon Sapin,
 Stuart Cook,
 Sven Uhlig,
 Tab Atkins,
+吉野剛史 (Takeshi Yoshino),
 Tantek Çelik,
 Tim Berners-Lee,
 Titi_Alone,
