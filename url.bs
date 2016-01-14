@@ -733,7 +733,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
 
    <li><p>Unless this is the fourth time, prepend "<code>.</code>" to <var>output</var>.
 
-   <li><p>Set <var>n</var> to <var>n</var> / 256.
+   <li><p>Set <var>n</var> to floor(<var>n</var> / 256).
   </ol>
 
  <li><p>Return <var>output</var>.
