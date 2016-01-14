@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2015-11-26">26 November 2015</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-01-14">14 January 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -1328,7 +1328,11 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
        not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
           <li>
-           <p><a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#default-encode-set">default encode set</a>, and append the result to <var>buffer</var>. </p>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a>, <a data-link-type="dfn" href="#ascii-lowercase">ASCII lowercased</a> starts
+       with "<code>2e</code>", append "<code>.</code>" to <var>buffer</var> and increase <var>pointer</var> by two. </p>
+          <li>
+           <p>Otherwise, <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#default-encode-set">default encode set</a>,
+       and append the result to <var>buffer</var>. </p>
          </ol>
        </ol>
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="non-relative-path-state">non-relative path state<a class="self-link" href="#non-relative-path-state"></a></dfn> 
@@ -2103,7 +2107,6 @@ neighboring rights to this work. </p>
    <li><a href="#ascii-lowercase">ASCII lowercase</a><span>, in §1</span>
    <li><a href="#ascii-string">ASCII string</a><span>, in §1</span>
    <li><a href="#authority-state">authority state</a><span>, in §4.2</span>
-   <li><a href="#dom-url-url-url-base-base">base</a><span>, in §6</span>
    <li><a href="#concept-base-url">base URL</a><span>, in §4</span>
    <li><a href="#concept-basic-url-parser">basic URL parser</a><span>, in §4.2</span>
    <li><a href="#c">c</a><span>, in §1.1</span>
@@ -2117,8 +2120,6 @@ neighboring rights to this work. </p>
     <ul>
      <li><a href="#concept-domain">dfn for host</a><span>, in §3</span>
      <li><a href="#syntax-host-domain">dfn for hostsyntax</a><span>, in §3.2</span>
-     <li><a href="#dom-url-domaintoascii-domain-domain">argument for URL/domainToASCII(domain)</a><span>, in §6</span>
-     <li><a href="#dom-url-domaintounicode-domain-domain">argument for URL/domainToUnicode(domain)</a><span>, in §6</span>
     </ul>
    <li><a href="#concept-domain-to-ascii">domain to ASCII</a><span>, in §3.1</span>
    <li><a href="#dom-url-domaintoascii">domainToASCII(domain)</a><span>, in §6.2</span>
@@ -2161,7 +2162,6 @@ neighboring rights to this work. </p>
    <li><a href="#host-state">host state</a><span>, in §4.2</span>
    <li><a href="#dom-url-href">href</a><span>, in §6.3</span>
    <li><a href="#include-credentials">include credentials</a><span>, in §4</span>
-   <li><a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a><span>, in §6.4</span>
    <li>
     IPv4 address
     <ul>
@@ -2187,16 +2187,6 @@ neighboring rights to this work. </p>
    <li><a href="#is-special">is special</a><span>, in §4</span>
    <li><a href="#concept-urlsearchparams-list">list</a><span>, in §6.4</span>
    <li><a href="#local-scheme">local scheme</a><span>, in §4</span>
-   <li>
-    name
-    <ul>
-     <li><a href="#dom-urlsearchparams-append-name-value-name">argument for URLSearchParams/append(name, value)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-delete-name-name">argument for URLSearchParams/delete(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-get-name-name">argument for URLSearchParams/get(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-getall-name-name">argument for URLSearchParams/getAll(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-has-name-name">argument for URLSearchParams/has(name)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-set-name-value-name">argument for URLSearchParams/set(name, value)</a><span>, in §6.4</span>
-    </ul>
    <li><a href="#concept-urlsearchparams-new">new</a><span>, in §6.4</span>
    <li><a href="#non-relative-flag">non-relative flag</a><span>, in §4</span>
    <li><a href="#non-relative-path-state">non-relative path state</a><span>, in §4.2</span>
@@ -2289,12 +2279,7 @@ neighboring rights to this work. </p>
      <li><a href="#syntax-url">dfn for urlsyntax</a><span>, in §4.1</span>
      <li><a href="#url">(interface)</a><span>, in §6</span>
     </ul>
-   <li>
-    url
-    <ul>
-     <li><a href="#dom-url-url-url-base-url">argument for URL/URL(url, base)</a><span>, in §6</span>
-     <li><a href="#concept-url-url">dfn for URL</a><span>, in §6</span>
-    </ul>
+   <li><a href="#concept-url-url">url</a><span>, in §6</span>
    <li><a href="#url-code-points">URL code points</a><span>, in §4.1</span>
    <li><a href="#concept-urlencoded-byte-serializer">urlencoded byte serializer</a><span>, in §5.2</span>
    <li><a href="#concept-urlencoded-parser">urlencoded parser</a><span>, in §5.1</span>
@@ -2318,12 +2303,6 @@ neighboring rights to this work. </p>
     </ul>
    <li><a href="#utf-8-percent-encode">utf-8 percent encode</a><span>, in §1.2</span>
    <li><a href="#valid-domain">valid domain</a><span>, in §3.2</span>
-   <li>
-    value
-    <ul>
-     <li><a href="#dom-urlsearchparams-append-name-value-value">argument for URLSearchParams/append(name, value)</a><span>, in §6.4</span>
-     <li><a href="#dom-urlsearchparams-set-name-value-value">argument for URLSearchParams/set(name, value)</a><span>, in §6.4</span>
-    </ul>
    <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span>
   </ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
