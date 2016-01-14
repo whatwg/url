@@ -831,7 +831,7 @@ null.
 null or a <a for=host>host</a>. It is initially null.
 
 <p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
-null or a 16-bit integer that identifies a networking port. It is initially null.
+null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
 <p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of
 zero or more <a>ASCII string</a> holding data, usually identifying a location in
