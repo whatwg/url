@@ -1241,8 +1241,10 @@ optionally with an <a>encoding</a>
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null,
        and <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s
-       <a for=url>scheme</a>, set <var>state</var> to
-       <a>special relative or authority state</a>.
+       <a for=url>scheme</a>
+       <span class=note>(this implies that <var>base</var>’s <a>non-relative flag</a>
+       is unset)</span>,
+       set <var>state</var> to <a>special relative or authority state</a>.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
