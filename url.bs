@@ -228,9 +228,9 @@ an <var>encode set</var>, run these steps:
 <h2 id=security-considerations>Security considerations</h2>
 
 <p>The security of a <a for=url>URL</a> is a function of its environment. Care is to be
-taken when rendering, interpreting, and passing <a for=url>URLs</a> around.
+taken when rendering, interpreting, and passing <a for=url lt=URL>URLs</a> around.
 
-<p>When rendering and allocating new <a for=url>URLs</a> "spoofing" needs to be
+<p>When rendering and allocating new <a for=url lt=URL>URLs</a> "spoofing" needs to be
 considered. An attack whereby one <a for=host>host</a> or <a for=url>URL</a> can be
 confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
 eerily similar. Or worse, consider how U+202A and similar code points are invisible.
@@ -240,7 +240,7 @@ eerily similar. Or worse, consider how U+202A and similar code points are invisi
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
 want to leak. <var>B</var> might receive input it did not expect and take an action that
 harms the user. In particular, <var>B</var> should never trust <var>A</var>, as at some
-point <a for=url>URLs</a> from <var>A</var> can come from untrusted sources.
+point <a for=url lt=URL>URLs</a> from <var>A</var> can come from untrusted sources.
 
 
 
@@ -253,7 +253,7 @@ point <a for=url>URLs</a> from <var>A</var> can come from untrusted sources.
 <p>A <dfn export for=host id=concept-host>host</dfn> is a <a for=host>domain</a>, an
 <a for=host>IPv4 address</a>, or an <a for=host>IPv6 address</a>. Typically a
 <a for=host>host</a> serves as a network address, but it is sometimes (ab)used as opaque
-identifier in <a for=url>URLs</a> where a network address is not necessary.
+identifier in <a for=url lt=URL>URLs</a> where a network address is not necessary.
 
 <p>A <dfn export for=host id=concept-domain>domain</dfn> identifies a realm within a
 network.
@@ -854,7 +854,7 @@ initially unset.
 <code><a>Blob</a></code> object. It is initially null. [[!FILEAPI]]
 
 <p class="note no-backref">At this point this is used primarily to support
-"<code>blob</code>" <a for=url>URLs</a>, but others can be added going forward, hence
+"<code>blob</code>" <a for=url lt=URL>URLs</a>, but others can be added going forward, hence
 "object".
 
 <hr>
@@ -1085,7 +1085,7 @@ U+100000 to U+10FFFD.
 <p class=note>Code points higher than U+009F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the
 <a>URL parser</a>, except for code points appearing in
-<a for=url>fragments</a>.
+<a for=url lt=fragment>fragments</a>.
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
 
@@ -1239,10 +1239,13 @@ optionally with an <a>encoding</a>
          <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
 
-       <li><p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null,
-       and <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s
-       <a for=url>scheme</a>, set <var>state</var> to
-       <a>special relative or authority state</a>.
+       <li>
+        <p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null, and
+        <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s <a for=url>scheme</a>,
+        set <var>state</var> to <a>special relative or authority state</a>.
+
+        <p class="note no-backref">This means that <var>base</var>'s <a>non-relative flag</a> is
+        unset.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
@@ -2107,7 +2110,7 @@ background information. [[!HTML]]
  <dd>
   <p>Return a new globally unique identifier.
 
-  <p class="note no-backref">This does indeed mean that these <a for=url>URLs</a> cannot
+  <p class="note no-backref">This does indeed mean that these <a for=url lt=URL>URLs</a> cannot
   be <a spec=html lt="same origin">same-origin</a> with themselves.
 </dl>
 
@@ -2135,9 +2138,9 @@ form, with these modifications:
 <p>For the purposes of bidirectional text it should be rendered as if it were in a
 left-to-right embedding. [[!BIDI]]
 
-<p class="note no-backref">Unfortunately, as rendered <a for=url>URLs</a> are simply
+<p class="note no-backref">Unfortunately, as rendered <a for=url lt=URL>URLs</a> are simply
 strings and can appear anywhere, a specific bidirectional algorithm for rendered
-<a for=url>URLs</a> would not see wide adoption. Bidirectional text interacts with the
+<a for=url lt=URL>URLs</a> would not see wide adoption. Bidirectional text interacts with the
 parts of a <a for=url>URL</a> in ways that can cause the rendering to be different from
 the model. Users of bidirectional languages are thus cautioned that this is to be
 expected, particularly in plain text environments.
@@ -2812,7 +2815,7 @@ the name and the value being the value.
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
-<p>A standard that exposes <a for=url>URLs</a>, should expose the <a for=url>URL</a> as a
+<p>A standard that exposes <a for=url lt=URL>URLs</a>, should expose the <a for=url>URL</a> as a
 string  (by <a lt='URL serializer'>serializing</a> an internal <a for=url>URL</a>). A
 standard should not expose a <a for=url>URL</a> using a {{URL}} object. {{URL}} objects
 are meant for <a for=url>URL</a> manipulation. In IDL the USVString type should be used.
@@ -2833,10 +2836,9 @@ proper naming. [[!HTML]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
-<p>There have been a lot of people that have helped make
-<a for=url class=no-backref>URLs</a> more interoperable over the years and
-thereby furthered the goals of this standard. Likewise many people have helped making this
-standard what it is today.
+<p>There have been a lot of people that have helped make <a for=url lt=URL class=no-backref>URLs</a>
+more interoperable over the years and thereby furthered the goals of this standard. Likewise many
+people have helped making this standard what it is today.
 
 <p>With that, many thanks to
 100の人,<!-- https://twitter.com/esperecyan -->

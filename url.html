@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-01-14">14 January 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-01-20">20 January 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -29,69 +29,69 @@
    <p>The URL Standard defines URLs, domains, IP addresses, the <code title="">application/x-www-form-urlencoded</code> format, and their API.</p>
   </div>
   <div data-fill-with="at-risk"></div>
-  <h2 class="no-num no-toc no-ref heading settled" id="contents"><span class="content">Table of Contents</span></h2>
-  <div data-fill-with="table-of-contents" role="navigation">
-   <ul class="toc" role="directory">
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
     <li><a href="#goals"><span class="secno"></span> <span class="content">Goals</span></a>
     <li>
      <a href="#infrastructure"><span class="secno">1</span> <span class="content">Infrastructure</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#parsers"><span class="secno">1.1</span> <span class="content">Parsers</span></a>
       <li><a href="#percent-encoded-bytes"><span class="secno">1.2</span> <span class="content">Percent-encoded bytes</span></a>
-     </ul>
+     </ol>
     <li><a href="#security-considerations"><span class="secno">2</span> <span class="content">Security considerations</span></a>
     <li>
      <a href="#hosts-(domains-and-ip-addresses)"><span class="secno">3</span> <span class="content">Hosts (domains and IP addresses)</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#idna"><span class="secno">3.1</span> <span class="content">IDNA</span></a>
       <li><a href="#host-syntax"><span class="secno">3.2</span> <span class="content">Host syntax</span></a>
       <li><a href="#host-parsing"><span class="secno">3.3</span> <span class="content">Host parsing</span></a>
       <li><a href="#host-serializing"><span class="secno">3.4</span> <span class="content">Host serializing</span></a>
       <li><a href="#host-equivalence"><span class="secno">3.5</span> <span class="content">Host equivalence</span></a>
-     </ul>
+     </ol>
     <li>
      <a href="#urls"><span class="secno">4</span> <span class="content">URLs</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#url-syntax"><span class="secno">4.1</span> <span class="content">URL syntax</span></a>
       <li><a href="#url-parsing"><span class="secno">4.2</span> <span class="content">URL parsing</span></a>
       <li><a href="#url-serializing"><span class="secno">4.3</span> <span class="content">URL serializing</span></a>
       <li><a href="#url-equivalence"><span class="secno">4.4</span> <span class="content">URL equivalence</span></a>
       <li><a href="#origin"><span class="secno">4.5</span> <span class="content">Origin</span></a>
       <li><a href="#url-rendering"><span class="secno">4.6</span> <span class="content">URL rendering</span></a>
-     </ul>
+     </ol>
     <li>
      <a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
       <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
       <li><a href="#urlencoded-hooks"><span class="secno">5.3</span> <span class="content">Hooks</span></a>
-     </ul>
+     </ol>
     <li>
      <a href="#api"><span class="secno">6</span> <span class="content">API</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#constructors"><span class="secno">6.1</span> <span class="content">Constructors</span></a>
       <li><a href="#url-statics"><span class="secno">6.2</span> <span class="content"><code class="idl"><span>URL</span></code> statics</span></a>
       <li><a href="#urlutils-members"><span class="secno">6.3</span> <span class="content"><code class="idl"><span>URL</span></code> members</span></a>
       <li><a href="#interface-urlsearchparams"><span class="secno">6.4</span> <span class="content">Interface <code class="idl"><span>URLSearchParams</span></code></span></a>
       <li><a href="#url-apis-elsewhere"><span class="secno">6.5</span> <span class="content">URL APIs elsewhere</span></a>
-     </ul>
+     </ol>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
       <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
-     </ul>
+     </ol>
     <li>
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
-     <ul class="toc">
+     <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
       <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
-     </ul>
+     </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
-   </ul>
-  </div>
+   </ol>
+  </nav>
   <main>
 <script async="" src="https://resources.whatwg.org/file-issue.js"></script>
 <script defer="" id="head" src="https://resources.whatwg.org/dfn.js"></script>
@@ -946,8 +946,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
              <p>Set <var>state</var> to <a data-link-type="dfn" href="#file-state">file state</a>. </p>
            </ol>
           <li>
-           <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is non-null,
-       and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is equal to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, set <var>state</var> to <a data-link-type="dfn" href="#special-relative-or-authority-state">special relative or authority state</a>. </p>
+           <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is non-null, and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is equal to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
+        set <var>state</var> to <a data-link-type="dfn" href="#special-relative-or-authority-state">special relative or authority state</a>. </p>
+           <p class="note no-backref" role="note">This means that <var>base</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is
+        unset. </p>
           <li>
            <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, set <var>state</var> to <a data-link-type="dfn" href="#special-authority-slashes-state">special authority slashes state</a>. </p>
           <li>
@@ -1947,7 +1949,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
   boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-has">has</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/has(name)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-has-name-name">name<a class="self-link" href="#dom-urlsearchparams-has-name-name"></a></dfn>);
   void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-set">set</a>(USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-set-name-value-name">name<a class="self-link" href="#dom-urlsearchparams-set-name-value-name"></a></dfn>, USVString <dfn class="idl-code" data-dfn-for="URLSearchParams/set(name, value)" data-dfn-type="argument" data-export="" id="dom-urlsearchparams-set-name-value-value">value<a class="self-link" href="#dom-urlsearchparams-set-name-value-value"></a></dfn>);
   iterable&lt;USVString, USVString>;
-  <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
+  <a data-link-type="dfn" href="#urlsearchparams-stringification-behavior">stringifier</a>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-list">list<a class="self-link" href="#concept-urlsearchparams-list"></a></dfn> of name-value pairs,
@@ -1999,7 +2001,7 @@ in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, in lis
    <p>The <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-has"><code>has(<var>name</var>)</code><a class="self-link" href="#dom-urlsearchparams-has"></a></dfn> method, when invoked, must return true if there is a name-value pair whose name is <var>name</var> in <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>, and false otherwise. </p>
    <p>The <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a> are the <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a> name-value pairs with the key being
 the name and the value being the value. </p>
-   <p>The <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="stringification-behavior">stringification behavior<a class="self-link" href="#stringification-behavior"></a></dfn> must return the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>. </p>
+   <p>The <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="urlsearchparams-stringification-behavior">stringification behavior<a class="self-link" href="#urlsearchparams-stringification-behavior"></a></dfn> must return the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>. </p>
    <h3 class="heading settled" data-level="6.5" id="url-apis-elsewhere"><span class="secno">6.5. </span><span class="content">URL APIs elsewhere</span><a class="self-link" href="#url-apis-elsewhere"></a></h3>
    <p>A standard that exposes <a data-link-type="dfn" href="#concept-url">URLs</a>, should expose the <a data-link-type="dfn" href="#concept-url">URL</a> as a
 string  (by <a data-link-type="dfn" href="#concept-url-serializer">serializing</a> an internal <a data-link-type="dfn" href="#concept-url">URL</a>). A
@@ -2014,9 +2016,8 @@ as "URL", "URI", and "IRI" should not be used. However, if the name is a compoun
    <p class="note" role="note">The <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a></code> interfaces in HTML are examples of
 proper naming. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <h2 class="no-num heading settled" id="acknowledgments"><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
-   <p>There have been a lot of people that have helped make <a class="no-backref" data-link-type="dfn" href="#concept-url">URLs</a> more interoperable over the years and
-thereby furthered the goals of this standard. Likewise many people have helped making this
-standard what it is today. </p>
+   <p>There have been a lot of people that have helped make <a class="no-backref" data-link-type="dfn" href="#concept-url">URLs</a> more interoperable over the years and thereby furthered the goals of this standard. Likewise many
+people have helped making this standard what it is today. </p>
    <p>With that, many thanks to
 100の人,
 Adam Barth,
@@ -2090,12 +2091,12 @@ neighboring rights to this work. </p>
   <div data-fill-with="conformance">
    <h2 class="no-num no-ref heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative. </p>
-   <p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+   <p>The key words “MUST”, “MUST NOT”, “REQUIRED”,  “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
    <p>Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.) </p>
   </div>
   <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
-  <ul class="indexlist">
+  <ul class="index">
    <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §4.1</span>
    <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §6.4</span>
@@ -2268,7 +2269,7 @@ neighboring rights to this work. </p>
     stringification behavior
     <ul>
      <li><a href="#URL-stringification-behavior">dfn for URL</a><span>, in §6</span>
-     <li><a href="#stringification-behavior">dfn for URLSearchParams</a><span>, in §6.4</span>
+     <li><a href="#urlsearchparams-stringification-behavior">dfn for URLSearchParams</a><span>, in §6.4</span>
     </ul>
    <li><a href="#syntax-violation">syntax violation</a><span>, in §1.1</span>
    <li><a href="#concept-urlsearchparams-update">update steps</a><span>, in §6.4</span>
@@ -2306,7 +2307,7 @@ neighboring rights to this work. </p>
    <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span>
   </ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
-  <ul class="indexlist">
+  <ul class="index">
    <li>
     <a data-link-type="biblio" href="#biblio-dom-ls">[dom-ls]</a> defines the following terms:
     <ul>
@@ -2402,7 +2403,7 @@ interface <a href="#urlsearchparams">URLSearchParams</a> {
   boolean <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-has">has</a>(USVString <a href="#dom-urlsearchparams-has-name-name">name</a>);
   void <a class="idl-code" data-link-type="method" href="#dom-urlsearchparams-set">set</a>(USVString <a href="#dom-urlsearchparams-set-name-value-name">name</a>, USVString <a href="#dom-urlsearchparams-set-name-value-value">value</a>);
   iterable&lt;USVString, USVString>;
-  <a data-link-type="dfn" href="#stringification-behavior">stringifier</a>;
+  <a data-link-type="dfn" href="#urlsearchparams-stringification-behavior">stringifier</a>;
 };
 
 </pre>
