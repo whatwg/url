@@ -2888,6 +2888,7 @@ Rodney Rehm,
 Roy Fielding,
 Ryan Sleevi,
 Santiago M. Mola,
+Sam Ruby,
 Sebastian Mayr,
 Simon Pieters,
 Simon Sapin,
@@ -2908,11 +2909,7 @@ for being awesome!
 <p>This standard is written by
 <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
-<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>)
-and
-<a lang=en-US href=http://intertwingly.net/>Sam Ruby</a>
-(<a href=//www.ibm.com/>IBM</a>,
-<a href=mailto:rubys@intertwingly.net>rubys@intertwingly.net</a>).
+<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
 
 <p>Per <a rel="license" href="//creativecommons.org/publicdomain/zero/1.0/">CC0</a>, to
 the extent possible under law, the editors have waived all copyright and related or
