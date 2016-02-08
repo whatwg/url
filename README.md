@@ -8,6 +8,11 @@ know). Also, the URL Standard uses [bikeshed](https://github.com/tabatkins/bikes
 `url.html`. (Do not worry if using that tool is too complicated, your pull request does not need to
 contain the generated HTML.)
 
+### Merge policy
+
+If you can commit to this repository, see
+[whatwg/html TEAM](https://github.com/whatwg/html/blob/master/TEAM.md) for guidelines.
+
 ### Tests
 
 Tests can be found in the `url/` directory of
