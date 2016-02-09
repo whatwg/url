@@ -2163,6 +2163,7 @@ simple way to encode name-value pairs in a byte sequence where all bytes are <a>
 widespread use due to the prevalence of HTML forms.
 [[!HTML]]
 
+
 <h3 id=urlencoded-parsing><code>application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
@@ -2173,34 +2174,30 @@ requires.
 
 <p>The
 <dfn id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
-takes a byte sequence <var>input</var>, optionally with an
-<a>encoding</a> <var>encoding override</var>,
-optionally with a <i title>use _charset_ flag</i>, and optionally with an
-<i title>isindex flag</i>, and then runs these steps:
+takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
+<var>encoding override</var>, optionally with a <i>use _charset_ flag</i>, and optionally with an
+<i>isindex flag</i>, and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding override</var> is not given, set it to
- <a>utf-8</a>.
+ <li><p>If <var>encoding override</var> is not given, set it to <a>utf-8</a>.
 
  <li>
-  <p>If <var>encoding override</var> is not
-  <a>utf-8</a> and <var>input</var> contains bytes
-  whose value is greater than 0x7F, return failure.
+  <p>If <var>encoding override</var> is not <a>utf-8</a> and <var>input</var> contains bytes that
+  are not <a>ASCII bytes</a>, return failure.
 
-  <p class="note no-backref">This can only happen if <var>input</var> was not
-  generated through the <a lt='urlencoded serializer'>serializer</a> or
-  {{URLSearchParams}}.
+  <p class="note no-backref">This can only happen if <var>input</var> was not generated through the
+  <a lt='urlencoded serializer'>serializer</a> or {{URLSearchParams}}.
 
- <li><p>Let <var>sequences</var> be the result of splitting
- <var>input</var> on `<code>&</code>`.
+ <li><p>Let <var>sequences</var> be the result of splitting <var>input</var> on
+ `<code>&amp;</code>`.
  <!-- XXX define splitting? DOM does not do it -->
 
  <li><p>If the <i title>isindex flag</i> is set and the first byte sequence in
  <var>sequences</var> does not contain a `<code>=</code>`, prepend
  `<code>=</code>` to the first byte sequence in <var>sequences</var>.
 
- <li><p>Let <var>pairs</var> be an empty list of name-value pairs where both name
- and value hold a byte sequence.
+ <li><p>Let <var>tuples</var> be an empty list of name-value tuples where both name and value hold a
+ byte sequence.
 
  <li>
   <p>For each byte sequence <var>bytes</var> in <var>sequences</var>,
@@ -2225,8 +2222,8 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
    <var>value</var> with 0x20.
 
    <li>
-    <p>If <i title>use _charset_ flag</i> is set and <var>name</var> is
-    `<code>_charset_</code>`, run these substeps:
+    <p>If <i>use _charset_ flag</i> is set and <var>name</var> is `<code>_charset_</code>`, run
+    these substeps:
 
     <ol>
      <li><p>Let <var>result</var> be the result of
@@ -2234,26 +2231,25 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
      for <var>value</var>,
      <a lt="utf-8 decode without BOM">decoded</a>.
 
-     <li><p>If <var>result</var> is not failure, unset <i title>use _charset_ flag</i> and
-     set <var>encoding override</var> to <var>result</var>.
+     <li><p>If <var>result</var> is not failure, unset <i>use _charset_ flag</i> and set
+     <var>encoding override</var> to <var>result</var>.
     </ol>
 
-   <li><p>Add a pair consisting of <var>name</var> and
-   <var>value</var> to <var>pairs</var>.
+   <li><p>Add a tuple consisting of <var>name</var> and <var>value</var> to <var>tuples</var>.
   </ol>
 
- <li><p>Let <var>output</var> be an empty list of name-value pairs where both name
- and value hold a string.
+ <li><p>Let <var>output</var> be an empty list of name-value tuples where both name and value hold a
+ string.
 
- <li><p>For each name-value pair in <var>pairs</var>, append a name-value pair to
- <var>output</var> where the new name and value appended to <var>output</var>
- are the result of running <var>encoding override</var>'s
- <a>decoder</a> on the
- <a lt="percent decode">percent decoding</a> of the name and value from
- <var>pairs</var>, respectively.
+ <li><p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to
+ <var>output</var> where the new name and value appended to <var>output</var> are the result of
+ running <var>encoding override</var>'s <a>decoder</a> on the
+ <a lt="percent decode">percent decoding</a> of the name and value from <var>tuples</var>,
+ respectively.
 
  <li><p>Return <var>output</var>.
 </ol>
+
 
 <h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
@@ -2301,9 +2297,8 @@ takes a byte sequence <var>input</var> and then runs these steps:
 
 <p>The
 <dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
-takes a list of name-value pairs <var>pairs</var>, optionally with an
-<a>encoding</a>
-<var>encoding override</var>, and then runs these steps:
+takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an
+<a>encoding</a> <var>encoding override</var>, and then runs these steps:
 
 <ol>
  <li><p>If <var>encoding override</var> is not given, set it to
@@ -2312,26 +2307,42 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
  <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p>For each <var>pair</var> in <var>pairs</var>, run
-  these substeps:
+  <p>For each <var>tuple</var> in <var>tuples</var>, run these substeps:
 
   <ol>
    <li><p>Let <var>outputPair</var> be a new name-value pair.
 
-   <li><p>Set <var>outputPair</var>'s name and value, to the result of
-   <a lt="urlencoded byte serializer">serializing</a> the result of
-   <a lt=encode>encoding</a> <var>pair</var>'s name and value, respectively, using
-   <var>encoding override</var>.
+   <li><p>Set <var>outputPair</var>'s name to the result of
+   <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
+   <var>tuple</var>'s name, using <var>encoding override</var>.
 
-   <li><p>If <var>pair</var> is not the first pair in <var>pairs</var>, append
-   "<code>&</code>" to <var>output</var>.
+   <li><p>If <var>tuple</var> has a type, and <var>tuple</var>'s type is "<code>hidden</code>",
+   set <var>outputPair</var>'s value to <var>encoding override</var>'s <a>name</a>.
 
-   <li><p>Append <var>outputPair</var>'s name, followed by "<code>=</code>",
-   followed by <var>outputPair</var>'s value to <var>output</var>.
+   <li><p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>'s type is
+   "<code>file</code>", set <var>outputPair</var>'s value to <var>tuple</var>'s value's filename.
+
+   <li><p>Otherwise, set <var>outputPair</var>'s value to the result of
+   <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
+   <var>tuple</var>'s value, using <var>encoding override</var>.
+
+   <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>text</code>",
+   <var>outputPair</var>'s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
+   in <var>tuples</var>, append <var>outputPair</var>'s value to <var>output</var>.
+
+   <li><p>Otherwise, if <var>tuple</var> is not the first pair in <var>tuples</var>, append
+   "<code>&amp;</code>" to <var>output</var>.
+
+   <li><p>Otherwise, append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
+   <var>outputPair</var>'s value, to <var>output</var>.
   </ol>
 
  <li>Return <var>output</var>.
 </ol>
+
+<p class="note no-backref">The <cite>HTML standard</cite> invokes this algorithm with
+name-value-type tuples. [[HTML]]
+
 
 <h3 id=urlencoded-hooks>Hooks</h3>
 
@@ -2988,6 +2999,7 @@ urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: utf-8 decode without bom; url: utf-8-decode-without-bom
   text: utf-8 encode; url: utf-8-encode
   text: utf-8 decoder; url: utf-8-decoder
+  text: name
 urlPrefix: https://html.spec.whatwg.org/multipage/
   urlPrefix: browsers.html; type: dfn;
     text: origin
