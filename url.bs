@@ -1490,7 +1490,7 @@ optionally with an <a>encoding</a>
        string, return failure.
        <!-- Otherwise parsing URLs would not be idempotent:
 
-            http://@/example.org/ -> http:///example.org/ -> http://example.org/ -->
+            https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
 
        <li><p>Let <var>host</var> be the result of
        <a lt='host parser'>host parsing</a>
@@ -2153,27 +2153,26 @@ distinguish between the two. E.g., users are expected to make trust decisions ba
 
 
 
-<h2 id="application/x-www-form-urlencoded"><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code></h2>
+<h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
-<p>The <dfn id=application-x-www-form-urlencoded-0><code>application/x-www-form-urlencoded</code></dfn> format is a simple way to
-encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range.
+<p>The <dfn id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format is a
+simple way to encode name-value pairs in a byte sequence where all bytes are <a>ASCII bytes</a>.
 
 <p class="note no-backref">While this description makes
-<code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
-format is in widespread use due to its prevalence of HTML forms.
+<code>application/x-www-form-urlencoded</code> sound dated — and really, it is — the format is in
+widespread use due to the prevalence of HTML forms.
 [[!HTML]]
 
-<h3 id=urlencoded-parsing><code lt=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> parsing</h3>
+<h3 id=urlencoded-parsing><code>application/x-www-form-urlencoded</code> parsing</h3>
 
 <p class="note no-backref">The features provided by the
-<code lt=application-x-www-form-urlencoded-0><a lt='urlencoded parser'>application/x-www-form-urlencoded</a></code> parser</a>
-are mainly relevant for server-oriented implementations. A browser-based implementation
-only needs what the
-<code lt=application-x-www-form-urlencoded-0><a lt='urlencoded string parser'>application/x-www-form-urlencoded</a></code> string parser</a>
+<a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parser</a> are mainly
+relevant for server-oriented implementations. A browser-based implementation only needs what the
+<a lt="urlencoded string parser"><code>application/x-www-form-urlencoded</code> string parser</a>
 requires.
 
 <p>The
-<dfn id=concept-urlencoded-parser lt='urlencoded parser'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> parser</dfn>
+<dfn id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, optionally with an
 <a>encoding</a> <var>encoding override</var>,
 optionally with a <i title>use _charset_ flag</i>, and optionally with an
@@ -2256,10 +2255,10 @@ optionally with a <i title>use _charset_ flag</i>, and optionally with an
  <li><p>Return <var>output</var>.
 </ol>
 
-<h3 id=urlencoded-serializing><code lt=application-x-www-form-urlencoded-0>application/x-www-form-urlencoded</code> serializing</h3>
+<h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
-<dfn id=concept-urlencoded-byte-serializer lt='urlencoded byte serializer'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> byte serializer</dfn>
+<dfn id=concept-urlencoded-byte-serializer lt='urlencoded byte serializer'><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
 takes a byte sequence <var>input</var> and then runs these steps:
 
 <ol>
@@ -2301,7 +2300,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
      bytes greater than 0x7A -->
 
 <p>The
-<dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> serializer</dfn>
+<dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value pairs <var>pairs</var>, optionally with an
 <a>encoding</a>
 <var>encoding override</var>, and then runs these steps:
@@ -2337,7 +2336,7 @@ takes a list of name-value pairs <var>pairs</var>, optionally with an
 <h3 id=urlencoded-hooks>Hooks</h3>
 
 <p>The
-<dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code lt=application-x-www-form-urlencoded-0><a>application/x-www-form-urlencoded</a></code> string parser</dfn>
+<dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>,
 <a lt="utf-8 encode">utf-8 encodes</a> it, and then
 returns the result of
@@ -2978,6 +2977,7 @@ urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: concept-document; url: concept-document
   text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
+  text: ascii byte
   text: string
   text: concept-encoding-get; url: concept-encoding-get
   text: decoder

@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-08">8 February 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-09">9 February 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -60,10 +60,10 @@
       <li><a href="#url-rendering"><span class="secno">4.6</span> <span class="content">URL rendering</span></a>
      </ol>
     <li>
-     <a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0"><span>application/x-www-form-urlencoded</span></code></span></a>
+     <a href="#application/x-www-form-urlencoded"><span class="secno">5</span> <span class="content"><code>application/x-www-form-urlencoded</code></span></a>
      <ol class="toc">
-      <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span></a>
-      <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span></a>
+      <li><a href="#urlencoded-parsing"><span class="secno">5.1</span> <span class="content"><code>application/x-www-form-urlencoded</code> parsing</span></a>
+      <li><a href="#urlencoded-serializing"><span class="secno">5.2</span> <span class="content"><code>application/x-www-form-urlencoded</code> serializing</span></a>
       <li><a href="#urlencoded-hooks"><span class="secno">5.3</span> <span class="content">Hooks</span></a>
      </ol>
     <li>
@@ -1566,17 +1566,15 @@ the model. Users of bidirectional languages are thus cautioned that this is to b
 expected, particularly in plain text environments. </p>
    <p>Due to the confusion that can arise between a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and <a data-link-type="dfn" href="#concept-url-path">path</a> with bidirectional text, browsers are encouraged to only render a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> in places where it is important for users to
 distinguish between the two. E.g., users are expected to make trust decisions based on a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> rendered in the address bar. </p>
-   <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="application-x-www-form-urlencoded-0"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#application-x-www-form-urlencoded-0"></a></dfn> format is a simple way to
-encode name-value pairs in a byte sequence where all bytes are in the 0x00 to 0x7F range. </p>
-   <p class="note no-backref" role="note">While this description makes <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> sound dated — and really, it is — the
-format is in widespread use due to its prevalence of HTML forms. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
-   <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
-   <p class="note no-backref" role="note">The features provided by the <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-parser">application/x-www-form-urlencoded</a></code> parser
-are mainly relevant for server-oriented implementations. A browser-based implementation
-only needs what the <code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#concept-urlencoded-string-parser">application/x-www-form-urlencoded</a></code> string parser
-requires. </p>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
+   <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code>application/x-www-form-urlencoded</code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#concept-urlencoded"></a></dfn> format is a
+simple way to encode name-value pairs in a byte sequence where all bytes are <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>. </p>
+   <p class="note no-backref" role="note">While this description makes <code>application/x-www-form-urlencoded</code> sound dated — and really, it is — the format is in
+widespread use due to the prevalence of HTML forms. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+   <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code>application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
+   <p class="note no-backref" role="note">The features provided by the <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</a> are mainly
+relevant for server-oriented implementations. A browser-based implementation only needs what the <a data-link-type="dfn" href="#concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser</a> requires. </p>
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>,
 optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i title="">isindex flag</i>, and then runs these steps: </p>
    <ol>
     <li>
@@ -1630,8 +1628,8 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <h3 class="heading settled" data-level="5.2" id="urlencoded-serializing"><span class="secno">5.2. </span><span class="content"><code data-lt="application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded byte serializer" data-noexport="" id="concept-urlencoded-byte-serializer"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> byte serializer<a class="self-link" href="#concept-urlencoded-byte-serializer"></a></dfn> takes a byte sequence <var>input</var> and then runs these steps: </p>
+   <h3 class="heading settled" data-level="5.2" id="urlencoded-serializing"><span class="secno">5.2. </span><span class="content"><code>application/x-www-form-urlencoded</code> serializing</span><a class="self-link" href="#urlencoded-serializing"></a></h3>
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded byte serializer" data-noexport="" id="concept-urlencoded-byte-serializer"><code>application/x-www-form-urlencoded</code> byte serializer<a class="self-link" href="#concept-urlencoded-byte-serializer"></a></dfn> takes a byte sequence <var>input</var> and then runs these steps: </p>
    <ol>
     <li>
      <p>Let <var>output</var> be the empty string. </p>
@@ -1657,7 +1655,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value pairs <var>pairs</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value pairs <var>pairs</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <ol>
     <li>
      <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. </p>
@@ -1681,7 +1679,7 @@ optionally with a <i title="">use _charset_ flag</i>, and optionally with an <i 
     <li>Return <var>output</var>. 
    </ol>
    <h3 class="heading settled" data-level="5.3" id="urlencoded-hooks"><span class="secno">5.3. </span><span class="content">Hooks</span><a class="self-link" href="#urlencoded-hooks"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code data-lt="application-x-www-form-urlencoded-0"><a data-link-type="dfn" href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a></code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn> takes a string <var>input</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encodes</a> it, and then
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn> takes a string <var>input</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encodes</a> it, and then
 returns the result of <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parsing</a> it. </p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-url">url<a class="self-link" href="#dom-url-url-url-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-base">base<a class="self-link" href="#dom-url-url-url-base-base"></a></dfn>),
@@ -2100,7 +2098,7 @@ neighboring rights to this work. </p>
    <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §4.1</span>
    <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §4.1</span>
    <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §6.4</span>
-   <li><a href="#application-x-www-form-urlencoded-0">application/x-www-form-urlencoded</a><span>, in §5</span>
+   <li><a href="#concept-urlencoded">application/x-www-form-urlencoded</a><span>, in §5</span>
    <li><a href="#ascii-alpha">ASCII alpha</a><span>, in §1</span>
    <li><a href="#ascii-alphanumeric">ASCII alphanumeric</a><span>, in §1</span>
    <li><a href="#ascii-digits">ASCII digits</a><span>, in §1</span>
