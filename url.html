@@ -886,7 +886,9 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <li>
      <p>If <var>base</var> is not given, set it to null. </p>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+     <p>Let <var>encoding</var> be <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+    <li>
+     <p>If <var>encoding override</var> is given, set <var>encoding</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#get-an-output-encoding">getting an output encoding</a> from <var>encoding override</var>. </p>
     <li>
      <p>Let <var>buffer</var> be the empty string. </p>
     <li>
@@ -1363,10 +1365,9 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <p>If <a data-link-type="dfn" href="#c">c</a> is the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, or <var>state override</var> is not given and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", run these substeps: </p>
          <ol>
           <li>
-           <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is <em>not</em> special</a> or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is either "<code>ws</code>" or
-       "<code>wss</code>", set <var>encoding override</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+           <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is <em>not</em> special</a> or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is either "<code>ws</code>" or "<code>wss</code>", set <var>encoding</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
           <li>
-           <p>Set <var>buffer</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>buffer</var> using <var>encoding override</var>. </p>
+           <p>Set <var>buffer</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>buffer</var> using <var>encoding</var>. </p>
           <li>
            <p>For each <var>byte</var> in <var>buffer</var> run
         these subsubsteps: </p>
@@ -1580,10 +1581,11 @@ relevant for server-oriented implementations. A browser-based implementation onl
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <i>use _charset_ flag</i>, and optionally with an <i>isindex flag</i>, and then runs these steps: </p>
    <ol>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+     <p>Let <var>encoding</var> be <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
     <li>
-     <p>If <var>encoding override</var> is not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a> and <var>input</var> contains bytes that
-  are not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>, return failure. </p>
+     <p>If <var>encoding override</var> is given, set <var>encoding</var> to <var>encoding override</var>. </p>
+    <li>
+     <p>If <var>encoding</var> is not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a> and <var>input</var> contains bytes that are not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>, return failure. </p>
      <p class="note no-backref" role="note">This can only happen if <var>input</var> was not generated through the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serializer</a> or <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code>. </p>
     <li>
      <p>Let <var>sequences</var> be the result of splitting <var>input</var> on
@@ -1616,7 +1618,7 @@ relevant for server-oriented implementations. A browser-based implementation onl
         <li>
          <p>Let <var>result</var> be the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#concept-encoding-get">getting an encoding</a> for <var>value</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">decoded</a>. </p>
         <li>
-         <p>If <var>result</var> is not failure, unset <i>use _charset_ flag</i> and set <var>encoding override</var> to <var>result</var>. </p>
+         <p>If <var>result</var> is not failure, unset <i>use _charset_ flag</i> and set <var>encoding</var> to <var>result</var>. </p>
        </ol>
       <li>
        <p>Add a tuple consisting of <var>name</var> and <var>value</var> to <var>tuples</var>. </p>
@@ -1626,7 +1628,7 @@ relevant for server-oriented implementations. A browser-based implementation onl
  string. </p>
     <li>
      <p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to <var>output</var> where the new name and value appended to <var>output</var> are the result of
- running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#decode">decode</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of the name and value from <var>tuples</var>, respectively, using <var>encoding override</var>. </p>
+ running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#decode">decode</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of the name and value from <var>tuples</var>, respectively, using <var>encoding</var>. </p>
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
@@ -1660,7 +1662,9 @@ relevant for server-oriented implementations. A browser-based implementation onl
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <ol>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+     <p>Let <var>encoding</var> be <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
+    <li>
+     <p>If <var>encoding override</var> is given, set <var>encoding</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#get-an-output-encoding">getting an output encoding</a> from <var>encoding override</var>. </p>
     <li>
      <p>Let <var>output</var> be the empty string. </p>
     <li>
@@ -1669,15 +1673,15 @@ relevant for server-oriented implementations. A browser-based implementation onl
       <li>
        <p>Let <var>outputPair</var> be a new name-value pair. </p>
       <li>
-       <p>Set <var>outputPair</var>’s name to the result of <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>tuple</var>’s name, using <var>encoding override</var>. </p>
+       <p>Set <var>outputPair</var>’s name to the result of <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>tuple</var>’s name, using <var>encoding</var>. </p>
       <li>
        <p>If <var>tuple</var> has a type, and <var>tuple</var>’s type is "<code>hidden</code>",
-   set <var>outputPair</var>’s value to <var>encoding override</var>’s <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#name">name</a>. </p>
+   set <var>outputPair</var>’s value to <var>encoding</var>’s <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#name">name</a>. </p>
       <li>
        <p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>’s type is
    "<code>file</code>", set <var>outputPair</var>’s value to <var>tuple</var>’s value’s filename. </p>
       <li>
-       <p>Otherwise, set <var>outputPair</var>’s value to the result of <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>tuple</var>’s value, using <var>encoding override</var>. </p>
+       <p>Otherwise, set <var>outputPair</var>’s value to the result of <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>tuple</var>’s value, using <var>encoding</var>. </p>
       <li>
        <p>If <var>tuple</var> has a type, <var>tuple</var>’s type is "<code>text</code>", <var>outputPair</var>’s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
    in <var>tuples</var>, append <var>outputPair</var>’s value to <var>output</var>. </p>

@@ -1164,8 +1164,10 @@ optionally with an <a>encoding</a>
 
  <li><p>If <var>base</var> is not given, set it to null.
 
- <li><p>If <var>encoding override</var> is not given, set it to
- <a>UTF-8</a>.
+ <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
+
+ <li><p>If <var>encoding override</var> is given, set <var>encoding</var> to the result of
+ <a lt="get an output encoding">getting an output encoding</a> from <var>encoding override</var>.
 
  <li><p>Let <var>buffer</var> be the empty string.
 
@@ -1864,14 +1866,13 @@ optionally with an <a>encoding</a>
       is "<code>#</code>", run these substeps:
 
       <ol>
-       <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or
-       <var>url</var>'s <a for=url>scheme</a> is either "<code>ws</code>" or
-       "<code>wss</code>", set <var>encoding override</var> to <a>UTF-8</a>.
+       <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or <var>url</var>'s
+       <a for=url>scheme</a> is either "<code>ws</code>" or "<code>wss</code>", set
+       <var>encoding</var> to <a>UTF-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
-       <li><p>Set <var>buffer</var> to the result of
-       <a lt=encode>encoding</a>
-       <var>buffer</var> using <var>encoding override</var>.
+       <li><p>Set <var>buffer</var> to the result of <a lt=encode>encoding</a> <var>buffer</var>
+       using <var>encoding</var>.
 
        <li>
         <p>For each <var>byte</var> in <var>buffer</var> run
@@ -2177,11 +2178,14 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
 <i>isindex flag</i>, and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding override</var> is not given, set it to <a>UTF-8</a>.
+ <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
+
+ <li><p>If <var>encoding override</var> is given, set <var>encoding</var> to
+ <var>encoding override</var>.
 
  <li>
-  <p>If <var>encoding override</var> is not <a>UTF-8</a> and <var>input</var> contains bytes that
-  are not <a>ASCII bytes</a>, return failure.
+  <p>If <var>encoding</var> is not <a>UTF-8</a> and <var>input</var> contains bytes that are not
+  <a>ASCII bytes</a>, return failure.
 
   <p class="note no-backref">This can only happen if <var>input</var> was not generated through the
   <a lt='urlencoded serializer'>serializer</a> or {{URLSearchParams}}.
@@ -2225,12 +2229,11 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
 
     <ol>
      <li><p>Let <var>result</var> be the result of
-     <a lt=concept-encoding-get>getting an encoding</a>
-     for <var>value</var>,
+     <a lt=concept-encoding-get>getting an encoding</a> for <var>value</var>,
      <a lt="utf-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i>use _charset_ flag</i> and set
-     <var>encoding override</var> to <var>result</var>.
+     <var>encoding</var> to <var>result</var>.
     </ol>
 
    <li><p>Add a tuple consisting of <var>name</var> and <var>value</var> to <var>tuples</var>.
@@ -2242,7 +2245,7 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
  <li><p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to
  <var>output</var> where the new name and value appended to <var>output</var> are the result of
  running <a>decode</a> on the <a lt="percent decode">percent decoding</a> of the name and value from
- <var>tuples</var>, respectively, using <var>encoding override</var>.
+ <var>tuples</var>, respectively, using <var>encoding</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -2298,7 +2301,10 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
 <a>encoding</a> <var>encoding override</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding override</var> is not given, set it to <a>UTF-8</a>.
+ <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
+
+ <li><p>If <var>encoding override</var> is given, set <var>encoding</var> to the result of
+ <a lt="get an output encoding">getting an output encoding</a> from <var>encoding override</var>.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -2310,17 +2316,17 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
 
    <li><p>Set <var>outputPair</var>'s name to the result of
    <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
-   <var>tuple</var>'s name, using <var>encoding override</var>.
+   <var>tuple</var>'s name, using <var>encoding</var>.
 
    <li><p>If <var>tuple</var> has a type, and <var>tuple</var>'s type is "<code>hidden</code>",
-   set <var>outputPair</var>'s value to <var>encoding override</var>'s <a>name</a>.
+   set <var>outputPair</var>'s value to <var>encoding</var>'s <a>name</a>.
 
    <li><p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>'s type is
    "<code>file</code>", set <var>outputPair</var>'s value to <var>tuple</var>'s value's filename.
 
    <li><p>Otherwise, set <var>outputPair</var>'s value to the result of
    <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
-   <var>tuple</var>'s value, using <var>encoding override</var>.
+   <var>tuple</var>'s value, using <var>encoding</var>.
 
    <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>text</code>",
    <var>outputPair</var>'s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
@@ -2986,6 +2992,7 @@ urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: decode
   text: encode
   text: encoding
+  text: get an output encoding
   text: name
   text: string
   text: utf-8; url: utf-8
