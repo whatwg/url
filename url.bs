@@ -2318,8 +2318,9 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
    <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
    <var>tuple</var>'s name, using <var>encoding</var>.
 
-   <li><p>If <var>tuple</var> has a type, and <var>tuple</var>'s type is "<code>hidden</code>",
-   set <var>outputPair</var>'s value to <var>encoding</var>'s <a>name</a>.
+   <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>hidden</code>", and
+   <var>outputPair</var>'s name is "<code>_charset_</code>", set <var>outputPair</var>'s value to
+   <var>encoding</var>'s <a>name</a>.
 
    <li><p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>'s type is
    "<code>file</code>", set <var>outputPair</var>'s value to <var>tuple</var>'s value's filename.
@@ -2332,11 +2333,16 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
    <var>outputPair</var>'s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
    in <var>tuples</var>, append <var>outputPair</var>'s value to <var>output</var>.
 
-   <li><p>Otherwise, if <var>tuple</var> is not the first pair in <var>tuples</var>, append
-   "<code>&amp;</code>" to <var>output</var>.
+   <li>
+    <p>Otherwise, run these substeps:
 
-   <li><p>Otherwise, append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
-   <var>outputPair</var>'s value, to <var>output</var>.
+    <ol>
+     <li><p>If <var>tuple</var> is not the first pair in <var>tuples</var>, append
+     "<code>&amp;</code>" to <var>output</var>.
+
+     <li>Append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
+     <var>outputPair</var>'s value, to <var>output</var>.
+    </ol>
   </ol>
 
  <li>Return <var>output</var>.
