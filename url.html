@@ -155,15 +155,14 @@ somewhere. </p>
 terminates. Termination of a parser is always stated explicitly. E.g., through a return
 statement. </p>
    <h3 class="heading settled" data-level="1.2" id="percent-encoded-bytes"><span class="secno">1.2. </span><span class="content">Percent-encoded bytes</span><a class="self-link" href="#percent-encoded-bytes"></a></h3>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="percent-encoded-byte">percent-encoded byte<a class="self-link" href="#percent-encoded-byte"></a></dfn> is "<code>%</code>", followed by
-two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>. Sequences of <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a>, after
-conversion to bytes, should not cause a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> to run into any <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#error">errors</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="percent-encoded-byte">percent-encoded byte<a class="self-link" href="#percent-encoded-byte"></a></dfn> is "<code>%</code>", followed by two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>.
+Sequences of <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a>, after conversion to bytes,
+should not cause <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom-or-fail">UTF-8 decode without BOM or fail</a> to return failure. </p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="percent-encode">percent encode<a class="self-link" href="#percent-encode"></a></dfn> a <var>byte</var> into a <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded byte</a>, return a string consisting of
 "<code>%</code>", followed by a double-digit, uppercase, hexadecimal
 representation of <var>byte</var>. </p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="percent-decode">percent decode<a class="self-link" href="#percent-decode"></a></dfn> a byte sequence <var>input</var>, run these steps: </p>
-   <p class="warning">Using anything but a <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decoder">utf-8 decoder</a> when the <var>input</var> contains bytes outside the range 0x00 to 0x7F might be
-insecure and is not recommended. </p>
+   <p class="warning">Using anything but <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">UTF-8 decode without BOM</a> when the <var>input</var> contains bytes that are not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a> might be insecure and is not recommended. </p>
    <ol>
     <li>
      <p>Let <var>output</var> be an empty byte sequence. </p>
@@ -216,13 +215,13 @@ and
 "<code>^</code>", 
 and
 "<code>|</code>". </p>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="utf-8-percent-encode">utf-8 percent encode<a class="self-link" href="#utf-8-percent-encode"></a></dfn> a <var>codePoint</var>, using
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="utf-8-percent-encode">UTF-8 percent encode<a class="self-link" href="#utf-8-percent-encode"></a></dfn> a <var>codePoint</var>, using
 an <var>encode set</var>, run these steps: </p>
    <ol>
     <li>
      <p>If <var>codePoint</var> is not in <var>encode set</var>, return <var>codePoint</var>. </p>
     <li>
-     <p>Let <var>bytes</var> be the result of running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var>codePoint</var>. </p>
+     <p>Let <var>bytes</var> be the result of running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">UTF-8 encode</a> on <var>codePoint</var>. </p>
     <li>
      <p><a data-link-type="dfn" href="#percent-encode">Percent encode</a> each byte in <var>bytes</var>, and then return the results
  concatenated, in the same order. </p>
@@ -306,7 +305,7 @@ steps: </p>
    "<code>]</code>" removed. </p>
      </ol>
     <li>
-     <p>Let <var>domain</var> be the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">utf-8 decode without BOM</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a> on <var>input</var>. </p>
+     <p>Let <var>domain</var> be the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">UTF-8 decode without BOM</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">UTF-8 encode</a> on <var>input</var>. </p>
     <li>
      <p>Let <var>asciiDomain</var> be the result of running <a data-link-type="dfn" href="#concept-domain-to-ascii">domain to ASCII</a> on <var>domain</var>. </p>
     <li>
@@ -887,7 +886,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <li>
      <p>If <var>base</var> is not given, set it to null. </p>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. </p>
+     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
     <li>
      <p>Let <var>buffer</var> be the empty string. </p>
     <li>
@@ -1060,7 +1059,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
             <li>
              <p>If <var>codePoint</var> is "<code>:</code>" and <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> is null, set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to the empty string and run these substeps for the next code point. </p>
             <li>
-             <p>Let <var>encodedCodePoints</var> be the result of running <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> <var>codePoint</var> using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>. </p>
+             <p>Let <var>encodedCodePoints</var> be the result of running <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> <var>codePoint</var> using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>. </p>
             <li>
              <p>If <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> is non-null, append <var>encodedCodePoints</var> to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>. </p>
             <li>
@@ -1333,7 +1332,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a>, <a data-link-type="dfn" href="#ascii-lowercase">ASCII lowercased</a> starts
        with "<code>2e</code>", append "<code>.</code>" to <var>buffer</var> and increase <var>pointer</var> by two. </p>
           <li>
-           <p>Otherwise, <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#default-encode-set">default encode set</a>,
+           <p>Otherwise, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#default-encode-set">default encode set</a>,
        and append the result to <var>buffer</var>. </p>
          </ol>
        </ol>
@@ -1354,7 +1353,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
        not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is none of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D, <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is none of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, U+0009, U+000A, and U+000D, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
          </ol>
        </ol>
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="query-state">query state<a class="self-link" href="#query-state"></a></dfn> 
@@ -1365,7 +1364,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <ol>
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is <em>not</em> special</a> or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is either "<code>ws</code>" or
-       "<code>wss</code>", set <var>encoding override</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. </p>
+       "<code>wss</code>", set <var>encoding override</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
           <li>
            <p>Set <var>buffer</var> to the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>buffer</var> using <var>encoding override</var>. </p>
           <li>
@@ -1437,7 +1436,7 @@ these steps: </p>
     <li>
      <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to the empty string. </p>
     <li>
-     <p>For each code point in <var>username</var>, <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and append the
+     <p>For each code point in <var>username</var>, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and append the
  result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>. </p>
    </ol>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-password">set the password<a class="self-link" href="#set-the-password"></a></dfn> given a <var>url</var> and <var>password</var>, run
@@ -1451,7 +1450,7 @@ these steps: </p>
       <li>
        <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to the empty string. </p>
       <li>
-       <p>For each code point in <var>password</var>, <a data-link-type="dfn" href="#utf-8-percent-encode">utf-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and
+       <p>For each code point in <var>password</var>, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and
    append the result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a>. </p>
      </ol>
    </ol>
@@ -1581,9 +1580,9 @@ relevant for server-oriented implementations. A browser-based implementation onl
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <i>use _charset_ flag</i>, and optionally with an <i>isindex flag</i>, and then runs these steps: </p>
    <ol>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. </p>
+     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
     <li>
-     <p>If <var>encoding override</var> is not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a> and <var>input</var> contains bytes that
+     <p>If <var>encoding override</var> is not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a> and <var>input</var> contains bytes that
   are not <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>, return failure. </p>
      <p class="note no-backref" role="note">This can only happen if <var>input</var> was not generated through the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serializer</a> or <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code>. </p>
     <li>
@@ -1627,8 +1626,7 @@ relevant for server-oriented implementations. A browser-based implementation onl
  string. </p>
     <li>
      <p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to <var>output</var> where the new name and value appended to <var>output</var> are the result of
- running <var>encoding override</var>’s <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#decoder">decoder</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of the name and value from <var>tuples</var>,
- respectively. </p>
+ running <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#decode">decode</a> on the <a data-link-type="dfn" href="#percent-decode">percent decoding</a> of the name and value from <var>tuples</var>, respectively, using <var>encoding override</var>. </p>
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
@@ -1662,7 +1660,7 @@ relevant for server-oriented implementations. A browser-based implementation onl
    <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <ol>
     <li>
-     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>. </p>
+     <p>If <var>encoding override</var> is not given, set it to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
     <li>
      <p>Let <var>output</var> be the empty string. </p>
     <li>
@@ -1694,8 +1692,8 @@ relevant for server-oriented implementations. A browser-based implementation onl
    <p class="note no-backref" role="note">The <cite>HTML standard</cite> invokes this algorithm with
 name-value-type tuples. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <h3 class="heading settled" data-level="5.3" id="urlencoded-hooks"><span class="secno">5.3. </span><span class="content">Hooks</span><a class="self-link" href="#urlencoded-hooks"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn> takes a string <var>input</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encodes</a> it, and then
-returns the result of <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parsing</a> it. </p>
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded string parser" data-noexport="" id="concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser<a class="self-link" href="#concept-urlencoded-string-parser"></a></dfn> takes a string <var>input</var>, <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-encode">UTF-8 encodes</a> it, and then returns the
+result of <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parsing</a> it. </p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
 <pre class="idl">[<a class="idl-code" data-link-type="constructor" href="#dom-url-url">Constructor</a>(USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-url">url<a class="self-link" href="#dom-url-url-url-base-url"></a></dfn>, optional USVString <dfn class="idl-code" data-dfn-for="URL/URL(url, base)" data-dfn-type="argument" data-export="" id="dom-url-url-url-base-base">base<a class="self-link" href="#dom-url-url-url-base-base"></a></dfn>),
  Exposed=(Window,Worker)]
@@ -2315,7 +2313,7 @@ neighboring rights to this work. </p>
      <li><a href="#concept-url-username">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-url-username">attribute for URL</a><span>, in §6.3</span>
     </ul>
-   <li><a href="#utf-8-percent-encode">utf-8 percent encode</a><span>, in §1.2</span>
+   <li><a href="#utf-8-percent-encode">UTF-8 percent encode</a><span>, in §1.2</span>
    <li><a href="#valid-domain">valid domain</a><span>, in §3.2</span>
    <li><a href="#windows-drive-letter">Windows drive letter</a><span>, in §1</span>
   </ul>

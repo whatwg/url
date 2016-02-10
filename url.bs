@@ -121,12 +121,9 @@ statement.
 
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
-<p>A <dfn>percent-encoded byte</dfn> is "<code>%</code>", followed by
-two <a>ASCII hex digits</a>. Sequences of
-<a lt="percent-encoded byte">percent-encoded bytes</a>, after
-conversion to bytes, should not cause a
-<a>utf-8 decoder</a> to run into any
-<a lt=error>errors</a>.
+<p>A <dfn>percent-encoded byte</dfn> is "<code>%</code>", followed by two <a>ASCII hex digits</a>.
+Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, after conversion to bytes,
+should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
 
 <p>To <dfn>percent encode</dfn> a <var>byte</var> into a
 <a>percent-encoded byte</a>, return a string consisting of
@@ -135,9 +132,8 @@ representation of <var>byte</var>.
 
 <p>To <dfn>percent decode</dfn> a byte sequence <var>input</var>, run these steps:
 
-<p class=warning>Using anything but a <a>utf-8 decoder</a>
-when the <var>input</var> contains bytes outside the range 0x00 to 0x7F might be
-insecure and is not recommended.
+<p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when the <var>input</var>
+contains bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
 <ol>
  <li><p>Let <var>output</var> be an empty byte sequence.
@@ -209,14 +205,14 @@ and
 and
 "<code>|</code>". <!-- 0x7C -->
 
-<p>To <dfn>utf-8 percent encode</dfn> a <var>codePoint</var>, using
+<p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using
 an <var>encode set</var>, run these steps:
 
 <ol>
  <li><p>If <var>codePoint</var> is not in <var>encode set</var>, return
  <var>codePoint</var>.
 
- <li><p>Let <var>bytes</var> be the result of running <a>utf-8 encode</a> on
+ <li><p>Let <var>bytes</var> be the result of running <a>UTF-8 encode</a> on
  <var>codePoint</var>.
 
  <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and then return the results
@@ -371,9 +367,9 @@ steps:
   </ol>
 
  <li><p>Let <var>domain</var> be the result of
- <a>utf-8 decode without BOM</a> on the
+ <a>UTF-8 decode without BOM</a> on the
  <a lt="percent decode">percent decoding</a> of
- <a>utf-8 encode</a> on <var>input</var>.
+ <a>UTF-8 encode</a> on <var>input</var>.
  <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
 
  <li><p>Let <var>asciiDomain</var> be the result of running
@@ -1169,7 +1165,7 @@ optionally with an <a>encoding</a>
  <li><p>If <var>base</var> is not given, set it to null.
 
  <li><p>If <var>encoding override</var> is not given, set it to
- <a>utf-8</a>.
+ <a>UTF-8</a>.
 
  <li><p>Let <var>buffer</var> be the empty string.
 
@@ -1456,7 +1452,7 @@ optionally with an <a>encoding</a>
          to the empty string and run these substeps for the next code point.
 
          <li><p>Let <var>encodedCodePoints</var> be the result of running
-         <a>utf-8 percent encode</a> <var>codePoint</var> using the
+         <a>UTF-8 percent encode</a> <var>codePoint</var> using the
          <a>userinfo encode set</a>.
 
          <li><p>If <var>url</var>'s <a for=url>password</a> is non-null, append
@@ -1824,7 +1820,7 @@ optionally with an <a>encoding</a>
        with "<code>2e</code>", append "<code>.</code>" to <var>buffer</var> and increase
        <var>pointer</var> by two.
 
-       <li><p>Otherwise, <a>utf-8 percent encode</a> <a>c</a> using the <a>default encode set</a>,
+       <li><p>Otherwise, <a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>,
        and append the result to <var>buffer</var>.
       </ol>
     </ol>
@@ -1853,7 +1849,7 @@ optionally with an <a>encoding</a>
 
        <li><p>If <a>c</a> is none of
        <a>EOF code point</a>, U+0009, U+000A, and U+000D,
-       <a>utf-8 percent encode</a> <a>c</a> using the
+       <a>UTF-8 percent encode</a> <a>c</a> using the
        <a>simple encode set</a>, and append the result to the first string in
        <var>url</var>'s <a for=url>path</a>.
       </ol>
@@ -1870,7 +1866,7 @@ optionally with an <a>encoding</a>
       <ol>
        <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or
        <var>url</var>'s <a for=url>scheme</a> is either "<code>ws</code>" or
-       "<code>wss</code>", set <var>encoding override</var> to <a>utf-8</a>.
+       "<code>wss</code>", set <var>encoding override</var> to <a>UTF-8</a>.
        <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
        <li><p>Set <var>buffer</var> to the result of
@@ -1962,7 +1958,7 @@ these steps:
  <li><p>Set <var>url</var>'s <a for=url>username</a> to the empty string.
 
  <li><p>For each code point in <var>username</var>,
- <a>utf-8 percent encode</a> it using the <a>userinfo encode set</a>, and append the
+ <a>UTF-8 percent encode</a> it using the <a>userinfo encode set</a>, and append the
  result to <var>url</var>'s <a for=url>username</a>.
 </ol>
 
@@ -1980,7 +1976,7 @@ these steps:
    <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
 
    <li><p>For each code point in <var>password</var>,
-   <a>utf-8 percent encode</a> it using the <a>userinfo encode set</a>, and
+   <a>UTF-8 percent encode</a> it using the <a>userinfo encode set</a>, and
    append the result to <var>url</var>'s <a for=url>password</a>.
   </ol>
 </ol>
@@ -2181,10 +2177,10 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
 <i>isindex flag</i>, and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding override</var> is not given, set it to <a>utf-8</a>.
+ <li><p>If <var>encoding override</var> is not given, set it to <a>UTF-8</a>.
 
  <li>
-  <p>If <var>encoding override</var> is not <a>utf-8</a> and <var>input</var> contains bytes that
+  <p>If <var>encoding override</var> is not <a>UTF-8</a> and <var>input</var> contains bytes that
   are not <a>ASCII bytes</a>, return failure.
 
   <p class="note no-backref">This can only happen if <var>input</var> was not generated through the
@@ -2245,9 +2241,8 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
 
  <li><p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to
  <var>output</var> where the new name and value appended to <var>output</var> are the result of
- running <var>encoding override</var>'s <a>decoder</a> on the
- <a lt="percent decode">percent decoding</a> of the name and value from <var>tuples</var>,
- respectively.
+ running <a>decode</a> on the <a lt="percent decode">percent decoding</a> of the name and value from
+ <var>tuples</var>, respectively, using <var>encoding override</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -2303,8 +2298,7 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
 <a>encoding</a> <var>encoding override</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding override</var> is not given, set it to
- <a>utf-8</a>.
+ <li><p>If <var>encoding override</var> is not given, set it to <a>UTF-8</a>.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -2350,11 +2344,8 @@ name-value-type tuples. [[HTML]]
 
 <p>The
 <dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
-takes a string <var>input</var>,
-<a lt="utf-8 encode">utf-8 encodes</a> it, and then
-returns the result of
-<a lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parsing</a>
-it.
+takes a string <var>input</var>, <a lt="utf-8 encode">UTF-8 encodes</a> it, and then returns the
+result of <a lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
@@ -2991,17 +2982,16 @@ urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: ascii byte
-  text: string
   text: concept-encoding-get; url: concept-encoding-get
-  text: decoder
+  text: decode
   text: encode
   text: encoding
-  text: error
+  text: name
+  text: string
   text: utf-8; url: utf-8
   text: utf-8 decode without bom; url: utf-8-decode-without-bom
+  text: utf-8 decode without bom or fail; url: utf-8-decode-without-bom-or-fail
   text: utf-8 encode; url: utf-8-encode
-  text: utf-8 decoder; url: utf-8-decoder
-  text: name
 urlPrefix: https://html.spec.whatwg.org/multipage/
   urlPrefix: browsers.html; type: dfn;
     text: origin
