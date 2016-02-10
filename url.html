@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-09">9 February 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-10">10 February 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -1569,8 +1569,12 @@ distinguish between the two. E.g., users are expected to make trust decisions ba
    <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code>application/x-www-form-urlencoded</code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#concept-urlencoded"></a></dfn> format is a
 simple way to encode name-value pairs in a byte sequence where all bytes are <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>. </p>
-   <p class="note no-backref" role="note">While this description makes <code>application/x-www-form-urlencoded</code> sound dated — and really, it is — the format is in
-widespread use due to the prevalence of HTML forms. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+   <p class="note no-backref" role="note">The <code>application/x-www-form-urlencoded</code> format is in many ways
+an aberrant monstrosity, the result of many years of implementation accidents and compromises
+leading to a set of requirements necessary for interoperability, but in no way representing good
+design practices. In particular, readers are cautioned to pay close attention to the twisted details
+involving repeated (and in some cases nested) conversions between character encodings and byte
+sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms.<a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code>application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
    <p class="note no-backref" role="note">The features provided by the <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</a> are mainly
 relevant for server-oriented implementations. A browser-based implementation only needs what the <a data-link-type="dfn" href="#concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser</a> requires. </p>
