@@ -919,7 +919,7 @@ last string, if any.
 a <a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>. To
 disambiguate from a <a>URL record</a> it can also be referred to as a <a>URL string</a>.
 
-<p>A
+<p>An
 <dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
 must be an <a>absolute URL</a>, followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
@@ -2907,6 +2907,7 @@ Michael™ Smith,
 Michel Suignard,
 Peter Occil,
 Philip Jägenstedt,
+Prayag Verma,
 Rodney Rehm,
 Roy Fielding,
 Ryan Sleevi,
