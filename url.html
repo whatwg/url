@@ -1,17 +1,17 @@
 <!doctype html><html lang="en">
  <head>
   <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>URL Standard</title>
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-url.svg" rel="icon">
   <meta content="Bikeshed 1.0.0" name="generator">
- </head>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-10">10 February 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-02-15">15 February 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -1513,9 +1513,9 @@ then runs these steps: </p>
  otherwise. </p>
    </ol>
    <h3 class="heading settled" data-level="4.5" id="origin"><span class="secno">4.5. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
-   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>’s definition in HTML for the necessary
+   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a>’s definition in HTML for the necessary
 background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
    <dl class="switch">
     <dt>"<code>blob</code>" 
     <dd>
@@ -1985,8 +1985,15 @@ initially null. </p>
      <p>Return <var>query</var>. </p>
    </ol>
    <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-update">update steps<a class="self-link" href="#concept-urlsearchparams-update"></a></dfn> are to set <a data-link-type="dfn" href="#concept-urlsearchparams-url-object">url object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to the <a data-link-type="dfn" href="#concept-urlencoded-serializer">serialization</a> of <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>. </p>
-   <p>The <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" id="dom-urlsearchparams-urlsearchparams"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn> constructor, when invoked, must return a <a data-link-type="dfn" href="#concept-urlsearchparams-new">new</a> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object,
-using <var>init</var> if given. </p>
+   <p>The <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="constructor" data-export="" id="dom-urlsearchparams-urlsearchparams"><code>URLSearchParams(<var>init</var>)</code><a class="self-link" href="#dom-urlsearchparams-urlsearchparams"></a></dfn> constructor, when invoked, must run these steps:</p>
+   <ol>
+    <li>
+     <p>If <var>init</var> is given, is a string, and starts with "<code>?</code>", remove the first
+ code point from <var>init</var>. </p>
+    <li>
+     <p>Return a <a data-link-type="dfn" href="#concept-urlsearchparams-new">new</a> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object, using <var>init</var> if
+ given. </p>
+   </ol>
    <p>The <dfn class="idl-code" data-dfn-for="URLSearchParams" data-dfn-type="method" data-export="" id="dom-urlsearchparams-append"><code>append(<var>name</var>, <var>value</var>)</code><a class="self-link" href="#dom-urlsearchparams-append"></a></dfn> method, when invoked, must run these steps: </p>
    <ol>
     <li>
@@ -2062,6 +2069,7 @@ Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,
+Jakub Gieryluk,
 James Graham,
 James Manger,
 James Ross,
@@ -2336,8 +2344,10 @@ neighboring rights to this work. </p>
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structured clone</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin">unicode serialisation of an origin</a>
     </ul>
   </ul>
   <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2424,5 +2434,3 @@ interface <a href="#urlsearchparams">URLSearchParams</a> {
 };
 
 </pre>
- </body>
-</html>
