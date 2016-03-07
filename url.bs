@@ -380,7 +380,7 @@ steps:
  <li><p>If <var>asciiDomain</var> is failure, return failure.
 
  <li>
-  <p>If <var>asciiDomain</var> contains one of
+  <p>If <var>asciiDomain</var> contains
   U+0000,
   U+0009,
   U+000A,
@@ -394,7 +394,7 @@ steps:
   "<code>@</code>",<!-- 40 -->
   "<code>[</code>",<!-- 5B -->
   "<code>\</code>",<!-- 5C -->
-  and
+  or
   "<code>]</code>",<!-- 5D -->
   <a>syntax violation</a>, return failure.
 
@@ -883,9 +883,8 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
 <p>A <a for=url>URL</a> <dfn>is special</dfn> if its <a for=url>scheme</a> is a
 <a>special scheme</a>.
 
-<p>A <dfn>local scheme</dfn> is a <a for=url>scheme</a> that is one of
-"<code>about</code>", "<code>blob</code>", "<code>data</code>", and
-"<code>filesystem</code>".
+<p>A <dfn>local scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
+"<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>".
 
 <p>A <a for=url>URL</a> <dfn>is local</dfn> if its <a for=url>scheme</a> is a
 <a>local scheme</a>.
@@ -1029,8 +1028,8 @@ must be "<code>.</code>" or an <a spec=dom>ASCII case-insensitive</a> match for
 
 <p>A
 <dfn export for=urlsyntax id=syntax-url-path-segment-dotdot>double-dot path segment</dfn>
-must be "<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for one of
-"<code>.%2e</code>", "<code>%2e.</code>", and "<code>%2e%2e</code>".
+must be "<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for
+"<code>.%2e</code>", "<code>%2e.</code>", or "<code>%2e%2e</code>".
 
 <p>A <dfn export for=urlsyntax id=syntax-url-query>query</dfn> must be zero or more
 <a>URL units</a>.
@@ -1184,10 +1183,9 @@ optionally with an <a>encoding</a>
  <var>input</var>.
 
  <li>
-  <p>Keep running the following state machine by switching on <var>state</var>. If
-  after a run <var>pointer</var> points to the <a>EOF code point</a>, go to
-  the next step. Otherwise, increase <var>pointer</var> by one and continue with the
-  state machine.
+  <p>Keep running the following state machine by switching on <var>state</var>. If after a run
+  <var>pointer</var> points to <a>EOF code point</a>, go to the next step. Otherwise, increase
+  <var>pointer</var> by one and continue with the state machine.
 
   <dl class=switch>
    <dt><dfn>scheme start state</dfn>
@@ -1469,11 +1467,17 @@ optionally with an <a>encoding</a>
        <li><p>Set <var>buffer</var> to the empty string.
       </ol>
 
-     <li><p>Otherwise, if either <a>c</a> is one of <a>EOF code point</a>,
-     "<code>/</code>", "<code>?</code>", and "<code>#</code>", or <var>url</var>
-     <a>is special</a> and <a>c</a> is "<code>\</code>", decrease <var>pointer</var> by
-     the number of code points in <var>buffer</var> plus one, set <var>buffer</var> to the
-     empty string, and <var>state</var> to <a>host state</a>.
+     <li>
+      <p>Otherwise, if one of the following is true
+
+      <ul class=brief>
+       <li><p><a>c</a> is <a>EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>"
+       <li><p><var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>"
+      </ul>
+
+      <p>then decrease <var>pointer</var> by the number of code points in <var>buffer</var> plus
+      one, set <var>buffer</var> to the empty string, and set <var>state</var> to <a>host state</a>.
 
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
@@ -1508,10 +1512,15 @@ optionally with an <a>encoding</a>
       </ol>
 
      <li>
-      <p>Otherwise, if either <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>",
-      "<code>?</code>", and "<code>#</code>", or <var>url</var> <a>is special</a> and
-      <a>c</a> is "<code>\</code>", decrease <var>pointer</var> by one, and run these
-      substeps:
+      <p>Otherwise, if one of the following is true
+
+      <ul class=brief>
+       <li><p><a>c</a> is <a>EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>"
+       <li><p><var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>"
+      </ul>
+
+      <p>then decrease <var>pointer</var> by one, and run these substeps:
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty
@@ -1551,10 +1560,16 @@ optionally with an <a>encoding</a>
      <li><p>If <a>c</a> is an <a>ASCII digit</a>, append <a>c</a> to <var>buffer</var>.
 
      <li>
-      <p>Otherwise, if <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>",
-      "<code>?</code>", and "<code>#</code>", or <var>url</var> <a>is special</a> and
-      <a>c</a> is "<code>\</code>", or <var>state override</var> is given, run these
-      substeps:
+      <p>Otherwise, if one of the following is true
+
+      <ul class=brief>
+       <li><p><a>c</a> is <a>EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>"
+       <li><p><var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>"
+       <li><p><var>state override</var> is given
+      </ul>
+
+      <p>run these substeps:
 
       <ol>
        <li>
@@ -1642,8 +1657,8 @@ optionally with an <a>encoding</a>
          <li><p><a>c</a> and the first code point of <a>remaining</a> are not a
          <a>Windows drive letter</a>
          <li><p><a>remaining</a> consists of one code point
-         <li><a>remaining</a>'s second code point is not one of "<code>/</code>",
-         "<code>\</code>", "<code>?</code>", and "<code>#</code>"
+         <li><a>remaining</a>'s second code point is <em>not</em> "<code>/</code>",
+         "<code>\</code>", "<code>?</code>", or "<code>#</code>"
         </ul>
 
         <p>then set <var>url</var>'s <a for=url>host</a> to
@@ -1698,9 +1713,8 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li>
-      <p>If <a>c</a> is one of <a>EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps:
+      <p>If <a>c</a> is <a>EOF code point</a>, "<code>/</code>", "<code>\</code>", "<code>?</code>",
+      or "<code>#</code>", decrease <var>pointer</var> by one, and run these substeps:
 
       <ol>
        <li>
@@ -1750,9 +1764,17 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li>
-      <p>If <a>c</a> is <a>EOF code point</a> or "<code>/</code>", or <var>url</var>
-      <a>is special</a> and <a>c</a> is "<code>\</code>", or <var>state override</var> is
-      not given and <a>c</a> is "<code>?</code>" or "<code>#</code>", run these substeps:
+      <p>If one of the following is true
+
+      <ul class=brief>
+       <li><p><a>c</a> is <a>EOF code point</a> or "<code>/</code>"
+       <li><p><var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>"
+       <li><p><var>state override</var> is not given and <a>c</a> is "<code>?</code>" or
+       "<code>#</code>"
+      </ul>
+
+      <p>then run these substeps:
+
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
        <a>syntax violation</a>.
@@ -1837,14 +1859,14 @@ optionally with an <a>encoding</a>
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a
-       <a lt="URL code points">URL code point</a>, and not
-       "<code>%</code>", <a>syntax violation</a>.
+       <li><p>If <a>c</a> is not <a>EOF code point</a>, not a
+       <a lt="URL code points">URL code point</a>, and not "<code>%</code>",
+       <a>syntax violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a>
+       <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a>
        using the <a>simple encode set</a>, and append the result to the first string in
        <var>url</var>'s <a for=url>path</a>.
       </ol>
@@ -1854,9 +1876,8 @@ optionally with an <a>encoding</a>
    <dd>
     <ol>
      <li>
-      <p>If <a>c</a> is the <a>EOF code point</a>, or
-      <var>state override</var> is not given and <a>c</a>
-      is "<code>#</code>", run these substeps:
+      <p>If <a>c</a> is <a>EOF code point</a>, or <var>state override</var> is not given and
+      <a>c</a> is "<code>#</code>", run these substeps:
 
       <ol>
        <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or <var>url</var>'s
@@ -1872,10 +1893,9 @@ optionally with an <a>encoding</a>
         these subsubsteps:
 
         <ol>
-         <li><p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is one of
-         0x22, 0x23, 0x3C, and 0x3E, append <var>byte</var>,
-         <a lt="percent encode">percent encoded</a>, to <var>url</var>'s
-         <a for=url>query</a>.
+         <li><p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is 0x22, 0x23, 0x3C, or
+         0x3E, append <var>byte</var>, <a lt="percent encode">percent encoded</a>, to
+         <var>url</var>'s <a for=url>query</a>.
 
          <li><p>Otherwise, append a code point whose value is <var>byte</var> to
          <var>url</var>'s <a for=url>query</a>.

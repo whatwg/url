@@ -312,7 +312,7 @@ steps: </p>
     <li>
      <p>If <var>asciiDomain</var> is failure, return failure. </p>
     <li>
-     <p>If <var>asciiDomain</var> contains one of
+     <p>If <var>asciiDomain</var> contains
   U+0000,
   U+0009,
   U+000A,
@@ -326,7 +326,7 @@ steps: </p>
   "<code>@</code>",
   "<code>[</code>",
   "<code>\</code>",
-  and
+  or
   "<code>]</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure. </p>
     <li>
      <p>Let <var>ipv4Host</var> be the result of <a data-link-type="dfn" href="#concept-ipv4-parser">IPv4 parsing</a> <var>asciiDomain</var>. </p>
@@ -705,9 +705,8 @@ corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is l
    </table>
    <p></p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-special">is special<a class="self-link" href="#is-special"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>. </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is one of
-"<code>about</code>", "<code>blob</code>", "<code>data</code>", and
-"<code>filesystem</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>about</code>",
+"<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>". </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-local">is local<a class="self-link" href="#is-local"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#local-scheme">local scheme</a>. </p>
    <p class="note" role="note">This definition is used externally. E.g., by the Fetch Standard and
 Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a data-link-type="biblio" href="#biblio-referrer-policy">[REFERRER-POLICY]</a> </p>
@@ -794,8 +793,8 @@ of the following </p>
    </ul>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dot">single-dot path segment<a class="self-link" href="#syntax-url-path-segment-dot"></a></dfn> must be "<code>.</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for
 "<code>%2e</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dotdot">double-dot path segment<a class="self-link" href="#syntax-url-path-segment-dotdot"></a></dfn> must be "<code>..</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for one of
-"<code>.%2e</code>", "<code>%2e.</code>", and "<code>%2e%2e</code>". </p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dotdot">double-dot path segment<a class="self-link" href="#syntax-url-path-segment-dotdot"></a></dfn> must be "<code>..</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for
+"<code>.%2e</code>", "<code>%2e.</code>", or "<code>%2e%2e</code>". </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-query">query<a class="self-link" href="#syntax-url-query"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-fragment">fragment<a class="self-link" href="#syntax-url-fragment"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-code-points">URL code points<a class="self-link" href="#url-code-points"></a></dfn> are <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
@@ -903,10 +902,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
     <li>
      <p>Let <var>pointer</var> be a pointer to first code point in <var>input</var>. </p>
     <li>
-     <p>Keep running the following state machine by switching on <var>state</var>. If
-  after a run <var>pointer</var> points to the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, go to
-  the next step. Otherwise, increase <var>pointer</var> by one and continue with the
-  state machine. </p>
+     <p>Keep running the following state machine by switching on <var>state</var>. If after a run <var>pointer</var> points to <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, go to the next step. Otherwise, increase <var>pointer</var> by one and continue with the state machine. </p>
      <dl class="switch">
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="scheme-start-state">scheme start state<a class="self-link" href="#scheme-start-state"></a></dfn> 
       <dd>
@@ -1074,10 +1070,16 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
            <p>Set <var>buffer</var> to the empty string. </p>
          </ol>
         <li>
-         <p>Otherwise, if either <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>,
-     "<code>/</code>", "<code>?</code>", and "<code>#</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", decrease <var>pointer</var> by
-     the number of code points in <var>buffer</var> plus one, set <var>buffer</var> to the
-     empty string, and <var>state</var> to <a data-link-type="dfn" href="#host-state">host state</a>. </p>
+         <p>Otherwise, if one of the following is true </p>
+         <ul class="brief">
+          <li>
+           <p><a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>" </p>
+          <li>
+           <p><var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>" </p>
+         </ul>
+         <p>then decrease <var>pointer</var> by the number of code points in <var>buffer</var> plus
+      one, set <var>buffer</var> to the empty string, and set <var>state</var> to <a data-link-type="dfn" href="#host-state">host state</a>. </p>
         <li>
          <p>Otherwise, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>. </p>
        </ol>
@@ -1103,9 +1105,15 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        terminate this algorithm. </p>
          </ol>
         <li>
-         <p>Otherwise, if either <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>",
-      "<code>?</code>", and "<code>#</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", decrease <var>pointer</var> by one, and run these
-      substeps: </p>
+         <p>Otherwise, if one of the following is true </p>
+         <ul class="brief">
+          <li>
+           <p><a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>" </p>
+          <li>
+           <p><var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>" </p>
+         </ul>
+         <p>then decrease <var>pointer</var> by one, and run these substeps: </p>
          <ol>
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <var>buffer</var> is the empty
@@ -1138,9 +1146,17 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         <li>
          <p>If <a data-link-type="dfn" href="#c">c</a> is an <a data-link-type="dfn" href="#ascii-digits">ASCII digit</a>, append <a data-link-type="dfn" href="#c">c</a> to <var>buffer</var>. </p>
         <li>
-         <p>Otherwise, if <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>",
-      "<code>?</code>", and "<code>#</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", or <var>state override</var> is given, run these
-      substeps: </p>
+         <p>Otherwise, if one of the following is true </p>
+         <ul class="brief">
+          <li>
+           <p><a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>?</code>", or
+       "<code>#</code>" </p>
+          <li>
+           <p><var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>" </p>
+          <li>
+           <p><var>state override</var> is given </p>
+         </ul>
+         <p>run these substeps: </p>
          <ol>
           <li>
            <p>If <var>buffer</var> is not the empty string, run these subsubsteps: </p>
@@ -1199,8 +1215,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
              <p><a data-link-type="dfn" href="#c">c</a> and the first code point of <a data-link-type="dfn" href="#remaining">remaining</a> are not a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a> </p>
             <li>
              <p><a data-link-type="dfn" href="#remaining">remaining</a> consists of one code point </p>
-            <li><a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is not one of "<code>/</code>",
-         "<code>\</code>", "<code>?</code>", and "<code>#</code>" 
+            <li><a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is <em>not</em> "<code>/</code>",
+         "<code>\</code>", "<code>?</code>", or "<code>#</code>" 
            </ul>
            <p>then set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then <a data-link-type="dfn" href="#pop-a-urls-path">pop</a> <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
            <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk. </p>
@@ -1237,9 +1253,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
        <ol>
         <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is one of <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>",
-      "<code>?</code>", and "<code>#</code>", decrease <var>pointer</var> by one, and run
-      these substeps: </p>
+         <p>If <a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, "<code>/</code>", "<code>\</code>", "<code>?</code>",
+      or "<code>#</code>", decrease <var>pointer</var> by one, and run these substeps: </p>
          <ol>
           <li>
            <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>,
@@ -1277,8 +1292,17 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
        <ol>
         <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a> or "<code>/</code>", or <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", or <var>state override</var> is
-      not given and <a data-link-type="dfn" href="#c">c</a> is "<code>?</code>" or "<code>#</code>", run these substeps: </p>
+         <p>If one of the following is true </p>
+         <ul class="brief">
+          <li>
+           <p><a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a> or "<code>/</code>" </p>
+          <li>
+           <p><var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>" </p>
+          <li>
+           <p><var>state override</var> is not given and <a data-link-type="dfn" href="#c">c</a> is "<code>?</code>" or
+       "<code>#</code>" </p>
+         </ul>
+         <p>then run these substeps: </p>
          <ol>
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
@@ -1344,20 +1368,19 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
          <p>Otherwise, run these substeps: </p>
          <ol>
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, not a <a data-link-type="dfn" href="#url-code-points">URL code point</a>, and not
-       "<code>%</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is not <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, not a <a data-link-type="dfn" href="#url-code-points">URL code point</a>, and not "<code>%</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
           <li>
            <p>If <a data-link-type="dfn" href="#c">c</a> is "<code>%</code>" and <a data-link-type="dfn" href="#remaining">remaining</a> does
        not start with two <a data-link-type="dfn" href="#ascii-hex-digits">ASCII hex digits</a>, <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
           <li>
-           <p>If <a data-link-type="dfn" href="#c">c</a> is not the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
+           <p>If <a data-link-type="dfn" href="#c">c</a> is not <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> <a data-link-type="dfn" href="#c">c</a> using the <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a>, and append the result to the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
          </ol>
        </ol>
       <dt><dfn data-dfn-type="dfn" data-noexport="" id="query-state">query state<a class="self-link" href="#query-state"></a></dfn> 
       <dd>
        <ol>
         <li>
-         <p>If <a data-link-type="dfn" href="#c">c</a> is the <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, or <var>state override</var> is not given and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", run these substeps: </p>
+         <p>If <a data-link-type="dfn" href="#c">c</a> is <a data-link-type="dfn" href="#eof-code-point">EOF code point</a>, or <var>state override</var> is not given and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", run these substeps: </p>
          <ol>
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is <em>not</em> special</a> or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is either "<code>ws</code>" or "<code>wss</code>", set <var>encoding</var> to <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
@@ -1368,8 +1391,8 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
         these subsubsteps: </p>
            <ol>
             <li>
-             <p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is one of
-         0x22, 0x23, 0x3C, and 0x3E, append <var>byte</var>, <a data-link-type="dfn" href="#percent-encode">percent encoded</a>, to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>. </p>
+             <p>If <var>byte</var> is less than 0x21, greater than 0x7E, or is 0x22, 0x23, 0x3C, or
+         0x3E, append <var>byte</var>, <a data-link-type="dfn" href="#percent-encode">percent encoded</a>, to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>. </p>
             <li>
              <p>Otherwise, append a code point whose value is <var>byte</var> to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>. </p>
            </ol>
