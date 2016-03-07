@@ -63,6 +63,8 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 
 <p>The <dfn>C0 controls and space</dfn> are <a>C0 controls</a> and code point U+0020.
 
+<p>The <dfn>tab and newline</dfn> are code points U+0009, U+000A, and U+000D.
+
 <p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039, inclusive.
 
 <p>The <dfn>ASCII hex digits</dfn> are <a>ASCII digits</a>, code points in the range
@@ -1117,9 +1119,9 @@ U+100000 to U+10FFFD.
  <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
  <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a spec=html>structured clone</a>
- of the entry in the <a>blob URL store</a> corresponding to the first string in
- <var>url</var>'s <a for=url>path</a>. [[!HTML]]
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a spec=html>StructuredClone</a> of the
+ entry in the <a>blob URL store</a> corresponding to the first string in <var>url</var>'s
+ <a for=url>path</a>. [[!HTML]]
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -1158,6 +1160,10 @@ optionally with an <a>encoding</a>
    <li><p>Remove any leading and trailing <a>C0 controls and space</a> from
    <var>input</var>.
   </ol>
+
+ <li><p>If <var>input</var> contains any <a>tab and newline</a>, <a>syntax violation</a>.
+
+ <li><p>Remove all <a>tab and newline</a> from <var>input</var>.
 
  <li><p>Let <var>state</var> be <var>state override</var>
  if given, or <a>scheme start state</a> otherwise.
@@ -1444,9 +1450,6 @@ optionally with an <a>encoding</a>
         <p>For each <var>codePoint</var> in <var>buffer</var>, run these substeps:
 
         <ol>
-         <li><p>If <var>codePoint</var> is U+0009, U+000A, or U+000D, run these substeps
-         for the next code point.
-
          <li><p>If <var>codePoint</var> is "<code>:</code>" and
          <var>url</var>'s
          <a for=url>password</a> is null, set
@@ -1528,8 +1531,6 @@ optionally with an <a>encoding</a>
        algorithm.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
-
      <li>
       <p>Otherwise, run these substeps:
 
@@ -1579,8 +1580,6 @@ optionally with an <a>encoding</a>
        <li><p>Set <var>state</var> to <a>path start state</a>, and decrease
        <var>pointer</var> by one.
       </ol>
-
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
 
      <li><p>Otherwise, <a>syntax violation</a>, return failure.
     </ol>
@@ -1733,8 +1732,6 @@ optionally with an <a>encoding</a>
         </ol>
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
-
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
@@ -1805,8 +1802,6 @@ optionally with an <a>encoding</a>
        and <var>state</var> to <a>fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
-
      <li>
       <p>Otherwise, run these steps:
 
@@ -1849,10 +1844,8 @@ optionally with an <a>encoding</a>
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
-       <li><p>If <a>c</a> is none of
-       <a>EOF code point</a>, U+0009, U+000A, and U+000D,
-       <a>UTF-8 percent encode</a> <a>c</a> using the
-       <a>simple encode set</a>, and append the result to the first string in
+       <li><p>If <a>c</a> is not the <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a>
+       using the <a>simple encode set</a>, and append the result to the first string in
        <var>url</var>'s <a for=url>path</a>.
       </ol>
     </ol>
@@ -1896,8 +1889,6 @@ optionally with an <a>encoding</a>
        and state to <a>fragment state</a>.
       </ol>
 
-     <li><p>Otherwise, if <a>c</a> is U+0009, U+000A, or U+000D, <a>syntax violation</a>.
-
      <li>
       <p>Otherwise, run these substeps:
 
@@ -1921,9 +1912,6 @@ optionally with an <a>encoding</a>
      <dd><p>Do nothing.
 
      <dt>U+0000
-     <dt>U+0009
-     <dt>U+000A
-     <dt>U+000D
      <dd><p><a>Syntax violation</a>.
 
      <dt>Otherwise
