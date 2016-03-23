@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-07">7 March 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-24">24 March 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -118,7 +118,7 @@
 might increase in scope somewhat. </p>
    <h2 class="heading settled" data-level="1" id="infrastructure"><span class="secno">1. </span><span class="content">Infrastructure</span><a class="self-link" href="#infrastructure"></a></h2>
    <p>Some terms used in this specification are defined in the
-DOM, Encoding, IDNA, and Web IDL Standards. <a data-link-type="biblio" href="#biblio-whatwg-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-whatwg-encoding">[ENCODING]</a> <a data-link-type="biblio" href="#biblio-idna">[IDNA]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> </p>
+DOM, Encoding, IDNA, and Web IDL Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-encoding">[ENCODING]</a> <a data-link-type="biblio" href="#biblio-idna">[IDNA]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="c0-controls">C0 controls<a class="self-link" href="#c0-controls"></a></dfn> are code points in the range U+0000 to U+001F, inclusive. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="c0-controls-and-space">C0 controls and space<a class="self-link" href="#c0-controls-and-space"></a></dfn> are <a data-link-type="dfn" href="#c0-controls">C0 controls</a> and code point U+0020. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="tab-and-newline">tab and newline<a class="self-link" href="#tab-and-newline"></a></dfn> are code points U+0009, U+000A, and U+000D. </p>
@@ -666,8 +666,7 @@ null or an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> holding
 either null or a string holding data that can be used for further processing on the
 resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify. It is initially null. </p>
    <p class="note no-backref" role="note">This is not an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> on purpose. </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-type="dfn" data-noexport="" id="non-relative-flag">non-relative flag<a class="self-link" href="#non-relative-flag"></a></dfn>. It is
-initially unset. </p>
+   <p id="non-relative-flag">A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag<a class="self-link" href="#url-cannot-be-a-base-url-flag"></a></dfn>. It is initially unset. </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a <code><a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#blob">Blob</a></code> object. It is initially null. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a> </p>
    <p class="note no-backref" role="note">At this point this is used primarily to support
 "<code>blob</code>" <a data-link-type="dfn" href="#concept-url">URLs</a>, but others can be added going forward, hence
@@ -951,15 +950,14 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
            <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, <var>base</var> is non-null, and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is equal to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>,
         set <var>state</var> to <a data-link-type="dfn" href="#special-relative-or-authority-state">special relative or authority state</a>. </p>
-           <p class="note no-backref" role="note">This means that <var>base</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is
-        unset. </p>
+           <p class="note no-backref" role="note">This means that <var>base</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is unset. </p>
           <li>
            <p>Otherwise, if <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a>, set <var>state</var> to <a data-link-type="dfn" href="#special-authority-slashes-state">special authority slashes state</a>. </p>
           <li>
            <p>Otherwise, if <a data-link-type="dfn" href="#remaining">remaining</a> starts with an "<code>/</code>", set <var>state</var> to <a data-link-type="dfn" href="#path-or-authority-state">path or authority state</a>, and increase <var>pointer</var> by one. </p>
           <li>
-           <p>Otherwise, set <var>url</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a>, append an empty
-       string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and set <var>state</var> to <a data-link-type="dfn" href="#non-relative-path-state">non-relative path state</a>. </p>
+           <p>Otherwise, set <var>url</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a>, append an empty
+       string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and set <var>state</var> to <a data-link-type="dfn" href="#cannot-be-a-base-url-path-state">cannot-be-a-base-URL path state</a>. </p>
          </ol>
         <li>
          <p>Otherwise, if <var>state override</var> is not given, set <var>buffer</var> to the empty string, <var>state</var> to <a data-link-type="dfn" href="#no-scheme-state">no scheme state</a>, and start over (from the first code point
@@ -971,10 +969,10 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
       <dd>
        <ol>
         <li>
-         <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is
+         <p>If <var>base</var> is null, or <var>base</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is
      set and <a data-link-type="dfn" href="#c">c</a> is not "<code>#</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>, return failure. </p>
         <li>
-         <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, set <var>url</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a>, and set <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>. </p>
+         <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set and <a data-link-type="dfn" href="#c">c</a> is "<code>#</code>", set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-fragment">fragment</a> to the empty string, set <var>url</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a>, and set <var>state</var> to <a data-link-type="dfn" href="#fragment-state">fragment state</a>. </p>
         <li>
          <p>Otherwise, if <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not
      "<code>file</code>", set <var>state</var> to <a data-link-type="dfn" href="#relative-state">relative state</a> and decrease <var>pointer</var> by one. </p>
@@ -1357,7 +1355,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
        and append the result to <var>buffer</var>. </p>
          </ol>
        </ol>
-      <dt><dfn data-dfn-type="dfn" data-noexport="" id="non-relative-path-state">non-relative path state<a class="self-link" href="#non-relative-path-state"></a></dfn> 
+      <dt><dfn data-dfn-type="dfn" data-noexport="" id="cannot-be-a-base-url-path-state">cannot-be-a-base-URL path state<a class="self-link" href="#cannot-be-a-base-url-path-state"></a></dfn> 
       <dd>
        <ol>
         <li>
@@ -1502,7 +1500,7 @@ then runs these steps: </p>
      <p>Otherwise, if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null and <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", append
  "<code>//</code>" to <var>output</var>. </p>
     <li>
-     <p>If <var>url</var>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, append the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>output</var>. </p>
+     <p>If <var>url</var>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, append the first string in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>output</var>. </p>
     <li>
      <p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> (including empty strings), separated from each other by
  "<code>/</code>", to <var>output</var>. </p>
@@ -1819,7 +1817,7 @@ compatibility with HTML’s <code>MessageEvent</code> feature. <a data-link-type
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-url-username">username</a></code> attribute’s setter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, or its <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, terminate these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, or its <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, terminate these steps. </p>
     <li>
      <p><a data-link-type="dfn" href="#set-the-username">Set the username</a> given <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> and the given
  value. </p>
@@ -1835,7 +1833,7 @@ compatibility with HTML’s <code>MessageEvent</code> feature. <a data-link-type
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-url-password">password</a></code> attribute’s setter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, or its <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, terminate these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, or its <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, terminate these steps. </p>
     <li>
      <p><a data-link-type="dfn" href="#set-the-password">Set the password</a> given <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> and the given
  value. </p>
@@ -1855,8 +1853,8 @@ compatibility with HTML’s <code>MessageEvent</code> feature. <a data-link-type
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-url-host">host</a></code> attribute’s setter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, terminate
- these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set,
+ terminate these steps. </p>
     <li>
      <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#host-state">host state</a> as <var>state override</var>. </p>
    </ol>
@@ -1873,8 +1871,8 @@ does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one mi
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-url-hostname">hostname</a></code> attribute’s setter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, terminate
- these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set,
+ terminate these steps. </p>
     <li>
      <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#hostname-state">hostname state</a> as <var>state override</var>. </p>
    </ol>
@@ -1889,16 +1887,16 @@ does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one mi
    <p>The <code><a class="idl-code" data-link-type="attribute" href="#dom-url-port">port</a></code> attribute’s setter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, its <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, or its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", terminate
- these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, its <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, or its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>",
+ terminate these steps. </p>
     <li>
      <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#port-state">port state</a> as <var>state override</var>. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-pathname"><code>pathname</code><a class="self-link" href="#dom-url-pathname"></a></dfn> attribute’s getter must run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, return the
- first string in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set,
+ return the first string in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
     <li>
      <p>Return "<code>/</code>", followed by the strings in <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-path">path</a> (including empty strings), separated from each other by
  "<code>/</code>". </p>
@@ -1907,8 +1905,8 @@ does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one mi
 run these steps: </p>
    <ol>
     <li>
-     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#non-relative-flag">non-relative flag</a> is set, terminate
- these steps. </p>
+     <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set,
+ terminate these steps. </p>
     <li>
      <p>Empty <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
     <li>
@@ -2152,6 +2150,8 @@ neighboring rights to this work. </p>
    <li><a href="#c">c</a><span>, in §1.1</span>
    <li><a href="#c0-controls">C0 controls</a><span>, in §1</span>
    <li><a href="#c0-controls-and-space">C0 controls and space</a><span>, in §1</span>
+   <li><a href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a><span>, in §4</span>
+   <li><a href="#cannot-be-a-base-url-path-state">cannot-be-a-base-URL path state</a><span>, in §4.2</span>
    <li><a href="#default-encode-set">default encode set</a><span>, in §1.2</span>
    <li><a href="#default-port">default port</a><span>, in §4</span>
    <li><a href="#dom-urlsearchparams-delete">delete(name)</a><span>, in §6.4</span>
@@ -2228,8 +2228,6 @@ neighboring rights to this work. </p>
    <li><a href="#concept-urlsearchparams-list">list</a><span>, in §6.4</span>
    <li><a href="#local-scheme">local scheme</a><span>, in §4</span>
    <li><a href="#concept-urlsearchparams-new">new</a><span>, in §6.4</span>
-   <li><a href="#non-relative-flag">non-relative flag</a><span>, in §4</span>
-   <li><a href="#non-relative-path-state">non-relative path state</a><span>, in §4.2</span>
    <li><a href="#normalized-windows-drive-letter">normalized Windows drive letter</a><span>, in §1</span>
    <li><a href="#no-scheme-state">no scheme state</a><span>, in §4.2</span>
    <li><a href="#concept-url-object">object</a><span>, in §4</span>
@@ -2349,13 +2347,13 @@ neighboring rights to this work. </p>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio" href="#biblio-whatwg-dom">[WHATWG-DOM]</a> defines the following terms:
+    <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
      <li><a href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ascii case-insensitive</a>
      <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
     </ul>
    <li>
-    <a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
+    <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a>
@@ -2370,6 +2368,10 @@ neighboring rights to this work. </p>
   <dl>
    <dt id="biblio-bidi">[BIDI]
    <dd>Mark Davis; Aharon Lanin; Andrew Glass. <a href="http://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</a>. 5 June 2014. Unicode Standard Annex #9. URL: <a href="http://www.unicode.org/reports/tr9/">http://www.unicode.org/reports/tr9/</a>
+   <dt id="biblio-dom">[DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+   <dt id="biblio-encoding">[ENCODING]
+   <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
    <dt id="biblio-fileapi">[FILEAPI]
    <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-html">[HTML]
@@ -2386,10 +2388,6 @@ neighboring rights to this work. </p>
    <dd>Mark Davis; Michel Suignard. <a href="http://unicode.org/reports/tr36/">Unicode Security Considerations</a>. URL: <a href="http://unicode.org/reports/tr36/">http://unicode.org/reports/tr36/</a>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Boris Zbarsky; Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
-   <dt id="biblio-whatwg-dom">[WHATWG-DOM]
-   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
-   <dt id="biblio-whatwg-encoding">[WHATWG-ENCODING]
-   <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
