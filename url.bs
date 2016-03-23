@@ -844,8 +844,9 @@ resource the <a for=url>URL</a>'s other components identify. It is initially nul
 
 <p class="note no-backref">This is not an <a>ASCII string</a> on purpose.
 
-<p>A <a for=url>URL</a> also has an associated <dfn>non-relative flag</dfn>. It is
-initially unset.
+<p>A <a for=url>URL</a> also has an associated
+<dfn><span id=non-relative-flag>cannot-be-a-base-URL flag</span></dfn>.
+It is initially unset.
 
 <p>A <a for=url>URL</a> also has an associated
 <dfn export for=url id=concept-url-object>object</dfn> that is either null or a
@@ -1246,8 +1247,8 @@ optionally with an <a>encoding</a>
         <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s <a for=url>scheme</a>,
         set <var>state</var> to <a>special relative or authority state</a>.
 
-        <p class="note no-backref">This means that <var>base</var>'s <a>non-relative flag</a> is
-        unset.
+        <p class="note no-backref">This means that <var>base</var>'s
+        <a>cannot-be-a-base-URL flag</a> is unset.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
@@ -1256,9 +1257,9 @@ optionally with an <a>encoding</a>
        <var>state</var> to <a>path or authority state</a>, and increase <var>pointer</var>
        by one.
 
-       <li><p>Otherwise, set <var>url</var>'s <a>non-relative flag</a>, append an empty
+       <li><p>Otherwise, set <var>url</var>'s <a>cannot-be-a-base-URL flag</a>, append an empty
        string to <var>url</var>'s <a for=url>path</a>, and set <var>state</var> to
-       <a>non-relative path state</a>.
+       <a>cannot-be-a-base-URL path state</a>.
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is not given, set
@@ -1272,10 +1273,10 @@ optionally with an <a>encoding</a>
    <dt><dfn>no scheme state</dfn>
    <dd>
     <ol>
-     <li><p>If <var>base</var> is null, or <var>base</var>'s <a>non-relative flag</a> is
+     <li><p>If <var>base</var> is null, or <var>base</var>'s <a>cannot-be-a-base-URL flag</a> is
      set and <a>c</a> is not "<code>#</code>", <a>syntax violation</a>, return failure.
 
-     <li><p>Otherwise, if <var>base</var>'s <a>non-relative flag</a> is set and <a>c</a>
+     <li><p>Otherwise, if <var>base</var>'s <a>cannot-be-a-base-URL flag</a> is set and <a>c</a>
      is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
      <var>base</var>'s <a for=url>scheme</a>,
      <var>url</var>'s <a for=url>path</a> to
@@ -1283,7 +1284,7 @@ optionally with an <a>encoding</a>
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
      <var>url</var>'s <a for=url>fragment</a> to the empty string, set
-     <var>url</var>'s <a>non-relative flag</a>, and set <var>state</var> to
+     <var>url</var>'s <a>cannot-be-a-base-URL flag</a>, and set <var>state</var> to
      <a>fragment state</a>.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>scheme</a> is not
@@ -1844,7 +1845,7 @@ optionally with an <a>encoding</a>
       </ol>
     </ol>
 
-   <dt><dfn>non-relative path state</dfn>
+   <dt><dfn>cannot-be-a-base-URL path state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is "<code>?</code>", set <var>url</var>'s
@@ -2034,7 +2035,7 @@ then runs these steps:
  <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", append
  "<code>//</code>" to <var>output</var>.
 
- <li><p>If <var>url</var>'s <a>non-relative flag</a> is set, append the first string in
+ <li><p>If <var>url</var>'s <a>cannot-be-a-base-URL flag</a> is set, append the first string in
  <var>url</var>'s <a for=url>path</a> to <var>output</var>.
 
  <li><p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>'s
@@ -2538,7 +2539,7 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a>non-relative flag</a> is set, terminate these steps.
+ <a>cannot-be-a-base-URL flag</a> is set, terminate these steps.
 
  <li><p><a>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the given
  value.
@@ -2557,7 +2558,7 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a>non-relative flag</a> is set, terminate these steps.
+ <a>cannot-be-a-base-URL flag</a> is set, terminate these steps.
 
  <li><p><a>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the given
  value.
@@ -2581,8 +2582,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>host</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>non-relative flag</a> is set, terminate
- these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
+ terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
@@ -2606,8 +2607,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 <p>The <code><a attribute for=URL>hostname</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>non-relative flag</a> is set, terminate
- these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
+ terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
@@ -2627,8 +2628,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, its
- <a>non-relative flag</a> is set, or its <a for=url>scheme</a> is "<code>file</code>", terminate
- these steps.
+ <a>cannot-be-a-base-URL flag</a> is set, or its <a for=url>scheme</a> is "<code>file</code>",
+ terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>port state</a> as <var>state override</var>.
@@ -2637,8 +2638,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>non-relative flag</a> is set, return the
- first string in <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
+ return the first string in <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
 
  <li><p>Return "<code>/</code>", followed by the strings in <a>context object</a>'s
  <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), separated from each other by
@@ -2649,8 +2650,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>non-relative flag</a> is set, terminate
- these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
+ terminate these steps.
 
  <li><p>Empty <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
 
