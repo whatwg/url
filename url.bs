@@ -464,7 +464,7 @@ runs these steps:
  <li><p>If the last item in <var>parts</var> is the empty string, set
  <var>syntaxViolationFlag</var> and remove the last item from <var>parts</var>.
 
- <li><p>If <var>parts</var> has more than four items, return <var>input</var>.
+ <li><p>If <var>parts</var> has more than four items or zero items, return <var>input</var>.
 
  <li><p>Let <var>numbers</var> be the empty list.
 
