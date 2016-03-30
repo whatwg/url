@@ -893,6 +893,11 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
 Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 <!-- And soonish CSP -->
 
+<p>A <dfn>network scheme</dfn> is a <a for=url>scheme</a> that is "<code>ftp</code>",
+"<code>http</code>", or "<code>https</code>".
+
+<p class=note>This definition is used by HTML. [[HTML]]
+
 <p>A <a for=url>URL</a> <dfn lt="include credentials">includes credentials</dfn> if either
 its <a for=url>username</a> is not the empty string or its <a for=url>password</a> is
 non-null.

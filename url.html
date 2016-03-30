@@ -11,7 +11,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-24">24 March 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-30">30 March 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -191,7 +191,6 @@ representation of <var>byte</var>. </p>
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <p></p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="simple-encode-set">simple encode set<a class="self-link" href="#simple-encode-set"></a></dfn> are <a data-link-type="dfn" href="#c0-controls">C0 controls</a> and all code points greater
 than U+007E. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="default-encode-set">default encode set<a class="self-link" href="#default-encode-set"></a></dfn> is the <a data-link-type="dfn" href="#simple-encode-set">simple encode set</a> and code points U+0020,
@@ -702,13 +701,15 @@ corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is l
       <td>"<code>wss</code>"
       <td>443 
    </table>
-   <p></p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-special">is special<a class="self-link" href="#is-special"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>. </p>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>". </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-local">is local<a class="self-link" href="#is-local"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#local-scheme">local scheme</a>. </p>
    <p class="note" role="note">This definition is used externally. E.g., by the Fetch Standard and
 Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a data-link-type="biblio" href="#biblio-referrer-policy">[REFERRER-POLICY]</a> </p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="network-scheme">network scheme<a class="self-link" href="#network-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>ftp</code>",
+"<code>http</code>", or "<code>https</code>". </p>
+   <p class="note" role="note">This definition is used by HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either
 its <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its <a data-link-type="dfn" href="#concept-url-password">password</a> is
 non-null. </p>
@@ -818,7 +819,8 @@ of the following </p>
 "<code>~</code>",
 and code points in the ranges
 U+00A0 to U+D7FF,
-U+E000 to U+FDCF,
+U+E000 to 
+U+FDCF,
 U+FDF0 to U+FFFD,
 U+10000 to U+1FFFD,
 U+20000 to U+2FFFD,
@@ -1732,7 +1734,6 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
            attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hash">hash</a>;
 };
 </pre>
-   <p></p>
    <p>A <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object has an associated <dfn data-dfn-for="URL" data-dfn-type="dfn" data-noexport="" id="concept-url-url">url<a class="self-link" href="#concept-url-url"></a></dfn> (a <a data-link-type="dfn" href="#concept-url">URL</a>) and <dfn data-dfn-for="URL" data-dfn-type="dfn" data-noexport="" id="concept-url-query-object">query object<a class="self-link" href="#concept-url-query-object"></a></dfn> (a <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object). </p>
    <h3 class="heading settled" data-level="6.1" id="constructors"><span class="secno">6.1. </span><span class="content">Constructors</span><a class="self-link" href="#constructors"></a></h3>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="constructor" data-export="" id="dom-url-url"><code>URL(<var>url</var>, <var>base</var>)</code><a class="self-link" href="#dom-url-url"></a></dfn> constructor,
@@ -2227,6 +2228,7 @@ neighboring rights to this work. </p>
    <li><a href="#is-special">is special</a><span>, in §4</span>
    <li><a href="#concept-urlsearchparams-list">list</a><span>, in §6.4</span>
    <li><a href="#local-scheme">local scheme</a><span>, in §4</span>
+   <li><a href="#network-scheme">network scheme</a><span>, in §4</span>
    <li><a href="#concept-urlsearchparams-new">new</a><span>, in §6.4</span>
    <li><a href="#normalized-windows-drive-letter">normalized Windows drive letter</a><span>, in §1</span>
    <li><a href="#no-scheme-state">no scheme state</a><span>, in §4.2</span>
