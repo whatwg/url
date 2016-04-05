@@ -2094,8 +2094,8 @@ background information. [[!HTML]]
   <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the first
   string in <a for=url>URL</a>'s <a for=url>path</a>.
 
-  <p>If <var>url</var> is failure, return a new globally unique identifier. Otherwise,
-  return <var>url</var>'s <a for=url>origin</a>.
+  <p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
+  <a for=url>origin</a> otherwise.
   <!-- Did you mean: recursion -->
 
   <p class="example no-backref">The <a for=url>origin</a> of
@@ -2108,17 +2108,16 @@ background information. [[!HTML]]
  <dt>"<code>https</code>"
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
- <dd><p>Return a tuple consisting of <a for=url>URL</a>'s <a for=url>scheme</a>, its
- <a for=url>host</a>, and its <a>default port</a> if its <a for=url>port</a> is null, and
- its <a for=url>port</a> otherwise.
+ <dd><p>Return a tuple consisting of <a for=url>URL</a>'s <a for=url>scheme</a>,
+ <a for=url>URL</a>'s <a for=url>host</a>, <a for=url>URL</a>'s <a for=url>port</a>, and null.
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
- return a new globally unique identifier.
+ return a new <a>opaque origin</a>.
 
  <dt>Otherwise
  <dd>
-  <p>Return a new globally unique identifier.
+  <p>Return a new <a>opaque origin</a>.
 
   <p class="note no-backref">This does indeed mean that these <a for=url lt=URL>URLs</a> cannot
   be <a spec=html lt="same origin">same-origin</a> with themselves.

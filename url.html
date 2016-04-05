@@ -2,6 +2,7 @@
  <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta content="#3c790a" name="theme-color">
   <title>URL Standard</title>
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
@@ -10,8 +11,10 @@
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
-   <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-30">30 March 2016</time></span></h2>
+   <hgroup>
+    <h1 class="p-name no-ref allcaps" id="title">URL</h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-05">5 April 2016</time></span></h2>
+   </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -28,7 +31,6 @@
   <div class="p-summary" data-fill-with="abstract">
    <p>The URL Standard defines URLs, domains, IP addresses, the <code title="">application/x-www-form-urlencoded</code> format, and their API.</p>
   </div>
-  <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
@@ -1526,16 +1528,15 @@ then runs these steps: </p>
  otherwise. </p>
    </ol>
    <h3 class="heading settled" data-level="4.5" id="origin"><span class="secno">4.5. </span><span class="content">Origin</span><a class="self-link" href="#origin"></a></h3>
-   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a>’s definition in HTML for the necessary
+   <p class="note" role="note">See <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>’s definition in HTML for the necessary
 background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-origin">origin<a class="self-link" href="#concept-url-origin"></a></dfn> is the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a> returned by running these steps, switching on <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
    <dl class="switch">
     <dt>"<code>blob</code>" 
     <dd>
      <p>Let <var>url</var> be the result of <a data-link-type="dfn" href="#concept-basic-url-parser">parsing</a> the first
   string in <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
-     <p>If <var>url</var> is failure, return a new globally unique identifier. Otherwise,
-  return <var>url</var>’s <a data-link-type="dfn" href="#concept-url-origin">origin</a>. </p>
+     <p>Return a new <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origin</a>, if <var>url</var> is failure, and <var>url</var>’s <a data-link-type="dfn" href="#concept-url-origin">origin</a> otherwise. </p>
      <p class="example no-backref" id="example-f4c8ee39"><a class="self-link" href="#example-f4c8ee39"></a>The <a data-link-type="dfn" href="#concept-url-origin">origin</a> of <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
   (<code>https</code>, <code>whatwg.org</code>, <code>443</code>). </p>
     <dt>"<code>ftp</code>" 
@@ -1545,15 +1546,14 @@ background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a
     <dt>"<code>ws</code>" 
     <dt>"<code>wss</code>" 
     <dd>
-     <p>Return a tuple consisting of <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, its <a data-link-type="dfn" href="#concept-url-host">host</a>, and its <a data-link-type="dfn" href="#default-port">default port</a> if its <a data-link-type="dfn" href="#concept-url-port">port</a> is null, and
- its <a data-link-type="dfn" href="#concept-url-port">port</a> otherwise. </p>
+     <p>Return a tuple consisting of <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>, <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a>, <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-port">port</a>, and null. </p>
     <dt>"<code>file</code>" 
     <dd>
      <p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
- return a new globally unique identifier. </p>
+ return a new <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origin</a>. </p>
     <dt>Otherwise 
     <dd>
-     <p>Return a new globally unique identifier. </p>
+     <p>Return a new <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origin</a>. </p>
      <p class="note no-backref" role="note">This does indeed mean that these <a data-link-type="dfn" href="#concept-url">URLs</a> cannot
   be <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same-origin</a> with themselves. </p>
    </dl>
@@ -2359,7 +2359,8 @@ neighboring rights to this work. </p>
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#hashchangeevent">HashChangeEvent</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#origin-2">origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#structured-clone">structuredclone</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin">unicode serialisation of an origin</a>
