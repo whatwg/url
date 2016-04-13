@@ -1632,6 +1632,9 @@ optionally with an <a>encoding</a>
          <li><p>Set <var>buffer</var> to the empty string.
         </ol>
 
+       <li><p>If <var>state override</var> is given and <var>buffer</var> is the empty string,
+       Set <var>url</var>'s <a for=url>port</a> to null.
+
        <li><p>If <var>state override</var> is given, terminate this algorithm.
 
        <li><p>Set <var>state</var> to <a>path start state</a>, and decrease
