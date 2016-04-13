@@ -2678,8 +2678,9 @@ steps:
 <ol>
  <li><p>Let <var>url</var> be <a>context object</a>'s <a for=URL>url</a>.
 
- <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null
- and empty <var>url</var>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>.
+ <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
+ empty <var>url</var>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>,
+ and terminate these steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading "<code>?</code>" removed, if
  any.

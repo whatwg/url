@@ -13,7 +13,7 @@
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-05">5 April 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-14">14 April 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1927,8 +1927,9 @@ steps: </p>
     <li>
      <p>Let <var>url</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>. </p>
     <li>
-     <p>If the given value is the empty string, set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to null
- and empty <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>. </p>
+     <p>If the given value is the empty string, set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query">query</a> to null,
+ empty <var>url</var>’s <a data-link-type="dfn" href="#concept-url-query-object">query object</a>’s <a data-link-type="dfn" href="#concept-urlsearchparams-list">list</a>,
+ and terminate these steps. </p>
     <li>
      <p>Let <var>input</var> be the given value with a single leading "<code>?</code>" removed, if
  any. </p>
