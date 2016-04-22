@@ -2100,7 +2100,7 @@ background information. [[!HTML]]
 
   <p class="example no-backref">The <a for=url>origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
-  (<code>https</code>, <code>whatwg.org</code>, <code>443</code>).
+  (<code>https</code>, <code>whatwg.org</code>, <code>443</code>, null).
 
  <dt>"<code>ftp</code>"
  <dt>"<code>gopher</code>"
