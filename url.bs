@@ -2186,8 +2186,8 @@ requires.
 <p>The
 <dfn id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
-<var>encoding override</var>, optionally with a <i>use _charset_ flag</i>, and optionally with an
-<i>isindex flag</i>, and then runs these steps:
+<var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
+steps:
 
 <ol>
  <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
@@ -2205,10 +2205,6 @@ takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
  <li><p>Let <var>sequences</var> be the result of splitting <var>input</var> on
  `<code>&amp;</code>`.
  <!-- XXX define splitting? DOM does not do it -->
-
- <li><p>If the <i title>isindex flag</i> is set and the first byte sequence in
- <var>sequences</var> does not contain a `<code>=</code>`, prepend
- `<code>=</code>` to the first byte sequence in <var>sequences</var>.
 
  <li><p>Let <var>tuples</var> be an empty list of name-value tuples where both name and value hold a
  byte sequence.
@@ -2341,20 +2337,11 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
    <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
    <var>tuple</var>'s value, using <var>encoding</var>.
 
-   <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>text</code>",
-   <var>outputPair</var>'s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
-   in <var>tuples</var>, append <var>outputPair</var>'s value to <var>output</var>.
+   <li><p>If <var>tuple</var> is not the first pair in <var>tuples</var>, then append
+   "<code>&amp;</code>" to <var>output</var>.
 
-   <li>
-    <p>Otherwise, run these substeps:
-
-    <ol>
-     <li><p>If <var>tuple</var> is not the first pair in <var>tuples</var>, append
-     "<code>&amp;</code>" to <var>output</var>.
-
-     <li>Append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
-     <var>outputPair</var>'s value, to <var>output</var>.
-    </ol>
+   <li>Append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
+   <var>outputPair</var>'s value, to <var>output</var>.
   </ol>
 
  <li>Return <var>output</var>.

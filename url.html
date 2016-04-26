@@ -13,7 +13,7 @@
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-22">22 April 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-26">26 April 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1591,7 +1591,8 @@ sequences. Unfortunately the format is in widespread use due to the prevalence o
    <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code>application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
    <p class="note no-backref" role="note">The features provided by the <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</a> are mainly
 relevant for server-oriented implementations. A browser-based implementation only needs what the <a data-link-type="dfn" href="#concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser</a> requires. </p>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <i>use _charset_ flag</i>, and optionally with an <i>isindex flag</i>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
+steps: </p>
    <ol>
     <li>
      <p>Let <var>encoding</var> be <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
@@ -1603,9 +1604,6 @@ relevant for server-oriented implementations. A browser-based implementation onl
     <li>
      <p>Let <var>sequences</var> be the result of splitting <var>input</var> on
  `<code>&amp;</code>`. </p>
-    <li>
-     <p>If the <i title="">isindex flag</i> is set and the first byte sequence in <var>sequences</var> does not contain a `<code>=</code>`, prepend
- `<code>=</code>` to the first byte sequence in <var>sequences</var>. </p>
     <li>
      <p>Let <var>tuples</var> be an empty list of name-value tuples where both name and value hold a
  byte sequence. </p>
@@ -1695,16 +1693,9 @@ relevant for server-oriented implementations. A browser-based implementation onl
       <li>
        <p>Otherwise, set <var>outputPair</var>’s value to the result of <a data-link-type="dfn" href="#concept-urlencoded-byte-serializer">serializing</a> the result of <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encode">encoding</a> <var>tuple</var>’s value, using <var>encoding</var>. </p>
       <li>
-       <p>If <var>tuple</var> has a type, <var>tuple</var>’s type is "<code>text</code>", <var>outputPair</var>’s name is "<code>isindex</code>", and <var>tuple</var> is the first tuple
-   in <var>tuples</var>, append <var>outputPair</var>’s value to <var>output</var>. </p>
-      <li>
-       <p>Otherwise, run these substeps: </p>
-       <ol>
-        <li>
-         <p>If <var>tuple</var> is not the first pair in <var>tuples</var>, append
-     "<code>&amp;</code>" to <var>output</var>. </p>
-        <li>Append <var>outputPair</var>’s name, followed by "<code>=</code>", followed by <var>outputPair</var>’s value, to <var>output</var>. 
-       </ol>
+       <p>If <var>tuple</var> is not the first pair in <var>tuples</var>, then append
+   "<code>&amp;</code>" to <var>output</var>. </p>
+      <li>Append <var>outputPair</var>’s name, followed by "<code>=</code>", followed by <var>outputPair</var>’s value, to <var>output</var>. 
      </ol>
     <li>Return <var>output</var>. 
    </ol>
