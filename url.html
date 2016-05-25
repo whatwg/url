@@ -8,12 +8,159 @@
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-url.svg" rel="icon">
   <meta content="Bikeshed 1.0.0" name="generator">
+<style>/* style-md-lists */
+
+            /* This is a weird hack for me not yet following the commonmark spec
+               regarding paragraph and lists. */
+            [data-md] > :first-child {
+                margin-top: 0;
+            }
+            [data-md] > :last-child {
+                margin-bottom: 0;
+            }</style>
+<style>/* style-counters */
+
+            body {
+                counter-reset: example figure issue;
+            }
+            .issue {
+                counter-increment: issue;
+            }
+            .issue:not(.no-marker)::before {
+                content: "Issue " counter(issue);
+            }
+
+            .example {
+                counter-increment: example;
+            }
+            .example:not(.no-marker)::before {
+                content: "Example " counter(example);
+            }
+            .invalid.example:not(.no-marker)::before,
+            .illegal.example:not(.no-marker)::before {
+                content: "Invalid Example" counter(example);
+            }
+
+            figure {
+                counter-increment: figure;
+            }
+            figcaption:not(.no-marker)::before {
+                content: "Figure " counter(figure);
+            }</style>
+<style>/* style-selflinks */
+
+            .heading, .issue, .note, .example, li, dt {
+                position: relative;
+            }
+            a.self-link {
+                position: absolute;
+                top: 0;
+                left: calc(-1 * (3.5rem - 26px));
+                width: calc(3.5rem - 26px);
+                height: 2em;
+                text-align: center;
+                border: none;
+                transition: opacity .2s;
+                opacity: .5;
+            }
+            a.self-link:hover {
+                opacity: 1;
+            }
+            .heading > a.self-link {
+                font-size: 83%;
+            }
+            li > a.self-link {
+                left: calc(-1 * (3.5rem - 26px) - 2em);
+            }
+            dfn > a.self-link {
+                top: auto;
+                left: auto;
+                opacity: 0;
+                width: 1.5em;
+                height: 1.5em;
+                background: gray;
+                color: white;
+                font-style: normal;
+                transition: opacity .2s, background-color .2s, color .2s;
+            }
+            dfn:hover > a.self-link {
+                opacity: 1;
+            }
+            dfn > a.self-link:hover {
+                color: black;
+            }
+
+            a.self-link::before            { content: "¶"; }
+            .heading > a.self-link::before { content: "§"; }
+            dfn > a.self-link::before      { content: "#"; }</style>
+<style>/* style-autolinks */
+
+            .css.css, .property.property, .descriptor.descriptor {
+                color: #005a9c;
+                font-size: inherit;
+                font-family: inherit;
+            }
+            .css::before, .property::before, .descriptor::before {
+                content: "‘";
+            }
+            .css::after, .property::after, .descriptor::after {
+                content: "’";
+            }
+            .property, .descriptor {
+                /* Don't wrap property and descriptor names */
+                white-space: nowrap;
+            }
+            .type { /* CSS value <type> */
+                font-style: italic;
+            }
+            pre .property::before, pre .property::after {
+                content: "";
+            }
+            [data-link-type="property"]::before,
+            [data-link-type="propdesc"]::before,
+            [data-link-type="descriptor"]::before,
+            [data-link-type="value"]::before,
+            [data-link-type="function"]::before,
+            [data-link-type="at-rule"]::before,
+            [data-link-type="selector"]::before,
+            [data-link-type="maybe"]::before {
+                content: "‘";
+            }
+            [data-link-type="property"]::after,
+            [data-link-type="propdesc"]::after,
+            [data-link-type="descriptor"]::after,
+            [data-link-type="value"]::after,
+            [data-link-type="function"]::after,
+            [data-link-type="at-rule"]::after,
+            [data-link-type="selector"]::after,
+            [data-link-type="maybe"]::after {
+                content: "’";
+            }
+
+            [data-link-type].production::before,
+            [data-link-type].production::after,
+            .prod [data-link-type]::before,
+            .prod [data-link-type]::after {
+                content: "";
+            }
+
+            [data-link-type=element],
+            [data-link-type=element-attr] {
+                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+                font-size: .9em;
+            }
+            [data-link-type=element]::before { content: "<" }
+            [data-link-type=element]::after  { content: ">" }
+
+            [data-link-type=biblio] {
+                white-space: pre;
+            }</style>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-27">27 April 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-05-25">25 May 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -675,7 +822,7 @@ resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other compo
 "<code>blob</code>" <a data-link-type="dfn" href="#concept-url">URLs</a>, but others can be added going forward, hence
 "object". </p>
    <hr>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="special-scheme">special scheme<a class="self-link" href="#special-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> listed in the first column of
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="special-scheme">special scheme<a class="self-link" href="#special-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> listed in the first column of
 the following table. A <dfn data-dfn-type="dfn" data-noexport="" id="default-port">default port<a class="self-link" href="#default-port"></a></dfn> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>’s optional
 corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is listed in the second column on the same row. </p>
    <table>
@@ -705,15 +852,17 @@ corresponding <a data-link-type="dfn" href="#concept-url-port">port</a> and is l
       <td>"<code>wss</code>"
       <td>443 
    </table>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-special">is special<a class="self-link" href="#is-special"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>. </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>about</code>",
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-export="" id="is-special">is special<a class="self-link" href="#is-special"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#special-scheme">special scheme</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="local-scheme">local scheme<a class="self-link" href="#local-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>". </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-noexport="" id="is-local">is local<a class="self-link" href="#is-local"></a></dfn> if its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is a <a data-link-type="dfn" href="#local-scheme">local scheme</a>. </p>
    <p class="note" role="note">This definition is used externally. E.g., by the Fetch Standard and
 Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a data-link-type="biblio" href="#biblio-referrer-policy">[REFERRER-POLICY]</a> </p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="network-scheme">network scheme<a class="self-link" href="#network-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>ftp</code>",
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="network-scheme">network scheme<a class="self-link" href="#network-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>ftp</code>",
 "<code>http</code>", or "<code>https</code>". </p>
-   <p class="note" role="note">This definition is used by HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="http-scheme">HTTP(S) scheme<a class="self-link" href="#http-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is
+"<code>http</code>" or "<code>https</code>". </p>
+   <p class="note" role="note"><a data-link-type="dfn" href="#network-scheme">Network scheme</a> and <a data-link-type="dfn" href="#http-scheme">HTTP(S) scheme</a> are used by HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either
 its <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its <a data-link-type="dfn" href="#concept-url-password">password</a> is
 non-null. </p>
@@ -1713,18 +1862,18 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="url
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoascii">domainToASCII</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToASCII(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintoascii-domain-domain">domain<a class="self-link" href="#dom-url-domaintoascii-domain-domain"></a></dfn>);
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicode">domainToUnicode</a>(USVString <dfn class="idl-code" data-dfn-for="URL/domainToUnicode(domain)" data-dfn-type="argument" data-export="" id="dom-url-domaintounicode-domain-domain">domain<a class="self-link" href="#dom-url-domaintounicode-domain-domain"></a></dfn>);
 
-  <dfn data-dfn-for="URL" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URL-stringification-behavior">stringifier<a class="self-link" href="#URL-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-href">href</a>;
-  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-url-origin">origin</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-protocol">protocol</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-username">username</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-password">password</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-host">host</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hostname">hostname</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-port">port</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-pathname">pathname</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-search">search</a>;
-  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-url-searchparams">searchParams</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hash">hash</a>;
+  <dfn data-dfn-for="URL" data-dfn-type="dfn" data-lt="stringification behavior" data-noexport="" id="URL-stringification-behavior">stringifier<a class="self-link" href="#URL-stringification-behavior"></a></dfn> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString" href="#dom-url-origin">origin</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-protocol">protocol</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-username">username</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-password">password</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-host">host</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-hostname">hostname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-port">port</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-pathname">pathname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-search">search</a>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams" href="#dom-url-searchparams">searchParams</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-hash">hash</a>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object has an associated <dfn data-dfn-for="URL" data-dfn-type="dfn" data-noexport="" id="concept-url-url">url<a class="self-link" href="#concept-url-url"></a></dfn> (a <a data-link-type="dfn" href="#concept-url">URL</a>) and <dfn data-dfn-for="URL" data-dfn-type="dfn" data-noexport="" id="concept-url-query-object">query object<a class="self-link" href="#concept-url-query-object"></a></dfn> (a <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object). </p>
@@ -2196,6 +2345,7 @@ neighboring rights to this work. </p>
    <li><a href="#concept-host-serializer">host serializer</a><span>, in §3.4</span>
    <li><a href="#host-state">host state</a><span>, in §4.2</span>
    <li><a href="#dom-url-href">href</a><span>, in §6.3</span>
+   <li><a href="#http-scheme">HTTP(S) scheme</a><span>, in §4</span>
    <li><a href="#include-credentials">include credentials</a><span>, in §4</span>
    <li>
     IPv4 address
@@ -2414,18 +2564,18 @@ interface <a href="#url">URL</a> {
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintoascii">domainToASCII</a>(USVString <a href="#dom-url-domaintoascii-domain-domain">domain</a>);
   static USVString <a class="idl-code" data-link-type="method" href="#dom-url-domaintounicode">domainToUnicode</a>(USVString <a href="#dom-url-domaintounicode-domain-domain">domain</a>);
 
-  <a href="#URL-stringification-behavior">stringifier</a> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-href">href</a>;
-  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString " href="#dom-url-origin">origin</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-protocol">protocol</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-username">username</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-password">password</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-host">host</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hostname">hostname</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-port">port</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-pathname">pathname</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-search">search</a>;
-  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams " href="#dom-url-searchparams">searchParams</a>;
-           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString " href="#dom-url-hash">hash</a>;
+  <a href="#URL-stringification-behavior">stringifier</a> attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-href">href</a>;
+  readonly attribute USVString <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="USVString" href="#dom-url-origin">origin</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-protocol">protocol</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-username">username</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-password">password</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-host">host</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-hostname">hostname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-port">port</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-pathname">pathname</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-search">search</a>;
+  readonly attribute <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="URLSearchParams" href="#dom-url-searchparams">searchParams</a>;
+           attribute USVString <a class="idl-code" data-link-type="attribute" data-type="USVString" href="#dom-url-hash">hash</a>;
 };
 
 [<a class="idl-code" data-link-type="constructor" href="#dom-urlsearchparams-urlsearchparams">Constructor</a>(optional (USVString or <a data-link-type="idl-name" href="#urlsearchparams">URLSearchParams</a>) <a href="#dom-urlsearchparams-urlsearchparams-init-init">init</a> = ""),
