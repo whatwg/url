@@ -254,6 +254,10 @@ point <a for=url lt=URL>URLs</a> from <var>A</var> can come from untrusted sourc
 <a for=host>host</a> serves as a network address, but it is sometimes (ab)used as opaque
 identifier in <a for=url lt=URL>URLs</a> where a network address is not necessary.
 
+<p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
+have no influence on <a for=host>host</a> syntax, parsing, and serialization. Unless stated
+otherwise in the sections that follow.
+
 <p>A <dfn export for=host id=concept-domain>domain</dfn> identifies a realm within a
 network.
 [[RFC1034]]
