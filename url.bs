@@ -254,6 +254,92 @@ point <a for=url lt=URL>URLs</a> from <var>A</var> can come from untrusted sourc
 <a for=host>host</a> serves as a network address, but it is sometimes (ab)used as opaque
 identifier in <a for=url lt=URL>URLs</a> where a network address is not necessary.
 
+<p>A <a>host</a>'s <dfn export for=host id=concept-host-public-suffix>public suffix</dfn> is
+the portion of a <a>host</a> which is controlled by a registrar, public or otherwise.
+To obtain a <var>host</var>'s <a>public suffix</a>, run these steps:
+
+1.  If <var>host</var> is an <a for=host>IPv4 address</a> or a <a for=host>IPv6 address</a>
+    return the empty string.
+
+2.  Let <var>host labels</var> be the result of <a lt="strictly split">strictly splitting</a>
+    <var>host</var> on the U+002E FULL STOP ('<code>.</code>') character.
+
+3.  Apply the <a>domain to ASCII</a> algorithm to each token in <var>host labels</var>.
+
+4.  Let <var>host</var> be the result of concatenating the items in <var>host labels</var>, in
+    the same order, separated by the U+002E FULL STOP ('<code>.</code>') character.
+
+5.  While <var>host</var> is not the empty string:
+
+    1.  If <var>host</var> matches the end of a suffix in the Public Suffix List,
+        return <var>host</var>. [PSL]
+
+    2.  <a>Strictly split</a> <var>host</var> on the U+002E FULL STOP ('<code>.</code>')
+        character, remove the first item from the resulting list, and let <var>host</var>
+        be the result of concatenating the remaining results, in the same order,
+        separated by the U+002E FULL STOP ('<code>.</code>') character.
+
+4.  Return the last item in <var>host labels</var>.
+
+<div class="example nobackref">
+  1. <code>example.com</code>'s public suffix is "<code>com</code>".
+  2. <code>example.co.uk</code>'s public suffix is "<code>co.uk</code>".
+  3. <code>example.appspot.com</code>'s public suffix is "<code>appspot.com</code>".
+  4. <code>subdomain.example.com</code>'s public suffix is "<code>com</code>".
+  5. <code>subdomain.example.co.uk</code>'s public suffix is "<code>co.uk</code>".
+  6. <code>subdomain.example.appspot.com</code>'s public suffix is "<code>appspot.com</code>".
+  7. <code>1.2.3.4</code>'s public suffix is "".
+  8. <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>'s public suffix is "".
+  
+  Assuming that <code>not-in-the-public-suffix-list</code> is not in the public suffix list:
+
+  1. <code>example.not-in-the-public-suffix-list</code>'s public suffix is "<code>not-in-the-public-suffix-list</code>".
+
+</div>
+
+<p>A <a>host</a>'s <dfn export for=host id=concept-host-registrable-domain>registrable
+domain</dfn> is the portion of a <a>host</a> which is assigned by a registrar, public
+or otherwise. To obtain a <var>host</var>'s <a>registrable domain</a>, run these steps:
+
+1.  If <var>host</var> is an <a for=host>IPv4 address</a> or a <a for=host>IPv6 address</a>
+    return <var>host</var>.
+
+2.  <a>Strictly split</a> <var>host</var> on the U+002E FULL STOP ('<code>.</code>')
+    character, apply the <a>domain to ASCII</a> algorithm to each returned token,
+    and let <var>host</var> be the result of concatenating the results, in the same
+    order, separated by the U+002E FULL STOP ('<code>.</code>') character.
+
+3.  Let <var>public suffix</var> be <var>host</var>'s <a>public suffix</a>.
+
+4.  If <var>public suffix</var> is <var>host</var>, return the empty string.
+
+5.  Let <var>registrable domain</var> be <var>public suffix</var>, <var>host labels</var>
+    and <var>public labels</var> be the result of <a lt="strictly split">strictly
+    splitting</a> <var>host</var> and <var>public suffix</var> respectively on the
+    U+002E FULL STOP ('<code>.</code>') character.
+
+6.  While the last item in <var>host labels</var> is an exact match with the last item
+    in <var>public labels</var>, pop the last item off both lists.
+
+7.  Prepend the last item in <var>host labels</var> to <var>registrable domain</var>.
+
+8.  Return <var>registrable domain</var>.
+
+<div class="example nobackref">
+  1. <code>example.com</code>'s registrable domain is "<code>example.com</code>".
+  2. <code>example.co.uk</code>'s registrable domain is "<code>example.co.uk</code>".
+  3. <code>example.appspot.com</code>'s registrable domain is "<code>example.appspot.com</code>".
+  4. <code>subdomain.example.com</code>'s registrable domain is "<code>example.com</code>".
+  5. <code>subdomain.example.co.uk</code>'s registrable domain is "<code>example.co.uk</code>".
+  6. <code>subdomain.example.appspot.com</code>'s registrable domain is "<code>example.appspot.com</code>".
+  7. <code>1.2.3.4</code>'s registrable domain is "<code>1.2.3.4</code>".
+  8. <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>'s registrable domain is "<code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>".
+  
+  Assuming that <code>not-in-the-public-suffix-list</code> is not in the public suffix list:
+
+  1. <code>example.not-in-the-public-suffix-list</code>'s registrable domain is "<code>example.not-in-the-public-suffix-list</code>".
+</div>
+
 <p>A <dfn export for=host id=concept-domain>domain</dfn> identifies a realm within a
 network.
 [[RFC1034]]
@@ -919,6 +1005,8 @@ input might be a <a>relative URL</a>.
 <var>url</var>'s <a for=url>path</a> does not contain a single string that is a
 <a>normalized Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s
 last string, if any.
+
+<p>A <a for=url>URL</a> <dfn>
 
 
 <h3 id=url-syntax>URL syntax</h3>
@@ -2978,6 +3066,11 @@ neighboring rights to this work.
         "href": "https://w3c.github.io/FileAPI/",
         "title": "File API",
         "publisher": "W3C"
+    },
+    "PSL": {
+      "href": "https://publicsuffix.org/",
+      "title": "Public Suffix List",
+      "publisher": "Mozilla Foundation"
     },
     "UTS36": {
       "href": "http://unicode.org/reports/tr36/",
