@@ -8,159 +8,12 @@
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-url.svg" rel="icon">
   <meta content="Bikeshed 1.0.0" name="generator">
-<style>/* style-md-lists */
-
-            /* This is a weird hack for me not yet following the commonmark spec
-               regarding paragraph and lists. */
-            [data-md] > :first-child {
-                margin-top: 0;
-            }
-            [data-md] > :last-child {
-                margin-bottom: 0;
-            }</style>
-<style>/* style-counters */
-
-            body {
-                counter-reset: example figure issue;
-            }
-            .issue {
-                counter-increment: issue;
-            }
-            .issue:not(.no-marker)::before {
-                content: "Issue " counter(issue);
-            }
-
-            .example {
-                counter-increment: example;
-            }
-            .example:not(.no-marker)::before {
-                content: "Example " counter(example);
-            }
-            .invalid.example:not(.no-marker)::before,
-            .illegal.example:not(.no-marker)::before {
-                content: "Invalid Example" counter(example);
-            }
-
-            figure {
-                counter-increment: figure;
-            }
-            figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure);
-            }</style>
-<style>/* style-selflinks */
-
-            .heading, .issue, .note, .example, li, dt {
-                position: relative;
-            }
-            a.self-link {
-                position: absolute;
-                top: 0;
-                left: calc(-1 * (3.5rem - 26px));
-                width: calc(3.5rem - 26px);
-                height: 2em;
-                text-align: center;
-                border: none;
-                transition: opacity .2s;
-                opacity: .5;
-            }
-            a.self-link:hover {
-                opacity: 1;
-            }
-            .heading > a.self-link {
-                font-size: 83%;
-            }
-            li > a.self-link {
-                left: calc(-1 * (3.5rem - 26px) - 2em);
-            }
-            dfn > a.self-link {
-                top: auto;
-                left: auto;
-                opacity: 0;
-                width: 1.5em;
-                height: 1.5em;
-                background: gray;
-                color: white;
-                font-style: normal;
-                transition: opacity .2s, background-color .2s, color .2s;
-            }
-            dfn:hover > a.self-link {
-                opacity: 1;
-            }
-            dfn > a.self-link:hover {
-                color: black;
-            }
-
-            a.self-link::before            { content: "¶"; }
-            .heading > a.self-link::before { content: "§"; }
-            dfn > a.self-link::before      { content: "#"; }</style>
-<style>/* style-autolinks */
-
-            .css.css, .property.property, .descriptor.descriptor {
-                color: #005a9c;
-                font-size: inherit;
-                font-family: inherit;
-            }
-            .css::before, .property::before, .descriptor::before {
-                content: "‘";
-            }
-            .css::after, .property::after, .descriptor::after {
-                content: "’";
-            }
-            .property, .descriptor {
-                /* Don't wrap property and descriptor names */
-                white-space: nowrap;
-            }
-            .type { /* CSS value <type> */
-                font-style: italic;
-            }
-            pre .property::before, pre .property::after {
-                content: "";
-            }
-            [data-link-type="property"]::before,
-            [data-link-type="propdesc"]::before,
-            [data-link-type="descriptor"]::before,
-            [data-link-type="value"]::before,
-            [data-link-type="function"]::before,
-            [data-link-type="at-rule"]::before,
-            [data-link-type="selector"]::before,
-            [data-link-type="maybe"]::before {
-                content: "‘";
-            }
-            [data-link-type="property"]::after,
-            [data-link-type="propdesc"]::after,
-            [data-link-type="descriptor"]::after,
-            [data-link-type="value"]::after,
-            [data-link-type="function"]::after,
-            [data-link-type="at-rule"]::after,
-            [data-link-type="selector"]::after,
-            [data-link-type="maybe"]::after {
-                content: "’";
-            }
-
-            [data-link-type].production::before,
-            [data-link-type].production::after,
-            .prod [data-link-type]::before,
-            .prod [data-link-type]::after {
-                content: "";
-            }
-
-            [data-link-type=element],
-            [data-link-type=element-attr] {
-                font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-                font-size: .9em;
-            }
-            [data-link-type=element]::before { content: "<" }
-            [data-link-type=element]::after  { content: ">" }
-
-            [data-link-type=biblio] {
-                white-space: pre;
-            }</style>
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-05-25">25 May 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-10">10 June 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -817,7 +670,7 @@ either null or a string holding data that can be used for further processing on 
 resource the <a data-link-type="dfn" href="#concept-url">URL</a>’s other components identify. It is initially null. </p>
    <p class="note no-backref" role="note">This is not an <a data-link-type="dfn" href="#ascii-string">ASCII string</a> on purpose. </p>
    <p id="non-relative-flag">A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag<a class="self-link" href="#url-cannot-be-a-base-url-flag"></a></dfn>. It is initially unset. </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is either null or a <code><a data-link-type="dfn" href="https://w3c.github.io/FileAPI/#blob">Blob</a></code> object. It is initially null. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a> </p>
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> also has an associated <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="concept-url-object">object<a class="self-link" href="#concept-url-object"></a></dfn> that is null, a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object, a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/media-source/#idl-def-MediaSource">MediaSource</a></code> object, or a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStream">MediaStream</a></code> object. It is initially null. <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a> <a data-link-type="biblio" href="#biblio-media-source">[MEDIA-SOURCE]</a> <a data-link-type="biblio" href="#biblio-mediacapture-streams">[MEDIACAPTURE-STREAMS]</a> </p>
    <p class="note no-backref" role="note">At this point this is used primarily to support
 "<code>blob</code>" <a data-link-type="dfn" href="#concept-url">URLs</a>, but others can be added going forward, hence
 "object". </p>
@@ -2499,6 +2352,11 @@ neighboring rights to this work. </p>
      <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[file-1]</a> defines the following terms:
+    <ul>
+     <li><a href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/comms.html#eventsource">EventSource</a>
@@ -2519,14 +2377,20 @@ neighboring rights to this work. </p>
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-encoding">[ENCODING]
    <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
+   <dt id="biblio-file-1">[FILE-1]
+   <dd>File API URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-fileapi">[FILEAPI]
-   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
+   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. 21 April 2015. WD. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-iana-uri-schemes">[IANA-URI-SCHEMES]
    <dd><a href="http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">Uniform Resource Identifier (URI) Schemes</a>. URL: <a href="http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</a>
    <dt id="biblio-idna">[IDNA]
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
+   <dt id="biblio-media-source">[MEDIA-SOURCE]
+   <dd>Matthew Wolenetz; et al. <a href="https://w3c.github.io/media-source/">Media Source Extensions</a>. 3 May 2016. CR. URL: <a href="https://w3c.github.io/media-source/">https://w3c.github.io/media-source/</a>
+   <dt id="biblio-mediacapture-streams">[MEDIACAPTURE-STREAMS]
+   <dd>Daniel Burnett; et al. <a href="https://w3c.github.io/mediacapture-main/">Media Capture and Streams</a>. 19 May 2016. CR. URL: <a href="https://w3c.github.io/mediacapture-main/">https://w3c.github.io/mediacapture-main/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-rfc4291">[RFC4291]
@@ -2534,14 +2398,14 @@ neighboring rights to this work. </p>
    <dt id="biblio-uts36">[UTS36]
    <dd>Mark Davis; Michel Suignard. <a href="http://unicode.org/reports/tr36/">Unicode Security Considerations</a>. URL: <a href="http://unicode.org/reports/tr36/">http://unicode.org/reports/tr36/</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Boris Zbarsky; Cameron McCormack. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 8 March 2016. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-referrer-policy">[REFERRER-POLICY]
-   <dd>Jochen Eisinger; Mike West. <a href="https://w3c.github.io/webappsec/specs/referrer-policy/">Referrer Policy</a>. 7 August 2014. WD. URL: <a href="https://w3c.github.io/webappsec/specs/referrer-policy/">https://w3c.github.io/webappsec/specs/referrer-policy/</a>
+   <dd>Jochen Eisinger; Mike West. <a href="https://w3c.github.io/webappsec/specs/referrer-policy/">Referrer Policy</a>. 1 June 2016. WD. URL: <a href="https://w3c.github.io/webappsec/specs/referrer-policy/">https://w3c.github.io/webappsec/specs/referrer-policy/</a>
    <dt id="biblio-rfc1034">[RFC1034]
    <dd>P.V. Mockapetris. <a href="https://tools.ietf.org/html/rfc1034">Domain names - concepts and facilities</a>. November 1987. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc1034">https://tools.ietf.org/html/rfc1034</a>
    <dt id="biblio-rfc3986">[RFC3986]

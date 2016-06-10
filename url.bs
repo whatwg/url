@@ -849,8 +849,11 @@ resource the <a for=url>URL</a>'s other components identify. It is initially nul
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
 <p>A <a for=url>URL</a> also has an associated
-<dfn export for=url id=concept-url-object>object</dfn> that is either null or a
-<code><a>Blob</a></code> object. It is initially null. [[!FILEAPI]]
+<dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
+{{MediaSource}} object, or a {{MediaStream}} object. It is initially null.
+[[!FILEAPI]]
+[[!MEDIA-SOURCE]]
+[[!MEDIACAPTURE-STREAMS]]
 
 <p class="note no-backref">At this point this is used primarily to support
 "<code>blob</code>" <a for=url lt=URL>URLs</a>, but others can be added going forward, hence
@@ -2954,53 +2957,22 @@ neighboring rights to this work.
         "title": "Unicode IDNA Compatibility Processing",
         "publisher": "Unicode Consortium"
     },
-    "DOM": {
-        "authors": [
-            "Anne van Kesteren"
-        ],
-        "href": "https://dom.spec.whatwg.org/",
-        "title": "DOM",
-        "publisher": "WHATWG"
-    },
-    "ENCODING": {
-        "authors": [
-            "Anne van Kesteren"
-        ],
-        "href": "https://encoding.spec.whatwg.org/",
-        "title": "Encoding",
-        "publisher": "WHATWG"
-    },
-    "FILEAPI": {
-        "authors": [
-            "Arun Ranganathan",
-            "Jonas Sicking"
-        ],
-        "href": "https://w3c.github.io/FileAPI/",
-        "title": "File API",
-        "publisher": "W3C"
-    },
     "UTS36": {
       "href": "http://unicode.org/reports/tr36/",
       "authors" : ["Mark Davis", "Michel Suignard"],
       "title": "Unicode Security Considerations",
       "publisher" : "Unicode Consortium"
-    },
-    "WEBIDL": {
-        "authors": [
-            "Boris Zbarsky",
-            "Cameron McCormack"
-        ],
-        "href": "https://heycam.github.io/webidl/",
-        "title": "Web IDL",
-        "publisher": "W3C"
     }
 }
 </pre>
 
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
-  text: blob
   text: blob url store; url: #BlobURLStore
+urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
+  text: MediaSource; url: MediaSource
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#idl-def-; type: interface
+  text: MediaStream; url: MediaStream
 urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: concept-attribute-value; url: concept-attribute-value
   text: concept-document; url: concept-document
