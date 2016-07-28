@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-30">30 June 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-07-28">28 July 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -788,7 +788,7 @@ last string, if any. </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" data-lt="URL|URL string" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either
 a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>. To
 disambiguate from a <a data-link-type="dfn" href="#concept-url">URL record</a> it can also be referred to as a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
-   <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute-with-fragment">absolute URL with fragment<a class="self-link" href="#syntax-url-absolute-with-fragment"></a></dfn> must be an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>, followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
+   <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute-with-fragment">absolute URL with fragment<a class="self-link" href="#syntax-url-absolute-with-fragment"></a></dfn> must be an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
    <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute">absolute URL<a class="self-link" href="#syntax-url-absolute"></a></dfn> must be one of
 the following </p>
    <ul class="brief">
@@ -804,7 +804,7 @@ the following </p>
    <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>. </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme">scheme<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
 "<code>+</code>", "<code>-</code>", and "<code>.</code>". <a data-link-type="dfn" href="#syntax-url-scheme">Schemes</a> should be registered in the <cite>IANA URI [sic] Schemes</cite> registry. <a data-link-type="biblio" href="#biblio-iana-uri-schemes">[IANA-URI-SCHEMES]</a> <a data-link-type="biblio" href="#biblio-rfc7595">[RFC7595]</a> </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative-with-fragment">relative URL with fragment<a class="self-link" href="#syntax-url-relative-with-fragment"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
+   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative-with-fragment">relative URL with fragment<a class="self-link" href="#syntax-url-relative-with-fragment"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be one of
 the following, switching on <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
    <dl class="switch">
@@ -2125,6 +2125,7 @@ Brandon Ross,
 Chris Rebert,
 Dan Appelquist,
 Daniel Bratell,
+David Burns,
 David Håsäther,
 David Sheets,
 David Singer,
@@ -2448,7 +2449,7 @@ neighboring rights to this work. </p>
    <dt id="biblio-idna">[IDNA]
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
    <dt id="biblio-media-source">[MEDIA-SOURCE]
-   <dd>Matthew Wolenetz; et al. <a href="https://w3c.github.io/media-source/">Media Source Extensions</a>. 3 May 2016. CR. URL: <a href="https://w3c.github.io/media-source/">https://w3c.github.io/media-source/</a>
+   <dd>Matthew Wolenetz; et al. <a href="https://w3c.github.io/media-source/">Media Source Extensions</a>. 5 July 2016. CR. URL: <a href="https://w3c.github.io/media-source/">https://w3c.github.io/media-source/</a>
    <dt id="biblio-mediacapture-streams">[MEDIACAPTURE-STREAMS]
    <dd>Daniel Burnett; et al. <a href="https://w3c.github.io/mediacapture-main/">Media Capture and Streams</a>. 19 May 2016. CR. URL: <a href="https://w3c.github.io/mediacapture-main/">https://w3c.github.io/mediacapture-main/</a>
    <dt id="biblio-rfc2119">[RFC2119]

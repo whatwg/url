@@ -939,7 +939,7 @@ disambiguate from a <a>URL record</a> it can also be referred to as a <a>URL str
 
 <p>An
 <dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
-must be an <a>absolute URL</a>, followed by "<code>#</code>" and a
+must be an <a>absolute URL</a>, optionally followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
 <p>An <dfn export for=urlsyntax id=syntax-url-absolute>absolute URL</dfn> must be one of
@@ -968,7 +968,7 @@ should be registered in the <cite>IANA URI [sic] Schemes</cite> registry.
 
 <p>A
 <dfn export for=urlsyntax id=syntax-url-relative-with-fragment>relative URL with fragment</dfn>
-must be a <a>relative URL</a>, followed by "<code>#</code>" and a
+must be a <a>relative URL</a>, optionally followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be one of
@@ -2890,6 +2890,7 @@ Brandon Ross,
 Chris Rebert,
 Dan Appelquist,
 Daniel Bratell,
+David Burns,
 David Håsäther,
 David Sheets,
 David Singer,
