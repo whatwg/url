@@ -2093,11 +2093,11 @@ then runs these steps:
 <h3 id=origin>Origin</h3>
 <!-- Still need to watch the final bits -->
 
-<p class=note>See <a spec=html for=origin>origin</a>'s definition in HTML for the necessary
+<p class=note>See <a for=/>origin</a>'s definition in HTML for the necessary
 background information. [[!HTML]]
 
 <p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-origin>origin</dfn> is the
-<a spec=html for=origin>origin</a> returned by running these steps, switching on
+<a for=/>origin</a> returned by running these steps, switching on
 <a for=url>URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
