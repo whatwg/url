@@ -108,7 +108,7 @@ references the code point the <var>pointer</var> variable points to.
 <dfn>remaining</dfn> references the substring after <var>pointer</var> in the string
 being processed.
 
-<p class=example>If "<code>mailto:username@example</code>" is a string being
+<p class=example id=example-12672b6a>If "<code>mailto:username@example</code>" is a string being
 processed and <var>pointer</var> points to "<code>@</code>",
 <a>c</a> is "<code>@</code>" and <a>remaining</a> is
 "<code>example</code>".
@@ -476,8 +476,8 @@ runs these steps:
    <li>
     <p>If <var>part</var> is the empty string, return <var>input</var>.
 
-    <p class="example no-backref"><code>0..0x300</code> is a <a for=host>domain</a>, not
-    an <a for=host>IPv4 address</a>.
+    <p class="example no-backref" id=example-c2afe535><code>0..0x300</code> is a
+    <a for=host>domain</a>, not an <a for=host>IPv4 address</a>.
 
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
    <var>part</var> using <var>syntaxViolationFlag</var>.
@@ -750,7 +750,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
   sequences of <var>address</var>'s
   <a lt='IPv6 piece'>16-bit pieces</a> that are 0.
 
-  <p class=example>In <code>0:f:0:0:f:f:0:0</code> it would point to
+  <p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to
   the second 0.
 
  <li><p>If there is no sequence of <var>address</var>'s
@@ -1135,7 +1135,7 @@ U+100000 to U+10FFFD.
  <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
  <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a spec=html>StructuredClone</a> of the
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a>StructuredClone</a> of the
  entry in the <a>blob URL store</a> corresponding to the first string in <var>url</var>'s
  <a for=url>path</a>. [[!HTML]]
 
@@ -2110,7 +2110,7 @@ background information. [[!HTML]]
   <a for=url>origin</a> otherwise.
   <!-- Did you mean: recursion -->
 
-  <p class="example no-backref">The <a for=url>origin</a> of
+  <p class="example no-backref" id=example-43b5cea5>The <a for=url>origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
   (<code>https</code>, <code>whatwg.org</code>, <code>443</code>, null).
 
@@ -2391,7 +2391,7 @@ interface URL {
            attribute USVString port;
            attribute USVString pathname;
            attribute USVString search;
-  readonly attribute URLSearchParams searchParams;
+  [SameObject] readonly attribute URLSearchParams searchParams;
            attribute USVString hash;
 };
 </pre>
@@ -2453,7 +2453,7 @@ when invoked, must run these steps:
  <li><p>Return <var>result</var>.
 </ol>
 
-<div class="example no-backref">
+<div class="example no-backref" id=example-5434421b>
  <p>To <a lt="basic URL parser">parse</a> a string into a <a for=url>URL</a> without using a
  <a>base URL</a>, invoke the {{URL}} constructor with a single argument:
 
@@ -2887,6 +2887,7 @@ Bobby Holley,
 Boris Zbarsky,
 Brad Hill,
 Brandon Ross,
+Chris Dumez,
 Chris Rebert,
 Dan Appelquist,
 Daniel Bratell,
@@ -2973,6 +2974,7 @@ neighboring rights to this work.
 </pre>
 
 <pre class="anchors">
+url: https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone; type: dfn; text: structuredclone
 urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
   text: blob url store; url: #BlobURLStore
 urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
