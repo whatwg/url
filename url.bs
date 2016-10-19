@@ -2378,9 +2378,6 @@ result of <a lt='urlencoded parser'><code>application/x-www-form-urlencoded</cod
 [Constructor(USVString url, optional USVString base),
  Exposed=(Window,Worker)]
 interface URL {
-  static USVString domainToASCII(USVString domain);
-  static USVString domainToUnicode(USVString domain);
-
   stringifier attribute USVString href;
   readonly attribute USVString origin;
            attribute USVString protocol;
@@ -2475,32 +2472,6 @@ url.pathname // "/%F0%9F%92%A9"</pre>
     url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
 </div>
-
-
-<h3 id=url-statics>{{URL}} statics</h3>
-
-<p>The <dfn method for=URL><code>domainToASCII(<var>domain</var>)</code></dfn> static
-method, when invoked, must run these steps:
-
-<ol>
- <li><p>Let <var>asciiDomain</var> be the result of
- <a lt='host parser'>host parsing</a> <var>domain</var>.
-
- <li><p>Return the empty string if <var>asciiDomain</var> is not a <a for=host>domain</a>,
- and <var>asciiDomain</var> otherwise.
-</ol>
-
-<p>The <dfn method for=URL><code>domainToUnicode(<var>domain</var>)</code></dfn> static
-method, when invoked, must run these steps:
-
-<ol>
- <li><p>Let <var>unicodeDomain</var> be the result of
- <a lt='host parser'>host parsing</a> <var>domain</var> with the
- <var>Unicode flag</var> set.
-
- <li><p>Return the empty string if <var>unicodeDomain</var> is not a
- <a for=host>domain</a>, and <var>unicodeDomain</var> otherwise.
-</ol>
 
 
 <h3 id=urlutils-members>{{URL}} members</h3>
