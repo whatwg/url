@@ -1105,6 +1105,28 @@ U+100000 to U+10FFFD.
 <a>URL parser</a>, except for code points appearing in
 <a for=url lt=fragment>fragments</a>.
 
+<p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
+<a for=urlsyntax>query</a> that are higher than U+009F will be converted to
+<a lt="percent-encoded byte">percent-encoded bytes</a> <em>using the document's encoding</em>.
+This can cause problems if a URL that works in one document is copied to another document that uses
+a different document encoding. Using the UTF-8 encoding everywhere solves this problem.
+
+<div class=example id=query-encoding-example>
+
+ <p>For example, consider this HTML document:
+
+ <pre>
+ &lt;!doctype html>
+ &lt;meta charset="windows-1252">
+ &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
+ </pre>
+
+ <p>Since the document encoding is windows-1252, the link's <a for=url>URL</a>'s
+ <a for=url>query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
+ it would instead be "sm%C3%B6rg%C3%A5sbord".
+
+</div>
+
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
 
 <p class=note><a>Percent-encoded bytes</a> can be used to encode code points that are not

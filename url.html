@@ -905,6 +905,19 @@ U+E0000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD. </p>
    <p class="note" role="note">Code points higher than U+009F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
+   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">query</a> that are higher than U+009F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>.
+This can cause problems if a URL that works in one document is copied to another document that uses
+a different document encoding. Using the UTF-8 encoding everywhere solves this problem. </p>
+   <div class="example" id="query-encoding-example">
+    <a class="self-link" href="#query-encoding-example"></a> 
+    <p>For example, consider this HTML document: </p>
+<pre>&lt;!doctype html>
+&lt;meta charset="windows-1252">
+&lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
+</pre>
+    <p>Since the document encoding is windows-1252, the link’s <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
+ it would instead be "sm%C3%B6rg%C3%A5sbord". </p>
+   </div>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-units">URL units<a class="self-link" href="#url-units"></a></dfn> are <a data-link-type="dfn" href="#url-code-points">URL code points</a> and <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a>. </p>
    <p class="note" role="note"><a data-link-type="dfn" href="#percent-encoded-byte">Percent-encoded bytes</a> can be used to encode code points that are not <a data-link-type="dfn" href="#url-code-points">URL code points</a> or are excluded from a syntax production. </p>
    <hr>
