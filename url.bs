@@ -2513,6 +2513,14 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
  <li><p>If <var>parsedURL</var> is failure, <a>throw</a> a <code>TypeError</code> exception.
 
  <li><p>Set <a>context object</a>'s <a for=URL>url</a> to <var>parsedURL</var>.
+
+ <li><p>Empty <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>.
+
+ <li><p>Let <var>query</var> be <a>context object</a>'s <a for=URL>url</a>'s <a for=url>query</a>.
+
+ <li><p>If <var>query</var> is non-null, then set <a>context object</a>'s
+ <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the result of
+ <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>origin</code></dfn> attribute's getter must return the
@@ -2674,7 +2682,7 @@ steps:
  <li><p>Let <var>url</var> be <a>context object</a>'s <a for=URL>url</a>.
 
  <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
- empty <var>url</var>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>,
+ empty <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>,
  and terminate these steps.
 
  <li><p>Let <var>input</var> be the given value with a single leading "<code>?</code>" removed, if
@@ -2685,8 +2693,8 @@ steps:
  <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with <var>url</var> as
  <var>url</var> and <a>query state</a> as <var>state override</var>.
 
- <li><p>Set <var>url</var>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
- result of <a lt='urlencoded string parser'>parsing</a> <var>input</var>.
+ <li><p>Set <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to
+ the result of <a lt='urlencoded string parser'>parsing</a> <var>input</var>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>searchParams</code></dfn> attribute's getter must return
