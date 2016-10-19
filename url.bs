@@ -922,11 +922,11 @@ input might be a <a>relative URL</a>.
 
 <hr>
 
-<p>To <dfn local-lt=pop>pop a <var>url</var>'s path</dfn>, if
-<var>url</var>'s <a for=url>scheme</a> is not "<code>file</code>" or
-<var>url</var>'s <a for=url>path</a> does not contain a single string that is a
-<a>normalized Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s
-last string, if any.
+<p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>, if
+<var>url</var>'s <a for=url>scheme</a> is not "<code>file</code>" or <var>url</var>'s
+<a for=url>path</a> does not contain a single string that is a
+<a>normalized Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s last string,
+if any.
 
 
 <h3 id=url-syntax>URL syntax</h3>
@@ -1681,7 +1681,7 @@ optionally with an <a>encoding</a>
         <p>then set <var>url</var>'s <a for=url>host</a> to
         <var>base</var>'s <a for=url>host</a>,
         <var>url</var>'s <a for=url>path</a> to
-        <var>base</var>'s <a for=url>path</a>, and then <a>pop</a>
+        <var>base</var>'s <a for=url>path</a>, and then <a>shorten</a>
         <var>url</var>'s <a for=url>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk.
@@ -1796,7 +1796,7 @@ optionally with an <a>encoding</a>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
        <a>syntax violation</a>.
 
-       <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>pop</a>
+       <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>shorten</a>
        <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is
        "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
        "<code>\</code>", append the empty string to <var>url</var>'s <a for=url>path</a>.

@@ -780,8 +780,8 @@ non-null. </p>
    <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is useful for the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a> when the
 input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>. </p>
    <hr>
-   <p>To <dfn data-dfn-type="dfn" data-local-lt="pop" data-noexport="" id="pop-a-urls-path">pop a <var>url</var>’s path<a class="self-link" href="#pop-a-urls-path"></a></dfn>, if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a <a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s
-last string, if any. </p>
+   <p id="pop-a-urls-path">To <dfn data-dfn-type="dfn" data-local-lt="shorten" data-noexport="" id="shorten-a-urls-path">shorten a <var>url</var>’s path<a class="self-link" href="#shorten-a-urls-path"></a></dfn>, if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a <a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s last string,
+if any. </p>
    <h3 class="heading settled" data-level="4.1" id="url-syntax"><span class="secno">4.1. </span><span class="content">URL syntax</span><a class="self-link" href="#url-syntax"></a></h3>
    <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" data-lt="URL|URL string" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either
 a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>. To
@@ -1281,7 +1281,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
             <li><a data-link-type="dfn" href="#remaining">remaining</a>’s second code point is <em>not</em> "<code>/</code>",
          "<code>\</code>", "<code>?</code>", or "<code>#</code>" 
            </ul>
-           <p>then set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then <a data-link-type="dfn" href="#pop-a-urls-path">pop</a> <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
+           <p>then set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-host">host</a>, <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> to <var>base</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then <a data-link-type="dfn" href="#shorten-a-urls-path">shorten</a> <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
            <p class="note" role="note">This is a (platform-independent) Windows drive letter quirk. </p>
           <li>
            <p>Otherwise, if <var>base</var> is non-null and <var>base</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
@@ -1370,7 +1370,7 @@ optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.or
           <li>
            <p>If <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is "<code>\</code>", <a data-link-type="dfn" href="#syntax-violation">syntax violation</a>. </p>
           <li>
-           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>, <a data-link-type="dfn" href="#pop-a-urls-path">pop</a> <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then if neither <a data-link-type="dfn" href="#c">c</a> is
+           <p>If <var>buffer</var> is a <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>, <a data-link-type="dfn" href="#shorten-a-urls-path">shorten</a> <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>, and then if neither <a data-link-type="dfn" href="#c">c</a> is
        "<code>/</code>", nor <var>url</var> <a data-link-type="dfn" href="#is-special">is special</a> and <a data-link-type="dfn" href="#c">c</a> is
        "<code>\</code>", append the empty string to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>. </p>
           <li>
@@ -2293,8 +2293,6 @@ neighboring rights to this work. </p>
    <li><a href="#percent-decode">percent decode</a><span>, in §1.2</span>
    <li><a href="#percent-encode">percent encode</a><span>, in §1.2</span>
    <li><a href="#percent-encoded-byte">percent-encoded byte</a><span>, in §1.2</span>
-   <li><a href="#pop-a-urls-path">pop</a><span>, in §4</span>
-   <li><a href="#pop-a-urls-path">pop a url’s path</a><span>, in §4</span>
    <li>
     port
     <ul>
@@ -2333,6 +2331,8 @@ neighboring rights to this work. </p>
    <li><a href="#dom-urlsearchparams-set">set(name, value)</a><span>, in §6.3</span>
    <li><a href="#set-the-password">set the password</a><span>, in §4.2</span>
    <li><a href="#set-the-username">set the username</a><span>, in §4.2</span>
+   <li><a href="#shorten-a-urls-path">shorten</a><span>, in §4</span>
+   <li><a href="#shorten-a-urls-path">shorten a url’s path</a><span>, in §4</span>
    <li><a href="#simple-encode-set">simple encode set</a><span>, in §1.2</span>
    <li><a href="#syntax-url-path-segment-dot">single-dot path segment</a><span>, in §4.1</span>
    <li><a href="#special-authority-ignore-slashes-state">special authority ignore slashes state</a><span>, in §4.2</span>
