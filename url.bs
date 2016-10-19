@@ -1148,7 +1148,7 @@ U+100000 to U+10FFFD.
 <var>input</var>, optionally with a
 <a>base URL</a> <var>base</var>,
 optionally with an <a>encoding</a>
-<var>encoding override</var>, optionally with an
+<var>encoding override</var>, optionally with a
 <a for=url>URL</a> <var>url</var> and a state override
 <var>state override</var>, and then runs these steps:
 
@@ -2879,6 +2879,7 @@ people have helped making this standard what it is today.
 Adam Barth,
 Addison Phillips,
 Albert Wiersch,
+Alex Christensen,
 Alexandre Morgaut,
 Andrew Sullivan,
 Arkadiusz Michalski,
