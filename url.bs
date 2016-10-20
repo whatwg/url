@@ -1100,13 +1100,13 @@ U+E0000 to U+EFFFD,<!-- changed relative to IRI from E1000 to E0000 to align wit
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD.
 
-<p class=note>Code points higher than U+009F will be converted to
+<p class=note>Code points higher than U+007F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the
 <a>URL parser</a>, except for code points appearing in
 <a for=url lt=fragment>fragments</a>.
 
 <p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
-<a for=urlsyntax>query</a> that are higher than U+009F will be converted to
+<a for=urlsyntax>query</a> that are higher than U+007F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> <em>using the document's encoding</em>.
 This can cause problems if a URL that works in one document is copied to another document that uses
 a different document encoding. Using the UTF-8 encoding everywhere solves this problem.

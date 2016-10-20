@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-19">19 October 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-20">20 October 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -904,8 +904,8 @@ U+D0000 to U+DFFFD,
 U+E0000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD. </p>
-   <p class="note" role="note">Code points higher than U+009F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
-   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">query</a> that are higher than U+009F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>.
+   <p class="note" role="note">Code points higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
+   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">query</a> that are higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>.
 This can cause problems if a URL that works in one document is copied to another document that uses
 a different document encoding. Using the UTF-8 encoding everywhere solves this problem. </p>
    <div class="example" id="query-encoding-example">
