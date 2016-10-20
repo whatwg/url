@@ -1100,10 +1100,31 @@ U+E0000 to U+EFFFD,<!-- changed relative to IRI from E1000 to E0000 to align wit
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD.
 
-<p class=note>Code points higher than U+009F will be converted to
-<a lt="percent-encoded byte">percent-encoded bytes</a> by the
-<a>URL parser</a>, except for code points appearing in
-<a for=url lt=fragment>fragments</a>.
+<p class=note>Code points higher than U+007F will be converted to
+<a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>, except for code
+points appearing in <a for=url lt=fragment>fragments</a>.
+
+<p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
+<a for=urlsyntax>query</a> that are higher than U+007F will be converted to
+<a lt="percent-encoded byte">percent-encoded bytes</a> <em>using the document's encoding</em>. This
+can cause problems if a URL that works in one document is copied to another document that uses a
+different document encoding. Using the <a>UTF-8</a> encoding everywhere solves this problem.
+
+<div class=example id=query-encoding-example>
+
+ <p>For example, consider this HTML document:
+
+ <pre>
+ &lt;!doctype html>
+ &lt;meta charset="windows-1252">
+ &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
+ </pre>
+
+ <p>Since the document encoding is windows-1252, the link's <a for=url>URL</a>'s
+ <a for=url>query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
+ it would instead be "sm%C3%B6rg%C3%A5sbord".
+
+</div>
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
 
@@ -2344,7 +2365,7 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
 
    <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>hidden</code>", and
    <var>outputPair</var>'s name is "<code>_charset_</code>", set <var>outputPair</var>'s value to
-   <var>encoding</var>'s <a>name</a>.
+   <var>encoding</var>'s <a for=encoding>name</a>.
 
    <li><p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>'s type is
    "<code>file</code>", set <var>outputPair</var>'s value to <var>tuple</var>'s value's filename.
@@ -2963,17 +2984,10 @@ urlPrefix: https://dom.spec.whatwg.org/; type: dfn
   text: dom-node-baseuri; url: dom-node-baseuri
 urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
   text: ascii byte
-  text: concept-encoding-get; url: concept-encoding-get
   text: decode
   text: encode
   text: encoding
-  text: get an output encoding
-  text: name
   text: string
-  text: utf-8; url: utf-8
-  text: utf-8 decode without bom; url: utf-8-decode-without-bom
-  text: utf-8 decode without bom or fail; url: utf-8-decode-without-bom-or-fail
-  text: utf-8 encode; url: utf-8-encode
 urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
   text: throw
   text: value pairs to iterate over

@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-19">19 October 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-20">20 October 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -904,7 +904,21 @@ U+D0000 to U+DFFFD,
 U+E0000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD. </p>
-   <p class="note" role="note">Code points higher than U+009F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
+   <p class="note" role="note">Code points higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code
+points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
+   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">query</a> that are higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>. This
+can cause problems if a URL that works in one document is copied to another document that uses a
+different document encoding. Using the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a> encoding everywhere solves this problem. </p>
+   <div class="example" id="query-encoding-example">
+    <a class="self-link" href="#query-encoding-example"></a> 
+    <p>For example, consider this HTML document: </p>
+<pre>&lt;!doctype html>
+&lt;meta charset="windows-1252">
+&lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
+</pre>
+    <p>Since the document encoding is windows-1252, the link’s <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-query">query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
+ it would instead be "sm%C3%B6rg%C3%A5sbord". </p>
+   </div>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-units">URL units<a class="self-link" href="#url-units"></a></dfn> are <a data-link-type="dfn" href="#url-code-points">URL code points</a> and <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a>. </p>
    <p class="note" role="note"><a data-link-type="dfn" href="#percent-encoded-byte">Percent-encoded bytes</a> can be used to encode code points that are not <a data-link-type="dfn" href="#url-code-points">URL code points</a> or are excluded from a syntax production. </p>
    <hr>
@@ -2391,6 +2405,17 @@ neighboring rights to this work. </p>
     <ul>
      <li><a href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ascii case-insensitive</a>
      <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[ENCODING]</a> defines the following terms:
+    <ul>
+     <li><a href="https://encoding.spec.whatwg.org/#concept-encoding-get">concept-encoding-get</a>
+     <li><a href="https://encoding.spec.whatwg.org/#get-an-output-encoding">get an output encoding</a>
+     <li><a href="https://encoding.spec.whatwg.org/#name">name</a>
+     <li><a href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>
+     <li><a href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom">utf-8 decode without bom</a>
+     <li><a href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom-or-fail">utf-8 decode without bom or fail</a>
+     <li><a href="https://encoding.spec.whatwg.org/#utf-8-encode">utf-8 encode</a>
     </ul>
    <li>
     <a data-link-type="biblio">[FILEAPI]</a> defines the following terms:
