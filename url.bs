@@ -894,7 +894,7 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
 <p>A <dfn export>local scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>".
 
-<p>A <a for=url>URL</a> <dfn>is local</dfn> if its <a for=url>scheme</a> is a
+<p>A <a for=url>URL</a> <dfn export>is local</dfn> if its <a for=url>scheme</a> is a
 <a>local scheme</a>.
 
 <p class=note>This definition is used externally. E.g., by the Fetch Standard and
