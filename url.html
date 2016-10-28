@@ -1945,7 +1945,10 @@ does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one mi
      <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, its <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, or its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>",
  terminate these steps. </p>
     <li>
-     <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#port-state">port state</a> as <var>state override</var>. </p>
+     <p>If the given value is the empty string, then set <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+ null.</p>
+    <li>
+     <p>Otherwise, <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#port-state">port state</a> as <var>state override</var>. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-pathname"><code>pathname</code><a class="self-link" href="#dom-url-pathname"></a></dfn> attribute’s getter must run these steps: </p>
    <ol>
