@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-url.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref allcaps" id="title">URL</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-24">24 October 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-28">28 October 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1939,6 +1939,9 @@ does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one mi
      <p>If <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null, its <a data-link-type="dfn" href="#url-cannot-be-a-base-url-flag">cannot-be-a-base-URL flag</a> is set, or its <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is "<code>file</code>",
  terminate these steps. </p>
     <li>
+     <p>If the given value is the empty string, then set <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-port">port</a> to
+ null and terminate these steps.</p>
+    <li>
      <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#port-state">port state</a> as <var>state override</var>. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-pathname"><code>pathname</code><a class="self-link" href="#dom-url-pathname"></a></dfn> attribute’s getter must run these steps: </p>
@@ -2449,7 +2452,7 @@ neighboring rights to this work. </p>
    <dt id="biblio-encoding">[ENCODING]
    <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/">Encoding Standard</a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
    <dt id="biblio-fileapi">[FILEAPI]
-   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. 21 April 2015. WD. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
+   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-iana-uri-schemes">[IANA-URI-SCHEMES]
@@ -2457,9 +2460,9 @@ neighboring rights to this work. </p>
    <dt id="biblio-idna">[IDNA]
    <dd>Mark Davis; Michel Suignard. <a href="http://www.unicode.org/reports/tr46/">Unicode IDNA Compatibility Processing</a>. URL: <a href="http://www.unicode.org/reports/tr46/">http://www.unicode.org/reports/tr46/</a>
    <dt id="biblio-media-source">[MEDIA-SOURCE]
-   <dd>Matthew Wolenetz; et al. <a href="https://w3c.github.io/media-source/">Media Source Extensions™</a>. 4 October 2016. PR. URL: <a href="https://w3c.github.io/media-source/">https://w3c.github.io/media-source/</a>
+   <dd>Matthew Wolenetz; et al. <a href="https://w3c.github.io/media-source/">Media Source Extensions™</a>. URL: <a href="https://w3c.github.io/media-source/">https://w3c.github.io/media-source/</a>
    <dt id="biblio-mediacapture-streams">[MEDIACAPTURE-STREAMS]
-   <dd>Daniel Burnett; et al. <a href="https://w3c.github.io/mediacapture-main/">Media Capture and Streams</a>. 19 May 2016. CR. URL: <a href="https://w3c.github.io/mediacapture-main/">https://w3c.github.io/mediacapture-main/</a>
+   <dd>Daniel Burnett; et al. <a href="https://w3c.github.io/mediacapture-main/">Media Capture and Streams</a>. URL: <a href="https://w3c.github.io/mediacapture-main/">https://w3c.github.io/mediacapture-main/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-rfc4291">[RFC4291]
@@ -2467,14 +2470,14 @@ neighboring rights to this work. </p>
    <dt id="biblio-uts36">[UTS36]
    <dd>Mark Davis; Michel Suignard. <a href="http://unicode.org/reports/tr36/">Unicode Security Considerations</a>. URL: <a href="http://unicode.org/reports/tr36/">http://unicode.org/reports/tr36/</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 15 September 2016. PR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky; Tobie Langel. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-referrer-policy">[REFERRER-POLICY]
-   <dd>Jochen Eisinger; Mike West. <a href="https://w3c.github.io/webappsec-referrer-policy/">Referrer Policy</a>. 16 October 2016. WD. URL: <a href="https://w3c.github.io/webappsec-referrer-policy/">https://w3c.github.io/webappsec-referrer-policy/</a>
+   <dd>Jochen Eisinger; Mike West. <a href="https://w3c.github.io/webappsec-referrer-policy/">Referrer Policy</a>. URL: <a href="https://w3c.github.io/webappsec-referrer-policy/">https://w3c.github.io/webappsec-referrer-policy/</a>
    <dt id="biblio-rfc1034">[RFC1034]
    <dd>P.V. Mockapetris. <a href="https://tools.ietf.org/html/rfc1034">Domain names - concepts and facilities</a>. November 1987. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc1034">https://tools.ietf.org/html/rfc1034</a>
    <dt id="biblio-rfc3986">[RFC3986]
