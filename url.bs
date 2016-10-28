@@ -1900,12 +1900,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
-       <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a>, <a>ASCII lowercased</a> starts
-       with "<code>2e</code>", append "<code>.</code>" to <var>buffer</var> and increase
-       <var>pointer</var> by two.
-
-       <li><p>Otherwise, <a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>,
-       and append the result to <var>buffer</var>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>, and append
+       the result to <var>buffer</var>.
       </ol>
     </ol>
 
