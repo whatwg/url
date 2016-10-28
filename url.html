@@ -776,7 +776,7 @@ Referrer Policy. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a> <a 
    <p>A <dfn data-dfn-type="dfn" data-export="" id="fetch-scheme">fetch scheme<a class="self-link" href="#fetch-scheme"></a></dfn> is a <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", "<code>file</code>", "<code>filesystem</code>", or a <span>network scheme</span>. </p>
    <p class="note no-backref" role="note"><a data-link-type="dfn" href="#http-scheme">HTTP(S) scheme</a>, <a data-link-type="dfn" href="#network-scheme">network scheme</a>, and <span>fetch scheme</span> are used by HTML. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
-   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-lt="include credentials" data-noexport="" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either
+   <p>A <a data-link-type="dfn" href="#concept-url">URL</a> <dfn data-dfn-type="dfn" data-export="" data-lt="include credentials" id="include-credentials">includes credentials<a class="self-link" href="#include-credentials"></a></dfn> if either
 its <a data-link-type="dfn" href="#concept-url-username">username</a> is not the empty string or its <a data-link-type="dfn" href="#concept-url-password">password</a> is
 non-null. </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> can be designated as <dfn data-dfn-type="dfn" data-noexport="" id="concept-base-url">base URL<a class="self-link" href="#concept-base-url"></a></dfn>. </p>
@@ -924,8 +924,7 @@ different document encoding. Using the <a data-link-type="dfn" href="https://enc
    <hr>
    <p class="note no-backref" role="note">There is no conforming way to express a <a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL record</a> within a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
    <h3 class="heading settled" data-level="4.2" id="url-parsing"><span class="secno">4.2. </span><span class="content">URL parsing</span><a class="self-link" href="#url-parsing"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string <var>input</var>,
-with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-export="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string <var>input</var>, with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <p class="note no-backref" role="note">Non-web-browser implementations only need to implement the <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a>. </p>
    <ol>
     <li>
@@ -944,7 +943,8 @@ with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <
      <p>Return <var>url</var>. </p>
    </ol>
    <hr>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-basic-url-parser">basic URL parser<a class="self-link" href="#concept-basic-url-parser"></a></dfn> takes a string <var>input</var>, optionally with a <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var> and a state override <var>state override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-export="" id="concept-basic-url-parser">basic URL parser<a class="self-link" href="#concept-basic-url-parser"></a></dfn> takes a
+string <var>input</var>, optionally with a <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var> and a state override <var>state override</var>, and then runs these steps: </p>
    <div class="note no-backref" role="note">
     <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for use by various APIs. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
@@ -1524,8 +1524,7 @@ with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <
      <p>Return <var>url</var>. </p>
    </ol>
    <hr>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-username">set the username<a class="self-link" href="#set-the-username"></a></dfn> given a <var>url</var> and <var>username</var>, run
-these steps: </p>
+   <p>To <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="set-the-username">set the username<a class="self-link" href="#set-the-username"></a></dfn> given a <var>url</var> and <var>username</var>, run these steps: </p>
    <ol>
     <li>
      <p>Set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a> to the empty string. </p>
@@ -1533,8 +1532,7 @@ these steps: </p>
      <p>For each code point in <var>username</var>, <a data-link-type="dfn" href="#utf-8-percent-encode">UTF-8 percent encode</a> it using the <a data-link-type="dfn" href="#userinfo-encode-set">userinfo encode set</a>, and append the
  result to <var>url</var>’s <a data-link-type="dfn" href="#concept-url-username">username</a>. </p>
    </ol>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="set-the-password">set the password<a class="self-link" href="#set-the-password"></a></dfn> given a <var>url</var> and <var>password</var>, run
-these steps: </p>
+   <p>To <dfn data-dfn-for="url" data-dfn-type="dfn" data-export="" id="set-the-password">set the password<a class="self-link" href="#set-the-password"></a></dfn> given a <var>url</var> and <var>password</var>, run these steps: </p>
    <ol>
     <li>
      <p>If <var>password</var> is the empty string, set <var>url</var>’s <a data-link-type="dfn" href="#concept-url-password">password</a> to null. </p>
@@ -1549,7 +1547,7 @@ these steps: </p>
      </ol>
    </ol>
    <h3 class="heading settled" data-level="4.3" id="url-serializing"><span class="secno">4.3. </span><span class="content">URL serializing</span><a class="self-link" href="#url-serializing"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-serializer">URL serializer<a class="self-link" href="#concept-url-serializer"></a></dfn> takes a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var>, an optional <i title="">exclude fragment flag</i>, and
+   <p>The <dfn data-dfn-type="dfn" data-export="" id="concept-url-serializer">URL serializer<a class="self-link" href="#concept-url-serializer"></a></dfn> takes a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var>, an optional <i title="">exclude fragment flag</i>, and
 then runs these steps: </p>
    <ol>
     <li>
@@ -1658,8 +1656,8 @@ expected, particularly in plain text environments. </p>
    <p>Due to the confusion that can arise between a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> and <a data-link-type="dfn" href="#concept-url-path">path</a> with bidirectional text, browsers are encouraged to only render a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> in places where it is important for users to
 distinguish between the two. E.g., users are expected to make trust decisions based on a <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> rendered in the address bar. </p>
    <h2 class="heading settled" data-level="5" id="application/x-www-form-urlencoded"><span class="secno">5. </span><span class="content"><code>application/x-www-form-urlencoded</code></span><a class="self-link" href="#application/x-www-form-urlencoded"></a></h2>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-urlencoded"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#concept-urlencoded"></a></dfn> format is a
-simple way to encode name-value pairs in a byte sequence where all bytes are <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>. </p>
+   <p>The <dfn data-dfn-type="dfn" data-export="" id="concept-urlencoded"><code>application/x-www-form-urlencoded</code><a class="self-link" href="#concept-urlencoded"></a></dfn> format
+is a simple way to encode name-value pairs in a byte sequence where all bytes are <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#ascii-byte">ASCII bytes</a>. </p>
    <p class="note no-backref" role="note">The <code>application/x-www-form-urlencoded</code> format is in many ways
 an aberrant monstrosity, the result of many years of implementation accidents and compromises
 leading to a set of requirements necessary for interoperability, but in no way representing good
@@ -1669,7 +1667,7 @@ sequences. Unfortunately the format is in widespread use due to the prevalence o
    <h3 class="heading settled" data-level="5.1" id="urlencoded-parsing"><span class="secno">5.1. </span><span class="content"><code>application/x-www-form-urlencoded</code> parsing</span><a class="self-link" href="#urlencoded-parsing"></a></h3>
    <p class="note no-backref" role="note">The features provided by the <a data-link-type="dfn" href="#concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser</a> are mainly
 relevant for server-oriented implementations. A browser-based implementation only needs what the <a data-link-type="dfn" href="#concept-urlencoded-string-parser"><code>application/x-www-form-urlencoded</code> string parser</a> requires. </p>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded parser" data-noexport="" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
+   <p>The <dfn data-dfn-type="dfn" data-export="" data-lt="urlencoded parser" id="concept-urlencoded-parser"><code>application/x-www-form-urlencoded</code> parser<a class="self-link" href="#concept-urlencoded-parser"></a></dfn> takes a byte sequence <var>input</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
 steps: </p>
    <ol>
     <li>
@@ -1748,7 +1746,7 @@ steps: </p>
     <li>
      <p>Return <var>output</var>. </p>
    </ol>
-   <p>The <dfn data-dfn-type="dfn" data-lt="urlencoded serializer" data-noexport="" id="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-export="" data-lt="urlencoded serializer" id="concept-urlencoded-serializer"><code>application/x-www-form-urlencoded</code> serializer<a class="self-link" href="#concept-urlencoded-serializer"></a></dfn> takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <ol>
     <li>
      <p>Let <var>encoding</var> be <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a>. </p>
@@ -2039,11 +2037,11 @@ steps: </p>
   <a class="kt" data-link-type="dfn" href="#urlsearchparams-stringification-behavior">stringifier</a>;
 };
 </pre>
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-list">list<a class="self-link" href="#concept-urlsearchparams-list"></a></dfn> of name-value pairs,
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-export="" id="concept-urlsearchparams-list">list<a class="self-link" href="#concept-urlsearchparams-list"></a></dfn> of name-value pairs,
 which is initially empty. </p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-url-object">url object<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is
+   <p>A <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object has an associated <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-export="" id="concept-urlsearchparams-url-object">url object<a class="self-link" href="#concept-urlsearchparams-url-object"></a></dfn>, which is
 initially null. </p>
-   <p>To create a <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-noexport="" id="concept-urlsearchparams-new">new<a class="self-link" href="#concept-urlsearchparams-new"></a></dfn> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object, optionally using <var>init</var>, run these steps: </p>
+   <p>To create a <dfn data-dfn-for="URLSearchParams" data-dfn-type="dfn" data-export="" id="concept-urlsearchparams-new">new<a class="self-link" href="#concept-urlsearchparams-new"></a></dfn> <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object, optionally using <var>init</var>, run these steps: </p>
    <ol>
     <li>
      <p>Let <var>query</var> be a new <code class="idl"><a data-link-type="idl" href="#urlsearchparams">URLSearchParams</a></code> object. </p>

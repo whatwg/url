@@ -914,7 +914,7 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 <p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and
 <span>fetch scheme</span> are used by HTML. [[HTML]]
 
-<p>A <a for=url>URL</a> <dfn lt="include credentials">includes credentials</dfn> if either
+<p>A <a for=url>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if either
 its <a for=url>username</a> is not the empty string or its <a for=url>password</a> is
 non-null.
 <!-- used by Fetch -->
@@ -1140,9 +1140,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <h3 id=url-parsing>URL parsing</h3>
 
-<p>The <dfn id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string <var>input</var>,
-with an optional <a>base URL</a> <var>base</var> and an optional <a for=/>encoding</a>
-<var>encoding override</var>, and then runs these steps:
+<p>The <dfn export id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
+<var>input</var>, with an optional <a>base URL</a> <var>base</var> and an optional
+<a for=/>encoding</a> <var>encoding override</var>, and then runs these steps:
 
 <p class="note no-backref">Non-web-browser implementations only need to implement the
 <a>basic URL parser</a>.
@@ -1169,8 +1169,8 @@ with an optional <a>base URL</a> <var>base</var> and an optional <a for=/>encodi
 
 <hr>
 
-<p>The <dfn id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a string
-<var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
+<p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
+string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
 <a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=url>URL</a>
 <var>url</var> and a state override <var>state override</var>, and then runs these steps:
 
@@ -1999,8 +1999,8 @@ with an optional <a>base URL</a> <var>base</var> and an optional <a for=/>encodi
 
 <hr>
 
-<p>To <dfn>set the username</dfn> given a <var>url</var> and <var>username</var>, run
-these steps:
+<p>To <dfn export id=set-the-username for=url>set the username</dfn> given a <var>url</var> and
+<var>username</var>, run these steps:
 
 <ol>
  <li><p>Set <var>url</var>'s <a for=url>username</a> to the empty string.
@@ -2010,8 +2010,8 @@ these steps:
  result to <var>url</var>'s <a for=url>username</a>.
 </ol>
 
-<p>To <dfn>set the password</dfn> given a <var>url</var> and <var>password</var>, run
-these steps:
+<p>To <dfn export id=set-the-password for=url>set the password</dfn> given a <var>url</var> and
+<var>password</var>, run these steps:
 
 <ol>
  <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
@@ -2032,7 +2032,7 @@ these steps:
 
 <h3 id=url-serializing>URL serializing</h3>
 
-<p>The <dfn id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
+<p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
 <a for=url>URL</a> <var>url</var>, an optional <i title>exclude fragment flag</i>, and
 then runs these steps:
 
@@ -2198,8 +2198,9 @@ distinguish between the two. E.g., users are expected to make trust decisions ba
 
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
-<p>The <dfn id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format is a
-simple way to encode name-value pairs in a byte sequence where all bytes are <a>ASCII bytes</a>.
+<p>The <dfn export id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format
+is a simple way to encode name-value pairs in a byte sequence where all bytes are
+<a>ASCII bytes</a>.
 
 <p class="note no-backref">The <code>application/x-www-form-urlencoded</code> format is in many ways
 an aberrant monstrosity, the result of many years of implementation accidents and compromises
@@ -2218,7 +2219,7 @@ relevant for server-oriented implementations. A browser-based implementation onl
 requires.
 
 <p>The
-<dfn id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
+<dfn export id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, optionally with an <a for=/>encoding</a>
 <var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
 steps:
@@ -2338,7 +2339,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
      bytes greater than 0x7A -->
 
 <p>The
-<dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
+<dfn export id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an
 <a for=/>encoding</a> <var>encoding override</var>, and then runs these steps:
 
@@ -2751,15 +2752,15 @@ interface URLSearchParams {
 </pre>
 
 <p>A {{URLSearchParams}} object has an associated
-<dfn for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
+<dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
 which is initially empty.
 
 <p>A {{URLSearchParams}} object has an associated
-<dfn for=URLSearchParams id=concept-urlsearchparams-url-object>url object</dfn>, which is
+<dfn export for=URLSearchParams id=concept-urlsearchparams-url-object>url object</dfn>, which is
 initially null.
 
-<p>To create a <dfn for=URLSearchParams id=concept-urlsearchparams-new>new</dfn> {{URLSearchParams}}
-object, optionally using <var>init</var>, run these steps:
+<p>To create a <dfn export for=URLSearchParams id=concept-urlsearchparams-new>new</dfn>
+{{URLSearchParams}} object, optionally using <var>init</var>, run these steps:
 
 <ol>
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
