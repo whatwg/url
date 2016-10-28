@@ -1140,9 +1140,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <h3 id=url-parsing>URL parsing</h3>
 
-<p>The <dfn id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
-<var>input</var>, with an optional <a>base URL</a> <var>base</var> and an optional
-<a>encoding</a> <var>encoding override</var>, and then runs these steps:
+<p>The <dfn id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string <var>input</var>,
+with an optional <a>base URL</a> <var>base</var> and an optional <a for=/>encoding</a>
+<var>encoding override</var>, and then runs these steps:
 
 <p class="note no-backref">Non-web-browser implementations only need to implement the
 <a>basic URL parser</a>.
@@ -1170,12 +1170,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 <hr>
 
 <p>The <dfn id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a string
-<var>input</var>, optionally with a
-<a>base URL</a> <var>base</var>,
-optionally with an <a>encoding</a>
-<var>encoding override</var>, optionally with a
-<a for=url>URL</a> <var>url</var> and a state override
-<var>state override</var>, and then runs these steps:
+<var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
+<a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=url>URL</a>
+<var>url</var> and a state override <var>state override</var>, and then runs these steps:
 
 <div class="note no-backref">
  <p>The <var>encoding override</var> argument is a legacy concept only relevant for
@@ -2222,7 +2219,7 @@ requires.
 
 <p>The
 <dfn id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
-takes a byte sequence <var>input</var>, optionally with an <a>encoding</a>
+takes a byte sequence <var>input</var>, optionally with an <a for=/>encoding</a>
 <var>encoding override</var>, and optionally with a <i>use _charset_ flag</i>, and then runs these
 steps:
 
@@ -2343,7 +2340,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
 <p>The
 <dfn id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value or name-value-type tuples <var>tuples</var>, optionally with an
-<a>encoding</a> <var>encoding override</var>, and then runs these steps:
+<a for=/>encoding</a> <var>encoding override</var>, and then runs these steps:
 
 <ol>
  <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
@@ -2983,26 +2980,16 @@ neighboring rights to this work.
 </pre>
 
 <pre class="anchors">
-url: https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone; type: dfn; text: structuredclone
+url: https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone; type: dfn; text: structuredclone; spec: HTML
 urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
   text: blob url store; url: #BlobURLStore
 urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
   text: MediaSource; url: MediaSource
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#idl-def-; type: interface
   text: MediaStream; url: MediaStream
-urlPrefix: https://dom.spec.whatwg.org/; type: dfn
-  text: concept-attribute-value; url: concept-attribute-value
-  text: concept-document; url: concept-document
-  text: dom-node-baseuri; url: dom-node-baseuri
-urlPrefix: https://encoding.spec.whatwg.org/; type: dfn
+urlPrefix: https://encoding.spec.whatwg.org/; type: dfn; spec: ENCODING
   text: ascii byte
-  text: decode
-  text: encode
-  text: encoding
   text: string
-urlPrefix: https://heycam.github.io/webidl/#dfn-; type: dfn;
-  text: throw
-  text: value pairs to iterate over
-url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii
-url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode
+url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii; spec: IDNA
+url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode; spec: IDNA
 </pre>

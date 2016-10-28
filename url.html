@@ -924,7 +924,8 @@ different document encoding. Using the <a data-link-type="dfn" href="https://enc
    <hr>
    <p class="note no-backref" role="note">There is no conforming way to express a <a data-link-type="dfn" href="#concept-url-username">username</a> or <a data-link-type="dfn" href="#concept-url-password">password</a> of a <a data-link-type="dfn" href="#concept-url">URL record</a> within a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
    <h3 class="heading settled" data-level="4.2" id="url-parsing"><span class="secno">4.2. </span><span class="content">URL parsing</span><a class="self-link" href="#url-parsing"></a></h3>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string <var>input</var>, with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-url-parser">URL parser<a class="self-link" href="#concept-url-parser"></a></dfn> takes a string <var>input</var>,
+with an optional <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var> and an optional <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, and then runs these steps: </p>
    <p class="note no-backref" role="note">Non-web-browser implementations only need to implement the <a data-link-type="dfn" href="#concept-basic-url-parser">basic URL parser</a>. </p>
    <ol>
     <li>
@@ -943,8 +944,7 @@ different document encoding. Using the <a data-link-type="dfn" href="https://enc
      <p>Return <var>url</var>. </p>
    </ol>
    <hr>
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-basic-url-parser">basic URL parser<a class="self-link" href="#concept-basic-url-parser"></a></dfn> takes a string <var>input</var>, optionally with a <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var>,
-optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var> and a state override <var>state override</var>, and then runs these steps: </p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-basic-url-parser">basic URL parser<a class="self-link" href="#concept-basic-url-parser"></a></dfn> takes a string <var>input</var>, optionally with a <a data-link-type="dfn" href="#concept-base-url">base URL</a> <var>base</var>, optionally with an <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#encoding">encoding</a> <var>encoding override</var>, optionally with a <a data-link-type="dfn" href="#concept-url">URL</a> <var>url</var> and a state override <var>state override</var>, and then runs these steps: </p>
    <div class="note no-backref" role="note">
     <p>The <var>encoding override</var> argument is a legacy concept only relevant for
  HTML. The <var>url</var> and <var>state override</var> arguments are only for use by various APIs. <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
@@ -2418,7 +2418,16 @@ neighboring rights to this work. </p>
    <li>
     <a data-link-type="biblio">[ENCODING]</a> defines the following terms:
     <ul>
+     <li><a href="https://encoding.spec.whatwg.org/#ascii-byte">ascii byte</a>
+     <li><a href="https://encoding.spec.whatwg.org/#string">string</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[ENCODING]</a> defines the following terms:
+    <ul>
      <li><a href="https://encoding.spec.whatwg.org/#concept-encoding-get">concept-encoding-get</a>
+     <li><a href="https://encoding.spec.whatwg.org/#decode">decode</a>
+     <li><a href="https://encoding.spec.whatwg.org/#encode">encode</a>
+     <li><a href="https://encoding.spec.whatwg.org/#encoding">encoding</a>
      <li><a href="https://encoding.spec.whatwg.org/#get-an-output-encoding">get an output encoding</a>
      <li><a href="https://encoding.spec.whatwg.org/#name">name</a>
      <li><a href="https://encoding.spec.whatwg.org/#utf-8">utf-8</a>
@@ -2439,13 +2448,22 @@ neighboring rights to this work. </p>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone">structuredclone</a>
      <li><a href="https://html.spec.whatwg.org/multipage/browsers.html#unicode-serialisation-of-an-origin">unicode serialization of an origin</a>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[IDNA]</a> defines the following terms:
+    <ul>
+     <li><a href="http://www.unicode.org/reports/tr46/#ToASCII">toascii</a>
+     <li><a href="http://www.unicode.org/reports/tr46/#ToUnicode">tounicode</a>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#SameObject">SameObject</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-value-pairs-to-iterate-over">value pairs to iterate over</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
