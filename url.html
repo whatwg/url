@@ -1832,16 +1832,22 @@ when invoked, must run these steps: </p>
    <div class="example no-backref" id="example-5434421b">
     <a class="self-link" href="#example-5434421b"></a> 
     <p>To <a data-link-type="dfn" href="#concept-basic-url-parser">parse</a> a string into a <a data-link-type="dfn" href="#concept-url">URL</a> without using a <a data-link-type="dfn" href="#concept-base-url">base URL</a>, invoke the <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> constructor with a single argument: </p>
-<pre>var input = "https://example.org/💩",    url = new URL(input)
+<pre>var input = "https://example.org/💩",
+    url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
     <p>This throws an exception if the input is not an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>: </p>
-<pre>try {  var url = new URL("/🍣🍺")
+<pre>try {
+  var url = new URL("/🍣🍺")
 } catch(e) {
   // that happened
 }</pre>
     <p>A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary if the input is a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>: </p>
-<pre>var input = "/🍣🍺",    url = new URL(input, document.baseURI)
+<pre>var input = "/🍣🍺",
+    url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
+    <p>A <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object can be used as <a data-link-type="dfn" href="#concept-base-url">base URL</a> (while IDL requires a string as argument, a <code class="idl"><a data-link-type="idl" href="#url">URL</a></code> object stringifies to its <code class="idl"><a data-link-type="idl" href="#dom-url-href">href</a></code> attribute value):</p>
+<pre>var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
+url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</pre>
    </div>
    <h3 class="heading settled" data-level="6.2" id="urlutils-members"><span class="secno">6.2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#url">URL</a></code> members</span><a class="self-link" href="#urlutils-members"></a></h3>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-href"><code>href</code><a class="self-link" href="#dom-url-href"></a></dfn> attribute’s getter must return the <a data-link-type="dfn" href="#concept-url-serializer">serialization</a> of <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>. </p>
@@ -2177,6 +2183,7 @@ Titi_Alone,
 Tomek Wytrębowicz,
 Valentin Gosu,
 Vyacheslav Matva,
+Wei Wang,
 山岸和利 (Yamagishi Kazutoshi), and
 成瀬ゆい (Yui Naruse)
 for being awesome! </p>
