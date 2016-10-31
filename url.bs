@@ -226,20 +226,20 @@ an <var>encode set</var>, run these steps:
 
 <h2 id=security-considerations>Security considerations</h2>
 
-<p>The security of a <a for=url>URL</a> is a function of its environment. Care is to be
-taken when rendering, interpreting, and passing <a for=url lt=URL>URLs</a> around.
+<p>The security of a <a for=/>URL</a> is a function of its environment. Care is to be
+taken when rendering, interpreting, and passing <a for=/>URLs</a> around.
 
-<p>When rendering and allocating new <a for=url lt=URL>URLs</a> "spoofing" needs to be
-considered. An attack whereby one <a for=host>host</a> or <a for=url>URL</a> can be
+<p>When rendering and allocating new <a for=/>URLs</a> "spoofing" needs to be
+considered. An attack whereby one <a for=host>host</a> or <a for=/>URL</a> can be
 confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
 eerily similar. Or worse, consider how U+202A and similar code points are invisible.
 [[!UTS36]]
 
-<p>When passing a <a for=url>URL</a> from party <var>A</var> to <var>B</var>, both need to
+<p>When passing a <a for=/>URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
 want to leak. <var>B</var> might receive input it did not expect and take an action that
 harms the user. In particular, <var>B</var> should never trust <var>A</var>, as at some
-point <a for=url lt=URL>URLs</a> from <var>A</var> can come from untrusted sources.
+point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 
 
@@ -252,7 +252,7 @@ point <a for=url lt=URL>URLs</a> from <var>A</var> can come from untrusted sourc
 <p>A <dfn export for=host id=concept-host>host</dfn> is a <a for=host>domain</a>, an
 <a for=host>IPv4 address</a>, or an <a for=host>IPv6 address</a>. Typically a
 <a for=host>host</a> serves as a network address, but it is sometimes (ab)used as opaque
-identifier in <a for=url lt=URL>URLs</a> where a network address is not necessary.
+identifier in <a for=/>URLs</a> where a network address is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a for=host>host</a> syntax, parsing, and serialization. Unless stated
@@ -814,45 +814,44 @@ unified model would be, please file an issue.
 <!-- History behind URL as term:
      https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>A <dfn export for=url id=concept-url lt="URL|URL record">URL</dfn> is a universal
-identifier. To disambiguate from a <a>URL string</a> it can also be referred to as a
-<a for=url>URL record</a>.
+<p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a universal identifier. To
+disambiguate from a <a>URL string</a> it can also be referred to as a <a for=/>URL record</a>.
 
-<p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
-<a>ASCII string</a> that identifies the type of <a for=url>URL</a> and can be used to
-dispatch a <a for=url>URL</a> for further processing after <a lt='URL parser'>parsing</a>.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
+<a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
+dispatch a <a for=/>URL</a> for further processing after <a lt='URL parser'>parsing</a>.
 It is initially the empty string.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is
 an <a>ASCII string</a> identifying a user. It is initially the empty string.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is
 either null or an <a>ASCII string</a> identifying a user's credentials. It is initially
 null.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
 null or a <a for=host>host</a>. It is initially null.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of
 zero or more <a>ASCII string</a> holding data, usually identifying a location in
 hierarchical form. It is initially the empty list.
 
-<p>A  <a for=url>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a> holding data. It is initially null.
 
-<p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is
 either null or a string holding data that can be used for further processing on the
-resource the <a for=url>URL</a>'s other components identify. It is initially null.
+resource the <a for=/>URL</a>'s other components identify. It is initially null.
 
 <p class="note no-backref">This is not an <a>ASCII string</a> on purpose.
 
-<p id=non-relative-flag>A <a for=url>URL</a> also has an associated
+<p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
-<p>A <a for=url>URL</a> also has an associated
+<p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
 {{MediaSource}} object, or a {{MediaStream}} object. It is initially null.
 [[!FILEAPI]]
@@ -860,7 +859,7 @@ resource the <a for=url>URL</a>'s other components identify. It is initially nul
 [[!MEDIACAPTURE-STREAMS]]
 
 <p class="note no-backref">At this point this is used primarily to support
-"<code>blob</code>" <a for=url lt=URL>URLs</a>, but others can be added going forward, hence
+"<code>blob</code>" <a for=/>URLs</a>, but others can be added going forward, hence
 "object".
 
 <hr>
@@ -888,13 +887,13 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
      It seems fine to remain compatible on that front, no need to support it
      elsewhere though. -->
 
-<p>A <a for=url>URL</a> <dfn export>is special</dfn> if its <a for=url>scheme</a> is a
+<p>A <a for=/>URL</a> <dfn export>is special</dfn> if its <a for=url>scheme</a> is a
 <a>special scheme</a>.
 
 <p>A <dfn export>local scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>".
 
-<p>A <a for=url>URL</a> <dfn export>is local</dfn> if its <a for=url>scheme</a> is a
+<p>A <a for=/>URL</a> <dfn export>is local</dfn> if its <a for=url>scheme</a> is a
 <a>local scheme</a>.
 
 <p class=note>This definition is used externally. E.g., by the Fetch Standard and
@@ -914,12 +913,12 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 <p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and
 <span>fetch scheme</span> are used by HTML. [[HTML]]
 
-<p>A <a for=url>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if either
+<p>A <a for=/>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if either
 its <a for=url>username</a> is not the empty string or its <a for=url>password</a> is
 non-null.
 <!-- used by Fetch -->
 
-<p>A <a for=url>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
+<p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
 input might be a <a for=urlsyntax>relative URL</a>.
@@ -939,7 +938,7 @@ if any.
 
 <p>A <dfn export for=urlsyntax id=syntax-url lt="URL|URL string">URL</dfn> must be either
 a <a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>. To
-disambiguate from a <a for=url>URL record</a> it can also be referred to as a <a>URL string</a>.
+disambiguate from a <a for=/>URL record</a> it can also be referred to as a <a>URL string</a>.
 
 <p>An
 <dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
@@ -1120,7 +1119,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
  </pre>
 
- <p>Since the document encoding is windows-1252, the link's <a for=url>URL</a>'s
+ <p>Since the document encoding is windows-1252, the link's <a for=/>URL</a>'s
  <a for=url>query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
  it would instead be "sm%C3%B6rg%C3%A5sbord".
 
@@ -1134,7 +1133,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 <hr>
 
 <p class="note no-backref">There is no conforming way to express a
-<a for=url>username</a> or <a for=url>password</a> of a <a for=url>URL record</a> within a
+<a for=url>username</a> or <a for=url>password</a> of a <a for=/>URL record</a> within a
 <a for=urlsyntax>URL string</a>.
 
 
@@ -1171,7 +1170,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
 string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
-<a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=url>URL</a>
+<a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=/>URL</a>
 <var>url</var> and a state override <var>state override</var>, and then runs these steps:
 
 <div class="note no-backref">
@@ -1180,7 +1179,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
  [[!HTML]]
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
- <a>basic URL parser</a> returns either a new <a for=url>URL</a> or failure. If they are
+ <a>basic URL parser</a> returns either a new <a for=/>URL</a> or failure. If they are
  passed, the algorithm simply modifies the passed <var>url</var> and can terminate without
  returning anything.
 </div>
@@ -1190,7 +1189,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
   <p>If <var>url</var> is not given:
 
   <ol>
-   <li><p>Set <var>url</var> to a new <a for=url>URL</a>.
+   <li><p>Set <var>url</var> to a new <a for=/>URL</a>.
 
    <li><p>If <var>input</var> contains any leading or trailing
    <a>C0 controls and space</a>, <a>syntax violation</a>.
@@ -2034,7 +2033,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 <h3 id=url-serializing>URL serializing</h3>
 
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
-<a for=url>URL</a> <var>url</var>, an optional <i title>exclude fragment flag</i>, and
+<a for=/>URL</a> <var>url</var>, an optional <i title>exclude fragment flag</i>, and
 then runs these steps:
 
 <ol>
@@ -2095,7 +2094,7 @@ then runs these steps:
 
 <h3 id=url-equivalence>URL equivalence</h3>
 
-<p>To determine whether a <a for=url>URL</a> <var>A</var>
+<p>To determine whether a <a for=/>URL</a> <var>A</var>
 <dfn export for=url id=concept-url-equals>equals</dfn> <var>B</var>, optionally with an
 <i>exclude fragments flag</i>, run these steps:
 
@@ -2119,15 +2118,15 @@ then runs these steps:
 <p class=note>See <a for=/>origin</a>'s definition in HTML for the necessary
 background information. [[!HTML]]
 
-<p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-origin>origin</dfn> is the
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-origin>origin</dfn> is the
 <a for=/>origin</a> returned by running these steps, switching on
-<a for=url>URL</a>'s <a for=url>scheme</a>:
+<a for=/>URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
   <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the first
-  string in <a for=url>URL</a>'s <a for=url>path</a>.
+  string in <a for=/>URL</a>'s <a for=url>path</a>.
 
   <p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
   <a for=url>origin</a> otherwise.
@@ -2143,8 +2142,8 @@ background information. [[!HTML]]
  <dt>"<code>https</code>"
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
- <dd><p>Return a tuple consisting of <a for=url>URL</a>'s <a for=url>scheme</a>,
- <a for=url>URL</a>'s <a for=url>host</a>, <a for=url>URL</a>'s <a for=url>port</a>, and null.
+ <dd><p>Return a tuple consisting of <a for=/>URL</a>'s <a for=url>scheme</a>,
+ <a for=/>URL</a>'s <a for=url>host</a>, <a for=/>URL</a>'s <a for=url>port</a>, and null.
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
@@ -2154,23 +2153,23 @@ background information. [[!HTML]]
  <dd>
   <p>Return a new <a>opaque origin</a>.
 
-  <p class="note no-backref">This does indeed mean that these <a for=url lt=URL>URLs</a> cannot
-  be <a spec=html lt="same origin">same-origin</a> with themselves.
+  <p class="note no-backref">This does indeed mean that these <a for=/>URLs</a> cannot be
+  <a lt="same origin">same-origin</a> with themselves.
 </dl>
 
 
 <h3 id=url-rendering>URL rendering</h3>
 <!-- See https://www.w3.org/Bugs/Public/show_bug.cgi?id=27641 for context -->
 
-<p>A <a for=url>URL</a> should be rendered in its <a lt="URL serializer">serialized</a>
+<p>A <a for=/>URL</a> should be rendered in its <a lt="URL serializer">serialized</a>
 form, with these modifications:
 
 <ul class=brief>
- <li><p>A <a for=url>URL</a>'s <a for=url>username</a> and <a for=url>password</a> should
- not be rendered as they can be mistaken for a <a for=url>URL</a>'s <a for=url>host</a>.
+ <li><p>A <a for=/>URL</a>'s <a for=url>username</a> and <a for=url>password</a> should
+ not be rendered as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a>.
  E.g., consider <code>https://examplecorp.com@attacker.example/</code>.
 
- <li><p>A <a for=url>URL</a>'s <a for=url>host</a> should be rendered using
+ <li><p>A <a for=/>URL</a>'s <a for=url>host</a> should be rendered using
  <a>domain to Unicode</a>.
 
  <li><p>Other parts of the <a for=urlsyntax>URL</a> should have their sequences of
@@ -2182,18 +2181,18 @@ form, with these modifications:
 <p>For the purposes of bidirectional text it should be rendered as if it were in a
 left-to-right embedding. [[!BIDI]]
 
-<p class="note no-backref">Unfortunately, as rendered <a for=url lt=URL>URLs</a> are simply
+<p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are simply
 strings and can appear anywhere, a specific bidirectional algorithm for rendered
-<a for=url lt=URL>URLs</a> would not see wide adoption. Bidirectional text interacts with the
-parts of a <a for=url>URL</a> in ways that can cause the rendering to be different from
+<a for=/>URLs</a> would not see wide adoption. Bidirectional text interacts with the
+parts of a <a for=/>URL</a> in ways that can cause the rendering to be different from
 the model. Users of bidirectional languages are thus cautioned that this is to be
 expected, particularly in plain text environments.
 
-<p>Due to the confusion that can arise between a <a for=url>URL</a>'s <a for=url>host</a>
+<p>Due to the confusion that can arise between a <a for=/>URL</a>'s <a for=url>host</a>
 and <a for=url>path</a> with bidirectional text, browsers are encouraged to only render a
-<a for=url>URL</a>'s <a for=url>host</a> in places where it is important for users to
+<a for=/>URL</a>'s <a for=url>host</a> in places where it is important for users to
 distinguish between the two. E.g., users are expected to make trust decisions based on a
-<a for=url>URL</a>'s <a for=url>host</a> rendered in the address bar.
+<a for=/>URL</a>'s <a for=url>host</a> rendered in the address bar.
 
 
 
@@ -2431,7 +2430,7 @@ dictionary URLEqualOptions {
 URLPath would be a subclassed Array? -->
 
 <p>A {{URL}} object has an associated <dfn id=concept-url-url noexport for=URL>url</dfn> (a
-<a for=url>URL</a>) and <dfn id=concept-url-query-object noexport for=URL>query object</dfn> (a
+<a for=/>URL</a>) and <dfn id=concept-url-query-object noexport for=URL>query object</dfn> (a
 {{URLSearchParams}} object).
 
 
@@ -2475,7 +2474,7 @@ when invoked, must run these steps:
 </ol>
 
 <div class="example no-backref" id=example-5434421b>
- <p>To <a lt="basic URL parser">parse</a> a string into a <a for=url>URL</a> without using a
+ <p>To <a lt="basic URL parser">parse</a> a string into a <a for=/>URL</a> without using a
  <a>base URL</a>, invoke the {{URL}} constructor with a single argument:
 
  <pre>
@@ -2866,10 +2865,10 @@ the name and the value being the value.
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
-<p>A standard that exposes <a for=url lt=URL>URLs</a>, should expose the <a for=url>URL</a> as a
-string  (by <a lt='URL serializer'>serializing</a> an internal <a for=url>URL</a>). A
-standard should not expose a <a for=url>URL</a> using a {{URL}} object. {{URL}} objects
-are meant for <a for=url>URL</a> manipulation. In IDL the USVString type should be used.
+<p>A standard that exposes <a for=/>URLs</a>, should expose the <a for=/>URL</a> as a
+string  (by <a lt='URL serializer'>serializing</a> an internal <a for=/>URL</a>). A
+standard should not expose a <a for=/>URL</a> using a {{URL}} object. {{URL}} objects
+are meant for <a for=/>URL</a> manipulation. In IDL the USVString type should be used.
 
 <p class=note>The higher-level notion here is that values are to be exposed as immutable
 data structures.
@@ -2887,7 +2886,7 @@ proper naming. [[!HTML]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
-<p>There have been a lot of people that have helped make <a for=url lt=URL class=no-backref>URLs</a>
+<p>There have been a lot of people that have helped make <a for=/ class=no-backref>URLs</a>
 more interoperable over the years and thereby furthered the goals of this standard. Likewise many
 people have helped making this standard what it is today.
 
