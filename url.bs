@@ -921,7 +921,7 @@ non-null.
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
-input might be a <a for=urlsyntax>relative URL</a>.
+input might be a <a>relative-URL string</a>.
 
 <hr>
 
@@ -936,102 +936,93 @@ if any.
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
-<p>A <dfn export for=urlsyntax id=syntax-url lt="URL|URL string">URL</dfn> must be either
-a <a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>. To
-disambiguate from a <a for=/>URL record</a> it can also be referred to as a <a>URL string</a>.
+<p>A <dfn export id=syntax-url>URL string</dfn> must be either a
+<a>relative-URL-with-fragment string</a> or an <a>absolute-URL-with-fragment string</a>.
 
 <p>An
-<dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
-must be an <a for=urlsyntax>absolute URL</a>, optionally followed by "<code>#</code>" and a
-<a for=urlsyntax>fragment</a>.
+<dfn export id=syntax-url-absolute-with-fragment>absolute-URL-with-fragment string</dfn> must be an
+<a>absolute-URL string</a>, optionally followed by "<code>#</code>" and a
+<a>URL-fragment string</a>.
 
-<p>An <dfn export for=urlsyntax id=syntax-url-absolute>absolute URL</dfn> must be one of
-the following
+<p>An <dfn export id=syntax-url-absolute>absolute-URL string</dfn> must be one of the following
 
 <ul class=brief>
- <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
- match for a <a>special scheme</a> and not an <a spec=dom>ASCII case-insensitive</a> match
- for "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative URL</a>
- <li><p>a <a for=urlsyntax>scheme</a> that is <em>not</em> an
- <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by
- "<code>:</code>" and a <a for=urlsyntax>relative URL</a>
- <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
+ <li><p>a <a>URL-scheme string</a> that is an <a spec=dom>ASCII case-insensitive</a> match for a
+ <a>special scheme</a> and not an <a spec=dom>ASCII case-insensitive</a> match for
+ "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative-URL string</a>
+ <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a spec=dom>ASCII case-insensitive</a>
+ match for a <a>special scheme</a>, followed by "<code>:</code>" and a <a>relative-URL string</a>
+ <li><p>a <a>URL-scheme string</a> that is an <a spec=dom>ASCII case-insensitive</a>
  match for "<code>file</code>", followed by "<code>:</code>" and a
- <a>scheme-relative file URL</a>
+ <a>scheme-relative-file-URL string</a>
 </ul>
 
-<p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
+<p>any optionally followed by "<code>?</code>" and a <a>URL-query string</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-scheme>scheme</dfn> must be one
-<a>ASCII alpha</a>, followed by zero or more of <a>ASCII alphanumeric</a>,
-"<code>+</code>", "<code>-</code>", and "<code>.</code>". <a for=urlsyntax>Schemes</a>
-should be registered in the <cite>IANA URI [sic] Schemes</cite> registry.
+<p>A <dfn export id=syntax-url-scheme>URL-scheme string</dfn> must be one <a>ASCII alpha</a>,
+followed by zero or more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
+"<code>.</code>". <a lt="URL-scheme string">Schemes</a> should be registered in the
+<cite>IANA URI [sic] Schemes</cite> registry.
 [[!IANA-URI-SCHEMES]]
 [[RFC7595]]
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-relative-with-fragment>relative URL with fragment</dfn>
-must be a <a for=urlsyntax>relative URL</a>, optionally followed by "<code>#</code>" and a
-<a for=urlsyntax>fragment</a>.
+<p>A <dfn export id=syntax-url-relative-with-fragment>relative-URL-with-fragment string</dfn>
+must be a <a>relative-URL string</a>, optionally followed by "<code>#</code>" and a
+<a>URL-fragment string</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be one of
-the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
+<p>A <dfn export id=syntax-url-relative>relative-URL string</dfn> must be one of the following,
+switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
  <dt>Not "<code>file</code>"
- <dd><p>a <a>scheme-relative URL</a>
- <dd><p>a <a>path-absolute URL</a>
- <dd><p>a <a>path-relative scheme-less URL</a>
+ <dd><p>a <a>scheme-relative-URL string</a>
+ <dd><p>a <a>path-absolute-URL string</a>
+ <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
- <dd><p>a <a>scheme-relative file URL</a>
- <dd><p>a <a>path-absolute URL</a> if <a>base URL</a>'s <a for=url>host</a> is null
- <dd><p>a <a>path-absolute non-Windows-file URL</a> if <a>base URL</a>'s
- <a for=url>host</a> is non-null
- <dd><p>a <a>path-relative scheme-less URL</a>
+ <dd><p>a <a>scheme-relative-file-URL string</a>
+ <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is null
+ <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
+ is non-null
+ <dd><p>a <a>path-relative-scheme-less-URL string</a>
 </dl>
 
-<p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
+<p>any optionally followed by "<code>?</code>" and a <a>URL-query string</a>.
 
 <p class="note no-backref">A non-null <a>base URL</a> is necessary when
-<a lt="URL parser">parsing</a> a <a for=urlsyntax>relative URL</a>.
+<a lt="URL parser">parsing</a> a <a>relative-URL string</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-scheme-relative>scheme-relative URL</dfn>
-must be "<code>//</code>", followed by a <a for=hostsyntax>host</a>, optionally followed
-by "<code>:</code>" and a <a for=urlsyntax>port</a>, optionally followed by a
-<a>path-absolute URL</a>.
+<p>A <dfn export id=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
+"<code>//</code>", followed by a <a for=hostsyntax>host</a>, optionally followed by "<code>:</code>"
+and a <a>URL-port string</a>, optionally followed by a <a>path-absolute-URL string</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-port>port</dfn> must be zero or more
-<a>ASCII digits</a>.
+<p>A <dfn export id=syntax-url-port>URL-port string</dfn> must be zero or more <a>ASCII digits</a>.
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-file-scheme-relative>scheme-relative file URL</dfn>
-must be "<code>//</code>", followed by one of the following
+<p>A <dfn export id=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
+"<code>//</code>", followed by one of the following
 
 <ul class=brief>
  <li><p>a <a for=hostsyntax>host</a>, optionally followed by a
- <a>path-absolute non-Windows-file URL</a>
- <li><p>a <a>path-absolute URL</a>.
+ <a>path-absolute-non-Windows-file-URL string</a>
+ <li><p>a <a>path-absolute-URL string</a>.
 </ul>
 
-<p>A <dfn export for=urlsyntax id=syntax-url-path-absolute>path-absolute URL</dfn> must be
-"<code>/</code>" followed by a <a>path-relative URL</a>.
+<p>A <dfn export id=syntax-url-path-absolute>path-absolute-URL string</dfn> must be "<code>/</code>"
+followed by a <a>path-relative-URL string</a>.
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-file-path-absolute>path-absolute non-Windows-file URL</dfn>
-must be a <a>path-absolute URL</a> that does not start with "<code>/</code>", followed by
+<p>A <dfn export id=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
+must be a <a>path-absolute-URL string</a> that does not start with "<code>/</code>", followed by
 a <a>Windows drive letter</a>, followed by "<code>/</code>".
 
-<p>A <dfn export for=urlsyntax id=syntax-url-path-relative>path-relative URL</dfn> must be
-zero or more <a for=urlsyntax>path segments</a>, separated from each other by "<code>/</code>", and
-not start with "<code>/</code>".
+<p>A <dfn export id=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
+<a lt="URL-path-segment string">path segments</a>, separated from each other by "<code>/</code>",
+and not start with "<code>/</code>".
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-path-relative-scheme-less>path-relative scheme-less URL</dfn>
-must be a <a>path-relative URL</a> that does not start with a <a for=urlsyntax>scheme</a>
-and "<code>:</code>".
+<p>A <dfn export id=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
+must be a <a>path-relative-URL string</a> that does not start with a <a>URL-scheme string</a> and
+"<code>:</code>".
 
-<p>A <dfn export for=urlsyntax id=syntax-url-path-segment>path segment</dfn> must be one
-of the following
+<p>A <dfn export id=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
+following
 
 <ul class=brief>
  <li><p>zero or more <a>URL units</a>, excluding "<code>/</code>" and "<code>?</code>",
@@ -1041,20 +1032,16 @@ of the following
  <li><p>a <a>double-dot path segment</a>.
 </ul>
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-path-segment-dot>single-dot path segment</dfn>
-must be "<code>.</code>" or an <a spec=dom>ASCII case-insensitive</a> match for
-"<code>%2e</code>".
+<p>A <dfn export id=syntax-url-path-segment-dot>single-dot path segment</dfn> must be
+"<code>.</code>" or an <a spec=dom>ASCII case-insensitive</a> match for "<code>%2e</code>".
 
-<p>A
-<dfn export for=urlsyntax id=syntax-url-path-segment-dotdot>double-dot path segment</dfn>
-must be "<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for
-"<code>.%2e</code>", "<code>%2e.</code>", or "<code>%2e%2e</code>".
+<p>A <dfn export id=syntax-url-path-segment-dotdot>double-dot path segment</dfn> must be
+"<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for "<code>.%2e</code>",
+"<code>%2e.</code>", or "<code>%2e%2e</code>".
 
-<p>A <dfn export for=urlsyntax id=syntax-url-query>query</dfn> must be zero or more
-<a>URL units</a>.
+<p>A <dfn export id=syntax-url-query>URL-query string</dfn> must be zero or more <a>URL units</a>.
 
-<p>A <dfn export for=urlsyntax id=syntax-url-fragment>fragment</dfn> must be zero or more
+<p>A <dfn export id=syntax-url-fragment>URL-fragment string</dfn> must be zero or more
 <a>URL units</a>.
 
 <p>The <dfn>URL code points</dfn> are <a>ASCII alphanumeric</a>,
@@ -1101,10 +1088,10 @@ U+100000 to U+10FFFD.
 
 <p class=note>Code points higher than U+007F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>, except for code
-points appearing in <a for=url lt=fragment>fragments</a>.
+points appearing in <a lt="URL-fragment string">fragments</a>.
 
 <p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
-<a for=urlsyntax>query</a> that are higher than U+007F will be converted to
+<a>URL-query string</a> that are higher than U+007F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> <em>using the document's encoding</em>. This
 can cause problems if a URL that works in one document is copied to another document that uses a
 different document encoding. Using the <a>UTF-8</a> encoding everywhere solves this problem.
@@ -1134,7 +1121,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <p class="note no-backref">There is no conforming way to express a
 <a for=url>username</a> or <a for=url>password</a> of a <a for=/>URL record</a> within a
-<a for=urlsyntax>URL string</a>.
+<a>URL string</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>
@@ -2172,7 +2159,7 @@ form, with these modifications:
  <li><p>A <a for=/>URL</a>'s <a for=url>host</a> should be rendered using
  <a>domain to Unicode</a>.
 
- <li><p>Other parts of the <a for=urlsyntax>URL</a> should have their sequences of
+ <li><p>Other parts of the <a for=/>URL</a> should have their sequences of
  <a>percent-encoded bytes</a> replaced with code points resulting from
  <a>percent decoding</a> those sequences converted to bytes, unless that renders those
  sequences invisible.
@@ -2482,7 +2469,7 @@ var input = "https://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
 
- <p>This throws an exception if the input is not an <a for=urlsyntax>absolute URL</a>:
+ <p>This throws an exception if the input is not an <a>absolute-URL string</a>:
 
  <pre>
 try {
@@ -2491,7 +2478,7 @@ try {
   // that happened
 }</pre>
 
- <p>A <a>base URL</a> is necessary if the input is a <a for=urlsyntax>relative URL</a>:
+ <p>A <a>base URL</a> is necessary if the input is a <a>relative-URL string</a>:
 
  <pre>
 var input = "/🍣🍺",
@@ -2604,9 +2591,10 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
-attribute's setter lacks a <a for=urlsyntax>port</a>, <a>context object</a>'s <a for=URL>url</a>'s
-<a for=url>port</a> will not change. This can be unexpected as <code>host</code> attribute's getter
-does return a <a for=urlsyntax>port</a> so one might have assumed the setter to always "reset" both.
+attribute's setter lacks a <a lt="URL-port string">port</a>, <a>context object</a>'s
+<a for=URL>url</a>'s <a for=url>port</a> will not change. This can be unexpected as
+<code>host</code> attribute's getter does return a <a>URL-port string</a> so one might have assumed
+the setter to always "reset" both.
 
 <p>The <dfn attribute for=URL><code>hostname</code></dfn> attribute's getter must run these steps:
 
