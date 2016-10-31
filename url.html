@@ -300,15 +300,15 @@ want to leak. <var>B</var> might receive input it did not expect and take an act
 harms the user. In particular, <var>B</var> should never trust <var>A</var>, as at some
 point <a data-link-type="dfn" href="#concept-url">URLs</a> from <var>A</var> can come from untrusted sources. </p>
    <h2 class="heading settled" data-level="3" id="hosts-(domains-and-ip-addresses)"><span class="secno">3. </span><span class="content">Hosts (domains and IP addresses)</span><a class="self-link" href="#hosts-%28domains-and-ip-addresses%29"></a></h2>
-   <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>. Typically a <a data-link-type="dfn" href="#concept-host">host</a> serves as a network address, but it is sometimes (ab)used as opaque
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="concept-host">host<a class="self-link" href="#concept-host"></a></dfn> is a <a data-link-type="dfn" href="#concept-domain">domain</a>, an <a data-link-type="dfn" href="#concept-ipv4">IPv4 address</a>, or an <a data-link-type="dfn" href="#concept-ipv6">IPv6 address</a>. Typically a <a data-link-type="dfn" href="#concept-host">host</a> serves as a network address, but it is sometimes (ab)used as opaque
 identifier in <a data-link-type="dfn" href="#concept-url">URLs</a> where a network address is not necessary. </p>
    <p class="note" role="note">The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a data-link-type="dfn" href="#concept-host">host</a> syntax, parsing, and serialization. Unless stated
 otherwise in the sections that follow. </p>
-   <p>A <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="concept-domain">domain<a class="self-link" href="#concept-domain"></a></dfn> identifies a realm within a
 network. <a data-link-type="biblio" href="#biblio-rfc1034">[RFC1034]</a> </p>
-   <p>An <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-ipv4">IPv4 address<a class="self-link" href="#concept-ipv4"></a></dfn> is a 32-bit identifier. <a data-link-type="biblio" href="#biblio-rfc791">[RFC791]</a> </p>
-   <p>An <dfn data-dfn-for="host" data-dfn-type="dfn" data-export="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="concept-ipv4">IPv4 address<a class="self-link" href="#concept-ipv4"></a></dfn> is a 32-bit identifier. <a data-link-type="biblio" href="#biblio-rfc791">[RFC791]</a> </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="concept-ipv6">IPv6 address<a class="self-link" href="#concept-ipv6"></a></dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept-ipv6-piece">16-bit pieces<a class="self-link" href="#concept-ipv6-piece"></a></dfn>. <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a> </p>
    <p class="note" role="note">Support for <code>&lt;zone_id></code> is <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>. </p>
@@ -330,8 +330,8 @@ eight <dfn data-dfn-type="dfn" data-lt="IPv6 piece" data-noexport="" id="concept
      <p>Signify <a data-link-type="dfn" href="#syntax-violation">syntax violations</a> for any returned errors, and then, return <var>result</var>. </p>
    </ol>
    <h3 class="heading settled" data-level="3.2" id="host-syntax"><span class="secno">3.2. </span><span class="content">Host syntax</span><a class="self-link" href="#host-syntax"></a></h3>
-   <p>A <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host">host<a class="self-link" href="#syntax-host"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-host-domain">domain</a>, an <a data-link-type="dfn" href="#syntax-host-ipv4">IPv4 address</a>, or "<code>[</code>",
-followed by an <a data-link-type="dfn" href="#syntax-host-ipv6">IPv6 address</a>, followed by "<code>]</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-host">host string<a class="self-link" href="#syntax-host"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-host-domain">domain string</a>, an <a data-link-type="dfn" href="#syntax-host-ipv4">IPv4 address string</a>, or "<code>[</code>", followed by an <a data-link-type="dfn" href="#syntax-host-ipv6">IPv6 address string</a>, followed
+by "<code>]</code>". </p>
    <p>A <var>domain</var> is a <dfn data-dfn-type="dfn" data-noexport="" id="valid-domain">valid domain<a class="self-link" href="#valid-domain"></a></dfn> if these steps return success: </p>
    <ol>
     <li>
@@ -346,12 +346,11 @@ followed by an <a data-link-type="dfn" href="#syntax-host-ipv6">IPv6 address</a>
      <p>Return success. </p>
    </ol>
    <p class="XXX">Ideally we define this in terms of a sequence of code points that make up a <a data-link-type="dfn" href="#valid-domain">valid domain</a> rather than through a whack-a-mole: <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334">bug 25334</a>. </p>
-   <p>A <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-domain">domain<a class="self-link" href="#syntax-host-domain"></a></dfn> must be a string that
-is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>. </p>
-   <p>An <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-ipv4">IPv4 address<a class="self-link" href="#syntax-host-ipv4"></a></dfn> must be four
-sequences of up to three <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> per sequence, each representing a decimal
-number no greater than 255, and separated from each other by "<code>.</code>". </p>
-   <p>An <dfn data-dfn-for="hostsyntax" data-dfn-type="dfn" data-export="" id="syntax-host-ipv6">IPv6 address<a class="self-link" href="#syntax-host-ipv6"></a></dfn> is defined in the <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>. <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a> </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-host-domain">domain string<a class="self-link" href="#syntax-host-domain"></a></dfn> must be a string that is a <a data-link-type="dfn" href="#valid-domain">valid domain</a>. </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="syntax-host-ipv4">IPv4 address string<a class="self-link" href="#syntax-host-ipv4"></a></dfn> must be four sequences of up to
+three <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a> per sequence, each representing a decimal number no greater than 255, and
+separated from each other by "<code>.</code>". </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="syntax-host-ipv6">IPv6 address string<a class="self-link" href="#syntax-host-ipv6"></a></dfn> is defined in the <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>. <a data-link-type="biblio" href="#biblio-rfc4291">[RFC4291]</a> </p>
    <h3 class="heading settled" data-level="3.3" id="host-parsing"><span class="secno">3.3. </span><span class="content">Host parsing</span><a class="self-link" href="#host-parsing"></a></h3>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="concept-host-parser">host parser<a class="self-link" href="#concept-host-parser"></a></dfn> takes a string <var>input</var> and
 an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
@@ -826,14 +825,14 @@ switching on <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <
    <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">URL-query string</a>. </p>
    <p class="note no-backref" role="note">A non-null <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary when <a data-link-type="dfn" href="#concept-url-parser">parsing</a> a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a>. </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-scheme-relative">scheme-relative-URL string<a class="self-link" href="#syntax-url-scheme-relative"></a></dfn> must be
-"<code>//</code>", followed by a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by "<code>:</code>"
+"<code>//</code>", followed by a <a data-link-type="dfn" href="#syntax-host">host string</a>, optionally followed by "<code>:</code>"
 and a <a data-link-type="dfn" href="#syntax-url-port">URL-port string</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a>. </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-port">URL-port string<a class="self-link" href="#syntax-url-port"></a></dfn> must be zero or more <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>. </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-file-scheme-relative">scheme-relative-file-URL string<a class="self-link" href="#syntax-url-file-scheme-relative"></a></dfn> must be
 "<code>//</code>", followed by one of the following </p>
    <ul class="brief">
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-host">host string</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string</a> </p>
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a>. </p>
    </ul>
@@ -841,8 +840,8 @@ and a <a data-link-type="dfn" href="#syntax-url-port">URL-port string</a>, optio
 followed by a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative-URL string</a>. </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string<a class="self-link" href="#syntax-url-file-path-absolute"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a> that does not start with "<code>/</code>", followed by
 a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, followed by "<code>/</code>". </p>
-   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative-URL string<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">path segments</a>, separated from each other by "<code>/</code>",
-and not start with "<code>/</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative-URL string<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">URL-path-segment strings</a>, separated from each other by "<code>/</code>", and not start with
+"<code>/</code>". </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-relative-scheme-less">path-relative-scheme-less-URL string<a class="self-link" href="#syntax-url-path-relative-scheme-less"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative-URL string</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">URL-scheme string</a> and
 "<code>:</code>". </p>
    <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-segment">URL-path-segment string<a class="self-link" href="#syntax-url-path-segment"></a></dfn> must be one of the
@@ -2221,12 +2220,8 @@ neighboring rights to this work. </p>
    <li><a href="#default-encode-set">default encode set</a><span>, in §1.2</span>
    <li><a href="#default-port">default port</a><span>, in §4</span>
    <li><a href="#dom-urlsearchparams-delete">delete(name)</a><span>, in §6.3</span>
-   <li>
-    domain
-    <ul>
-     <li><a href="#concept-domain">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-domain">dfn for hostsyntax</a><span>, in §3.2</span>
-    </ul>
+   <li><a href="#concept-domain">domain</a><span>, in §3</span>
+   <li><a href="#syntax-host-domain">domain string</a><span>, in §3.2</span>
    <li><a href="#concept-domain-to-ascii">domain to ASCII</a><span>, in §3.1</span>
    <li><a href="#concept-domain-to-unicode">domain to Unicode</a><span>, in §3.1</span>
    <li><a href="#syntax-url-path-segment-dotdot">double-dot path segment</a><span>, in §4.1</span>
@@ -2250,8 +2245,7 @@ neighboring rights to this work. </p>
    <li>
     host
     <ul>
-     <li><a href="#concept-host">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host">dfn for hostsyntax</a><span>, in §3.2</span>
+     <li><a href="#concept-host">definition of</a><span>, in §3</span>
      <li><a href="#concept-url-host">dfn for url</a><span>, in §4</span>
      <li><a href="#dom-url-host">attribute for URL</a><span>, in §6.2</span>
     </ul>
@@ -2260,24 +2254,17 @@ neighboring rights to this work. </p>
    <li><a href="#concept-host-parser">host parser</a><span>, in §3.3</span>
    <li><a href="#concept-host-serializer">host serializer</a><span>, in §3.4</span>
    <li><a href="#host-state">host state</a><span>, in §4.2</span>
+   <li><a href="#syntax-host">host string</a><span>, in §3.2</span>
    <li><a href="#dom-url-href">href</a><span>, in §6.2</span>
    <li><a href="#http-scheme">HTTP(S) scheme</a><span>, in §4</span>
    <li><a href="#include-credentials">include credentials</a><span>, in §4</span>
-   <li>
-    IPv4 address
-    <ul>
-     <li><a href="#concept-ipv4">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-ipv4">dfn for hostsyntax</a><span>, in §3.2</span>
-    </ul>
+   <li><a href="#concept-ipv4">IPv4 address</a><span>, in §3</span>
+   <li><a href="#syntax-host-ipv4">IPv4 address string</a><span>, in §3.2</span>
    <li><a href="#ipv4-number-parser">IPv4 number parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv4-parser">IPv4 parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv4-serializer">IPv4 serializer</a><span>, in §3.4</span>
-   <li>
-    IPv6 address
-    <ul>
-     <li><a href="#concept-ipv6">dfn for host</a><span>, in §3</span>
-     <li><a href="#syntax-host-ipv6">dfn for hostsyntax</a><span>, in §3.2</span>
-    </ul>
+   <li><a href="#concept-ipv6">IPv6 address</a><span>, in §3</span>
+   <li><a href="#syntax-host-ipv6">IPv6 address string</a><span>, in §3.2</span>
    <li><a href="#concept-ipv6-parser">IPv6 parser</a><span>, in §3.3</span>
    <li><a href="#concept-ipv6-parser-finale">IPv6 parser Finale</a><span>, in §3.3</span>
    <li><a href="#concept-ipv6-parser-ipv4">IPv6 parser IPv4</a><span>, in §3.3</span>

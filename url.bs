@@ -230,7 +230,7 @@ an <var>encode set</var>, run these steps:
 taken when rendering, interpreting, and passing <a for=/>URLs</a> around.
 
 <p>When rendering and allocating new <a for=/>URLs</a> "spoofing" needs to be
-considered. An attack whereby one <a for=host>host</a> or <a for=/>URL</a> can be
+considered. An attack whereby one <a for=/>host</a> or <a for=/>URL</a> can be
 confused for another. E.g., consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear
 eerily similar. Or worse, consider how U+202A and similar code points are invisible.
 [[!UTS36]]
@@ -249,23 +249,23 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
      https://tools.ietf.org/html/rfc3492
      https://mothereff.in/punycode -->
 
-<p>A <dfn export for=host id=concept-host>host</dfn> is a <a for=host>domain</a>, an
-<a for=host>IPv4 address</a>, or an <a for=host>IPv6 address</a>. Typically a
-<a for=host>host</a> serves as a network address, but it is sometimes (ab)used as opaque
+<p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
+<a>IPv4 address</a>, or an <a>IPv6 address</a>. Typically a
+<a for=/>host</a> serves as a network address, but it is sometimes (ab)used as opaque
 identifier in <a for=/>URLs</a> where a network address is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
-have no influence on <a for=host>host</a> syntax, parsing, and serialization. Unless stated
+have no influence on <a for=/>host</a> syntax, parsing, and serialization. Unless stated
 otherwise in the sections that follow.
 
-<p>A <dfn export for=host id=concept-domain>domain</dfn> identifies a realm within a
+<p>A <dfn export id=concept-domain>domain</dfn> identifies a realm within a
 network.
 [[RFC1034]]
 
-<p>An <dfn export for=host id=concept-ipv4>IPv4 address</dfn> is a 32-bit identifier.
+<p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a 32-bit identifier.
 [[RFC791]]
 
-<p>An <dfn export for=host id=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
+<p>An <dfn export id=concept-ipv6>IPv6 address</dfn> is a 128-bit identifier and
 for the purposes of this specification represented as an ordered list of
 eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 [[RFC4291]]
@@ -277,7 +277,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 <h3 id=idna>IDNA</h3>
 
 <p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> given a
-<a for=host>domain</a> <var>domain</var>, runs these steps:
+<a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
@@ -292,7 +292,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 </ol>
 
 <p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> given a
-<a for=host>domain</a> <var>domain</var>, runs these steps:
+<a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
@@ -307,9 +307,9 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 
 <h3 id=host-syntax>Host syntax</h3>
 
-<p>A <dfn export for=hostsyntax id=syntax-host>host</dfn> must be a
-<a for=hostsyntax>domain</a>, an <a for=hostsyntax>IPv4 address</a>, or "<code>[</code>",
-followed by an <a for=hostsyntax>IPv6 address</a>, followed by "<code>]</code>".
+<p>A <dfn export id=syntax-host>host string</dfn> must be a <a>domain string</a>, an
+<a>IPv4 address string</a>, or "<code>[</code>", followed by an <a>IPv6 address string</a>, followed
+by "<code>]</code>".
 
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
@@ -336,14 +336,14 @@ followed by an <a for=hostsyntax>IPv6 address</a>, followed by "<code>]</code>".
 <a>valid domain</a> rather than through a whack-a-mole:
 <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
 
-<p>A <dfn export for=hostsyntax id=syntax-host-domain>domain</dfn> must be a string that
-is a <a>valid domain</a>.
+<p>A <dfn export id=syntax-host-domain>domain string</dfn> must be a string that is a
+<a>valid domain</a>.
 
-<p>An <dfn export for=hostsyntax id=syntax-host-ipv4>IPv4 address</dfn> must be four
-sequences of up to three <a>ASCII digits</a> per sequence, each representing a decimal
-number no greater than 255, and separated from each other by "<code>.</code>".
+<p>An <dfn export id=syntax-host-ipv4>IPv4 address string</dfn> must be four sequences of up to
+three <a>ASCII digits</a> per sequence, each representing a decimal number no greater than 255, and
+separated from each other by "<code>.</code>".
 
-<p>An <dfn export for=hostsyntax id=syntax-host-ipv6>IPv6 address</dfn> is defined in the
+<p>An <dfn export id=syntax-host-ipv6>IPv6 address string</dfn> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
 <!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
@@ -406,7 +406,7 @@ steps:
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
 
- <li><p>If <var>ipv4Host</var> is an <a for=host>IPv4 address</a> or failure, return
+ <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a> or failure, return
  <var>ipv4Host</var>.
 
  <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
@@ -481,7 +481,7 @@ runs these steps:
     <p>If <var>part</var> is the empty string, return <var>input</var>.
 
     <p class="example no-backref" id=example-c2afe535><code>0..0x300</code> is a
-    <a for=host>domain</a>, not an <a for=host>IPv4 address</a>.
+    <a>domain</a>, not an <a>IPv4 address</a>.
 
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
    <var>part</var> using <var>syntaxViolationFlag</var>.
@@ -525,7 +525,7 @@ runs these steps:
 then runs these steps:
 
 <ol>
- <li><p>Let <var>address</var> be a new <a for=host>IPv6 address</a> with its
+ <li><p>Let <var>address</var> be a new <a>IPv6 address</a> with its
  <a lt='IPv6 piece'>16-bit pieces</a> initialized to 0.
 
  <li><p>Let <var>piece pointer</var> be a pointer into
@@ -705,22 +705,22 @@ They serve no purpose other than being a location the algorithm can jump to.
 <h3 id=host-serializing>Host serializing</h3>
 
 <p>The <dfn id=concept-host-serializer lt="host serializer">host serializer</dfn> takes a
-<a for=host>host</a> <var>host</var> and then runs these steps:
+<a for=/>host</a> <var>host</var> and then runs these steps:
 
 <ol>
- <li><p>If <var>host</var> is an <a for=host>IPv4 address</a>, return the result of
+ <li><p>If <var>host</var> is an <a>IPv4 address</a>, return the result of
  running the <a>IPv4 serializer</a> on <var>host</var>.
 
- <li><p>Otherwise, if <var>host</var> is an <a for=host>IPv6 address</a>, return
+ <li><p>Otherwise, if <var>host</var> is an <a>IPv6 address</a>, return
  "<code>[</code>", followed by the result of running the
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
 
- <li><p>Otherwise, <var>host</var> is a <a for=host>domain</a>, return <var>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a>domain</a>, return <var>host</var>.
 </ol>
 
 The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
-<a for=host>IPv4 address</a> <var>address</var> and then runs these steps:
+<a>IPv4 address</a> <var>address</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.
@@ -743,7 +743,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
 </ol>
 
 <p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an
-<a for=host>IPv6 address</a> <var>address</var> and then runs these steps:
+<a>IPv6 address</a> <var>address</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.
@@ -797,7 +797,7 @@ A Recommendation for IPv6 Address Text Representation.
 
 <h3 id=host-equivalence>Host equivalence</h3>
 
-To determine whether a <a for=host>host</a> <var>A</var>
+To determine whether a <a for=/>host</a> <var>A</var>
 <dfn export for=host id=concept-host-equals>equals</dfn> <var>B</var>, return true if
 <var>A</var> is <var>B</var>, and false otherwise.
 
@@ -830,7 +830,7 @@ either null or an <a>ASCII string</a> identifying a user's credentials. It is in
 null.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
-null or a <a for=host>host</a>. It is initially null.
+null or a <a for=/>host</a>. It is initially null.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
@@ -992,7 +992,7 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <a lt="URL parser">parsing</a> a <a>relative-URL string</a>.
 
 <p>A <dfn export id=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
-"<code>//</code>", followed by a <a for=hostsyntax>host</a>, optionally followed by "<code>:</code>"
+"<code>//</code>", followed by a <a>host string</a>, optionally followed by "<code>:</code>"
 and a <a>URL-port string</a>, optionally followed by a <a>path-absolute-URL string</a>.
 
 <p>A <dfn export id=syntax-url-port>URL-port string</dfn> must be zero or more <a>ASCII digits</a>.
@@ -1001,7 +1001,7 @@ and a <a>URL-port string</a>, optionally followed by a <a>path-absolute-URL stri
 "<code>//</code>", followed by one of the following
 
 <ul class=brief>
- <li><p>a <a for=hostsyntax>host</a>, optionally followed by a
+ <li><p>a <a>host string</a>, optionally followed by a
  <a>path-absolute-non-Windows-file-URL string</a>
  <li><p>a <a>path-absolute-URL string</a>.
 </ul>
@@ -1014,8 +1014,8 @@ must be a <a>path-absolute-URL string</a> that does not start with "<code>/</cod
 a <a>Windows drive letter</a>, followed by "<code>/</code>".
 
 <p>A <dfn export id=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
-<a lt="URL-path-segment string">path segments</a>, separated from each other by "<code>/</code>",
-and not start with "<code>/</code>".
+<a>URL-path-segment strings</a>, separated from each other by "<code>/</code>", and not start with
+"<code>/</code>".
 
 <p>A <dfn export id=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
 must be a <a>path-relative-URL string</a> that does not start with a <a>URL-scheme string</a> and
