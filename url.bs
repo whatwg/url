@@ -816,7 +816,7 @@ unified model would be, please file an issue.
 
 <p>A <dfn export for=url id=concept-url lt="URL|URL record">URL</dfn> is a universal
 identifier. To disambiguate from a <a>URL string</a> it can also be referred to as a
-<a>URL record</a>.
+<a for=url>URL record</a>.
 
 <p>A <a for=url>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=url>URL</a> and can be used to
@@ -922,7 +922,7 @@ non-null.
 <p>A <a for=url>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
-input might be a <a>relative URL</a>.
+input might be a <a for=urlsyntax>relative URL</a>.
 
 <hr>
 
@@ -939,11 +939,11 @@ if any.
 
 <p>A <dfn export for=urlsyntax id=syntax-url lt="URL|URL string">URL</dfn> must be either
 a <a>relative URL with fragment</a> or an <a>absolute URL with fragment</a>. To
-disambiguate from a <a>URL record</a> it can also be referred to as a <a>URL string</a>.
+disambiguate from a <a for=url>URL record</a> it can also be referred to as a <a>URL string</a>.
 
 <p>An
 <dfn export for=urlsyntax id=syntax-url-absolute-with-fragment>absolute URL with fragment</dfn>
-must be an <a>absolute URL</a>, optionally followed by "<code>#</code>" and a
+must be an <a for=urlsyntax>absolute URL</a>, optionally followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
 <p>An <dfn export for=urlsyntax id=syntax-url-absolute>absolute URL</dfn> must be one of
@@ -955,7 +955,7 @@ the following
  for "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative URL</a>
  <li><p>a <a for=urlsyntax>scheme</a> that is <em>not</em> an
  <a spec=dom>ASCII case-insensitive</a> match for a <a>special scheme</a>, followed by
- "<code>:</code>" and a <a>relative URL</a>
+ "<code>:</code>" and a <a for=urlsyntax>relative URL</a>
  <li><p>a <a for=urlsyntax>scheme</a> that is an <a spec=dom>ASCII case-insensitive</a>
  match for "<code>file</code>", followed by "<code>:</code>" and a
  <a>scheme-relative file URL</a>
@@ -972,7 +972,7 @@ should be registered in the <cite>IANA URI [sic] Schemes</cite> registry.
 
 <p>A
 <dfn export for=urlsyntax id=syntax-url-relative-with-fragment>relative URL with fragment</dfn>
-must be a <a>relative URL</a>, optionally followed by "<code>#</code>" and a
+must be a <a for=urlsyntax>relative URL</a>, optionally followed by "<code>#</code>" and a
 <a for=urlsyntax>fragment</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-relative>relative URL</dfn> must be one of
@@ -994,7 +994,7 @@ the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <p>any optionally followed by "<code>?</code>" and a <a for=urlsyntax>query</a>.
 
 <p class="note no-backref">A non-null <a>base URL</a> is necessary when
-<a lt="URL parser">parsing</a> a <a>relative URL</a>.
+<a lt="URL parser">parsing</a> a <a for=urlsyntax>relative URL</a>.
 
 <p>A <dfn export for=urlsyntax id=syntax-url-scheme-relative>scheme-relative URL</dfn>
 must be "<code>//</code>", followed by a <a for=hostsyntax>host</a>, optionally followed
@@ -1023,8 +1023,8 @@ must be a <a>path-absolute URL</a> that does not start with "<code>/</code>", fo
 a <a>Windows drive letter</a>, followed by "<code>/</code>".
 
 <p>A <dfn export for=urlsyntax id=syntax-url-path-relative>path-relative URL</dfn> must be
-zero or more <a>path segments</a>, separated from each other by "<code>/</code>", and not
-start with "<code>/</code>".
+zero or more <a for=urlsyntax>path segments</a>, separated from each other by "<code>/</code>", and
+not start with "<code>/</code>".
 
 <p>A
 <dfn export for=urlsyntax id=syntax-url-path-relative-scheme-less>path-relative scheme-less URL</dfn>
@@ -1286,7 +1286,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         set <var>state</var> to <a>special relative or authority state</a>.
 
         <p class="note no-backref">This means that <var>base</var>'s
-        <a>cannot-be-a-base-URL flag</a> is unset.
+        <a for=url>cannot-be-a-base-URL flag</a> is unset.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
@@ -1295,8 +1295,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>state</var> to <a>path or authority state</a>, and increase <var>pointer</var>
        by one.
 
-       <li><p>Otherwise, set <var>url</var>'s <a>cannot-be-a-base-URL flag</a>, append an empty
-       string to <var>url</var>'s <a for=url>path</a>, and set <var>state</var> to
+       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>, append an
+       empty string to <var>url</var>'s <a for=url>path</a>, and set <var>state</var> to
        <a>cannot-be-a-base-URL path state</a>.
       </ol>
 
@@ -1311,18 +1311,19 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dt><dfn>no scheme state</dfn>
    <dd>
     <ol>
-     <li><p>If <var>base</var> is null, or <var>base</var>'s <a>cannot-be-a-base-URL flag</a> is
-     set and <a>c</a> is not "<code>#</code>", <a>syntax violation</a>, return failure.
+     <li><p>If <var>base</var> is null, or <var>base</var>'s
+     <a for=url>cannot-be-a-base-URL flag</a> is set and <a>c</a> is not "<code>#</code>",
+     <a>syntax violation</a>, return failure.
 
-     <li><p>Otherwise, if <var>base</var>'s <a>cannot-be-a-base-URL flag</a> is set and <a>c</a>
-     is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
+     <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set and
+     <a>c</a> is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
      <var>base</var>'s <a for=url>scheme</a>,
      <var>url</var>'s <a for=url>path</a> to
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
      <var>url</var>'s <a for=url>fragment</a> to the empty string, set
-     <var>url</var>'s <a>cannot-be-a-base-URL flag</a>, and set <var>state</var> to
+     <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>, and set <var>state</var> to
      <a>fragment state</a>.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>scheme</a> is not
@@ -2073,8 +2074,8 @@ then runs these steps:
  <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", append
  "<code>//</code>" to <var>output</var>.
 
- <li><p>If <var>url</var>'s <a>cannot-be-a-base-URL flag</a> is set, append the first string in
- <var>url</var>'s <a for=url>path</a> to <var>output</var>.
+ <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append the first string
+ in <var>url</var>'s <a for=url>path</a> to <var>output</var>.
 
  <li><p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>'s
  <a for=url>path</a> (including empty strings), separated from each other by
@@ -2553,10 +2554,10 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
 
- <li><p><a>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the given
- value.
+ <li><p><a for=url>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the
+ given value.
 </ol>
 
 <p>The <dfn attribute for=URL><code>password</code></dfn> attribute's getter must run these steps:
@@ -2572,10 +2573,10 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
 
- <li><p><a>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the given
- value.
+ <li><p><a for=url>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the
+ given value.
 </ol>
 
 <p>The <dfn attribute for=URL><code>host</code></dfn> attribute's getter must run these steps:
@@ -2596,8 +2597,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>host</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
- terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
@@ -2621,8 +2622,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 <p>The <code><a attribute for=URL>hostname</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
- terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, terminate these steps.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
@@ -2642,8 +2643,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, its
- <a>cannot-be-a-base-URL flag</a> is set, or its <a for=url>scheme</a> is "<code>file</code>",
- terminate these steps.
+ <a for=url>cannot-be-a-base-URL flag</a> is set, or its <a for=url>scheme</a> is
+ "<code>file</code>", terminate these steps.
 
  <li><p>If the given value is the empty string, then set <a for=URL>url</a>'s <a for=url>port</a> to
  null.</p></li>
@@ -2656,8 +2657,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> attribute's getter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
- return the first string in <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, return the first string in <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
 
  <li><p>Return "<code>/</code>", followed by the strings in <a>context object</a>'s
  <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), separated from each other by
@@ -2668,8 +2669,8 @@ does return a <a for=urlsyntax>port</a> so one might have assumed the setter to 
 run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a>cannot-be-a-base-URL flag</a> is set,
- terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, terminate these steps.
 
  <li><p>Empty <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
 
