@@ -781,73 +781,72 @@ its <a data-link-type="dfn" href="#concept-url-username">username</a> is not the
 non-null. </p>
    <p>A <a data-link-type="dfn" href="#concept-url">URL</a> can be designated as <dfn data-dfn-type="dfn" data-noexport="" id="concept-base-url">base URL<a class="self-link" href="#concept-base-url"></a></dfn>. </p>
    <p class="note no-backref" role="note">A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is useful for the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a> when the
-input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>. </p>
+input might be a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a>. </p>
    <hr>
    <p id="pop-a-urls-path">To <dfn data-dfn-type="dfn" data-local-lt="shorten" data-noexport="" id="shorten-a-urls-path">shorten a <var>url</var>’s path<a class="self-link" href="#shorten-a-urls-path"></a></dfn>, if <var>url</var>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a> is not "<code>file</code>" or <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a> does not contain a single string that is a <a data-link-type="dfn" href="#normalized-windows-drive-letter">normalized Windows drive letter</a>, remove <var>url</var>’s <a data-link-type="dfn" href="#concept-url-path">path</a>’s last string,
 if any. </p>
    <h3 class="heading settled" data-level="4.1" id="url-syntax"><span class="secno">4.1. </span><span class="content">URL syntax</span><a class="self-link" href="#url-syntax"></a></h3>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" data-lt="URL|URL string" id="syntax-url">URL<a class="self-link" href="#syntax-url"></a></dfn> must be either
-a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative URL with fragment</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a>. To
-disambiguate from a <a data-link-type="dfn" href="#concept-url">URL record</a> it can also be referred to as a <a data-link-type="dfn" href="#syntax-url">URL string</a>. </p>
-   <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute-with-fragment">absolute URL with fragment<a class="self-link" href="#syntax-url-absolute-with-fragment"></a></dfn> must be an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
-   <p>An <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-absolute">absolute URL<a class="self-link" href="#syntax-url-absolute"></a></dfn> must be one of
-the following </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url">URL string<a class="self-link" href="#syntax-url"></a></dfn> must be either a <a data-link-type="dfn" href="#syntax-url-relative-with-fragment">relative-URL-with-fragment string</a> or an <a data-link-type="dfn" href="#syntax-url-absolute-with-fragment">absolute-URL-with-fragment string</a>. </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="syntax-url-absolute-with-fragment">absolute-URL-with-fragment string<a class="self-link" href="#syntax-url-absolute-with-fragment"></a></dfn> must be an <a data-link-type="dfn" href="#syntax-url-absolute">absolute-URL string</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">URL-fragment string</a>. </p>
+   <p>An <dfn data-dfn-type="dfn" data-export="" id="syntax-url-absolute">absolute-URL string<a class="self-link" href="#syntax-url-absolute"></a></dfn> must be one of the following </p>
    <ul class="brief">
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a> and not an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match
- for "<code>file</code>", followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">URL-scheme string</a> that is an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a> and not an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for
+ "<code>file</code>", followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative-URL string</a> </p>
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is <em>not</em> an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by
- "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">URL-scheme string</a> that is <em>not</em> an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for a <a data-link-type="dfn" href="#special-scheme">special scheme</a>, followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a> </p>
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> that is an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for "<code>file</code>", followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative file URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme">URL-scheme string</a> that is an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for "<code>file</code>", followed by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative-file-URL string</a> </p>
    </ul>
-   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme">scheme<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>, followed by zero or more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
-"<code>+</code>", "<code>-</code>", and "<code>.</code>". <a data-link-type="dfn" href="#syntax-url-scheme">Schemes</a> should be registered in the <cite>IANA URI [sic] Schemes</cite> registry. <a data-link-type="biblio" href="#biblio-iana-uri-schemes">[IANA-URI-SCHEMES]</a> <a data-link-type="biblio" href="#biblio-rfc7595">[RFC7595]</a> </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative-with-fragment">relative URL with fragment<a class="self-link" href="#syntax-url-relative-with-fragment"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">fragment</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative URL<a class="self-link" href="#syntax-url-relative"></a></dfn> must be one of
-the following, switching on <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
+   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">URL-query string</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-scheme">URL-scheme string<a class="self-link" href="#syntax-url-scheme"></a></dfn> must be one <a data-link-type="dfn" href="#ascii-alpha">ASCII alpha</a>,
+followed by zero or more of <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
+"<code>.</code>". <a data-link-type="dfn" href="#syntax-url-scheme">Schemes</a> should be registered in the <cite>IANA URI [sic] Schemes</cite> registry. <a data-link-type="biblio" href="#biblio-iana-uri-schemes">[IANA-URI-SCHEMES]</a> <a data-link-type="biblio" href="#biblio-rfc7595">[RFC7595]</a> </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-relative-with-fragment">relative-URL-with-fragment string<a class="self-link" href="#syntax-url-relative-with-fragment"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a>, optionally followed by "<code>#</code>" and a <a data-link-type="dfn" href="#syntax-url-fragment">URL-fragment string</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-relative">relative-URL string<a class="self-link" href="#syntax-url-relative"></a></dfn> must be one of the following,
+switching on <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-scheme">scheme</a>: </p>
    <dl class="switch">
     <dt>Not "<code>file</code>" 
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-scheme-relative">scheme-relative-URL string</a> </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a> </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative-scheme-less-URL string</a> </p>
     <dt>"<code>file</code>" 
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative file URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-file-scheme-relative">scheme-relative-file-URL string</a> </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is null </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is non-null </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string</a> if <a data-link-type="dfn" href="#concept-base-url">base URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> is non-null </p>
     <dd>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-relative-scheme-less">path-relative-scheme-less-URL string</a> </p>
    </dl>
-   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">query</a>. </p>
-   <p class="note no-backref" role="note">A non-null <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary when <a data-link-type="dfn" href="#concept-url-parser">parsing</a> a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-scheme-relative">scheme-relative URL<a class="self-link" href="#syntax-url-scheme-relative"></a></dfn> must be "<code>//</code>", followed by a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed
-by "<code>:</code>" and a <a data-link-type="dfn" href="#syntax-url-port">port</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-port">port<a class="self-link" href="#syntax-url-port"></a></dfn> must be zero or more <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-file-scheme-relative">scheme-relative file URL<a class="self-link" href="#syntax-url-file-scheme-relative"></a></dfn> must be "<code>//</code>", followed by one of the following </p>
+   <p>any optionally followed by "<code>?</code>" and a <a data-link-type="dfn" href="#syntax-url-query">URL-query string</a>. </p>
+   <p class="note no-backref" role="note">A non-null <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary when <a data-link-type="dfn" href="#concept-url-parser">parsing</a> a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-scheme-relative">scheme-relative-URL string<a class="self-link" href="#syntax-url-scheme-relative"></a></dfn> must be
+"<code>//</code>", followed by a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by "<code>:</code>"
+and a <a data-link-type="dfn" href="#syntax-url-port">URL-port string</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-port">URL-port string<a class="self-link" href="#syntax-url-port"></a></dfn> must be zero or more <a data-link-type="dfn" href="#ascii-digits">ASCII digits</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-file-scheme-relative">scheme-relative-file-URL string<a class="self-link" href="#syntax-url-file-scheme-relative"></a></dfn> must be
+"<code>//</code>", followed by one of the following </p>
    <ul class="brief">
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a> </p>
+     <p>a <a data-link-type="dfn" href="#syntax-host">host</a>, optionally followed by a <a data-link-type="dfn" href="#syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string</a> </p>
     <li>
-     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a>. </p>
+     <p>a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a>. </p>
    </ul>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-absolute">path-absolute URL<a class="self-link" href="#syntax-url-path-absolute"></a></dfn> must be
-"<code>/</code>" followed by a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-file-path-absolute">path-absolute non-Windows-file URL<a class="self-link" href="#syntax-url-file-path-absolute"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute URL</a> that does not start with "<code>/</code>", followed by
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-absolute">path-absolute-URL string<a class="self-link" href="#syntax-url-path-absolute"></a></dfn> must be "<code>/</code>"
+followed by a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative-URL string</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string<a class="self-link" href="#syntax-url-file-path-absolute"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-absolute">path-absolute-URL string</a> that does not start with "<code>/</code>", followed by
 a <a data-link-type="dfn" href="#windows-drive-letter">Windows drive letter</a>, followed by "<code>/</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative URL<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be
-zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">path segments</a>, separated from each other by "<code>/</code>", and
-not start with "<code>/</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-relative-scheme-less">path-relative scheme-less URL<a class="self-link" href="#syntax-url-path-relative-scheme-less"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative URL</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">scheme</a> and "<code>:</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment">path segment<a class="self-link" href="#syntax-url-path-segment"></a></dfn> must be one
-of the following </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-relative">path-relative-URL string<a class="self-link" href="#syntax-url-path-relative"></a></dfn> must be zero or more <a data-link-type="dfn" href="#syntax-url-path-segment">path segments</a>, separated from each other by "<code>/</code>",
+and not start with "<code>/</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-relative-scheme-less">path-relative-scheme-less-URL string<a class="self-link" href="#syntax-url-path-relative-scheme-less"></a></dfn> must be a <a data-link-type="dfn" href="#syntax-url-path-relative">path-relative-URL string</a> that does not start with a <a data-link-type="dfn" href="#syntax-url-scheme">URL-scheme string</a> and
+"<code>:</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-segment">URL-path-segment string<a class="self-link" href="#syntax-url-path-segment"></a></dfn> must be one of the
+following </p>
    <ul class="brief">
     <li>
      <p>zero or more <a data-link-type="dfn" href="#url-units">URL units</a>, excluding "<code>/</code>" and "<code>?</code>",
@@ -857,12 +856,13 @@ of the following </p>
     <li>
      <p>a <a data-link-type="dfn" href="#syntax-url-path-segment-dotdot">double-dot path segment</a>. </p>
    </ul>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dot">single-dot path segment<a class="self-link" href="#syntax-url-path-segment-dot"></a></dfn> must be "<code>.</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for
-"<code>%2e</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dotdot">double-dot path segment<a class="self-link" href="#syntax-url-path-segment-dotdot"></a></dfn> must be "<code>..</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for
-"<code>.%2e</code>", "<code>%2e.</code>", or "<code>%2e%2e</code>". </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-query">query<a class="self-link" href="#syntax-url-query"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
-   <p>A <dfn data-dfn-for="urlsyntax" data-dfn-type="dfn" data-export="" id="syntax-url-fragment">fragment<a class="self-link" href="#syntax-url-fragment"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dot">single-dot path segment<a class="self-link" href="#syntax-url-path-segment-dot"></a></dfn> must be
+"<code>.</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for "<code>%2e</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-path-segment-dotdot">double-dot path segment<a class="self-link" href="#syntax-url-path-segment-dotdot"></a></dfn> must be
+"<code>..</code>" or an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#ascii-case-insensitive">ASCII case-insensitive</a> match for "<code>.%2e</code>",
+"<code>%2e.</code>", or "<code>%2e%2e</code>". </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-query">URL-query string<a class="self-link" href="#syntax-url-query"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
+   <p>A <dfn data-dfn-type="dfn" data-export="" id="syntax-url-fragment">URL-fragment string<a class="self-link" href="#syntax-url-fragment"></a></dfn> must be zero or more <a data-link-type="dfn" href="#url-units">URL units</a>. </p>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="url-code-points">URL code points<a class="self-link" href="#url-code-points"></a></dfn> are <a data-link-type="dfn" href="#ascii-alphanumeric">ASCII alphanumeric</a>,
 "<code>!</code>",
 "<code>$</code>",
@@ -905,8 +905,8 @@ U+E0000 to U+EFFFD,
 U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD. </p>
    <p class="note" role="note">Code points higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> by the <a data-link-type="dfn" href="#concept-url-parser">URL parser</a>, except for code
-points appearing in <a data-link-type="dfn" href="#concept-url-fragment">fragments</a>. </p>
-   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">query</a> that are higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>. This
+points appearing in <a data-link-type="dfn" href="#syntax-url-fragment">fragments</a>. </p>
+   <p class="note" role="note">In HTML, when the document encoding is a legacy encoding, code points in the <a data-link-type="dfn" href="#syntax-url-query">URL-query string</a> that are higher than U+007F will be converted to <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> <em>using the document’s encoding</em>. This
 can cause problems if a URL that works in one document is copied to another document that uses a
 different document encoding. Using the <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8">UTF-8</a> encoding everywhere solves this problem. </p>
    <div class="example" id="query-encoding-example">
@@ -1642,7 +1642,7 @@ background information. <a data-link-type="biblio" href="#biblio-html">[HTML]</a
     <li>
      <p>A <a data-link-type="dfn" href="#concept-url">URL</a>’s <a data-link-type="dfn" href="#concept-url-host">host</a> should be rendered using <a data-link-type="dfn" href="#concept-domain-to-unicode">domain to Unicode</a>. </p>
     <li>
-     <p>Other parts of the <a data-link-type="dfn" href="#syntax-url">URL</a> should have their sequences of <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> replaced with code points resulting from <a data-link-type="dfn" href="#percent-decode">percent decoding</a> those sequences converted to bytes, unless that renders those
+     <p>Other parts of the <a data-link-type="dfn" href="#concept-url">URL</a> should have their sequences of <a data-link-type="dfn" href="#percent-encoded-byte">percent-encoded bytes</a> replaced with code points resulting from <a data-link-type="dfn" href="#percent-decode">percent decoding</a> those sequences converted to bytes, unless that renders those
  sequences invisible. </p>
    </ul>
    <p>For the purposes of bidirectional text it should be rendered as if it were in a
@@ -1834,13 +1834,13 @@ when invoked, must run these steps: </p>
 <pre>var input = "https://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</pre>
-    <p>This throws an exception if the input is not an <a data-link-type="dfn" href="#syntax-url-absolute">absolute URL</a>: </p>
+    <p>This throws an exception if the input is not an <a data-link-type="dfn" href="#syntax-url-absolute">absolute-URL string</a>: </p>
 <pre>try {
   var url = new URL("/🍣🍺")
 } catch(e) {
   // that happened
 }</pre>
-    <p>A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary if the input is a <a data-link-type="dfn" href="#syntax-url-relative">relative URL</a>: </p>
+    <p>A <a data-link-type="dfn" href="#concept-base-url">base URL</a> is necessary if the input is a <a data-link-type="dfn" href="#syntax-url-relative">relative-URL string</a>: </p>
 <pre>var input = "/🍣🍺",
     url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
@@ -1916,8 +1916,8 @@ compatibility with HTML’s <code>MessageEvent</code> feature. <a data-link-type
     <li>
      <p><a data-link-type="dfn" href="#concept-basic-url-parser">Basic URL parse</a> the given value with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a> as <var>url</var> and <a data-link-type="dfn" href="#host-state">host state</a> as <var>state override</var>. </p>
    </ol>
-   <p class="note no-backref" role="note">If the given value for the <code><a class="idl-code" data-link-type="attribute" href="#dom-url-host">host</a></code> attribute’s setter lacks a <a data-link-type="dfn" href="#syntax-url-port">port</a>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-port">port</a> will not change. This can be unexpected as <code>host</code> attribute’s getter
-does return a <a data-link-type="dfn" href="#syntax-url-port">port</a> so one might have assumed the setter to always "reset" both. </p>
+   <p class="note no-backref" role="note">If the given value for the <code><a class="idl-code" data-link-type="attribute" href="#dom-url-host">host</a></code> attribute’s setter lacks a <a data-link-type="dfn" href="#syntax-url-port">port</a>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="#concept-url-url">url</a>’s <a data-link-type="dfn" href="#concept-url-port">port</a> will not change. This can be unexpected as <code>host</code> attribute’s getter does return a <a data-link-type="dfn" href="#syntax-url-port">URL-port string</a> so one might have assumed
+the setter to always "reset" both. </p>
    <p>The <dfn class="idl-code" data-dfn-for="URL" data-dfn-type="attribute" data-export="" id="dom-url-hostname"><code>hostname</code><a class="self-link" href="#dom-url-hostname"></a></dfn> attribute’s getter must run these steps: </p>
    <ol>
     <li>
@@ -2200,8 +2200,8 @@ neighboring rights to this work. </p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#syntax-url-absolute">absolute URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-absolute-with-fragment">absolute URL with fragment</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-absolute">absolute-URL string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-absolute-with-fragment">absolute-URL-with-fragment string</a><span>, in §4.1</span>
    <li><a href="#dom-urlsearchparams-append">append(name, value)</a><span>, in §6.3</span>
    <li><a href="#concept-urlencoded">application/x-www-form-urlencoded</a><span>, in §5</span>
    <li><a href="#ascii-alpha">ASCII alpha</a><span>, in §1</span>
@@ -2241,12 +2241,7 @@ neighboring rights to this work. </p>
    <li><a href="#file-host-state">file host state</a><span>, in §4.2</span>
    <li><a href="#file-slash-state">file slash state</a><span>, in §4.2</span>
    <li><a href="#file-state">file state</a><span>, in §4.2</span>
-   <li>
-    fragment
-    <ul>
-     <li><a href="#concept-url-fragment">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-fragment">dfn for urlsyntax</a><span>, in §4.1</span>
-    </ul>
+   <li><a href="#concept-url-fragment">fragment</a><span>, in §4</span>
    <li><a href="#fragment-state">fragment state</a><span>, in §4.2</span>
    <li><a href="#dom-urlsearchparams-getall">getAll(name)</a><span>, in §6.3</span>
    <li><a href="#dom-urlsearchparams-get">get(name)</a><span>, in §6.3</span>
@@ -2311,13 +2306,12 @@ neighboring rights to this work. </p>
      <li><a href="#dom-url-password">attribute for URL</a><span>, in §6.2</span>
     </ul>
    <li><a href="#concept-url-path">path</a><span>, in §4</span>
-   <li><a href="#syntax-url-file-path-absolute">path-absolute non-Windows-file URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-absolute">path-absolute URL</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-file-path-absolute">path-absolute-non-Windows-file-URL string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-path-absolute">path-absolute-URL string</a><span>, in §4.1</span>
    <li><a href="#dom-url-pathname">pathname</a><span>, in §6.2</span>
    <li><a href="#path-or-authority-state">path or authority state</a><span>, in §4.2</span>
-   <li><a href="#syntax-url-path-relative-scheme-less">path-relative scheme-less URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-relative">path-relative URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-path-segment">path segment</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-path-relative-scheme-less">path-relative-scheme-less-URL string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-path-relative">path-relative-URL string</a><span>, in §4.1</span>
    <li><a href="#path-start-state">path start state</a><span>, in §4.2</span>
    <li><a href="#path-state">path state</a><span>, in §4.2</span>
    <li><a href="#percent-decode">percent decode</a><span>, in §1.2</span>
@@ -2327,32 +2321,21 @@ neighboring rights to this work. </p>
     port
     <ul>
      <li><a href="#concept-url-port">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-port">dfn for urlsyntax</a><span>, in §4.1</span>
      <li><a href="#dom-url-port">attribute for URL</a><span>, in §6.2</span>
     </ul>
    <li><a href="#port-state">port state</a><span>, in §4.2</span>
    <li><a href="#dom-url-protocol">protocol</a><span>, in §6.2</span>
-   <li>
-    query
-    <ul>
-     <li><a href="#concept-url-query">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-query">dfn for urlsyntax</a><span>, in §4.1</span>
-    </ul>
+   <li><a href="#concept-url-query">query</a><span>, in §4</span>
    <li><a href="#concept-url-query-object">query object</a><span>, in §6</span>
    <li><a href="#query-state">query state</a><span>, in §4.2</span>
    <li><a href="#relative-slash-state">relative slash state</a><span>, in §4.2</span>
    <li><a href="#relative-state">relative state</a><span>, in §4.2</span>
-   <li><a href="#syntax-url-relative">relative URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-relative-with-fragment">relative URL with fragment</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-relative">relative-URL string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-relative-with-fragment">relative-URL-with-fragment string</a><span>, in §4.1</span>
    <li><a href="#remaining">remaining</a><span>, in §1.1</span>
-   <li>
-    scheme
-    <ul>
-     <li><a href="#concept-url-scheme">dfn for url</a><span>, in §4</span>
-     <li><a href="#syntax-url-scheme">dfn for urlsyntax</a><span>, in §4.1</span>
-    </ul>
-   <li><a href="#syntax-url-file-scheme-relative">scheme-relative file URL</a><span>, in §4.1</span>
-   <li><a href="#syntax-url-scheme-relative">scheme-relative URL</a><span>, in §4.1</span>
+   <li><a href="#concept-url-scheme">scheme</a><span>, in §4</span>
+   <li><a href="#syntax-url-file-scheme-relative">scheme-relative-file-URL string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-scheme-relative">scheme-relative-URL string</a><span>, in §4.1</span>
    <li><a href="#scheme-start-state">scheme start state</a><span>, in §4.2</span>
    <li><a href="#scheme-state">scheme state</a><span>, in §4.2</span>
    <li><a href="#dom-url-search">search</a><span>, in §6.2</span>
@@ -2382,7 +2365,6 @@ neighboring rights to this work. </p>
     URL
     <ul>
      <li><a href="#concept-url">definition of</a><span>, in §4</span>
-     <li><a href="#syntax-url">dfn for urlsyntax</a><span>, in §4.1</span>
      <li><a href="#url">(interface)</a><span>, in §6</span>
     </ul>
    <li><a href="#concept-url-url">url</a><span>, in §6</span>
@@ -2391,9 +2373,14 @@ neighboring rights to this work. </p>
    <li><a href="#concept-urlencoded-parser">urlencoded parser</a><span>, in §5.1</span>
    <li><a href="#concept-urlencoded-serializer">urlencoded serializer</a><span>, in §5.2</span>
    <li><a href="#concept-urlencoded-string-parser">urlencoded string parser</a><span>, in §5.3</span>
+   <li><a href="#syntax-url-fragment">URL-fragment string</a><span>, in §4.1</span>
    <li><a href="#concept-urlsearchparams-url-object">url object</a><span>, in §6.3</span>
    <li><a href="#concept-url-parser">URL parser</a><span>, in §4.2</span>
+   <li><a href="#syntax-url-path-segment">URL-path-segment string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-port">URL-port string</a><span>, in §4.1</span>
+   <li><a href="#syntax-url-query">URL-query string</a><span>, in §4.1</span>
    <li><a href="#concept-url">URL record</a><span>, in §4</span>
+   <li><a href="#syntax-url-scheme">URL-scheme string</a><span>, in §4.1</span>
    <li><a href="#urlsearchparams">URLSearchParams</a><span>, in §6.3</span>
    <li><a href="#dom-urlsearchparams-urlsearchparams">URLSearchParams(init)</a><span>, in §6.3</span>
    <li><a href="#concept-url-serializer">URL serializer</a><span>, in §4.3</span>
