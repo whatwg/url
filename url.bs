@@ -1146,7 +1146,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
  <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a>StructuredClone</a> of the
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a abstract-op>StructuredClone</a> of the
  entry in the <a>blob URL store</a> corresponding to the first string in <var>url</var>'s
  <a for=url>path</a>. [[!HTML]]
 
@@ -2519,8 +2519,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</pre>
 </ol>
 
 <p>The <dfn attribute for=URL><code>origin</code></dfn> attribute's getter must return the
-<a lt="Unicode serialization of an origin" spec=html>Unicode serialization</a> of
-<a>context object</a>'s <a for=URL>url</a>'s <a for=url>origin</a>. [[!HTML]]
+<a lt="Unicode serialization of an origin">Unicode serialization</a> of <a>context object</a>'s
+<a for=URL>url</a>'s <a for=url>origin</a>. [[!HTML]]
 
 <p class="note no-backref">It returns the Unicode rather than the ASCII serialization for
 compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
@@ -2980,7 +2980,6 @@ neighboring rights to this work.
 </pre>
 
 <pre class="anchors">
-url: https://html.spec.whatwg.org/multipage/infrastructure.html#structuredclone; type: dfn; text: structuredclone; spec: HTML
 urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
   text: blob url store; url: #BlobURLStore
 urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
