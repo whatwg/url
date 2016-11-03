@@ -15,11 +15,22 @@ started, leave a comment on the issue or ask around [on IRC](https://wiki.whatwg
 
 ### Pull requests
 
-See the [html repository's README](https://github.com/whatwg/html/blob/master/README.md) for the
-general guidelines. Note that `source` is `url.bs` and "Acknowledgements" is "Acknowledgments" here
-(I know). Also, the URL Standard uses [bikeshed](https://github.com/tabatkins/bikeshed) to generate
-`url.html`. (Do not worry if using that tool is too complicated, your pull request does not need to
-contain the generated HTML.)
+In short, change `url.bs` and submit your patch, with a
+[good commit message](https://github.com/erlang/otp/wiki/Writing-good-commit-messages). Consider
+reading through the [WHATWG FAQ](https://wiki.whatwg.org/wiki/FAQ) if you are new here.
+
+Please add your name to the Acknowledgments section in your first pull request, even for trivial
+fixes. The names are sorted lexicographically.
+
+If you want to preview the spec locally, you can either use a locally installed copy of
+[Bikeshed](https://github.com/tabatkins/bikeshed) by running `make` or use the HTTP API version by
+running `make remote`.
+
+If you want to do a complete "local deploy" including commit and/or branch snapshots, run
+
+```
+./deploy.sh --local
+```
 
 ### Merge policy
 
