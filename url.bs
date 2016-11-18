@@ -56,7 +56,7 @@ might increase in scope somewhat.
 
 <h2 id=infrastructure>Infrastructure</h2>
 
-<p>This specification depends on Infra standard. [[!INFRA]]
+<p>This specification depends on the Infra Standard. [[!INFRA]]
 
 <p>Some terms used in this specification are defined in the
 DOM, Encoding, IDNA, and Web IDL Standards.
