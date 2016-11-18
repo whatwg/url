@@ -19,7 +19,7 @@ Boilerplate: omit feedback-header
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
 <script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
-<script src=https://resources.whatwg.org/dfn.js defer id=head></script>
+<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 
 <h2 id=goals class=no-num>Goals</h2>
@@ -55,34 +55,14 @@ might increase in scope somewhat.
 
 <h2 id=infrastructure>Infrastructure</h2>
 
+<p>This specification depends on Infra standard. [[!INFRA]]
+
 <p>Some terms used in this specification are defined in the
 DOM, Encoding, IDNA, and Web IDL Standards.
 [[!DOM]]
 [[!ENCODING]]
 [[!IDNA]]
 [[!WEBIDL]]
-
-<p>The <dfn>C0 controls</dfn> are code points in the range U+0000 to U+001F, inclusive.
-
-<p>The <dfn>C0 controls and space</dfn> are <a>C0 controls</a> and code point U+0020.
-
-<p>The <dfn>tab and newline</dfn> are code points U+0009, U+000A, and U+000D.
-
-<p>The <dfn>ASCII digits</dfn> are code points in the range U+0030 to U+0039, inclusive.
-
-<p>The <dfn>ASCII hex digits</dfn> are <a>ASCII digits</a>, code points in the range
-U+0041 to U+0046, inclusive, and code points in the range U+0061 to U+0066, inclusive.
-
-<p>The <dfn>ASCII alpha</dfn> are code points in the range U+0041 to U+005A, inclusive,
-and in the range U+0061 to U+007A, inclusive.
-
-<p>The <dfn>ASCII alphanumeric</dfn> are <a>ASCII digits</a> and <a>ASCII alpha</a>.
-
-<p>An <dfn>ASCII string</dfn> is a <a>string</a> in the range U+0000 to U+007F, inclusive.
-
-<p>To <dfn>ASCII lowercase</dfn> a <a>string</a>, replace all code points in the range
-U+0041 to U+005A, inclusive, with the corresponding code points in the range
-U+0061 to U+007A, inclusive.
 
 <hr>
 
@@ -161,7 +141,7 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
     <ol>
      <li><p>Let <var>bytePoint</var> be the two bytes after <var>byte</var> in
      <var>input</var>,
-     <a lt="utf-8 decode without BOM">decoded</a>, and
+     <a lt="UTF-8 decode without BOM">decoded</a>, and
      then interpreted as hexadecimal number.
      <!-- We should have a definition for this that is saner. -->
 
@@ -949,14 +929,13 @@ if any.
 <p>An <dfn export id=syntax-url-absolute>absolute-URL string</dfn> must be one of the following
 
 <ul class=brief>
- <li><p>a <a>URL-scheme string</a> that is an <a spec=dom>ASCII case-insensitive</a> match for a
- <a>special scheme</a> and not an <a spec=dom>ASCII case-insensitive</a> match for
- "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative-URL string</a>
- <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a spec=dom>ASCII case-insensitive</a>
- match for a <a>special scheme</a>, followed by "<code>:</code>" and a <a>relative-URL string</a>
- <li><p>a <a>URL-scheme string</a> that is an <a spec=dom>ASCII case-insensitive</a>
- match for "<code>file</code>", followed by "<code>:</code>" and a
- <a>scheme-relative-file-URL string</a>
+ <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for a
+ <a>special scheme</a> and not an <a>ASCII case-insensitive</a> match for "<code>file</code>",
+ followed by "<code>:</code>" and a <a>scheme-relative-URL string</a>
+ <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a>ASCII case-insensitive</a> match for a
+ <a>special scheme</a>, followed by "<code>:</code>" and a <a>relative-URL string</a>
+ <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for
+ "<code>file</code>", followed by "<code>:</code>" and a <a>scheme-relative-file-URL string</a>
 </ul>
 
 <p>any optionally followed by "<code>?</code>" and a <a>URL-query string</a>.
@@ -1035,10 +1014,10 @@ following
 </ul>
 
 <p>A <dfn export id=syntax-url-path-segment-dot>single-dot path segment</dfn> must be
-"<code>.</code>" or an <a spec=dom>ASCII case-insensitive</a> match for "<code>%2e</code>".
+"<code>.</code>" or an <a>ASCII case-insensitive</a> match for "<code>%2e</code>".
 
 <p>A <dfn export id=syntax-url-path-segment-dotdot>double-dot path segment</dfn> must be
-"<code>..</code>" or an <a spec=dom>ASCII case-insensitive</a> match for "<code>.%2e</code>",
+"<code>..</code>" or an <a>ASCII case-insensitive</a> match for "<code>.%2e</code>",
 "<code>%2e.</code>", or "<code>%2e%2e</code>".
 
 <p>A <dfn export id=syntax-url-query>URL-query string</dfn> must be zero or more <a>URL units</a>.
@@ -1180,16 +1159,15 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
   <ol>
    <li><p>Set <var>url</var> to a new <a for=/>URL</a>.
 
-   <li><p>If <var>input</var> contains any leading or trailing
-   <a>C0 controls and space</a>, <a>syntax violation</a>.
+   <li><p>If <var>input</var> contains any leading or trailing <a>C0 control or space</a>,
+   <a>syntax violation</a>.
 
-   <li><p>Remove any leading and trailing <a>C0 controls and space</a> from
-   <var>input</var>.
+   <li><p>Remove any leading and trailing <a>C0 control or space</a> from <var>input</var>.
   </ol>
 
- <li><p>If <var>input</var> contains any <a>tab and newline</a>, <a>syntax violation</a>.
+ <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>syntax violation</a>.
 
- <li><p>Remove all <a>tab and newline</a> from <var>input</var>.
+ <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
 
  <li><p>Let <var>state</var> be <var>state override</var>
  if given, or <a>scheme start state</a> otherwise.
@@ -2260,9 +2238,8 @@ steps:
     these substeps:
 
     <ol>
-     <li><p>Let <var>result</var> be the result of
-     <a lt=concept-encoding-get>getting an encoding</a> for <var>value</var>,
-     <a lt="utf-8 decode without BOM">decoded</a>.
+     <li><p>Let <var>result</var> be the result of <a>getting an encoding</a> for <var>value</var>,
+     <a lt="UTF-8 decode without BOM">decoded</a>.
 
      <li><p>If <var>result</var> is not failure, unset <i>use _charset_ flag</i> and set
      <var>encoding</var> to <var>result</var>.
@@ -2379,8 +2356,8 @@ name-value-type tuples. [[HTML]]
 
 <p>The
 <dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
-takes a string <var>input</var>, <a lt="utf-8 encode">UTF-8 encodes</a> it, and then returns the
-result of <a lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parsing</a> it.
+takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
+<a lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
@@ -2988,9 +2965,6 @@ urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
   text: MediaSource; url: MediaSource
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#idl-def-; type: interface
   text: MediaStream; url: MediaStream
-urlPrefix: https://encoding.spec.whatwg.org/; type: dfn; spec: ENCODING
-  text: ascii byte
-  text: string
 url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii; spec: IDNA
 url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode; spec: IDNA
 </pre>
