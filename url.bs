@@ -2940,11 +2940,8 @@ neighboring rights to this work.
 <pre class="biblio">
 {
     "IDNA": {
-        "authors": [
-            "Mark Davis",
-            "Michel Suignard"
-        ],
         "href": "http://www.unicode.org/reports/tr46/",
+        "authors": ["Mark Davis", "Michel Suignard"],
         "title": "Unicode IDNA Compatibility Processing",
         "publisher": "Unicode Consortium"
     },
