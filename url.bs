@@ -885,11 +885,11 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 "<code>http</code>" or "<code>https</code>".
 
 <p>A <dfn export>network scheme</dfn> is a <a for=url>scheme</a> that is "<code>ftp</code>" or an
-<span>HTTP(S) scheme</span>.
+<a>HTTP(S) scheme</a>.
 
 <p>A <dfn export>fetch scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
 "<code>blob</code>", "<code>data</code>", "<code>file</code>", "<code>filesystem</code>", or a
-<span>network scheme</span>.
+<a>network scheme</a>.
 
 <p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and
 <span>fetch scheme</span> are used by HTML. [[HTML]]
