@@ -824,10 +824,8 @@ hierarchical form. It is initially the empty list.
 null or an <a>ASCII string</a> holding data. It is initially null.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is
-either null or a string holding data that can be used for further processing on the
+either null or an <a>ASCII string</a> holding data that can be used for further processing on the
 resource the <a for=/>URL</a>'s other components identify. It is initially null.
-
-<p class="note no-backref">This is not an <a>ASCII string</a> on purpose.
 
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
@@ -1067,8 +1065,7 @@ U+F0000 to U+FFFFD,
 U+100000 to U+10FFFD.
 
 <p class=note>Code points higher than U+007F will be converted to
-<a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>, except for code
-points appearing in <a lt="URL-fragment string">fragments</a>.
+<a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>.
 
 <p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
 <a>URL-query string</a> that are higher than U+007F will be converted to
@@ -1948,14 +1945,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
-       <li>
-        <p>Append <a>c</a> to <var>url</var>'s <a for=url>fragment</a>.
-
-        <p class="note no-backref">Unfortunately not using
-        <a lt="percent encode">percent-encoding</a> is intentional as implementations with
-        majority market share exhibit this behavior.
-        <!-- Chrome does percent-encoding if the scheme is not a special scheme,
-             hopefully that can be aligned since flip-flopping is not great. -->
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>simple encode set</a> and append the
+       result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
     </dl>
   </dl>
