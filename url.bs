@@ -412,9 +412,6 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
    <li><p>Set <var>R</var> to 16.
   </ol>
 
- <li><p>If <var>input</var> is the empty string, return zero.
- <!-- 0x/0X is an IPv4 number apparently -->
-
  <li>
   <p>Otherwise, if <var>input</var> contains at least two code points and the first code
   point is "<code>0</code>", run these substeps:
@@ -427,6 +424,9 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 
    <li><p>Set <var>R</var> to 8.
   </ol>
+
+ <li><p>If <var>input</var> is the empty string, then return zero.
+ <!-- 0x/0X is an IPv4 number apparently -->
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
  and return failure.
@@ -2903,6 +2903,7 @@ Mathias Bynens,
 Michael Peick,
 Michael™ Smith,
 Michel Suignard,
+Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
 Prayag Verma,
