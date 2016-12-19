@@ -907,12 +907,15 @@ input might be a <a>relative-URL string</a>.
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
 
 <ol>
- <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.</p></li>
- <li><p>If <var>path</var>'s <a for=list>size</a> is 0, return.</p></li>
+ <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
+
+ <li><p>If <var>path</var>'s <a for=list>size</a> is 0, return.
+
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
  <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>,
- return.</p></li>
- <li><p><a for=list>Remove</a> <var>path</var>'s last item.</p></li>
+ return.
+
+ <li><p><a for=list>Remove</a> <var>path</var>'s last item.
 </ol>
 
 
