@@ -904,11 +904,19 @@ input might be a <a>relative-URL string</a>.
 
 <hr>
 
-<p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>, if
-<var>url</var>'s <a for=url>scheme</a> is not "<code>file</code>" or <var>url</var>'s
-<a for=url>path</a> does not contain a single string that is a
-<a>normalized Windows drive letter</a>, remove <var>url</var>'s <a for=url>path</a>'s last string,
-if any.
+<p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
+
+<ol>
+ <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
+
+ <li><p>If <var>path</var>'s <a for=list>size</a> is 0, then return.
+
+ <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
+ <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>, then
+ return.
+
+ <li><p><a for=list>Remove</a> <var>path</var>'s last item.
+</ol>
 
 
 <h3 id=url-syntax>URL syntax</h3>
