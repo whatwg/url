@@ -2704,7 +2704,7 @@ steps:
 <h3 id=interface-urlsearchparams>Interface {{URLSearchParams}}</h3>
 
 <pre class=idl>
-[Constructor(optional (USVString or URLSearchParams) init = ""),
+[Constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = ""),
  Exposed=(Window,Worker)]
 interface URLSearchParams {
   void append(USVString name, USVString value);
@@ -2717,6 +2717,14 @@ interface URLSearchParams {
   stringifier;
 };
 </pre>
+
+<div class=example id=example-constructing-urlsearchparams>
+ <p>Constructing and stringifying a {{URLSearchParams}} object is fairly straightforward:
+
+ <pre><code class="lang-javascript">
+let params = new URLSearchParams({key: 730d67})
+params.toString() // key=730d67</code></pre>
+</div>
 
 <p>A {{URLSearchParams}} object has an associated
 <dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
@@ -2732,13 +2740,24 @@ initially null.
 <ol>
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
 
- <li><p>If <var>init</var> is a string, set <var>query</var>'s
+ <li>
+  <p>If <var>init</var> is a <a>sequence</a>, then for each <var>pair</var> in <var>init</var>:
+
+  <ol>
+   <li><p>If <var>pair</var> does not contain exactly two items, then <a>throw</a> a {{TypeError}}.
+
+   <li><p>Append a new name-value pair whose name is <var>pair</var>'s first item, and value is
+   <var>pair</var>'s second item, to <var>query</var>'s <a for=URLSearchParams>list</a>.
+  </ol>
+
+ <li><p>Otherwise, if <var>init</var> is a <a>record</a>, then for each <a for=record>mapping</a>
+ (<var>name</var>, <var>value</var>) in <var>init</var>, append a new name-value pair whose name is
+ <var>name</var> and value is <var>value</var>, to <var>query</var>'s
+ <a for=URLSearchParams>list</a>.
+
+ <li><p>Otherwise, <var>init</var> is a string, then set <var>query</var>'s
  <a for=URLSearchParams>list</a> to the result of
  <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
-
- <li><p>If <var>init</var> is a {{URLSearchParams}} object, set <var>query</var>'s
- <a for=URLSearchParams>list</a> to a copy of <var>init</var>'s
- <a for=URLSearchParams>list</a>.
 
  <li><p>Return <var>query</var>.
 </ol>
@@ -2885,6 +2904,7 @@ James Ross,
 Joshua Bell,
 Jxck,
 Kevin Grandon,
+Kornel Lesiński,
 Larry Masinter,
 Leif Halvard Silli,
 Mark Davis,
