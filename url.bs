@@ -1130,6 +1130,37 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>Return <var>url</var>.
 </ol>
 
+<div class=example id=example-url-parsing>
+ <table>
+  <tr>
+   <th>Input
+   <th>Base
+   <th>Output
+  <tr>
+   <td><code>example</code>
+   <td><code>https://example.com/demo</code>
+   <td><code>https://example.com/example</code>
+  <tr>
+   <td><code>hello:world</code>
+   <td><code>https://example.com</code>
+   <td><code>hello:world</code>
+  <tr>
+   <td><code>https://example.com:demo</code>
+   <td>
+   <td>Failure
+  <tr>
+   <td><code>https:example.invalid</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/example.invalid</code>
+  <tr>
+   <td><code>\example\..\demo/.\</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/demo/</code>
+ </table>
+
+ <p>The base and output URL are represented in serialized form for brevity.</p>
+</div>
+
 <hr>
 
 <p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
