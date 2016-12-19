@@ -1141,6 +1141,10 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
    <td><code>https://example.com/demo</code>
    <td><code>https://example.com/example</code>
   <tr>
+   <td><code>example</code>
+   <td>
+   <td>Failure
+  <tr>
    <td><code>hello:world</code>
    <td><code>https://example.com</code>
    <td><code>hello:world</code>
@@ -1149,9 +1153,21 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
    <td>
    <td>Failure
   <tr>
-   <td><code>https:example.invalid</code>
+   <td><code>http://[www.example.com]/</code>
+   <td>
+   <td>Failure
+  <tr>
+   <td><code>https:example.org</code>
    <td><code>https://example.com</code>
-   <td><code>https://example.com/example.invalid</code>
+   <td><code>https://example.com/example.org</code>
+  <tr>
+   <td><code>https:example.org</code>
+   <td>
+   <td><code>https://example.org/</code>
+  <tr>
+   <td><code>https://example.com/././foo</code>
+   <td>
+   <td><code>https://example.com/foo</code>
   <tr>
    <td><code>\example\..\demo/.\</code>
    <td><code>https://example.com</code>
