@@ -1137,6 +1137,30 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
    <th>Base
    <th>Output
   <tr>
+   <td><code>https:example.org</code>
+   <td>
+   <td><code>https://example.org/</code>
+  <tr>
+   <td><code>https://////example.com///</code>
+   <td>
+   <td><code>https://example.com///</code>
+  <tr>
+   <td><code>https://example.com/././foo</code>
+   <td>
+   <td><code>https://example.com/foo</code>
+  <tr>
+   <td><code>hello:world</code>
+   <td><code>https://example.com</code>
+   <td><code>hello:world</code>
+  <tr>
+   <td><code>https:example.org</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/example.org</code>
+  <tr>
+   <td><code>\example\..\demo/.\</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/demo/</code>
+  <tr>
    <td><code>example</code>
    <td><code>https://example.com/demo</code>
    <td><code>https://example.com/example</code>
@@ -1145,10 +1169,6 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
    <td>
    <td>Failure
   <tr>
-   <td><code>hello:world</code>
-   <td><code>https://example.com</code>
-   <td><code>hello:world</code>
-  <tr>
    <td><code>https://example.com:demo</code>
    <td>
    <td>Failure
@@ -1156,25 +1176,10 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
    <td><code>http://[www.example.com]/</code>
    <td>
    <td>Failure
-  <tr>
-   <td><code>https:example.org</code>
-   <td><code>https://example.com</code>
-   <td><code>https://example.com/example.org</code>
-  <tr>
-   <td><code>https:example.org</code>
-   <td>
-   <td><code>https://example.org/</code>
-  <tr>
-   <td><code>https://example.com/././foo</code>
-   <td>
-   <td><code>https://example.com/foo</code>
-  <tr>
-   <td><code>\example\..\demo/.\</code>
-   <td><code>https://example.com</code>
-   <td><code>https://example.com/demo/</code>
  </table>
 
- <p>The base and output URL are represented in serialized form for brevity.</p>
+ <p>The base and output <a lt="URL record">URL</a> are represented in
+ <a lt="URL serializer">serialized</a> form for brevity.
 </div>
 
 <hr>
