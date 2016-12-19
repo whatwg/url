@@ -909,10 +909,10 @@ input might be a <a>relative-URL string</a>.
 <ol>
  <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
 
- <li><p>If <var>path</var>'s <a for=list>size</a> is 0, return.
+ <li><p>If <var>path</var>'s <a for=list>size</a> is 0, then return.
 
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
- <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>,
+ <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>, then
  return.
 
  <li><p><a for=list>Remove</a> <var>path</var>'s last item.
