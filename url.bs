@@ -996,16 +996,16 @@ and a <a>URL-port string</a>, optionally followed by a <a>path-absolute-URL stri
 followed by a <a>path-relative-URL string</a>.
 
 <p>A <dfn export id=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
-must be a <a>path-absolute-URL string</a> that does not start with "<code>/</code>", followed by
-a <a>Windows drive letter</a>, followed by "<code>/</code>".
+must be a <a>path-absolute-URL string</a> that does not start with: "<code>/</code>", followed by a
+<a>Windows drive letter</a>, followed by "<code>/</code>".
 
 <p>A <dfn export id=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
 <a>URL-path-segment strings</a>, separated from each other by "<code>/</code>", and not start with
 "<code>/</code>".
 
 <p>A <dfn export id=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
-must be a <a>path-relative-URL string</a> that does not start with a <a>URL-scheme string</a> and
-"<code>:</code>".
+must be a <a>path-relative-URL string</a> that does not start with: a <a>URL-scheme string</a>,
+followed by "<code>:</code>".
 
 <p>A <dfn export id=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
 following
@@ -2890,6 +2890,7 @@ Jakub Gieryluk,
 James Graham,
 James Manger,
 James Ross,
+Joe Duarte,
 Joshua Bell,
 Jxck,
 Kevin Grandon,
