@@ -243,8 +243,8 @@ otherwise in the sections that follow.
 network.
 [[RFC1034]]
 
-<p class=note>The <code>example.com</code> and <code>example.com<mark>.</mark></code>
-<a for=/>domains</a> are not equivalent and typically treated as distinct.
+<p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
+not equivalent and typically treated as distinct.
 
 <p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a 32-bit identifier.
 [[RFC791]]
