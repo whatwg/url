@@ -243,6 +243,9 @@ otherwise in the sections that follow.
 network.
 [[RFC1034]]
 
+<p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
+not equivalent and typically treated as distinct.
+
 <p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a 32-bit identifier.
 [[RFC791]]
 
@@ -2920,6 +2923,7 @@ Tab Atkins,
 吉野剛史 (Takeshi Yoshino),
 Tantek Çelik,
 Tim Berners-Lee,
+簡冠庭 (Tim Guan-tin Chien),
 Titi_Alone,
 Tomek Wytrębowicz,
 Valentin Gosu,
