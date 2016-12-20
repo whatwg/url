@@ -429,7 +429,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
  <!-- 0x/0X is an IPv4 number apparently -->
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit,
- and return failure.
+ then return failure.
  <!-- There is no need to set syntaxViolationFlag here since it will be used.
       XXX radix-R digit, hahaha, that's not a thing -->
 
@@ -2886,6 +2886,7 @@ Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,
+Italo A. Casas,
 Jakub Gieryluk,
 James Graham,
 James Manger,
