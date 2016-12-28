@@ -70,6 +70,7 @@ else
     curl https://api.csswg.org/bikeshed/ -f -F file=@$INPUT_FILE \
          -F md-Text-Macro="SNAPSHOT-LINK $SNAPSHOT_LINK" \
          > $WEB_ROOT/index.html
+    cp .htaccess > $WEB_ROOT/.htaccess
     echo "Living standard output to $WEB_ROOT"
 fi
 
