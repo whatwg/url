@@ -809,9 +809,8 @@ It is initially the empty string.
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is
 an <a>ASCII string</a> identifying a user. It is initially the empty string.
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is
-either null or an <a>ASCII string</a> identifying a user's credentials. It is initially
-null.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is an
+<a>ASCII string</a> identifying a user's credentials. It is initially the empty string.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
 null or a <a for=/>host</a>. It is initially null.
@@ -895,9 +894,8 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 <p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and <a>fetch scheme</a> are
 used by HTML. [[HTML]]
 
-<p>A <a for=/>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if either
-its <a for=url>username</a> is not the empty string or its <a for=url>password</a> is
-non-null.
+<p>A <a for=/>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if its
+<a for=url>username</a> or <a for=url>password</a> is not the empty string.
 <!-- used by Fetch -->
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
@@ -1509,22 +1507,22 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
        <li><p>Set the <var>@ flag</var>.
 
+       <li><p>Let <var>passwordTokenSeenFlag</var> be unset.
+
        <li>
         <p>For each <var>codePoint</var> in <var>buffer</var>, run these substeps:
 
         <ol>
-         <li><p>If <var>codePoint</var> is "<code>:</code>" and
-         <var>url</var>'s
-         <a for=url>password</a> is null, set
-         <var>url</var>'s <a for=url>password</a>
-         to the empty string and run these substeps for the next code point.
+         <li><p>If <var>codePoint</var> is "<code>:</code>" and <var>passwordTokenSeenFlag</var> is
+         unset, then set <var>passwordTokenSeenFlag</var> and run these substeps for the next code
+         point.
 
          <li><p>Let <var>encodedCodePoints</var> be the result of running
          <a>UTF-8 percent encode</a> <var>codePoint</var> using the
          <a>userinfo encode set</a>.
 
-         <li><p>If <var>url</var>'s <a for=url>password</a> is non-null, append
-         <var>encodedCodePoints</var> to <var>url</var>'s <a for=url>password</a>.
+         <li><p>If <var>passwordTokenSeenFlag</var> is set, then append <var>encodedCodePoints</var>
+         to <var>url</var>'s <a for=url>password</a>.
 
          <li><p>Otherwise, append <var>encodedCodePoints</var> to <var>url</var>'s
          <a for=url>username</a>.
@@ -2034,19 +2032,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 <var>password</var>, run these steps:
 
 <ol>
- <li><p>If <var>password</var> is the empty string, set <var>url</var>'s
- <a for=url>password</a> to null.
+ <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
 
- <li>
-  <p>Otherwise, run these substeps:
-
-  <ol>
-   <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
-
-   <li><p>For each code point in <var>password</var>,
-   <a>UTF-8 percent encode</a> it using the <a>userinfo encode set</a>, and
-   append the result to <var>url</var>'s <a for=url>password</a>.
-  </ol>
+ <li><p>For each code point in <var>password</var>, <a>UTF-8 percent encode</a> it using the
+ <a>userinfo encode set</a>, and append the result to <var>url</var>'s <a for=url>password</a>.
 </ol>
 
 
@@ -2067,16 +2056,15 @@ then runs these steps:
    <li><p>Append "<code>//</code>" to <var>output</var>.
 
    <li>
-    <p>If <var>url</var>'s <a for=url>username</a> is not the empty string
-    or <var>url</var>'s <a for=url>password</a> is non-null, run these substeps:
+    <p>If <var>url</var>'s <a for=url>username</a> or <a for=url>password</a> is not
+    the empty string, then:
 
     <ol>
      <li><p>Append <var>url</var>'s <a for=url>username</a> to
      <var>output</var>.
 
-     <li><p>If <var>url</var>'s <a for=url>password</a> is non-null, append
-     "<code>:</code>", followed by <var>url</var>'s <a for=url>password</a>, to
-     <var>output</var>.
+     <li><p>If <var>url</var>'s <a for=url>password</a> is not the empty string, then append
+     "<code>:</code>", followed by <var>url</var>'s <a for=url>password</a>, to <var>output</var>.
 
      <li><p>Append "<code>@</code>" to <var>output</var>.
     </ol>
@@ -2581,14 +2569,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
  given value.
 </ol>
 
-<p>The <dfn attribute for=URL><code>password</code></dfn> attribute's getter must run these steps:
-
-<ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>password</a> is null, return the
- empty string.
-
- <li><p>Return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>password</a>.
-</ol>
+<p>The <dfn attribute for=URL><code>password</code></dfn> attribute's getter must return
+<a>context object</a>'s <a for=URL>url</a>'s <a for=url>password</a>.
 
 <p>The <code><a attribute for=URL>password</a></code> attribute's setter must run these steps:
 
@@ -2974,6 +2956,7 @@ Santiago M. Mola,
 Sebastian Mayr,
 Simon Pieters,
 Simon Sapin,
+Steven Vachon,
 Stuart Cook,
 Sven Uhlig,
 Tab Atkins,
