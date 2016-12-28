@@ -1141,6 +1141,58 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>Return <var>url</var>.
 </ol>
 
+<div class=example id=example-url-parsing>
+ <table>
+  <tr>
+   <th>Input
+   <th>Base
+   <th>Output
+  <tr>
+   <td><code>https:example.org</code>
+   <td>
+   <td><code>https://example.org/</code>
+  <tr>
+   <td><code>https://////example.com///</code>
+   <td>
+   <td><code>https://example.com///</code>
+  <tr>
+   <td><code>https://example.com/././foo</code>
+   <td>
+   <td><code>https://example.com/foo</code>
+  <tr>
+   <td><code>hello:world</code>
+   <td><code>https://example.com</code>
+   <td><code>hello:world</code>
+  <tr>
+   <td><code>https:example.org</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/example.org</code>
+  <tr>
+   <td><code>\example\..\demo/.\</code>
+   <td><code>https://example.com</code>
+   <td><code>https://example.com/demo/</code>
+  <tr>
+   <td><code>example</code>
+   <td><code>https://example.com/demo</code>
+   <td><code>https://example.com/example</code>
+  <tr>
+   <td><code>example</code>
+   <td>
+   <td>Failure
+  <tr>
+   <td><code>https://example.com:demo</code>
+   <td>
+   <td>Failure
+  <tr>
+   <td><code>http://[www.example.com]/</code>
+   <td>
+   <td>Failure
+ </table>
+
+ <p>The base and output <a lt="URL record">URL</a> are represented in
+ <a lt="URL serializer">serialized</a> form for brevity.
+</div>
+
 <hr>
 
 <p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
