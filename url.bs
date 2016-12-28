@@ -2374,28 +2374,31 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
   <p>For each <var>tuple</var> in <var>tuples</var>, run these substeps:
 
   <ol>
-   <li><p>Let <var>outputPair</var> be a new name-value pair.
+   <li><p>Let <var>name</var> be the result of <a lt="urlencoded byte serializer">serializing</a>
+   the result of <a lt=encode>encoding</a> <var>tuple</var>'s name, using <var>encoding</var>.
 
-   <li><p>Set <var>outputPair</var>'s name to the result of
-   <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
-   <var>tuple</var>'s name, using <var>encoding</var>.
+   <li><p>Let <var>value</var> be <var>tuple</var>'s value.
 
-   <li><p>If <var>tuple</var> has a type, <var>tuple</var>'s type is "<code>hidden</code>", and
-   <var>outputPair</var>'s name is "<code>_charset_</code>", set <var>outputPair</var>'s value to
-   <var>encoding</var>'s <a for=encoding>name</a>.
+   <li>
+    <p>If <var>tuple</var> has a type, then:
 
-   <li><p>Otherwise, if <var>tuple</var> has a type, and <var>tuple</var>'s type is
-   "<code>file</code>", set <var>outputPair</var>'s value to <var>tuple</var>'s value's filename.
+    <ol>
+     <li><p>If <var>tuple</var>'s type is "<code>hidden</code>" and <var>name</var> is
+     "<code>_charset_</code>", then set <var>value</var> to <var>encoding</var>'s
+     <a for=encoding>name</a>.
 
-   <li><p>Otherwise, set <var>outputPair</var>'s value to the result of
-   <a lt="urlencoded byte serializer">serializing</a> the result of <a lt=encode>encoding</a>
-   <var>tuple</var>'s value, using <var>encoding</var>.
+     <li><p>Otherwise, if <var>tuple</var>'s type is "<code>file</code>", then set <var>value</var>
+     to <var>value</var>'s filename.
+    </ol>
+
+   <li><p>Set <var>value</var> to the result of <a lt="urlencoded byte serializer">serializing</a>
+   the result of <a lt=encode>encoding</a> <var>value</var>, using <var>encoding</var>.
 
    <li><p>If <var>tuple</var> is not the first pair in <var>tuples</var>, then append
    "<code>&amp;</code>" to <var>output</var>.
 
-   <li>Append <var>outputPair</var>'s name, followed by "<code>=</code>", followed by
-   <var>outputPair</var>'s value, to <var>output</var>.
+   <li>Append <var>name</var>, followed by "<code>=</code>", followed by <var>value</var>, to
+   <var>output</var>.
   </ol>
 
  <li>Return <var>output</var>.
