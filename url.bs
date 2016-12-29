@@ -864,9 +864,9 @@ It is initially the empty string.
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of zero or more
-<a>ASCII strings</a> holding data, usually identifying a location in hierarchical form. It is
-initially the empty list.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a>list</a> of zero
+or more <a>ASCII strings</a> holding data, usually identifying a location in hierarchical form. It
+is initially empty.
 
 <p class="note no-backref">A <a lt="is special">special</a> <a for=/>URL</a> always has a
 <a for=list lt="is empty">non-empty</a> <a for=url>path</a>.
@@ -1204,12 +1204,13 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
- <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
+ <li><p>If <var>url</var>'s <a for=url>path</a> <a for=list>is empty</a> or <var>url</var>'s
+ <a for=url>path</a>[0] is not in the <a>blob URL store</a>, then return <var>url</var>.
+ [[!FILEAPI]]
 
  <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a abstract-op>StructuredClone</a> of the
- entry in the <a>blob URL store</a> corresponding to the first string in <var>url</var>'s
- <a for=url>path</a>. [[!HTML]]
+ entry in the <a>blob URL store</a> corresponding to <var>url</var>'s <a for=url>path</a>[0].
+ [[!HTML]]
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -1357,18 +1358,18 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>If <var>state override</var> is given, run these subsubsteps:
 
         <ol>
-         <li><p>If <var>url</var>'s <a for=url>scheme</a> is a
-         <a>special scheme</a> and <var>buffer</var> is not, terminate this algorithm.
+         <li><p>If <var>url</var>'s <a for=url>scheme</a> is a <a>special scheme</a> and
+         <var>buffer</var> is not, then return.
 
-         <li><p>If <var>url</var>'s <a for=url>scheme</a> is not a
-         <a>special scheme</a> and <var>buffer</var> is, terminate this algorithm.
+         <li><p>If <var>url</var>'s <a for=url>scheme</a> is not a <a>special scheme</a> and
+         <var>buffer</var> is, then return.
         </ol>
 
        <li><p>Set <var>url</var>'s <a for=url>scheme</a> to <var>buffer</var>.
 
        <li><p>Set <var>buffer</var> to the empty string.
 
-       <li><p>If <var>state override</var> is given, terminate this algorithm.
+       <li><p>If <var>state override</var> is given, then return.
 
        <li>
         <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
@@ -1396,9 +1397,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>state</var> to <a>path or authority state</a>, and increase <var>pointer</var>
        by one.
 
-       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>, append an
-       empty string to <var>url</var>'s <a for=url>path</a>, and set <var>state</var> to
-       <a>cannot-be-a-base-URL path state</a>.
+       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>,
+       <a for=list>append</a> an empty string to <var>url</var>'s <a for=url>path</a>, and set
+       <var>state</var> to <a>cannot-be-a-base-URL path state</a>.
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is not given, set
@@ -1527,8 +1528,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>url</var>'s <a for=url>port</a> to
        <var>base</var>'s <a for=url>port</a>,
        <var>url</var>'s <a for=url>path</a> to
-       <var>base</var>'s <a for=url>path</a>, and then remove
-       <var>url</var>'s <a for=url>path</a>'s last entry, if any.
+       <var>base</var>'s <a for=url>path</a>, and then <a for=list>remove</a>
+       <var>url</var>'s <a for=url>path</a>'s last item, if any.
 
        <li><p>Set <var>state</var> to <a>path state</a>,
        and decrease <var>pointer</var> by one.
@@ -1664,8 +1665,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>port state</a>.
 
-       <li><p>If <var>state override</var> is <a>hostname state</a>,
-       terminate this algorithm.
+       <li><p>If <var>state override</var> is <a>hostname state</a>, then return.
       </ol>
 
      <li>
@@ -1698,8 +1698,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>path start state</a>.
 
-       <li><p>If <var>state override</var> is given, terminate this
-       algorithm.
+       <li><p>If <var>state override</var> is given, then return.
       </ol>
 
      <li>
@@ -1752,7 +1751,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          <li><p>Set <var>buffer</var> to the empty string.
         </ol>
 
-       <li><p>If <var>state override</var> is given, terminate this algorithm.
+       <li><p>If <var>state override</var> is given, then return.
 
        <li><p>Set <var>state</var> to <a>path start state</a>, and decrease
        <var>pointer</var> by one.
@@ -1845,11 +1844,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>base</var> is non-null, <var>base</var>'s
-        <a for=url>scheme</a> is "<code>file</code>", and <var>base</var>'s
-        <a for=url>path</a> first string is a <a>normalized Windows drive letter</a>,
-        append <var>base</var>'s <a for=url>path</a> first string to
-        <var>url</var>'s <a for=url>path</a>.
+        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a> is
+        "<code>file</code>", and <var>base</var>'s <a for=url>path</a>[0] is a
+        <a>normalized Windows drive letter</a>, <a for=list>append</a> <var>base</var>'s
+        <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
         <var>url</var>'s and <var>base</var>'s <a for=url>host</a> are null under
@@ -1962,13 +1960,13 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <a>syntax violation</a>.
 
        <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>shorten</a>
-       <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is
-       "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
-       "<code>\</code>", append the empty string to <var>url</var>'s <a for=url>path</a>.
+       <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
+       <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>", <a for=list>append</a>
+       the empty string to <var>url</var>'s <a for=url>path</a>.
 
-       <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if
-       neither <a>c</a> is "<code>/</code>", nor <var>url</var> <a>is special</a> and
-       <a>c</a> is "<code>\</code>", append the empty string to <var>url</var>'s
+       <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if neither
+       <a>c</a> is "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
+       "<code>\</code>", <a for=list>append</a> the empty string to <var>url</var>'s
        <a for=url>path</a>.
 
        <li>
@@ -1977,10 +1975,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li>
-          <p>If <var>url</var>'s <a for=url>scheme</a> is
-          "<code>file</code>", <var>url</var>'s <a for=url>path</a>
-          is empty, and <var>buffer</var> is a <a>Windows drive letter</a>, run these
-          subsubsubsteps:
+          <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>url</var>'s
+          <a for=url>path</a> <a for=list>is empty</a>, and <var>buffer</var> is a
+          <a>Windows drive letter</a>, then:
 
           <ol>
            <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
@@ -1992,7 +1989,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Append <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
+         <li><p><a for=list>Append</a> <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
@@ -2044,8 +2041,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
 
-       <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a>
-       using the <a>simple encode set</a>, and append the result to the first string in
+       <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
+       the <a>simple encode set</a>, and <a for=list>append</a> the result to the first string in
        <var>url</var>'s <a for=url>path</a>.
       </ol>
     </ol>
@@ -2195,8 +2192,8 @@ then runs these steps:
  <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", append
  "<code>//</code>" to <var>output</var>.
 
- <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append the first string
- in <var>url</var>'s <a for=url>path</a> to <var>output</var>.
+ <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append <var>url</var>'s
+ <a for=url>path</a>[0] to <var>output</var>.
 
  <li><p>Otherwise, then <a for=list>for each</a> string in <var>url</var>'s <a for=url>path</a>,
  append "<code>/</code>" followed by the string to <var>output</var>.
@@ -2246,8 +2243,8 @@ background information. [[!HTML]]
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
-  <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the first
-  string in <a for=/>URL</a>'s <a for=url>path</a>.
+  <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> <a for=/>URL</a>'s
+  <a for=url>path</a>[0].
 
   <p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
   <a for=url>origin</a> otherwise.
@@ -2688,7 +2685,7 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, terminate these steps.
+ set, then return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
@@ -2714,7 +2711,7 @@ the setter to always "reset" both.
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, terminate these steps.
+ set, then return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
  <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
@@ -2763,7 +2760,7 @@ run these steps:
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, terminate these steps.
+ set, then return.
 
  <li><p>Empty <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
 
@@ -2789,7 +2786,7 @@ steps:
 
  <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
  empty <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>,
- and terminate these steps.
+ and then return.
 
  <li><p>Let <var>input</var> be the given value with a single leading "<code>?</code>" removed, if
  any.
@@ -2822,10 +2819,10 @@ steps:
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>scheme</a> is
- "<code>javascript</code>", terminate these steps.
+ "<code>javascript</code>", then return.
 
- <li><p>If the given value is the empty string, set <a>context object</a>'s <a for=URL>url</a>'s
- <a for=url>fragment</a> to null and terminate these steps.
+ <li><p>If the given value is the empty string, then set <a>context object</a>'s
+ <a for=URL>url</a>'s <a for=url>fragment</a> to null and return.
 
  <li><p>Let <var>input</var> be the given value with a single leading "<code>#</code>" removed, if
  any.
