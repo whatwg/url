@@ -450,8 +450,17 @@ runs these steps:
 
  <li><p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
 
- <li><p>If the last item in <var>parts</var> is the empty string, set
- <var>syntaxViolationFlag</var> and remove the last item from <var>parts</var>.
+ <li>
+  <p>If the last item in <var>parts</var> is the empty string, then:
+
+  <ol>
+   <li><p>Set <var>syntaxViolationFlag</var>.
+
+   <li><p>If <var>parts</var> has more than one item, then remove the last item from
+   <var>parts</var>.
+   <!-- Since the IPv4 parser is not to be invoked directly the input cannot be the empty string,
+        but if it somehow is this conditional makes sure we can keep going. -->
+  </ol>
 
  <li><p>If <var>parts</var> has more than four items, return <var>input</var>.
 
