@@ -894,9 +894,10 @@ Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
 <p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and <a>fetch scheme</a> are
 used by HTML. [[HTML]]
 
-<p>A <a for=/>URL</a> <dfn export lt="include credentials">includes credentials</dfn> if its
+<p>A <a for=/>URL</a>
+<dfn export lt="include credentials|includes credentials">includes credentials</dfn> if its
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
-<!-- used by Fetch -->
+<!-- also used by Fetch -->
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
@@ -2056,8 +2057,7 @@ then runs these steps:
    <li><p>Append "<code>//</code>" to <var>output</var>.
 
    <li>
-    <p>If <var>url</var>'s <a for=url>username</a> or <a for=url>password</a> is not
-    the empty string, then:
+    <p>If <var>url</var> <a>includes credentials</a>, then:
 
     <ol>
      <li><p>Append <var>url</var>'s <a for=url>username</a> to
