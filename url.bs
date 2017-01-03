@@ -1239,7 +1239,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
  <li><p>Let <var>buffer</var> be the empty string.
 
- <li><p>Let the <var>@ flag</var> and the <var>[] flag</var> be
+ <li><p>Let the <var>@ flag</var>, <var>[] flag</var>, and <var>passwordTokenSeenFlag</var> be
  unset.
 
  <li><p>Let <var>pointer</var> be a pointer to first code point in
@@ -1507,8 +1507,6 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>buffer</var>.
 
        <li><p>Set the <var>@ flag</var>.
-
-       <li><p>Let <var>passwordTokenSeenFlag</var> be unset.
 
        <li>
         <p>For each <var>codePoint</var> in <var>buffer</var>, run these substeps:
