@@ -1262,7 +1262,11 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>state</var> to <a>no scheme state</a>, and decrease
      <var>pointer</var> by one.
 
-     <li><p>Otherwise, <a>syntax violation</a>, terminate this algorithm.
+     <li>
+      <p>Otherwise, <a>syntax violation</a>, return failure.
+
+      <p class=note>This indication of failure is used exclusively by {{Location}} object's
+      {{Location/protocol}} attribute.
     </ol>
 
    <dt><dfn>scheme state</dfn>
@@ -1329,7 +1333,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <a>no scheme state</a>, and start over (from the first code point
      in <var>input</var>).
 
-     <li><p>Otherwise, <a>syntax violation</a>, terminate this algorithm.
+     <li>
+      <p>Otherwise, <a>syntax violation</a>, return failure.
+
+      <p class=note>This indication of failure is used exclusively by {{Location}} object's
+      {{Location/protocol}} attribute. Furthermore, the non-failure termination earlier in this
+      state is an intentional difference for defining that attribute.
     </ol>
 
    <dt><dfn>no scheme state</dfn>
