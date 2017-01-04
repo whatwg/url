@@ -806,11 +806,11 @@ disambiguate from a <a>URL string</a> it can also be referred to as a <a for=/>U
 dispatch a <a for=/>URL</a> for further processing after <a lt='URL parser'>parsing</a>.
 It is initially the empty string.
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is
-an <a>ASCII string</a> identifying a user. It is initially the empty string.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is an
+<a>ASCII string</a> identifying a username. It is initially the empty string.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is an
-<a>ASCII string</a> identifying a user's credentials. It is initially the empty string.
+<a>ASCII string</a> identifying a password. It is initially the empty string.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
 null or a <a for=/>host</a>. It is initially null.
