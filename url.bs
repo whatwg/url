@@ -607,7 +607,7 @@ then runs these steps:
  <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>:
  If <var>piece pointer</var> is greater than six, <a>syntax violation</a>, return failure.
 
- <li><p>Let <var>dots seen</var> be 0.
+ <li><p>Let <var>numbersSeen</var> be 0.
 
  <li>
   <p>While <a>c</a> is not the <a>EOF code point</a>, run
@@ -615,6 +615,16 @@ then runs these steps:
 
   <ol>
    <li><p>Let <var>value</var> be null.
+
+   <li>
+    <p>If <var>numbersSeen</var> is greater than 0, then:
+
+    <ol>
+     <li><p>If <a>c</a> is a "<code>.</code>" and <var>numbersSeen</var> is less than 4, then
+     increase <var>pointer</var> by one.
+
+     <li>Otherwise, <a>syntax violation</a>, return failure.
+    </ol>
 
    <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>syntax violation</a>,
    return failure. <!-- prevent the empty string -->
@@ -638,24 +648,15 @@ then runs these steps:
      return failure.
     </ol>
 
-   <li><p>If <var>dots seen</var> is less than 3 and
-   <a>c</a> is not a "<code>.</code>",
-   <a>syntax violation</a>, return failure.
-
    <li><p>Set <var>piece</var> to
    <var>piece</var> &times; 0x100 + <var>value</var>.
 
-   <li><p>If <var>dots seen</var> is 1 or 3, increase
-   <var>piece pointer</var> by one.
+   <li><p>Increase <var>numbersSeen</var> by one.
 
-   <li><p>If <a>c</a> is not the <a>EOF code point</a>, increase <var>pointer</var> by
-   one.
+   <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
 
-   <li><p>If <var>dots seen</var> is 3 and <a>c</a> is not
-   the <a>EOF code point</a>,
+   <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
    <a>syntax violation</a>, return failure.
-
-   <li><p>Increase <var>dots seen</var> by one.
   </ol>
 
  <li>
@@ -2951,6 +2952,7 @@ Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
 Prayag Verma,
+Rimas Misevičius,
 Rodney Rehm,
 Roy Fielding,
 Ryan Sleevi,
