@@ -2868,8 +2868,8 @@ method, when invoked, must run these steps:
 
 <hr>
 
-<p>The <dfn method for=URLSearchParams><code>sort()</code></df> method, when invoked, must run these
-steps:
+<p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method, when invoked, must run
+these steps:
 
 <ol>
  <li><p>Lexicographically sort all name-value pairs, if any, by name, while preserving the relative
