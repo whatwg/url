@@ -2868,12 +2868,29 @@ method, when invoked, must run these steps:
 
 <hr>
 
+<div class=example id=example-searchparams-sort>
+ <p>It can be useful to sort the name-value pairs in a {{SearchParams}} object, in particular to
+ increase cache hits. This can be accomplished simply through invoking the {{SearchParams/sort()}}
+ method:
+
+ <pre><code class=lang-javascript>
+const url = new URL("https://example.org/?q=🏳️‍🌈&amp;key=e1f7bc78");
+url.searchParams.sort();
+url.search; // "?key=e1f7bc78&amp;q=%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
+
+ <p>To avoid altering the original input, e.g., for comparison purposes, construct a new
+ {{SearchParams}} object:
+
+ <pre><code class=lang-javascript>
+const sorted = (new URLSearchParams(url.search)).sort();</code></pre>
+</div>
+
 <p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method, when invoked, must run
 these steps:
 
 <ol>
- <li><p>Lexicographically sort all name-value pairs, if any, by name, while preserving the relative
- order between duplicate names, if any.
+ <li><p>Sort all name-value pairs, if any, by their names. Sorting must be done by comparison of
+ code units. The relative order between name-value pairs with equal names must be preserved.
 
  <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
