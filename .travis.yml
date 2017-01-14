@@ -1,5 +1,8 @@
 language: generic
 
+env:
+  global:
+    - ENCRYPTION_LABEL: "82f6fcb5a224"
 install:
   - curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
 script:
