@@ -90,5 +90,5 @@ if [ "$1" != "--local" ]; then
     ssh-add deploy_key
 
     # scp the output directory up
-    scp -r -o StrictHostKeyChecking=no $WEB_ROOT $DEPLOY_USER@$SERVER:
+    scp -r $WEB_ROOT $DEPLOY_USER@$SERVER:
 fi
