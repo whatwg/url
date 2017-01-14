@@ -2774,7 +2774,7 @@ interface URLSearchParams {
  <p>Constructing and stringifying a {{URLSearchParams}} object is fairly straightforward:
 
  <pre><code class="lang-javascript">
-let params = new URLSearchParams({key: 730d67})
+let params = new URLSearchParams({key: '730d67'})
 params.toString() // key=730d67</code></pre>
 </div>
 
