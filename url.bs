@@ -2756,7 +2756,7 @@ steps:
 <h3 id=interface-urlsearchparams>Interface {{URLSearchParams}}</h3>
 
 <pre class=idl>
-[Constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = ""),
+[Constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, (USVString or sequence&lt;USVString>)> or USVString) init = ""),
  Exposed=(Window,Worker)]
 interface URLSearchParams {
   void append(USVString name, USVString value);
@@ -2803,9 +2803,17 @@ initially null.
   </ol>
 
  <li><p>Otherwise, if <var>init</var> is a <a>record</a>, then for each <a for=record>mapping</a>
- (<var>name</var>, <var>value</var>) in <var>init</var>, append a new name-value pair whose name is
- <var>name</var> and value is <var>value</var>, to <var>query</var>'s
- <a for=URLSearchParams>list</a>.
+ (<var>name</var>, <var>value</var>) in <var>init</var>, run these steps:
+
+ <ol>
+  <li><p>If <var>value</var> is a <a>sequence</a>, then for each <var>innerValue</var> in
+  <var>value</var>, append a new name-value pair whose name is <var>name</var> and value is
+  <var>innerValue</var>, to <var>query</var>'s <a for=URLSearchParams>list</a>.
+
+  <li><p>Otherwise, <var>value</var> is a string, then append a new name-value pair whose name is
+  <var>name</var> and value is <var>value</var>, to <var>query</var>'s
+  <a for=URLSearchParams>list</a>.
+ </ol>
 
  <li><p>Otherwise, <var>init</var> is a string, then set <var>query</var>'s
  <a for=URLSearchParams>list</a> to the result of
