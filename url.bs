@@ -683,8 +683,8 @@ then runs these steps:
 </ol>
 
 <p class="note no-backref">To be clear, <a lt='IPv6 parser Main'>Main</a>,
-<a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are simple markers.
-They serve no purpose other than being a location the algorithm can jump to.
+<a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are markers. They serve
+no purpose other than being a location the algorithm can jump to.
 
 
 <h3 id=host-serializing>Host serializing</h3>
@@ -1206,9 +1206,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
  [[!HTML]]
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
- <a>basic URL parser</a> returns either a new <a for=/>URL</a> or failure. If they are
- passed, the algorithm simply modifies the passed <var>url</var> and can terminate without
- returning anything.
+ <a>basic URL parser</a> returns either a new <a for=/>URL</a> or failure. If they are passed, the
+ algorithm modifies the passed <var>url</var> and can terminate without returning anything.
 </div>
 
 <ol>
@@ -2193,12 +2192,11 @@ form, with these modifications:
 <p>For the purposes of bidirectional text it should be rendered as if it were in a
 left-to-right embedding. [[!BIDI]]
 
-<p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are simply
-strings and can appear anywhere, a specific bidirectional algorithm for rendered
-<a for=/>URLs</a> would not see wide adoption. Bidirectional text interacts with the
-parts of a <a for=/>URL</a> in ways that can cause the rendering to be different from
-the model. Users of bidirectional languages are thus cautioned that this is to be
-expected, particularly in plain text environments.
+<p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
+anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
+adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
+the rendering to be different from the model. Users of bidirectional languages are thus cautioned
+that this is to be expected, particularly in plain text environments.
 
 <p>Due to the confusion that can arise between a <a for=/>URL</a>'s <a for=url>host</a>
 and <a for=url>path</a> with bidirectional text, browsers are encouraged to only render a
