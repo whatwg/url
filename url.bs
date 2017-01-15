@@ -2210,7 +2210,7 @@ distinguish between the two. E.g., users are expected to make trust decisions ba
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
 <p>The <dfn export id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format
-provides a simple way to encode name-value pairs.
+provides a way to encode name-value pairs.
 
 <p class="note no-backref">The <code>application/x-www-form-urlencoded</code> format is in many ways
 an aberrant monstrosity, the result of many years of implementation accidents and compromises
