@@ -2882,7 +2882,8 @@ url.search; // "?key=e1f7bc78&amp;q=%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"<
  {{SearchParams}} object:
 
  <pre><code class=lang-javascript>
-const sorted = (new URLSearchParams(url.search)).sort();</code></pre>
+const sorted = new URLSearchParams(url.search)
+sorted.sort()</code></pre>
 </div>
 
 <p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method, when invoked, must run
@@ -3003,6 +3004,7 @@ Tab Atkins,
 Tantek Çelik,
 Tim Berners-Lee,
 簡冠庭 (Tim Guan-tin Chien),
+Timothy Gu,
 Titi_Alone,
 Tomek Wytrębowicz,
 Valentin Gosu,
