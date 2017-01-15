@@ -1,18 +1,16 @@
 #!/bin/bash
 set -e
 
-DEPLOY_USER="annevankesteren"
-
-TITLE="URL Standard"
-LS_URL="https://url.spec.whatwg.org/"
-COMMIT_URL_BASE="https://github.com/whatwg/url/commit/"
-BRANCH_URL_BASE="https://github.com/whatwg/url/tree/"
-
+LS_URL="https://$SHORTNAME.spec.whatwg.org/"
+COMMIT_URL_BASE="https://github.com/whatwg/$SHORTNAME/commit/"
+BRANCH_URL_BASE="https://github.com/whatwg/$SHORTNAME/tree/"
 INPUT_FILE="url.bs"
-SERVER="url.spec.whatwg.org"
-WEB_ROOT="url.spec.whatwg.org"
+WEB_ROOT="$SHORTNAME.spec.whatwg.org"
 COMMITS_DIR="commit-snapshots"
 BRANCHES_DIR="branch-snapshots"
+
+SERVER="75.119.197.251"
+SERVER_PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM6WJlvCc/+Zy2wrdzfKMv0Mb2Pmf9INvJPOH/zFrG5TbrKWY2LbNB6m3kkYTDQJzc0EuxCytuDsGhTuzTgc3drHwe2dys7cUQyQzS0iue50r6nBMfr1x2h6WhV3OZHkzFgqS17vlVdlLcGHCCwYgm19TGlrqY5RDnE+jTEAC/9AN7YFbbyfZV5fzToXwA2sFyj9TtwKfu/EeZAInPBpaLumu/glhr+rFXwhQQdNFh7hth8b4flG5mOqODju94wtbuDa4Utw1+S/zCeFIU55R7JHa29Pz3rL6Rpiiin9SpenjkD3UpP+y8WC1OaMImEh1XNUuomQa+6qxXEjxQAW1r"
 
 if [ "$1" != "--local" -a "$DEPLOY_USER" == "" ]; then
     echo "No deploy credentials present; skipping deploy"
@@ -89,6 +87,7 @@ if [ "$1" != "--local" ]; then
     eval `ssh-agent -s`
     ssh-add deploy_key
 
-    # scp the output directory up
-    scp -r -o StrictHostKeyChecking=no $WEB_ROOT $DEPLOY_USER@$SERVER:
+
+    echo "$SERVER $SERVER_PUBLIC_KEY" > known_hosts
+    scp -r -o UserKnownHostsFile=known_hosts $WEB_ROOT $DEPLOY_USER@$SERVER:
 fi

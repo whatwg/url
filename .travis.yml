@@ -1,12 +1,12 @@
 language: generic
 
 env:
-  global:
-    - ENCRYPTION_LABEL: "82f6fcb5a224"
-addons:
-  apt:
-    packages:
-      - oracle-java8-set-default
+  - ENCRYPTION_LABEL="82f6fcb5a224"
+  - DEPLOY_USER="annevankesteren"
+  - TITLE="URL Standard"
+  - SHORTNAME="url"
+  - INPUT_FILE="url.bs"
+
 install:
   - curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
 script:
