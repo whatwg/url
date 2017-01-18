@@ -2869,9 +2869,9 @@ method, when invoked, must run these steps:
 <hr>
 
 <div class=example id=example-searchparams-sort>
- <p>It can be useful to sort the name-value pairs in a {{SearchParams}} object, in particular to
- increase cache hits. This can be accomplished simply through invoking the {{SearchParams/sort()}}
- method:
+ <p>It can be useful to sort the name-value pairs in a {{URLSearchParams}} object, in particular to
+ increase cache hits. This can be accomplished simply through invoking the
+ {{URLSearchParams/sort()}} method:
 
  <pre><code class=lang-javascript>
 const url = new URL("https://example.org/?q=🏳️‍🌈&amp;key=e1f7bc78");
@@ -2879,7 +2879,7 @@ url.searchParams.sort();
 url.search; // "?key=e1f7bc78&amp;q=%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
  <p>To avoid altering the original input, e.g., for comparison purposes, construct a new
- {{SearchParams}} object:
+ {{URLSearchParams}} object:
 
  <pre><code class=lang-javascript>
 const sorted = new URLSearchParams(url.search)
@@ -2965,11 +2965,13 @@ Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,
+Ilya Grigorik,
 Italo A. Casas,
 Jakub Gieryluk,
 James Graham,
 James Manger,
 James Ross,
+Jeffrey Posnick,
 Joe Duarte,
 Joshua Bell,
 Jxck,
