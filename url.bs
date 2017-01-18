@@ -2735,6 +2735,9 @@ interface URLSearchParams {
   sequence&lt;USVString> getAll(USVString name);
   boolean has(USVString name);
   void set(USVString name, USVString value);
+
+  void sort();
+
   iterable&lt;USVString, USVString>;
   stringifier;
 };
@@ -2833,6 +2836,11 @@ method, when invoked, must return the values of all name-value pairs whose name 
 in <a for=URLSearchParams>list</a>, in list order, and the empty sequence otherwise.
 
 <p>The
+<dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
+method, when invoked, must return true if there is a name-value pair whose name is <var>name</var>
+in <a for=URLSearchParams>list</a>, and false otherwise.
+
+<p>The
 <dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method, when invoked, must run these steps:
 
@@ -2847,10 +2855,37 @@ method, when invoked, must run these steps:
  <li><p>Run the <a for=URLSearchParams>update steps</a>.
 </ol>
 
-<p>The
-<dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
-method, when invoked, must return true if there is a name-value pair whose name is <var>name</var>
-in <a for=URLSearchParams>list</a>, and false otherwise.
+<hr>
+
+<div class=example id=example-searchparams-sort>
+ <p>It can be useful to sort the name-value pairs in a {{URLSearchParams}} object, in particular to
+ increase cache hits. This can be accomplished simply through invoking the
+ {{URLSearchParams/sort()}} method:
+
+ <pre><code class=lang-javascript>
+const url = new URL("https://example.org/?q=🏳️‍🌈&amp;key=e1f7bc78");
+url.searchParams.sort();
+url.search; // "?key=e1f7bc78&amp;q=%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
+
+ <p>To avoid altering the original input, e.g., for comparison purposes, construct a new
+ {{URLSearchParams}} object:
+
+ <pre><code class=lang-javascript>
+const sorted = new URLSearchParams(url.search)
+sorted.sort()</code></pre>
+</div>
+
+<p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method, when invoked, must run
+these steps:
+
+<ol>
+ <li><p>Sort all name-value pairs, if any, by their names. Sorting must be done by comparison of
+ code units. The relative order between name-value pairs with equal names must be preserved.
+
+ <li><p>Run the <a for=URLSearchParams>update steps</a>.
+</ol>
+
+<hr>
 
 <p>The <a>value pairs to iterate over</a> are the
 <a for=URLSearchParams>list</a> name-value pairs with the key being
@@ -2919,11 +2954,13 @@ Geoff Richards,
 Glenn Maynard,
 Henri Sivonen,
 Ian Hickson,
+Ilya Grigorik,
 Italo A. Casas,
 Jakub Gieryluk,
 James Graham,
 James Manger,
 James Ross,
+Jeffrey Posnick,
 Joe Duarte,
 Joshua Bell,
 Jxck,
@@ -2957,6 +2994,7 @@ Sven Uhlig,
 Tab Atkins,
 吉野剛史 (Takeshi Yoshino),
 Tantek Çelik,
+Tiancheng "Timothy" Gu,
 Tim Berners-Lee,
 簡冠庭 (Tim Guan-tin Chien),
 Titi_Alone,
