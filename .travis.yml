@@ -6,7 +6,7 @@ env:
     - DEPLOY_USER="annevankesteren"
 
 script:
-  - bash ./deploy.sh
+  - curl --remote-name https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
 
 notifications:
   email:
