@@ -78,9 +78,11 @@ echo ""
 find $WEB_ROOT -print
 echo ""
 
-# Run the HTML checker on all output
-curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
-java -Xss512k -jar vnu.jar --skip-non-html $WEB_ROOT
+# Run the HTML checker when building on Travis
+if [ "$TRAVIS" == "true" ]; then
+    curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
+    /usr/lib/jvm/java-8-oracle/jre/bin/java -Xss512k -jar vnu.jar --skip-non-html $WEB_ROOT
+fi
 
 if [ "$1" != "--local" ]; then
     # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
@@ -92,7 +94,6 @@ if [ "$1" != "--local" ]; then
     chmod 600 deploy_key
     eval `ssh-agent -s`
     ssh-add deploy_key
-
 
     echo "$SERVER $SERVER_PUBLIC_KEY" > known_hosts
     scp -r -o UserKnownHostsFile=known_hosts $WEB_ROOT $DEPLOY_USER@$SERVER:
