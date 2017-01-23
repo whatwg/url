@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+SHORTNAME=`git config --local remote.origin.url | sed -n "s#.*/\([^.]*\)\.git#\1#p"`
+INPUT_FILE=`find . -name "*.bs"`
+
 LS_URL="https://$SHORTNAME.spec.whatwg.org/"
 COMMIT_URL_BASE="https://github.com/whatwg/$SHORTNAME/commit/"
 BRANCH_URL_BASE="https://github.com/whatwg/$SHORTNAME/tree/"
-INPUT_FILE="url.bs"
 WEB_ROOT="$SHORTNAME.spec.whatwg.org"
 COMMITS_DIR="commit-snapshots"
 BRANCHES_DIR="branch-snapshots"
