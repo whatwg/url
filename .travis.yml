@@ -1,7 +1,5 @@
 language: generic
 
-jdk:
-  - oraclejdk8
 addons:
   apt:
     packages:
