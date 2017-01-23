@@ -4,7 +4,6 @@ env:
   global:
     - ENCRYPTION_LABEL="82f6fcb5a224"
     - DEPLOY_USER="annevankesteren"
-    - TITLE="URL Standard"
 
 script:
   - bash ./deploy.sh

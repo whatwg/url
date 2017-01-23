@@ -3,6 +3,7 @@ set -e
 
 SHORTNAME=`git config --local remote.origin.url | sed -n "s#.*/\([^.]*\)\.git#\1#p"`
 INPUT_FILE=`find . -name "*.bs"`
+TITLE=`cat $INPUT_FILE | grep "^Title: .*$" | sed -e "s/Title: //"`
 
 LS_URL="https://$SHORTNAME.spec.whatwg.org/"
 COMMIT_URL_BASE="https://github.com/whatwg/$SHORTNAME/commit/"
