@@ -1,5 +1,8 @@
 language: generic
 
+jdk:
+  - oraclejdk8
+
 env:
   global:
     - ENCRYPTION_LABEL="82f6fcb5a224"
