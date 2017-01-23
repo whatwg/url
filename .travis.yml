@@ -2,7 +2,10 @@ language: generic
 
 jdk:
   - oraclejdk8
-
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 env:
   global:
     - ENCRYPTION_LABEL="82f6fcb5a224"
