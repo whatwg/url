@@ -44,17 +44,6 @@ echo ""
 
 rm -rf $WEB_ROOT || exit 0
 
-# Commit snapshot
-COMMIT_DIR=$WEB_ROOT/$COMMITS_DIR/$SHA
-mkdir -p $COMMIT_DIR
-curl https://api.csswg.org/bikeshed/ -f -F file=@$INPUT_FILE -F md-status=LS-COMMIT \
-     -F md-warning="Commit $SHA $COMMIT_URL_BASE$SHA replaced by $LS_URL" \
-     -F md-title="$TITLE (Commit Snapshot $SHA)" \
-     -F md-Text-Macro="SNAPSHOT-LINK $BACK_TO_LS_LINK" \
-     > $COMMIT_DIR/index.html;
-echo "Commit snapshot output to $WEB_ROOT/$COMMITS_DIR/$SHA"
-echo ""
-
 if [ $BRANCH != "master" ] ; then
     # Branch snapshot, if not master
     BRANCH_DIR=$WEB_ROOT/$BRANCHES_DIR/$BRANCH
@@ -66,6 +55,17 @@ if [ $BRANCH != "master" ] ; then
          > $BRANCH_DIR/index.html;
     echo "Branch snapshot output to $WEB_ROOT/$BRANCHES_DIR/$BRANCH"
 else
+    # Commit snapshot, if master
+    COMMIT_DIR=$WEB_ROOT/$COMMITS_DIR/$SHA
+    mkdir -p $COMMIT_DIR
+    curl https://api.csswg.org/bikeshed/ -f -F file=@$INPUT_FILE -F md-status=LS-COMMIT \
+         -F md-warning="Commit $SHA $COMMIT_URL_BASE$SHA replaced by $LS_URL" \
+         -F md-title="$TITLE (Commit Snapshot $SHA)" \
+         -F md-Text-Macro="SNAPSHOT-LINK $BACK_TO_LS_LINK" \
+         > $COMMIT_DIR/index.html;
+    echo "Commit snapshot output to $WEB_ROOT/$COMMITS_DIR/$SHA"
+    echo ""
+
     # Living standard, if master
     curl https://api.csswg.org/bikeshed/ -f -F file=@$INPUT_FILE \
          -F md-Text-Macro="SNAPSHOT-LINK $SNAPSHOT_LINK" \
