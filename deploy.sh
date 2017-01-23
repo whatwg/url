@@ -81,7 +81,7 @@ echo ""
 # Run the HTML checker when building on Travis
 if [ "$TRAVIS" == "true" ]; then
     curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
-    /usr/lib/jvm/java-8-oracle/jre/bin/java -Xss512k -jar vnu.jar --skip-non-html $WEB_ROOT
+    /usr/lib/jvm/java-8-oracle/jre/bin/java -jar vnu.jar --skip-non-html $WEB_ROOT
 fi
 
 if [ "$1" != "--local" ]; then
