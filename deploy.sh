@@ -78,6 +78,10 @@ echo ""
 find $WEB_ROOT -print
 echo ""
 
+# Run the HTML checker on all output
+curl -O https://sideshowbarker.net/nightlies/jar/vnu.jar
+java -Xss512k -jar vnu.jar --skip-non-html $WEB_ROOT
+
 if [ "$1" != "--local" ]; then
     # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
     ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
