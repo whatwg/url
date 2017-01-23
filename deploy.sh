@@ -75,7 +75,7 @@ else
 fi
 
 echo ""
-find $WEB_ROOT -print
+find $WEB_ROOT -type f -print
 echo ""
 
 # Run the HTML checker when building on Travis
