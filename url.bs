@@ -263,6 +263,24 @@ further processing.
 <p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
 <a for=/>URLs</a>.
 
+<hr>
+
+<p>A <dfn export>forbidden host code point</dfn> is
+U+0000,
+U+0009,
+U+000A,
+U+000D,
+U+0020,
+"<code>#</code>",<!-- 23 -->
+"<code>%</code>",<!-- 25 -->
+"<code>/</code>",<!-- 2F -->
+"<code>:</code>",<!-- 3A -->
+"<code>?</code>",<!-- 3F -->
+"<code>@</code>",<!-- 40 -->
+"<code>[</code>",<!-- 5B -->
+"<code>\</code>",<!-- 5C -->
+or
+"<code>]</code>".<!-- 5D -->
 
 
 <h3 id=idna>IDNA</h3>
@@ -346,25 +364,6 @@ separated from each other by "<code>.</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>host string</a> as it requires
 context to be distinguished.
-
-<hr>
-
-<p>A <dfn export>forbidden host code point</dfn> is
-U+0000,
-U+0009,
-U+000A,
-U+000D,
-U+0020,
-"<code>#</code>",<!-- 23 -->
-"<code>%</code>",<!-- 25 -->
-"<code>/</code>",<!-- 2F -->
-"<code>:</code>",<!-- 3A -->
-"<code>?</code>",<!-- 3F -->
-"<code>@</code>",<!-- 40 -->
-"<code>[</code>",<!-- 5B -->
-"<code>\</code>",<!-- 5C -->
-or
-"<code>]</code>".<!-- 5D -->
 
 
 <h3 id=host-parsing>Host parsing</h3>
