@@ -231,9 +231,9 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
      https://mothereff.in/punycode -->
 
 <p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
-<a>IPv4 address</a>, or an <a>IPv6 address</a>. Typically a
-<a for=/>host</a> serves as a network address, but it is sometimes (ab)used as opaque
-identifier in <a for=/>URLs</a> where a network address is not necessary.
+<a>IPv4 address</a>, an <a>IPv6 address</a>, or an <a>opaque host</a>. Typically a <a for=/>host</a>
+serves as a network address, but it is sometimes used as opaque identifier in <a for=/>URLs</a>
+where a network address is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a for=/>host</a> syntax, parsing, and serialization. Unless stated
@@ -256,6 +256,31 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 
 <p class="note">Support for <code>&lt;zone_id></code> is
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>.
+
+<p>An <dfn export>opaque host</dfn> is an <a>ASCII string</a> holding data that can be used for
+further processing.
+
+<p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
+<a for=/>URLs</a>.
+
+<hr>
+
+<p>A <dfn export>forbidden host code point</dfn> is
+U+0000,
+U+0009,
+U+000A,
+U+000D,
+U+0020,
+"<code>#</code>",<!-- 23 -->
+"<code>%</code>",<!-- 25 -->
+"<code>/</code>",<!-- 2F -->
+"<code>:</code>",<!-- 3A -->
+"<code>?</code>",<!-- 3F -->
+"<code>@</code>",<!-- 40 -->
+"<code>[</code>",<!-- 5B -->
+"<code>\</code>",<!-- 5C -->
+or
+"<code>]</code>".<!-- 5D -->
 
 
 <h3 id=idna>IDNA</h3>
@@ -292,8 +317,8 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 <h3 id=host-syntax>Host syntax</h3>
 
 <p>A <dfn export id=syntax-host>host string</dfn> must be a <a>domain string</a>, an
-<a>IPv4 address string</a>, or "<code>[</code>", followed by an <a>IPv6 address string</a>, followed
-by "<code>]</code>".
+<a>IPv4 address string</a>, or: "<code>[</code>", followed by an <a>IPv6 address string</a>,
+followed by "<code>]</code>".
 
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
@@ -335,6 +360,11 @@ separated from each other by "<code>.</code>".
 
      XXX should we define the format inline instead just like STD 66? -->
 
+<p>An <dfn export>opaque-host string</dfn> must be zero or more <a>URL units</a>.
+
+<p class="note no-backref">This is not part of the definition of <a>host string</a> as it requires
+context to be distinguished.
+
 
 <h3 id=host-parsing>Host parsing</h3>
 
@@ -368,24 +398,8 @@ steps:
 
  <li><p>If <var>asciiDomain</var> is failure, return failure.
 
- <li>
-  <p>If <var>asciiDomain</var> contains
-  U+0000,
-  U+0009,
-  U+000A,
-  U+000D,
-  U+0020,
-  "<code>#</code>",<!-- 23 -->
-  "<code>%</code>",<!-- 25 -->
-  "<code>/</code>",<!-- 2F -->
-  "<code>:</code>",<!-- 3A -->
-  "<code>?</code>",<!-- 3F -->
-  "<code>@</code>",<!-- 40 -->
-  "<code>[</code>",<!-- 5B -->
-  "<code>\</code>",<!-- 5C -->
-  or
-  "<code>]</code>",<!-- 5D -->
-  <a>syntax violation</a>, return failure.
+ <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
+ <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -701,7 +715,7 @@ no purpose other than being a location the algorithm can jump to.
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
 
- <li><p>Otherwise, <var>host</var> is a <a>domain</a>, return <var>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a>domain</a> or <a>opaque host</a>, return <var>host</var>.
 </ol>
 
 The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
@@ -813,15 +827,15 @@ It is initially the empty string.
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-password>password</dfn> is an
 <a>ASCII string</a> identifying a password. It is initially the empty string.
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is either
-null or a <a for=/>host</a>. It is initially null.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is null or a
+<a for=/>host</a>. It is initially null.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of
-zero or more <a>ASCII string</a> holding data, usually identifying a location in
-hierarchical form. It is initially the empty list.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of zero or more
+<a>ASCII strings</a> holding data, usually identifying a location in hierarchical form. It is
+initially the empty list.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a> holding data. It is initially null.
@@ -939,7 +953,7 @@ input might be a <a>relative-URL string</a>.
 <ul class=brief>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for a
  <a>special scheme</a> and not an <a>ASCII case-insensitive</a> match for "<code>file</code>",
- followed by "<code>:</code>" and a <a>scheme-relative-URL string</a>
+ followed by "<code>:</code>" and a <a>scheme-relative-special-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a>ASCII case-insensitive</a> match for a
  <a>special scheme</a>, followed by "<code>:</code>" and a <a>relative-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for
@@ -963,8 +977,8 @@ must be a <a>relative-URL string</a>, optionally followed by "<code>#</code>" an
 switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
- <dt>Not "<code>file</code>"
- <dd><p>a <a>scheme-relative-URL string</a>
+ <dt>A <a>special scheme</a> that is not "<code>file</code>"
+ <dd><p>a <a>scheme-relative-special-URL string</a>
  <dd><p>a <a>path-absolute-URL string</a>
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
@@ -973,6 +987,10 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
  <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
  is non-null
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
+ <dt>Otherwise
+ <dd><p>a <a>scheme-relative-URL string</a>
+ <dd><p>a <a>path-absolute-URL string</a>
+ <dd><p>a <a>path-relative-scheme-less-URL string</a>
 </dl>
 
 <p>any optionally followed by "<code>?</code>" and a <a>URL-query string</a>.
@@ -980,11 +998,19 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <p class="note no-backref">A non-null <a>base URL</a> is necessary when
 <a lt="URL parser">parsing</a> a <a>relative-URL string</a>.
 
-<p>A <dfn export id=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
-"<code>//</code>", followed by a <a>host string</a>, optionally followed by "<code>:</code>"
-and a <a>URL-port string</a>, optionally followed by a <a>path-absolute-URL string</a>.
+<p>A <dfn export>scheme-relative-special-URL string</dfn> must be "<code>//</code>", followed by a
+<a>host string</a>, optionally followed by "<code>:</code>" and a <a>URL-port string</a>, optionally
+followed by a <a>path-absolute-URL string</a>.
 
 <p>A <dfn export id=syntax-url-port>URL-port string</dfn> must be zero or more <a>ASCII digits</a>.
+
+<p>A <dfn export id=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
+"<code>//</code>", followed by an <a>opaque-host-and-port string</a>, optionally followed by a
+<a>path-absolute-URL string</a>.
+
+<p>An <dfn export>opaque-host-and-port string</dfn> must be either an empty
+<a>opaque-host string</a> or: a non-empty <a>opaque-host string</a>, optionally followed by
+"<code>:</code>" and a <a>URL-port string</a>.
 
 <p>A <dfn export id=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
 "<code>//</code>", followed by one of the following
@@ -1192,6 +1218,26 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <p>The base and output <a lt="URL record">URL</a> are represented in
  <a lt="URL serializer">serialized</a> form for brevity.
 </div>
+
+<hr>
+
+<p>The <dfn export id=concept-url-host-parser>URL-host parser</dfn> takes a string <var>input</var>
+and a boolean <var>isSpecial</var>, and then runs these steps:</p>
+
+<ol>
+ <li><p>If <var>isSpecial</var> is true, then return the result of
+ <a lt="host parser">host parsing</a> <var>input</var>.
+
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a>, <a>syntax violation</a>,
+ return failure.
+
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
+ <a>simple encode set</a>, and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 <hr>
 
@@ -1547,8 +1593,19 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p><var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>"
       </ul>
 
-      <p>then decrease <var>pointer</var> by the number of code points in <var>buffer</var> plus
-      one, set <var>buffer</var> to the empty string, and set <var>state</var> to <a>host state</a>.
+      <p>then run these substeps:
+
+      <ol>
+       <li><p>If <var>@ flag</var> is set and <var>buffer</var> is the empty string,
+       <a>syntax violation</a>, return failure.
+       <!-- No URLs with userinfo, but without host. For special URLs it would also not be
+            idempotent:
+            https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
+
+       <li><p>Decrease <var>pointer</var> by the number of code points in <var>buffer</var> plus
+       one, set <var>buffer</var> to the empty string, and set <var>state</var> to
+       <a>host state</a>.
+      </ol>
 
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
@@ -1562,17 +1619,13 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <var>[] flag</var> is unset, run these substeps:
 
       <ol>
-       <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty
-       string, return failure.
-       <!-- Otherwise parsing URLs would not be idempotent:
+       <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
+       <!-- No URLs with port, but without host. -->
 
-            https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
+       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <var>buffer</var> with <var>url</var> <a>is special</a>.
 
-       <li><p>Let <var>host</var> be the result of
-       <a lt='host parser'>host parsing</a>
-       <var>buffer</var>.
-
-       <li><p>If <var>host</var> is failure, return failure.
+       <li><p>If <var>host</var> is failure, then return failure.
 
        <li><p>Set <var>url</var>'s <a for=url>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
@@ -1594,14 +1647,15 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>then decrease <var>pointer</var> by one, and run these substeps:
 
       <ol>
-       <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty
-       string, return failure.
+       <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
+       <a>syntax violation</a>, return failure.
+       <!-- http://? -> failure
+            test://? -> test://? -->
 
-       <li><p>Let <var>host</var> be the result of
-       <a lt='host parser'>host parsing</a>
-       <var>buffer</var>.
+       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <var>buffer</var> with <var>url</var> <a>is special</a>.
 
-       <li><p>If <var>host</var> is failure, return failure.
+       <li><p>If <var>host</var> is failure, then return failure.
 
        <li><p>Set <var>url</var>'s <a for=url>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
@@ -2088,7 +2142,7 @@ then runs these steps:
  in <var>url</var>'s <a for=url>path</a> to <var>output</var>.
 
  <li><p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>'s
- <a for=url>path</a> (including empty strings), separated from each other by
+ <a for=url>path</a> (including empty strings), if any, separated from each other by
  "<code>/</code>", to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a for=url>query</a> is non-null, append
@@ -2636,11 +2690,11 @@ the setter to always "reset" both.
 
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, return the first string in <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
+ set, then return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>[0].
 
  <li><p>Return "<code>/</code>", followed by the strings in <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), separated from each other by
- "<code>/</code>".
+ <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), if any, separated from each
+ other by "<code>/</code>".
 </ol>
 
 <p>The <code><a attribute for=URL>pathname</a></code> attribute's setter must
