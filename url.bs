@@ -357,16 +357,15 @@ steps:
    "<code>]</code>" removed.
   </ol>
 
- <li><p>Let <var>domain</var> be the result of
- <a>UTF-8 decode without BOM</a> on the
- <a lt="percent decode">percent decoding</a> of
- <a>UTF-8 encode</a> on <var>input</var>.
- <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=309671 -->
+ <li><p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM or fail</a> on
+ the <a lt="percent decode">percent decoding</a> of <a>UTF-8 encode</a> on <var>input</var>.
+
+ <li><p>If <var>domain</var> is failure, <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>asciiDomain</var> be the result of running
  <a>domain to ASCII</a> on <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is failure, return failure.
+ <li><p>If <var>asciiDomain</var> is failure, <a>syntax violation</a>, return failure.
 
  <li>
   <p>If <var>asciiDomain</var> contains
