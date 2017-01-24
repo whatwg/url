@@ -347,6 +347,25 @@ separated from each other by "<code>.</code>".
 <p class="note no-backref">This is not part of the definition of <a>host string</a> as it requires
 context to be distinguished.
 
+<hr>
+
+<p>A <dfn export>forbidden host code point</dfn> is
+U+0000,
+U+0009,
+U+000A,
+U+000D,
+U+0020,
+"<code>#</code>",<!-- 23 -->
+"<code>%</code>",<!-- 25 -->
+"<code>/</code>",<!-- 2F -->
+"<code>:</code>",<!-- 3A -->
+"<code>?</code>",<!-- 3F -->
+"<code>@</code>",<!-- 40 -->
+"<code>[</code>",<!-- 5B -->
+"<code>\</code>",<!-- 5C -->
+or
+"<code>]</code>".<!-- 5D -->
+
 
 <h3 id=host-parsing>Host parsing</h3>
 
@@ -380,24 +399,8 @@ steps:
 
  <li><p>If <var>asciiDomain</var> is failure, return failure.
 
- <li>
-  <p>If <var>asciiDomain</var> contains
-  U+0000,
-  U+0009,
-  U+000A,
-  U+000D,
-  U+0020,
-  "<code>#</code>",<!-- 23 -->
-  "<code>%</code>",<!-- 25 -->
-  "<code>/</code>",<!-- 2F -->
-  "<code>:</code>",<!-- 3A -->
-  "<code>?</code>",<!-- 3F -->
-  "<code>@</code>",<!-- 40 -->
-  "<code>[</code>",<!-- 5B -->
-  "<code>\</code>",<!-- 5C -->
-  or
-  "<code>]</code>",<!-- 5D -->
-  <a>syntax violation</a>, return failure.
+ <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
+ <a>syntax violation</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -1226,20 +1229,8 @@ and a boolean <var>isSpecial</var>, and then runs these steps:</p>
  <li><p>If <var>isSpecial</var> is true, then return the result of
  <a lt="host parser">host parsing</a> <var>input</var>.
 
- <li>
-  <p>If <var>input</var> contains
-  U+0000,
-  U+0009,
-  U+000A,
-  U+000D,
-  U+0020,
-  "<code>#</code>",<!-- 23 -->
-  "<code>/</code>",<!-- 2F -->
-  "<code>:</code>",<!-- 3A -->
-  "<code>?</code>",<!-- 3F -->
-  or
-  "<code>@</code>",<!-- 40 -->
-  <a>syntax violation</a>, return failure.
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a>, <a>syntax violation</a>,
+ return failure.
 
  <li><p>Let <var>output</var> be the empty string.
 
