@@ -1889,8 +1889,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
-       <li><p>Set <var>state</var> to <a>path state</a> and if <a>c</a> is neither "<code>/</code>"
-       nor "<code>\</code>", then decrease <var>pointer</var> by one.
+       <li><p>Set <var>state</var> to <a>path state</a>.
+
+       <li><p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", then decrease
+       <var>pointer</var> by one.
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is not given and <a>c</a> is "<code>?</code>",
