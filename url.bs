@@ -847,6 +847,9 @@ null or a 16-bit unsigned integer that identifies a networking port. It is initi
 <a>ASCII strings</a> holding data, usually identifying a location in hierarchical form. It is
 initially the empty list.
 
+<p class="note no-backref">A <a lt="is special">special</a> <a for=/>URL</a> always has a
+<a for=list lt="is empty">non-empty</a> <a for=url>path</a>.
+
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a> holding data. It is initially null.
 
@@ -1522,14 +1525,17 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dd>
     <ol>
      <li>
-      <p>If either <a>c</a> is "<code>/</code>", or <var>url</var> <a>is special</a> and
-      <a>c</a> is "<code>\</code>", run these substeps:
+      <p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>/</code>" or "<code>\</code>",
+      then:
 
       <ol>
        <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
+
+     <li><p>Otherwise, if <a>c</a> is "<code>/</code>", then set <var>state</var> to
+     <a>authority state</a>.
 
      <li><p>Otherwise, set
      <var>url</var>'s <a for=url>username</a> to
@@ -1887,12 +1893,29 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dt><dfn>path start state</dfn>
    <dd>
     <ol>
-     <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-     <a>syntax violation</a>.
+     <li>
+      <p>If <var>url</var> <a>is special</a>, then:
 
-     <li><p>Set <var>state</var> to <a>path state</a>, and if neither <a>c</a> is
-     "<code>/</code>", nor <var>url</var> <a>is special</a> and <a>c</a> is
-     "<code>\</code>", decrease <var>pointer</var> by one.
+      <ol>
+       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
+
+       <li><p>Set <var>state</var> to <a>path state</a>.
+
+       <li><p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", then decrease
+       <var>pointer</var> by one.
+      </ol>
+
+     <li><p>Otherwise, if <var>state override</var> is not given and <a>c</a> is "<code>?</code>",
+     then set <var>url</var>'s <a for=url>query</a> to the empty string and <var>state</var> to
+     <a>query state</a>.
+
+     <li><p>Otherwise, if <var>state override</var> is not given and <a>c</a> is "<code>#</code>",
+     then set <var>url</var>'s <a for=url>fragment</a> to the empty string and <var>state</var> to
+     <a>fragment state</a>.
+
+     <li><p>Otherwise, if <a>c</a> is not <a>EOF code point</a>, then: set <var>state</var> to
+     <a>path state</a> and if <a>c</a> is not "<code>/</code>", then decrease <var>pointer</var> by
+     one.
     </ol>
 
    <dt><dfn>path state</dfn>
@@ -2151,9 +2174,8 @@ then runs these steps:
  <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append the first string
  in <var>url</var>'s <a for=url>path</a> to <var>output</var>.
 
- <li><p>Otherwise, append "<code>/</code>", followed by the strings in <var>url</var>'s
- <a for=url>path</a> (including empty strings), if any, separated from each other by
- "<code>/</code>", to <var>output</var>.
+ <li><p>Otherwise, then <a for=list>for each</a> string in <var>url</var>'s <a for=url>path</a>,
+ append "<code>/</code>" followed by the string to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a for=url>query</a> is non-null, append
  "<code>?</code>", followed by <var>url</var>'s <a for=url>query</a>, to
@@ -2701,6 +2723,9 @@ the setter to always "reset" both.
 <ol>
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
  set, then return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>[0].
+
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>
+ <a for=list>is empty</a>, then return the empty string.
 
  <li><p>Return "<code>/</code>", followed by the strings in <a>context object</a>'s
  <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), if any, separated from each
