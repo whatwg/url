@@ -1668,6 +1668,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <!-- http://? -> failure
             test://? -> test://? -->
 
+       <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
+       string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
+       <a for=url>port</a> is non-null, <a>syntax violation</a>, return.
+
        <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
 
@@ -1859,28 +1863,42 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>buffer</var> is a <a>Windows drive letter</a>, <a>syntax violation</a>,
-        set <var>state</var> to <a>path state</a>.
-
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
+        <p>If <var>state override</var> is not given and <var>buffer</var> is a
+        <a>Windows drive letter</a>, <a>syntax violation</a>, set <var>state</var> to
         <a>path state</a>.
 
-       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a>path start state</a>.
+        <p class=note>This is a (platform-independent) Windows drive letter quirk. <var>buffer</var>
+        is not reset here and instead used in the <a>path state</a>.
+
+       <li>
+        <p>Otherwise, if <var>buffer</var> is the empty string, then:
+
+        <ol>
+         <li><p>If <var>state override</var> is given and <var>url</var>
+         <a>includes credentials</a>, <a>syntax violation</a>, return.
+
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
+
+         <li><p>If <var>state override</var> is given, then return.
+
+         <li><p>Set <var>state</var> to <a>path start state</a>.
+        </ol>
 
        <li>
         <p>Otherwise, run these steps:
 
         <ol>
-         <li><p>Let <var>host</var> be the result of
-         <a lt='host parser'>host parsing</a>
+         <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
          <var>buffer</var>.
 
-         <li><p>If <var>host</var> is failure, return failure.
+         <li><p>If <var>host</var> is failure, then return failure.
 
-         <li><p>If <var>host</var> is not "<code title>localhost</code>", set
-         <var>url</var>'s <a for=url>host</a> to <var>host</var>.
+         <li><p>If <var>host</var> is "<code title>localhost</code>", then set <var>host</var> to
+         the empty string.
+
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>host</var>.
+
+         <li><p>If <var>state override</var> is given, then return.
 
          <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
          <a>path start state</a>.
@@ -2622,8 +2640,9 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>username</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null or the empty
+ string, or <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, then return.
 
  <li><p><a for=url>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2635,8 +2654,9 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>password</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null or the empty
+ string, or <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
+ set, then return.
 
  <li><p><a for=url>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2663,8 +2683,11 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
  set, terminate these steps.
 
+ <li><p>Let <var>hostState</var> be <a>file host state</a> if <a>context object</a>'s
+ <a for=URL>url</a>'s <a for=url>scheme</a> is "<code>file</code>", and <a>host state</a> otherwise.
+
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
+ <a for=URL>url</a> as <var>url</var> and <var>hostState</var> as <var>state override</var>.
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
@@ -2689,8 +2712,12 @@ the setter to always "reset" both.
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
  set, terminate these steps.
 
+ <li><p>Let <var>hostState</var> be <a>file host state</a> if <a>context object</a>'s
+ <a for=URL>url</a>'s <a for=url>scheme</a> is "<code>file</code>", and <a>hostname state</a>
+ otherwise.
+
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
+ <a for=URL>url</a> as <var>url</var> and <var>hostState</var> as <var>state override</var>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>port</code></dfn> attribute's getter must run these steps:
@@ -2706,9 +2733,16 @@ the setter to always "reset" both.
 <p>The <code><a attribute for=URL>port</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, its
- <a for=url>cannot-be-a-base-URL flag</a> is set, or its <a for=url>scheme</a> is
- "<code>file</code>", terminate these steps.
+ <li>
+  <p>If one of the following regarding <a>context object</a>'s <a for=URL>url</a> is true
+
+  <ul class=brief>
+   <li><p>its <a for=url>host</a> is null or the empty string
+   <li><p>its <a for=url>cannot-be-a-base-URL flag</a> is set
+   <li><p>its <a for=url>scheme</a> is "<code>file</code>"
+  </ul>
+
+  <p>then return.
 
  <li><p>If the given value is the empty string, then set <a for=URL>url</a>'s <a for=url>port</a> to
  null.</p></li>
