@@ -45,6 +45,8 @@ Boilerplate: omit feedback-header, omit conformance
  enhancements to make it easier to work with. Add a new <code><a interface>URL</a></code>
  object as well for URL manipulation without usage of HTML elements. (Useful
  for JavaScript worker environments.)
+
+ <li><p>Ensure the combination of parser, serializer, and API guarantee idempotence.
 </ul>
 
 <p class=note>As the editors learn more about the subject matter the goals
