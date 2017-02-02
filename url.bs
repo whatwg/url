@@ -223,9 +223,27 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <h2 id="hosts-(domains-and-ip-addresses)">Hosts (domains and IP addresses)</h2>
 
-<!-- Punycode:
-     https://tools.ietf.org/html/rfc3492
-     https://mothereff.in/punycode -->
+<p>At a high level, a <a for=/>host</a>, <a>host string</a>, <a>host parser</a>, and
+<a>host serializer</a> relate as follows:
+
+<ul>
+ <li><p>The <a>host parser</a> takes an arbitrary string and returns either failure or a
+ <a for=/>host</a>. (This <a for=/>host</a> cannot be an <a>opaque host</a>, those can only be
+ returned through the <a>URL parser</a>.)
+
+ <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
+
+ <li><p>A <a>host string</a> defines what input would not trigger a <a>syntax violation</a> or
+ failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
+ valid.
+
+ <li><p>The <a>host serializer</a> takes a <a for=/>host</a> and returns a string. (If that string
+ is then <a lt="host parser">parsed</a>, the result will <a for=host>equal</a> the
+ <a lt="host serializer">serialized</a> <a for=/>host</a>.)
+</ul>
+
+
+<h3 id=host-representation>Host representation</h3>
 
 <p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
 <a>IPv4 address</a>, an <a>IPv6 address</a>, or an <a>opaque host</a>. Typically a <a for=/>host</a>
@@ -260,7 +278,8 @@ further processing.
 <p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
 <a for=/>URLs</a>.
 
-<hr>
+
+<h3 id=host-miscellaneous>Host miscellaneous</h3>
 
 <p>A <dfn export>forbidden host code point</dfn> is
 U+0000,
@@ -828,7 +847,7 @@ A Recommendation for IPv6 Address Text Representation.
 <h3 id=host-equivalence>Host equivalence</h3>
 
 To determine whether a <a for=/>host</a> <var>A</var>
-<dfn export for=host id=concept-host-equals>equals</dfn> <var>B</var>, return true if
+<dfn export for=host id=concept-host-equals lt=equal>equals</dfn> <var>B</var>, return true if
 <var>A</var> is <var>B</var>, and false otherwise.
 
 <p class=XXX>Certificate comparison requires a host equivalence check that ignores the
@@ -843,6 +862,27 @@ unified model would be, please file an issue.
 
 <!-- History behind URL as term:
      https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
+
+<p>At a high level, a <a for=/>URL</a>, <a>URL string</a>, <a>URL parser</a>, and
+<a>URL serializer</a> relate as follows:
+
+<ul>
+ <li><p>The <a>URL parser</a> takes an arbitrary string and returns either failure or a
+ <a for=/>URL</a>.
+
+ <li><p>A <a for=/>URL</a> can be seen as the in-memory representation.
+
+ <li><p>A <a>URL string</a> defines what input would not trigger a <a>syntax violation</a> or
+ failure when given to the <a>URL parser</a>. I.e., input that would be considered conforming or
+ valid.
+
+ <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns a string. (If that string
+ is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the
+ <a lt="URL serializer">serialized</a> <a for=/>host</a>.)
+</ul>
+
+
+<h3 id=url-representation>URL representation</h3>
 
 <p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a universal identifier. To
 disambiguate from a <a>URL string</a> it can also be referred to as a <a for=/>URL record</a>.
@@ -892,7 +932,8 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 "<code>blob</code>" <a for=/>URLs</a>, but others can be added going forward, hence
 "object".
 
-<hr>
+
+<h3 id=url-miscellaneous>URL miscellaneous</h3>
 
 <p>A <dfn export>special scheme</dfn> is a <a for=url>scheme</a> listed in the first column of
 the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s optional
@@ -2213,7 +2254,7 @@ then runs these steps:
 <h3 id=url-equivalence>URL equivalence</h3>
 
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
-<dfn export for=url id=concept-url-equals>equals</dfn> <var>B</var>, optionally with an
+<dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <var>B</var>, optionally with an
 <i>exclude fragments flag</i>, run these steps:
 
 <ol>
