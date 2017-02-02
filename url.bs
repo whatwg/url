@@ -2483,6 +2483,8 @@ interface URL {
            attribute USVString search;
   [SameObject] readonly attribute URLSearchParams searchParams;
            attribute USVString hash;
+
+  USVString toJSON();
 };
 </pre>
 
@@ -2579,8 +2581,9 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</pre>
 
 <h3 id=urlutils-members>{{URL}} members</h3>
 
-<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter must return the
-<a lt='URL serializer'>serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
+<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter and the
+<dfn method for=URL>toJSON()</dfn> method, when invoked, must return the
+<a lt="URL serializer">serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
 
 <p>The <code><a attribute for=URL>href</a></code> attribute's setter must run these steps:
 
