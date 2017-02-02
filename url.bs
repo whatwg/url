@@ -927,6 +927,10 @@ used by HTML. [[HTML]]
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
 <!-- also used by Fetch -->
 
+<p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
+<a for=url>host</a> is null or the empty string, its <a for=url>cannot-be-a-base-URL flag</a> is
+set, or its <a for=url>scheme</a> is "<code>file</code>".
+
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
@@ -2640,16 +2644,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>username</a></code> attribute's setter must run these steps:
 
 <ol>
- <li>
-  <p>If one of the following regarding <a>context object</a>'s <a for=URL>url</a> is true
-
-  <ul class=brief>
-   <li><p>its <a for=url>host</a> is null or the empty string
-   <li><p>its <a for=url>cannot-be-a-base-URL flag</a> is set
-   <li><p>its <a for=url>scheme</a> is "<code>file</code>"
-  </ul>
-
-  <p>then return.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p><a for=url>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2661,16 +2657,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>password</a></code> attribute's setter must run these steps:
 
 <ol>
- <li>
-  <p>If one of the following regarding <a>context object</a>'s <a for=URL>url</a> is true
-
-  <ul class=brief>
-   <li><p>its <a for=url>host</a> is null or the empty string
-   <li><p>its <a for=url>cannot-be-a-base-URL flag</a> is set
-   <li><p>its <a for=url>scheme</a> is "<code>file</code>"
-  </ul>
-
-  <p>then return.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p><a for=url>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2747,16 +2735,8 @@ the setter to always "reset" both.
 <p>The <code><a attribute for=URL>port</a></code> attribute's setter must run these steps:
 
 <ol>
- <li>
-  <p>If one of the following regarding <a>context object</a>'s <a for=URL>url</a> is true
-
-  <ul class=brief>
-   <li><p>its <a for=url>host</a> is null or the empty string
-   <li><p>its <a for=url>cannot-be-a-base-URL flag</a> is set
-   <li><p>its <a for=url>scheme</a> is "<code>file</code>"
-  </ul>
-
-  <p>then return.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p>If the given value is the empty string, then set <a for=URL>url</a>'s <a for=url>port</a> to
  null.</p></li>
