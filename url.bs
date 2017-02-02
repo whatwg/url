@@ -68,14 +68,6 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 <p>To <dfn>serialize an integer</dfn>, represent it as the shortest possible decimal
 number.
 
-<hr>
-
-<p>A <dfn>Windows drive letter</dfn> is two code points, of which the first is
-an <a>ASCII alpha</a> and the second is either "<code>:</code>" or "<code>|</code>".
-
-<p>A <dfn>normalized Windows drive letter</dfn> is a <a>Windows drive letter</a> of which
-the second code point is "<code>:</code>".
-
 
 <h3 id=parsers>Parsers</h3>
 
@@ -933,6 +925,15 @@ used by HTML. [[HTML]]
 input might be a <a>relative-URL string</a>.
 
 <hr>
+
+<p>A <dfn>Windows drive letter</dfn> is two code points, of which the first is an <a>ASCII alpha</a>
+and the second is either "<code>:</code>" or "<code>|</code>".
+
+<p>A <dfn>normalized Windows drive letter</dfn> is a <a>Windows drive letter</a> of which the second
+code point is "<code>:</code>".
+
+<p class="note">As per the <a href=#url-syntax>URL syntax</a> section, only a
+<a>normalized Windows drive letter</a> is conforming.
 
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
 
