@@ -282,6 +282,19 @@ U+0020,
 or
 "<code>]</code>".<!-- 5D -->
 
+<p>A <dfn export>forbidden opaque host code point</dfn> is
+U+0000,
+U+0009,
+U+000A,
+U+000D,
+U+0020,
+"<code>#</code>",<!-- 23 -->
+"<code>/</code>",<!-- 2F -->
+"<code>?</code>",<!-- 3F -->
+"<code>@</code>",<!-- 40 -->
+or
+"<code>\</code>".<!-- 5C -->
+
 
 <h3 id=idna>IDNA</h3>
 
@@ -1237,12 +1250,7 @@ and a boolean <var>isSpecial</var>, and then runs these steps:</p>
  <li><p>If <var>isSpecial</var> is true, then return the result of
  <a lt="host parser">host parsing</a> <var>input</var>.
 
- <li><p>Let <var>buffer</var> be the result of
- <a>UTF-8 decode without BOM</a> on the
- <a lt="percent decode">percent decoding</a> of
- <a>UTF-8 encode</a> on <var>input</var>.
-
- <li><p>If <var>buffer</var> contains a <a>forbidden host code point</a>, <a>syntax violation</a>,
+ <li><p>If <var>input</var> contains a <a>forbidden opaque host code point</a>, <a>syntax violation</a>,
  return failure.
 
  <li><p>Let <var>output</var> be the empty string.
