@@ -1742,81 +1742,70 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
    <dt><dfn>file state</dfn>
    <dd>
-    <p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>",
-    and then, switching on <a>c</a>:
+    <ol>
+     <li><p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>".
 
-    <dl class=switch>
-     <dt><a>EOF code point</a>
-     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a for=url>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a for=url>host</a> to
-     <var>base</var>'s <a for=url>host</a>,
-     <var>url</var>'s <a for=url>path</a> to
-     <var>base</var>'s <a for=url>path</a>, and
-     <var>url</var>'s <a for=url>query</a> to
-     <var>base</var>'s <a for=url>query</a>.
+     <li>
+      <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", then:
 
-     <dt>"<code>/</code>"
-     <dt>"<code>\</code>"
-     <dd>
       <ol>
        <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
 
        <li><p>Set <var>state</var> to <a>file slash state</a>.
       </ol>
 
-     <dt>"<code>?</code>"
-     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a for=url>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a for=url>host</a> to
-     <var>base</var>'s <a for=url>host</a>,
-     <var>url</var>'s <a for=url>path</a> to
-     <var>base</var>'s <a for=url>path</a>,
-     <var>url</var>'s <a for=url>query</a> to the empty string,
-     and <var>state</var> to <a>query state</a>.
+     <li>
+      <p>Otherwise, if <var>base</var> is non-null and <var>base</var>'s <a for=url>scheme</a> is
+      "<code>file</code>", switch on <a>c</a>:
 
-     <dt>"<code>#</code>"
-     <dd><p>If <var>base</var> is non-null and <var>base</var>'s
-     <a for=url>scheme</a> is "<code>file</code>", set
-     <var>url</var>'s <a for=url>host</a> to
-     <var>base</var>'s <a for=url>host</a>,
-     <var>url</var>'s <a for=url>path</a> to
-     <var>base</var>'s <a for=url>path</a>,
-     <var>url</var>'s <a for=url>query</a> to
-     <var>base</var>'s <a for=url>query</a>,
-     <var>url</var>'s <a for=url>fragment</a> to the empty string,
-     and <var>state</var> to <a>fragment state</a>.
+      <dl class=switch>
+       <dt><a>EOF code point</a>
+       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>, and
+       <var>url</var>'s <a for=url>query</a> to <var>base</var>'s <a for=url>query</a>.
 
-     <dt>Otherwise
-     <dd>
-      <ol>
-       <li>
-        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a>
-        is "<code>file</code>", and at least one of the following is true
+       <dt>"<code>?</code>"
+       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>,
+       <var>url</var>'s <a for=url>query</a> to the empty string, and <var>state</var> to
+       <a>query state</a>.
 
-        <ul class=brief>
-         <li><p><a>c</a> and the first code point of <a>remaining</a> are not a
-         <a>Windows drive letter</a>
-         <li><p><a>remaining</a> consists of one code point
-         <li><a>remaining</a>'s second code point is <em>not</em> "<code>/</code>",
-         "<code>\</code>", "<code>?</code>", or "<code>#</code>"
-        </ul>
+       <dt>"<code>#</code>"
+       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>,
+       <var>url</var>'s <a for=url>query</a> to <var>base</var>'s <a for=url>query</a>,
+       <var>url</var>'s <a for=url>fragment</a> to the empty string, and <var>state</var> to
+       <a>fragment state</a>.
 
-        <p>then set <var>url</var>'s <a for=url>host</a> to
-        <var>base</var>'s <a for=url>host</a>,
-        <var>url</var>'s <a for=url>path</a> to
-        <var>base</var>'s <a for=url>path</a>, and then <a>shorten</a>
-        <var>url</var>'s <a for=url>path</a>.
+       <dt>Otherwise
+       <dd>
+        <ol>
+         <li>
+          <p>If at least one of the following is true
 
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
+          <ul class=brief>
+           <li><p><a>c</a> and the first code point of <a>remaining</a> are not a
+           <a>Windows drive letter</a>
+           <li><p><a>remaining</a> consists of one code point
+           <li><p><a>remaining</a>'s second code point is <em>not</em> "<code>/</code>",
+           "<code>\</code>", "<code>?</code>", or "<code>#</code>"
+          </ul>
 
-       <li><p>Otherwise, if <var>base</var> is non-null and <var>base</var>'s
-       <a for=url>scheme</a> is "<code>file</code>", <a>syntax violation</a>.
+          <p>then set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+          <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>, and then
+          <a>shorten</a> <var>url</var>'s <a for=url>path</a>.
 
-       <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
-       by one.
-      </ol>
-    </dl>
+          <p class=note>This is a (platform-independent) Windows drive letter quirk.
+
+         <li><p>Otherwise, <a>syntax violation</a>.
+
+         <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by one.
+        </ol>
+      </dl>
+
+     <li><p>Otherwise, set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by
+     one.
+    </ol>
 
    <dt><dfn>file slash state</dfn>
    <dd>
