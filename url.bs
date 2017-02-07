@@ -274,19 +274,6 @@ U+0020,
 or
 "<code>]</code>".<!-- 5D -->
 
-<p>A <dfn export>forbidden opaque host code point</dfn> is
-U+0000,
-U+0009,
-U+000A,
-U+000D,
-U+0020,
-"<code>#</code>",<!-- 23 -->
-"<code>/</code>",<!-- 2F -->
-"<code>?</code>",<!-- 3F -->
-"<code>@</code>",<!-- 40 -->
-or
-"<code>\</code>".<!-- 5C -->
-
 
 <h3 id=idna>IDNA</h3>
 
@@ -373,7 +360,7 @@ context to be distinguished.
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var> and
+<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean <var>isSpecial</var> and
 an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
 steps:
 
@@ -391,6 +378,9 @@ steps:
    with its leading "<code>[</code>" and trailing
    "<code>]</code>" removed.
   </ol>
+
+ <li><p>If <var>isSpecial</var> is false, then return the result of
+ <a lt="opaque host parser">opaque host parsing</a> <var>input</var>.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
@@ -1248,14 +1238,11 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p>The <dfn export id=concept-url-host-parser>URL-host parser</dfn> takes a string <var>input</var>
-and a boolean <var>isSpecial</var>, and then runs these steps:</p>
+<p>The <dfn export id=concept-opaque-host-parser>opaque host parser</dfn> takes a string <var>input</var>,
+and then runs these steps:</p>
 
 <ol>
- <li><p>If <var>isSpecial</var> is true, then return the result of
- <a lt="host parser">host parsing</a> <var>input</var>.
-
- <li><p>If <var>input</var> contains a <a>forbidden opaque host code point</a>, <a>syntax violation</a>,
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>", <a>syntax violation</a>,
  return failure.
 
  <li><p>Let <var>output</var> be the empty string.
@@ -1652,7 +1639,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
-       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
@@ -1682,7 +1669,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <!-- http://? -> failure
             test://? -> test://? -->
 
-       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
@@ -1878,7 +1865,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <ol>
          <li><p>Let <var>host</var> be the result of
          <a lt='host parser'>host parsing</a>
-         <var>buffer</var>.
+         <var>buffer</var> with <var>url</var> <a>is special</a>.
 
          <li><p>If <var>host</var> is failure, return failure.
 
