@@ -407,6 +407,21 @@ steps:
  result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </ol>
 
+The <dfn export id=concept-opaque-host-parser>opaque host parser</dfn> takes a string <var>input</var>,
+and then runs these steps:
+
+<ol>
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>", <a>syntax violation</a>,
+ return failure.
+
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
+ <a>simple encode set</a>, and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
+
 The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 <var>syntaxViolationFlag</var> pointer, and then runs these steps:
 
@@ -1235,23 +1250,6 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <p>The base and output <a lt="URL record">URL</a> are represented in
  <a lt="URL serializer">serialized</a> form for brevity.
 </div>
-
-<hr>
-
-<p>The <dfn export id=concept-opaque-host-parser>opaque host parser</dfn> takes a string <var>input</var>,
-and then runs these steps:</p>
-
-<ol>
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>", <a>syntax violation</a>,
- return failure.
-
- <li><p>Let <var>output</var> be the empty string.
-
- <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>simple encode set</a>, and append the result to <var>output</var>.
-
- <li><p>Return <var>output</var>.
-</ol>
 
 <hr>
 
