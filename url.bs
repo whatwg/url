@@ -46,7 +46,10 @@ Boilerplate: omit feedback-header, omit conformance
  object as well for URL manipulation without usage of HTML elements. (Useful
  for JavaScript worker environments.)
 
- <li><p>Ensure the combination of parser, serializer, and API guarantee idempotence.
+ <li><p>Ensure the combination of parser, serializer, and API guarantee idempotence. For example, a
+ non-failure result of a parse-then-serialize operation will not change with any further
+ parse-then-serialize operations applied to it. Similarly, manipulating a non-failure result through
+ the API will not change from applying any number of serialize-then-parse operations to it.
 </ul>
 
 <p class=note>As the editors learn more about the subject matter the goals
