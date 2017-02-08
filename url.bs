@@ -360,9 +360,9 @@ context to be distinguished.
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean <var>isSpecial</var> and
-an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
-steps:
+<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean
+<var>isSpecial</var>, and an optional <var>Unicode flag</var> (unset unless stated otherwise), and
+then runs these steps:
 
 <ol>
  <li>
@@ -380,7 +380,7 @@ steps:
   </ol>
 
  <li><p>If <var>isSpecial</var> is false, then return the result of
- <a lt="opaque host parser">opaque host parsing</a> <var>input</var>.
+ <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
@@ -405,21 +405,6 @@ steps:
 
  <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
  result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
-</ol>
-
-The <dfn export id=concept-opaque-host-parser>opaque host parser</dfn> takes a string <var>input</var>,
-and then runs these steps:
-
-<ol>
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>", <a>syntax violation</a>,
- return failure.
-
- <li><p>Let <var>output</var> be the empty string.
-
- <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>simple encode set</a>, and append the result to <var>output</var>.
-
- <li><p>Return <var>output</var>.
 </ol>
 
 The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
@@ -467,8 +452,10 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
  <!-- XXX well, you know, it works for ECMAScript, kinda -->
 </ol>
 
-The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then
-runs these steps:
+<hr>
+
+<p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then runs
+these steps:
 
 <ol>
  <li><p>Let <var>syntaxViolationFlag</var> be unset.
@@ -538,6 +525,8 @@ runs these steps:
 
  <li><p>Return <var>ipv4</var>.
 </ol>
+
+<hr>
 
 <p>The <dfn id=concept-ipv6-parser>IPv6 parser</dfn> takes a string <var>input</var> and
 then runs these steps:
@@ -719,6 +708,23 @@ then runs these steps:
 <p class="note no-backref">To be clear, <a lt='IPv6 parser Main'>Main</a>,
 <a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are markers. They serve
 no purpose other than being a location the algorithm can jump to.
+
+<hr>
+
+<p>The <dfn export id=concept-opaque-host-parser>opaque-host parser</dfn> takes a string
+<var>input</var>, and then runs these steps:
+
+<ol>
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>",
+ <a>syntax violation</a>, return failure.
+
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
+ <a>simple encode set</a>, and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 
 <h3 id=host-serializing>Host serializing</h3>
@@ -1861,8 +1867,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>Otherwise, run these steps:
 
         <ol>
-         <li><p>Let <var>host</var> be the result of
-         <a lt='host parser'>host parsing</a>
+         <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
          <var>buffer</var> with <var>url</var> <a>is special</a>.
 
          <li><p>If <var>host</var> is failure, return failure.
