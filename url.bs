@@ -74,6 +74,22 @@ DOM, Encoding, IDNA, and Web IDL Standards.
 number.
 
 
+<h3 id=writing>Writing</h3>
+
+<p>A <dfn oldids=syntax-violation>writing violation</dfn> indicates a non-fatal mismatch between
+input and writing requirements. User agents, especially conformance checkers are encouraged to
+report them somewhere.
+
+<div class="note no-backref">
+ <p>A <a>writing violation</a> does not mean that the parser terminates. Termination of a parser is
+ always stated explicitly, E.g., through a return statement.
+
+ <p>It is useful to signal <a>writing violations</a> as error-handling can be non-intuitive, legacy
+ user agents might not implement correct error-handling, the intent of what is written might be
+ unclear to other developers.
+</div>
+
+
 <h3 id=parsers>Parsers</h3>
 
 <p>The <dfn>EOF code point</dfn> is a conceptual code point that signifies the end of a
@@ -90,14 +106,6 @@ being processed.
 processed and <var>pointer</var> points to "<code>@</code>",
 <a>c</a> is "<code>@</code>" and <a>remaining</a> is
 "<code>example</code>".
-
-<p>A <dfn>syntax violation</dfn> indicates a non-fatal mismatch between input and syntax
-requirements. User agents, especially conformance checkers are encouraged to report them
-somewhere.
-
-<p class="note no-backref">A <a>syntax violation</a> does not mean that the parser
-terminates. Termination of a parser is always stated explicitly. E.g., through a return
-statement.
 
 
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
@@ -233,7 +241,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
 
- <li><p>A <a>host string</a> defines what input would not trigger a <a>syntax violation</a> or
+ <li><p>A <a>host string</a> defines what input would not trigger a <a>writing violation</a> or
  failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
  valid.
 
@@ -251,8 +259,8 @@ serves as a network address, but it is sometimes used as opaque identifier in <a
 where a network address is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
-have no influence on <a for=/>host</a> syntax, parsing, and serialization. Unless stated
-otherwise in the sections that follow.
+have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
+in the sections that follow.
 
 <p>A <dfn export id=concept-domain>domain</dfn> identifies a realm within a
 network.
@@ -311,7 +319,7 @@ or
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>If <var>result</var> is a failure value, <a>syntax violation</a>, return failure.
+ <li><p>If <var>result</var> is a failure value, <a>writing violation</a>, return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -325,14 +333,14 @@ or
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
- <li><p>Signify <a>syntax violations</a> for any returned errors, and then, return
+ <li><p>Signify <a>writing violations</a> for any returned errors, and then, return
  <var>result</var>.
 </ol>
 
 
 <h3 id=host-writing oldids=host-syntax>Host writing</h3>
 
-<p>A <dfn export id=syntax-host>host string</dfn> must be a <a>domain string</a>, an
+<p>A <dfn export oldids=syntax-host>host string</dfn> must be a <a>domain string</a>, an
 <a>IPv4 address string</a>, or: "<code>[</code>", followed by an <a>IPv6 address string</a>,
 followed by "<code>]</code>".
 
@@ -361,14 +369,14 @@ followed by "<code>]</code>".
 <a>valid domain</a> rather than through a whack-a-mole:
 <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
 
-<p>A <dfn export id=syntax-host-domain>domain string</dfn> must be a string that is a
+<p>A <dfn export oldids=syntax-host-domain>domain string</dfn> must be a string that is a
 <a>valid domain</a>.
 
-<p>An <dfn export id=syntax-host-ipv4>IPv4 address string</dfn> must be four sequences of up to
+<p>An <dfn export oldids=syntax-host-ipv4>IPv4 address string</dfn> must be four sequences of up to
 three <a>ASCII digits</a> per sequence, each representing a decimal number no greater than 255, and
 separated from each other by "<code>.</code>".
 
-<p>An <dfn export id=syntax-host-ipv6>IPv6 address string</dfn> is defined in the
+<p>An <dfn export oldids=syntax-host-ipv6>IPv6 address string</dfn> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
 <!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
@@ -395,7 +403,7 @@ then runs these steps:
 
   <ol>
    <li><p>If <var>input</var> does not end with
-   "<code>]</code>", <a>syntax violation</a>, return failure.
+   "<code>]</code>", <a>writing violation</a>, return failure.
 
    <li><p>Return the result of
    <a lt="IPv6 parser">IPv6 parsing</a> <var>input</var>
@@ -416,10 +424,10 @@ then runs these steps:
  <li><p>Let <var>asciiDomain</var> be the result of running
  <a>domain to ASCII</a> on <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is failure, <a>syntax violation</a>, return failure.
+ <li><p>If <var>asciiDomain</var> is failure, <a>writing violation</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
- <a>syntax violation</a>, return failure.
+ <a>writing violation</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -432,7 +440,7 @@ then runs these steps:
 </ol>
 
 The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
-<var>syntaxViolationFlag</var> pointer, and then runs these steps:
+<var>writingViolationFlag</var> pointer, and then runs these steps:
 
 <ol>
  <li><p>Let <var>R</var> be 10.
@@ -442,7 +450,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
   are either "<code>0x</code>" or "<code>0X</code>", run these substeps:
 
   <ol>
-   <li><p>Set <var>syntaxViolationFlag</var>.
+   <li><p>Set <var>writingViolationFlag</var>.
 
    <li><p>Remove the first two code points from <var>input</var>.
 
@@ -455,7 +463,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
   <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
 
   <ol>
-   <li><p>Set <var>syntaxViolationFlag</var>.
+   <li><p>Set <var>writingViolationFlag</var>.
 
    <li><p>Remove the first code point from <var>input</var>.
 
@@ -467,7 +475,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit, then
  return failure.
- <!-- There is no need to set syntaxViolationFlag here since it will be used.
+ <!-- There is no need to set writingViolationFlag here since it will be used.
       XXX radix-R digit, hahaha, that's not a thing -->
 
  <li><p>Return the mathematical integer value that is represented by <var>input</var> in
@@ -482,7 +490,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 these steps:
 
 <ol>
- <li><p>Let <var>syntaxViolationFlag</var> be unset.
+ <li><p>Let <var>writingViolationFlag</var> be unset.
 
  <li><p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
 
@@ -490,7 +498,7 @@ these steps:
   <p>If the last item in <var>parts</var> is the empty string, then:
 
   <ol>
-   <li><p>Set <var>syntaxViolationFlag</var>.
+   <li><p>Set <var>writingViolationFlag</var>.
 
    <li><p>If <var>parts</var> has more than one item, then remove the last item from
    <var>parts</var>.
@@ -513,23 +521,23 @@ these steps:
     <a>domain</a>, not an <a>IPv4 address</a>.
 
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
-   <var>part</var> using <var>syntaxViolationFlag</var>.
+   <var>part</var> using <var>writingViolationFlag</var>.
 
    <li><p>If <var>n</var> is failure, return <var>input</var>.
 
    <li><p>Append <var>n</var> to <var>numbers</var>.
   </ol>
 
- <li><p>If <var>syntaxViolationFlag</var> is set, <a>syntax violation</a>.
+ <li><p>If <var>writingViolationFlag</var> is set, <a>writing violation</a>.
 
- <li><p>If any item in <var>numbers</var> is greater than 255, <a>syntax violation</a>.
+ <li><p>If any item in <var>numbers</var> is greater than 255, <a>writing violation</a>.
 
  <li><p>If any but the last item in <var>numbers</var> is greater than 255, return
  failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
  256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>,
- <a>syntax violation</a>, return failure.
+ <a>writing violation</a>, return failure.
 
  <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
 
@@ -578,7 +586,7 @@ then runs these steps:
 
   <ol>
    <li><p>If <a>remaining</a> does not start with "<code>:</code>",
-   <a>syntax violation</a>, return failure.
+   <a>writing violation</a>, return failure.
 
    <li><p>Increase <var>pointer</var> by two.
 
@@ -592,14 +600,14 @@ then runs these steps:
   substeps:
 
   <ol>
-   <li><p>If <var>piece pointer</var> is eight, <a>syntax violation</a>, return failure.
+   <li><p>If <var>piece pointer</var> is eight, <a>writing violation</a>, return failure.
 
    <li>
     <p>If <a>c</a> is "<code>:</code>", run these inner
     substeps:
 
     <ol>
-     <li><p>If <var>compress pointer</var> is non-null, <a>syntax violation</a>,
+     <li><p>If <var>compress pointer</var> is non-null, <a>writing violation</a>,
      return failure.
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
@@ -623,7 +631,7 @@ then runs these steps:
      <dt>"<code>.</code>"
      <dd>
       <ol>
-       <li><p>If <var>length</var> is 0, <a>syntax violation</a>, return failure.
+       <li><p>If <var>length</var> is 0, <a>writing violation</a>, return failure.
 
        <li><p>Decrease <var>pointer</var> by <var>length</var>.
 
@@ -635,12 +643,12 @@ then runs these steps:
       <ol>
        <li><p>Increase <var>pointer</var> by one.
 
-       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>syntax violation</a>,
+       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>writing violation</a>,
        return failure.
       </ol>
 
      <dt>Anything but the <a>EOF code point</a>
-     <dd><p><a>Syntax violation</a>, return failure.
+     <dd><p><a>Writing violation</a>, return failure.
     </dl>
 
    <li><p>Set <var>piece</var> to <var>value</var>.
@@ -652,7 +660,7 @@ then runs these steps:
  <a lt='IPv6 parser Finale'>Finale</a>.
 
  <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>:
- If <var>piece pointer</var> is greater than six, <a>syntax violation</a>, return failure.
+ If <var>piece pointer</var> is greater than six, <a>writing violation</a>, return failure.
 
  <li><p>Let <var>numbersSeen</var> be 0.
 
@@ -670,10 +678,10 @@ then runs these steps:
      <li><p>If <a>c</a> is a "<code>.</code>" and <var>numbersSeen</var> is less than 4, then
      increase <var>pointer</var> by one.
 
-     <li>Otherwise, <a>syntax violation</a>, return failure.
+     <li>Otherwise, <a>writing violation</a>, return failure.
     </ol>
 
-   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>syntax violation</a>,
+   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>writing violation</a>,
    return failure. <!-- prevent the empty string -->
 
    <li>
@@ -685,13 +693,13 @@ then runs these steps:
      <li>
       <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
 
-      <p>Otherwise, if <var>value</var> is 0, <a>syntax violation</a>, return failure.
+      <p>Otherwise, if <var>value</var> is 0, <a>writing violation</a>, return failure.
 
       <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
 
      <li><p>Increase <var>pointer</var> by one.
 
-     <li><p>If <var>value</var> is greater than 255, <a>syntax violation</a>,
+     <li><p>If <var>value</var> is greater than 255, <a>writing violation</a>,
      return failure.
     </ol>
 
@@ -703,7 +711,7 @@ then runs these steps:
    <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
 
    <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
-   <a>syntax violation</a>, return failure.
+   <a>writing violation</a>, return failure.
   </ol>
 
  <li>
@@ -724,7 +732,7 @@ then runs these steps:
   </ol>
 
  <li><p>Otherwise, if <var>compress pointer</var> is null and <var>piece pointer</var> is
- not eight, <a>syntax violation</a>, return failure.
+ not eight, <a>writing violation</a>, return failure.
 
  <li><p>Return <var>address</var>.
 </ol>
@@ -872,7 +880,7 @@ unified model would be, please file an issue.
 
  <li><p>A <a for=/>URL</a> can be seen as the in-memory representation.
 
- <li><p>A <a>URL string</a> defines what input would not trigger a <a>syntax violation</a> or
+ <li><p>A <a>URL string</a> defines what input would not trigger a <a>writing violation</a> or
  failure when given to the <a>URL parser</a>. I.e., input that would be considered conforming or
  valid.
 
@@ -1006,7 +1014,7 @@ and the second is either "<code>:</code>" or "<code>|</code>".
 <p>A <dfn>normalized Windows drive letter</dfn> is a <a>Windows drive letter</a> of which the second
 code point is "<code>:</code>".
 
-<p class="note">As per the <a href=#url-syntax>URL syntax</a> section, only a
+<p class="note">As per the <a href=#url-writing>URL writing</a> section, only a
 <a>normalized Windows drive letter</a> is conforming.
 
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
@@ -1028,15 +1036,15 @@ code point is "<code>:</code>".
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
-<p>A <dfn export id=syntax-url>URL string</dfn> must be either a
+<p>A <dfn export oldids=syntax-url>URL string</dfn> must be either a
 <a>relative-URL-with-fragment string</a> or an <a>absolute-URL-with-fragment string</a>.
 
 <p>An
-<dfn export id=syntax-url-absolute-with-fragment>absolute-URL-with-fragment string</dfn> must be an
+<dfn export oldids=syntax-url-absolute-with-fragment>absolute-URL-with-fragment string</dfn> must be an
 <a>absolute-URL string</a>, optionally followed by "<code>#</code>" and a
 <a>URL-fragment string</a>.
 
-<p>An <dfn export id=syntax-url-absolute>absolute-URL string</dfn> must be one of the following
+<p>An <dfn export oldids=syntax-url-absolute>absolute-URL string</dfn> must be one of the following
 
 <ul class=brief>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for a
@@ -1050,18 +1058,18 @@ code point is "<code>:</code>".
 
 <p>any optionally followed by "<code>?</code>" and a <a>URL-query string</a>.
 
-<p>A <dfn export id=syntax-url-scheme>URL-scheme string</dfn> must be one <a>ASCII alpha</a>,
+<p>A <dfn export oldids=syntax-url-scheme>URL-scheme string</dfn> must be one <a>ASCII alpha</a>,
 followed by zero or more of <a>ASCII alphanumeric</a>, "<code>+</code>", "<code>-</code>", and
 "<code>.</code>". <a lt="URL-scheme string">Schemes</a> should be registered in the
 <cite>IANA URI [sic] Schemes</cite> registry.
 [[!IANA-URI-SCHEMES]]
 [[RFC7595]]
 
-<p>A <dfn export id=syntax-url-relative-with-fragment>relative-URL-with-fragment string</dfn>
+<p>A <dfn export oldids=syntax-url-relative-with-fragment>relative-URL-with-fragment string</dfn>
 must be a <a>relative-URL string</a>, optionally followed by "<code>#</code>" and a
 <a>URL-fragment string</a>.
 
-<p>A <dfn export id=syntax-url-relative>relative-URL string</dfn> must be one of the following,
+<p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be one of the following,
 switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
@@ -1090,9 +1098,10 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <a>host string</a>, optionally followed by "<code>:</code>" and a <a>URL-port string</a>, optionally
 followed by a <a>path-absolute-URL string</a>.
 
-<p>A <dfn export id=syntax-url-port>URL-port string</dfn> must be zero or more <a>ASCII digits</a>.
+<p>A <dfn export oldids=syntax-url-port>URL-port string</dfn> must be zero or more
+<a>ASCII digits</a>.
 
-<p>A <dfn export id=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
+<p>A <dfn export oldids=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
 "<code>//</code>", followed by an <a>opaque-host-and-port string</a>, optionally followed by a
 <a>path-absolute-URL string</a>.
 
@@ -1100,7 +1109,7 @@ followed by a <a>path-absolute-URL string</a>.
 <a>opaque-host string</a> or: a non-empty <a>opaque-host string</a>, optionally followed by
 "<code>:</code>" and a <a>URL-port string</a>.
 
-<p>A <dfn export id=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
+<p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
 "<code>//</code>", followed by one of the following
 
 <ul class=brief>
@@ -1109,22 +1118,23 @@ followed by a <a>path-absolute-URL string</a>.
  <li><p>a <a>path-absolute-URL string</a>.
 </ul>
 
-<p>A <dfn export id=syntax-url-path-absolute>path-absolute-URL string</dfn> must be "<code>/</code>"
-followed by a <a>path-relative-URL string</a>.
+<p>A <dfn export oldids=syntax-url-path-absolute>path-absolute-URL string</dfn> must be
+"<code>/</code>" followed by a <a>path-relative-URL string</a>.
 
-<p>A <dfn export id=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
+<p>A <dfn export oldids=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
 must be a <a>path-absolute-URL string</a> that does not start with: "<code>/</code>", followed by a
 <a>Windows drive letter</a>, followed by "<code>/</code>".
 
-<p>A <dfn export id=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
+<p>A <dfn export oldids=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
 <a>URL-path-segment strings</a>, separated from each other by "<code>/</code>", and not start with
 "<code>/</code>".
 
-<p>A <dfn export id=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
+<p>A
+<dfn export oldids=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
 must be a <a>path-relative-URL string</a> that does not start with: a <a>URL-scheme string</a>,
 followed by "<code>:</code>".
 
-<p>A <dfn export id=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
+<p>A <dfn export oldids=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
 following
 
 <ul class=brief>
@@ -1135,16 +1145,16 @@ following
  <li><p>a <a>double-dot path segment</a>.
 </ul>
 
-<p>A <dfn export id=syntax-url-path-segment-dot>single-dot path segment</dfn> must be
+<p>A <dfn export oldids=syntax-url-path-segment-dot>single-dot path segment</dfn> must be
 "<code>.</code>" or an <a>ASCII case-insensitive</a> match for "<code>%2e</code>".
 
-<p>A <dfn export id=syntax-url-path-segment-dotdot>double-dot path segment</dfn> must be
+<p>A <dfn export oldids=syntax-url-path-segment-dotdot>double-dot path segment</dfn> must be
 "<code>..</code>" or an <a>ASCII case-insensitive</a> match for "<code>.%2e</code>",
 "<code>%2e.</code>", or "<code>%2e%2e</code>".
 
-<p>A <dfn export id=syntax-url-query>URL-query string</dfn> must be zero or more <a>URL units</a>.
+<p>A <dfn export oldids=syntax-url-query>URL-query string</dfn> must be zero or more <a>URL units</a>.
 
-<p>A <dfn export id=syntax-url-fragment>URL-fragment string</dfn> must be zero or more
+<p>A <dfn export oldids=syntax-url-fragment>URL-fragment string</dfn> must be zero or more
 <a>URL units</a>.
 
 <p>The <dfn>URL code points</dfn> are <a>ASCII alphanumeric</a>,
@@ -1217,7 +1227,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
 
 <p class=note><a>Percent-encoded bytes</a> can be used to encode code points that are not
-<a>URL code points</a> or are excluded from a syntax production.
+<a>URL code points</a> or are excluded from being written.
 
 <hr>
 
@@ -1333,12 +1343,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <li><p>Set <var>url</var> to a new <a for=/>URL</a>.
 
    <li><p>If <var>input</var> contains any leading or trailing <a>C0 control or space</a>,
-   <a>syntax violation</a>.
+   <a>writing violation</a>.
 
    <li><p>Remove any leading and trailing <a>C0 control or space</a> from <var>input</var>.
   </ol>
 
- <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>syntax violation</a>.
+ <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>writing violation</a>.
 
  <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
 
@@ -1378,7 +1388,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>pointer</var> by one.
 
      <li>
-      <p>Otherwise, <a>syntax violation</a>, return failure.
+      <p>Otherwise, <a>writing violation</a>, return failure.
 
       <p class=note>This indication of failure is used exclusively by {{Location}} object's
       {{Location/protocol}} attribute.
@@ -1418,7 +1428,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>If <a>remaining</a> does not start with "<code>//</code>",
-         <a>syntax violation</a>.
+         <a>writing violation</a>.
 
          <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
@@ -1449,7 +1459,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      in <var>input</var>).
 
      <li>
-      <p>Otherwise, <a>syntax violation</a>, return failure.
+      <p>Otherwise, <a>writing violation</a>, return failure.
 
       <p class=note>This indication of failure is used exclusively by {{Location}} object's
       {{Location/protocol}} attribute. Furthermore, the non-failure termination earlier in this
@@ -1461,7 +1471,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <ol>
      <li><p>If <var>base</var> is null, or <var>base</var>'s
      <a for=url>cannot-be-a-base-URL flag</a> is set and <a>c</a> is not "<code>#</code>",
-     <a>syntax violation</a>, return failure.
+     <a>writing violation</a>, return failure.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set and
      <a>c</a> is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
@@ -1489,7 +1499,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <var>state</var> to <a>special authority ignore slashes state</a>
     and increase <var>pointer</var> by one.
 
-    <p>Otherwise, <a>syntax violation</a>, set <var>state</var> to <a>relative state</a>
+    <p>Otherwise, <a>writing violation</a>, set <var>state</var> to <a>relative state</a>
     and decrease <var>pointer</var> by one.
 
    <dt><dfn>path or authority state</dfn>
@@ -1555,7 +1565,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <dt>Otherwise
      <dd>
       <p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-      <a>syntax violation</a>, set <var>state</var> to <a>relative slash state</a>.
+      <a>writing violation</a>, set <var>state</var> to <a>relative slash state</a>.
 
       <p>Otherwise, run these steps:
 
@@ -1585,7 +1595,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
 
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
@@ -1611,7 +1621,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     set <var>state</var> to <a>special authority ignore slashes state</a>, and increase
     <var>pointer</var> by one.
 
-    <p>Otherwise, <a>syntax violation</a>, set <var>state</var> to
+    <p>Otherwise, <a>writing violation</a>, set <var>state</var> to
     <a>special authority ignore slashes state</a>, and decrease <var>pointer</var> by one.
 
    <dt><dfn>special authority ignore slashes state</dfn>
@@ -1619,7 +1629,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", set <var>state</var>
     to <a>authority state</a>, and decrease <var>pointer</var> by one.
 
-    <p>Otherwise, <a>syntax violation</a>.
+    <p>Otherwise, <a>writing violation</a>.
 
    <dt><dfn>authority state</dfn>
    <dd>
@@ -1628,7 +1638,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>@</code>", run these substeps:
 
       <ol>
-       <li><p><a>Syntax violation</a>.
+       <li><p><a>Writing violation</a>.
 
        <li><p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
        <var>buffer</var>.
@@ -1669,7 +1679,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>@ flag</var> is set and <var>buffer</var> is the empty string,
-       <a>syntax violation</a>, return failure.
+       <a>writing violation</a>, return failure.
        <!-- No URLs with userinfo, but without host. For special URLs it would also not be
             idempotent:
             https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
@@ -1694,7 +1704,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise, if <a>c</a> is "<code>:</code>" and the <var>[] flag</var> is unset, then:
 
       <ol>
-       <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
+       <li><p>If <var>buffer</var> is the empty string, <a>writing violation</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
        <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
@@ -1722,7 +1732,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
-       <a>syntax violation</a>, return failure.
+       <a>writing violation</a>, return failure.
        <!-- http://? -> failure
             test://? -> test://? -->
 
@@ -1783,7 +1793,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          0 through 9.
 
          <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
-         <a>syntax violation</a>, return failure.
+         <a>writing violation</a>, return failure.
 
          <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
          <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>, and to
@@ -1798,7 +1808,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, <a>syntax violation</a>, return failure.
+     <li><p>Otherwise, <a>writing violation</a>, return failure.
     </ol>
 
    <dt><dfn>file state</dfn>
@@ -1810,7 +1820,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
 
        <li><p>Set <var>state</var> to <a>file slash state</a>.
       </ol>
@@ -1858,7 +1868,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Otherwise, <a>syntax violation</a>.
+         <li><p>Otherwise, <a>writing violation</a>.
 
          <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by one.
         </ol>
@@ -1875,7 +1885,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
 
        <li><p>Set <var>state</var> to <a>file host state</a>.
       </ol>
@@ -1909,7 +1919,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li>
         <p>If <var>state override</var> is not given and <var>buffer</var> is a
-        <a>Windows drive letter</a>, <a>syntax violation</a>, set <var>state</var> to
+        <a>Windows drive letter</a>, <a>writing violation</a>, set <var>state</var> to
         <a>path state</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. <var>buffer</var>
@@ -1960,7 +1970,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <var>url</var> <a>is special</a>, then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>syntax violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
 
        <li><p>Set <var>state</var> to <a>path state</a>.
 
@@ -1998,7 +2008,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-       <a>syntax violation</a>.
+       <a>writing violation</a>.
 
        <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>shorten</a>
        <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
@@ -2022,7 +2032,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
           <ol>
            <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
-           <a>syntax violation</a>.
+           <a>writing violation</a>.
 
            <li><p>Set <var>url</var>'s <a for=url>host</a> to null and replace the second
            code point in <var>buffer</var> with "<code>:</code>".
@@ -2050,10 +2060,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li><p>If <a>c</a> is not a
        <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>syntax violation</a>.
+       <a>writing violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
 
        <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>, and append
        the result to <var>buffer</var>.
@@ -2077,10 +2087,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li><p>If <a>c</a> is not <a>EOF code point</a>, not a
        <a lt="URL code points">URL code point</a>, and not "<code>%</code>",
-       <a>syntax violation</a>.
+       <a>writing violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
        the <a>simple encode set</a>, and <a for=list>append</a> the result to the first string in
@@ -2131,10 +2141,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li><p>If <a>c</a> is not a
        <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>syntax violation</a>.
+       <a>writing violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
@@ -2148,16 +2158,16 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <dd><p>Do nothing.
 
      <dt>U+0000
-     <dd><p><a>Syntax violation</a>.
+     <dd><p><a>Writing violation</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
        <li><p>If <a>c</a> is not a <a lt="URL code points">URL code point</a> and not
-       "<code>%</code>", <a>syntax violation</a>.
+       "<code>%</code>", <a>writing violation</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>syntax violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
 
        <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>simple encode set</a> and append the
        result to <var>url</var>'s <a for=url>fragment</a>.
