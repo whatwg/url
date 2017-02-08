@@ -228,7 +228,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <ul>
  <li><p>The <a>host parser</a> takes an arbitrary string and returns either failure or a
- <a for=/>host</a>. (This <a for=/>host</a> cannot be an <a>opaque host</a>, those can only be
+ <a for=/>host</a>. (This <a for=/>host</a> cannot be an <a>opaque host</a>; those can only be
  returned through the <a>URL parser</a>.)
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
@@ -878,7 +878,7 @@ unified model would be, please file an issue.
 
  <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns a string. (If that string
  is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the
- <a lt="URL serializer">serialized</a> <a for=/>host</a>.)
+ <a lt="URL serializer">serialized</a> <a for=/>URL</a>.)
 </ul>
 
 
