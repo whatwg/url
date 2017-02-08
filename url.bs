@@ -365,9 +365,9 @@ context to be distinguished.
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var> and
-an optional <var>Unicode flag</var> (unset unless stated otherwise), and then runs these
-steps:
+<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean
+<var>isSpecial</var>, and an optional <var>Unicode flag</var> (unset unless stated otherwise), and
+then runs these steps:
 
 <ol>
  <li>
@@ -383,6 +383,9 @@ steps:
    with its leading "<code>[</code>" and trailing
    "<code>]</code>" removed.
   </ol>
+
+ <li><p>If <var>isSpecial</var> is false, then return the result of
+ <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
@@ -454,8 +457,10 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
  <!-- XXX well, you know, it works for ECMAScript, kinda -->
 </ol>
 
-The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then
-runs these steps:
+<hr>
+
+<p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then runs
+these steps:
 
 <ol>
  <li><p>Let <var>syntaxViolationFlag</var> be unset.
@@ -525,6 +530,8 @@ runs these steps:
 
  <li><p>Return <var>ipv4</var>.
 </ol>
+
+<hr>
 
 <p>The <dfn id=concept-ipv6-parser>IPv6 parser</dfn> takes a string <var>input</var> and
 then runs these steps:
@@ -706,6 +713,23 @@ then runs these steps:
 <p class="note no-backref">To be clear, <a lt='IPv6 parser Main'>Main</a>,
 <a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are markers. They serve
 no purpose other than being a location the algorithm can jump to.
+
+<hr>
+
+<p>The <dfn export id=concept-opaque-host-parser>opaque-host parser</dfn> takes a string
+<var>input</var>, and then runs these steps:
+
+<ol>
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>",
+ <a>syntax violation</a>, return failure.
+
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
+ <a>simple encode set</a>, and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 
 <h3 id=host-serializing>Host serializing</h3>
@@ -1244,26 +1268,6 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p>The <dfn export id=concept-url-host-parser>URL-host parser</dfn> takes a string <var>input</var>
-and a boolean <var>isSpecial</var>, and then runs these steps:</p>
-
-<ol>
- <li><p>If <var>isSpecial</var> is true, then return the result of
- <a lt="host parser">host parsing</a> <var>input</var>.
-
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a>, <a>syntax violation</a>,
- return failure.
-
- <li><p>Let <var>output</var> be the empty string.
-
- <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>simple encode set</a>, and append the result to <var>output</var>.
-
- <li><p>Return <var>output</var>.
-</ol>
-
-<hr>
-
 <p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
 string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
 <a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=/>URL</a>
@@ -1651,7 +1655,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
-       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
@@ -1685,7 +1689,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
        <a for=url>port</a> is non-null, <a>syntax violation</a>, return.
 
-       <li><p>Let <var>host</var> be the result of <a lt="URL-host parser">URL-host parsing</a>
+       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
@@ -1891,7 +1895,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
-         <var>buffer</var>.
+         <var>buffer</var> with <var>url</var> <a>is special</a>.
 
          <li><p>If <var>host</var> is failure, then return failure.
 
