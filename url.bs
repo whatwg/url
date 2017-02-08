@@ -1570,23 +1570,14 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
         subsubsteps:
         <ol>
-         <li>
-          <p>If <a>remaining</a> does not start with "<code>//</code>",
-          <a>syntax violation</a>.</p>
-         </li>
-         <li>
-          <p>Set <var>state</var> to <a>file state</a>,
-          and decrease <var>pointer</var> by one.</p>
-         </li>
+         <li><p>If <a>remaining</a> does not start with "<code>//</code>",
+         <a>syntax violation</a>.
+         <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
-       <li>
-        <p>Otherwise, set <var>state</var>
-        to <a>authority state</a>, and decrease <var>pointer</var> by one.</p>
-       </li>
+       <li><p>Otherwise, set <var>state</var> to <a>authority state</a>.
+       <li><p>Decrease <var>pointer</var> by one.
       </ol>
-     <li>
-      <p>Otherwise, <a>syntax violation</a>.</p>
-     </li>
+     <li><p>Otherwise, <a>syntax violation</a>.
     </ol>
    </dd>
    <dt><dfn>authority state</dfn>
