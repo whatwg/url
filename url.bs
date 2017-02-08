@@ -1634,9 +1634,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dt><dfn>hostname state</dfn>
    <dd>
     <ol>
+     <li><p>If <var>state override</var> is given and <var>url</var>'s <a for=url>scheme</a> is
+     "<code>file</code>", then decrease <var>pointer</var> by one and set <var>state</var> to
+     <a>file host state</a>.
+
      <li>
-      <p>If <a>c</a> is "<code>:</code>" and the
-      <var>[] flag</var> is unset, run these substeps:
+      <p>Otherwise, if <a>c</a> is "<code>:</code>" and the <var>[] flag</var> is unset, then:
 
       <ol>
        <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
@@ -2685,11 +2688,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
  set, terminate these steps.
 
- <li><p>Let <var>hostState</var> be <a>file host state</a> if <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>scheme</a> is "<code>file</code>", and <a>host state</a> otherwise.
-
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <var>hostState</var> as <var>state override</var>.
+ <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
@@ -2714,12 +2714,8 @@ the setter to always "reset" both.
  <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
  set, terminate these steps.
 
- <li><p>Let <var>hostState</var> be <a>file host state</a> if <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>scheme</a> is "<code>file</code>", and <a>hostname state</a>
- otherwise.
-
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <var>hostState</var> as <var>state override</var>.
+ <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>port</code></dfn> attribute's getter must run these steps:
