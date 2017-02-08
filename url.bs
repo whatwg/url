@@ -231,7 +231,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <h2 id="hosts-(domains-and-ip-addresses)">Hosts (domains and IP addresses)</h2>
 
-<p>At a high level, a <a for=/>host</a>, <a>host string</a>, <a>host parser</a>, and
+<p>At a high level, a <a for=/>host</a>, <a>valid host string</a>, <a>host parser</a>, and
 <a>host serializer</a> relate as follows:
 
 <ul>
@@ -241,8 +241,8 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
 
- <li><p>A <a>host string</a> defines what input would not trigger a <a>writing violation</a> or
- failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
+ <li><p>A <a>valid host string</a> defines what input would not trigger a <a>writing violation</a>
+ or failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
  valid.
 
  <li><p>The <a>host serializer</a> takes a <a for=/>host</a> and returns a string. (If that string
@@ -340,9 +340,9 @@ or
 
 <h3 id=host-writing oldids=host-syntax>Host writing</h3>
 
-<p>A <dfn export oldids=syntax-host>host string</dfn> must be a <a>domain string</a>, an
-<a>IPv4 address string</a>, or: "<code>[</code>", followed by an <a>IPv6 address string</a>,
-followed by "<code>]</code>".
+<p>A <dfn export oldids=syntax-host>valid host string</dfn> must be a <a>valid domain string</a>, a
+<a>valid IPv4-address string</a>, or: "<code>[</code>", followed by a
+<a>valid IPv6-address string</a>, followed by "<code>]</code>".
 
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
@@ -369,14 +369,14 @@ followed by "<code>]</code>".
 <a>valid domain</a> rather than through a whack-a-mole:
 <a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
 
-<p>A <dfn export oldids=syntax-host-domain>domain string</dfn> must be a string that is a
+<p>A <dfn export oldids=syntax-host-domain>valid domain string</dfn> must be a string that is a
 <a>valid domain</a>.
 
-<p>An <dfn export oldids=syntax-host-ipv4>IPv4 address string</dfn> must be four sequences of up to
-three <a>ASCII digits</a> per sequence, each representing a decimal number no greater than 255, and
-separated from each other by "<code>.</code>".
+<p>A <dfn export oldids=syntax-host-ipv4>valid IPv4-address string</dfn> must be four sequences of
+up to three <a>ASCII digits</a> per sequence, each representing a decimal number no greater than
+255, and separated from each other by "<code>.</code>".
 
-<p>An <dfn export oldids=syntax-host-ipv6>IPv6 address string</dfn> is defined in the
+<p>A <dfn export oldids=syntax-host-ipv6>valid IPv6-address string</dfn> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
 [[!RFC4291]]
 <!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
@@ -384,10 +384,10 @@ separated from each other by "<code>.</code>".
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>An <dfn export>opaque-host string</dfn> must be zero or more <a>URL units</a>.
+<p>A <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a>.
 
-<p class="note no-backref">This is not part of the definition of <a>host string</a> as it requires
-context to be distinguished.
+<p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
+requires context to be distinguished.
 
 
 <h3 id=host-parsing>Host parsing</h3>
@@ -871,7 +871,7 @@ unified model would be, please file an issue.
 <!-- History behind URL as term:
      https://lists.w3.org/Archives/Public/uri/2012Oct/0080.html -->
 
-<p>At a high level, a <a for=/>URL</a>, <a>URL string</a>, <a>URL parser</a>, and
+<p>At a high level, a <a for=/>URL</a>, <a>valid URL string</a>, <a>URL parser</a>, and
 <a>URL serializer</a> relate as follows:
 
 <ul>
@@ -880,7 +880,7 @@ unified model would be, please file an issue.
 
  <li><p>A <a for=/>URL</a> can be seen as the in-memory representation.
 
- <li><p>A <a>URL string</a> defines what input would not trigger a <a>writing violation</a> or
+ <li><p>A <a>valid URL string</a> defines what input would not trigger a <a>writing violation</a> or
  failure when given to the <a>URL parser</a>. I.e., input that would be considered conforming or
  valid.
 
@@ -893,7 +893,7 @@ unified model would be, please file an issue.
 <h3 id=url-representation>URL representation</h3>
 
 <p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a universal identifier. To
-disambiguate from a <a>URL string</a> it can also be referred to as a <a for=/>URL record</a>.
+disambiguate from a <a>valid URL string</a> it can also be referred to as a <a for=/>URL record</a>.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
@@ -1036,7 +1036,7 @@ code point is "<code>:</code>".
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
-<p>A <dfn export oldids=syntax-url>URL string</dfn> must be either a
+<p>A <dfn export oldids=syntax-url>valid URL string</dfn> must be either a
 <a>relative-URL-with-fragment string</a> or an <a>absolute-URL-with-fragment string</a>.
 
 <p>An
@@ -1095,8 +1095,8 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <a lt="URL parser">parsing</a> a <a>relative-URL string</a>.
 
 <p>A <dfn export>scheme-relative-special-URL string</dfn> must be "<code>//</code>", followed by a
-<a>host string</a>, optionally followed by "<code>:</code>" and a <a>URL-port string</a>, optionally
-followed by a <a>path-absolute-URL string</a>.
+<a>valid host string</a>, optionally followed by "<code>:</code>" and a <a>URL-port string</a>,
+optionally followed by a <a>path-absolute-URL string</a>.
 
 <p>A <dfn export oldids=syntax-url-port>URL-port string</dfn> must be zero or more
 <a>ASCII digits</a>.
@@ -1106,14 +1106,14 @@ followed by a <a>path-absolute-URL string</a>.
 <a>path-absolute-URL string</a>.
 
 <p>An <dfn export>opaque-host-and-port string</dfn> must be either an empty
-<a>opaque-host string</a> or: a non-empty <a>opaque-host string</a>, optionally followed by
-"<code>:</code>" and a <a>URL-port string</a>.
+<a>valid opaque-host string</a> or: a non-empty <a>valid opaque-host string</a>, optionally followed
+by "<code>:</code>" and a <a>URL-port string</a>.
 
 <p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
 "<code>//</code>", followed by one of the following
 
 <ul class=brief>
- <li><p>a <a>host string</a>, optionally followed by a
+ <li><p>a <a>valid host string</a>, optionally followed by a
  <a>path-absolute-non-Windows-file-URL string</a>
  <li><p>a <a>path-absolute-URL string</a>.
 </ul>
@@ -1231,9 +1231,8 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p class="note no-backref">There is no conforming way to express a
-<a for=url>username</a> or <a for=url>password</a> of a <a for=/>URL record</a> within a
-<a>URL string</a>.
+<p class="note no-backref">There is no way to express a <a for=url>username</a> or
+<a for=url>password</a> of a <a for=/>URL record</a> within a <a>valid URL string</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>
