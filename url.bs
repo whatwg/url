@@ -45,6 +45,11 @@ Boilerplate: omit feedback-header, omit conformance
  enhancements to make it easier to work with. Add a new <code><a interface>URL</a></code>
  object as well for URL manipulation without usage of HTML elements. (Useful
  for JavaScript worker environments.)
+
+ <li><p>Ensure the combination of parser, serializer, and API guarantee idempotence. For example, a
+ non-failure result of a parse-then-serialize operation will not change with any further
+ parse-then-serialize operations applied to it. Similarly, manipulating a non-failure result through
+ the API will not change from applying any number of serialize-then-parse operations to it.
 </ul>
 
 <p class=note>As the editors learn more about the subject matter the goals
@@ -943,6 +948,10 @@ used by HTML. [[HTML]]
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
 <!-- also used by Fetch -->
 
+<p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
+<a for=url>host</a> is null or the empty string, its <a for=url>cannot-be-a-base-URL flag</a> is
+set, or its <a for=url>scheme</a> is "<code>file</code>".
+
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
 <p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
@@ -1635,9 +1644,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dt><dfn>hostname state</dfn>
    <dd>
     <ol>
+     <li><p>If <var>state override</var> is given and <var>url</var>'s <a for=url>scheme</a> is
+     "<code>file</code>", then decrease <var>pointer</var> by one and set <var>state</var> to
+     <a>file host state</a>.
+
      <li>
-      <p>If <a>c</a> is "<code>:</code>" and the
-      <var>[] flag</var> is unset, run these substeps:
+      <p>Otherwise, if <a>c</a> is "<code>:</code>" and the <var>[] flag</var> is unset, then:
 
       <ol>
        <li><p>If <var>buffer</var> is the empty string, <a>syntax violation</a>, return failure.
@@ -1672,6 +1684,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <a>syntax violation</a>, return failure.
        <!-- http://? -> failure
             test://? -> test://? -->
+
+       <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
+       string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
+       <a for=url>port</a> is non-null, <a>syntax violation</a>, return.
 
        <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
@@ -1853,15 +1869,26 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>buffer</var> is a <a>Windows drive letter</a>, <a>syntax violation</a>,
-        set <var>state</var> to <a>path state</a>.
-
-        <p class=note>This is a (platform-independent) Windows drive letter quirk.
-        <var>buffer</var> is not reset here and instead used in the
+        <p>If <var>state override</var> is not given and <var>buffer</var> is a
+        <a>Windows drive letter</a>, <a>syntax violation</a>, set <var>state</var> to
         <a>path state</a>.
 
-       <li><p>Otherwise, if <var>buffer</var> is the empty string, set
-       <var>state</var> to <a>path start state</a>.
+        <p class=note>This is a (platform-independent) Windows drive letter quirk. <var>buffer</var>
+        is not reset here and instead used in the <a>path state</a>.
+
+       <li>
+        <p>Otherwise, if <var>buffer</var> is the empty string, then:
+
+        <ol>
+         <li><p>If <var>state override</var> is given and <var>url</var>
+         <a>includes credentials</a>, <a>syntax violation</a>, return.
+
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
+
+         <li><p>If <var>state override</var> is given, then return.
+
+         <li><p>Set <var>state</var> to <a>path start state</a>.
+        </ol>
 
        <li>
         <p>Otherwise, run these steps:
@@ -1870,10 +1897,14 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
          <var>buffer</var> with <var>url</var> <a>is special</a>.
 
-         <li><p>If <var>host</var> is failure, return failure.
+         <li><p>If <var>host</var> is failure, then return failure.
 
-         <li><p>If <var>host</var> is not "<code title>localhost</code>", set
-         <var>url</var>'s <a for=url>host</a> to <var>host</var>.
+         <li><p>If <var>host</var> is "<code title>localhost</code>", then set <var>host</var> to
+         the empty string.
+
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>host</var>.
+
+         <li><p>If <var>state override</var> is given, then return.
 
          <li><p>Set <var>buffer</var> to the empty string and <var>state</var> to
          <a>path start state</a>.
@@ -2476,6 +2507,8 @@ interface URL {
            attribute USVString search;
   [SameObject] readonly attribute URLSearchParams searchParams;
            attribute USVString hash;
+
+  USVString toJSON();
 };
 </pre>
 
@@ -2572,8 +2605,9 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</pre>
 
 <h3 id=urlutils-members>{{URL}} members</h3>
 
-<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter must return the
-<a lt='URL serializer'>serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
+<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter and the
+<dfn method for=URL><code>toJSON()</code></dfn> method, when invoked, must return the
+<a lt="URL serializer">serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
 
 <p>The <code><a attribute for=URL>href</a></code> attribute's setter must run these steps:
 
@@ -2615,8 +2649,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>username</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p><a for=url>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2628,8 +2662,8 @@ compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
 <p>The <code><a attribute for=URL>password</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, or its
- <a for=url>cannot-be-a-base-URL flag</a> is set, terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p><a for=url>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the
  given value.
@@ -2699,9 +2733,8 @@ the setter to always "reset" both.
 <p>The <code><a attribute for=URL>port</a></code> attribute's setter must run these steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, its
- <a for=url>cannot-be-a-base-URL flag</a> is set, or its <a for=url>scheme</a> is
- "<code>file</code>", terminate these steps.
+ <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
+ then return.
 
  <li><p>If the given value is the empty string, then set <a for=URL>url</a>'s <a for=url>port</a> to
  null.</p></li>
