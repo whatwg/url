@@ -330,7 +330,7 @@ or
 </ol>
 
 
-<h3 id=host-syntax>Host syntax</h3>
+<h3 id=host-writing oldids=host-syntax>Host writing</h3>
 
 <p>A <dfn export id=syntax-host>host string</dfn> must be a <a>domain string</a>, an
 <a>IPv4 address string</a>, or: "<code>[</code>", followed by an <a>IPv6 address string</a>,
@@ -1024,7 +1024,7 @@ code point is "<code>:</code>".
 </ol>
 
 
-<h3 id=url-syntax>URL syntax</h3>
+<h3 id=url-writing oldids=url-syntax>URL writing</h3>
 
 <!-- http://tantek.com/2011/238/b1/many-ways-slice-url-name-pieces -->
 
