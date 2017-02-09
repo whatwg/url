@@ -864,9 +864,9 @@ It is initially the empty string.
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a>list</a> of zero
-or more <a>ASCII strings</a> holding data, usually identifying a location in hierarchical form. It
-is initially empty.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a for=/>list</a> of
+zero or more <a>ASCII strings</a> holding data, usually identifying a location in hierarchical form.
+It is initially empty.
 
 <p class="note no-backref">A <a lt="is special">special</a> <a for=/>URL</a> always has a
 <a for=list lt="is empty">non-empty</a> <a for=url>path</a>.
