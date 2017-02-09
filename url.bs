@@ -76,15 +76,14 @@ number.
 
 <h3 id=writing>Writing</h3>
 
-<p>A <dfn oldids=syntax-violation>writing violation</dfn> indicates a non-fatal mismatch between
-input and writing requirements. User agents, especially conformance checkers, are encouraged to
-report them somewhere.
+<p>A <dfn oldids=syntax-violation>validation error</dfn> indicates a mismatch between input and
+valid input. User agents, especially conformance checkers, are encouraged to report them somewhere.
 
 <div class="note no-backref">
- <p>A <a>writing violation</a> does not mean that the parser terminates. Termination of a parser is
+ <p>A <a>validation error</a> does not mean that the parser terminates. Termination of a parser is
  always stated explicitly, e.g., through a return statement.
 
- <p>It is useful to signal <a>writing violations</a> as error-handling can be non-intuitive, legacy
+ <p>It is useful to signal <a>validation errors</a> as error-handling can be non-intuitive, legacy
  user agents might not implement correct error-handling, and the intent of what is written might be
  unclear to other developers.
 </div>
@@ -240,7 +239,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
 
- <li><p>A <a>valid host string</a> defines what input would not trigger a <a>writing violation</a>
+ <li><p>A <a>valid host string</a> defines what input would not trigger a <a>validation error</a>
  or failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
  valid.
 
@@ -318,7 +317,7 @@ or
  <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
  <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
 
- <li><p>If <var>result</var> is a failure value, <a>writing violation</a>, return failure.
+ <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -332,7 +331,7 @@ or
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
- <li><p>Signify <a>writing violations</a> for any returned errors, and then, return
+ <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
  <var>result</var>.
 </ol>
 
@@ -401,8 +400,8 @@ then runs these steps:
   substeps:
 
   <ol>
-   <li><p>If <var>input</var> does not end with
-   "<code>]</code>", <a>writing violation</a>, return failure.
+   <li><p>If <var>input</var> does not end with "<code>]</code>", <a>validation error</a>, return
+   failure.
 
    <li><p>Return the result of
    <a lt="IPv6 parser">IPv6 parsing</a> <var>input</var>
@@ -423,10 +422,10 @@ then runs these steps:
  <li><p>Let <var>asciiDomain</var> be the result of running
  <a>domain to ASCII</a> on <var>domain</var>.
 
- <li><p>If <var>asciiDomain</var> is failure, <a>writing violation</a>, return failure.
+ <li><p>If <var>asciiDomain</var> is failure, <a>validation error</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
- <a>writing violation</a>, return failure.
+ <a>validation error</a>, return failure.
 
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
@@ -527,16 +526,16 @@ these steps:
    <li><p>Append <var>n</var> to <var>numbers</var>.
   </ol>
 
- <li><p>If <var>writingViolationFlag</var> is set, <a>writing violation</a>.
+ <li><p>If <var>writingViolationFlag</var> is set, <a>validation error</a>.
 
- <li><p>If any item in <var>numbers</var> is greater than 255, <a>writing violation</a>.
+ <li><p>If any item in <var>numbers</var> is greater than 255, <a>validation error</a>.
 
  <li><p>If any but the last item in <var>numbers</var> is greater than 255, return
  failure.
 
  <li><p>If the last item in <var>numbers</var> is greater than or equal to
- 256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>,
- <a>writing violation</a>, return failure.
+ 256<sup>(5 &minus; the number of items in <var>numbers</var>)</sup>, <a>validation error</a>,
+ return failure.
 
  <li><p>Let <var>ipv4</var> be the last item in <var>numbers</var>.
 
@@ -584,8 +583,8 @@ then runs these steps:
   <p>If <a>c</a> is "<code>:</code>", run these substeps:
 
   <ol>
-   <li><p>If <a>remaining</a> does not start with "<code>:</code>",
-   <a>writing violation</a>, return failure.
+   <li><p>If <a>remaining</a> does not start with "<code>:</code>", <a>validation error</a>, return
+   failure.
 
    <li><p>Increase <var>pointer</var> by two.
 
@@ -599,15 +598,14 @@ then runs these steps:
   substeps:
 
   <ol>
-   <li><p>If <var>piece pointer</var> is eight, <a>writing violation</a>, return failure.
+   <li><p>If <var>piece pointer</var> is eight, <a>validation error</a>, return failure.
 
    <li>
     <p>If <a>c</a> is "<code>:</code>", run these inner
     substeps:
 
     <ol>
-     <li><p>If <var>compress pointer</var> is non-null, <a>writing violation</a>,
-     return failure.
+     <li><p>If <var>compress pointer</var> is non-null, <a>validation error</a>, return failure.
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
      <var>compress pointer</var> to <var>piece pointer</var>,
@@ -630,7 +628,7 @@ then runs these steps:
      <dt>"<code>.</code>"
      <dd>
       <ol>
-       <li><p>If <var>length</var> is 0, <a>writing violation</a>, return failure.
+       <li><p>If <var>length</var> is 0, <a>validation error</a>, return failure.
 
        <li><p>Decrease <var>pointer</var> by <var>length</var>.
 
@@ -642,12 +640,11 @@ then runs these steps:
       <ol>
        <li><p>Increase <var>pointer</var> by one.
 
-       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>writing violation</a>,
-       return failure.
+       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>validation error</a>, return failure.
       </ol>
 
      <dt>Anything but the <a>EOF code point</a>
-     <dd><p><a>Writing violation</a>, return failure.
+     <dd><p><a>Validation error</a>, return failure.
     </dl>
 
    <li><p>Set <var>piece</var> to <var>value</var>.
@@ -659,7 +656,7 @@ then runs these steps:
  <a lt='IPv6 parser Finale'>Finale</a>.
 
  <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>:
- If <var>piece pointer</var> is greater than six, <a>writing violation</a>, return failure.
+ If <var>piece pointer</var> is greater than six, <a>validation error</a>, return failure.
 
  <li><p>Let <var>numbersSeen</var> be 0.
 
@@ -677,11 +674,11 @@ then runs these steps:
      <li><p>If <a>c</a> is a "<code>.</code>" and <var>numbersSeen</var> is less than 4, then
      increase <var>pointer</var> by one.
 
-     <li>Otherwise, <a>writing violation</a>, return failure.
+     <li>Otherwise, <a>validation error</a>, return failure.
     </ol>
 
-   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>writing violation</a>,
-   return failure. <!-- prevent the empty string -->
+   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>validation error</a>, return failure.
+   <!-- prevent the empty string -->
 
    <li>
     <p>While <a>c</a> is an <a>ASCII digit</a>, run these subsubsteps:
@@ -692,14 +689,13 @@ then runs these steps:
      <li>
       <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
 
-      <p>Otherwise, if <var>value</var> is 0, <a>writing violation</a>, return failure.
+      <p>Otherwise, if <var>value</var> is 0, <a>validation error</a>, return failure.
 
       <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
 
      <li><p>Increase <var>pointer</var> by one.
 
-     <li><p>If <var>value</var> is greater than 255, <a>writing violation</a>,
-     return failure.
+     <li><p>If <var>value</var> is greater than 255, <a>validation error</a>, return failure.
     </ol>
 
    <li><p>Set <var>piece</var> to
@@ -710,7 +706,7 @@ then runs these steps:
    <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
 
    <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
-   <a>writing violation</a>, return failure.
+   <a>validation error</a>, return failure.
   </ol>
 
  <li>
@@ -730,8 +726,8 @@ then runs these steps:
    decrease both <var>piece pointer</var> and <var>swaps</var> by one.
   </ol>
 
- <li><p>Otherwise, if <var>compress pointer</var> is null and <var>piece pointer</var> is
- not eight, <a>writing violation</a>, return failure.
+ <li><p>Otherwise, if <var>compress pointer</var> is null and <var>piece pointer</var> is not eight,
+ <a>validation error</a>, return failure.
 
  <li><p>Return <var>address</var>.
 </ol>
@@ -747,7 +743,7 @@ no purpose other than being a location the algorithm can jump to.
 
 <ol>
  <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>",
- <a>writing violation</a>, return failure.
+ <a>validation error</a>, return failure.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -879,7 +875,7 @@ unified model would be, please file an issue.
 
  <li><p>A <a for=/>URL</a> can be seen as the in-memory representation.
 
- <li><p>A <a>valid URL string</a> defines what input would not trigger a <a>writing violation</a> or
+ <li><p>A <a>valid URL string</a> defines what input would not trigger a <a>validation error</a> or
  failure when given to the <a>URL parser</a>. I.e., input that would be considered conforming or
  valid.
 
@@ -1156,7 +1152,8 @@ following
 <p>A <dfn export oldids=syntax-url-fragment>URL-fragment string</dfn> must be zero or more
 <a>URL units</a>.
 
-<p>The <dfn>URL code points</dfn> are <a>ASCII alphanumeric</a>,
+<p>The <dfn export lt="URL code point" id=url-code-points>URL code points</dfn> are
+<a>ASCII alphanumeric</a>,
 "<code>!</code>",<!-- 0x21, sub-delims -->
 "<code>$</code>",<!-- 0x24, sub-delims -->
 "<code>&</code>",<!-- 0x26, sub-delims -->
@@ -1341,12 +1338,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <li><p>Set <var>url</var> to a new <a for=/>URL</a>.
 
    <li><p>If <var>input</var> contains any leading or trailing <a>C0 control or space</a>,
-   <a>writing violation</a>.
+   <a>validation error</a>.
 
    <li><p>Remove any leading and trailing <a>C0 control or space</a> from <var>input</var>.
   </ol>
 
- <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>writing violation</a>.
+ <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>validation error</a>.
 
  <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
 
@@ -1386,7 +1383,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>pointer</var> by one.
 
      <li>
-      <p>Otherwise, <a>writing violation</a>, return failure.
+      <p>Otherwise, <a>validation error</a>, return failure.
 
       <p class=note>This indication of failure is used exclusively by {{Location}} object's
       {{Location/protocol}} attribute.
@@ -1426,7 +1423,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>If <a>remaining</a> does not start with "<code>//</code>",
-         <a>writing violation</a>.
+         <a>validation error</a>.
 
          <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
@@ -1457,7 +1454,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      in <var>input</var>).
 
      <li>
-      <p>Otherwise, <a>writing violation</a>, return failure.
+      <p>Otherwise, <a>validation error</a>, return failure.
 
       <p class=note>This indication of failure is used exclusively by {{Location}} object's
       {{Location/protocol}} attribute. Furthermore, the non-failure termination earlier in this
@@ -1469,7 +1466,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <ol>
      <li><p>If <var>base</var> is null, or <var>base</var>'s
      <a for=url>cannot-be-a-base-URL flag</a> is set and <a>c</a> is not "<code>#</code>",
-     <a>writing violation</a>, return failure.
+     <a>validation error</a>, return failure.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set and
      <a>c</a> is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
@@ -1497,7 +1494,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <var>state</var> to <a>special authority ignore slashes state</a>
     and increase <var>pointer</var> by one.
 
-    <p>Otherwise, <a>writing violation</a>, set <var>state</var> to <a>relative state</a>
+    <p>Otherwise, <a>validation error</a>, set <var>state</var> to <a>relative state</a>
     and decrease <var>pointer</var> by one.
 
    <dt><dfn>path or authority state</dfn>
@@ -1563,7 +1560,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <dt>Otherwise
      <dd>
       <p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-      <a>writing violation</a>, set <var>state</var> to <a>relative slash state</a>.
+      <a>validation error</a>, set <var>state</var> to <a>relative slash state</a>.
 
       <p>Otherwise, run these steps:
 
@@ -1593,7 +1590,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
@@ -1619,7 +1616,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     set <var>state</var> to <a>special authority ignore slashes state</a>, and increase
     <var>pointer</var> by one.
 
-    <p>Otherwise, <a>writing violation</a>, set <var>state</var> to
+    <p>Otherwise, <a>validation error</a>, set <var>state</var> to
     <a>special authority ignore slashes state</a>, and decrease <var>pointer</var> by one.
 
    <dt><dfn>special authority ignore slashes state</dfn>
@@ -1627,7 +1624,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
     <p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", set <var>state</var>
     to <a>authority state</a>, and decrease <var>pointer</var> by one.
 
-    <p>Otherwise, <a>writing violation</a>.
+    <p>Otherwise, <a>validation error</a>.
 
    <dt><dfn>authority state</dfn>
    <dd>
@@ -1636,7 +1633,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>@</code>", run these substeps:
 
       <ol>
-       <li><p><a>Writing violation</a>.
+       <li><p><a>Validation error</a>.
 
        <li><p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
        <var>buffer</var>.
@@ -1677,7 +1674,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>@ flag</var> is set and <var>buffer</var> is the empty string,
-       <a>writing violation</a>, return failure.
+       <a>validation error</a>, return failure.
        <!-- No URLs with userinfo, but without host. For special URLs it would also not be
             idempotent:
             https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
@@ -1702,7 +1699,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise, if <a>c</a> is "<code>:</code>" and the <var>[] flag</var> is unset, then:
 
       <ol>
-       <li><p>If <var>buffer</var> is the empty string, <a>writing violation</a>, return failure.
+       <li><p>If <var>buffer</var> is the empty string, <a>validation error</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
        <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
@@ -1730,13 +1727,13 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
-       <a>writing violation</a>, return failure.
+       <a>validation error</a>, return failure.
        <!-- http://? -> failure
             test://? -> test://? -->
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
-       <a for=url>port</a> is non-null, <a>writing violation</a>, return.
+       <a for=url>port</a> is non-null, <a>validation error</a>, return.
 
        <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
@@ -1791,7 +1788,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          0 through 9.
 
          <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
-         <a>writing violation</a>, return failure.
+         <a>validation error</a>, return failure.
 
          <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
          <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>, and to
@@ -1806,7 +1803,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>pointer</var> by one.
       </ol>
 
-     <li><p>Otherwise, <a>writing violation</a>, return failure.
+     <li><p>Otherwise, <a>validation error</a>, return failure.
     </ol>
 
    <dt><dfn>file state</dfn>
@@ -1818,7 +1815,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>file slash state</a>.
       </ol>
@@ -1866,7 +1863,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Otherwise, <a>writing violation</a>.
+         <li><p>Otherwise, <a>validation error</a>.
 
          <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by one.
         </ol>
@@ -1883,7 +1880,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <a>c</a> is "<code>/</code>" or "<code>\</code>", run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>file host state</a>.
       </ol>
@@ -1917,7 +1914,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li>
         <p>If <var>state override</var> is not given and <var>buffer</var> is a
-        <a>Windows drive letter</a>, <a>writing violation</a>, set <var>state</var> to
+        <a>Windows drive letter</a>, <a>validation error</a>, set <var>state</var> to
         <a>path state</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. <var>buffer</var>
@@ -1928,7 +1925,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>If <var>state override</var> is given and <var>url</var>
-         <a>includes credentials</a>, <a>writing violation</a>, return.
+         <a>includes credentials</a>, <a>validation error</a>, return.
 
          <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
@@ -1968,7 +1965,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <var>url</var> <a>is special</a>, then:
 
       <ol>
-       <li><p>If <a>c</a> is "<code>\</code>", <a>writing violation</a>.
+       <li><p>If <a>c</a> is "<code>\</code>", <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>path state</a>.
 
@@ -2006,7 +2003,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is "<code>\</code>",
-       <a>writing violation</a>.
+       <a>validation error</a>.
 
        <li><p>If <var>buffer</var> is a <a>double-dot path segment</a>, <a>shorten</a>
        <var>url</var>'s <a for=url>path</a>, and then if neither <a>c</a> is "<code>/</code>", nor
@@ -2030,7 +2027,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
           <ol>
            <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
-           <a>writing violation</a>.
+           <a>validation error</a>.
 
            <li><p>Set <var>url</var>'s <a for=url>host</a> to null and replace the second
            code point in <var>buffer</var> with "<code>:</code>".
@@ -2056,12 +2053,11 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise, run these steps:
 
       <ol>
-       <li><p>If <a>c</a> is not a
-       <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>writing violation</a>.
+       <li><p>If <a>c</a> is not a <a>URL code point</a> and not "<code>%</code>",
+       <a>validation error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>, and append
        the result to <var>buffer</var>.
@@ -2083,12 +2079,11 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is not <a>EOF code point</a>, not a
-       <a lt="URL code points">URL code point</a>, and not "<code>%</code>",
-       <a>writing violation</a>.
+       <li><p>If <a>c</a> is not <a>EOF code point</a>, not a <a>URL code point</a>, and not
+       "<code>%</code>", <a>validation error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
        the <a>simple encode set</a>, and <a for=list>append</a> the result to the first string in
@@ -2137,12 +2132,11 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise, run these substeps:
 
       <ol>
-       <li><p>If <a>c</a> is not a
-       <a lt="URL code points">URL code point</a> and not "<code>%</code>",
-       <a>writing violation</a>.
+       <li><p>If <a>c</a> is not a <a>URL code point</a> and not "<code>%</code>",
+       <a>validation error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
@@ -2156,16 +2150,16 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <dd><p>Do nothing.
 
      <dt>U+0000
-     <dd><p><a>Writing violation</a>.
+     <dd><p><a>Validation error</a>.
 
      <dt>Otherwise
      <dd>
       <ol>
-       <li><p>If <a>c</a> is not a <a lt="URL code points">URL code point</a> and not
-       "<code>%</code>", <a>writing violation</a>.
+       <li><p>If <a>c</a> is not a <a>URL code point</a> and not "<code>%</code>",
+       <a>validation error</a>.
 
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
-       not start with two <a>ASCII hex digits</a>, <a>writing violation</a>.
+       not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>simple encode set</a> and append the
        result to <var>url</var>'s <a for=url>fragment</a>.
