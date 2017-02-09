@@ -748,7 +748,7 @@ no purpose other than being a location the algorithm can jump to.
 
 <ol>
  <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding "<code>%</code>",
- <a>syntax violation</a>, return failure.
+ <a>writing violation</a>, return failure.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -1737,7 +1737,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
-       <a for=url>port</a> is non-null, <a>syntax violation</a>, return.
+       <a for=url>port</a> is non-null, <a>writing violation</a>, return.
 
        <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
        <var>buffer</var> with <var>url</var> <a>is special</a>.
@@ -1929,7 +1929,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>If <var>state override</var> is given and <var>url</var>
-         <a>includes credentials</a>, <a>syntax violation</a>, return.
+         <a>includes credentials</a>, <a>writing violation</a>, return.
 
          <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
