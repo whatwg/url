@@ -1372,21 +1372,22 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <var>state override</var> is given, then return.
 
        <li>
-        <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
-        subsubsteps:
-
-        <ol>
-         <li><p>If <a>remaining</a> does not start with "<code>//</code>",
-         <a>syntax violation</a>.
-
-         <li><p>Set <var>state</var> to <a>file state</a>.
-        </ol>
-
-       <li>
         <p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null, and
-        <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s <a for=url>scheme</a>,
-        set <var>state</var> to <a>special relative or authority state</a>.
-
+        <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s
+        <a for=url>scheme</a>, run these subsubsteps:</p>
+        <ol>
+         <li>
+          <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
+           subsubsteps:</p>
+           <ol>
+            <li><p>If <a>remaining</a> does not start with "<code>//</code>",
+             <a>syntax violation</a>.</p></li>
+            <li><p>Set <var>state</var> to <a>file state</a>.</p></li>
+          </ol>
+         <li>
+          <p>Otherwise, set <var>state</var> to <a>special relative or authority state</a>.</p>
+         </li>
+        </ol>
         <p class="note no-backref">This means that <var>base</var>'s
         <a for=url>cannot-be-a-base-URL flag</a> is unset.
 
@@ -1575,11 +1576,24 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
    <dt><dfn>special authority ignore slashes state</dfn>
    <dd>
-    <p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", set <var>state</var>
-    to <a>authority state</a>, and decrease <var>pointer</var> by one.
-
-    <p>Otherwise, <a>syntax violation</a>.
-
+    <ol>
+     <li>
+      <p>If <a>c</a> is neither "<code>/</code>" nor "<code>\</code>", run these substeps:
+      <ol>
+       <li>
+        <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", run these
+        subsubsteps:
+        <ol>
+         <li><p>If <a>remaining</a> does not start with "<code>//</code>",
+         <a>syntax violation</a>.
+         <li><p>Set <var>state</var> to <a>file state</a>.
+        </ol>
+       <li><p>Otherwise, set <var>state</var> to <a>authority state</a>.
+       <li><p>Decrease <var>pointer</var> by one.
+      </ol>
+     <li><p>Otherwise, <a>syntax violation</a>.
+    </ol>
+   </dd>
    <dt><dfn>authority state</dfn>
    <dd>
     <ol>
