@@ -77,15 +77,15 @@ number.
 <h3 id=writing>Writing</h3>
 
 <p>A <dfn oldids=syntax-violation>writing violation</dfn> indicates a non-fatal mismatch between
-input and writing requirements. User agents, especially conformance checkers are encouraged to
+input and writing requirements. User agents, especially conformance checkers, are encouraged to
 report them somewhere.
 
 <div class="note no-backref">
  <p>A <a>writing violation</a> does not mean that the parser terminates. Termination of a parser is
- always stated explicitly, E.g., through a return statement.
+ always stated explicitly, e.g., through a return statement.
 
  <p>It is useful to signal <a>writing violations</a> as error-handling can be non-intuitive, legacy
- user agents might not implement correct error-handling, the intent of what is written might be
+ user agents might not implement correct error-handling, and the intent of what is written might be
  unclear to other developers.
 </div>
 
@@ -236,8 +236,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <ul>
  <li><p>The <a>host parser</a> takes an arbitrary string and returns either failure or a
- <a for=/>host</a>. (This <a for=/>host</a> cannot be an <a>opaque host</a>; those can only be
- returned through the <a>URL parser</a>.)
+ <a for=/>host</a>.
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
 
@@ -246,8 +245,8 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
  valid.
 
  <li><p>The <a>host serializer</a> takes a <a for=/>host</a> and returns a string. (If that string
- is then <a lt="host parser">parsed</a>, the result will <a for=host>equal</a> the
- <a lt="host serializer">serialized</a> <a for=/>host</a>.)
+ is then <a lt="host parser">parsed</a>, the result will <a for=host>equal</a> the <a for=/>host</a>
+ that was <a lt="host serializer">serialized</a>.)
 </ul>
 
 
@@ -885,8 +884,8 @@ unified model would be, please file an issue.
  valid.
 
  <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns a string. (If that string
- is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the
- <a lt="URL serializer">serialized</a> <a for=/>URL</a>.)
+ is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the <a for=/>URL</a>
+ that was <a lt="URL serializer">serialized</a>.)
 </ul>
 
 
@@ -3161,6 +3160,7 @@ Tim Berners-Lee,
 簡冠庭 (Tim Guan-tin Chien),
 Titi_Alone,
 Tomek Wytrębowicz,
+Trevor Rowbotham,
 Valentin Gosu,
 Vyacheslav Matva,
 Wei Wang,
