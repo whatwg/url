@@ -382,7 +382,8 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>A <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a>.
+<p>An <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a> or:
+"<code>[</code>", followed by an <a>IPv6 address string</a>, followed by "<code>]</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
 requires context to be distinguished.
