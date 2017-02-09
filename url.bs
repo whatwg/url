@@ -437,8 +437,8 @@ then runs these steps:
  result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
 </ol>
 
-The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
-<var>writingViolationFlag</var> pointer, and then runs these steps:
+<p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
+<var>validationErrorFlag</var> pointer, and then runs these steps:
 
 <ol>
  <li><p>Let <var>R</var> be 10.
@@ -448,7 +448,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
   are either "<code>0x</code>" or "<code>0X</code>", run these substeps:
 
   <ol>
-   <li><p>Set <var>writingViolationFlag</var>.
+   <li><p>Set <var>validationErrorFlag</var>.
 
    <li><p>Remove the first two code points from <var>input</var>.
 
@@ -461,7 +461,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
   <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
 
   <ol>
-   <li><p>Set <var>writingViolationFlag</var>.
+   <li><p>Set <var>validationErrorFlag</var>.
 
    <li><p>Remove the first code point from <var>input</var>.
 
@@ -473,7 +473,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit, then
  return failure.
- <!-- There is no need to set writingViolationFlag here since it will be used.
+ <!-- There is no need to set validationErrorFlag here since it will be used.
       XXX radix-R digit, hahaha, that's not a thing -->
 
  <li><p>Return the mathematical integer value that is represented by <var>input</var> in
@@ -488,7 +488,7 @@ The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
 these steps:
 
 <ol>
- <li><p>Let <var>writingViolationFlag</var> be unset.
+ <li><p>Let <var>validationErrorFlag</var> be unset.
 
  <li><p>Let <var>parts</var> be <var>input</var> split on "<code>.</code>".
 
@@ -496,7 +496,7 @@ these steps:
   <p>If the last item in <var>parts</var> is the empty string, then:
 
   <ol>
-   <li><p>Set <var>writingViolationFlag</var>.
+   <li><p>Set <var>validationErrorFlag</var>.
 
    <li><p>If <var>parts</var> has more than one item, then remove the last item from
    <var>parts</var>.
@@ -519,14 +519,14 @@ these steps:
     <a>domain</a>, not an <a>IPv4 address</a>.
 
    <li><p>Let <var>n</var> be the result of <a lt="IPv4 number parser">parsing</a>
-   <var>part</var> using <var>writingViolationFlag</var>.
+   <var>part</var> using <var>validationErrorFlag</var>.
 
    <li><p>If <var>n</var> is failure, return <var>input</var>.
 
    <li><p>Append <var>n</var> to <var>numbers</var>.
   </ol>
 
- <li><p>If <var>writingViolationFlag</var> is set, <a>validation error</a>.
+ <li><p>If <var>validationErrorFlag</var> is set, <a>validation error</a>.
 
  <li><p>If any item in <var>numbers</var> is greater than 255, <a>validation error</a>.
 
