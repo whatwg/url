@@ -919,6 +919,18 @@ unified model would be, please file an issue.
    <td><code>https://example.com/demo</code>
    <td><code>https://example.com/example</code>
   <tr>
+   <td><code>file:///C|/demo</code> (❌)
+   <td>
+   <td><code>file:///C:/demo</code>
+  <tr>
+   <td><code>..</code> (✅)
+   <td><code>file:///C:/demo</code>
+   <td><code>file:///C:/</code>
+  <tr>
+   <td><code>file://loc%61lhost/</code> (✅)
+   <td>
+   <td><code>file:///</code>
+  <tr>
    <td><code>example</code> (❌, due to lack of base)
    <td>
    <td>Failure
