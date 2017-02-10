@@ -887,60 +887,74 @@ unified model would be, please file an issue.
 <div class=example id=example-url-parsing>
  <table>
   <tr>
-   <th>Input (valid)
+   <th>Input
    <th>Base
+   <th>Valid
    <th>Output
   <tr>
-   <td><code>https:example.org</code> (✅)
+   <td><code>https:example.org</code>
    <td>
+   <td>✅
    <td><code>https://example.org/</code>
   <tr>
-   <td><code>https://////example.com///</code> (❌)
+   <td><code>https://////example.com///</code>
    <td>
+   <td>❌
    <td><code>https://example.com///</code>
   <tr>
-   <td><code>https://example.com/././foo</code> (✅)
+   <td><code>https://example.com/././foo</code>
    <td>
+   <td>✅
    <td><code>https://example.com/foo</code>
   <tr>
-   <td><code>hello:world</code> (✅)
+   <td><code>hello:world</code>
    <td><code>https://example.com/</code>
+   <td>✅
    <td><code>hello:world</code>
   <tr>
-   <td><code>https:example.org</code> (❌)
+   <td><code>https:example.org</code>
    <td><code>https://example.com/</code>
+   <td>❌
    <td><code>https://example.com/example.org</code>
   <tr>
-   <td><code>\example\..\demo/.\</code> (❌)
+   <td><code>\example\..\demo/.\</code>
    <td><code>https://example.com/</code>
+   <td>❌
    <td><code>https://example.com/demo/</code>
   <tr>
-   <td><code>example</code> (✅)
+   <td><code>example</code>
    <td><code>https://example.com/demo</code>
+   <td>✅
    <td><code>https://example.com/example</code>
   <tr>
-   <td><code>file:///C|/demo</code> (❌)
+   <td><code>file:///C|/demo</code>
    <td>
+   <td>❌
    <td><code>file:///C:/demo</code>
   <tr>
-   <td><code>..</code> (✅)
+   <td><code>..</code>
    <td><code>file:///C:/demo</code>
+   <td>✅
    <td><code>file:///C:/</code>
   <tr>
-   <td><code>file://loc%61lhost/</code> (✅)
+   <td><code>file://loc%61lhost/</code>
    <td>
+   <td>✅
    <td><code>file:///</code>
   <tr>
-   <td><code>example</code> (❌, due to lack of base)
+   <td><code>example</code>
    <td>
+   <td>❌, due to lack of base
    <td>Failure
   <tr>
-   <td><code>https://example.com:demo</code> (❌)
+   <td><code>https://example.com:demo</code>
    <td>
+   <td>❌
    <td>Failure
   <tr>
-   <td><code>http://[www.example.com]/</code> (❌)
+   <td><code>http://[www.example.com]/</code>
    <td>
+   <td>❌
    <td>Failure
  </table>
 
