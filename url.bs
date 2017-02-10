@@ -942,6 +942,26 @@ unified model would be, please file an issue.
    <td>✅
    <td><code>file:///</code>
   <tr>
+   <td><code>https://user:password@example.org/</code>
+   <td>
+   <td>❌
+   <td><code>https://user:password@example.org/</code>
+  <tr>
+   <td><code>https://example.org/foo bar</code>
+   <td>
+   <td>❌
+   <td><code>https://example.org/foo%20bar</code>
+  <tr>
+   <td><code>https://EXAMPLE.com/../x</code>
+   <td>
+   <td>✅
+   <td><code>https://example.com/x</code>
+  <tr>
+   <td><code>https://ex ample.org/</code>
+   <td>
+   <td>❌
+   <td>Failure
+  <tr>
    <td><code>example</code>
    <td>
    <td>❌, due to lack of base
