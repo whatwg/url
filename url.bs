@@ -164,11 +164,11 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 
      note that query and application/x-www-form-urlencoded use their own
      local sets -->
-<p>The <dfn>simple encode set</dfn> are <a>C0 controls</a> and all code points greater
-than U+007E.
+<p>The <dfn>C0 control encode set</dfn> are <a>C0 controls</a> and all code points greater than
+U+007E.
 
-<p>The <dfn>default encode set</dfn> is the
-<a>simple encode set</a> and code points U+0020,
+<p>The <dfn>path encode set</dfn> is the <a>C0 control encode set</a> and code points
+U+0020,
 '<code>"</code>', <!-- 0x22 -->
 "<code>#</code>", <!-- 0x23 -->
 "<code>&lt;</code>", <!-- 0x3C -->
@@ -179,8 +179,7 @@ than U+007E.
 and
 "<code>}</code>". <!-- 0x7D -->
 
-<p>The <dfn>userinfo encode set</dfn> is the
-<a>default encode set</a> and code points
+<p>The <dfn>userinfo encode set</dfn> is the <a>path encode set</a> and code points
 "<code>/</code>", <!-- 0x2F -->
 "<code>:</code>", <!-- 0x3A -->
 "<code>;</code>", <!-- 0x3B -->
@@ -748,7 +747,7 @@ no purpose other than being a location the algorithm can jump to.
  <li><p>Let <var>output</var> be the empty string.
 
  <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>simple encode set</a>, and append the result to <var>output</var>.
+ <a>C0 control encode set</a>, and append the result to <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -2105,8 +2104,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>default encode set</a>, and append
-       the result to <var>buffer</var>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>path encode set</a>, and append the
+       result to <var>buffer</var>.
       </ol>
     </ol>
 
@@ -2132,7 +2131,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
-       the <a>simple encode set</a>, and append the result to <var>url</var>'s
+       the <a>C0 control encode set</a>, and append the result to <var>url</var>'s
        <a for=url>path</a>[0].
       </ol>
     </ol>
@@ -2207,8 +2206,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>simple encode set</a> and append the
-       result to <var>url</var>'s <a for=url>fragment</a>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>C0 control encode set</a> and append
+       the result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
     </dl>
   </dl>
