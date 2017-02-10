@@ -2086,7 +2086,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
-       the <a>simple encode set</a>, and <a for=list>append</a> the result to <var>url</var>'s
+       the <a>simple encode set</a>, and append the result to <var>url</var>'s
        <a for=url>path</a>[0].
       </ol>
     </ol>
