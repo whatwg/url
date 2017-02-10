@@ -1115,7 +1115,7 @@ code point is "<code>:</code>".
 <ol>
  <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
 
- <li><p>If <var>path</var>'s <a for=list>size</a> is 0, then return.
+ <li><p>If <var>path</var> <a for=list>is empty</a>, then return.
 
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
  <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>, then
@@ -1517,7 +1517,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set and
      <a>c</a> is "<code>#</code>", set <var>url</var>'s <a for=url>scheme</a> to
      <var>base</var>'s <a for=url>scheme</a>,
-     <var>url</var>'s <a for=url>path</a> to
+     <var>url</var>'s <a for=url>path</a> to a copy of
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
@@ -1565,7 +1565,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>base</var>'s <a for=url>host</a>,
      <var>url</var>'s <a for=url>port</a> to
      <var>base</var>'s <a for=url>port</a>,
-     <var>url</var>'s <a for=url>path</a> to
+     <var>url</var>'s <a for=url>path</a> to a copy of
      <var>base</var>'s <a for=url>path</a>, and
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>.
@@ -1582,7 +1582,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>base</var>'s <a for=url>host</a>,
      <var>url</var>'s <a for=url>port</a> to
      <var>base</var>'s <a for=url>port</a>,
-     <var>url</var>'s <a for=url>path</a> to
+     <var>url</var>'s <a for=url>path</a> to a copy of
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to the empty string,
      and <var>state</var> to <a>query state</a>.
@@ -1596,7 +1596,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <var>base</var>'s <a for=url>host</a>,
      <var>url</var>'s <a for=url>port</a> to
      <var>base</var>'s <a for=url>port</a>,
-     <var>url</var>'s <a for=url>path</a> to
+     <var>url</var>'s <a for=url>path</a> to a copy of
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
@@ -1619,7 +1619,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>base</var>'s <a for=url>host</a>,
        <var>url</var>'s <a for=url>port</a> to
        <var>base</var>'s <a for=url>port</a>,
-       <var>url</var>'s <a for=url>path</a> to
+       <var>url</var>'s <a for=url>path</a> to a copy of
        <var>base</var>'s <a for=url>path</a>, and then <a for=list>remove</a>
        <var>url</var>'s <a for=url>path</a>'s last item, if any.
 
@@ -1873,18 +1873,18 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <dl class=switch>
        <dt><a>EOF code point</a>
        <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>, and
+       <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>, and
        <var>url</var>'s <a for=url>query</a> to <var>base</var>'s <a for=url>query</a>.
 
        <dt>"<code>?</code>"
        <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>,
+       <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>,
        <var>url</var>'s <a for=url>query</a> to the empty string, and <var>state</var> to
        <a>query state</a>.
 
        <dt>"<code>#</code>"
        <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-       <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>,
+       <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>,
        <var>url</var>'s <a for=url>query</a> to <var>base</var>'s <a for=url>query</a>,
        <var>url</var>'s <a for=url>fragment</a> to the empty string, and <var>state</var> to
        <a>fragment state</a>.
@@ -1904,8 +1904,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           </ul>
 
           <p>then set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-          <var>url</var>'s <a for=url>path</a> to <var>base</var>'s <a for=url>path</a>, and then
-          <a>shorten</a> <var>url</var>'s <a for=url>path</a>.
+          <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>,
+          and then <a>shorten</a> <var>url</var>'s <a for=url>path</a>.
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
@@ -2132,8 +2132,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
-       the <a>simple encode set</a>, and <a for=list>append</a> the result to the first string in
-       <var>url</var>'s <a for=url>path</a>.
+       the <a>simple encode set</a>, and append the result to <var>url</var>'s
+       <a for=url>path</a>[0].
       </ol>
     </ol>
 
