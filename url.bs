@@ -164,10 +164,11 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 
      note that query and application/x-www-form-urlencoded use their own
      local sets -->
-<p>The <dfn>C0 control encode set</dfn> are <a>C0 controls</a> and all code points greater than
-U+007E.
+<p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are <a>C0 controls</a> and
+all code points greater than U+007E.
 
-<p>The <dfn>path encode set</dfn> is the <a>C0 control encode set</a> and code points
+<p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
+<a>C0 control percent-encode set</a> and code points
 U+0020,
 '<code>"</code>', <!-- 0x22 -->
 "<code>#</code>", <!-- 0x23 -->
@@ -179,7 +180,8 @@ U+0020,
 and
 "<code>}</code>". <!-- 0x7D -->
 
-<p>The <dfn>userinfo encode set</dfn> is the <a>path encode set</a> and code points
+<p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
+<a>path percent-encode set</a> and code points
 "<code>/</code>", <!-- 0x2F -->
 "<code>:</code>", <!-- 0x3A -->
 "<code>;</code>", <!-- 0x3B -->
@@ -192,11 +194,11 @@ and
 and
 "<code>|</code>". <!-- 0x7C -->
 
-<p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using
-an <var>encode set</var>, run these steps:
+<p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using a <var>percentEncodeSet</var>,
+run these steps:
 
 <ol>
- <li><p>If <var>codePoint</var> is not in <var>encode set</var>, return
+ <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then return
  <var>codePoint</var>.
 
  <li><p>Let <var>bytes</var> be the result of running <a>UTF-8 encode</a> on
@@ -747,7 +749,7 @@ no purpose other than being a location the algorithm can jump to.
  <li><p>Let <var>output</var> be the empty string.
 
  <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>C0 control encode set</a>, and append the result to <var>output</var>.
+ <a>C0 control percent-encode set</a>, and append the result to <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -1695,7 +1697,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
          <li><p>Let <var>encodedCodePoints</var> be the result of running
          <a>UTF-8 percent encode</a> <var>codePoint</var> using the
-         <a>userinfo encode set</a>.
+         <a>userinfo percent-encode set</a>.
 
          <li><p>If <var>passwordTokenSeenFlag</var> is set, then append <var>encodedCodePoints</var>
          to <var>url</var>'s <a for=url>password</a>.
@@ -2104,8 +2106,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>path encode set</a>, and append the
-       result to <var>buffer</var>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>path percent-encode set</a>, and
+       append the result to <var>buffer</var>.
       </ol>
     </ol>
 
@@ -2131,7 +2133,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
        <li><p>If <a>c</a> is not <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a> using
-       the <a>C0 control encode set</a>, and append the result to <var>url</var>'s
+       the <a>C0 control percent-encode set</a>, and append the result to <var>url</var>'s
        <a for=url>path</a>[0].
       </ol>
     </ol>
@@ -2206,8 +2208,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is "<code>%</code>" and <a>remaining</a> does
        not start with two <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>C0 control encode set</a> and append
-       the result to <var>url</var>'s <a for=url>fragment</a>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>C0 control percent-encode set</a>
+       and append the result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
     </dl>
   </dl>
@@ -2223,9 +2225,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 <ol>
  <li><p>Set <var>url</var>'s <a for=url>username</a> to the empty string.
 
- <li><p>For each code point in <var>username</var>,
- <a>UTF-8 percent encode</a> it using the <a>userinfo encode set</a>, and append the
- result to <var>url</var>'s <a for=url>username</a>.
+ <li><p>For each code point in <var>username</var>, <a>UTF-8 percent encode</a> it using the
+ <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
+ <a for=url>username</a>.
 </ol>
 
 <p>To <dfn export id=set-the-password for=url>set the password</dfn> given a <var>url</var> and
@@ -2235,7 +2237,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
  <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
 
  <li><p>For each code point in <var>password</var>, <a>UTF-8 percent encode</a> it using the
- <a>userinfo encode set</a>, and append the result to <var>url</var>'s <a for=url>password</a>.
+ <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
+ <a for=url>password</a>.
 </ol>
 
 
