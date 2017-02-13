@@ -383,7 +383,7 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
      XXX should we define the format inline instead just like STD 66? -->
 
 <p>An <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a> or:
-"<code>[</code>", followed by an <a>IPv6 address string</a>, followed by "<code>]</code>".
+"<code>[</code>", followed by a <a>valid IPv6-address string</a>, followed by "<code>]</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
 requires context to be distinguished.
@@ -392,8 +392,7 @@ requires context to be distinguished.
 <h3 id=host-parsing>Host parsing</h3>
 
 <p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean
-<var>isSpecial</var>, and an optional <var>Unicode flag</var> (unset unless stated otherwise), and
-then runs these steps:
+<var>isSpecial</var>, and then runs these steps:
 
 <ol>
  <li>
@@ -434,8 +433,7 @@ then runs these steps:
  <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a> or failure, return
  <var>ipv4Host</var>.
 
- <li><p>Return <var>asciiDomain</var> if the <var>Unicode flag</var> is unset, and the
- result of running <a>domain to Unicode</a> on <var>asciiDomain</var> otherwise.
+ <li><p>Return <var>asciiDomain</var>.
 </ol>
 
 <p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and a
