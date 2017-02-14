@@ -3061,7 +3061,7 @@ method, when invoked, must run these steps:
 
 <div class=example id=example-searchparams-sort>
  <p>It can be useful to sort the name-value pairs in a {{URLSearchParams}} object, in particular to
- increase cache hits. This can be accomplished simply through invoking the
+ increase cache hits. This can be accomplished through invoking the
  {{URLSearchParams/sort()}} method:
 
  <pre><code class=lang-javascript>
