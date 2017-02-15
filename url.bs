@@ -13,6 +13,7 @@ Boilerplate: omit feedback-header, omit conformance
 !Commits: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
 !Commits: [SNAPSHOT-LINK]
 !Commits: <a href="https://twitter.com/urlstandard">@urlstandard</a>
+!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/url>web-platform-tests url/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/url>ongoing work</a>)
 !Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/URL-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
 </pre>
 

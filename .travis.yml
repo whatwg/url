@@ -2,7 +2,7 @@ language: generic
 
 env:
   global:
-    - ENCRYPTION_LABEL: "82f6fcb5a224"
+    - ENCRYPTION_LABEL="82f6fcb5a224"
 addons:
   apt:
     packages:

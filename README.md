@@ -39,5 +39,5 @@ If you can commit to this repository, see the
 
 ### Tests
 
-Tests can be found in the `url/` directory of the
-[web-platform-tests repository](https://github.com/w3c/web-platform-tests).
+Tests can be found in the `url/` directory of
+[web-platform-tests](https://github.com/w3c/web-platform-tests).
