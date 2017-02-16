@@ -1971,9 +1971,6 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>Otherwise, if <var>buffer</var> is the empty string, then:
 
         <ol>
-         <li><p>If <var>state override</var> is given and <var>url</var>
-         <a>includes credentials</a>, <a>validation error</a>, return.
-
          <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
          <li><p>If <var>state override</var> is given, then return.
