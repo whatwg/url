@@ -2909,9 +2909,6 @@ getter must run these steps:
 steps:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>scheme</a> is
- "<code>javascript</code>", then return.
-
  <li><p>If the given value is the empty string, then set <a>context object</a>'s
  <a for=URL>url</a>'s <a for=url>fragment</a> to null and return.
 
