@@ -1304,19 +1304,16 @@ can cause problems if a URL that works in one document is copied to another docu
 different document encoding. Using the <a>UTF-8</a> encoding everywhere solves this problem.
 
 <div class=example id=query-encoding-example>
-
  <p>For example, consider this HTML document:
 
- <pre>
+ <pre><code class="lang-html">
  &lt;!doctype html>
  &lt;meta charset="windows-1252">
- &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a>
- </pre>
+ &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a></code></pre>
 
- <p>Since the document encoding is windows-1252, the link's <a for=/>URL</a>'s
- <a for=url>query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
- it would instead be "sm%C3%B6rg%C3%A5sbord".
-
+ <p>Since the document encoding is windows-1252, the link's <a for=/>URL</a>'s <a for=url>query</a>
+ will be "<code>sm%F6rg%E5sbord</code>". If the document encoding had been UTF-8, it would instead
+ be "<code>sm%C3%B6rg%C3%A5sbord</code>".
 </div>
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
@@ -2411,7 +2408,8 @@ an aberrant monstrosity, the result of many years of implementation accidents an
 leading to a set of requirements necessary for interoperability, but in no way representing good
 design practices. In particular, readers are cautioned to pay close attention to the twisted details
 involving repeated (and in some cases nested) conversions between character encodings and byte
-sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms.[[HTML]]
+sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms.
+[[HTML]]
 
 
 <h3 id=urlencoded-parsing><code>application/x-www-form-urlencoded</code> parsing</h3>
@@ -2658,33 +2656,33 @@ when invoked, must run these steps:
  <p>To <a lt="basic URL parser">parse</a> a string into a <a for=/>URL</a> without using a
  <a>base URL</a>, invoke the {{URL}} constructor with a single argument:
 
- <pre>
+ <pre><code class="lang-javascript">
 var input = "https://example.org/💩",
     url = new URL(input)
-url.pathname // "/%F0%9F%92%A9"</pre>
+url.pathname // "/%F0%9F%92%A9"</code></pre>
 
  <p>This throws an exception if the input is not an <a>absolute-URL string</a>:
 
- <pre>
+ <pre><code class="lang-javascript">
 try {
   var url = new URL("/🍣🍺")
 } catch(e) {
   // that happened
-}</pre>
+}</code></pre>
 
  <p>A <a>base URL</a> is necessary if the input is a <a>relative-URL string</a>:
 
- <pre>
+ <pre><code class="lang-javascript">
 var input = "/🍣🍺",
     url = new URL(input, document.baseURI)
-url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</pre>
+url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 
  <p>A {{URL}} object can be used as <a>base URL</a> (while IDL requires a string as argument, a
  {{URL}} object stringifies to its {{URL/href}} attribute value):</p>
 
- <pre>
+ <pre><code class="lang-javascript">
 var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
-url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</pre>
+url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </div>
 
 
