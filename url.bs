@@ -2411,7 +2411,7 @@ an aberrant monstrosity, the result of many years of implementation accidents an
 leading to a set of requirements necessary for interoperability, but in no way representing good
 design practices. In particular, readers are cautioned to pay close attention to the twisted details
 involving repeated (and in some cases nested) conversions between character encodings and byte
-sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms.[[HTML]]
+sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms. [[HTML]]
 
 
 <h3 id=urlencoded-parsing><code>application/x-www-form-urlencoded</code> parsing</h3>
