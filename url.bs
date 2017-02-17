@@ -1304,7 +1304,6 @@ can cause problems if a URL that works in one document is copied to another docu
 different document encoding. Using the <a>UTF-8</a> encoding everywhere solves this problem.
 
 <div class=example id=query-encoding-example>
-
  <p>For example, consider this HTML document:
 
  <pre><code class="lang-html">
@@ -1312,10 +1311,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  &lt;meta charset="windows-1252">
  &lt;a href="?sm&amp;ouml;rg&amp;aring;sbord">Test&lt;/a></code></pre>
 
- <p>Since the document encoding is windows-1252, the link's <a for=/>URL</a>'s
- <a for=url>query</a> will be "sm%F6rg%E5sbord". If the document encoding had been UTF-8,
- it would instead be "sm%C3%B6rg%C3%A5sbord".
-
+ <p>Since the document encoding is windows-1252, the link's <a for=/>URL</a>'s <a for=url>query</a>
+ will be "<code>sm%F6rg%E5sbord</code>". If the document encoding had been UTF-8, it would instead
+ be "<code>sm%C3%B6rg%C3%A5sbord</code>".
 </div>
 
 <p>The <dfn>URL units</dfn> are <a>URL code points</a> and <a>percent-encoded bytes</a>.
