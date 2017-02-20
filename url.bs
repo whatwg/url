@@ -313,11 +313,10 @@ or
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running
- <a lt=ToASCII>Unicode ToASCII</a> with
- <i>domain_name</i> set to <var>domain</var>,
- <i>UseSTD3ASCIIRules</i> set to false, <i>processing_option</i> set to
- <i>Transitional_Processing</i>, and <i>VerifyDnsLength</i> set to false.
+ <li><p>Let <var>result</var> be the result of running <a lt=ToASCII>Unicode ToASCII</a> with
+ <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to false,
+ <i>processing_option</i> set to <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set
+ to false.
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
