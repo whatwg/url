@@ -2066,10 +2066,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           <a>Windows drive letter</a>, then:
 
           <ol>
-           <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
+           <li><p>If <var>url</var>'s <a for=url>host</a> is not the empty string,
            <a>validation error</a>.
 
-           <li><p>Set <var>url</var>'s <a for=url>host</a> to null and replace the second
+           <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string and replace the second
            code point in <var>buffer</var> with "<code>:</code>".
           </ol>
 
