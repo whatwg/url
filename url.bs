@@ -254,7 +254,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 <h3 id=host-representation>Host representation</h3>
 
 <p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
-<a>IPv4 address</a>, an <a>IPv6 address</a>, or an <a>opaque host</a>. Typically a <a for=/>host</a>
+<a>IPv4 address</a>, an <a>IPv6 address</a>, an <a>opaque host</a>, or an <a>empty host</a>. Typically a <a for=/>host</a>
 serves as a network address, but it is sometimes used as opaque identifier in <a for=/>URLs</a>
 where a network address is not necessary.
 
@@ -285,6 +285,8 @@ further processing.
 
 <p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
 <a for=/>URLs</a>.
+
+<p>An <dfn export>empty host</dfn> is the empty string.
 
 
 <h3 id=host-miscellaneous>Host miscellaneous</h3>
@@ -768,7 +770,7 @@ no purpose other than being a location the algorithm can jump to.
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
 
- <li><p>Otherwise, <var>host</var> is a <a>domain</a> or <a>opaque host</a>, return <var>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a>domain</a>, an <a>opaque host</a>, or an <a>empty host</a>, return <var>host</var>.
 </ol>
 
 The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
