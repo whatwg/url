@@ -1172,9 +1172,9 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
  <dd><p>a <a>scheme-relative-file-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is null
+ <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is either null or the empty string
  <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
- is non-null
+ is non-empty string
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>Otherwise
  <dd><p>a <a>scheme-relative-URL string</a>
