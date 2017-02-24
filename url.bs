@@ -280,7 +280,7 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 <p class="note">Support for <code>&lt;zone_id></code> is
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>.
 
-<p>An <dfn export>opaque host</dfn> is an <a>ASCII string</a> holding data that can be used for
+<p>An <dfn export>opaque host</dfn> is a non-empty <a>ASCII string</a> holding data that can be used for
 further processing.
 
 <p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
@@ -385,7 +385,7 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>An <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a> or:
+<p>An <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or:
 "<code>[</code>", followed by a <a>valid IPv6-address string</a>, followed by "<code>]</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
@@ -1201,7 +1201,7 @@ optionally followed by a <a>path-absolute-URL string</a>.
 <a>path-absolute-URL string</a>.
 
 <p>An <dfn export>opaque-host-and-port string</dfn> must be either an empty
-<a>valid opaque-host string</a> or: a non-empty <a>valid opaque-host string</a>, optionally followed
+string or: a <a>valid opaque-host string</a>, optionally followed
 by "<code>:</code>" and a <a>URL-port string</a>.
 
 <p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
