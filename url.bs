@@ -385,7 +385,7 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>An <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or:
+<p>A <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or:
 "<code>[</code>", followed by a <a>valid IPv6-address string</a>, followed by "<code>]</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
@@ -770,8 +770,8 @@ no purpose other than being a location the algorithm can jump to.
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
 
- <li><p>Otherwise, <var>host</var> is a <a>domain</a>, an <a>opaque host</a>, or an <a>empty
- host</a>, return <var>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a>domain</a>, <a>opaque host</a>, or <a>empty host</a>,
+ return <var>host</var>.
 </ol>
 
 The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
@@ -1175,8 +1175,8 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
  <dd><p>a <a>scheme-relative-file-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is an <a>empty
- host</a>
+ <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is an
+ <a>empty host</a>
  <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
  is not an <a>empty host</a>
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
@@ -2073,8 +2073,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
            <li><p>If <var>url</var>'s <a for=url>host</a> is not the empty string,
            <a>validation error</a>.
 
-           <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string and replace the second
-           code point in <var>buffer</var> with "<code>:</code>".
+           <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string and replace the
+           second code point in <var>buffer</var> with "<code>:</code>".
           </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
