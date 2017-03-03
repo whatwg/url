@@ -1005,6 +1005,25 @@ It is initially the empty string.
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is null or a
 <a for=/>host</a>. It is initially null.
 
+<div class="note">
+ <p>The following table lists allowed <a for=/>URL</a>'s <a for=url>scheme</a> /
+ <a for=url>host</a> combinations.
+
+ <table>
+  <tr><th rowspan="2"><a for=/>URL</a>'s <a for=url>scheme</a>
+      <th colspan="6"><a for=/>URL</a>'s <a for=url>host</a>
+  <tr><th><a>domain</a>
+      <th><a>IPv4 address</a>
+      <th><a>IPv6 address</a>
+      <th><a>opaque host</a>
+      <th><a>empty host</a>
+      <th>null
+  <tr><td>non-file <a lt="special scheme">special</a><td>✅<td>✅<td>✅<td><td><td>
+  <tr><td>"<code>file</code>"<td>✅<td>✅<td>✅<td><td>✅<td>✅
+  <tr><td><a lt="special scheme">non-special</a><td><td><td>✅<td>✅<td>✅<td>✅
+ </table>
+</div>
+
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
