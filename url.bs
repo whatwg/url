@@ -2960,7 +2960,8 @@ initially null.
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
 
  <li>
-  <p>If <var>init</var> is a <a>sequence</a>, then for each <var>pair</var> in <var>init</var>:
+  <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>pair</var> in
+  <var>init</var>:
 
   <ol>
    <li><p>If <var>pair</var> does not contain exactly two items, then <a>throw</a> a {{TypeError}}.
@@ -2969,8 +2970,8 @@ initially null.
    <var>pair</var>'s second item, to <var>query</var>'s <a for=URLSearchParams>list</a>.
   </ol>
 
- <li><p>Otherwise, if <var>init</var> is a <a>record</a>, then for each <a for=record>mapping</a>
- (<var>name</var>, <var>value</var>) in <var>init</var>, append a new name-value pair whose name is
+ <li><p>Otherwise, if <var>init</var> is a <a>record</a>, then <a for=map>for each</a>
+ <var>name</var> → <var>value</var> in <var>init</var>, append a new name-value pair whose name is
  <var>name</var> and value is <var>value</var>, to <var>query</var>'s
  <a for=URLSearchParams>list</a>.
 
