@@ -283,9 +283,6 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 <p>An <dfn export>opaque host</dfn> is a non-empty <a>ASCII string</a> holding data that can be used
 for further processing.
 
-<p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
-<a for=/>URLs</a>.
-
 <p>An <dfn export>empty host</dfn> is the empty string.
 
 
@@ -1010,17 +1007,40 @@ It is initially the empty string.
  <a for=url>host</a> combinations.
 
  <table>
-  <tr><th rowspan="2"><a for=/>URL</a>'s <a for=url>scheme</a>
-      <th colspan="6"><a for=/>URL</a>'s <a for=url>host</a>
-  <tr><th><a>domain</a>
-      <th><a>IPv4 address</a>
-      <th><a>IPv6 address</a>
-      <th><a>opaque host</a>
-      <th><a>empty host</a>
-      <th>null
-  <tr><td>non-file <a lt="special scheme">special</a><td>✅<td>✅<td>✅<td><td><td>
-  <tr><td>"<code>file</code>"<td>✅<td>✅<td>✅<td><td>✅<td>✅
-  <tr><td><a lt="special scheme">non-special</a><td><td><td>✅<td>✅<td>✅<td>✅
+  <tr>
+   <th rowspan=2><a for=url>scheme</a>
+   <th colspan=6><a for=url>host</a>
+  <tr>
+   <th><a>domain</a>
+   <th><a>IPv4 address</a>
+   <th><a>IPv6 address</a>
+   <th><a>opaque host</a>
+   <th><a>empty host</a>
+   <th>null
+  <tr>
+   <td>non-"<code>file</code>" <a lt="special scheme">special</a>
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>❌
+   <td>❌
+   <td>❌
+  <tr>
+   <td>"<code>file</code>"
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>❌
+   <td>✅
+   <td>✅
+  <tr>
+   <td><a lt="special scheme">non-special</a>
+   <td>❌
+   <td>❌
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>✅
  </table>
 </div>
 
