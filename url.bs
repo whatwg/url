@@ -1291,7 +1291,7 @@ U+C0000 to U+CFFFD,
 U+D0000 to U+DFFFD,
 U+E0000 to U+EFFFD,<!-- changed relative to IRI from E1000 to E0000 to align with HTML-->
 U+F0000 to U+FFFFD,
-U+100000 to U+10FFFD.
+U+100000 to U+10FFFD, all inclusive.
 
 <p class=note>Code points higher than U+007F will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>.
@@ -3169,6 +3169,7 @@ Martin Dürst,
 Mathias Bynens,
 Michael Peick,
 Michael™ Smith,
+Michal Bukovský,
 Michel Suignard,
 Noah Levitt,
 Peter Occil,
