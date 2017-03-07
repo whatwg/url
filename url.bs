@@ -254,9 +254,9 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 <h3 id=host-representation>Host representation</h3>
 
 <p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
-<a>IPv4 address</a>, an <a>IPv6 address</a>, or an <a>opaque host</a>. Typically a <a for=/>host</a>
-serves as a network address, but it is sometimes used as opaque identifier in <a for=/>URLs</a>
-where a network address is not necessary.
+<a>IPv4 address</a>, an <a>IPv6 address</a>, an <a>opaque host</a>, or an <a>empty host</a>.
+Typically a <a for=/>host</a> serves as a network address, but it is sometimes used as opaque
+identifier in <a for=/>URLs</a> where a network address is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
@@ -280,11 +280,10 @@ eight <dfn id=concept-ipv6-piece lt='IPv6 piece'>16-bit pieces</dfn>.
 <p class="note">Support for <code>&lt;zone_id></code> is
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>.
 
-<p>An <dfn export>opaque host</dfn> is an <a>ASCII string</a> holding data that can be used for
-further processing.
+<p>An <dfn export>opaque host</dfn> is a non-empty <a>ASCII string</a> holding data that can be used
+for further processing.
 
-<p class="note no-backref">An <a>opaque host</a> is only used by <a lt="is special">non-special</a>
-<a for=/>URLs</a>.
+<p>An <dfn export>empty host</dfn> is the empty string.
 
 
 <h3 id=host-miscellaneous>Host miscellaneous</h3>
@@ -383,7 +382,7 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>An <dfn export>valid opaque-host string</dfn> must be zero or more <a>URL units</a> or:
+<p>A <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or:
 "<code>[</code>", followed by a <a>valid IPv6-address string</a>, followed by "<code>]</code>".
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
@@ -768,7 +767,8 @@ no purpose other than being a location the algorithm can jump to.
  <a>IPv6 serializer</a> on <var>host</var>,
  followed by "<code>]</code>".
 
- <li><p>Otherwise, <var>host</var> is a <a>domain</a> or <a>opaque host</a>, return <var>host</var>.
+ <li><p>Otherwise, <var>host</var> is a <a>domain</a>, <a>opaque host</a>, or <a>empty host</a>,
+ return <var>host</var>.
 </ol>
 
 The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
@@ -1002,6 +1002,48 @@ It is initially the empty string.
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-host>host</dfn> is null or a
 <a for=/>host</a>. It is initially null.
 
+<div class="note">
+ <p>The following table lists allowed <a for=/>URL</a>'s <a for=url>scheme</a> /
+ <a for=url>host</a> combinations.
+
+ <table>
+  <tr>
+   <th rowspan=2><a for=url>scheme</a>
+   <th colspan=6><a for=url>host</a>
+  <tr>
+   <th><a>domain</a>
+   <th><a>IPv4 address</a>
+   <th><a>IPv6 address</a>
+   <th><a>opaque host</a>
+   <th><a>empty host</a>
+   <th>null
+  <tr>
+   <td>non-"<code>file</code>" <a lt="special scheme">special</a>
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>❌
+   <td>❌
+   <td>❌
+  <tr>
+   <td>"<code>file</code>"
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>❌
+   <td>✅
+   <td>✅
+  <tr>
+   <td><a lt="special scheme">non-special</a>
+   <td>❌
+   <td>❌
+   <td>✅
+   <td>✅
+   <td>✅
+   <td>✅
+ </table>
+</div>
+
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
@@ -1172,9 +1214,10 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
  <dd><p>a <a>scheme-relative-file-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is null
+ <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is an
+ <a>empty host</a>
  <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
- is non-null
+ is not an <a>empty host</a>
  <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>Otherwise
  <dd><p>a <a>scheme-relative-URL string</a>
@@ -1198,8 +1241,8 @@ optionally followed by a <a>path-absolute-URL string</a>.
 "<code>//</code>", followed by an <a>opaque-host-and-port string</a>, optionally followed by a
 <a>path-absolute-URL string</a>.
 
-<p>An <dfn export>opaque-host-and-port string</dfn> must be either an empty
-<a>valid opaque-host string</a> or: a non-empty <a>valid opaque-host string</a>, optionally followed
+<p>An <dfn export>opaque-host-and-port string</dfn> must be either the empty
+string or: a <a>valid opaque-host string</a>, optionally followed
 by "<code>:</code>" and a <a>URL-port string</a>.
 
 <p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
@@ -2066,11 +2109,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           <a>Windows drive letter</a>, then:
 
           <ol>
-           <li><p>If <var>url</var>'s <a for=url>host</a> is non-null,
-           <a>validation error</a>.
+           <li><p>If <var>url</var>'s <a for=url>host</a> is neither the empty string nor null,
+           <a>validation error</a>, set <var>url</var>'s <a for=url>host</a> to the empty string.
 
-           <li><p>Set <var>url</var>'s <a for=url>host</a> to null and replace the second
-           code point in <var>buffer</var> with "<code>:</code>".
+           <li><p>Replace the second code point in <var>buffer</var> with "<code>:</code>".
           </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
