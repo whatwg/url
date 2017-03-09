@@ -8,7 +8,7 @@ No Editor: true
 Abstract: The URL Standard defines URLs, domains, IP addresses, the <code title>application/x-www-form-urlencoded</code> format, and their API.
 Logo: https://resources.whatwg.org/logo-url.svg
 Boilerplate: omit feedback-header, omit conformance
-!Participate: <a href=https://github.com/whatwg/url>GitHub whatwg/url</a> (<a href=https://github.com/whatwg/url/issues/new>new issue</a>, <a href="https://github.com/whatwg/url/issues">open issues</a>, <a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=URL&amp;resolution=---">legacy open bugs</a>)
+!Participate: <a href=https://github.com/whatwg/url>GitHub whatwg/url</a> (<a href=https://github.com/whatwg/url/issues/new>new issue</a>, <a href="https://github.com/whatwg/url/issues">open issues</a>)
 !Participate: <a href="https://wiki.whatwg.org/wiki/IRC">IRC: #whatwg on Freenode</a>
 !Commits: <a href="https://github.com/whatwg/url/commits">https://github.com/whatwg/url/commits</a>
 !Commits: [SNAPSHOT-LINK]
@@ -813,20 +813,28 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <a lt='IPv6 piece'>16-bit pieces</a> that are 0 longer than
  one, set <var>compress pointer</var> to null.
 
+ <li><p>Let <var>ignore0</var> be false.
+
  <li>
   <p>For each <var>piece</var> in <var>address</var>'s
   <a lt='IPv6 piece'>pieces</a>, run these substeps:
 
   <ol>
-   <li><p>If <var>compress pointer</var> points to
-   <var>piece</var>, append "<code>::</code>" to
-   <var>output</var> if <var>piece</var> is
-   <var>address</var>'s first <a lt='IPv6 piece'>piece</a> and append
-   "<code>:</code>" otherwise, and then run these substeps again with all
-   subsequent <a lt='IPv6 piece'>pieces</a> in
-   <var>address</var>'s <a lt='IPv6 piece'>pieces</a>
-   that are 0 skipped or go the next step in the overall set of steps if
-   that leaves no <a lt='IPv6 piece'>pieces</a>.
+   <li><p>If <var>ignore0</var> is true and <var>piece</var> is 0, then <a>continue</a>.
+
+   <li><p>Otherwise, if <var>ignore0</var> is true, set <var>ignore0</var> to false.
+
+   <li>
+    <p>If <var>compress pointer</var> points to <var>piece</var>, then:
+
+    <ol>
+     <li><p>Let <var>separator</var> be "<code>::</code>" if <var>piece</var> is
+     <var>address</var>'s first <a lt='IPv6 piece'>piece</a>, and "<code>:</code>"  otherwise.
+
+     <li><p>Append <var>separator</var> to <var>output</var>.
+
+     <li><p>Set <var>ignore0</var> to true and <a>continue</a>.
+    </ol>
 
    <li><p>Append <var>piece</var>, represented as the shortest
    possible lowercase hexadecimal number, to <var>output</var>.
