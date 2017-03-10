@@ -1490,6 +1490,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>If <var>state override</var> is given, run these subsubsteps:
 
         <ol>
+         <li><p>If <var>url</var> <a>includes credentials</a> or has a non-null <a for=url>port</a>,
+         and <var>buffer</var> is "<code>file</code>", then return.
+
          <li><p>If <var>url</var>'s <a for=url>scheme</a> is a <a>special scheme</a> and
          <var>buffer</var> is not, then return.
 
