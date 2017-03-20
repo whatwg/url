@@ -1112,29 +1112,6 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
 <p>A <a for=/>URL</a> <dfn export>is special</dfn> if its <a for=url>scheme</a> is a
 <a>special scheme</a>.
 
-<p>A <dfn export>local scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
-"<code>blob</code>", "<code>data</code>", or "<code>filesystem</code>".
-
-<p>A <a for=/>URL</a> <dfn export>is local</dfn> if its <a for=url>scheme</a> is a
-<a>local scheme</a>.
-
-<p class=note>This definition is used externally. E.g., by the Fetch Standard and
-Referrer Policy. [[FETCH]] [[REFERRER-POLICY]]
-<!-- And soonish CSP -->
-
-<p>An <dfn export id=http-scheme>HTTP(S) scheme</dfn> is a <a for=url>scheme</a> that is
-"<code>http</code>" or "<code>https</code>".
-
-<p>A <dfn export>network scheme</dfn> is a <a for=url>scheme</a> that is "<code>ftp</code>" or an
-<a>HTTP(S) scheme</a>.
-
-<p>A <dfn export>fetch scheme</dfn> is a <a for=url>scheme</a> that is "<code>about</code>",
-"<code>blob</code>", "<code>data</code>", "<code>file</code>", "<code>filesystem</code>", or a
-<a>network scheme</a>.
-
-<p class="note no-backref"><a>HTTP(S) scheme</a>, <a>network scheme</a>, and <a>fetch scheme</a> are
-used by HTML. [[HTML]]
-
 <p>A <a for=/>URL</a>
 <dfn export lt="include credentials|includes credentials">includes credentials</dfn> if its
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
@@ -3193,6 +3170,7 @@ Chris Rebert,
 Corey Farwell,
 Dan Appelquist,
 Daniel Bratell,
+Daniel Stenberg,
 David Burns,
 David Håsäther,
 David Sheets,
