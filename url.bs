@@ -1909,14 +1909,22 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a> is
-        "<code>file</code>", and <var>base</var>'s <a for=url>path</a>[0] is a
-        <a>normalized Windows drive letter</a>, <a for=list>append</a> <var>base</var>'s
-        <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
+        <p>If <var>base</var> is non-null and <var>base</var>'s <a for=url>scheme</a> is
+        "<code>file</code>", then:
 
-        <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
-        <var>url</var>'s and <var>base</var>'s <a for=url>host</a> are null under
-        these conditions and therefore not copied.
+        <ol>
+         <li>
+          <p>If <var>base</var>'s <a for=url>path</a>[0] is a
+          <a>normalized Windows drive letter</a>, then <a for=list>append</a> <var>base</var>'s
+          <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
+
+          <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
+          <var>url</var>'s and <var>base</var>'s <a for=url>host</a> are null under these conditions
+          and therefore not copied.
+
+         <li><p>Otherwise, set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s
+         <a for=url>host</a>.
+        </ol>
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
        by one.
@@ -2056,6 +2064,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
+
+       <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>" and <a>c</a> is the
+       <a>EOF code point</a>, U+003F (?), or U+0023 (#), then while <var>url</var>'s
+       <a for=url>path</a>'s <a for=list>size</a> is greater than 1 and <var>url</var>'s
+       <a for=url>path</a>[0] is the empty string, <a>validation error</a>, <a for=list>remove</a>
+       the first <a for=list>item</a> from <var>url</var>'s <a for=url>path</a>.
 
        <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
        string and <var>state</var> to <a>query state</a>.
