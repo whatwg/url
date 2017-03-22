@@ -1377,9 +1377,8 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <a for=url>path</a>[0] is not in the <a>blob URL store</a>, then return <var>url</var>.
  [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a abstract-op>StructuredClone</a> of the
- entry in the <a>blob URL store</a> corresponding to <var>url</var>'s <a for=url>path</a>[0].
- [[!HTML]]
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to the entry in the <a>blob URL store</a>
+ corresponding to <var>url</var>'s <a for=url>path</a>[0].
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -3267,9 +3266,9 @@ neighboring rights to this work.
 urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
     text: blob url store; url: #BlobURLStore
 urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
-    text: MediaSource; url: MediaSource
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#idl-def-; type: interface
-    text: MediaStream; url: MediaStream
+    text: MediaSource
+urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-; type: interface
+    text: MediaStream
 url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii; spec: IDNA
 url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode; spec: IDNA
 </pre>
