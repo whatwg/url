@@ -1021,6 +1021,9 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
 <p>A <a for=/>URL</a> also has an associated
+<dfn export for=url>parser-removed-tab-or-newline flag</dfn>. It is initially unset.
+
+<p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
 {{MediaSource}} object, or a {{MediaStream}} object. It is initially null.
 [[!FILEAPI]]
@@ -1342,9 +1345,13 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <li><p>Remove any leading and trailing <a>C0 control or space</a> from <var>input</var>.
   </ol>
 
- <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>validation error</a>.
-
- <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
+ <li>
+  <p>If <var>input</var> contains any <a>ASCII tab or newline</a>:
+  <ol>
+   <li><p><a>validation error</a>.
+   <li><p>Set <var>url</var>'s <a for=url>parser-removed-tab-or-newline flag</a>.
+   <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
+  </ol>
 
  <li><p>Let <var>state</var> be <var>state override</var>
  if given, or <a>scheme start state</a> otherwise.
