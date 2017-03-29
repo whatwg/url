@@ -1252,29 +1252,12 @@ U+003F (?),<!-- iquery/ifragment -->
 U+0040 (@),<!-- ipchar -->
 U+005F (_),<!-- iunreserved -->
 U+007E (~),<!-- iunreserved -->
-and code points in the ranges
-U+00A0 to U+D7FF,
-U+E000 to <!--U+F8FF,
-U+F900 to -->U+FDCF,
-U+FDF0 to U+FFFD,<!-- changed relative to IRI from U+FFEF to U+FFFD to align with HTML-->
-U+10000 to U+1FFFD,
-U+20000 to U+2FFFD,
-U+30000 to U+3FFFD,
-U+40000 to U+4FFFD,
-U+50000 to U+5FFFD,
-U+60000 to U+6FFFD,
-U+70000 to U+7FFFD,
-U+80000 to U+8FFFD,
-U+90000 to U+9FFFD,
-U+A0000 to U+AFFFD,
-U+B0000 to U+BFFFD,
-U+C0000 to U+CFFFD,
-U+D0000 to U+DFFFD,
-U+E0000 to U+EFFFD,<!-- changed relative to IRI from E1000 to E0000 to align with HTML-->
-U+F0000 to U+FFFFD,
-U+100000 to U+10FFFD, all inclusive.
+and <a>code points</a> in the range U+00A0 to U+10FFFD, inclusive, excluding <a>surrogates</a> and
+<a>noncharacters</a>.
+<!-- IRI also excludes the ranges U+E000 to U+F8FF, U+FFF0 to U+FFFD, and U+E0000 to U+E09FF, all
+     inclusive. We don't to align with HTML. -->
 
-<p class=note>Code points higher than U+007F DELETE will be converted to
+<p class=note>Code points greater than U+007F DELETE will be converted to
 <a lt="percent-encoded byte">percent-encoded bytes</a> by the <a>URL parser</a>.
 
 <p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
