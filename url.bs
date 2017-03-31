@@ -2402,7 +2402,7 @@ name is `<code>_charset</code>`. Such logic is not described here as only <a>UTF
 conforming.
 
 <p>The
-<dfn export id=concept-urlencoded-parser lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parser</dfn>
+<dfn export id=concept-urlencoded-parser lt="application/x-www-form-urlencoded parser|application/x-www-form-urlencoded parsing"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, and then runs these steps:
 
 <ol>
@@ -2547,11 +2547,14 @@ name-value-type tuples. [[HTML]]
 <p>The
 <dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
-<a lt='urlencoded parser'><code>application/x-www-form-urlencoded</code> parsing</a> it.
+<a><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
 <h2 id=api>API</h2>
+
+
+<h3 id=url-class>URL class</h3>
 
 <pre class=idl>
 [Constructor(USVString url, optional USVString base),
@@ -2591,11 +2594,10 @@ URLPath would be a subclassed Array? -->
 <a for=/>URL</a>) and <dfn id=concept-url-query-object noexport for=URL>query object</dfn> (a
 {{URLSearchParams}} object).
 
+<hr>
 
-<h3 id=constructors>Constructors</h3> <!-- "constructor" causes dfn.js to fail -->
-
-<p>The <dfn constructor for=URL><code>URL(<var>url</var>, <var>base</var>)</code></dfn> constructor,
-when invoked, must run these steps:
+<p id=constructors>The <dfn constructor for=URL><code>URL(<var>url</var>,
+<var>base</var>)</code></dfn> constructor, when invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>parsedBase</var> be null.
@@ -2663,8 +2665,7 @@ var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world")
 url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </div>
 
-
-<h3 id=urlutils-members>{{URL}} members</h3>
+<hr id=urlutils-members>
 
 <p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter and the
 <dfn method for=URL><code>toJSON()</code></dfn> method, when invoked, must return the
@@ -2896,7 +2897,7 @@ steps:
 </ol>
 
 
-<h3 id=interface-urlsearchparams>Interface {{URLSearchParams}}</h3>
+<h3 id=interface-urlsearchparams>URLSearchParams class</h3>
 
 <pre class=idl>
 [Constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = ""),
@@ -3072,22 +3073,21 @@ the name and the value being the value.
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
 
-<p>A standard that exposes <a for=/>URLs</a>, should expose the <a for=/>URL</a> as a
-string  (by <a lt='URL serializer'>serializing</a> an internal <a for=/>URL</a>). A
-standard should not expose a <a for=/>URL</a> using a {{URL}} object. {{URL}} objects
-are meant for <a for=/>URL</a> manipulation. In IDL the USVString type should be used.
+<p>A standard that exposes <a for=/>URLs</a>, should expose the <a for=/>URL</a> as a string (by
+<a lt="URL serializer">serializing</a> an internal <a for=/>URL</a>). A standard should not expose a
+<a for=/>URL</a> using a {{URL}} object. {{URL}} objects are meant for <a for=/>URL</a>
+manipulation. In IDL the USVString type should be used.
 
-<p class=note>The higher-level notion here is that values are to be exposed as immutable
-data structures.
+<p class=note>The higher-level notion here is that values are to be exposed as immutable data
+structures.
 
-<p>If a standard decides to use a variant of the name "URL" for a feature it defines, it
-should name such a feature "url" (i.e., lowercase and with an "l" at the end). Names such
-as "URL", "URI", and "IRI" should not be used. However, if the name is a compound, "URL"
-(i.e., uppercase) is preferred, e.g., "newURL" and "oldURL".
+<p>If a standard decides to use a variant of the name "URL" for a feature it defines, it should name
+such a feature "url" (i.e., lowercase and with an "l" at the end). Names such as "URL", "URI", and
+"IRI" should not be used. However, if the name is a compound, "URL" (i.e., uppercase) is preferred,
+e.g., "newURL" and "oldURL".
 
-<p class=note>The {{EventSource}} and
-{{HashChangeEvent}} interfaces in HTML are examples of
-proper naming. [[!HTML]]
+<p class=note>The {{EventSource}} and {{HashChangeEvent}} interfaces in HTML are examples of proper
+naming. [[!HTML]]
 
 
 
