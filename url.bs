@@ -735,13 +735,13 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <li><p>Let <var>n</var> be the value of <var>address</var>.
 
  <li>
-  <p>Repeat four times:
+  <p><a for=list>For each</a> <var>i</var> in the range 1 to 4, inclusive:
 
   <ol>
    <li><p>Prepend <var>n</var> % 256, <a lt="serialize an integer">serialized</a>, to
    <var>output</var>.
 
-   <li><p>Unless this is the fourth time, prepend U+002E (.) to <var>output</var>.
+   <li><p>If <var>i</var> is not 4, then prepend U+002E (.) to <var>output</var>.
 
    <li><p>Set <var>n</var> to floor(<var>n</var> / 256).
   </ol>
