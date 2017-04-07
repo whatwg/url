@@ -594,7 +594,7 @@ then runs these steps:
       <p>While <a>c</a> is not the <a>EOF code point</a>:
 
       <ol>
-       <li><p>Let <var>value</var> be null.
+       <li><p>Let <var>ipv4Piece</var> be null.
 
        <li>
         <p>If <var>numbersSeen</var> is greater than 0, then:
@@ -616,18 +616,20 @@ then runs these steps:
          <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
 
          <li>
-          <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
+          <p>If <var>ipv4Piece</var> is null, then set <var>ipv4Piece</var> to <var>number</var>.
 
-          <p>Otherwise, if <var>value</var> is 0, <a>validation error</a>, return failure.
+          <p>Otherwise, if <var>ipv4Piece</var> is 0, <a>validation error</a>, return failure.
 
-          <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
+          <p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
+          <var>number</var>.
 
          <li><p>Increase <var>pointer</var> by one.
 
-         <li><p>If <var>value</var> is greater than 255, <a>validation error</a>, return failure.
+         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>validation error</a>, return
+         failure.
         </ol>
 
-       <li><p>Set <var>piece</var> to <var>piece</var> &times; 0x100 + <var>value</var>.
+       <li><p>Set <var>piece</var> to <var>piece</var> &times; 0x100 + <var>ipv4Piece</var>.
 
        <li><p>Increase <var>numbersSeen</var> by one.
 
@@ -649,7 +651,7 @@ then runs these steps:
      <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>validation error</a>, return failure.
     </ol>
 
-   <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>Validation error</a>, return
+   <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>validation error</a>, return
    failure.
 
    <li><p>Set <var>piece</var> to <var>value</var>.
