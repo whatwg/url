@@ -552,8 +552,7 @@ then runs these steps:
   </ol>
 
  <li>
-  <p><dfn id=concept-ipv6-parser-main lt='IPv6 parser Main'>Main</dfn>: while <a>c</a> is not the
-  <a>EOF code point</a>:
+  <p>While <a>c</a> is not the <a>EOF code point</a>:
 
   <ol>
    <li><p>If <var>piece pointer</var> is eight, <a>validation error</a>, return failure.
@@ -565,8 +564,8 @@ then runs these steps:
      <li><p>If <var>compress pointer</var> is non-null, <a>validation error</a>, return failure.
 
      <li>Increase <var>pointer</var> and <var>piece pointer</var> by one, set
-     <var>compress pointer</var> to <var>piece pointer</var>,
-     and then jump to <a lt='IPv6 parser Main'>Main</a>.
+     <var>compress pointer</var> to <var>piece pointer</var>, and then
+     <a for=iteration>continue</a>.
     </ol>
 
    <li><p>Let <var>value</var> and <var>length</var> be 0.
@@ -579,95 +578,89 @@ then runs these steps:
    and increase <var>pointer</var> and <var>length</var> by one.
 
    <li>
-    <p>Switching on <a>c</a>:
+    <p>If <a>c</a> is U+002E (.), then:
 
-    <dl class=switch>
-     <dt>U+002E (.)
-     <dd>
+    <ol>
+     <li><p>If <var>length</var> is 0, <a>validation error</a>, return failure.
+
+     <li><p>Decrease <var>pointer</var> by <var>length</var>.
+
+     <li><p>If <var>piece pointer</var> is greater than six, <a>validation error</a>, return
+     failure.
+
+     <li><p>Let <var>numbersSeen</var> be 0.
+
+     <li>
+      <p>While <a>c</a> is not the <a>EOF code point</a>:
+
       <ol>
-       <li><p>If <var>length</var> is 0, <a>validation error</a>, return failure.
+       <li><p>Let <var>ipv4Piece</var> be null.
 
-       <li><p>Decrease <var>pointer</var> by <var>length</var>.
+       <li>
+        <p>If <var>numbersSeen</var> is greater than 0, then:
 
-       <li><p>Jump to <a lt='IPv6 parser IPv4'>IPv4</a>.
+        <ol>
+         <li><p>If <a>c</a> is a U+002E (.) and <var>numbersSeen</var> is less than 4, then increase
+         <var>pointer</var> by one.
+
+         <li>Otherwise, <a>validation error</a>, return failure.
+        </ol>
+
+       <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>validation error</a>, return failure.
+       <!-- prevent the empty string -->
+
+       <li>
+        <p>While <a>c</a> is an <a>ASCII digit</a>:
+
+        <ol>
+         <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
+
+         <li>
+          <p>If <var>ipv4Piece</var> is null, then set <var>ipv4Piece</var> to <var>number</var>.
+
+          <p>Otherwise, if <var>ipv4Piece</var> is 0, <a>validation error</a>, return failure.
+
+          <p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
+          <var>number</var>.
+
+         <li><p>Increase <var>pointer</var> by one.
+
+         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>validation error</a>, return
+         failure.
+        </ol>
+
+       <li><p>Set <var>piece</var> to <var>piece</var> &times; 0x100 + <var>ipv4Piece</var>.
+
+       <li><p>Increase <var>numbersSeen</var> by one.
+
+       <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
+
+       <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
+       <a>validation error</a>, return failure.
       </ol>
 
-     <dt>U+003A (:)
-     <dd>
-      <ol>
-       <li><p>Increase <var>pointer</var> by one.
+     <li><p><a for=iteration>Break</a>.
+    </ol>
 
-       <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>validation error</a>, return failure.
-      </ol>
+   <li>
+    <p>Otherwise, if <a>c</a> is U+003A (:):
 
-     <dt>Anything but the <a>EOF code point</a>
-     <dd><p><a>Validation error</a>, return failure.
-    </dl>
+    <ol>
+     <li><p>Increase <var>pointer</var> by one.
+
+     <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>validation error</a>, return failure.
+    </ol>
+
+   <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>validation error</a>, return
+   failure.
 
    <li><p>Set <var>piece</var> to <var>value</var>.
 
    <li><p>Increase <var>piece pointer</var> by one.
   </ol>
 
- <li><p>If <a>c</a> is the <a>EOF code point</a>, jump to
- <a lt='IPv6 parser Finale'>Finale</a>.
-
- <li><p><dfn id=concept-ipv6-parser-ipv4 lt='IPv6 parser IPv4'>IPv4</dfn>: if
- <var>piece pointer</var> is greater than six, <a>validation error</a>, return failure.
-
- <li><p>Let <var>numbersSeen</var> be 0.
-
  <li>
-  <p>While <a>c</a> is not the <a>EOF code point</a>:
-
-  <ol>
-   <li><p>Let <var>value</var> be null.
-
-   <li>
-    <p>If <var>numbersSeen</var> is greater than 0, then:
-
-    <ol>
-     <li><p>If <a>c</a> is a U+002E (.) and <var>numbersSeen</var> is less than 4, then increase
-     <var>pointer</var> by one.
-
-     <li>Otherwise, <a>validation error</a>, return failure.
-    </ol>
-
-   <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>validation error</a>, return failure.
-   <!-- prevent the empty string -->
-
-   <li>
-    <p>While <a>c</a> is an <a>ASCII digit</a>:
-
-    <ol>
-     <li><p>Let <var>number</var> be <a>c</a> interpreted as decimal number.
-
-     <li>
-      <p>If <var>value</var> is null, set <var>value</var> to <var>number</var>.
-
-      <p>Otherwise, if <var>value</var> is 0, <a>validation error</a>, return failure.
-
-      <p>Otherwise, set <var>value</var> to <var>value</var> &times; 10 + <var>number</var>.
-
-     <li><p>Increase <var>pointer</var> by one.
-
-     <li><p>If <var>value</var> is greater than 255, <a>validation error</a>, return failure.
-    </ol>
-
-   <li><p>Set <var>piece</var> to
-   <var>piece</var> &times; 0x100 + <var>value</var>.
-
-   <li><p>Increase <var>numbersSeen</var> by one.
-
-   <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
-
-   <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
-   <a>validation error</a>, return failure.
-  </ol>
-
- <li>
-  <p><dfn id=concept-ipv6-parser-finale lt='IPv6 parser Finale'>Finale</dfn>: if
-  <var>compress pointer</var> is non-null, then:
+  <p>If <var>compress pointer</var> is non-null, then:
 
   <ol>
    <li><p>Let <var>swaps</var> be
@@ -687,10 +680,6 @@ then runs these steps:
 
  <li><p>Return <var>address</var>.
 </ol>
-
-<p class="note no-backref">To be clear, <a lt='IPv6 parser Main'>Main</a>,
-<a lt='IPv6 parser IPv4'>IPv4</a>, and <a lt='IPv6 parser Finale'>Finale</a> are markers. They serve
-no purpose other than being a location the algorithm can jump to.
 
 <hr>
 
