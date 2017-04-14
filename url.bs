@@ -623,10 +623,10 @@ then runs these steps:
           <p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
           <var>number</var>.
 
-         <li><p>Increase <var>pointer</var> by one.
-
          <li><p>If <var>ipv4Piece</var> is greater than 255, <a>validation error</a>, return
          failure.
+
+         <li><p>Increase <var>pointer</var> by one.
         </ol>
 
        <li><p>Set <var>piece</var> to <var>piece</var> &times; 0x100 + <var>ipv4Piece</var>.
@@ -634,10 +634,9 @@ then runs these steps:
        <li><p>Increase <var>numbersSeen</var> by one.
 
        <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece pointer</var> by one.
-
-       <li><p>If <a>c</a> is the <a>EOF code point</a> and <var>numbersSeen</var> is not 4,
-       <a>validation error</a>, return failure.
       </ol>
+
+     <li><p>If <var>numbersSeen</var> is not 4, <a>validation error</a>, return failure.
 
      <li><p><a for=iteration>Break</a>.
     </ol>
