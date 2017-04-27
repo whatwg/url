@@ -62,12 +62,18 @@ might increase in scope somewhat.
 
 <p>This specification depends on the Infra Standard. [[!INFRA]]
 
-<p>Some terms used in this specification are defined in the
-DOM, Encoding, IDNA, and Web IDL Standards.
-[[!DOM]]
-[[!ENCODING]]
-[[!IDNA]]
-[[!WEBIDL]]
+<p>Some terms used in this specification are defined in the following standards and specifications:
+
+<ul class=brief>
+ <li>DOM Standard [[!DOM]]
+ <li>Encoding Standard [[!ENCODING]]
+ <li>File API [[!FILEAPI]]
+ <li>HTML Standard [[!HTML]]
+ <li>Media Source Extensions [[!MEDIA-SOURCE]]
+ <li>Media Capture and Streams [[!MEDIACAPTURE-STREAMS]]
+ <li>Unicode IDNA Compatibility Processing [[!UTS46]]
+ <li>Web IDL [[!WEBIDL]]
+</ul>
 
 <hr>
 
@@ -196,7 +202,7 @@ taken when rendering, interpreting, and passing <a for=/>URLs</a> around.
 <p>When rendering and allocating new <a for=/>URLs</a> "spoofing" needs to be considered. An attack
 whereby one <a for=/>host</a> or <a for=/>URL</a> can be confused for another. For instance,
 consider how 1/l/I, m/rn/rri, 0/O, and а/a can all appear eerily similar. Or worse, consider how
-U+202A LEFT-TO-RIGHT EMBEDDING and similar <a>code points</a> are invisible. [[!UTS36]]
+U+202A LEFT-TO-RIGHT EMBEDDING and similar <a>code points</a> are invisible. [[UTR36]]
 
 <p>When passing a <a for=/>URL</a> from party <var>A</var> to <var>B</var>, both need to
 carefully consider what is happening. <var>A</var> might end up leaking data it does not
@@ -275,7 +281,7 @@ U+005C (\), or U+005D (]).
 <a>domain</a> <var>domain</var>, runs these steps:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running <a lt=ToASCII>Unicode ToASCII</a> with
+ <li><p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a> with
  <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to false,
  <i>processing_option</i> set to <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set
  to false.
@@ -290,7 +296,7 @@ U+005C (\), or U+005D (]).
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a lt=ToUnicode>Unicode ToUnicode</a> with
+ <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to false.
 
@@ -309,7 +315,7 @@ U+005C (\), or U+005D (]).
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a lt=ToASCII>Unicode ToASCII</a> with
+ <a abstract-op lt=ToASCII>Unicode ToASCII</a> with
  <i>domain_name</i> set to <var>domain</var>,
  <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
@@ -317,7 +323,7 @@ U+005C (\), or U+005D (]).
  <li><p>If <var>result</var> is a failure value, return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <a lt=ToUnicode>Unicode ToUnicode</a> with
+ <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with
  <i>domain_name</i> set to <var>result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
@@ -1298,10 +1304,10 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  "<code>blob</code>", return <var>url</var>.
 
  <li><p>If <var>url</var>'s <a for=url>path</a> <a for=list>is empty</a> or <var>url</var>'s
- <a for=url>path</a>[0] is not in the <a>blob URL store</a>, then return <var>url</var>.
+ <a for=url>path</a>[0] is not in the <a>Blob URL Store</a>, then return <var>url</var>.
  [[!FILEAPI]]
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to the entry in the <a>blob URL store</a>
+ <li><p>Set <var>url</var>'s <a for=url>object</a> to the entry in the <a>Blob URL Store</a>
  corresponding to <var>url</var>'s <a for=url>path</a>[0].
 
  <li><p>Return <var>url</var>.
@@ -3163,32 +3169,14 @@ for being awesome!
 possible under law, the editor has waived all copyright and related or neighboring rights to this
 work.
 
-<pre class=biblio>
-{
-    "IDNA": {
-        "href": "http://www.unicode.org/reports/tr46/",
-        "authors": ["Mark Davis", "Michel Suignard"],
-        "title": "Unicode IDNA Compatibility Processing",
-        "publisher": "Unicode Consortium"
-    },
-    "UTS36": {
-      "href": "http://unicode.org/reports/tr36/",
-      "authors" : ["Mark Davis", "Michel Suignard"],
-      "title": "Unicode Security Considerations",
-      "publisher" : "Unicode Consortium"
-    }
-}
-</pre>
-
 <pre class=anchors>
-urlPrefix: https://w3c.github.io/FileAPI/; type: dfn
-    text: blob url store; url: #BlobURLStore
-urlPrefix: https://w3c.github.io/media-source/#idl-def-; type: interface
-    text: MediaSource
-urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-; type: interface
-    text: MediaStream
-url: http://www.unicode.org/reports/tr46/#ToASCII; type: dfn; text: toascii; spec: IDNA
-url: http://www.unicode.org/reports/tr46/#ToUnicode; type: dfn; text: tounicode; spec: IDNA
+spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
+    type: interface; text: MediaSource
+spec: MEDIACAPTURE-STREAMS; urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-
+    type: interface; text: MediaStream
+spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/
+    type: abstract-op; text: ToASCII; url: #ToASCII
+    type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
 
 <pre class=link-defaults>
