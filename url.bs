@@ -129,10 +129,9 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
   <p>For each byte <var>byte</var> in <var>input</var>:
 
   <ol>
-   <li><p>If <var>byte</var> is not `<code>%</code>`, append
-   <var>byte</var> to <var>output</var>.
+   <li><p>If <var>byte</var> is not 0x25 (%), then append <var>byte</var> to <var>output</var>.
 
-   <li><p>Otherwise, if <var>byte</var> is `<code>%</code>` and the next two bytes after
+   <li><p>Otherwise, if <var>byte</var> is 0x25 (%) and the next two bytes after
    <var>byte</var> in <var>input</var> are not in the ranges 0x30 (0) to 0x39 (9),
    0x41 (A) to 0x46 (F), and 0x61 (a) to 0x66 (f), all inclusive, append <var>byte</var> to
    <var>output</var>.
@@ -2378,11 +2377,12 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 
 <ol>
  <li><p>Let <var>sequences</var> be the result of splitting <var>input</var> on
- `<code>&amp;</code>`.
- <!-- XXX define splitting? DOM does not do it -->
+ 0x26 (&amp;).
+ <!-- XXX either define strictly splitting for byte sequences in Infra, or investigate whether
+      UTF-8 decoding can be done before this step rather than after. -->
 
- <li><p>Let <var>tuples</var> be an empty list of name-value tuples where both name and value hold a
- byte sequence.
+ <li><p>Let <var>output</var> be an initially empty <a for=/>list</a> of name-value tuples where
+ both name and value hold a string.
 
  <li>
   <p><a for=list>For each</a> byte sequence <var>bytes</var> in <var>sequences</var>:
@@ -2403,16 +2403,13 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 
    <li><p>Replace any 0x2B (+) in <var>name</var> and <var>value</var> with 0x20 (SP).
 
-   <li><p>Add a tuple consisting of <var>name</var> and <var>value</var> to <var>tuples</var>.
+   <li><p>Let <var>nameString</var> and <var>valueString</var> be the result of running <a>UTF-8
+   decode without BOM</a> on the <a lt="percent decode">percent decoding</a> of <var>name</var> and
+   <var>value</var>, respectively.
+
+   <li><p><a for=list>Append</a> (<var>nameString</var>, <var>valueString</var>) to
+   <var>output</var>.
   </ol>
-
- <li><p>Let <var>output</var> be an empty list of name-value tuples where both name and value hold a
- string.
-
- <li><p>For each name-value tuple in <var>tuples</var>, append a name-value tuple to
- <var>output</var> where the new name and value appended to <var>output</var> are the result of
- running <a>UTF-8 decode without BOM</a> on the <a lt="percent decode">percent decoding</a> of the
- name and value from <var>tuples</var>, respectively, using <var>encoding</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
