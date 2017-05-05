@@ -441,7 +441,7 @@ requires context to be distinguished.
       XXX radix-R digit, hahaha, that's not a thing -->
 
  <li><p>Return the mathematical integer value that is represented by <var>input</var> in
- radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with values 0
+ radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with values 10
  through 15.
  <!-- XXX well, you know, it works for ECMAScript, kinda -->
 </ol>
