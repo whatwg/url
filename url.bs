@@ -468,7 +468,7 @@ these steps:
         but if it somehow is this conditional makes sure we can keep going. -->
   </ol>
 
- <li><p>If <var>parts</var> has more than four items, return <var>input</var>.
+ <li><p>If <var>parts</var> has more than four items or zero items, return <var>input</var>.
 
  <li><p>Let <var>numbers</var> be the empty list.
 
