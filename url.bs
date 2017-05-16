@@ -2665,11 +2665,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </ol>
 
 <p>The <dfn attribute for=URL><code>origin</code></dfn> attribute's getter must return the
-<a lt="Unicode serialization of an origin">Unicode serialization</a> of <a>context object</a>'s
-<a for=URL>url</a>'s <a for=url>origin</a>. [[!HTML]]
-
-<p class="note no-backref">It returns the Unicode rather than the ASCII serialization for
-compatibility with HTML's <code>MessageEvent</code> feature. [[!HTML]]
+<a lt="serialization of an origin">serialization</a> of <a>context object</a>'s <a for=URL>url</a>'s
+<a for=url>origin</a>. [[!HTML]]
 
 <p>The <dfn attribute for=URL><code>protocol</code></dfn> attribute's getter must return
 <a>context object</a> <a for=URL>url</a>'s <a for=url>scheme</a>, followed by U+003A (:).
