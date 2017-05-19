@@ -528,9 +528,9 @@ these steps:
 then runs these steps:
 
 <ol>
- <li><p>Let <var>address</var> be a new <a>IPv6 address</a> whose <a>IPv6 pieces</a> are 0.
+ <li><p>Let <var>address</var> be a new <a>IPv6 address</a> whose <a>IPv6 pieces</a> are all 0.
 
- <li><p>Let <var>piece</var> be 0.
+ <li><p>Let <var>pieceIndex</var> be 0.
 
  <li><p>Let <var>compress</var> be null.
 
@@ -546,14 +546,15 @@ then runs these steps:
 
    <li><p>Increase <var>pointer</var> by 2.
 
-   <li><p>Increase <var>piece</var> by 1 and then set <var>compress</var> to <var>piece</var>.
+   <li><p>Increase <var>pieceIndex</var> by 1 and then set <var>compress</var> to
+   <var>pieceIndex</var>.
   </ol>
 
  <li>
   <p>While <a>c</a> is not the <a>EOF code point</a>:
 
   <ol>
-   <li><p>If <var>piece</var> is 8, <a>validation error</a>, return failure.
+   <li><p>If <var>pieceIndex</var> is 8, <a>validation error</a>, return failure.
 
    <li>
     <p>If <a>c</a> is U+003A (:), then:
@@ -561,8 +562,8 @@ then runs these steps:
     <ol>
      <li><p>If <var>compress</var> is non-null, <a>validation error</a>, return failure.
 
-     <li>Increase <var>pointer</var> and <var>piece</var> by 1, set <var>compress</var> to
-     <var>piece</var>, and then <a for=iteration>continue</a>.
+     <li>Increase <var>pointer</var> and <var>pieceIndex</var> by 1, set <var>compress</var> to
+     <var>pieceIndex</var>, and then <a for=iteration>continue</a>.
     </ol>
 
    <li><p>Let <var>value</var> and <var>length</var> be 0.
@@ -579,7 +580,7 @@ then runs these steps:
 
      <li><p>Decrease <var>pointer</var> by <var>length</var>.
 
-     <li><p>If <var>piece</var> is greater than 6, <a>validation error</a>, return failure.
+     <li><p>If <var>pieceIndex</var> is greater than 6, <a>validation error</a>, return failure.
 
      <li><p>Let <var>numbersSeen</var> be 0.
 
@@ -622,12 +623,12 @@ then runs these steps:
          <li><p>Increase <var>pointer</var> by 1.
         </ol>
 
-       <li><p>Set <var>address</var>[<var>piece</var>] to
-       <var>address</var>[<var>piece</var>] &times; 0x100 + <var>ipv4Piece</var>.
+       <li><p>Set <var>address</var>[<var>pieceIndex</var>] to
+       <var>address</var>[<var>pieceIndex</var>] &times; 0x100 + <var>ipv4Piece</var>.
 
        <li><p>Increase <var>numbersSeen</var> by 1.
 
-       <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>piece</var> by 1.
+       <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>pieceIndex</var> by 1.
       </ol>
 
      <li><p>If <var>numbersSeen</var> is not 4, <a>validation error</a>, return failure.
@@ -647,26 +648,26 @@ then runs these steps:
    <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>validation error</a>, return
    failure.
 
-   <li><p>Set <var>address</var>[<var>piece</var>] to <var>value</var>.
+   <li><p>Set <var>address</var>[<var>pieceIndex</var>] to <var>value</var>.
 
-   <li><p>Increase <var>piece</var> by 1.
+   <li><p>Increase <var>pieceIndex</var> by 1.
   </ol>
 
  <li>
   <p>If <var>compress</var> is non-null, then:
 
   <ol>
-   <li><p>Let <var>swaps</var> be <var>piece</var> &minus; <var>compress</var>.
+   <li><p>Let <var>swaps</var> be <var>pieceIndex</var> &minus; <var>compress</var>.
 
-   <li><p>Set <var>piece</var> to 7.
+   <li><p>Set <var>pieceIndex</var> to 7.
 
-   <li><p>While <var>piece</var> is not 0 and <var>swaps</var> is greater than 0, swap
-   <var>address</var>[<var>piece</var>] with
+   <li><p>While <var>pieceIndex</var> is not 0 and <var>swaps</var> is greater than 0, swap
+   <var>address</var>[<var>pieceIndex</var>] with
    <var>address</var>[<var>compress</var> + <var>swaps</var> &minus; 1], and then decrease both
-   <var>piece</var> and <var>swaps</var> by 1.
+   <var>pieceIndex</var> and <var>swaps</var> by 1.
   </ol>
 
- <li><p>Otherwise, if <var>compress</var> is null and <var>piece</var> is not 8,
+ <li><p>Otherwise, if <var>compress</var> is null and <var>pieceIndex</var> is not 8,
  <a>validation error</a>, return failure.
 
  <li><p>Return <var>address</var>.
@@ -715,7 +716,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <li><p>Let <var>n</var> be the value of <var>address</var>.
 
  <li>
-  <p><a for=list>For each</a> <var>i</var> in the range 1 to 4, inclusive:
+  <p><a for=set>For each</a> <var>i</var> in the range 1 to 4, inclusive:
 
   <ol>
    <li><p>Prepend <var>n</var> % 256, <a lt="serialize an integer">serialized</a>, to
@@ -736,7 +737,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p>Let <var>compress</var> be a pointer to the first <a>IPv6 piece</a> in the first longest
+  <p>Let <var>compress</var> be an index to the first <a>IPv6 piece</a> in the first longest
   sequences of <var>address</var>'s <a>IPv6 pieces</a> that are 0.
 
   <p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to
@@ -748,31 +749,30 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <li><p>Let <var>ignore0</var> be false.
 
  <li>
-  <p><a for=list>For each</a> <var>piece</var> in <var>address</var>'s <a>IPv6 pieces</a>:
+  <p><a for=set>For each</a> <var>pieceIndex</var> in the range 0 to 7, inclusive:
 
   <ol>
-   <li><p>If <var>ignore0</var> is true and <var>piece</var> is 0, then
+   <li><p>If <var>ignore0</var> is true and <var>address</var>[<var>pieceIndex</var>] is 0, then
    <a for=iteration>continue</a>.
 
    <li><p>Otherwise, if <var>ignore0</var> is true, set <var>ignore0</var> to false.
 
    <li>
-    <p>If <var>compress</var> points to <var>piece</var>, then:
+    <p>If <var>compress</var> is <var>pieceIndex</var>, then:
 
     <ol>
-     <li><p>Let <var>separator</var> be "<code>::</code>" if <var>piece</var> is
-     <var>address</var>'s first <a>IPv6 piece</a>, and U+003A (:) otherwise.
+     <li><p>Let <var>separator</var> be "<code>::</code>" if <var>pieceIndex</var> is 0, and
+     U+003A (:) otherwise.
 
      <li><p>Append <var>separator</var> to <var>output</var>.
 
      <li><p>Set <var>ignore0</var> to true and <a for=iteration>continue</a>.
     </ol>
 
-   <li><p>Append <var>piece</var>, represented as the shortest
-   possible lowercase hexadecimal number, to <var>output</var>.
+   <li><p>Append <var>address</var>[<var>pieceIndex</var>], represented as the shortest possible
+   lowercase hexadecimal number, to <var>output</var>.
 
-   <li><p>If <var>address</var>[<var>piece</var>] is not <var>address</var>'s last
-   <a>IPv6 piece</a>, then append U+003A (:) to <var>output</var>.
+   <li><p>If <var>pieceIndex</var> is not 7, then append U+003A (:) to <var>output</var>.
   </ol>
 
  <li><p>Return <var>output</var>.
