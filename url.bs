@@ -2128,6 +2128,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          0x23 (#), 0x3C (&lt;), or 0x3E (>), append <var>byte</var>,
          <a lt="percent encode">percent encoded</a>, to <var>url</var>'s <a for=url>query</a>.
 
+         <li><p>If <var>byte</var> is 0x3C (&lt;), set <var>url</var>'s <a>parser-encoded-less-than
+         flag</a>.
+
          <li><p>Otherwise, append a code point whose value is <var>byte</var> to
          <var>url</var>'s <a for=url>query</a>.
         </ol>
