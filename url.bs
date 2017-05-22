@@ -1024,6 +1024,9 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <dfn export for=url>parser-removed-tab-or-newline flag</dfn>. It is initially unset.
 
 <p>A <a for=/>URL</a> also has an associated
+<dfn export for=url>parser-encoded-less-than flag</dfn>. It is initially unset.
+
+<p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
 {{MediaSource}} object, or a {{MediaStream}} object. It is initially null.
 [[!FILEAPI]]
