@@ -1020,11 +1020,11 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
-<p>A <a for=/>URL</a> also has an associated
-<dfn export for=url>parser-removed-tab-or-newline flag</dfn>. It is initially unset.
+<p>A <a for=/>URL</a> also has an associated <dfn export for=url>potentially-dangling-markup
+flag</dfn>, which is initially unset.
 
-<p>A <a for=/>URL</a> also has an associated
-<dfn export for=url>parser-encoded-less-than flag</dfn>. It is initially unset.
+<p class="note no-backref">This flag will be set if both <a>ASCII tab or newline</a> characters are
+removed from a URL, and an 0x3C (&lt;) character is encountered during parsing.
 
 <p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
@@ -1349,11 +1349,30 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
   </ol>
 
  <li>
-  <p>If <var>input</var> contains any <a>ASCII tab or newline</a>:
+  <p>If <var>input</var> contains any <a>ASCII tab or newline</a>, then:
+
   <ol>
    <li><p><a>validation error</a>.
-   <li><p>Set <var>url</var>'s <a for=url>parser-removed-tab-or-newline flag</a>.
-   <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
+
+   <li><p>Let <var>processed</var> be an empty string.
+
+   <li>
+    <p>For each <var>byte</var> in <var>input</var>:
+
+    <ol>
+     <li>
+      <p>If <var>byte</var> is not an <a>ASCII tab or newline</a> character:
+
+      <ol>
+       <li><p>Append <var>byte</var> to <var>processed</var>.
+
+       <li><p>If <var>byte</var> is U+003C (&lt;), set <var>url</var>'s
+       <a>potentially-dangling-markup flag</a>.
+      </ol>
+
+    </ol>
+
+   <li><p>Set <var>input</var> to <var>processed</var>.
   </ol>
 
  <li><p>Let <var>state</var> be <var>state override</var>
@@ -2127,9 +2146,6 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          <li><p>If <var>byte</var> is less than 0x21 (!), greater than 0x7E (~), or is 0x22 ("),
          0x23 (#), 0x3C (&lt;), or 0x3E (>), append <var>byte</var>,
          <a lt="percent encode">percent encoded</a>, to <var>url</var>'s <a for=url>query</a>.
-
-         <li><p>If <var>byte</var> is 0x3C (&lt;), set <var>url</var>'s <a>parser-encoded-less-than
-         flag</a>.
 
          <li><p>Otherwise, append a code point whose value is <var>byte</var> to
          <var>url</var>'s <a for=url>query</a>.
