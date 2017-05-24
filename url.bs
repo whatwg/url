@@ -744,7 +744,7 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
   the second 0.
 
  <li><p>If there is no sequence of <var>address</var>'s <a>IPv6 pieces</a> that are 0 that is
- greater than 1, then set <var>compress</var> to null.
+ longer than 1, then set <var>compress</var> to null.
 
  <li><p>Let <var>ignore0</var> be false.
 
