@@ -2515,7 +2515,8 @@ takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the r
 
 <pre class=idl>
 [Constructor(USVString url, optional USVString base),
- Exposed=(Window,Worker)]
+ Exposed=(Window,Worker),
+ LegacyWindowAlias=webkitURL]
 interface URL {
   stringifier attribute USVString href;
   readonly attribute USVString origin;
