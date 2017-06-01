@@ -278,28 +278,35 @@ U+005C (\), or U+005D (]).
 
 <h3 id=idna>IDNA</h3>
 
-<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> given a
-<a>domain</a> <var>domain</var>, runs these steps:
+<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>domain</a>
+<var>domain</var> and optionally a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a> with
- <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to false,
- <i>processing_option</i> set to <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set
- to false.
+ <li><p>If <var>beStrict</var> is not given, set it to false.
+
+ <li>
+  <p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
+  with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
+  <var>beStrict</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
+  <i>CheckJoiners</i> set to true, <i>processing_option</i> set to
+  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to <var>beStrict</var>.
+
+  <p class="XXX">This and <a>domain to Unicode</a> below are based on a proposed revision. See
+  <a href="https://github.com/whatwg/url/issues/313">issue #313</a>.
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
 
-<p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> given a
-<a>domain</a> <var>domain</var>, runs these steps:
+<p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> algorithm, given a <a>domain</a>
+<var>domain</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
- <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with
- <i>domain_name</i> set to <var>domain</var>,
- <i>UseSTD3ASCIIRules</i> set to false.
+ <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>domain</var>,
+ <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
+ and <i>UseSTD3ASCIIRules</i> set to false.
 
  <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
  <var>result</var>.
@@ -315,16 +322,16 @@ U+005C (\), or U+005D (]).
 <p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running
- <a abstract-op lt=ToASCII>Unicode ToASCII</a> with
- <i>domain_name</i> set to <var>domain</var>,
- <i>UseSTD3ASCIIRules</i> set to true, <i>processing_option</i> set to
- <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to true.
+ <li><p>Let <var>result</var> be the result of running <a>domain to ASCII</a> with <var>domain</var>
+ and true.
 
- <li><p>If <var>result</var> is a failure value, return failure.
+ <li><p>If <var>result</var> is failure, then return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with
+ <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>result</var>,
+ <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
+ and <i>UseSTD3ASCIIRules</i> set to true.
+
  <i>domain_name</i> set to <var>result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
@@ -3152,7 +3159,7 @@ spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
     type: interface; text: MediaSource
 spec: MEDIACAPTURE-STREAMS; urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-
     type: interface; text: MediaStream
-spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/
+spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/proposed.html
     type: abstract-op; text: ToASCII; url: #ToASCII
     type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
