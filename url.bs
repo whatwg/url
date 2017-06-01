@@ -328,7 +328,10 @@ U+005C (\), or U+005D (]).
  <li><p>If <var>result</var> is failure, then return failure.
 
  <li><p>Set <var>result</var> to the result of running
- <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with
+ <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>result</var>,
+ <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
+ and <i>UseSTD3ASCIIRules</i> set to true.
+
  <i>domain_name</i> set to <var>result</var>,
  <i>UseSTD3ASCIIRules</i> set to true.
 
