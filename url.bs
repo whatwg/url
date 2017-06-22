@@ -284,15 +284,11 @@ U+005C (\), or U+005D (]).
 <ol>
  <li><p>If <var>beStrict</var> is not given, set it to false.
 
- <li>
-  <p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
-  with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
-  <var>beStrict</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
-  <i>CheckJoiners</i> set to true, <i>processing_option</i> set to
-  <i>Nontransitional_Processing</i>, and <i>VerifyDnsLength</i> set to <var>beStrict</var>.
-
-  <p class="XXX">This and <a>domain to Unicode</a> below are based on a proposed revision. See
-  <a href="https://github.com/whatwg/url/issues/313">issue #313</a>.
+ <li><p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
+ with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
+ <var>beStrict</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
+ <i>CheckJoiners</i> set to true, <i>processing_option</i> set to <i>Nontransitional_Processing</i>,
+ and <i>VerifyDnsLength</i> set to <var>beStrict</var>.
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
@@ -331,9 +327,6 @@ U+005C (\), or U+005D (]).
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>result</var>,
  <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
  and <i>UseSTD3ASCIIRules</i> set to true.
-
- <i>domain_name</i> set to <var>result</var>,
- <i>UseSTD3ASCIIRules</i> set to true.
 
  <li><p>If <var>result</var> contains any errors, return failure.
 
@@ -3159,7 +3152,7 @@ spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
     type: interface; text: MediaSource
 spec: MEDIACAPTURE-STREAMS; urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-
     type: interface; text: MediaStream
-spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/proposed.html
+spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToASCII; url: #ToASCII
     type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
