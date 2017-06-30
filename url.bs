@@ -1400,9 +1400,17 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
        <li><p>Set <var>url</var>'s <a for=url>scheme</a> to <var>buffer</var>.
 
-       <li><p>Set <var>buffer</var> to the empty string.
+       <li>
+         <p>If <var>state override</var> is given, then:
 
-       <li><p>If <var>state override</var> is given, then return.
+         <ol>
+          <li><p>If <var>url</var>'s <a for=url>port</a> is <var>url</var>'s <a for=url>scheme</a>'s
+          <a>default port</a>, then set <var>url</var>'s <a for=url>port</a> to null.
+
+          <li><p>Return.
+         </ol>
+
+       <li><p>Set <var>buffer</var> to the empty string.
 
        <li>
         <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", then:
