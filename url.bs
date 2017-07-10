@@ -2897,7 +2897,7 @@ which is initially empty.
 initially null.
 
 <p>To create a <dfn export for=URLSearchParams id=concept-urlsearchparams-new>new</dfn>
-{{URLSearchParams}} object, optionally using <var>init</var>, run these steps:
+{{URLSearchParams}} object using <var>init</var>, run these steps:
 
 <ol>
  <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
@@ -2935,11 +2935,10 @@ initially null.
 constructor, when invoked, must run these steps:</p>
 
 <ol>
- <li><p>If <var>init</var> is given, is a string, and starts with U+003F (?), remove the first
- code point from <var>init</var>.
+ <li><p>If <var>init</var> is a string and starts with U+003F (?), remove the first code point from
+ <var>init</var>.
 
- <li><p>Return a <a for=URLSearchParams>new</a> {{URLSearchParams}} object, using <var>init</var> if
- given.
+ <li><p>Return a <a for=URLSearchParams>new</a> {{URLSearchParams}} object using <var>init</var>.
 </ol>
 
 <p>The
@@ -3090,6 +3089,7 @@ Erik Arvidsson,
 Gavin Carothers,
 Geoff Richards,
 Glenn Maynard,
+Gordon P. Hemsley,
 Henri Sivonen,
 Ian Hickson,
 Ilya Grigorik,
