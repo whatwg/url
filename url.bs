@@ -2926,10 +2926,18 @@ initially null.
 </ol>
 
 <p>A {{URLSearchParams}} object's
-<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are to set
-<a for=URLSearchParams>url object</a>'s <a for=URL>url</a>'s <a for=url>query</a> to the
-<a lt='urlencoded serializer'>serialization</a> of {{URLSearchParams}} object's
-<a for=URLSearchParams>list</a>.
+<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are to run these
+steps:
+
+<ol>
+ <li><p>Let <var>query</var> be the <a lt="urlencoded serializer">serialization</a> of
+ {{URLSearchParams}} object's <a for=URLSearchParams>list</a>.
+
+ <li><p>If <var>query</var> is the empty string, then set <var>query</var> to null.
+
+ <li><p>Set <a for=URLSearchParams>url object</a>'s <a for=URL>url</a>'s <a for=url>query</a> to
+ <var>query</var>.
+</ol>
 
 <p>The <dfn constructor for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
 constructor, when invoked, must run these steps:</p>
