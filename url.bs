@@ -2762,7 +2762,7 @@ the setter to always "reset" both.
  <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
  then return.
 
- <li><p>If the given value is the empty string, then set <a>context object</a>a>'s
+ <li><p>If the given value is the empty string, then set <a>context object</a>'s
  <a for=URL>url</a>'s <a for=url>port</a> to null.</p></li>
 
  <li><p>Otherwise, <a lt="basic URL parser">basic URL parse</a> the given value with
