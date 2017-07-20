@@ -1386,10 +1386,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li><p>If <var>url</var>'s <a for=url>scheme</a> is a <a>special scheme</a> and
-         <var>buffer</var> is not, then return.
+         <var>buffer</var> is not a <a>special scheme</a>, then return.
 
          <li><p>If <var>url</var>'s <a for=url>scheme</a> is not a <a>special scheme</a> and
-         <var>buffer</var> is, then return.
+         <var>buffer</var> is a <a>special scheme</a>, then return.
 
          <li><p>If <var>url</var> <a>includes credentials</a> or has a non-null <a for=url>port</a>,
          and <var>buffer</var> is "<code>file</code>", then return.
@@ -1701,7 +1701,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>port state</a>.
 
-       <li><p>If <var>state override</var> is <a>hostname state</a>, then return.
+       <li><p>If <var>state override</var> is given and <var>state override</var> is
+       <a>hostname state</a>, then return.
       </ol>
 
      <li>
@@ -2761,8 +2762,8 @@ the setter to always "reset" both.
  <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
  then return.
 
- <li><p>If the given value is the empty string, then set <a for=URL>url</a>'s <a for=url>port</a> to
- null.</p></li>
+ <li><p>If the given value is the empty string, then set <a>context object</a>'s
+ <a for=URL>url</a>'s <a for=url>port</a> to null.</p></li>
 
  <li><p>Otherwise, <a lt="basic URL parser">basic URL parse</a> the given value with
  <a>context object</a>'s <a for=URL>url</a> as <var>url</var> and <a>port state</a> as
