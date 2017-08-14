@@ -119,8 +119,8 @@ being processed and <var>pointer</var> points to @, <a>c</a> is U+0040 (@) and <
 Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, after conversion to bytes,
 should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
 
-<p>To <dfn>percent encode</dfn> a <var>byte</var> into a <a>percent-encoded byte</a>, return a
-<a>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a> representing
+<p>To <dfn export>percent encode</dfn> a <var>byte</var> into a <a>percent-encoded byte</a>, return
+a <a>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a> representing
 <var>byte</var>.
 
 <p>To <dfn export>percent decode</dfn> a <a>byte sequence</a> <var>input</var>, run these steps:
@@ -165,7 +165,7 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 <ol>
  <li><p>Let <var>bytes</var> be the <a>UTF-8 encoding</a> of <var>input</var>.
 
- <li><p>Return the <a>percent encoding</a> of <var>bytes</var>.
+ <li><p>Return the <a>percent decoding</a> of <var>bytes</var>.
 </ol>
 
 <hr>
