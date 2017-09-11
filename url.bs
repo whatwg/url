@@ -1068,6 +1068,33 @@ code point is U+003A (:).
 <p class="note">As per the <a href=#url-writing>URL writing</a> section, only a
 <a>normalized Windows drive letter</a> is conforming.
 
+<p>A string <dfn>starts with Windows drive letter</dfn> if all of the following are true:
+
+<ul>
+ <li><p>it contains at least two code points and the first two code points are
+ <a>Windows drive letter</a>.
+
+ <li><p>it contains two code points or the third code point is U+002F (/), U+005C (\), U+003F (?),
+ or U+0023 (#).
+</ul>
+
+<div class=example id=example-starts-with-widows-drive-letter>
+ <table>
+  <tr>
+   <th>String
+   <th>Result
+  <tr>
+   <td>"<code>c:</code>"
+   <td>✅
+  <tr>
+   <td>"<code>c:/</code>"
+   <td>✅
+  <tr>
+   <td>"<code>c:a</code>"
+   <td>❌
+ </table>
+</div>
+
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
 
 <ol>
