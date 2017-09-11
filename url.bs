@@ -1861,17 +1861,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <dd>
         <ol>
          <li>
-          <p>If at least one of the following is true
-
-          <ul class=brief>
-           <li><p><a>remaining</a> consists of zero code points
-           <li><p><a>c</a> and the first code point of <a>remaining</a> are not a
-           <a>Windows drive letter</a>
-           <li><p><a>remaining</a> has at least 2 code points and <a>remaining</a>'s second code
-           point is <em>not</em> U+002F (/), U+005C (\), U+003F (?), or U+0023 (#)
-          </ul>
-
-          <p>then set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+          <p>If the substring from <var>pointer</var> in the <var>input</var> does not
+          <a lt="starts with Windows drive letter">start with Windows drive letter</a>,
+          then set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
           <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>,
           and then <a>shorten</a> <var>url</var>'s <a for=url>path</a>.
 
