@@ -1068,21 +1068,22 @@ code point is U+003A (:).
 <p class="note">As per the <a href=#url-writing>URL writing</a> section, only a
 <a>normalized Windows drive letter</a> is conforming.
 
-<p>A string <dfn>starts with Windows drive letter</dfn> if all of the following are true:
+<p>A string
+<dfn lt="start with a Windows drive letter|starts with a Windows drive letter">starts with a Windows drive letter</dfn>
+if all of the following are true:
 
-<ul>
- <li><p>it contains at least two code points and the first two code points are
- <a>Windows drive letter</a>.
-
- <li><p>it contains two code points or the third code point is U+002F (/), U+005C (\), U+003F (?),
- or U+0023 (#).
+<ul class=brief>
+ <li>its <a for=string>length</a> is greater than or equal to 2
+ <li>its first two code points are a <a>Windows drive letter</a>
+ <li>its <a for=string>length</a> is 2 or the third code point is U+002F (/), U+005C (\),
+ U+003F (?), or U+0023 (#).
 </ul>
 
-<div class=example id=example-starts-with-widows-drive-letter>
+<div class=example id=example-start-with-a-widows-drive-letter>
  <table>
   <tr>
    <th>String
-   <th>Result
+   <th>Starts with a Windows drive letter
   <tr>
    <td>"<code>c:</code>"
    <td>✅
@@ -1861,11 +1862,11 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <dd>
         <ol>
          <li>
-          <p>If the substring from <var>pointer</var> in the <var>input</var> does not
-          <a lt="starts with Windows drive letter">start with Windows drive letter</a>,
-          then set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-          <var>url</var>'s <a for=url>path</a> to a copy of <var>base</var>'s <a for=url>path</a>,
-          and then <a>shorten</a> <var>url</var>'s <a for=url>path</a>.
+          <p>If the substring from <var>pointer</var> in <var>input</var> does not
+          <a>start with a Windows drive letter</a>, then set <var>url</var>'s <a for=url>host</a> to
+          <var>base</var>'s <a for=url>host</a>, <var>url</var>'s <a for=url>path</a> to a copy of
+          <var>base</var>'s <a for=url>path</a>, and then <a>shorten</a> <var>url</var>'s
+          <a for=url>path</a>.
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
@@ -1896,9 +1897,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>base</var> is non-null and <var>base</var>'s <a for=url>scheme</a> is
-        "<code>file</code>" and the substring from <var>pointer</var> in the <var>input</var> does
-        not <a lt="starts with Windows drive letter">start with Windows drive letter</a>, then:
+        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a> is
+        "<code>file</code>", and the substring from <var>pointer</var> in <var>input</var> does not
+        <a>start with a Windows drive letter</a>, then:
 
         <ol>
          <li>
