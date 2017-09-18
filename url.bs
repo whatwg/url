@@ -1075,7 +1075,7 @@ if all of the following are true:
 <ul class=brief>
  <li>its <a for=string>length</a> is greater than or equal to 2
  <li>its first two code points are a <a>Windows drive letter</a>
- <li>its <a for=string>length</a> is 2 or the third code point is U+002F (/), U+005C (\),
+ <li>its <a for=string>length</a> is 2 or its third code point is U+002F (/), U+005C (\),
  U+003F (?), or U+0023 (#).
 </ul>
 
