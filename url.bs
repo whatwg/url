@@ -177,6 +177,9 @@ U+003E (>), U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([), U+005C (\), U+005D (]), U+005E (^), and U+007C (|).
 
+<p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
+U+0022 ("), U+003C(<), U+003E (>), and U+0060 (`).
+
 <p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using a <var>percentEncodeSet</var>,
 run these steps:
 
@@ -2161,7 +2164,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>C0 control percent-encode set</a>
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>fragment percent-encode set</a>
        and append the result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
     </dl>
