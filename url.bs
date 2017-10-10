@@ -119,17 +119,17 @@ being processed and <var>pointer</var> points to @, <a>c</a> is U+0040 (@) and <
 Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, after conversion to bytes,
 should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
 
-<p>To <dfn>percent encode</dfn> a <var>byte</var> into a <a>percent-encoded byte</a>, return a
-<a>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a> representing
+<p>To <dfn export>percent encode</dfn> a <var>byte</var> into a <a>percent-encoded byte</a>, return
+a <a>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a> representing
 <var>byte</var>.
 
-<p>To <dfn>percent decode</dfn> a byte sequence <var>input</var>, run these steps:
+<p>To <dfn export>percent decode</dfn> a <a>byte sequence</a> <var>input</var>, run these steps:
 
 <p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when the <var>input</var>
 contains bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
 <ol>
- <li><p>Let <var>output</var> be an empty byte sequence.
+ <li><p>Let <var>output</var> be an empty <a>byte sequence</a>.
 
  <li>
   <p>For each byte <var>byte</var> in <var>input</var>:
@@ -159,6 +159,16 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 
  <li><p>Return <var>output</var>.
 </ol>
+
+<p>To <dfn export>string percent decode</dfn> a string <var>input</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>bytes</var> be the <a>UTF-8 encoding</a> of <var>input</var>.
+
+ <li><p>Return the <a>percent decoding</a> of <var>bytes</var>.
+</ol>
+
+<hr>
 
 <!-- the escape sets are minimal as escaping can lead to problems; we might
      be able to escape more here but only if implementors are willing and
@@ -380,7 +390,7 @@ requires context to be distinguished.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
-  <a lt="percent decode">percent decoding</a> of <a>UTF-8 encode</a> on <var>input</var>.
+  <a>string percent decoding</a> of <var>input</var>.
 
   <p class="note no-backref">Alternatively <a>UTF-8 decode without BOM or fail</a> can be used,
   coupled with an early return for failure, as <a>domain to ASCII</a> fails on
