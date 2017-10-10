@@ -170,7 +170,7 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 and all <a>code points</a> greater than U+007E (~).
 
 <p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+003C(&lt;), U+003E (&gt;), and U+0060 (`).
+U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
 <a>fragment percent-encode set</a> and U+0023 (#), U+003F (?), U+007B ({), and U+007D (}).
