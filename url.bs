@@ -169,16 +169,15 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 <p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
 and all <a>code points</a> greater than U+007E (~).
 
+<p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
+U+0022 SPACE, U+0022 ("), U+003C(&lt;), U+003E (&gt;), and U+0060 (`).
+
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
-<a>C0 control percent-encode set</a> and U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;),
-U+003E (>), U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
+<a>fragment percent-encode set</a> and U+0023 (#), U+003F (?), U+007B ({), and U+007D (}).
 
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([), U+005C (\), U+005D (]), U+005E (^), and U+007C (|).
-
-<p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0022 ("), U+003C(<), U+003E (>), and U+0060 (`).
 
 <p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using a <var>percentEncodeSet</var>,
 run these steps:
