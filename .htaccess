@@ -1,6 +1,0 @@
-Redirect 410 /interop
-Redirect 301 /reference-implementation/liveview.html https://quuz.org/url/liveview.html
-Redirect 301 /reference-implementation/liveview2.html https://quuz.org/url/liveview2.html
-Redirect 301 /reference-implementation/liveview3.html https://quuz.org/url/liveview3.html
-Redirect 301 /reference-implementation/uri-validate.html https://quuz.org/url/uri-validate.html
-Redirect 410 /reference-implementation
