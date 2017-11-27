@@ -37,7 +37,7 @@ Boilerplate: omit feedback-header, omit conformance
  <li><p>Standardize on the term URL. URI and IRI are just confusing. In
  practice a single algorithm is used for both so keeping them distinct is
  not helping anyone. URL also easily wins the
- <a href="http://www.googlefight.com/index.php?word1=url&amp;word2=uri">search result popularity contest</a>.
+ <a href="https://trends.google.com/trends/explore?q=url,uri">search result popularity contest</a>.
 
  <li><p>Supplanting <a href="https://tools.ietf.org/html/rfc6454#section-4">Origin of a URI [sic]</a>.
  [[RFC6454]]
@@ -3157,6 +3157,7 @@ Michel Suignard,
 Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
+Philippe Ombredanne,
 Prayag Verma,
 Rimas Misevičius,
 Robert Kieffer,
