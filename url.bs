@@ -171,7 +171,7 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 <hr>
 
 <!-- the escape sets are minimal as escaping can lead to problems; we might
-     be able to escape more here but only if implementors are willing and
+     be able to escape more here but only if implementers are willing and
      there's an upside
 
      note that query and application/x-www-form-urlencoded use their own
@@ -2401,7 +2401,7 @@ name is `<code>_charset</code>`. Such logic is not described here as only <a>UTF
 conforming.
 
 <p>The
-<dfn export id=concept-urlencoded-parser lt="application/x-www-form-urlencoded parser|application/x-www-form-urlencoded parsing"><code>application/x-www-form-urlencoded</code> parser</dfn>
+<dfn export id=concept-urlencoded-parser lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, and then runs these steps:
 
 <ol>
@@ -2945,7 +2945,7 @@ initially null.
    <var>pair</var>'s second item, to <var>query</var>'s <a for=URLSearchParams>list</a>.
   </ol>
 
- <li><p>Otherwise, if <var>init</var> is a <a>record</a>, then <a for=map>for each</a>
+ <li><p>Otherwise, if <var>init</var> is a <a for=/>record</a>, then <a for=map>for each</a>
  <var>name</var> → <var>value</var> in <var>init</var>, append a new name-value pair whose name is
  <var>name</var> and value is <var>value</var>, to <var>query</var>'s
  <a for=URLSearchParams>list</a>.
@@ -3202,7 +3202,7 @@ spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
     type: interface; text: MediaSource
 spec: MEDIACAPTURE-STREAMS; urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-
     type: interface; text: MediaStream
-spec: UTS46; urlPrefix: http://www.unicode.org/reports/tr46/
+spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToASCII; url: #ToASCII
     type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
