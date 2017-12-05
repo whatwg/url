@@ -179,9 +179,11 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 <p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
 and all <a>code points</a> greater than U+007E (~).
 
+<p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
+U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
+
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
-<a>C0 control percent-encode set</a> and U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;),
-U+003E (>), U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
+<a>fragment percent-encode set</a> and U+0023 (#), U+003F (?), U+007B ({), and U+007D (}).
 
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
@@ -2184,7 +2186,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>C0 control percent-encode set</a>
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>fragment percent-encode set</a>
        and append the result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
     </dl>
