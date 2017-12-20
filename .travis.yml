@@ -3,10 +3,13 @@ language: generic
 env:
   global:
     - ENCRYPTION_LABEL="82f6fcb5a224"
-    - DEPLOY_USER="annevankesteren"
 
 script:
   - curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
+
+branches:
+  only:
+    - master
 
 notifications:
   email:
