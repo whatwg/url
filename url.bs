@@ -2546,7 +2546,7 @@ name-value-type tuples. [[HTML]]
 <p>The
 <dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
-<a><code>application/x-www-form-urlencoded</code> parsing</a> it.
+<a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
