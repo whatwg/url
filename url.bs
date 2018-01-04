@@ -3,7 +3,7 @@ Group: WHATWG
 H1: URL
 Shortname: url
 Text Macro: TWITTER urlstandard
-Abstract: The URL Standard defines URLs, domains, IP addresses, the <code title>application/x-www-form-urlencoded</code> format, and their API.
+Abstract: The URL Standard defines URLs, domains, IP addresses, the <code><a>application/x-www-form-urlencoded</a></code> format, and their API.
 Translation: ja https://triple-underscore.github.io/URL-ja.html
 </pre>
 
@@ -2532,7 +2532,7 @@ name-value-type tuples. [[HTML]]
 <p>The
 <dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
-<a><code>application/x-www-form-urlencoded</code> parsing</a> it.
+<a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
