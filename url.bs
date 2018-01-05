@@ -3,7 +3,7 @@ Group: WHATWG
 H1: URL
 Shortname: url
 Text Macro: TWITTER urlstandard
-Abstract: The URL Standard defines URLs, domains, IP addresses, the <code><a>application/x-www-form-urlencoded</a></code> format, and their API.
+Abstract: The URL Standard defines URLs, domains, IP addresses, the <code>application/x-www-form-urlencoded</code> format, and their API.
 Translation: ja https://triple-underscore.github.io/URL-ja.html
 </pre>
 
