@@ -4,5 +4,5 @@ local: url.bs
 remote: url.bs
 	curl https://api.csswg.org/bikeshed/ -f -F file=@url.bs > url.html -F md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
 
-deploy: dom.bs
+deploy: url.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
