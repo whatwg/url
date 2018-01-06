@@ -35,7 +35,7 @@ If you want to do a complete "local deploy" including commit and/or branch snaps
 ### Merge policy
 
 If you can commit to this repository, see the
-[html repository's TEAM](https://github.com/whatwg/html/blob/master/TEAM.md) for guidelines.
+[WHATWG maintainer guidlines](https://github.com/whatwg/meta/blob/master/MAINTAINERS.md) for more details.
 
 ### Tests
 
