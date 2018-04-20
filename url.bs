@@ -56,7 +56,6 @@ might increase in scope somewhat.
  <li>File API [[!FILEAPI]]
  <li>HTML Standard [[!HTML]]
  <li>Media Source Extensions [[!MEDIA-SOURCE]]
- <li>Media Capture and Streams [[!MEDIACAPTURE-STREAMS]]
  <li>Unicode IDNA Compatibility Processing [[!UTS46]]
  <li>Web IDL [[!WEBIDL]]
 </ul>
@@ -1001,12 +1000,10 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
-<p>A <a for=/>URL</a> also has an associated
-<dfn export for=url id=concept-url-object>object</dfn> that is null, a {{Blob}} object, a
-{{MediaSource}} object, or a {{MediaStream}} object. It is initially null.
+<p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-object>object</dfn>
+that is null, a {{Blob}} object, or a {{MediaSource}} object. It is initially null.
 [[!FILEAPI]]
 [[!MEDIA-SOURCE]]
-[[!MEDIACAPTURE-STREAMS]]
 
 <p class="note no-backref">At this point this is used primarily to support
 "<code>blob</code>" <a for=/>URLs</a>, but others can be added going forward, hence
@@ -3185,8 +3182,6 @@ for being awesome!
 <pre class=anchors>
 spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
     type: interface; text: MediaSource
-spec: MEDIACAPTURE-STREAMS; urlPrefix: https://w3c.github.io/mediacapture-main/#idl-def-
-    type: interface; text: MediaStream
 spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToASCII; url: #ToASCII
     type: abstract-op; text: ToUnicode; url: #ToUnicode
