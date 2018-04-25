@@ -2495,8 +2495,8 @@ takes a list of name-value or name-value-type tuples <var>tuples</var>, optional
 
    <li><p>Let <var>value</var> be <var>tuple</var>'s value.
 
-   <li><p>If <var>tuple</var> has a type, and it is "<code>file</code>", then
-   set <var>value</var> to <var>value</var>'s filename.
+   <li><p>If <var>tuple</var> has a type and it is "<code>file</code>", then set <var>value</var> to
+   <var>value</var>'s filename.
 
    <li><p>Set <var>value</var> to the result of <a lt="urlencoded byte serializer">serializing</a>
    the result of <a lt=encode>encoding</a> <var>value</var>, using <var>encoding</var>.
