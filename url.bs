@@ -2475,8 +2475,8 @@ takes a byte sequence <var>input</var> and then runs these steps:
 
 <p>The
 <dfn export id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
-takes a list of name-value or name-value tuples <var>tuples</var>, optionally with an
-<a for=/>encoding</a> <var>encoding override</var>, and then runs these steps:
+takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/>encoding</a> <var>encoding
+override</var>, and then runs these steps:
 
 <ol>
  <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
