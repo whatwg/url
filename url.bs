@@ -2106,15 +2106,21 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dd>
     <ol>
      <li>
+      <p>If <var>encoding</var> is not <a>UTF-8</a> and one of the following is true
+
+      <ul class=brief>
+       <li><p><var>url</var> <a lt="is special">is not special</a>
+       <li><p><var>url</var>'s <a for=url>scheme</a> is "<code>ws</code>" or "<code>wss</code>"
+      </ul>
+
+      <p>then set <var>encoding</var> to <a>UTF-8</a>.
+      <!-- https://simon.html5.org/test/url/url-encoding.html -->
+
+     <li>
       <p>If <a>c</a> is the <a>EOF code point</a>, or <var>state override</var> is not given and
       <a>c</a> is U+0023 (#), then:
 
       <ol>
-       <li><p>If <var>url</var> <a lt="is special">is <em>not</em> special</a> or <var>url</var>'s
-       <a for=url>scheme</a> is either "<code>ws</code>" or "<code>wss</code>", set
-       <var>encoding</var> to <a>UTF-8</a>.
-       <!-- https://simon.html5.org/test/url/url-encoding.html -->
-
        <li><p>Set <var>buffer</var> to the result of <a lt=encode>encoding</a> <var>buffer</var>
        using <var>encoding</var>.
 
