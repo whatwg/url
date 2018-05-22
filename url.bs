@@ -358,10 +358,12 @@ requires context to be distinguished.
 
 <h3 id=host-parsing>Host parsing</h3>
 
-<p>The <dfn id=concept-host-parser>host parser</dfn> takes a string <var>input</var>, a boolean
-<var>isSpecial</var>, and then runs these steps:
+<p>The <dfn export id=concept-host-parser lt="host parser|host parsing">host parser</dfn> takes a
+string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and then runs these steps:
 
 <ol>
+ <li><p>If <var>isNotSpecial</var> is not given, then set <var>isNotSpecial</var> to false.
+
  <li>
   <p>If <var>input</var> starts with U+005B ([), then:
 
@@ -372,7 +374,7 @@ requires context to be distinguished.
    leading U+005B ([) and trailing U+005D (]) removed.
   </ol>
 
- <li><p>If <var>isSpecial</var> is false, then return the result of
+ <li><p>If <var>isNotSpecial</var> is true, then return the result of
  <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
 
  <li>
@@ -1036,7 +1038,8 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
      elsewhere though. -->
 
 <p>A <a for=/>URL</a> <dfn export>is special</dfn> if its <a for=url>scheme</a> is a
-<a>special scheme</a>.
+<a>special scheme</a>. A <a for=/>URL</a> <dfn>is not special</dfn> if its <a for=url>scheme</a> is
+not a <a>special scheme</a>.
 
 <p>A <a for=/>URL</a>
 <dfn export lt="include credentials|includes credentials">includes credentials</dfn> if its
@@ -1715,8 +1718,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <var>buffer</var> is the empty string, <a>validation error</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
-       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
-       <var>buffer</var> with <var>url</var> <a>is special</a>.
+       <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
+       <var>url</var> <a>is not special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
 
@@ -1748,8 +1751,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
        <a for=url>port</a> is non-null, <a>validation error</a>, return.
 
-       <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
-       <var>buffer</var> with <var>url</var> <a>is special</a>.
+       <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
+       <var>url</var> <a>is not special</a>.
 
        <li><p>If <var>host</var> is failure, then return failure.
 
@@ -1946,8 +1949,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>Otherwise, run these steps:
 
         <ol>
-         <li><p>Let <var>host</var> be the result of <a lt="host parser">host parsing</a>
-         <var>buffer</var> with <var>url</var> <a>is special</a>.
+         <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
+         <var>url</var> <a>is not special</a>.
 
          <li><p>If <var>host</var> is failure, then return failure.
 
@@ -2109,7 +2112,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>If <var>encoding</var> is not <a>UTF-8</a> and one of the following is true
 
       <ul class=brief>
-       <li><p><var>url</var> <a lt="is special">is not special</a>
+       <li><p><var>url</var> <a>is not special</a>
        <li><p><var>url</var>'s <a for=url>scheme</a> is "<code>ws</code>" or "<code>wss</code>"
       </ul>
 
@@ -2603,14 +2606,13 @@ URLPath would be a subclassed Array? -->
    <li><p>Let <var>parsedBase</var> be the result of running the <a>basic URL parser</a> on
    <var>base</var>.
 
-   <li><p>If <var>parsedBase</var> is failure, then <a>throw</a> a <code>TypeError</code> exception.
+   <li><p>If <var>parsedBase</var> is failure, then <a>throw</a> a {{TypeError}}.
   </ol>
 
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on
  <var>url</var> with <var>parsedBase</var>.
 
- <li><p>If <var>parsedURL</var> is failure, <a>throw</a> a <code>TypeError</code>
- exception.
+ <li><p>If <var>parsedURL</var> is failure, not <a>throw</a> a {{TypeError}}.
 
  <li><p>Let <var>query</var> be <var>parsedURL</var>'s <a for=url>query</a>, if that is non-null,
  and the empty string otherwise.
@@ -2671,7 +2673,7 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on the given
  value.
 
- <li><p>If <var>parsedURL</var> is failure, <a>throw</a> a <code>TypeError</code> exception.
+ <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a {{TypeError}}.
 
  <li><p>Set <a>context object</a>'s <a for=URL>url</a> to <var>parsedURL</var>.
 
@@ -3064,7 +3066,7 @@ these steps:
 <a for=URLSearchParams>list</a> name-value pairs with the key being
 the name and the value being the value.
 
-<p>The <dfn dfn for=URLSearchParams>stringification behavior</dfn> must return the
+<p>The <dfn for=URLSearchParams>stringification behavior</dfn> must return the
 <a lt='urlencoded serializer'>serialization</a> of the {{URLSearchParams}} object's
 <a for=URLSearchParams>list</a>.
 
