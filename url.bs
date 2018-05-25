@@ -272,6 +272,97 @@ for further processing.
 U+0020 SPACE, U+0023 (#), U+0025 (%), U+002F (/), U+003A (:), U+003F (?), U+0040 (@), U+005B ([),
 U+005C (\), or U+005D (]).
 
+<p>A <a for=/>host</a>'s <dfn for=host export id=concept-host-public-suffix>public suffix</dfn> is
+the portion of a <a for=/>host</a> which is controlled by a registrar, public or otherwise. To
+obtain <var>host</var>'s <a for=host>public suffix</a>, run the following steps:
+
+<ol>
+ <li><p>Let <var>parsed</var> be the result of <a lt="host parser">host parsing</a> <var>host</var>.
+
+ <li><p>If <var>parsed</var> is not a <a>domain</a>, return the empty string.
+
+ <li><p>Return the <a for=host>public suffix</a> obtained by executing the
+ <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List. [[!PSL]].
+</ol>
+
+<p>A <a for=/>host</a>'s <dfn for=host export id=concept-host-registrable-domain>registrable
+domain</dfn> is a formally valid domain name that could be registered at a registry. To obtain
+<var>host</var>'s <a for=host>registrable domain</a>, run the following steps:
+
+<ol>
+ <li><p>Let <var>parsed</var> be the result of <a lt="host parser">host parsing</a> <var>host</var>.
+
+ <li><p>If <var>parsed</var> is not a <a>domain</a>, return the empty string.
+
+ <li><p>If <var>parsed</var>'s <a for=host>public suffix</a> is <var>host</var>, return the empty
+ string.
+
+ <li><p>Return the <a for=host>registrable domain</a> obtained by executing the
+ <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List. [[!PSL]].
+</ol>
+
+<div class=example id=example-host-psl>
+ <table>
+  <tr>
+   <th>Host
+   <th>Public Suffix
+   <th>Registrable Domain
+  <tr>
+   <td><code>com</code>
+   <td><code>com</code>
+   <td>
+  <tr>
+   <td><code>example.com</code>
+   <td><code>com</code>
+   <td><code>example.com</code>
+  <tr>
+   <td><code>www.example.com</code>
+   <td><code>com</code>
+   <td><code>example.com</code>
+  <tr>
+   <td><code>sub.www.example.com</code>
+   <td><code>com</code>
+   <td><code>example.com</code>
+  <tr>
+   <td><code>EXAMPLE.COM</code>
+   <td><code>com</code>
+   <td><code>example.com</code>
+  <tr>
+   <td><code>github.io</code>
+   <td><code>github.io</code>
+   <td>
+  <tr>
+   <td><code>whatwg.github.io</code>
+   <td><code>github.io</code>
+   <td><code>whatwg.github.io</code>
+  <tr>
+   <td><code>whatwg.github.io</code>
+   <td><code>github.io</code>
+   <td><code>whatwg.github.io</code>
+  <tr>
+   <td><code>إختبار</code>
+   <td><code>xn-kgbechtv</code>
+   <td>
+  <tr>
+   <td><code>example.إختبار</code>
+   <td><code>xn-kgbechtv</code>
+   <td><code>example.xn-kgbechtv</code>
+  <tr>
+   <td><code>sub.example.إختبار</code>
+   <td><code>xn-kgbechtv</code>
+   <td><code>example.xn-kgbechtv</code>
+ </table>
+</div>
+
+<p>Two <a for=/>hosts</a>, <var>A</var> and <var>B</var> are said to be
+<dfn for=host export id=concept-host-same-site>same-site</dfn> with each other if either of the
+following statements are true:
+
+<ul class=brief>
+ <li><p><var>A</var> is identical to <var>B</var>
+ <li><p><var>A</var>'s <a for=host>registrable domain</a> is not the empty string, and is identical
+ to <var>B</var>'s <a for=host>registrable domain</a>.
+</ul>
 
 <h3 id=idna>IDNA</h3>
 
