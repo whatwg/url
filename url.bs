@@ -277,12 +277,11 @@ the portion of a <a for=/>host</a> which is controlled by a registrar, public or
 obtain <var>host</var>'s <a for=host>public suffix</a>, run the following steps:
 
 <ol>
- <li><p>Let <var>parsed</var> be the result of <a lt="host parser">host parsing</a> <var>host</var>.
-
- <li><p>If <var>parsed</var> is not a <a>domain</a>, return the empty string.
+ <li><p>If <var>host</var> is not a <a>domain</a>, return null.
 
  <li><p>Return the <a for=host>public suffix</a> obtained by executing the
- <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List. [[!PSL]].
+ <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List on
+ <var>host</var>. [[!PSL]].
 </ol>
 
 <p>A <a for=/>host</a>'s <dfn for=host export id=concept-host-registrable-domain>registrable
@@ -290,21 +289,18 @@ domain</dfn> is a formally valid domain name that could be registered at a regis
 <var>host</var>'s <a for=host>registrable domain</a>, run the following steps:
 
 <ol>
- <li><p>Let <var>parsed</var> be the result of <a lt="host parser">host parsing</a> <var>host</var>.
-
- <li><p>If <var>parsed</var> is not a <a>domain</a>, return the empty string.
-
- <li><p>If <var>parsed</var>'s <a for=host>public suffix</a> is <var>host</var>, return the empty
- string.
+ <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null, or
+ <a lt=concept-host-equals>equals</a> <var>host</var>, return null.
 
  <li><p>Return the <a for=host>registrable domain</a> obtained by executing the
- <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List. [[!PSL]].
+ <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List on
+ <var>host</var>. [[!PSL]].
 </ol>
 
 <div class=example id=example-host-psl>
  <table>
   <tr>
-   <th>Host
+   <th>Host Input
    <th>Public Suffix
    <th>Registrable Domain
   <tr>
@@ -355,11 +351,11 @@ domain</dfn> is a formally valid domain name that could be registered at a regis
 </div>
 
 <p>Two <a for=/>hosts</a>, <var>A</var> and <var>B</var> are said to be
-<dfn for=host export id=concept-host-same-site>same-site</dfn> with each other if either of the
+<dfn for=host export id=concept-host-same-site>same site</dfn> with each other if either of the
 following statements are true:
 
 <ul class=brief>
- <li><p><var>A</var> is identical to <var>B</var>
+ <li><p><var>A</var> <a lt=concept-host-equals>equals</a> <var>B</var>
  <li><p><var>A</var>'s <a for=host>registrable domain</a> is not the empty string, and is identical
  to <var>B</var>'s <a for=host>registrable domain</a>.
 </ul>
