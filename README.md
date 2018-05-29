@@ -2,7 +2,7 @@ This repository hosts the [URL Standard](https://url.spec.whatwg.org/).
 
 ### Code of conduct
 
-We are committed to providing a friendly, safe and welcoming environment for all. Please read and
+We are committed to providing a friendly, safe, and welcoming environment for all. Please read and
 respect the [WHATWG Code of Conduct](https://whatwg.org/code-of-conduct).
 
 ### Contribution opportunities
@@ -24,7 +24,9 @@ fixes. The names are sorted lexicographically.
 
 ### Building "locally"
 
-For quick local iteration, run `make`. To verify your changes locally, run `make deploy`. See more in the [WHATWG Contributor Guidelines](https://github.com/whatwg/meta/blob/master/CONTRIBUTING.md#building).
+For quick local iteration, run `make`. To verify your changes locally, run `make deploy`. See more
+in the
+[WHATWG Contributor Guidelines](https://github.com/whatwg/meta/blob/master/CONTRIBUTING.md#building).
 
 ### Merge policy
 
