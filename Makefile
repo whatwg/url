@@ -5,7 +5,9 @@ local: url.bs
 	bikeshed spec url.bs url.html --md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
 
 deploy: url.bs
-	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh && bash ./deploy.sh
+	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
+	bash ./deploy.sh
 
 review: url.bs
-	curl --remote-name --fail https://resources.whatwg.org/build/review.sh && bash ./review.sh
+	curl --remote-name --fail https://resources.whatwg.org/build/review.sh
+	bash ./review.sh
