@@ -2612,7 +2612,7 @@ URLPath would be a subclassed Array? -->
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on
  <var>url</var> with <var>parsedBase</var>.
 
- <li><p>If <var>parsedURL</var> is failure, not <a>throw</a> a {{TypeError}}.
+ <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a {{TypeError}}.
 
  <li><p>Let <var>query</var> be <var>parsedURL</var>'s <a for=url>query</a>, if that is non-null,
  and the empty string otherwise.
