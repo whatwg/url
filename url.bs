@@ -364,13 +364,13 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  <ul>
   <li><p><code>example.com</code>, <code>sub.example.com</code>, <code>other.example.com</code>,
   <code>sub.sub.example.com</code>, and <code>sub.other.example.com</code> are all <a>same site</a>
-  with each other (and themselves), as each their <a for=host>registrable domain</a> is
+  with each other (and themselves), as their <a for=host>registrable domains</a> are
   <code>example.com</code>.
 
   <li><p><code>registrable.suffix.example</code>, <code>sub.registrable.suffix.example</code>,
   <code>other.registrable.suffix.example</code>, <code>sub.sub.registrable.suffix.example</code>,
   and <code>sub.other.registrable.suffix.example</code> are all <a>same site</a> with each other
-  (and themselves), as each their <a for=host>registrable domain</a> is
+  (and themselves), as their <a for=host>registrable domains</a> are
   <code>registrable.suffix.example</code>.
 
   <li><p><code>example.com</code> and <code>registrable.suffix.example</code> are not
