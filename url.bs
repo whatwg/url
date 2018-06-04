@@ -284,9 +284,10 @@ U+005C (\), or U+005D (]).
  <var>host</var>. [[!PSL]].
 </ol>
 
-<p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> that could
-be registered at a registry. To obtain <var>host</var>'s <a for=host>registrable domain</a>, run
-these steps:
+<p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
+the most specific public suffix, along with the domain label immediately preceeding it. If no such
+label is available, the <a for=host>registrable domain</a> is null. To obtain <var>host</var>'s
+<a for=host>registrable domain</a>, run these steps:
 
 <ol>
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
@@ -384,7 +385,11 @@ these steps:
 
 <p class=warning>Specifications should avoid relying on "<a for=host>public suffix</a>",
 "<a for=host>registrable domain</a>", and "<a>same site</a>". The public suffix list will diverge
-from client to client, and cannot be relied-upon to provide a hard security boundary.</p>
+from client to client, and cannot be relied-upon to provide a hard security boundary. Specifications
+which ignore this advice are encouraged to carefully consider whether URLs' schemes ought to be
+incorporated into any decision made based upon whether or not two <a for=/>hosts</a> are <a>same
+site</a>. HTML's <a>same origin-domain</a> concept is a reasonable example of this consideration in
+practice.
 
 
 <h3 id=idna>IDNA</h3>
