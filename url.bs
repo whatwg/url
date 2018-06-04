@@ -273,7 +273,7 @@ U+0020 SPACE, U+0023 (#), U+0025 (%), U+002F (/), U+003A (:), U+003F (?), U+0040
 U+005C (\), or U+005D (]).
 
 <p>A <a for=/>host</a>'s <dfn for=host export>public suffix</dfn> is the portion of a
-<a for=/>host</a> which is controlled by a registrar, public or otherwise. To obtain
+<a for=/>host</a> which is included on the Public Suffix List [[!PSL]]. To obtain
 <var>host</var>'s <a for=host>public suffix</a>, run these steps:
 
 <ol>
@@ -290,8 +290,7 @@ these steps:
 
 <ol>
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
- <a for=host>public suffix</a> <a lt=concept-host-equals>equals</a> <var>host</var>, then return
- null.
+ <a for=host>public suffix</a> <a for=host>equals</a> <var>host</var>, then return null.
 
  <li><p>Return the <a for=host>registrable domain</a> obtained by executing the
  <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List on
@@ -307,7 +306,7 @@ these steps:
   <tr>
    <td><code>com</code>
    <td><code>com</code>
-   <td>
+   <td><i>null</i>
   <tr>
    <td><code>example.com</code>
    <td><code>com</code>
@@ -327,11 +326,7 @@ these steps:
   <tr>
    <td><code>github.io</code>
    <td><code>github.io</code>
-   <td>
-  <tr>
-   <td><code>whatwg.github.io</code>
-   <td><code>github.io</code>
-   <td><code>whatwg.github.io</code>
+   <td><i>null</i>
   <tr>
    <td><code>whatwg.github.io</code>
    <td><code>github.io</code>
@@ -339,7 +334,7 @@ these steps:
   <tr>
    <td><code>إختبار</code>
    <td><code>xn-kgbechtv</code>
-   <td>
+   <td><i>null</i>
   <tr>
    <td><code>example.إختبار</code>
    <td><code>xn-kgbechtv</code>
@@ -355,10 +350,41 @@ these steps:
 <dfn for=host export>same site</dfn> with each other if either of the following statements are true:
 
 <ul class=brief>
- <li><p><var>A</var> <a lt=concept-host-equals>equals</a> <var>B</var>
+ <li><p><var>A</var> <a for=host>equals</a> <var>B</var>, and <var>A</var>'s <a for=host>registrable
+ domain</a> is not null.
+
  <li><p><var>A</var>'s <a for=host>registrable domain</a> is <var>B</var>'s
  <a for=host>registrable domain</a> and is not null.
 </ul>
+
+<div class=example id=example-same-site>
+ <p>Assuming that <code>suffix.example</code> is a <a for=host>public suffix</a>, and that
+ <code>example.com</code> is not:
+
+ <ul>
+  <li><p><code>example.com</code>, <code>sub.example.com</code>, <code>other.example.com</code>,
+  <code>sub.sub.example.com</code>, and <code>sub.other.example.com</code> are all <a>same site</a>
+  with each other (and themselves), as each host's <a for=host>registrable domain</a> is
+  <code>example.com</code>.
+
+  <li><p><code>registrable.suffix.example</code>, <code>sub.registrable.suffix.example</code>,
+  <code>other.registrable.suffix.example</code>, <code>sub.sub.registrable.suffix.example</code>,
+  and <code>sub.other.registrable.suffix.example</code> are all <a>same site</a> with each other
+  (and themselves), as each host's <a for=host>registrable domain</a> is
+  <code>registrable.suffix.example</code>.
+
+  <li><p><code>example.com</code> and <code>registrable.suffix.example</code> are not <a>same
+  site</a> with each other, as their <a for=host>registrable domains</a> differ.
+
+  <li><p><code>suffix.example</code> is not <a>same site</a> with <code>suffix.example</code>, as
+  it is a <a for=host>public suffix</a>, and therefore has a null <a for=host>registrable
+  domain</a>.
+ </ul>
+</div>
+
+<p class=warning>Specifications should avoid relying on "<a for=host>public suffix</a>",
+"<a for=host>registrable domain</a>", and "<a>same site</a>". The public suffix list will diverge
+from client to client, and cannot be relied-upon to provide a hard security boundary.</p>
 
 
 <h3 id=idna>IDNA</h3>
