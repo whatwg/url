@@ -2469,7 +2469,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
    <dt>0x20 (SP)
    <dd><p>Append U+002B (+) to <var>output</var>.
 
-   <dt>0x2A (*)
+   <dt>0x7E (~)
    <dt>0x2D (-)
    <dt>0x2E (.)
    <dt>0x30 (0) to 0x39 (9)
