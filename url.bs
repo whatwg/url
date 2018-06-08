@@ -2281,6 +2281,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
            <li><p><var>byte</var> is less than 0x21 (!)
            <li><p><var>byte</var> is greater than 0x7E (~)
            <li><p><var>byte</var> is 0x22 ("), 0x23 (#), 0x3C (&lt;), or 0x3E (>)
+           <li><p><var>byte</var> is 0x27 (') and <var>url</var> <a>is special</a>
           </ul>
 
           <p>then append <var>byte</var>, <a lt="percent encode">percent encoded</a>, to
