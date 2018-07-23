@@ -402,7 +402,7 @@ consideration in practice.
  <li><p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
  with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
  <var>beStrict</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
- <i>CheckJoiners</i> set to true, <i>processing_option</i> set to <i>Nontransitional_Processing</i>,
+ <i>CheckJoiners</i> set to true, <i>Transitional_Processing</i> set to false,
  and <i>VerifyDnsLength</i> set to <var>beStrict</var>.
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
@@ -417,7 +417,7 @@ consideration in practice.
  <li><p>Let <var>result</var> be the result of running
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>domain</var>,
  <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
- and <i>UseSTD3ASCIIRules</i> set to false.
+ <i>UseSTD3ASCIIRules</i> set to false, and <i>Transitional_Processing</i> set to false.
 
  <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
  <var>result</var>.
@@ -441,7 +441,7 @@ consideration in practice.
  <li><p>Set <var>result</var> to the result of running
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>result</var>,
  <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
- and <i>UseSTD3ASCIIRules</i> set to true.
+ <i>UseSTD3ASCIIRules</i> set to true, and <i>Transitional_Processing</i> set to false.
 
  <li><p>If <var>result</var> contains any errors, return failure.
 
