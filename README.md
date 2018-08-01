@@ -19,7 +19,7 @@ In short, change `url.bs` and submit your patch, with a
 [good commit message](https://github.com/whatwg/meta/blob/master/COMMITTING.md). Consider
 reading through the [WHATWG FAQ](https://whatwg.org/faq) if you are new here.
 
-If your patch makes normative (behavioural) changes, you will be asked to add or update
+If your patch makes normative (behavioral) changes, you will be asked to add or update
 [tests](https://github.com/web-platform-tests/wpt), and update the
 [jsdom/whatwg-url](https://github.com/jsdom/whatwg-url) implementation (see "Tests and
 implementations" below).
