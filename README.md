@@ -48,6 +48,6 @@ A complete JavaScript implementation of the standard can be found at
 [jsdom/whatwg-url](https://github.com/jsdom/whatwg-url). This implementation is kept in sync with
 the standard and tests.
 
-The [Live URL Viewer](https://quuz.org/url/liveview.html) lets you manually test-parse any URL,
+The [Live URL Viewer](https://jsdom.github.io/whatwg-url/) lets you manually test-parse any URL,
 comparing your browser's URL parser to that of
 [jsdom/whatwg-url](https://github.com/jsdom/whatwg-url).
