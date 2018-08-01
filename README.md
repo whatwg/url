@@ -19,6 +19,11 @@ In short, change `url.bs` and submit your patch, with a
 [good commit message](https://github.com/whatwg/meta/blob/master/COMMITTING.md). Consider
 reading through the [WHATWG FAQ](https://whatwg.org/faq) if you are new here.
 
+If your patch makes normative (behavioural) changes, you will be asked to add or update
+[tests](https://github.com/web-platform-tests/wpt), and update the
+[jsdom/whatwg-url](https://github.com/jsdom/whatwg-url) implementation (see "Tests and
+implementations" below).
+
 Please add your name to the Acknowledgments section in your first pull request, even for trivial
 fixes. The names are sorted lexicographically.
 
@@ -33,7 +38,16 @@ in the
 If you can commit to this repository, see the
 [WHATWG Maintainer Guidelines](https://github.com/whatwg/meta/blob/master/MAINTAINERS.md).
 
-## Tests
+## Tests and implementations
 
 Tests can be found in the `url/` directory of
-[web-platform-tests/wpt](https://github.com/web-platform-tests/wpt).
+[web-platform-tests/wpt](https://github.com/web-platform-tests/wpt). A dashboard showing the tests
+running against major browsers can be seen at [wpt.fyi](https://wpt.fyi/results/url).
+
+A complete JavaScript implementation of the standard can be found at
+[jsdom/whatwg-url](https://github.com/jsdom/whatwg-url). This implementation is kept in sync with
+the standard and tests.
+
+The [Live URL Viewer](https://quuz.org/url/liveview.html) lets you manually test-parse any URL,
+comparing your browser's URL parser to that of
+[jsdom/whatwg-url](https://github.com/jsdom/whatwg-url).
