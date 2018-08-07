@@ -240,8 +240,8 @@ identifier in <a for=/>URLs</a> where a network address is not necessary.
 have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
 in the sections that follow.
 
-<p>A <dfn export id=concept-domain>domain</dfn> identifies a realm within a
-network.
+<p>A <dfn export id=concept-domain>domain</dfn> is an <a>ASCII string</a> that identifies a realm
+within a network.
 [[RFC1034]]
 
 <p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
@@ -393,7 +393,7 @@ consideration in practice.
 
 <h3 id=idna>IDNA</h3>
 
-<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>domain</a>
+<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>string</a>
 <var>domain</var> and optionally a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
@@ -935,9 +935,9 @@ unified model would be, please file an issue.
  failure when given to the <a>URL parser</a>. I.e., input that would be considered conforming or
  valid.
 
- <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns a string. (If that string
- is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the <a for=/>URL</a>
- that was <a lt="URL serializer">serialized</a>.)
+ <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns an <a>ASCII string</a>. (If
+ that string is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the <a
+ for=/>URL</a> that was <a lt="URL serializer">serialized</a>.)
 </ul>
 
 <div class=example id=example-url-parsing>
