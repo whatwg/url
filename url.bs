@@ -1140,6 +1140,7 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
  <tr><th><a for=url>scheme</a>
      <th><a for=url>port</a>
  <tr><td>"<code>ftp</code>"<td>21
+ <tr><td>"<code>ftps</code>"<td>990
  <tr><td>"<code>file</code>"<td>
  <tr><td>"<code>gopher</code>"<td>70
  <tr><td>"<code>http</code>"<td>80
@@ -3243,6 +3244,7 @@ David Singer,
 David Walp,
 Domenic Denicola,
 Erik Arvidsson,
+ExE Boss,
 Gavin Carothers,
 Geoff Richards,
 Glenn Maynard,
