@@ -58,6 +58,7 @@ might increase in scope somewhat.
  <li>Media Source Extensions [[!MEDIA-SOURCE]]
  <li>Unicode IDNA Compatibility Processing [[!UTS46]]
  <li>Web IDL [[!WEBIDL]]
+ <li>ABNF [[!STD68]]
 </ul>
 
 <hr>
@@ -2344,6 +2345,105 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
  <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
  <a for=url>password</a>.
 </ol>
+
+
+<h4 id=grammar>Formal grammar for minimally acceptable URLs</h4>
+
+<p>It is the intention that the above parsing algorithm accepts a
+superset of the language defined by the following grammar.  The
+grammar is only defined for UTF-8.  The <var>encoding override</var>
+option is not supported.  Resolving the URL against a <a>base URL</a>
+or raising an error if the URL is relative should be done after
+parsing.</p>
+
+<p>This specification uses the Augmented Backus-Naur Form (ABNF)
+notation of STD 68 [[!STD68]], including the following core ABNF
+syntax rules defined by that specification: ALPHA (letters), CR
+(carriage return), DIGIT (decimal digits), DQUOTE (double quote),
+HEXDIG (hexadecimal digits), LF (line feed), and SP (space).</p>
+
+<pre>
+   URI           = scheme ":" hier-part [ "?" query ] [ "#" fragment ]
+
+   hier-part     = "//" authority path-abempty
+                 / path-absolute
+                 / path-rootless
+                 / path-empty
+
+   URI-reference = URI / relative-ref
+
+   absolute-URI  = scheme ":" hier-part [ "?" query ]
+
+   relative-ref  = relative-part [ "?" query ] [ "#" fragment ]
+
+   relative-part = "//" authority path-abempty
+                 / path-absolute
+                 / path-noscheme
+                 / path-empty
+
+   scheme        = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+
+   authority     = [ userinfo "@" ] host [ ":" port ]
+   userinfo      = *( unreserved / pct-encoded / sub-delims / ":" )
+   host          = IP-literal / IPv4address / reg-name
+   port          = *DIGIT
+
+   IP-literal    = "[" IPv6address "]"
+
+   IPv6address   =                            6( h16 ":" ) ls32
+                 /                       "::" 5( h16 ":" ) ls32
+                 / [               h16 ] "::" 4( h16 ":" ) ls32
+                 / [ *1( h16 ":" ) h16 ] "::" 3( h16 ":" ) ls32
+                 / [ *2( h16 ":" ) h16 ] "::" 2( h16 ":" ) ls32
+                 / [ *3( h16 ":" ) h16 ] "::"    h16 ":"   ls32
+                 / [ *4( h16 ":" ) h16 ] "::"              ls32
+                 / [ *5( h16 ":" ) h16 ] "::"              h16
+                 / [ *6( h16 ":" ) h16 ] "::"
+
+   h16           = 1*4HEXDIG
+   ls32          = ( h16 ":" h16 ) / IPv4address
+   IPv4address   = dec-octet "." dec-octet "." dec-octet "." dec-octet
+
+
+   dec-octet     = DIGIT                 ; 0-9
+                 / %x31-39 DIGIT         ; 10-99
+                 / "1" 2DIGIT            ; 100-199
+                 / "2" %x30-34 DIGIT     ; 200-249
+                 / "25" %x30-35          ; 250-255
+
+   reg-name      = *( unreserved / pct-encoded / sub-delims )
+
+   path          = path-abempty    ; begins with "/" or is empty
+                 / path-absolute   ; begins with "/" but not "//"
+                 / path-noscheme   ; begins with a non-colon segment
+                 / path-rootless   ; begins with a segment
+                 / path-empty      ; zero characters
+
+   path-abempty  = *( "/" segment )
+   path-absolute = "/" [ segment-nz *( "/" segment ) ]
+   path-noscheme = segment-nz-nc *( "/" segment )
+   path-rootless = segment-nz *( "/" segment )
+   path-empty    = 0&lt;pchar&gt;
+
+   segment       = *pchar
+   segment-nz    = 1*pchar
+   segment-nz-nc = 1*( unreserved / pct-encoded / sub-delims / "@" )
+                 ; non-zero-length segment without any colon ":"
+
+   pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+
+   query         = *( pchar / "/" / "?" )
+
+   fragment      = *( pchar / "/" / "?" )
+
+   pct-encoded   = "%" HEXDIG HEXDIG
+
+   unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+   reserved      = gen-delims / sub-delims
+   gen-delims    = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
+</pre>
 
 
 <h3 id=url-serializing>URL serializing</h3>
