@@ -450,7 +450,7 @@ consideration in practice.
 
 <p class=XXX>Ideally we define this in terms of a sequence of code points that make up a
 <a>valid domain</a> rather than through a whack-a-mole:
-<a href=https://www.w3.org/Bugs/Public/show_bug.cgi?id=25334>bug 25334</a>.
+<a href=https://github.com/whatwg/url/issues/245>issue 245</a>.
 
 <p>A <dfn export oldids=syntax-host-domain>valid domain string</dfn> must be a string that is a
 <a>valid domain</a>.
