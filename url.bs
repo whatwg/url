@@ -1130,11 +1130,14 @@ that is null, a {{Blob}} object, or a {{MediaSource}} object. It is initially nu
 "object".
 
 <p>A <a for=/>URL</a> also has an associated
-<dfn for=url>object origin</dfn> that is either null or an <a>ASCII string</a>.
+<dfn for=url>object origin</dfn> that is either null or an <a for=/>origin</a>.
 It is initially null.
 
 <p class="note">This is used to support caching the origin of a "<code>blob</code>"
-<a for=/>URL</a> at the time it is parsed.
+<a for=/>URL</a> at the time it is parsed. It is important that both the
+<a for=url>object</a> and <a for=url>object origin</a> are cached as the <a for=/>URL</a>
+might be removed from the <a>blob URL store</a> between parsing and fetching, but
+fetching will still need to succeed.
 
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
@@ -1435,12 +1438,13 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>Set <var>url</var>'s <a for=url>object origin</a> to the result of
- <a for="blob URL" lt="resolve the origin">resolving the origin of the blob URL</a> <var>url</var>.
-
  <li><p>Set <var>url</var>'s <a for=url>object</a> to the result of
  <a for="blob URL" lt="resolve">resolving the blob URL</a> <var>url</var>,
  or null if that returned failure.
+
+ <li><p>If <var>url</var>'s <a for=url>object</a> is not null,
+ set <var>url</var>'s <a for=url>object origin</a> to the result of
+ <a for="blob URL" lt="resolve the origin">resolving the origin of the blob URL</a> <var>url</var>.
 
  <li><p>Return <var>url</var>.
 </ol>
