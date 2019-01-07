@@ -1120,24 +1120,13 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
-<p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-object>object</dfn>
-that is null, a {{Blob}} object, or a {{MediaSource}} object. It is initially null.
-[[!FILEAPI]]
-[[!MEDIA-SOURCE]]
+<p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-blob-entry>blob entry</dfn>
+that is either null or a <a>blob URL entry</a>. It is initially null.
 
-<p class="note no-backref">At this point this is used primarily to support
-"<code>blob</code>" <a for=/>URLs</a>, but others can be added going forward, hence
-"object".
-
-<p>A <a for=/>URL</a> also has an associated
-<dfn for=url>object origin</dfn> that is either null or an <a for=/>origin</a>.
-It is initially null.
-
-<p class="note">This is used to support caching the origin of a "<code>blob</code>"
-<a for=/>URL</a> at the time it is parsed. It is important that both the
-<a for=url>object</a> and <a for=url>object origin</a> are cached as the <a for=/>URL</a>
-might be removed from the <a>blob URL store</a> between parsing and fetching, but
-fetching will still need to succeed.
+<p class="not no-backref">This is used to support caching the object a "<code>blob</code>" URL
+refers to as well as its origin. It is important that these are cached as the <a for=/>URL</a> might
+be removed from the <a>blob URL store</a> between parsing and fetching, while fetching will still
+need to succeed.
 
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
@@ -1438,13 +1427,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>Set <var>url</var>'s <a for=url>object</a> to the result of
+ <li><p>Set <var>url</var>'s <a for=url>blob entry</a> to the result of
  <a for="blob URL" lt="resolve">resolving the blob URL</a> <var>url</var>,
  or null if that returned failure.
-
- <li><p>If <var>url</var>'s <a for=url>object</a> is not null,
- set <var>url</var>'s <a for=url>object origin</a> to the result of
- <a for="blob URL" lt="resolve the origin">resolving the origin of the blob URL</a> <var>url</var>.
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -2447,10 +2432,16 @@ background information. [[!HTML]]
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
-  If <a for=/>URL</a>'s <a for=url>object origin</a> is not null, return
-  <a for=/>URL</a>'s <a for=url>object origin</a>.
+  If <a for=/>URL</a>'s <a for=url>blob entry</a> is not null, return <a for=/>URL</a>'s
+  <a for=url>blob entry</a>'s <a for="blob URL entry">environment</a>'s
+  <a for="environment settings object">origin</a>.
 
-  <p>Return the result of <a for="blob URL" lt="resolve the origin">resolving the origin of the blob URL</a>.
+  <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> <a for=/>URL</a>'s
+  <a for=url>path</a>[0].
+
+  <p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
+  <a for=url>origin</a> otherwise.
+
   <!-- Did you mean: recursion -->
 
   <p class="example no-backref" id=example-43b5cea5>The <a for=url>origin</a> of
