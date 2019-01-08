@@ -1429,7 +1429,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
  <li><p>Set <var>url</var>'s <a for=url>blob entry</a> to the result of
  <a for="blob URL" lt="resolve">resolving the blob URL</a> <var>url</var>,
- or null if that returned failure.
+ if that did not return failure, and null otherwise.
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -2441,7 +2441,6 @@ background information. [[!HTML]]
 
   <p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
   <a for=url>origin</a> otherwise.
-
   <!-- Did you mean: recursion -->
 
   <p class="example no-backref" id=example-43b5cea5>The <a for=url>origin</a> of
