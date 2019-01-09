@@ -1120,8 +1120,8 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
 
-<p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-blob-entry>blob entry</dfn>
-that is either null or a <a>blob URL entry</a>. It is initially null.
+<p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-blob-entry>blob URL entry</dfn>
+that is either null or a <a for=/>blob URL entry</a>. It is initially null.
 
 <p class="note no-backref">This is used to support caching the object a "<code>blob</code>" URL
 refers to as well as its origin. It is important that these are cached as the <a for=/>URL</a> might
@@ -1427,7 +1427,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>Set <var>url</var>'s <a for=url>blob entry</a> to the result of
+ <li><p>Set <var>url</var>'s <a for=url>blob URL entry</a> to the result of
  <a for="blob URL" lt="resolve">resolving the blob URL</a> <var>url</var>,
  if that did not return failure, and null otherwise.
 
@@ -2432,8 +2432,8 @@ background information. [[!HTML]]
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
-  <p>If <a for=/>URL</a>'s <a for=url>blob entry</a> is not null, return <a for=/>URL</a>'s
-  <a for=url>blob entry</a>'s <a for="blob URL entry">environment</a>'s
+  <p>If <a for=/>URL</a>'s <a for=url>blob URL entry</a> is not null, return <a for=/>URL</a>'s
+  <a for=url>blob URL entry</a>'s <a for="blob URL entry">environment</a>'s
   <a for="environment settings object">origin</a>.
 
   <p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> <a for=/>URL</a>'s
