@@ -1123,7 +1123,7 @@ resource the <a for=/>URL</a>'s other components identify. It is initially null.
 <p>A <a for=/>URL</a> also has an associated <dfn export for=url id=concept-url-blob-entry>blob entry</dfn>
 that is either null or a <a>blob URL entry</a>. It is initially null.
 
-<p class="not no-backref">This is used to support caching the object a "<code>blob</code>" URL
+<p class="note no-backref">This is used to support caching the object a "<code>blob</code>" URL
 refers to as well as its origin. It is important that these are cached as the <a for=/>URL</a> might
 be removed from the <a>blob URL store</a> between parsing and fetching, while fetching will still
 need to succeed.
@@ -2432,7 +2432,7 @@ background information. [[!HTML]]
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
-  If <a for=/>URL</a>'s <a for=url>blob entry</a> is not null, return <a for=/>URL</a>'s
+  <p>If <a for=/>URL</a>'s <a for=url>blob entry</a> is not null, return <a for=/>URL</a>'s
   <a for=url>blob entry</a>'s <a for="blob URL entry">environment</a>'s
   <a for="environment settings object">origin</a>.
 
