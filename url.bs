@@ -1129,6 +1129,7 @@ refers to as well as its origin. It is important that these are cached as the <a
 be removed from the <a>blob URL store</a> between parsing and fetching, while fetching will still
 need to succeed.
 
+
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
 <p>A <dfn export>special scheme</dfn> is a <a for=url>scheme</a> listed in the first column of
