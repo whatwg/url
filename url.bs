@@ -382,13 +382,13 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  </ul>
 </div>
 
-<p class=warning>Specifications should avoid depending on "<a for=host>public suffix</a>",
-"<a for=host>registrable domain</a>", and "<a>same site</a>". The public suffix list will diverge
-from client to client, and cannot be relied-upon to provide a hard security boundary. Specifications
-which ignore this advice are encouraged to carefully consider whether URLs' schemes ought to be
-incorporated into any decision made based upon whether or not two <a for=/>hosts</a> are
-<a>same site</a>. HTML's <a>same origin-domain</a> concept is a reasonable example of this
-consideration in practice.
+<p class=warning>Specifications should prefer the <a for=/>origin</a> concept for security
+decisions. The notion of "<a for=host>public suffix</a>","<a for=host>registrable domain</a>",
+and "<a>same site</a>" cannot be relied-upon to provide a hard security boundary, as the public
+suffix list will diverge from client to client. Specifications which ignore this advice are
+encouraged to carefully consider whether URLs' schemes ought to be incorporated into any decision
+made based upon whether or not two <a for=/>hosts</a> are <a>same site</a>. HTML's <a>same
+origin-domain</a> concept is a reasonable example of this consideration in practice.
 
 
 <h3 id=idna>IDNA</h3>
