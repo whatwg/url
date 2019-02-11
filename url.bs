@@ -2397,8 +2397,6 @@ then runs these steps, returning an <a>ASCII string</a>:
  <a for=url>fragment</a> is non-null, append U+0023 (#), followed by
  <var>url</var>'s <a for=url>fragment</a>, to <var>output</var>.
 
- <li><p><a>Assert</a>: <var>output</var> is an <a>ASCII string</a>.
-
  <li><p>Return <var>output</var>.
 </ol>
 
