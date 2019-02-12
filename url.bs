@@ -2347,7 +2347,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
 <a for=/>URL</a> <var>url</var>, an optional <i title>exclude fragment flag</i>, and
-then runs these steps:
+then runs these steps, returning an <a>ASCII string</a>:
 
 <ol>
  <li><p>Let <var>output</var> be <var>url</var>'s <a for=url>scheme</a> and U+003A (:) concatenated.
