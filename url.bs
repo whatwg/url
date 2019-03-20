@@ -2486,7 +2486,7 @@ browser address bar).
 <p>Remove components that may provide opportunities for spoofing or distract from security-relevant
 information:
 
-<ul class=brief>
+<ul>
  <li><p>Browsers are encouraged to only render a URL’s <a for=url>host</a> in places where it is
  important for users to distinguish between the host and other parts of the URL such as the <a
  for=url>path</a>. Browsers may further consider rendering only the URL’s host's <a
@@ -2500,12 +2500,12 @@ information:
  <li><p>A URL can be rendered without its <a for=url>scheme</a> if the display surface only ever
  permits a single scheme (such as a browser feature that omits <code>https://</code> because it is
  only enabled for secure origins). Otherwise, the scheme may be replaced or supplemented with a
- human-readable string (e.g., "Not secure") and/or a security indicator icon.
+ human-readable string (e.g., "Not secure"), a security indicator icon, or both.
 
  <li><p>A leading <code>www</code> domain label can be omitted to simplify the host, except when it
  is part of the <a for=host>registrable domain</a>.
 
- <li><p>Omit the port if it is a <a>default port</a>.
+ <li><p>As described in <a>URL serializer</a>, null ports should not be serialized.
 </ul>
 
 <h4 id=url-rendering-elision>Elision</h4>
@@ -2513,14 +2513,15 @@ information:
 <p>In a space-constrained display, URLs should be elided carefully to avoid misleading the user when
 making a security decision:
 
-<ul class=brief>
+<ul>
  <li><p>Ensure that at least the <a for=host>registrable domain</a> can be shown when the URL is
  rendered (to avoid showing, e.g., <code>...examplecorp.com</code> when loading
  <code>https://not-really-examplecorp.com/</code>).
 
  <li><p>When the full <a for=url>host</a> cannot be rendered, elide domain labels starting from the
- front. (Note that bidirectional text means that the front of the string may not appear at the
- left.)
+ front. For example, <code>examplecorp.com.evil.com</code> should be elided as
+ <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that bidirectional text
+ means that the front of the string may not appear at the left.)
 </ul>
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
@@ -2528,7 +2529,7 @@ making a security decision:
 <p>International domain names (IDNs), special characters, and bidirectional text should be handled
 with care to prevent spoofing:
 
-<ul class=brief>
+<ul>
  <li><p>A <a for=/>URL</a>'s <a for=url>host</a> should be rendered using <a>domain to
  Unicode</a>.
 
@@ -2539,7 +2540,9 @@ with care to prevent spoofing:
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
  bidirectional text, so in this case it is particularly advisable to only render a URL’s <a
- for=url>host</a> (as recommended in <a>Simplify non-human-readable or irrelevant components</a>).
+ for=url>host</a>. Other parts of the <a for=/>URL</a>, if rendered, should have their sequences of
+ <a>percent-encoded bytes</a> replaced with code points resulting from <a>percent decoding</a> those
+ sequences converted to bytes, unless that renders those sequences invisible.
 
  <li><p>Bidirectional text should be rendered as if it were in a left-to-right embedding. [[!BIDI]]
 
@@ -2548,11 +2551,6 @@ with care to prevent spoofing:
  adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
  the rendering to be different from the model. Users of bidirectional languages are thus cautioned
  that this is to be expected, particularly in plain text environments.
-
- <li><p>Other parts of the <a for=/>URL</a> should have their sequences of
- <a>percent-encoded bytes</a> replaced with code points resulting from
- <a>percent decoding</a> those sequences converted to bytes, unless that renders those
- sequences invisible.
 
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
