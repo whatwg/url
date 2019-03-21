@@ -2477,20 +2477,20 @@ background information. [[!HTML]]
 <!-- See https://www.w3.org/Bugs/Public/show_bug.cgi?id=27641 for context -->
 
 <p>A <a for=/>URL</a> should be rendered in its <a lt="URL serializer">serialized</a> form, with
-modifications described below when the primary purpose of displaying a URL is to have the user make
+modifications described below, when the primary purpose of displaying a URL is to have the user make
 a security decision. For example, users are expected to make trust decisions based on a URL rendered
 in the browser address bar.
 
 <h4 id=url-rendering-simplification>Simplify non-human-readable or irrelevant components</h4>
 
-<p>Remove components that may provide opportunities for spoofing or distract from security-relevant
+<p>Remove components that can provide opportunities for spoofing or distract from security-relevant
 information:
 
 <ul>
  <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important
  for users to distinguish between the host and other parts of the URL such as the <a
  for=url>path</a>. Browsers may further consider rendering only the URL’s host's <a
- for=host>registrable domain</a> to remove spoofing opportunities posed by subdomains (e.g.,
+ for=host>registrable domain</a>, to remove spoofing opportunities posed by subdomains (e.g.,
  <code>https://examplecorp.attacker.com/</code>).
 
  <li><p>Browsers should not render a <a for=/>URL</a>'s <a for=url>username</a> and <a
@@ -2530,7 +2530,7 @@ making a security decision:
 with care to prevent spoofing:
 
 <ul>
- <li><p>Browser should render a <a for=/>URL</a>'s <a for=url>host</a> using
+ <li><p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using
  <a>domain to Unicode</a>.
 
  <p class="note no-backref">Note that non-ASCII characters can be used in <a
