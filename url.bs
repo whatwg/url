@@ -2478,8 +2478,8 @@ background information. [[!HTML]]
 
 <p>A <a for=/>URL</a> should be rendered in its <a lt="URL serializer">serialized</a> form, with
 modifications described below when the primary purpose of displaying a URL is to have the user make
-a security decision (e.g., users are expected to make trust decisions based on a URL rendered in the
-browser address bar).
+a security decision. For example, users are expected to make trust decisions based on a URL rendered
+in the browser address bar.
 
 <h4 id=url-rendering-simplification>Simplify non-human-readable or irrelevant components</h4>
 
@@ -2487,25 +2487,25 @@ browser address bar).
 information:
 
 <ul>
- <li><p>Browsers are encouraged to only render a URL’s <a for=url>host</a> in places where it is
- important for users to distinguish between the host and other parts of the URL such as the <a
+ <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important
+ for users to distinguish between the host and other parts of the URL such as the <a
  for=url>path</a>. Browsers may further consider rendering only the URL’s host's <a
  for=host>registrable domain</a> to remove spoofing opportunities posed by subdomains (e.g.,
  <code>https://examplecorp.attacker.com/</code>).
 
- <li><p>A <a for=/>URL</a>'s <a for=url>username</a> and <a for=url>password</a> should not be
- rendered as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (as in, e.g.,
- <code>https://examplecorp.com@attacker.example/</code>).
+ <li><p>Browsers should not render a <a for=/>URL</a>'s <a for=url>username</a> and <a
+ for=url>password</a>, as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (as in,
+ e.g., <code>https://examplecorp.com@attacker.example/</code>).
 
- <li><p>A URL can be rendered without its <a for=url>scheme</a> if the display surface only ever
+ <li><p>Browsers may render a URL without its <a for=url>scheme</a> if the display surface only ever
  permits a single scheme (such as a browser feature that omits <code>https://</code> because it is
  only enabled for secure origins). Otherwise, the scheme may be replaced or supplemented with a
  human-readable string (e.g., "Not secure"), a security indicator icon, or both.
 
- <li><p>A leading <code>www</code> domain label can be omitted to simplify the host, except when it
- is part of the <a for=host>registrable domain</a>.
+ <li><p>Browsers may omit a leading <code>www</code> domain label to simplify the host, except when
+ it is part of the <a for=host>registrable domain</a>.
 
- <li><p>As described in <a>URL serializer</a>, null ports should not be serialized.
+ <li><p>As described in <a>URL serializer</a>, browsers should not serialize null ports.
 </ul>
 
 <h4 id=url-rendering-elision>Elision</h4>
@@ -2514,14 +2514,14 @@ information:
 making a security decision:
 
 <ul>
- <li><p>Ensure that at least the <a for=host>registrable domain</a> can be shown when the URL is
- rendered (to avoid showing, e.g., <code>...examplecorp.com</code> when loading
+ <li><p>Browsers should ensure that at least the <a for=host>registrable domain</a> can be shown
+ when the URL is rendered (to avoid showing, e.g., <code>...examplecorp.com</code> when loading
  <code>https://not-really-examplecorp.com/</code>).
 
- <li><p>When the full <a for=url>host</a> cannot be rendered, elide domain labels starting from the
- front. For example, <code>examplecorp.com.evil.com</code> should be elided as
- <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that bidirectional text
- means that the front of the string may not appear at the left.)
+ <li><p>When the full <a for=url>host</a> cannot be rendered, browsers should elide domain labels
+ starting from the lowest-level domain label. For example, <code>examplecorp.com.evil.com</code>
+ should be elided as <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that
+ bidirectional text means that the lowest-level label may not appear at the left.)
 </ul>
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
@@ -2530,8 +2530,8 @@ making a security decision:
 with care to prevent spoofing:
 
 <ul>
- <li><p>A <a for=/>URL</a>'s <a for=url>host</a> should be rendered using <a>domain to
- Unicode</a>.
+ <li><p>Browser should render a <a for=/>URL</a>'s <a for=url>host</a> using
+ <a>domain to Unicode</a>.
 
  <p class="note no-backref">Note that non-ASCII characters can be used in <a
  href="http://unicode.org/faq/idn.html#26">homograph</a> spoofing attacks. Consider detecting <a
@@ -2540,17 +2540,20 @@ with care to prevent spoofing:
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
  bidirectional text, so in this case it is particularly advisable to only render a URL’s <a
- for=url>host</a>. Other parts of the <a for=/>URL</a>, if rendered, should have their sequences of
- <a>percent-encoded bytes</a> replaced with code points resulting from <a>percent decoding</a> those
- sequences converted to bytes, unless that renders those sequences invisible.
+ for=url>host</a>. For readability, other parts of the <a for=/>URL</a>, if rendered, should have
+ their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from <a>percent
+ decoding</a> those sequences converted to bytes, unless that renders those sequences
+ invisible. Browsers may choose to not decode certain sequences that present spoofing risks (e.g.,
+ the Unicode LOCK character U+1F512).
 
- <li><p>Bidirectional text should be rendered as if it were in a left-to-right embedding. [[!BIDI]]
+ <li><p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
 
  <p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
  anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
  adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
  the rendering to be different from the model. Users of bidirectional languages are thus cautioned
  that this is to be expected, particularly in plain text environments.
+</ul>
 
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
