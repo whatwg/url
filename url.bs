@@ -2488,9 +2488,9 @@ information:
 
 <ul>
  <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important for
- users to distinguish between the host and other parts of the URL such as the <a
- for=url>path</a>. Browsers may consider simplifying the host further to draw attention to the <a
- for=host>registrable domain</a>. For example, browsers may omit a leading <code>www</code> or
+ users to distinguish between the host and other parts of the URL such as the
+ <a for=url>path</a>. Browsers may consider simplifying the host further to draw attention to the
+ <a for=host>registrable domain</a>. For example, browsers may omit a leading <code>www</code> or
  <code>m</code> domain label to simplify the host, or display the registrable domain only to remove
  spoofing opportunities posted by subdomains (e.g., <code>https://examplecorp.attacker.com/</code>).
 
