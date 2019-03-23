@@ -2487,11 +2487,12 @@ in the browser address bar.
 information:
 
 <ul>
- <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important
- for users to distinguish between the host and other parts of the URL such as the <a
- for=url>path</a>. Browsers may further consider rendering only the URL’s host's <a
- for=host>registrable domain</a>, to remove spoofing opportunities posed by subdomains (e.g.,
- <code>https://examplecorp.attacker.com/</code>).
+ <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important for
+ users to distinguish between the host and other parts of the URL such as the <a
+ for=url>path</a>. Browsers may consider simplifying the host further to draw attention to the <a
+ for=host>registrable domain</a>. For example, browsers may omit a leading <code>www</code> or
+ <code>m</code> domain label to simplify the host, or display the registrable domain only to remove
+ spoofing opportunities posted by subdomains (e.g., <code>https://examplecorp.attacker.com/</code>).
 
  <li><p>Browsers should not render a <a for=/>URL</a>'s <a for=url>username</a> and <a
  for=url>password</a>, as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (as in,
@@ -2501,9 +2502,6 @@ information:
  permits a single scheme (such as a browser feature that omits <code>https://</code> because it is
  only enabled for secure origins). Otherwise, the scheme may be replaced or supplemented with a
  human-readable string (e.g., "Not secure"), a security indicator icon, or both.
-
- <li><p>Browsers may omit a leading <code>www</code> domain label to simplify the host, except when
- it is part of the <a for=host>registrable domain</a>.
 
  <li><p>As described in <a>URL serializer</a>, browsers should not serialize null ports.
 </ul>
