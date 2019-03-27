@@ -2487,16 +2487,16 @@ rendered in the browser address bar.
 information:
 
 <ul>
- <li><p>Browsers may render only a URL’s <a for=url>host</a> in places where it is important for
+ <li><p>Browsers may render only a URL's <a for=url>host</a> in places where it is important for
  users to distinguish between the host and other parts of the URL such as the
- <a for=url>path</a>. Browsers may consider simplifying the host further to draw attention to the
+ <a for=url>path</a>. Browsers may consider simplifying the host further to draw attention to its
  <a for=host>registrable domain</a>. For example, browsers may omit a leading <code>www</code> or
- <code>m</code> domain label to simplify the host, or display the registrable domain only to remove
+ <code>m</code> domain label to simplify the host, or display its registrable domain only to remove
  spoofing opportunities posted by subdomains (e.g., <code>https://examplecorp.attacker.com/</code>).
 
  <li><p>Browsers should not render a <a for=/>URL</a>'s <a for=url>username</a> and <a
- for=url>password</a>, as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (as in,
- e.g., <code>https://examplecorp.com@attacker.example/</code>).
+ for=url>password</a>, as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (e.g.,
+ <code>https://examplecorp.com@attacker.example/</code>).
 
  <li><p>Browsers may render a URL without its <a for=url>scheme</a> if the display surface only ever
  permits a single scheme (such as a browser feature that omits <code>https://</code> because it is
@@ -2522,33 +2522,35 @@ making a security decision:
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
 
-<p>International domain names (IDNs), special characters, and bidirectional text should be handled
-with care to prevent spoofing:
+<p>Internationalized domain names (IDNs), special characters, and bidirectional text should be
+handled with care to prevent spoofing:
 
 <ul>
- <li><p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using
- <a>domain to Unicode</a>.
+ <li>
+  <p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using <a>domain to Unicode</a>.
 
- <p class="note no-backref">Note that various characters can be used in homograph [[IDNFAQ]]
- spoofing attacks. Consider detecting confusable characters [[UTS39]] and warning when they are in
- use.
+  <p class="note no-backref">Note that various characters can be used in homograph spoofing attacks.
+  Consider detecting confusable characters and warning when they are in use. [[IDNFAQ]] [[UTS39]]
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
- bidirectional text, so in this case it is particularly advisable to only render a URL’s <a
- for=url>host</a>. For readability, other parts of the <a for=/>URL</a>, if rendered, should have
- their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from <a>percent
- decoding</a> those sequences converted to bytes, unless that renders those sequences
+ bidirectional text, so in this case it is particularly advisable to only render a URL's
+ <a for=url>host</a>. For readability, other parts of the <a for=/>URL</a>, if rendered, should have
+ their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from
+ <a>percent decoding</a> those sequences converted to bytes, unless that renders those sequences
  invisible. Browsers may choose to not decode certain sequences that present spoofing risks (e.g.,
- the Unicode LOCK character U+1F512).
+ U+1F512 (🔒)).
 
- <li><p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
+ <li>
+  <p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
 
- <p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
- anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
- adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
- the rendering to be different from the model. Users of bidirectional languages can come to
- expect this, particularly in plain text environments.
+  <p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
+  anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
+  adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
+  the rendering to be different from the model. Users of bidirectional languages can come to expect
+  this, particularly in plain text environments.
 </ul>
+
+
 
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
