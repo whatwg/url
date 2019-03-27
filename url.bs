@@ -2478,8 +2478,8 @@ background information. [[!HTML]]
 
 <p>A <a for=/>URL</a> should be rendered in its <a lt="URL serializer">serialized</a> form, with
 modifications described below, when the primary purpose of displaying a URL is to have the user make
-a security decision. For example, users are expected to make trust decisions based on a URL rendered
-in the browser address bar.
+a security or trust decision. For example, users are expected to make trust decisions based on a URL
+rendered in the browser address bar.
 
 <h4 id=url-rendering-simplification>Simplify non-human-readable or irrelevant components</h4>
 
@@ -2502,8 +2502,6 @@ information:
  permits a single scheme (such as a browser feature that omits <code>https://</code> because it is
  only enabled for secure origins). Otherwise, the scheme may be replaced or supplemented with a
  human-readable string (e.g., "Not secure"), a security indicator icon, or both.
-
- <li><p>As described in <a>URL serializer</a>, browsers should not serialize null ports.
 </ul>
 
 <h4 id=url-rendering-elision>Elision</h4>
@@ -2519,7 +2517,7 @@ making a security decision:
  <li><p>When the full <a for=url>host</a> cannot be rendered, browsers should elide domain labels
  starting from the lowest-level domain label. For example, <code>examplecorp.com.evil.com</code>
  should be elided as <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that
- bidirectional text means that the lowest-level label may not appear at the left.)
+ bidirectional text means that the lowest-level label may not appear on the left.)
 </ul>
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
@@ -2531,10 +2529,9 @@ with care to prevent spoofing:
  <li><p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using
  <a>domain to Unicode</a>.
 
- <p class="note no-backref">Note that non-ASCII characters can be used in <a
- href="http://unicode.org/faq/idn.html#26">homograph</a> spoofing attacks. Consider detecting <a
- href="http://www.unicode.org/reports/tr39/#Confusable_Detection">confusable characters</a> or
- warning when they are in use.
+ <p class="note no-backref">Note that various characters can be used in homograph [[IDNFAQ]]
+ spoofing attacks. Consider detecting confusable characters [[UTR39]] and warning when they are in
+ use.
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
  bidirectional text, so in this case it is particularly advisable to only render a URL’s <a
@@ -2549,8 +2546,8 @@ with care to prevent spoofing:
  <p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
  anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
  adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
- the rendering to be different from the model. Users of bidirectional languages are thus cautioned
- that this is to be expected, particularly in plain text environments.
+ the rendering to be different from the model. Users of bidirectional languages can come to
+ expect this, particularly in plain text environments.
 </ul>
 
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
