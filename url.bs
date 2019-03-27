@@ -2530,7 +2530,7 @@ with care to prevent spoofing:
  <a>domain to Unicode</a>.
 
  <p class="note no-backref">Note that various characters can be used in homograph [[IDNFAQ]]
- spoofing attacks. Consider detecting confusable characters [[UTR39]] and warning when they are in
+ spoofing attacks. Consider detecting confusable characters [[UTS39]] and warning when they are in
  use.
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
