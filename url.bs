@@ -983,6 +983,11 @@ unified model would be, please file an issue.
    <td>✅
    <td><code>https://example.com/example</code>
   <tr>
+   <td><code>example</code>
+   <td><code>https://example.com/demo/</code>
+   <td>✅
+   <td><code>https://example.com/demo/example</code>
+  <tr>
    <td><code>file:///C|/demo</code>
    <td>
    <td>❌
