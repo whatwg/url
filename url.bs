@@ -2717,10 +2717,10 @@ takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the r
 <h3 id=url-class>URL class</h3>
 
 <pre class=idl>
-[Constructor(USVString url, optional USVString base),
- Exposed=(Window,Worker),
+[Exposed=(Window,Worker),
  LegacyWindowAlias=webkitURL]
 interface URL {
+  constructor(USVString url, optional USVString base);
   stringifier attribute USVString href;
   readonly attribute USVString origin;
            attribute USVString protocol;
@@ -3057,9 +3057,9 @@ steps:
 <h3 id=interface-urlsearchparams>URLSearchParams class</h3>
 
 <pre class=idl>
-[Constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = ""),
- Exposed=(Window,Worker)]
+[Exposed=(Window,Worker)]
 interface URLSearchParams {
+  constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = "");
   void append(USVString name, USVString value);
   void delete(USVString name);
   USVString? get(USVString name);
