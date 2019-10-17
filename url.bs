@@ -1141,19 +1141,11 @@ corresponding <a for=url>port</a> and is listed in the second column on the same
      <th><a for=url>port</a>
  <tr><td>"<code>ftp</code>"<td>21
  <tr><td>"<code>file</code>"<td>
- <tr><td>"<code>gopher</code>"<td>70
  <tr><td>"<code>http</code>"<td>80
  <tr><td>"<code>https</code>"<td>443
  <tr><td>"<code>ws</code>"<td>80
  <tr><td>"<code>wss</code>"<td>443
 </table>
-
-<!-- The best reason I have for listing "gopher" is Apple/Google:
-     https://github.com/WebKit/webkit/blob/master/Source/WebCore/platform/URL.cpp#L72
-     https://code.google.com/p/google-url/source/browse/trunk/src/url_canon_stdurl.cc#120
-
-     It seems fine to remain compatible on that front, no need to support it
-     elsewhere though. -->
 
 <p>A <a for=/>URL</a> <dfn export>is special</dfn> if its <a for=url>scheme</a> is a
 <a>special scheme</a>. A <a for=/>URL</a> <dfn>is not special</dfn> if its <a for=url>scheme</a> is
