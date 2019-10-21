@@ -2444,7 +2444,6 @@ background information. [[!HTML]]
   (<code>https</code>, <code>whatwg.org</code>, null, null).
 
  <dt>"<code>ftp</code>"
- <dt>"<code>gopher</code>"
  <dt>"<code>http</code>"
  <dt>"<code>https</code>"
  <dt>"<code>ws</code>"
