@@ -352,7 +352,6 @@ for security decisions. The notion of "<a for=host>public suffix</a>" and
 the public suffix list will diverge from client to client. Specifications which ignore this advice
 are encouraged to carefully consider whether URLs' schemes ought to be incorporated into any
 decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same site</a> concepts.
-HTML's <a>same origin-domain</a> concept is a reasonable example of this consideration in practice.
 
 
 <h3 id=idna>IDNA</h3>
