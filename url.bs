@@ -7,6 +7,11 @@ Abstract: The URL Standard defines URLs, domains, IP addresses, the <code>applic
 Translation: ja https://triple-underscore.github.io/URL-ja.html
 </pre>
 
+<!-- TODO: remove after Bikeshed database updates itself to no longer have url version -->
+<pre class=link-defaults>
+spec:html; type:dfn; text:same site
+</pre>
+
 
 <h2 id=goals class=no-num>Goals</h2>
 
