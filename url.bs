@@ -348,7 +348,7 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
    <td><code>sub.example.إختبار</code>
    <td><code>xn--kgbechtv</code>
    <td><code>example.xn--kgbechtv</code>
-  <td>
+  <tr>
    <td><code>[2001:0db8:85a3:0000:0000:8a2e:0370:7334]</code>
    <td>null
    <td>null
