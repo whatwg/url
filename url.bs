@@ -311,7 +311,7 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
   <tr>
    <td><code>com</code>
    <td><code>com</code>
-   <td><i>null</i>
+   <td>null
   <tr>
    <td><code>example.com</code>
    <td><code>com</code>
@@ -331,23 +331,27 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
   <tr>
    <td><code>github.io</code>
    <td><code>github.io</code>
-   <td><i>null</i>
+   <td>null
   <tr>
    <td><code>whatwg.github.io</code>
    <td><code>github.io</code>
    <td><code>whatwg.github.io</code>
   <tr>
    <td><code>إختبار</code>
-   <td><code>xn-kgbechtv</code>
-   <td><i>null</i>
+   <td><code>xn--kgbechtv</code>
+   <td>null
   <tr>
    <td><code>example.إختبار</code>
-   <td><code>xn-kgbechtv</code>
-   <td><code>example.xn-kgbechtv</code>
+   <td><code>xn--kgbechtv</code>
+   <td><code>example.xn--kgbechtv</code>
   <tr>
    <td><code>sub.example.إختبار</code>
-   <td><code>xn-kgbechtv</code>
-   <td><code>example.xn-kgbechtv</code>
+   <td><code>xn--kgbechtv</code>
+   <td><code>example.xn--kgbechtv</code>
+  <tr>
+   <td><code>[2001:0db8:85a3:0000:0000:8a2e:0370:7334]</code>
+   <td>null
+   <td>null
  </table>
 </div>
 
