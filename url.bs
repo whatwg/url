@@ -288,7 +288,9 @@ U+005C (\), or U+005D (]).
  <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
  domain. [[!PSL]]
 
- <li><p>Return <var>publicSuffix</var> encoded using A-Labels. [[!UTS46]]
+ <li><p>Assert: <var>publicSuffix</var> is encoded using A-Labels. [[!UTS46]]
+
+ <li><p>Return <var>publicSuffix</var>.
 </ol>
 
 <p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
@@ -303,7 +305,9 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
  domain. [[!PSL]]
 
- <li><p>Return <var>registrableDomain</var> encoded using A-Labels. [[!UTS46]]
+ <li><p>Assert: <var>registrableDomain</var> is encoded using A-Labels. [[!UTS46]]
+
+ <li><p>Return <var>registrableDomain</var>.
 </ol>
 
 <div class=example id=example-host-psl>
