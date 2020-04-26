@@ -2256,16 +2256,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
    <dt><dfn>fragment state</dfn>
    <dd>
-    <p>Switching on <a>c</a>:
-    <dl class=switch>
-     <dt>The <a>EOF code point</a>
-     <dd><p>Do nothing.
+    <ol>
+     <li>
+      <p>If <a>c</a> is not the <a>EOF code point</a>, then:
 
-     <dt>U+0000 NULL
-     <dd><p><a>Validation error</a>.
-
-     <dt>Otherwise
-     <dd>
       <ol>
        <li><p>If <a>c</a> is not a <a>URL code point</a> and not U+0025 (%),
        <a>validation error</a>.
@@ -2273,10 +2267,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>fragment percent-encode set</a>
-       and append the result to <var>url</var>'s <a for=url>fragment</a>.
+       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>fragment percent-encode set</a> and
+       append the result to <var>url</var>'s <a for=url>fragment</a>.
       </ol>
-    </dl>
+    </ol>
   </dl>
 
  <li><p>Return <var>url</var>.
