@@ -265,8 +265,8 @@ network address. For the purposes of this standard it is represented as a <a for
 <p class="note">Support for <code>&lt;zone_id></code> is
 <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=27234#c2">intentionally omitted</a>.
 
-<p>An <dfn export>opaque host</dfn> is a non-empty <a>ASCII string</a> holding data that can be used
-for further processing.
+<p>An <dfn export>opaque host</dfn> is a non-empty <a>ASCII string</a> that can be used for further
+processing.
 
 <p>An <dfn export>empty host</dfn> is the empty string.
 
@@ -1004,6 +1004,11 @@ unified model would be, please file an issue.
    <td>
    <td>❌
    <td>Failure
+  <tr>
+   <td><code>https://example.org//</code>
+   <td>
+   <td>✅
+   <td><code>https://example.org//</code>
  </table>
 
  <p>The base and output <a lt="URL record">URL</a> are represented in
@@ -1076,18 +1081,18 @@ It is initially the empty string.
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a for=/>list</a> of
-zero or more <a>ASCII strings</a> holding data, usually identifying a location in hierarchical form.
-It is initially empty.
+zero or more <a>ASCII strings</a>, usually identifying a location in hierarchical form. It is
+initially empty.
 
 <p class="note no-backref">A <a lt="is special">special</a> <a for=/>URL</a> always has a
 <a for=list lt="is empty">non-empty</a> <a for=url>path</a>.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
-null or an <a>ASCII string</a> holding data. It is initially null.
+null or an <a>ASCII string</a>. It is initially null.
 
-<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is
-either null or an <a>ASCII string</a> holding data that can be used for further processing on the
-resource the <a for=/>URL</a>'s other components identify. It is initially null.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is either null or
+an <a>ASCII string</a> that can be used for further processing on the resource the
+<a for=/>URL</a>'s other components identify. It is initially null.
 
 <p id=non-relative-flag>A <a for=/>URL</a> also has an associated
 <dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
@@ -3314,6 +3319,7 @@ Tim Berners-Lee,
 Titi_Alone,
 Tomek Wytrębowicz,
 Trevor Rowbotham,
+Tristan Seligmann,
 Valentin Gosu,
 Vyacheslav Matva,
 Wei Wang,
