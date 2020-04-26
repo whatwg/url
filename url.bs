@@ -284,9 +284,11 @@ U+005C (\), or U+005D (]).
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
 
- <li><p>Return the <a for=host>public suffix</a> obtained by executing the
- <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List on
- <var>host</var>. [[!PSL]].
+ <li><p>Let <var>publicSuffix</var> be the public suffix determined by running the
+ <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
+ domain. [[!PSL]]
+
+ <li><p>Return <var>publicSuffix</var> encoded using A-Labels. [[!UTS46]]
 </ol>
 
 <p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
@@ -297,9 +299,11 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
  <a for=host>public suffix</a> <a for=host>equals</a> <var>host</var>, then return null.
 
- <li><p>Return the <a for=host>registrable domain</a> obtained by executing the
- <a href="https://publicsuffix.org/list/">algorithm</a> defined by the Public Suffix List on
- <var>host</var>. [[!PSL]]
+ <li><p>Let <var>registrableDomain</var> be the registrable domain determined by running the
+ <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
+ domain. [[!PSL]]
+
+ <li><p>Return <var>registrableDomain</var> encoded using A-Labels. [[!UTS46]]
 </ol>
 
 <div class=example id=example-host-psl>
