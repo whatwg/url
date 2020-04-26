@@ -3077,9 +3077,15 @@ initially null.
  <var>name</var> and value is <var>value</var>, to <var>query</var>'s
  <a for=URLSearchParams>list</a>.
 
- <li><p>Otherwise, <var>init</var> is a string, then set <var>query</var>'s
- <a for=URLSearchParams>list</a> to the result of
- <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
+ <li>
+  <p>Otherwise:
+
+  <ol>
+   <li><p>Assert: <var>init</var> is a string.
+
+   <li><p>Set <var>query</var>'s <a for=URLSearchParams>list</a> to the result of
+   <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
+  </ol>
 
  <li><p>Return <var>query</var>.
 </ol>
