@@ -288,7 +288,7 @@ U+005C (\), or U+005D (]).
  <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
  domain. [[!PSL]]
 
- <li><p>Assert: <var>publicSuffix</var> contains only <a>ASCII code points</a>.
+ <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a>.
 
  <li><p>Return <var>publicSuffix</var>.
 </ol>
@@ -305,7 +305,7 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
  domain. [[!PSL]]
 
- <li><p>Assert: <var>registrableDomain</var> contains only <a>ASCII code points</a>.
+ <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a>.
 
  <li><p>Return <var>registrableDomain</var>.
 </ol>
