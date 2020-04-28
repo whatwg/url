@@ -2110,7 +2110,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           U+005C (\), <a for=list>append</a> the empty string to <var>url</var>'s
           <a for=url>path</a>.
 
-          <p class="note no-backref">Usually <a>c</a> is U+002F (/) at this point.
+          <p class="note no-backref">This means that for input <code>/usr/..</code> the result is
+          <code>/</code> and not a lack of a path.
         </ol>
 
        <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if neither
