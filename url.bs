@@ -2723,18 +2723,46 @@ interface URL {
 };
 </pre>
 
-<!-- XXX Ideas:
-  boolean isEqual(URL, optional URLEqualOptions options)
-           attribute URLPath segments;
+<div class=example id=example-url-components>
+ <p>The following table lists how <a>valid URL strings</a>, when <a lt="URL parser">parsed</a>, map
+ to various {{URL}} getters. {{URL/href}}, {{URL/origin}}, {{URL/username}}, {{URL/password}},
+ {{URL/host}}, and {{URL/searchParams}} are left as exercise for the reader.
 
-dictionary URLEqualOptions {
-  boolean percentEncoding = false;
-  boolean ignoreHash = false;
-  boolean ignoreDomainDot = false;
-  ...
-};
-
-URLPath would be a subclassed Array? -->
+ <table>
+  <tr>
+   <th>Input
+   <th>{{URL/protocol}}
+   <th>{{URL/hostname}}
+   <th>{{URL/port}}
+   <th>{{URL/pathname}}
+   <th>{{URL/search}}
+   <th>{{URL/hash}}
+  <tr>
+   <td><code>https://example.com/</code>
+   <td>"<code>https:</code>"
+   <td>"<code>example.com</code>"
+   <td>the empty string
+   <td>"<code>/</code>"
+   <td>the empty string
+   <td>the empty string
+  <tr>
+   <td><code>https://localhost:8000/search?q=text#hello</code>
+   <td>"<code>https:</code>"
+   <td>"<code>localhost</code>"
+   <td>"<code>8000</code>"
+   <td>"<code>/search</code>"
+   <td>"<code>?q=text</code>"
+   <td>"<code>#hello</code>"
+  <tr>
+   <td><code>urn:isbn:9780307476463</code>
+   <td>"<code>urn</code>"
+   <td>the empty string
+   <td>the empty string
+   <td>"<code>isbn:9780307476463</code>"
+   <td>the empty string
+   <td>the empty string
+ </table>
+</div>
 
 <p>A {{URL}} object has an associated <dfn id=concept-url-url noexport for=URL>url</dfn> (a
 <a for=/>URL</a>) and <dfn id=concept-url-query-object noexport for=URL>query object</dfn> (a
