@@ -1114,6 +1114,50 @@ refers to as well as its origin. It is important that these are cached as the <a
 be removed from the <a>blob URL store</a> between parsing and fetching, while fetching will still
 need to succeed.
 
+<div class=example id=example-url-components>
+ <p>The following table lists how <a>valid URL strings</a>, when <a lt="URL parser">parsed</a>, map
+ to a <a for=/>URL</a>'s components. Username and password are left as exercise for the reader.
+
+ <table>
+  <tr>
+   <th>Input
+   <th>Scheme
+   <th>Host
+   <th>Port
+   <th>Path
+   <th>Query
+   <th>Fragment
+   <th>Cannot-be-base-URL flag
+  <tr>
+   <td><code>https://example.com/</code>
+   <td>"<code>https</code>"
+   <td>"<code>example.com</code>"
+   <td>null
+   <td>« the empty string »
+   <td>null
+   <td>null
+   <td>unset
+  <tr>
+   <td><code>https://localhost:8000/search?q=text#hello</code>
+   <td>"<code>https</code>"
+   <td>"<code>localhost</code>"
+   <td>8000
+   <td>« "<code>search</code>" »
+   <td>"<code>q=text</code>"
+   <td>"<code>hello</code>"
+   <td>unset
+  <tr>
+   <td><code>urn:isbn:9780307476463</code>
+   <td>"<code>urn</code>"
+   <td>null
+   <td>null
+   <td>« "<code>isbn:9780307476463</code>" »
+   <td>null
+   <td>null
+   <td>set
+ </table>
+</div>
+
 
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
