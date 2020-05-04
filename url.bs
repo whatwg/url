@@ -96,19 +96,19 @@ code point stream.
 <var>input</var>. If it is &minus;1 it points nowhere. If it is greater than or equal to
 <var>input</var>'s <a for=string>code point length</a>, it points to the <a>EOF code point</a>.
 
-<p>When a <a>pointer</a> is defined, <dfn>c</dfn> references the <a for=/>code point</a>
-<a>pointer</a> points to as long as it does not point nowhere. When <a>pointer</a> points to nowhere
-<a>c</a> cannot be used.
+<p>When a <a>pointer</a> is used, <dfn>c</dfn> references the <a for=/>code point</a> the
+<a>pointer</a> points to as long as it does not point nowhere. When the <a>pointer</a> points to
+nowhere <a>c</a> cannot be used.
 
-<p>When a <a>pointer</a> is defined, <dfn>remaining</dfn> references the substring after <a>c</a> as
+<p>When a <a>pointer</a> is used, <dfn>remaining</dfn> references the substring after <a>c</a> as
 long as <a>c</a> is not the <a>EOF code point</a>. When <a>c</a> is the <a>EOF code point</a>
 <a>remaining</a> cannot be used.
 
 <p class=example id=example-12672b6a>If "<code>mailto:username@example</code>" is a <a>string</a>
-being processed and <a>pointer</a> points to @, <a>c</a> is U+0040 (@) and <a>remaining</a> is
+being processed and a <a>pointer</a> points to @, <a>c</a> is U+0040 (@) and <a>remaining</a> is
 "<code>example</code>".
 
-<p class=example id=example-empty-string>If the empty string is being processed and <a>pointer</a>
+<p class=example id=example-empty-string>If the empty string is being processed and a <a>pointer</a>
 points to the start and is then decreased by 1, using <a>c</a> or <a>remaining</a> would be an
 error.
 
