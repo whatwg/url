@@ -510,54 +510,6 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
  <li><p>Return <var>asciiDomain</var>.
 </ol>
 
-<p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these steps:
-
-<ol>
- <li><p>Let <var>validationError</var> be false.
-
- <li><p>Let <var>R</var> be 10.
-
- <li>
-  <p>If <var>input</var> contains at least two code points and the first two code points are either
-  "<code>0x</code>" or "<code>0X</code>", then:
-
-  <ol>
-   <li><p>Set <var>validationError</var> to true.
-
-   <li><p>Remove the first two code points from <var>input</var>.
-
-   <li><p>Set <var>R</var> to 16.
-  </ol>
-
- <li>
-  <p>Otherwise, if <var>input</var> contains at least two code points and the first code point is
-  U+0030 (0), then:
-  <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
-
-  <ol>
-   <li><p>Set <var>validationError</var> to true.
-
-   <li><p>Remove the first code point from <var>input</var>.
-
-   <li><p>Set <var>R</var> to 8.
-  </ol>
-
- <li><p>If <var>input</var> is the empty string, then return 0.
- <!-- 0x/0X is an IPv4 number apparently -->
-
- <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit, then
- return failure.
- <!-- There is no need to set validationError here.
-      XXX radix-R digit, hahaha, that's not a thing -->
-
- <li><p>Let <var>output</var> be the mathematical integer value that is represented by
- <var>input</var> in radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with
- values 0 through 15.
- <!-- XXX well, you know, it works for ECMAScript, kinda -->
-
- <li><p>Return (<var>output</var>, <var>validationError</var>).
-</ol>
-
 <hr>
 
 <p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then runs
@@ -633,6 +585,54 @@ these steps:
   </ol>
 
  <li><p>Return <var>ipv4</var>.
+</ol>
+
+<p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these steps:
+
+<ol>
+ <li><p>Let <var>validationError</var> be false.
+
+ <li><p>Let <var>R</var> be 10.
+
+ <li>
+  <p>If <var>input</var> contains at least two code points and the first two code points are either
+  "<code>0x</code>" or "<code>0X</code>", then:
+
+  <ol>
+   <li><p>Set <var>validationError</var> to true.
+
+   <li><p>Remove the first two code points from <var>input</var>.
+
+   <li><p>Set <var>R</var> to 16.
+  </ol>
+
+ <li>
+  <p>Otherwise, if <var>input</var> contains at least two code points and the first code point is
+  U+0030 (0), then:
+  <!-- Needs to be at least two code points. Otherwise "0" as input fails to parse. -->
+
+  <ol>
+   <li><p>Set <var>validationError</var> to true.
+
+   <li><p>Remove the first code point from <var>input</var>.
+
+   <li><p>Set <var>R</var> to 8.
+  </ol>
+
+ <li><p>If <var>input</var> is the empty string, then return 0.
+ <!-- 0x/0X is an IPv4 number apparently -->
+
+ <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit, then
+ return failure.
+ <!-- There is no need to set validationError here.
+      XXX radix-R digit, hahaha, that's not a thing -->
+
+ <li><p>Let <var>output</var> be the mathematical integer value that is represented by
+ <var>input</var> in radix-<var>R</var> notation, using <a>ASCII hex digits</a> for digits with
+ values 0 through 15.
+ <!-- XXX well, you know, it works for ECMAScript, kinda -->
+
+ <li><p>Return (<var>output</var>, <var>validationError</var>).
 </ol>
 
 <hr>
