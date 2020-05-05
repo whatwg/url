@@ -1116,18 +1116,20 @@ need to succeed.
 
 <div class=example id=example-url-components>
  <p>The following table lists how <a>valid URL strings</a>, when <a lt="URL parser">parsed</a>, map
- to a <a for=/>URL</a>'s components. Username and password are left as exercise for the reader.
+ to a <a for=/>URL</a>'s components. <a for=url>Username</a>, <a for=url>password</a>, and
+ <a for=url>blob URL entry</a> are omitted; in the examples below they are the empty string, the
+ empty string, and null, respectively.
 
  <table>
   <tr>
    <th>Input
-   <th>Scheme
-   <th>Host
-   <th>Port
-   <th>Path
-   <th>Query
-   <th>Fragment
-   <th>Cannot-be-base-URL flag
+   <th><a for=url>Scheme</a>
+   <th><a for=url>Host</a>
+   <th><a for=url>Port</a>
+   <th><a for=url>Path</a>
+   <th><a for=url>Query</a>
+   <th><a for=url>Fragment</a>
+   <th><a for=url>Cannot-be-a-base-URL flag</a>
   <tr>
    <td><code>https://example.com/</code>
    <td>"<code>https</code>"
@@ -1155,6 +1157,15 @@ need to succeed.
    <td>null
    <td>null
    <td>set
+  <tr>
+   <td><code>file:///ada/Analytical%20Engine/README.md
+   <td>"<code>file</code>"
+   <td>null
+   <td>null
+   <td>« "<code>ada</code>", "<code>Analytical%20Engine</code>", "<code>README.md</code>" »
+   <td>null
+   <td>null
+   <td>unset
  </table>
 </div>
 
