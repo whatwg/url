@@ -257,7 +257,6 @@ in the sections that follow.
 
 <p>A <dfn export id=concept-domain>domain</dfn> is a non-empty <a>ASCII string</a> that identifies a
 realm within a network.
-
 [[RFC1034]]
 
 <p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
