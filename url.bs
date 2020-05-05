@@ -516,7 +516,12 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
 these steps:
 
 <ol>
- <li><p>Let <var>validationError</var> be false.
+ <li>
+  <p>Let <var>validationError</var> be false.
+
+  <p class="note no-backref">This uses <var>validationError</var> to track <a>validation errors</a>
+  to avoid reporting them before we are confident we want to parse <var>input</var> as an IPv4
+  address as the <a>host parser</a> almost always invokes the <a>IPv4 parser</a>.
 
  <li><p>Let <var>parts</var> be the result of <a>strictly splitting</a> <var>input</var> on
  U+002E (.).
@@ -547,14 +552,14 @@ these steps:
     <p class="example no-backref" id=example-c2afe535><code>0..0x300</code> is a
     <a>domain</a>, not an <a>IPv4 address</a>.
 
-   <li><p>Let (<var>n</var>, <var>hasError</var>) be the result of
-   <a lt="IPv4 number parser">parsing</a> <var>part</var>.
+   <li><p>Let <var>result</var> be the result of <a lt="IPv4 number parser">parsing</a>
+   <var>part</var>.
 
-   <li><p>If <var>n</var> is failure, then return <var>input</var>.
+   <li><p>If <var>result</var> is failure, then return <var>input</var>.
 
-   <li><p>If <var>hasError</var> is true, then set <var>validationError</var> to true.
+   <li><p>If <var>result</var>[1] is true, then set <var>validationError</var> to true.
 
-   <li><p><a for=list>Append</a> <var>n</var> to <var>numbers</var>.
+   <li><p><a for=list>Append</a> <var>result</var>[0] to <var>numbers</var>.
   </ol>
 
  <li><p>If <var>validationError</var> is true, <a>validation error</a>.
