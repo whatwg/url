@@ -562,7 +562,13 @@ these steps:
    <li><p><a for=list>Append</a> <var>result</var>[0] to <var>numbers</var>.
   </ol>
 
- <li><p>If <var>validationError</var> is true, <a>validation error</a>.
+ <li>
+  <p class="note">If we've reached this point, then each part was parsed into a number, so we're
+  committed to treating <var>input</var> as an IPv4 address and can resume reporting validation
+  errors.</p>
+
+  <p>If <var>validationError</var> is true, <a>validation error</a>.
+ </li>
 
  <li><p>If any item in <var>numbers</var> is greater than 255, <a>validation error</a>.
 
