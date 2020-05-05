@@ -2305,6 +2305,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
            <li><p><var>byte</var> is 0x22 ("), 0x23 (#), 0x3C (&lt;), or 0x3E (>)
            <li><p><var>byte</var> is 0x27 (') and <var>url</var> <a>is special</a>
           </ul>
+          <!-- Do not change this without double checking QUERY-UNITS -->
 
           <p>then append <var>byte</var>, <a lt="percent encode">percent encoded</a>, to
           <var>url</var>'s <a for=url>query</a>.
@@ -2669,15 +2670,17 @@ takes a byte sequence <var>input</var> and then runs these steps:
  <li><p>Return <var>output</var>.
 </ol>
 <!-- The inverse of the above byte set is all bytes
-     less than 0x20,
-     0x21 to 0x29,
-     0x2B,
-     0x2C,
-     0x2F,
-     0x3A to 0x40,
-     0x5B to 0x5E,
-     0x60,
-     bytes greater than 0x7A -->
+     less than 0x20 SP,
+     0x21 (!) to 0x29 (right parenthesis),
+     0x2B (+),
+     0x2C (,),
+     0x2F (/),
+     0x3A (:) to 0x40 (@),
+     0x5B ([) to 0x5E (^),
+     0x60 (`),
+     bytes greater than 0x7A (z). With a special case for 0x20 (SP).
+
+     Do not change this without double checking URLENCODED-UNITS -->
 
 <p>The
 <dfn export id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
@@ -3108,15 +3111,17 @@ params.toString() // "key=730d67"</code></pre>
  {{URL/search}}.
 
  <p>{{URLSearchParams}} objects will percent-encode: U+0000 NULL to U+0019 EOM, inclusive,
- U+0021 (!) to U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+0040 (@),
- U+005B ([]) to U+005E (^), inclusive, U+0060 (`), and anything greater than U+007A (z). And will
- encode U+0020 SPACE as U+002B (+).
- <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted -->
+ U+0021 (!) to U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+003A (:)
+ to U+0040 (@), inclusive, U+005B ([) to U+005E (^), inclusive, U+0060 (`), and anything greater
+ than U+007A (z). And will encode U+0020 SPACE as U+002B (+).
+ <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted.
+      Do not change this without double checking URLENCODED-UNITS -->
 
  <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode U+0000 NULL to
  U+0020 SPACE, inclusive, U+0022 ("), U+0023 (#), U+0027 (') varying on <a>is special</a>,
- U+003C (<), U+003E (>), and anything greater than U+007E (~).
- <!-- From https://url.spec.whatwg.org/#query-state -->
+ U+003C (&lt;), U+003E (>), and anything greater than U+007E (~).
+ <!-- From https://url.spec.whatwg.org/#query-state.
+      Do not change this without double checking QUERY-UNITS -->
 </div>
 
 <p>A {{URLSearchParams}} object has an associated
