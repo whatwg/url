@@ -255,8 +255,9 @@ identifier in <a for=/>URLs</a> where a network address is not necessary.
 have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
 in the sections that follow.
 
-<p>A <dfn export id=concept-domain>domain</dfn> is an <a>ASCII string</a> that identifies a realm
-within a network.
+<p>A <dfn export id=concept-domain>domain</dfn> is a non-empty <a>ASCII string</a> that identifies a
+realm within a network.
+
 [[RFC1034]]
 
 <p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
@@ -484,6 +485,8 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
 
  <li><p>If <var>isNotSpecial</var> is true, then return the result of
  <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
+
+ <li><p>Assert: <var>input</var> is not the empty string.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
@@ -2517,7 +2520,7 @@ making a security decision:
  <li><p>When the full <a for=url>host</a> cannot be rendered, browsers should elide domain labels
  starting from the lowest-level domain label. For example, <code>examplecorp.com.evil.com</code>
  should be elided as <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that
- bidirectional text means that the lowest-level label may not appear on the left.)
+ bidirectional text means that the lowest-level domain label may not appear on the left.)
 </ul>
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
