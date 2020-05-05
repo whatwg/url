@@ -457,8 +457,9 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>A <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or: U+005B ([),
-followed by a <a>valid IPv6-address string</a>, followed by U+005D (]).
+<p>A <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a>, excluding
+<a>forbidden host code points</a>, or: U+005B ([), followed by a <a>valid IPv6-address string</a>,
+followed by U+005D (]).
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
 requires context to be distinguished.
@@ -787,8 +788,14 @@ then runs these steps:
 <var>input</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding U+0025 (%),
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a>, excluding U+0025 (%),
  <a>validation error</a>, return failure.
+
+ <li><p>If <var>input</var> contains a <a>code point</a> that is not a <a>URL code point</a> and not
+ U+0025 (%), <a>validation error</a>.
+
+ <li><p>If <var>input</var> contains a U+0025 (%) and the two <a>code points</a> following it are
+ not <a>ASCII hex digits</a>, <a>validation error</a>.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -3324,6 +3331,7 @@ Kevin Grandon,
 Kornel Lesiński,
 Larry Masinter,
 Leif Halvard Silli,
+Mark Amery,
 Mark Davis,
 Marcos Cáceres,
 Marijn Kruisselbrink,
