@@ -3102,6 +3102,23 @@ let params = new URLSearchParams({key: "730d67"})
 params.toString() // "key=730d67"</code></pre>
 </div>
 
+<div class=note>
+ <p>As {{URLSearchParams}} objects use the <a><code>application/x-www-form-urlencoded</code></a>
+ format underneath there are some difference with how it encodes certain code points compared to
+ {{URL/search}}.
+
+ <p>{{URLSearchParams}} objects will percent-encode: U+0000 NULL to U+0019 EOM, inclusive,
+ U+0021 (!) to U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+0040 (@),
+ U+005B ([]) to U+005E (^), inclusive, U+0060 (`), and anything greater than U+007A (z). And will
+ encode U+0020 SPACE as U+002B (+).
+ <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted -->
+
+ <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode U+0000 NULL to
+ U+0020 SPACE, inclusive, U+0022 ("), U+0023 (#), U+0027 (') varying on <a>is special</a>,
+ U+003C (<), U+003E (>), and anything greater than U+007E (~).
+ <!-- From https://url.spec.whatwg.org/#query-state -->
+</div>
+
 <p>A {{URLSearchParams}} object has an associated
 <dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
 which is initially empty.
