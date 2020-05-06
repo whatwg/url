@@ -3106,11 +3106,24 @@ params.toString() // "key=730d67"</code></pre>
 </div>
 
 <div class=note>
- <p>As {{URLSearchParams}} objects use the <a><code>application/x-www-form-urlencoded</code></a>
- format underneath there are some difference with how it encodes certain code points compared to
- {{URL/search}}.
+ <p>As a {{URLSearchParams}} object uses the <a><code>application/x-www-form-urlencoded</code></a>
+ format underneath there are some difference with how it encodes certain code points compared to a
+ {{URL}} object (including {{URL/href}} and {{URL/search}}). This can be especially surprising when
+ using {{URL/searchParams}} to operate on a <a for=/>URL</a>'s <a for=url>query</a>.
 
- <p>{{URLSearchParams}} objects will percent-encode: U+0000 NULL to U+0019 EOM, inclusive,
+ <pre><code class="lang-javascript">
+const url = new URL('https://example.com/?a=b ~');
+console.log(url.href);   // "https://example.com/?a=b%20~"
+url.searchParams.sort();
+console.log(url.href);   // "https://example.com/?a=b+%7E"</code></pre>
+
+ <pre><code class="lang-javascript">
+const url = new URL('https://example.com/?a=~&b=%7E');
+console.log(url.search);                // "?a=~&b=%7E"
+console.log(url.searchParams.get('a')); // "~"
+console.log(url.searchParams.get('b')); // "~"</code></pre>
+
+ <p>{{URLSearchParams}} objects will percent-encode: U+0000 NULL to U+0019 END OF MEDIUM, inclusive,
  U+0021 (!) to U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+003A (:)
  to U+0040 (@), inclusive, U+005B ([) to U+005E (^), inclusive, U+0060 (`), and anything greater
  than U+007A (z). And will encode U+0020 SPACE as U+002B (+).
