@@ -397,6 +397,8 @@ decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
+ <li><p>If <var>result</var> is the empty string, <a>validation error</a>, return failure.
+
  <li><p>Return <var>result</var>.
 </ol>
 
@@ -503,8 +505,6 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
  <a>domain to ASCII</a> on <var>domain</var>.
 
  <li><p>If <var>asciiDomain</var> is failure, <a>validation error</a>, return failure.
-
- <li><p>If <var>asciiDomain</var> is the empty string, <a>validation error</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
  <a>validation error</a>, return failure.
