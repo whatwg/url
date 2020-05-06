@@ -457,8 +457,12 @@ up to three <a>ASCII digits</a> per sequence, each representing a decimal number
 
      XXX should we define the format inline instead just like STD 66? -->
 
-<p>A <dfn export>valid opaque-host string</dfn> must be one or more <a>URL units</a> or: U+005B ([),
-followed by a <a>valid IPv6-address string</a>, followed by U+005D (]).
+<p>A <dfn export>valid opaque-host string</dfn> must be one of the following:
+
+<ul class=brief>
+ <li><p>one or more <a>URL units</a> excluding <a>forbidden host code points</a>
+ <li><p>U+005B ([), followed by a <a>valid IPv6-address string</a>, followed by U+005D (]).
+</ul>
 
 <p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
 requires context to be distinguished.
@@ -805,6 +809,12 @@ then runs these steps:
 <ol>
  <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding U+0025 (%),
  <a>validation error</a>, return failure.
+
+ <li><p>If <var>input</var> contains a <a>code point</a> that is not a <a>URL code point</a> and not
+ U+0025 (%), <a>validation error</a>.
+
+ <li><p>If <var>input</var> contains a U+0025 (%) and the two <a>code points</a> following it are
+ not <a>ASCII hex digits</a>, <a>validation error</a>.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -1297,7 +1307,7 @@ if all of the following are true:
 <dfn export oldids=syntax-url-absolute-with-fragment>absolute-URL-with-fragment string</dfn> must be
 an <a>absolute-URL string</a>, optionally followed by U+0023 (#) and a <a>URL-fragment string</a>.
 
-<p>An <dfn export oldids=syntax-url-absolute>absolute-URL string</dfn> must be one of the following
+<p>An <dfn export oldids=syntax-url-absolute>absolute-URL string</dfn> must be one of the following:
 
 <ul class=brief>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for a
@@ -1362,8 +1372,8 @@ followed by a <a>path-absolute-URL string</a>.
 <p>An <dfn export>opaque-host-and-port string</dfn> must be either the empty string or: a
 <a>valid opaque-host string</a>, optionally followed by U+003A (:) and a <a>URL-port string</a>.
 
-<p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must be
-"<code>//</code>", followed by one of the following
+<p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must
+be "<code>//</code>", followed by one of the following:
 
 <ul class=brief>
  <li><p>a <a>valid host string</a>, optionally followed by a
@@ -1388,10 +1398,10 @@ must be a <a>path-relative-URL string</a> that does not start with: a <a>URL-sch
 followed by U+003A (:).
 
 <p>A <dfn export oldids=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
-following
+following:
 
 <ul class=brief>
- <li><p>zero or more <a>URL units</a>, excluding U+002F (/) and U+003F (?), that together are not a
+ <li><p>zero or more <a>URL units</a> excluding U+002F (/) and U+003F (?), that together are not a
  <a>single-dot path segment</a> or a <a>double-dot path segment</a>.
  <li><p>a <a>single-dot path segment</a>
  <li><p>a <a>double-dot path segment</a>.
@@ -1865,7 +1875,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       </ol>
 
      <li>
-      <p>Otherwise, if one of the following is true
+      <p>Otherwise, if one of the following is true:
 
       <ul class=brief>
        <li><p><a>c</a> is the <a>EOF code point</a>, U+002F (/), U+003F (?), or U+0023 (#)
@@ -1918,7 +1928,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       </ol>
 
      <li>
-      <p>Otherwise, if one of the following is true
+      <p>Otherwise, if one of the following is true:
 
       <ul class=brief>
        <li><p><a>c</a> is the <a>EOF code point</a>, U+002F (/), U+003F (?), or U+0023 (#)
@@ -1967,7 +1977,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li><p>If <a>c</a> is an <a>ASCII digit</a>, append <a>c</a> to <var>buffer</var>.
 
      <li>
-      <p>Otherwise, if one of the following is true
+      <p>Otherwise, if one of the following is true:
 
       <ul class=brief>
        <li><p><a>c</a> is the <a>EOF code point</a>, U+002F (/), U+003F (?), or U+0023 (#)
@@ -2191,7 +2201,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dd>
     <ol>
      <li>
-      <p>If one of the following is true
+      <p>If one of the following is true:
 
       <ul class=brief>
        <li><p><a>c</a> is the <a>EOF code point</a> or U+002F (/)
@@ -2304,7 +2314,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dd>
     <ol>
      <li>
-      <p>If <var>encoding</var> is not <a>UTF-8</a> and one of the following is true
+      <p>If <var>encoding</var> is not <a>UTF-8</a> and one of the following is true:
 
       <ul class=brief>
        <li><p><var>url</var> <a>is not special</a>
@@ -2352,7 +2362,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
         <ol>
          <li>
-          <p>If one of the following is true
+          <p>If one of the following is true:
 
           <ul class=brief>
            <li><p><var>byte</var> is less than 0x21 (!)
@@ -3395,6 +3405,7 @@ Kevin Grandon,
 Kornel Lesiński,
 Larry Masinter,
 Leif Halvard Silli,
+Mark Amery,
 Mark Davis,
 Marcos Cáceres,
 Marijn Kruisselbrink,
