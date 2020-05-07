@@ -397,6 +397,8 @@ decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
+ <li><p>If <var>result</var> is the empty string, <a>validation error</a>, return failure.
+
  <li><p>Return <var>result</var>.
 </ol>
 
