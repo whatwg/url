@@ -187,7 +187,7 @@ U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
-U+005B ([), U+005C (\), U+005D (]), U+005E (^), and U+007C (|).
+U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
 <p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using a <var>percentEncodeSet</var>,
 run these steps:
@@ -3190,10 +3190,10 @@ console.log(url.search);                // "?a=~&b=%7E"
 console.log(url.searchParams.get('a')); // "~"
 console.log(url.searchParams.get('b')); // "~"</code></pre>
 
- <p>{{URLSearchParams}} objects will percent-encode: U+0000 NULL to U+0019 END OF MEDIUM, inclusive,
- U+0021 (!) to U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+003A (:)
- to U+0040 (@), inclusive, U+005B ([) to U+005E (^), inclusive, U+0060 (`), and anything greater
- than U+007A (z). And will encode U+0020 SPACE as U+002B (+).
+ <p>{{URLSearchParams}} objects will percent-encode: <a>C0 controls</a>, U+0021 (!) to
+ U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+003A (:) to U+0040 (@),
+ inclusive, U+005B ([) to U+005E (^), inclusive, U+0060 (`), and anything greater than U+007A (z).
+ And will encode U+0020 SPACE as U+002B (+).
  <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted.
       Do not change this without double checking URLENCODED-UNITS -->
 
