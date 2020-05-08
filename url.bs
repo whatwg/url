@@ -116,7 +116,7 @@ error.
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
 <p>A <dfn>percent-encoded byte</dfn> is U+0025 (%), followed by two <a>ASCII hex digits</a>.
-Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, <a>isomorphic encoded</a>,
+Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, <a>string percent decoded</a>,
 should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
 
 <p>To <dfn export>percent encode</dfn> a <a for=/>byte</a> <var>byte</var>, return a
