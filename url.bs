@@ -116,17 +116,17 @@ error.
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
 <p>A <dfn>percent-encoded byte</dfn> is U+0025 (%), followed by two <a>ASCII hex digits</a>.
-Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, after conversion to bytes,
+Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, <a>string percent decoded</a>,
 should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
 
-<p>To <dfn export>percent encode</dfn> a <var>byte</var> into a <a>percent-encoded byte</a>, return
-a <a>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a> representing
-<var>byte</var>.
+<p>To <dfn export>percent encode</dfn> a <a for=/>byte</a> <var>byte</var>, return a
+<a for=/>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a>
+representing <var>byte</var>.
 
 <p>To <dfn export>percent decode</dfn> a <a>byte sequence</a> <var>input</var>, run these steps:
 
-<p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when the <var>input</var>
-contains bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
+<p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when <var>input</var> contains
+bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
 <ol>
  <li><p>Let <var>output</var> be an empty <a>byte sequence</a>.
@@ -170,12 +170,6 @@ contains bytes that are not <a>ASCII bytes</a> might be insecure and is not reco
 
 <hr>
 
-<!-- the escape sets are minimal as escaping can lead to problems; we might
-     be able to escape more here but only if implementers are willing and
-     there's an upside
-
-     note that query and application/x-www-form-urlencoded use their own
-     local sets -->
 <p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
 and all <a>code points</a> greater than U+007E (~).
 
@@ -189,8 +183,8 @@ U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
-<p>To <dfn>UTF-8 percent encode</dfn> a <var>codePoint</var>, using a <var>percentEncodeSet</var>,
-run these steps:
+<p>To <dfn>UTF-8 percent encode</dfn> a <a for=/>code point</a> <var>codePoint</var>, using a
+<var>percentEncodeSet</var>, run these steps:
 
 <ol>
  <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then return
@@ -202,6 +196,10 @@ run these steps:
  <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and then return the results
  concatenated, in the same order.
 </ol>
+
+<p class="note no-backref">The <a><code>application/x-www-form-urlencoded</code></a> format's
+<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
+<a>query state</a> use <a>percent encode</a> directly.
 
 
 
