@@ -183,7 +183,11 @@ U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
-<p>To <dfn>UTF-8 percent encode</dfn> a <a for=/>code point</a> <var>codePoint</var>, using a
+<p class=note>The <a><code>application/x-www-form-urlencoded</code></a> format's
+<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
+<a>query state</a> use <a>percent encode</a> directly without any of these sets.
+
+<p>To <dfn>UTF-8 percent encode</dfn> a <a for=/>code point</a> <var>codePoint</var> using a
 <var>percentEncodeSet</var>, run these steps:
 
 <ol>
@@ -197,9 +201,17 @@ U+005B ([) to U+005E (^), inclusive, and U+007C (|).
  concatenated, in the same order.
 </ol>
 
-<p class="note no-backref">The <a><code>application/x-www-form-urlencoded</code></a> format's
-<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
-<a>query state</a> use <a>percent encode</a> directly.
+<p>To <dfn>string UTF-8 percent encode</dfn> a <a for=/>string</a> <var>input</var> using a
+<var>percentEncodeSet</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>output</var> be the empty string.</p></li>
+
+ <li><p>For each <var>codePoint</var> of <var>input</var>, <a>UTF-8 percent encode</a>
+ <var>codePoint</var> using <var>percentEncodeSet</var> and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
 
 
 
@@ -816,12 +828,8 @@ then runs these steps:
  <li><p>If <var>input</var> contains a U+0025 (%) and the two <a>code points</a> following it are
  not <a>ASCII hex digits</a>, <a>validation error</a>.
 
- <li><p>Let <var>output</var> be the empty string.
-
- <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>C0 control percent-encode set</a>, and append the result to <var>output</var>.
-
- <li><p>Return <var>output</var>.
+ <li><p>Return the result of running <a>string UTF-8 percent encode</a> on <var>input</var> using
+ the <a>C0 control percent-encode set</a>.
 </ol>
 
 
@@ -2371,26 +2379,14 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 <hr>
 
 <p>To <dfn export id=set-the-username for=url>set the username</dfn> given a <var>url</var> and
-<var>username</var>, run these steps:
-
-<ol>
- <li><p>Set <var>url</var>'s <a for=url>username</a> to the empty string.
-
- <li><p>For each code point in <var>username</var>, <a>UTF-8 percent encode</a> it using the
- <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
- <a for=url>username</a>.
-</ol>
+<var>username</var>, set <var>url</var>'s <a for=url>username</a> to the result of running
+<a>string UTF-8 percent encode</a> on <var>username</var> using the
+<a>userinfo percent-encode set</a>.
 
 <p>To <dfn export id=set-the-password for=url>set the password</dfn> given a <var>url</var> and
-<var>password</var>, run these steps:
-
-<ol>
- <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
-
- <li><p>For each code point in <var>password</var>, <a>UTF-8 percent encode</a> it using the
- <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
- <a for=url>password</a>.
-</ol>
+<var>password</var>, set <var>url</var>'s <a for=url>password</a> to the result of running
+<a>string UTF-8 percent encode</a> on <var>password</var> using the
+<a>userinfo percent-encode set</a>.
 
 
 <h3 id=url-serializing>URL serializing</h3>
