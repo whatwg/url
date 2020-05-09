@@ -2533,8 +2533,22 @@ then runs these steps, returning an <a>ASCII string</a>:
  <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append <var>url</var>'s
  <a for=url>path</a>[0] to <var>output</var>.
 
- <li><p>Otherwise, then <a for=list>for each</a> string in <var>url</var>'s <a for=url>path</a>,
- append U+002F (/) followed by the string to <var>output</var>.
+ <li>
+  <p>Otherwise:
+
+  <ol>
+   <li><p>If <var>url</var>'s <a for=url>host</a> is null, <var>url</var>'s <a for=url>path</a>'s
+   <a for=list>size</a> is greater than 1, and <var>url</var>'s <a for=url>path</a>[0] is the empty
+   string, then append U+002F (/) followed by U+002E (.) to <var>output</var>.
+
+   <li><p><a for=list>For each</a> <var>segment</var> of <var>url</var>'s <a for=url>path</a>:
+   append U+002F (/) followed by <var>segment</var> to <var>output</var>.
+  </ol>
+
+  <p class=note>This prevents <code>web+demo:/.//not-a-host/</code> or
+  <code>web+demo:/path/..//not-a-host/</code>, when <a lt="URL parser">parsed</a> and then
+  <a lt="URL serializer">serialized</a>, from ending up as <code>web+demo://not-a-host/</code> (they
+  end up as <code>web+demo:/.//not-a-host/</code>).
 
  <li><p>If <var>url</var>'s <a for=url>query</a> is non-null, append
  U+003F (?), followed by <var>url</var>'s <a for=url>query</a>, to
@@ -3472,8 +3486,9 @@ Valentin Gosu,
 Vyacheslav Matva,
 Wei Wang,
 山岸和利 (Yamagishi Kazutoshi),
-Yongsheng Zhang, and
-成瀬ゆい (Yui Naruse)
+Yongsheng Zhang,
+成瀬ゆい (Yui Naruse), and
+zealousidealroll
 for being awesome!
 
 <p>This standard is written by
