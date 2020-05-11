@@ -1096,7 +1096,7 @@ It is initially the empty string.
    <th><a>empty host</a>
    <th>null
   <tr>
-   <td>non-"<code>file</code>" <a lt="special scheme">special</a>
+   <td><a>Special schemes</a> excluding "<code>file</code>"
    <td>✅
    <td>✅
    <td>✅
@@ -1112,7 +1112,7 @@ It is initially the empty string.
    <td>✅
    <td>✅
   <tr>
-   <td><a lt="special scheme">non-special</a>
+   <td>Others
    <td>❌
    <td>❌
    <td>✅
@@ -1210,14 +1210,14 @@ need to succeed.
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
 <p>A <dfn export>special scheme</dfn> is a <a for=url>scheme</a> listed in the first column of
-the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s optional
-corresponding <a for=url>port</a> and is listed in the second column on the same row.
+the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s corresponding
+<a for=url>port</a> and is listed in the second column on the same row.
 
 <table>
  <tr><th><a for=url>scheme</a>
      <th><a for=url>port</a>
  <tr><td>"<code>ftp</code>"<td>21
- <tr><td>"<code>file</code>"<td>
+ <tr><td>"<code>file</code>"<td>null
  <tr><td>"<code>http</code>"<td>80
  <tr><td>"<code>https</code>"<td>443
  <tr><td>"<code>ws</code>"<td>80
@@ -3430,6 +3430,7 @@ Jakub Gieryluk,
 James Graham,
 James Manger,
 James Ross,
+Jeff Hodges,
 Jeffrey Posnick,
 Jeffrey Yasskin,
 Joe Duarte,
