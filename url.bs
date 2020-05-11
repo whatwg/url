@@ -1068,7 +1068,7 @@ disambiguate from a <a>valid URL string</a> it can also be referred to as a <a f
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
-dispatch a <a for=/>URL</a> for further processing after <a lt='URL parser'>parsing</a>.
+dispatch a <a for=/>URL</a> for further processing after <a lt="URL parser">parsing</a>.
 It is initially the empty string.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is an
@@ -1511,7 +1511,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
+<p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
 string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
 <a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=/>URL</a>
 <var>url</var> and a state override <var>state override</var>, and then runs these steps:
@@ -1579,8 +1579,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li>
       <p>Otherwise, <a>validation error</a>, return failure.
 
-      <p class=note>This indication of failure is used exclusively by {{Location}} object's
-      {{Location/protocol}} attribute.
+      <p class=note>This indication of failure is used exclusively by the {{Location}} object's
+      {{Location/protocol}} setter.
     </ol>
 
    <dt><dfn>scheme state</dfn>
@@ -1661,9 +1661,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li>
       <p>Otherwise, <a>validation error</a>, return failure.
 
-      <p class=note>This indication of failure is used exclusively by {{Location}} object's
-      {{Location/protocol}} attribute. Furthermore, the non-failure termination earlier in this
-      state is an intentional difference for defining that attribute.
+      <p class=note>This indication of failure is used exclusively by the {{Location}} object's
+      {{Location/protocol}} setter. Furthermore, the non-failure termination earlier in this state
+      is an intentional difference for defining that setter.
     </ol>
 
    <dt><dfn>no scheme state</dfn>
@@ -2704,7 +2704,7 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 <h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
-<dfn id=concept-urlencoded-byte-serializer lt='urlencoded byte serializer'><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
+<dfn id=concept-urlencoded-byte-serializer lt="urlencoded byte serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
 takes a byte sequence <var>input</var> and then runs these steps:
 
 <ol>
@@ -2748,7 +2748,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
      Do not change this without double checking URLENCODED-UNITS -->
 
 <p>The
-<dfn export id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
+<dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
@@ -2791,7 +2791,7 @@ are files. [[HTML]]
 <h3 id=urlencoded-hooks>Hooks</h3>
 
 <p>The
-<dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
+<dfn id=concept-urlencoded-string-parser lt="urlencoded string parser"><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
 <a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
@@ -2897,7 +2897,7 @@ var input = "/🍣🍺",
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 
  <p>A {{URL}} object can be used as <a>base URL</a> (while IDL requires a string as argument, a
- {{URL}} object stringifies to its {{URL/href}} attribute value):</p>
+ {{URL}} object stringifies to its {{URL/href}} getter return value):</p>
 
  <pre><code class="lang-javascript">
 var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
@@ -2906,11 +2906,11 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
 <hr id=urlutils-members>
 
-<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter steps and the
+<p>The <dfn attribute for=URL><code>href</code></dfn> getter steps and the
 <dfn method for=URL><code>toJSON()</code></dfn> method steps are to return the
 <a lt="URL serializer">serialization</a> of <a>this</a>'s <a for=URL>URL</a>.
 
-<p>The <code><a attribute for=URL>href</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>href</a></code> setter steps are:
 
 <ol>
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on the given
@@ -2926,25 +2926,25 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
  <li><p>If <var>query</var> is non-null, then set <a>this</a>'s
  <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the result of
- <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
+ <a lt="urlencoded string parser">parsing</a> <var>query</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>origin</code></dfn> attribute's getter steps are to return the
+<p>The <dfn attribute for=URL><code>origin</code></dfn> getter steps are to return the
 <a lt="serialization of an origin">serialization</a> of <a>this</a>'s <a for=URL>URL</a>'s
 <a for=url>origin</a>. [[!HTML]]
 
-<p>The <dfn attribute for=URL><code>protocol</code></dfn> attribute's getter steps are to return
-<a>this</a> <a for=URL>URL</a>'s <a for=url>scheme</a>, followed by U+003A (:).
+<p>The <dfn attribute for=URL><code>protocol</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>scheme</a>, followed by U+003A (:).
 
-<p>The <code><a attribute for=URL>protocol</a></code> attribute's setter steps are to
-<a lt='basic URL parser'>basic URL parse</a> the given value, followed by U+003A (:), with
+<p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
+<a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
 <a>this</a>'s <a for=URL>URL</a> as <var>url</var> and <a>scheme start state</a> as
 <var>state override</var>.
 
-<p>The <dfn attribute for=URL><code>username</code></dfn> attribute's getter steps are to return
-<a>this</a>'s <a for=URL>URL</a>'s <a for=url>username</a>.
+<p>The <dfn attribute for=URL><code>username</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>username</a>.
 
-<p>The <code><a attribute for=URL>username</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>username</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
@@ -2953,10 +2953,10 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <li><p><a for=url>Set the username</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
 
-<p>The <dfn attribute for=URL><code>password</code></dfn> attribute's getter steps are to return
-<a>this</a>'s <a for=URL>URL</a>'s <a for=url>password</a>.
+<p>The <dfn attribute for=URL><code>password</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>password</a>.
 
-<p>The <code><a attribute for=URL>password</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>password</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
@@ -2965,7 +2965,7 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <li><p><a for=url>Set the password</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
 
-<p>The <dfn attribute for=URL><code>host</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>host</code></dfn> getter steps are:
 
 <ol>
  <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
@@ -2980,7 +2980,7 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <a lt="serialize an integer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>host</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
@@ -2991,11 +2991,11 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
-attribute's setter lacks a <a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s
-<a for=url>port</a> will not change. This can be unexpected as <code>host</code> attribute's getter
+setter lacks a <a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s
+<a for=url>port</a> will not change. This can be unexpected as <code>host</code> getter
 does return a <a>URL-port string</a> so one might have assumed the setter to always "reset" both.
 
-<p>The <dfn attribute for=URL><code>hostname</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>hostname</code></dfn> getter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>host</a> is null, then return the empty
@@ -3005,7 +3005,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a lt="host serializer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>hostname</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
@@ -3015,7 +3015,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a for=URL>URL</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>port</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>port</code></dfn> getter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a> is null, then return the empty
@@ -3025,7 +3025,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a lt="serialize an integer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>port</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>port</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
@@ -3039,7 +3039,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>pathname</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
@@ -3052,7 +3052,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a for=url>path</a> (including empty strings), if any, separated from each other by U+002F (/).
 </ol>
 
-<p>The <code><a attribute for=URL>pathname</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
@@ -3064,7 +3064,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a for=URL>URL</a> as <var>url</var> and <a>path start state</a> as <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>search</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>search</code></dfn> getter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a> is either null or the empty
@@ -3073,7 +3073,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Return U+003F (?), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>search</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>search</a></code> setter steps are:
 
 <ol>
  <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
@@ -3085,17 +3085,17 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 
  <li><p>Set <var>url</var>'s <a for=url>query</a> to the empty string.
 
- <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with <var>url</var> as
+ <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <var>url</var> as
  <var>url</var> and <a>query state</a> as <var>state override</var>.
 
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
- result of <a lt='urlencoded string parser'>parsing</a> <var>input</var>.
+ result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>searchParams</code></dfn> attribute's getter steps are to return
+<p>The <dfn attribute for=URL><code>searchParams</code></dfn> getter steps are to return
 <a>this</a>'s <a for=URL>query object</a>.
 
-<p>The <dfn attribute for=URL><code>hash</code></dfn> attribute's getter steps are:
+<p>The <dfn attribute for=URL><code>hash</code></dfn> getter steps are:
 
 <ol>
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s  <a for=url>fragment</a> is either null or the empty
@@ -3104,7 +3104,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Return U+0023 (#), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>hash</a></code> attribute's setter steps are:
+<p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
  <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
@@ -3114,7 +3114,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 
  <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to the empty string.
 
- <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with <a>this</a>'s
+ <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <a>this</a>'s
  <a for=URL>URL</a> as <var>url</var> and <a>fragment state</a> as <var>state override</var>.
 </ol>
 
@@ -3216,7 +3216,7 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
    <li><p>Assert: <var>init</var> is a string.
 
    <li><p>Set <var>query</var>'s <a for=URLSearchParams>list</a> to the result of
-   <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
+   <a lt="urlencoded string parser">parsing</a> <var>init</var>.
   </ol>
 </ol>
 
@@ -3282,8 +3282,8 @@ return true if there is a name-value pair whose name is <var>name</var> in <a>th
 method steps are:
 
 <ol>
- <li><p>If there are any name-value pairs whose name is <var>name</var>, in <a>this</a>'s
- <a for=URLSearchParams>list</a>, set the value of the first such name-value pair to
+ <li><p>If <a>this</a>'s <a for=URLSearchParams>list</a> <a for=list>contains</a> any name-value
+ pairs whose name is <var>name</var>, then set the value of the first such name-value pair to
  <var>value</var> and remove the others.
 
  <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and value is
@@ -3323,11 +3323,11 @@ sorted.sort()</code></pre>
 
 <hr>
 
-<p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=URLSearchParams>list</a>
+<p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=URLSearchParams>list</a>'s
 name-value pairs with the key being the name and the value being the value.
 
 <p>The <dfn for=URLSearchParams>stringification behavior</dfn> steps are to return the
-<a lt='urlencoded serializer'>serialization</a> of <a>this</a>'s <a for=URLSearchParams>list</a>.
+<a lt="urlencoded serializer">serialization</a> of <a>this</a>'s <a for=URLSearchParams>list</a>.
 
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
