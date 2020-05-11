@@ -2068,7 +2068,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
          <li><p>Set <var>state</var> to <a>path state</a> and decrease <var>pointer</var> by 1.
         </ol>
-      </dl>
+      </ol>
 
      <li><p>Otherwise, set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
      by 1.
