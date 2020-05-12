@@ -1068,7 +1068,7 @@ disambiguate from a <a>valid URL string</a> it can also be referred to as a <a f
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
-dispatch a <a for=/>URL</a> for further processing after <a lt='URL parser'>parsing</a>.
+dispatch a <a for=/>URL</a> for further processing after <a lt="URL parser">parsing</a>.
 It is initially the empty string.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-username>username</dfn> is an
@@ -1511,7 +1511,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p>The <dfn export id=concept-basic-url-parser lt='basic URL parser'>basic URL parser</dfn> takes a
+<p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
 string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, optionally with an
 <a for=/>encoding</a> <var>encoding override</var>, optionally with a <a for=/>URL</a>
 <var>url</var> and a state override <var>state override</var>, and then runs these steps:
@@ -1579,8 +1579,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li>
       <p>Otherwise, <a>validation error</a>, return failure.
 
-      <p class=note>This indication of failure is used exclusively by {{Location}} object's
-      {{Location/protocol}} attribute.
+      <p class=note>This indication of failure is used exclusively by the {{Location}} object's
+      {{Location/protocol}} setter.
     </ol>
 
    <dt><dfn>scheme state</dfn>
@@ -1661,9 +1661,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <li>
       <p>Otherwise, <a>validation error</a>, return failure.
 
-      <p class=note>This indication of failure is used exclusively by {{Location}} object's
-      {{Location/protocol}} attribute. Furthermore, the non-failure termination earlier in this
-      state is an intentional difference for defining that attribute.
+      <p class=note>This indication of failure is used exclusively by the {{Location}} object's
+      {{Location/protocol}} setter. Furthermore, the non-failure termination earlier in this state
+      is an intentional difference for defining that setter.
     </ol>
 
    <dt><dfn>no scheme state</dfn>
@@ -2669,7 +2669,7 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 <h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
-<dfn id=concept-urlencoded-byte-serializer lt='urlencoded byte serializer'><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
+<dfn id=concept-urlencoded-byte-serializer lt="urlencoded byte serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
 takes a byte sequence <var>input</var> and then runs these steps:
 
 <ol>
@@ -2713,7 +2713,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
      Do not change this without double checking URLENCODED-UNITS -->
 
 <p>The
-<dfn export id=concept-urlencoded-serializer lt='urlencoded serializer'><code>application/x-www-form-urlencoded</code> serializer</dfn>
+<dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/>encoding</a>
 <var>encoding override</var>, and then runs these steps:
 
@@ -2756,7 +2756,7 @@ are files. [[HTML]]
 <h3 id=urlencoded-hooks>Hooks</h3>
 
 <p>The
-<dfn id=concept-urlencoded-string-parser lt='urlencoded string parser'><code>application/x-www-form-urlencoded</code> string parser</dfn>
+<dfn id=concept-urlencoded-string-parser lt="urlencoded string parser"><code>application/x-www-form-urlencoded</code> string parser</dfn>
 takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
 <a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
@@ -2790,27 +2790,19 @@ interface URL {
 };
 </pre>
 
-<!-- XXX Ideas:
-  boolean isEqual(URL, optional URLEqualOptions options)
-           attribute URLPath segments;
+<p>A {{URL}} object has an associated:
 
-dictionary URLEqualOptions {
-  boolean percentEncoding = false;
-  boolean ignoreHash = false;
-  boolean ignoreDomainDot = false;
-  ...
-};
-
-URLPath would be a subclassed Array? -->
-
-<p>A {{URL}} object has an associated <dfn id=concept-url-url noexport for=URL>url</dfn> (a
-<a for=/>URL</a>) and <dfn id=concept-url-query-object noexport for=URL>query object</dfn> (a
-{{URLSearchParams}} object).
+<ul class=brief>
+ <li><dfn id=concept-url-url noexport for=URL>URL</dfn>: a <a for=/>URL</a>.
+ <li><dfn id=concept-url-query-object noexport for=URL>query object</dfn>: a {{URLSearchParams}}
+ object.
+</ul>
 
 <hr>
 
-<p id=constructors>The <dfn constructor for=URL><code>URL(<var>url</var>,
-<var>base</var>)</code></dfn> constructor, when invoked, must run these steps:
+<p id=constructors>The
+<dfn constructor for=URL lt="URL(url, base)"><code>new URL(<var>url</var>, <var>base</var>)</code></dfn>
+constructor steps are:
 
 <ol>
  <li><p>Let <var>parsedBase</var> be null.
@@ -2833,15 +2825,15 @@ URLPath would be a subclassed Array? -->
  <li><p>Let <var>query</var> be <var>parsedURL</var>'s <a for=url>query</a>, if that is non-null,
  and the empty string otherwise.
 
- <li><p>Let <var>result</var> be a new {{URL}} object.
+ <li><p>Set <a>this</a>'s <a for=URL>URL</a> to <var>parsedURL</var>.
 
- <li><p>Set <var>result</var>'s <a for=URL>url</a> to <var>parsedURL</var>.
+ <li><p>Set <a>this</a>'s <a for=URL>query object</a> to a new {{URLSearchParams}} object.
 
- <li><p>Set <var>result</var>'s <a for=URL>query object</a> to a <a for=URLSearchParams>new</a>
- {{URLSearchParams}} object using <var>query</var>, and then set that <a for=URL>query object</a>'s
- <a for=URLSearchParams>url object</a> to <var>result</var>.
+ <li><p><a for=URLSearchParams>Initialize</a> <a>this</a>'s <a for=URL>query object</a> with
+ <var>query</var>.
 
- <li><p>Return <var>result</var>.
+ <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>URL object</a> to
+ <a>this</a>.
 </ol>
 
 <div class="example no-backref" id=example-5434421b>
@@ -2870,7 +2862,7 @@ var input = "/🍣🍺",
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 
  <p>A {{URL}} object can be used as <a>base URL</a> (while IDL requires a string as argument, a
- {{URL}} object stringifies to its {{URL/href}} attribute value):</p>
+ {{URL}} object stringifies to its {{URL/href}} getter return value):</p>
 
  <pre><code class="lang-javascript">
 var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
@@ -2879,11 +2871,11 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
 <hr id=urlutils-members>
 
-<p>The <dfn attribute for=URL><code>href</code></dfn> attribute's getter and the
-<dfn method for=URL><code>toJSON()</code></dfn> method, when invoked, must return the
-<a lt="URL serializer">serialization</a> of <a>context object</a>'s <a for=URL>url</a>.
+<p>The <dfn attribute for=URL><code>href</code></dfn> getter steps and the
+<dfn method for=URL><code>toJSON()</code></dfn> method steps are to return the
+<a lt="URL serializer">serialization</a> of <a>this</a>'s <a for=URL>URL</a>.
 
-<p>The <code><a attribute for=URL>href</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>href</a></code> setter steps are:
 
 <ol>
  <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on the given
@@ -2891,61 +2883,59 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
  <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a {{TypeError}}.
 
- <li><p>Set <a>context object</a>'s <a for=URL>url</a> to <var>parsedURL</var>.
+ <li><p>Set <a>this</a>'s <a for=URL>URL</a> to <var>parsedURL</var>.
 
- <li><p>Empty <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>.
+ <li><p>Empty <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>.
 
- <li><p>Let <var>query</var> be <a>context object</a>'s <a for=URL>url</a>'s <a for=url>query</a>.
+ <li><p>Let <var>query</var> be <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a>.
 
- <li><p>If <var>query</var> is non-null, then set <a>context object</a>'s
+ <li><p>If <var>query</var> is non-null, then set <a>this</a>'s
  <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the result of
- <a lt='urlencoded string parser'>parsing</a> <var>query</var>.
+ <a lt="urlencoded string parser">parsing</a> <var>query</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>origin</code></dfn> attribute's getter must return the
-<a lt="serialization of an origin">serialization</a> of <a>context object</a>'s <a for=URL>url</a>'s
+<p>The <dfn attribute for=URL><code>origin</code></dfn> getter steps are to return the
+<a lt="serialization of an origin">serialization</a> of <a>this</a>'s <a for=URL>URL</a>'s
 <a for=url>origin</a>. [[!HTML]]
 
-<p>The <dfn attribute for=URL><code>protocol</code></dfn> attribute's getter must return
-<a>context object</a> <a for=URL>url</a>'s <a for=url>scheme</a>, followed by U+003A (:).
+<p>The <dfn attribute for=URL><code>protocol</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>scheme</a>, followed by U+003A (:).
 
-<p>The <code><a attribute for=URL>protocol</a></code> attribute's setter must
-<a lt='basic URL parser'>basic URL parse</a> the given value, followed by U+003A (:), with
-<a>context object</a>'s <a for=URL>url</a> as <var>url</var> and <a>scheme start state</a> as
+<p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
+<a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
+<a>this</a>'s <a for=URL>URL</a> as <var>url</var> and <a>scheme start state</a> as
 <var>state override</var>.
 
-<p>The <dfn attribute for=URL><code>username</code></dfn> attribute's getter must return
-<a>context object</a>'s <a for=URL>url</a>'s <a for=url>username</a>.
+<p>The <dfn attribute for=URL><code>username</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>username</a>.
 
-<p>The <code><a attribute for=URL>username</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>username</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
- then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
+ return.
 
- <li><p><a for=url>Set the username</a> given <a>context object</a>'s <a for=URL>url</a> and the
- given value.
+ <li><p><a for=url>Set the username</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
 
-<p>The <dfn attribute for=URL><code>password</code></dfn> attribute's getter must return
-<a>context object</a>'s <a for=URL>url</a>'s <a for=url>password</a>.
+<p>The <dfn attribute for=URL><code>password</code></dfn> getter steps are to return <a>this</a>'s
+<a for=URL>URL</a>'s <a for=url>password</a>.
 
-<p>The <code><a attribute for=URL>password</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>password</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
- then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
+ return.
 
- <li><p><a for=url>Set the password</a> given <a>context object</a>'s <a for=URL>url</a> and the
- given value.
+ <li><p><a for=url>Set the password</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
 
-<p>The <dfn attribute for=URL><code>host</code></dfn> attribute's getter must run these steps:
+<p>The <dfn attribute for=URL><code>host</code></dfn> getter steps are:
 
 <ol>
- <li><p>Let <var>url</var> be <a>context object</a>'s <a for=URL>url</a>.
+ <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
 
- <li><p>If <var>url</var>'s <a for=url>host</a> is null, return the empty string.
+ <li><p>If <var>url</var>'s <a for=url>host</a> is null, then return the empty string.
 
  <li><p>If <var>url</var>'s <a for=url>port</a> is null, return <var>url</var>'s
  <a for=url>host</a>, <a lt="host serializer">serialized</a>.
@@ -2955,154 +2945,142 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <a lt="serialize an integer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>host</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ return.
 
- <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
+ <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
+ <a for=URL>URL</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
-attribute's setter lacks a <a lt="URL-port string">port</a>, <a>context object</a>'s
-<a for=URL>url</a>'s <a for=url>port</a> will not change. This can be unexpected as
-<code>host</code> attribute's getter does return a <a>URL-port string</a> so one might have assumed
-the setter to always "reset" both.
+setter lacks a <a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s
+<a for=url>port</a> will not change. This can be unexpected as <code>host</code> getter
+does return a <a>URL-port string</a> so one might have assumed the setter to always "reset" both.
 
-<p>The <dfn attribute for=URL><code>hostname</code></dfn> attribute's getter must run these steps:
+<p>The <dfn attribute for=URL><code>hostname</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a> is null, return the
- empty string.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>host</a> is null, then return the empty
+ string.
 
- <li><p>Return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>host</a>,
+ <li><p>Return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>host</a>,
  <a lt="host serializer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>hostname</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ return.
 
- <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
+ <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
+ <a for=URL>URL</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>port</code></dfn> attribute's getter must run these steps:
+<p>The <dfn attribute for=URL><code>port</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>port</a> is null, return the
- empty string.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a> is null, then return the empty
+ string.
 
- <li><p>Return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>port</a>,
+ <li><p>Return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a>,
  <a lt="serialize an integer">serialized</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>port</a></code> attribute's setter must run these steps:
+<p>The <code><a attribute for=URL>port</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a> <a>cannot have a username/password/port</a>,
- then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> <a>cannot have a username/password/port</a>, then
+ return.
 
- <li><p>If the given value is the empty string, then set <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>port</a> to null.</p></li>
+ <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
+ <a for=url>port</a> to null.</p></li>
 
  <li><p>Otherwise, <a lt="basic URL parser">basic URL parse</a> the given value with
- <a>context object</a>'s <a for=URL>url</a> as <var>url</var> and <a>port state</a> as
+ <a>this</a>'s <a for=URL>URL</a> as <var>url</var> and <a>port state</a> as
  <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>pathname</code></dfn> attribute's getter must run these steps:
+<p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, then return <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>[0].
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>[0].
 
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>
- <a for=list>is empty</a>, then return the empty string.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a> <a for=list>is empty</a>, then
+ return the empty string.
 
- <li><p>Return U+002F (/), followed by the strings in <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>path</a> (including empty strings), if any, separated from each
- other by U+002F (/).
+ <li><p>Return U+002F (/), followed by the strings in <a>this</a>'s <a for=URL>URL</a>'s
+ <a for=url>path</a> (including empty strings), if any, separated from each other by U+002F (/).
 </ol>
 
-<p>The <code><a attribute for=URL>pathname</a></code> attribute's setter must
-run these steps:
+<p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>cannot-be-a-base-URL flag</a> is
- set, then return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ return.
 
- <li><p>Empty <a>context object</a>'s <a for=URL>url</a>'s <a for=url>path</a>.
+ <li><p>Empty <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
 
- <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>path start state</a> as <var>state override</var>.
+ <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
+ <a for=URL>URL</a> as <var>url</var> and <a>path start state</a> as <var>state override</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>search</code></dfn> attribute's getter must run these steps:
+<p>The <dfn attribute for=URL><code>search</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s <a for=url>query</a> is either null or the
- empty string, return the empty string.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a> is either null or the empty
+ string, then return the empty string.
 
- <li><p>Return U+003F (?), followed by <a>context object</a>'s <a for=URL>url</a>'s
- <a for=url>query</a>.
+ <li><p>Return U+003F (?), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>search</a></code> attribute's setter must run these
-steps:
+<p>The <code><a attribute for=URL>search</a></code> setter steps are:
 
 <ol>
- <li><p>Let <var>url</var> be <a>context object</a>'s <a for=URL>url</a>.
+ <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
 
  <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
- empty <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>,
- and then return.
+ empty <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>, and then return.
 
- <li><p>Let <var>input</var> be the given value with a single leading U+003F (?) removed, if
- any.
+ <li><p>Let <var>input</var> be the given value with a single leading U+003F (?) removed, if any.
 
  <li><p>Set <var>url</var>'s <a for=url>query</a> to the empty string.
 
- <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with <var>url</var> as
+ <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <var>url</var> as
  <var>url</var> and <a>query state</a> as <var>state override</var>.
 
- <li><p>Set <a>context object</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to
- the result of <a lt='urlencoded string parser'>parsing</a> <var>input</var>.
+ <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
+ result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>searchParams</code></dfn> attribute's getter must return
-<a>context object</a>'s <a for=URL>query object</a>.
+<p>The <dfn attribute for=URL><code>searchParams</code></dfn> getter steps are to return
+<a>this</a>'s <a for=URL>query object</a>.
 
-<p>The <dfn attribute for=URL><code>hash</code></dfn> attribute's
-getter must run these steps:
+<p>The <dfn attribute for=URL><code>hash</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>context object</a>'s <a for=URL>url</a>'s  <a for=url>fragment</a> is either null or
- the empty string, return the empty string.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s  <a for=url>fragment</a> is either null or the empty
+ string, then return the empty string.
 
- <li><p>Return U+0023 (#), followed by <a>context object</a>'s <a for=URL>url</a>'s
- <a for=url>fragment</a>.
+ <li><p>Return U+0023 (#), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a>.
 </ol>
 
-<p>The <code><a attribute for=URL>hash</a></code> attribute's setter must run these
-steps:
+<p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
- <li><p>If the given value is the empty string, then set <a>context object</a>'s
- <a for=URL>url</a>'s <a for=url>fragment</a> to null and return.
+ <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
+ <a for=url>fragment</a> to null and return.
 
- <li><p>Let <var>input</var> be the given value with a single leading U+0023 (#) removed, if
- any.
+ <li><p>Let <var>input</var> be the given value with a single leading U+0023 (#) removed, if any.
 
- <li><p>Set <a>context object</a>'s <a for=URL>url</a>'s <a for=url>fragment</a> to the empty
- string.
+ <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to the empty string.
 
- <li><p><a lt='basic URL parser'>Basic URL parse</a> <var>input</var> with <a>context object</a>'s
- <a for=URL>url</a> as <var>url</var> and <a>fragment state</a> as <var>state override</var>.
+ <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <a>this</a>'s
+ <a for=URL>URL</a> as <var>url</var> and <a>fragment state</a> as <var>state override</var>.
 </ol>
 
 
@@ -3167,20 +3145,19 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
       Do not change this without double checking QUERY-UNITS -->
 </div>
 
-<p>A {{URLSearchParams}} object has an associated
-<dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn> of name-value pairs,
-which is initially empty.
+<p>A {{URLSearchParams}} object has an associated:
 
-<p>A {{URLSearchParams}} object has an associated
-<dfn export for=URLSearchParams id=concept-urlsearchparams-url-object>url object</dfn>, which is
-initially null.
+<ul class=brief>
+ <li><dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn>: a <a for=/>list</a>
+ of name-value pairs, initially empty.
+ <li><dfn export for=URLSearchParams id=concept-urlsearchparams-url-object>URL object</dfn>: null or
+ a {{URL}} object, initially null.
+</ul>
 
-<p>To create a <dfn export for=URLSearchParams id=concept-urlsearchparams-new>new</dfn>
-{{URLSearchParams}} object using <var>init</var>, run these steps:
+<p>To <dfn for=URLSearchParams oldids=concept-urlsearchparams-new>initialize</dfn> a
+{{URLSearchParams}} object <var>query</var> with <var>init</var>, run these steps:
 
 <ol>
- <li><p>Let <var>query</var> be a new {{URLSearchParams}} object.
-
  <li>
   <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>pair</var> in
   <var>init</var>:
@@ -3193,8 +3170,8 @@ initially null.
   </ol>
 
  <li><p>Otherwise, if <var>init</var> is a <a for=/>record</a>, then <a for=map>for each</a>
- <var>name</var> → <var>value</var> in <var>init</var>, append a new name-value pair whose name is
- <var>name</var> and value is <var>value</var>, to <var>query</var>'s
+ <var>name</var> → <var>value</var> of <var>init</var>, <a for=list>append</a> a new name-value pair
+ whose name is <var>name</var> and value is <var>value</var>, to <var>query</var>'s
  <a for=URLSearchParams>list</a>.
 
  <li>
@@ -3204,85 +3181,80 @@ initially null.
    <li><p>Assert: <var>init</var> is a string.
 
    <li><p>Set <var>query</var>'s <a for=URLSearchParams>list</a> to the result of
-   <a lt='urlencoded string parser'>parsing</a> <var>init</var>.
+   <a lt="urlencoded string parser">parsing</a> <var>init</var>.
   </ol>
-
- <li><p>Return <var>query</var>.
 </ol>
 
-<p>A {{URLSearchParams}} object's
-<dfn for=URLSearchParams id=concept-urlsearchparams-update>update steps</dfn> are to run these
-steps:
+<p>To <dfn for=URLSearchParams id=concept-urlsearchparams-update>update</dfn> a {{URLSearchParams}}
+object <var>query</var>, run these steps:
 
 <ol>
- <li><p>Let <var>query</var> be the <a lt="urlencoded serializer">serialization</a> of
- {{URLSearchParams}} object's <a for=URLSearchParams>list</a>.
+ <li><p>If <var>query</var>'s <a for=URLSearchParams>URL object</a> is null, then return.
 
- <li><p>If <var>query</var> is the empty string, then set <var>query</var> to null.
+ <li><p>Let <var>serializedQuery</var> be the <a lt="urlencoded serializer">serialization</a> of
+ <var>query</var>'s <a for=URLSearchParams>list</a>.
 
- <li><p>Set <a for=URLSearchParams>url object</a>'s <a for=URL>url</a>'s <a for=url>query</a> to
- <var>query</var>.
-</ol>
+ <li><p>If <var>serializedQuery</var> is the empty string, then set <var>serializedQuery</var> to
+ null.
 
-<p>The <dfn constructor for=URLSearchParams><code>URLSearchParams(<var>init</var>)</code></dfn>
-constructor, when invoked, must run these steps:</p>
-
-<ol>
- <li><p>If <var>init</var> is a string and starts with U+003F (?), remove the first code point from
- <var>init</var>.
-
- <li><p>Return a <a for=URLSearchParams>new</a> {{URLSearchParams}} object using <var>init</var>.
+ <li><p>Set <var>query</var>'s <a for=URLSearchParams>URL object</a>'s <a for=URL>URL</a>'s
+ <a for=url>query</a> to <var>serializedQuery</var>.
 </ol>
 
 <p>The
-<dfn method for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
-method, when invoked, must run these steps:
+<dfn constructor for=URLSearchParams lt="URLSearchParams(init)"><code>new URLSearchParams(<var>init</var>)</code></dfn>
+constructor steps are:</p>
 
 <ol>
- <li><p>Append a new name-value pair whose name is <var>name</var> and
- value is <var>value</var>, to <a for=URLSearchParams>list</a>.
+ <li><p>If <var>init</var> is a string and starts with U+003F (?), then remove the first code point
+ from <var>init</var>.
 
- <li><p>Run the <a for=URLSearchParams>update steps</a>.
+ <li><p><a for=URLSearchParams>Initialize</a> <a>this</a> with <var>init</var>.
 </ol>
 
-<p>The <dfn method for=URLSearchParams><code>delete(<var>name</var>)</code></dfn> method, when
-invoked, must run these steps:
+<p>The <dfn method for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
+method steps are:
+
+<ol>
+ <li><p>Append a new name-value pair whose name is <var>name</var> and value is <var>value</var>, to
+ <a for=URLSearchParams>list</a>.
+
+ <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
+</ol>
+
+<p>The <dfn method for=URLSearchParams><code>delete(<var>name</var>)</code></dfn> method steps are:
 
 <ol>
  <li><p>Remove all name-value pairs whose name is <var>name</var> from
  <a for=URLSearchParams>list</a>.
 
- <li><p>Run the <a for=URLSearchParams>update steps</a>.
+ <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
 
-<p>The
-<dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn>
-method, when invoked, must return the value of the first name-value pair whose name is
-<var>name</var> in <a for=URLSearchParams>list</a>, if there is such a pair, and null otherwise.
+<p>The <dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn> method steps are to
+return the value of the first name-value pair whose name is <var>name</var> in <a>this</a>'s
+<a for=URLSearchParams>list</a>, if there is such a pair, and null otherwise.
 
-<p>The
-<dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn>
-method, when invoked, must return the values of all name-value pairs whose name is <var>name</var>,
-in <a for=URLSearchParams>list</a>, in list order, and the empty sequence otherwise.
+<p>The <dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn> method steps are
+to return the values of all name-value pairs whose name is <var>name</var>, in <a>this</a>'s
+<a for=URLSearchParams>list</a>, in list order, and the empty sequence otherwise.
 
-<p>The
-<dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn>
-method, when invoked, must return true if there is a name-value pair whose name is <var>name</var>
-in <a for=URLSearchParams>list</a>, and false otherwise.
+<p>The <dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn> method steps are to
+return true if there is a name-value pair whose name is <var>name</var> in <a>this</a>'s
+<a for=URLSearchParams>list</a>, and false otherwise.
 
-<p>The
-<dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
-method, when invoked, must run these steps:
+<p>The <dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
+method steps are:
 
 <ol>
- <li><p>If there are any name-value pairs whose name is <var>name</var>, in
- <a for=URLSearchParams>list</a>, set the value of the first such name-value pair to
+ <li><p>If <a>this</a>'s <a for=URLSearchParams>list</a> <a for=list>contains</a> any name-value
+ pairs whose name is <var>name</var>, then set the value of the first such name-value pair to
  <var>value</var> and remove the others.
 
  <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and value is
- <var>value</var>, to <a for=URLSearchParams>list</a>.
+ <var>value</var>, to <a>this</a>'s <a for=URLSearchParams>list</a>.
 
- <li><p>Run the <a for=URLSearchParams>update steps</a>.
+ <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
 
 <hr>
@@ -3305,25 +3277,22 @@ const sorted = new URLSearchParams(url.search)
 sorted.sort()</code></pre>
 </div>
 
-<p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method steps are:
 
 <ol>
  <li><p>Sort all name-value pairs, if any, by their names. Sorting must be done by comparison of
  code units. The relative order between name-value pairs with equal names must be preserved.
 
- <li><p>Run the <a for=URLSearchParams>update steps</a>.
+ <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
 
 <hr>
 
-<p>The <a>value pairs to iterate over</a> are the
-<a for=URLSearchParams>list</a> name-value pairs with the key being
-the name and the value being the value.
+<p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=URLSearchParams>list</a>'s
+name-value pairs with the key being the name and the value being the value.
 
-<p>The <dfn for=URLSearchParams>stringification behavior</dfn> must return the
-<a lt='urlencoded serializer'>serialization</a> of the {{URLSearchParams}} object's
-<a for=URLSearchParams>list</a>.
+<p>The <dfn for=URLSearchParams>stringification behavior</dfn> steps are to return the
+<a lt="urlencoded serializer">serialization</a> of <a>this</a>'s <a for=URLSearchParams>list</a>.
 
 
 <h3 id=url-apis-elsewhere>URL APIs elsewhere</h3>
