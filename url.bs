@@ -116,14 +116,16 @@ error.
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
 <p>A <dfn>percent-encoded byte</dfn> is U+0025 (%), followed by two <a>ASCII hex digits</a>.
-Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>, <a>string percent decoded</a>,
-should not cause <a>UTF-8 decode without BOM or fail</a> to return failure.
+Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>,
+<a for=string>percent-decoded</a>, should not cause <a>UTF-8 decode without BOM or fail</a> to
+return failure.
 
-<p>To <dfn export>percent encode</dfn> a <a for=/>byte</a> <var>byte</var>, return a
-<a for=/>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a>
+<p>To <dfn for=byte id=percent-encode>percent-encode</dfn> a <a for=/>byte</a> <var>byte</var>,
+return a <a for=/>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a>
 representing <var>byte</var>.
 
-<p>To <dfn export>percent decode</dfn> a <a>byte sequence</a> <var>input</var>, run these steps:
+<p>To <dfn export for="byte sequence" id=percent-decode>percent-decode</dfn> a
+<a for=/>byte sequence</a> <var>input</var>, run these steps:
 
 <p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when <var>input</var> contains
 bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
@@ -147,7 +149,7 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
     <ol>
      <li><p>Let <var>bytePoint</var> be the two bytes after <var>byte</var> in <var>input</var>,
-     <a lt="UTF-8 decode without BOM">decoded</a>, and then interpreted as hexadecimal number.
+     <a lt="isomorphic decode">decoded</a>, and then interpreted as hexadecimal number.
      <!-- We should have a better definition for this. -->
 
      <li><p>Append a byte whose value is <var>bytePoint</var> to
@@ -160,13 +162,17 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
  <li><p>Return <var>output</var>.
 </ol>
 
-<p>To <dfn export>string percent decode</dfn> a string <var>input</var>, run these steps:
+<p>To <dfn export for=string>percent-decode</dfn> a <a for=/>string</a> <var>input</var>, run these
+steps:
 
 <ol>
  <li><p>Let <var>bytes</var> be the <a>UTF-8 encoding</a> of <var>input</var>.
 
- <li><p>Return the <a>percent decoding</a> of <var>bytes</var>.
+ <li><p>Return the <a for="byte sequence">percent-decoding</a> of <var>bytes</var>.
 </ol>
+
+<p class=note>In general, percent-encoding results in a string with more U+0025 (%) code points than
+the input, and percent-decoding results in a byte sequence with less 0x25 (%) bytes than the input.
 
 <hr>
 
@@ -183,23 +189,74 @@ U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
-<p>To <dfn>UTF-8 percent encode</dfn> a <a for=/>code point</a> <var>codePoint</var>, using a
-<var>percentEncodeSet</var>, run these steps:
+<p class=note>The <a><code>application/x-www-form-urlencoded</code></a> format's
+<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
+<a>query state</a> use <a for=byte>percent-encode</a> directly without any of these sets.
+
+<p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
+<a for=/>code point</a> <var>codePoint</var> using a <var>percentEncodeSet</var>, run these steps:
 
 <ol>
  <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then return
  <var>codePoint</var>.
 
- <li><p>Let <var>bytes</var> be the result of running <a>UTF-8 encode</a> on
- <var>codePoint</var>.
+ <li><p>Let <var>bytes</var> be the result of running <a>UTF-8 encode</a> on <var>codePoint</var>.
 
- <li><p><a>Percent encode</a> each byte in <var>bytes</var>, and then return the results
- concatenated, in the same order.
+ <li><p>Let <var>output</var> be the empty string.</p></li>
+
+ <li><p>For each <var>byte</var> of <var>bytes</var>, <a for=byte>percent-encode</a>
+ <var>byte</var> and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
 </ol>
 
-<p class="note no-backref">The <a><code>application/x-www-form-urlencoded</code></a> format's
-<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
-<a>query state</a> use <a>percent encode</a> directly.
+<p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>string</a> <var>input</var> using
+a <var>percentEncodeSet</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>output</var> be the empty string.</p></li>
+
+ <li><p>For each <var>codePoint</var> of <var>input</var>,
+ <a for="code point">UTF-8 percent-encode</a> <var>codePoint</var> using <var>percentEncodeSet</var>
+ and append the result to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ol>
+
+<hr>
+
+<div class=example id=example-percent-encode-operations>
+ <p>Here is a summary, by way of example, of the operations defined above:
+
+ <table>
+  <tr>
+   <th>Operation
+   <th>Example input
+   <th>Example output
+  <tr>
+   <td><a for=byte>Percent-encode</a> <var>input</var>
+   <td>0x7F
+   <td>"<code>%23</code>"
+  <tr>
+   <td><a for="byte sequence">Percent-decode</a> <var>input</var>
+   <td>`<code>%25%s%1G</code>`
+   <td>`<code>%%s%1G</code>`
+  <tr>
+   <td><a for=string>Percent-decode</a> <var>input</var>
+   <td>"<code>‽%25%2E</code>"
+   <td>0xE2 0x80 0xBD 0x25 0x2E
+  <tr>
+   <td><a for="code point">UTF-8 percent-encode</a> <var>input</var> using the
+   <a>userinfo percent-encode set</a>
+   <td>U+203D
+   <td>"<code>%E2%80%BD</code>"
+  <tr>
+   <td><a for=string>UTF-8 percent-encode</a> <var>input</var> using the
+   <a>userinfo percent-encode set</a>
+   <td>"<code>Say what‽</code>"
+   <td>"<code>Say%20what%E2%80%BD</code>"
+ </table>
+</div>
 
 
 
@@ -493,7 +550,7 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
-  <a>string percent decoding</a> of <var>input</var>.
+  <a for=string>percent-decoding</a> of <var>input</var>.
 
   <p class="note no-backref">Alternatively <a>UTF-8 decode without BOM or fail</a> can be used,
   coupled with an early return for failure, as <a>domain to ASCII</a> fails on
@@ -816,12 +873,8 @@ then runs these steps:
  <li><p>If <var>input</var> contains a U+0025 (%) and the two <a>code points</a> following it are
  not <a>ASCII hex digits</a>, <a>validation error</a>.
 
- <li><p>Let <var>output</var> be the empty string.
-
- <li><p>For each code point in <var>input</var>, <a>UTF-8 percent encode</a> it using the
- <a>C0 control percent-encode set</a>, and append the result to <var>output</var>.
-
- <li><p>Return <var>output</var>.
+ <li><p>Return the result of running <a for=string>UTF-8 percent-encode</a> on <var>input</var>
+ using the <a>C0 control percent-encode set</a>.
 </ol>
 
 
@@ -1826,7 +1879,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          unset, then set <var>passwordTokenSeenFlag</var> and <a for=iteration>continue</a>.
 
          <li><p>Let <var>encodedCodePoints</var> be the result of running
-         <a>UTF-8 percent encode</a> <var>codePoint</var> using the
+         <a for="code point">UTF-8 percent-encode</a> <var>codePoint</var> using the
          <a>userinfo percent-encode set</a>.
 
          <li><p>If <var>passwordTokenSeenFlag</var> is set, then append <var>encodedCodePoints</var>
@@ -2245,8 +2298,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>path percent-encode set</a>, and
-       append the result to <var>buffer</var>.
+       <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
+       <a>path percent-encode set</a> and append the result to <var>buffer</var>.
       </ol>
     </ol>
 
@@ -2269,8 +2322,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>, <a>UTF-8 percent encode</a> <a>c</a>
-       using the <a>C0 control percent-encode set</a>, and append the result to <var>url</var>'s
+       <li><p>If <a>c</a> is not the <a>EOF code point</a>,
+       <a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
+       <a>C0 control percent-encode set</a> and append the result to <var>url</var>'s
        <a for=url>path</a>[0].
       </ol>
     </ol>
@@ -2337,7 +2391,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           </ul>
           <!-- Do not change this without double checking QUERY-UNITS -->
 
-          <p>then append <var>byte</var>, <a lt="percent encode">percent encoded</a>, to
+          <p>then append <var>byte</var>, <a for=byte>percent-encoded</a>, to
           <var>url</var>'s <a for=url>query</a>.
 
          <li><p>Otherwise, append a code point whose value is <var>byte</var> to
@@ -2359,8 +2413,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p><a>UTF-8 percent encode</a> <a>c</a> using the <a>fragment percent-encode set</a> and
-       append the result to <var>url</var>'s <a for=url>fragment</a>.
+       <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
+       <a>fragment percent-encode set</a> and append the result to <var>url</var>'s
+       <a for=url>fragment</a>.
       </ol>
     </ol>
   </dl>
@@ -2371,26 +2426,14 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 <hr>
 
 <p>To <dfn export id=set-the-username for=url>set the username</dfn> given a <var>url</var> and
-<var>username</var>, run these steps:
-
-<ol>
- <li><p>Set <var>url</var>'s <a for=url>username</a> to the empty string.
-
- <li><p>For each code point in <var>username</var>, <a>UTF-8 percent encode</a> it using the
- <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
- <a for=url>username</a>.
-</ol>
+<var>username</var>, set <var>url</var>'s <a for=url>username</a> to the result of running
+<a for=string>UTF-8 percent-encode</a> on <var>username</var> using the
+<a>userinfo percent-encode set</a>.
 
 <p>To <dfn export id=set-the-password for=url>set the password</dfn> given a <var>url</var> and
-<var>password</var>, run these steps:
-
-<ol>
- <li><p>Set <var>url</var>'s <a for=url>password</a> to the empty string.
-
- <li><p>For each code point in <var>password</var>, <a>UTF-8 percent encode</a> it using the
- <a>userinfo percent-encode set</a>, and append the result to <var>url</var>'s
- <a for=url>password</a>.
-</ol>
+<var>password</var>, set <var>url</var>'s <a for=url>password</a> to the result of running
+<a for=string>UTF-8 percent-encode</a> on <var>password</var> using the
+<a>userinfo percent-encode set</a>.
 
 
 <h3 id=url-serializing>URL serializing</h3>
@@ -2585,9 +2628,9 @@ handled with care to prevent spoofing:
  bidirectional text, so in this case it is particularly advisable to only render a URL's
  <a for=url>host</a>. For readability, other parts of the <a for=/>URL</a>, if rendered, should have
  their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from
- <a>percent decoding</a> those sequences converted to bytes, unless that renders those sequences
- invisible. Browsers may choose to not decode certain sequences that present spoofing risks (e.g.,
- U+1F512 (🔒)).
+ <a for=string>percent-decoding</a> those sequences converted to bytes, unless that renders those
+ sequences invisible. Browsers may choose to not decode certain sequences that present spoofing
+ risks (e.g., U+1F512 (🔒)).
 
  <li>
   <p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
@@ -2655,8 +2698,8 @@ takes a byte sequence <var>input</var>, and then runs these steps:
    <li><p>Replace any 0x2B (+) in <var>name</var> and <var>value</var> with 0x20 (SP).
 
    <li><p>Let <var>nameString</var> and <var>valueString</var> be the result of running <a>UTF-8
-   decode without BOM</a> on the <a lt="percent decode">percent decoding</a> of <var>name</var> and
-   <var>value</var>, respectively.
+   decode without BOM</a> on the <a lt=percent-decode for="byte sequence">percent-decoding</a> of
+   <var>name</var> and <var>value</var>, respectively.
 
    <li><p><a for=list>Append</a> (<var>nameString</var>, <var>valueString</var>) to
    <var>output</var>.
@@ -2694,7 +2737,7 @@ takes a byte sequence <var>input</var> and then runs these steps:
 
    <dt>Otherwise
    <dd><p>Append <var>byte</var>,
-   <a lt="percent encode">percent encoded</a>, to
+   <a for=byte>percent-encoded</a>, to
    <var>output</var>.
   </dl>
  <li><p>Return <var>output</var>.
