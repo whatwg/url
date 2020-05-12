@@ -171,6 +171,9 @@ steps:
  <li><p>Return the <a for="byte sequence">percent-decoding</a> of <var>bytes</var>.
 </ol>
 
+<p class=note>In general, percent-encoding results in a string with more U+0025 (%) code points than
+the input, and percent-decoding results in a byte sequence with less 0x25 (%) bytes than the input.
+
 <hr>
 
 <p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
