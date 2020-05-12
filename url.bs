@@ -181,10 +181,9 @@ and all <a>code points</a> greater than U+007E (~).
 
 <p>The <dfn>query percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
 U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and U+003E (>).
-<!-- Do not change this without double checking QUERY-UNITS -->
 
-<p class="note">For <a lt="is special">special</a> <a for=/>URLs</a> the <a>query state</a> adds
-U+0027 (') to this set.
+<p>The <dfn>special-query percent-encode set</dfn> is the <a>query percent-encode set</a> and
+U+0027 (').
 
 <p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
 U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and U+0060 (`).
@@ -2369,8 +2368,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
        <li>
         <p>If <var>queryPart</var> starts with "<code>&amp;#</code>" and ends with 0+003B (;), then
-        <a>string UTF-8 percent encode</a> <var>queryPart</var> using « U+0023 (#), U+0026 (&amp;),
-        U+003B (;) » and append the result to <var>url</var>'s <a for=url>query</a>.
+        <a for=string>UTF-8 percent-encode</a> <var>queryPart</var> using « U+0023 (#),
+        U+0026 (&amp;), U+003B (;) » and append the result to <var>url</var>'s <a for=url>query</a>.
 
         <p class="note no-backref">This can happen when <a lt=encode>encoding</a> code points using
         a non-<a>UTF-8</a> <a for=/>encoding</a>.
@@ -2379,13 +2378,10 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <p>Otherwise:
 
         <ol>
-         <li><p>Let <var>queryPercentEncodeSet</var> be a <a for=set>clone</a> of the
-         <a>query percent-encode set</a>.
+         <li><p>Let <var>queryPercentEncodeSet</var> be the <a>special-query percent-encode set</a>
+         if <var>url</var> <a>is special</a>; otherwise the <a>query percent-encode set</a>.
 
-         <li><p>If <var>url</var> <a>is special</a>, then <a for=set>append</a> U+0027 (') to
-         <var>queryPercentEncodeSet</var>.
-
-         <li><p><a>String UTF-8 percent encode</a> <var>queryPart</var> using
+         <li><p><a for=string>UTF-8 percent-encode</a> <var>queryPart</var> using
          <var>queryPercentEncodeSet</var> and append the result to <var>url</var>'s
          <a for=url>query</a>.
         </ol>
@@ -3174,9 +3170,8 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
       Do not change this without double checking URLENCODED-UNITS -->
 
  <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode anything in the
- <a>query percent-encode set</a> and, varying on <a>is special</a>, U+0027 (').
- <!-- From https://url.spec.whatwg.org/#query-state.
-      Do not change this without double checking QUERY-UNITS -->
+ <a>query percent-encode set</a> or, varying on <a>is special</a>, the
+ <a>special-query percent-encode set</a>.
 </div>
 
 <p>A {{URLSearchParams}} object has an associated:
