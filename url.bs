@@ -124,8 +124,8 @@ return failure.
 return a <a for=/>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a>
 representing <var>byte</var>.
 
-<p>To <dfn export for="byte sequence" id=percent-decode>percent-decode</dfn> a <a>byte sequence</a>
-<var>input</var>, run these steps:
+<p>To <dfn export for="byte sequence" id=percent-decode>percent-decode</dfn> a
+<a for=/>byte sequence</a> <var>input</var>, run these steps:
 
 <p class=warning>Using anything but <a>UTF-8 decode without BOM</a> when <var>input</var> contains
 bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
@@ -162,7 +162,8 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
  <li><p>Return <var>output</var>.
 </ol>
 
-<p>To <dfn export for=string>percent-decode</dfn> a string <var>input</var>, run these steps:
+<p>To <dfn export for=string>percent-decode</dfn> a <a for=/>string</a> <var>input</var>, run these
+steps:
 
 <ol>
  <li><p>Let <var>bytes</var> be the <a>UTF-8 encoding</a> of <var>input</var>.
