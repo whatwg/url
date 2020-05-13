@@ -179,14 +179,8 @@ the input, and percent-decoding results in a byte sequence with less 0x25 (%) by
 <p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
 and all <a>code points</a> greater than U+007E (~).
 
-<p>The <dfn>query percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and U+003E (>).
-
-<p>The <dfn>special-query percent-encode set</dfn> is the <a>query percent-encode set</a> and
-U+0027 (').
-
 <p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and U+0060 (`).
+U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
 
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
 <a>fragment percent-encode set</a> and U+0023 (#), U+003F (?), U+007B ({), and U+007D (}).
@@ -196,8 +190,8 @@ U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and U+0060 (`).
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
 <p class=note>The <a><code>application/x-www-form-urlencoded</code></a> format's
-<a lt="urlencoded byte serializer">byte serializer</a> uses <a for=byte>percent-encode</a> directly
-without any of these sets.
+<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
+<a>query state</a> use <a for=byte>percent-encode</a> directly without any of these sets.
 
 <p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
 <a for=/>code point</a> <var>codePoint</var> using a <var>percentEncodeSet</var>, run these steps:
@@ -2363,27 +2357,45 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p>Let <var>queryPart</var> be the result of <a>isomorphic decoding</a> the result of
-       <a lt=encode>encoding</a> <a>c</a> using <var>encoding</var>.
+       <li><p>Let <var>bytes</var> be the result of <a lt=encode>encoding</a> <a>c</a> using
+       <var>encoding</var>.
 
        <li>
-        <p>If <var>queryPart</var> starts with "<code>&amp;#</code>" and ends with 0+003B (;), then
-        <a for=string>UTF-8 percent-encode</a> <var>queryPart</var> using « U+0023 (#),
-        U+0026 (&amp;), U+003B (;) » and append the result to <var>url</var>'s <a for=url>query</a>.
+        <p>If <var>bytes</var> starts with `<code>&amp;#</code>` and ends with 0x3B (;), then:
+
+        <ol>
+         <li><p>Replace `<code>&amp;#</code>` at the start of <var>bytes</var> with
+         `<code>%26%23</code>`.
+
+         <li><p>Replace 0x3B (;) at the end of <var>bytes</var> with `<code>%3B</code>`.
+
+         <li><p>Append <var>bytes</var>, <a>isomorphic decoded</a>, to <var>url</var>'s
+         <a for=url>query</a>.
+        </ol>
 
         <p class="note no-backref">This can happen when <a lt=encode>encoding</a> code points using
         a non-<a>UTF-8</a> <a for=/>encoding</a>.
 
        <li>
-        <p>Otherwise:
+        <p>Otherwise, for each <var>byte</var> in <var>bytes</var>:
 
         <ol>
-         <li><p>Let <var>queryPercentEncodeSet</var> be the <a>special-query percent-encode set</a>
-         if <var>url</var> <a>is special</a>; otherwise the <a>query percent-encode set</a>.
+         <li>
+          <p>If one of the following is true:
 
-         <li><p><a for=string>UTF-8 percent-encode</a> <var>queryPart</var> using
-         <var>queryPercentEncodeSet</var> and append the result to <var>url</var>'s
-         <a for=url>query</a>.
+          <ul class=brief>
+           <li><p><var>byte</var> is less than 0x21 (!)
+           <li><p><var>byte</var> is greater than 0x7E (~)
+           <li><p><var>byte</var> is 0x22 ("), 0x23 (#), 0x3C (&lt;), or 0x3E (>)
+           <li><p><var>byte</var> is 0x27 (') and <var>url</var> <a>is special</a>
+          </ul>
+          <!-- Do not change this without double checking QUERY-UNITS -->
+
+          <p>then append <var>byte</var>, <a for=byte>percent-encoded</a>, to
+          <var>url</var>'s <a for=url>query</a>.
+
+         <li><p>Otherwise, append a code point whose value is <var>byte</var> to
+         <var>url</var>'s <a for=url>query</a>.
         </ol>
       </ol>
     </ol>
@@ -3169,9 +3181,11 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
  <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted.
       Do not change this without double checking URLENCODED-UNITS -->
 
- <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode anything in the
- <a>query percent-encode set</a> or the <a>special-query percent-encode set</a> (depending on
- whether or not the <a for=/>URL</a> <a>is special</a>).
+ <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode U+0000 NULL to
+ U+0020 SPACE, inclusive, U+0022 ("), U+0023 (#), U+0027 (') varying on <a>is special</a>,
+ U+003C (&lt;), U+003E (>), and anything greater than U+007E (~).
+ <!-- From https://url.spec.whatwg.org/#query-state.
+      Do not change this without double checking QUERY-UNITS -->
 </div>
 
 <p>A {{URLSearchParams}} object has an associated:
@@ -3415,7 +3429,6 @@ Michael Peick,
 Michael™ Smith,
 Michal Bukovský,
 Michel Suignard,
-Mikaël Geljić,
 Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
