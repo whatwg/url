@@ -3170,8 +3170,8 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
       Do not change this without double checking URLENCODED-UNITS -->
 
  <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode anything in the
- <a>query percent-encode set</a> or, varying on <a>is special</a>, the
- <a>special-query percent-encode set</a>.
+ <a>query percent-encode set</a> or the <a>special-query percent-encode set</a> (depending on
+ whether or not the <a for=/>URL</a> <a>is special</a>).
 </div>
 
 <p>A {{URLSearchParams}} object has an associated:
