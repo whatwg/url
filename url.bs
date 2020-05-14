@@ -2048,45 +2048,45 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
      <li>
       <p>Otherwise, if <var>base</var> is non-null and <var>base</var>'s <a for=url>scheme</a> is
-      "<code>file</code>", switch on <a>c</a>:
+      "<code>file</code>":
 
-      <dl class=switch>
-       <dt>The <a>EOF code point</a>
-       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
+      <ol>
+       <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
        <var>url</var>'s <a for=url>path</a> to a <a for=list>clone</a> of <var>base</var>'s
        <a for=url>path</a>, and <var>url</var>'s <a for=url>query</a> to <var>base</var>'s
        <a for=url>query</a>.
 
-       <dt>U+003F (?)
-       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-       <var>url</var>'s <a for=url>path</a> to a <a for=list>clone</a> of <var>base</var>'s
-       <a for=url>path</a>, <var>url</var>'s <a for=url>query</a> to the empty string, and
-       <var>state</var> to <a>query state</a>.
+       <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
+       string and <var>state</var> to <a>query state</a>.
 
-       <dt>U+0023 (#)
-       <dd><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>,
-       <var>url</var>'s <a for=url>path</a> to a <a for=list>clone</a> of <var>base</var>'s
-       <a for=url>path</a>, <var>url</var>'s <a for=url>query</a> to <var>base</var>'s
-       <a for=url>query</a>, <var>url</var>'s <a for=url>fragment</a> to the empty string, and
-       <var>state</var> to <a>fragment state</a>.
+       <li><p>Otherwise, if <a>c</a> is U+0023 (#), set <var>url</var>'s <a for=url>fragment</a> to
+       the empty string and <var>state</var> to <a>fragment state</a>.
 
-       <dt>Otherwise
-       <dd>
+       <li>
+        <p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>:
+
         <ol>
+         <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
+
+         <li><p>If the substring from <var>pointer</var> in <var>input</var> does not
+         <a>start with a Windows drive letter</a>, then <a>shorten</a> <var>url</var>'s
+         <a for=url>path</a>.
+
          <li>
-          <p>If the substring from <var>pointer</var> in <var>input</var> does not
-          <a>start with a Windows drive letter</a>, then set <var>url</var>'s <a for=url>host</a> to
-          <var>base</var>'s <a for=url>host</a>, <var>url</var>'s <a for=url>path</a> to a
-          <a for=list>clone</a> of <var>base</var>'s <a for=url>path</a>, and then <a>shorten</a>
-          <var>url</var>'s <a for=url>path</a>.
+          <p>Otherwise:
+
+          <ol>
+           <li><p><a>Validation error</a>.
+
+           <li><p>Set <var>url</var>'s <a for=url>host</a> to null and <var>url</var>'s
+           <a for=url>path</a> to an empty list.
+          </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Otherwise, <a>validation error</a>.
-
          <li><p>Set <var>state</var> to <a>path state</a> and decrease <var>pointer</var> by 1.
         </ol>
-      </dl>
+      </ol>
 
      <li><p>Otherwise, set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var>
      by 1.
