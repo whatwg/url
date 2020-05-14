@@ -180,27 +180,56 @@ the input, and percent-decoding results in a byte sequence with less 0x25 (%) by
 and all <a>code points</a> greater than U+007E (~).
 
 <p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (&gt;), and U+0060 (`).
+U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and U+0060 (`).
+
+<p>The <dfn>query percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
+U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and U+003E (>).
+
+<p class=note>The <a>query percent-encode set</a> cannot be defined in terms of the
+<a>fragment percent-encode set</a> due to the omission of U+0060 (`).
+
+<p>The <dfn>special-query percent-encode set</dfn> is the <a>query percent-encode set</a> and
+U+0027 (').
 
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
-<a>fragment percent-encode set</a> and U+0023 (#), U+003F (?), U+007B ({), and U+007D (}).
+<a>query percent-encode set</a> and U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
 
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 
-<p class=note>The <a><code>application/x-www-form-urlencoded</code></a> format's
-<a lt="urlencoded byte serializer">byte serializer</a> and the <a>URL parser</a>'s
-<a>query state</a> use <a for=byte>percent-encode</a> directly without any of these sets.
+<p>The <dfn><code>application/x-www-form-urlencoded</code> percent-encode set</dfn> is the
+<a>userinfo percent-encode set</a> and U+0021 (!), U+0024 ($) to U+0029 RIGHT PARENTHESIS,
+inclusive, U+002B (+), U+002C (,), and U+007E (~).
 
-<p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
-<a for=/>code point</a> <var>codePoint</var> using a <var>percentEncodeSet</var>, run these steps:
+<p class=note>The <a>application/x-www-form-urlencoded percent-encode set</a> contains all code
+points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.), and U+005F (_).
+
+<p>To <dfn for="code point">percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
+<var>encoding</var>, <a for=/>code point</a> <var>codePoint</var>, and a
+<var>percentEncodeSet</var>, run these steps:
 
 <ol>
  <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then return
  <var>codePoint</var>.
 
- <li><p>Let <var>bytes</var> be the result of running <a>UTF-8 encode</a> on <var>codePoint</var>.
+ <li><p>Let <var>bytes</var> be the result of <a lt=encode>encoding</a> <var>codePoint</var> using
+ <var>encoding</var>.
+
+ <li>
+  <p>If <var>bytes</var> starts with 0x26 (&amp;) 0x23 (#) and ends with 0x3B (;), then:
+
+  <ol>
+   <li><p>Let <var>output</var> be <var>bytes</var>, <a>isomorphic decoded</a>.
+
+   <li><p>Replace the first two code points of <var>output</var> with "<code>%26%23</code>".
+
+   <li><p>Replace the last code point of <var>output</var> with "<code>%3B</code>".
+
+   <li><p>Return <var>output</var>.
+  </ol>
+
+  <p class="note no-backref">This can happen when <var>encoding</var> is not <a>UTF-8</a>.
 
  <li><p>Let <var>output</var> be the empty string.</p></li>
 
@@ -210,18 +239,37 @@ U+005B ([) to U+005E (^), inclusive, and U+007C (|).
  <li><p>Return <var>output</var>.
 </ol>
 
-<p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>string</a> <var>input</var> using
-a <var>percentEncodeSet</var>, run these steps:
+<p>To <dfn for="string">percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
+<var>encoding</var>, <a for=/>string</a> <var>input</var>, a <var>percentEncodeSet</var>, and a
+boolean <var>spaceAsPlus</var>, run these steps:
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.</p></li>
 
- <li><p>For each <var>codePoint</var> of <var>input</var>,
- <a for="code point">UTF-8 percent-encode</a> <var>codePoint</var> using <var>percentEncodeSet</var>
- and append the result to <var>output</var>.
+ <li>
+  <p>For each <var>codePoint</var> of <var>input</var>:
+
+  <ol>
+   <li><p>If <var>spaceAsPlus</var> is true and <var>codePoint</var> is U+0020, then append
+   U+002B (+) to <var>output</var>.
+
+   <li><p>Otherwise, run <a for="code point">percent-encode after encoding</a> with
+   <var>encoding</var>, <var>codePoint</var>, and <var>percentEncodeSet</var>, and append the result
+   to <var>output</var>.
+  </ol>
 
  <li><p>Return <var>output</var>.
 </ol>
+
+<p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
+<a for=/>code point</a> <var>codePoint</var> using a <var>percentEncodeSet</var>, return the result
+of running <a for="code point">percent-encode after encoding</a> with <a for=/>UTF-8</a>,
+<var>codePoint</var>, and <var>percentEncodeSet</var>.
+
+<p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>string</a> <var>input</var> using
+a <var>percentEncodeSet</var>, return the result of running
+<a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>, <var>input</var>, and
+<var>percentEncodeSet</var>.
 
 <hr>
 
@@ -246,9 +294,28 @@ a <var>percentEncodeSet</var>, run these steps:
    <td>"<code>‽%25%2E</code>"
    <td>0xE2 0x80 0xBD 0x25 0x2E
   <tr>
-   <td><a for="code point">UTF-8 percent-encode</a> <var>input</var> using the
+   <td rowspan=3><a for="code point">Percent-encode after encoding</a> with <a>Shift_JIS</a>,
+   <var>input</var>, and the <a>userinfo percent-encode set</a>
+   <td>U+0020
+   <td>"<code>%20</code>"
+  <tr>
+   <td>U+2261 (≡)
+   <td>"<code>%81%DF</code>"
+  <tr>
+   <td>U+203D (‽)
+   <td>"<code>%26%238253%3B</code>"
+  <tr>
+   <td><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>, <var>input</var>, the
+   <a>userinfo percent-encode set</a>, and true
+   <td>"<code>1+1 ≡ 2%20‽</code>"
+   <td>"<code>1+1+%81%DF+2%20%26%238253%3B</code>"
+  <tr>
+   <td rowspan=2><a for="code point">UTF-8 percent-encode</a> <var>input</var> using the
    <a>userinfo percent-encode set</a>
-   <td>U+203D
+   <td>U+2261 (≡)
+   <td>"<code>%E2%89%A1</code>"
+  <tr>
+   <td>U+203D (‽)
    <td>"<code>%E2%80%BD</code>"
   <tr>
    <td><a for=string>UTF-8 percent-encode</a> <var>input</var> using the
@@ -2362,46 +2429,12 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p>Let <var>bytes</var> be the result of <a lt=encode>encoding</a> <a>c</a> using
-       <var>encoding</var>.
+       <li><p>Let <var>queryPercentEncodeSet</var> be the <a>special-query percent-encode set</a> if
+       <var>url</var> <a>is special</a>; otherwise the <a>query percent-encode set</a>.
 
-       <li>
-        <p>If <var>bytes</var> starts with `<code>&amp;#</code>` and ends with 0x3B (;), then:
-
-        <ol>
-         <li><p>Replace `<code>&amp;#</code>` at the start of <var>bytes</var> with
-         `<code>%26%23</code>`.
-
-         <li><p>Replace 0x3B (;) at the end of <var>bytes</var> with `<code>%3B</code>`.
-
-         <li><p>Append <var>bytes</var>, <a>isomorphic decoded</a>, to <var>url</var>'s
-         <a for=url>query</a>.
-        </ol>
-
-        <p class="note no-backref">This can happen when <a lt=encode>encoding</a> code points using
-        a non-<a>UTF-8</a> <a for=/>encoding</a>.
-
-       <li>
-        <p>Otherwise, for each <var>byte</var> in <var>bytes</var>:
-
-        <ol>
-         <li>
-          <p>If one of the following is true:
-
-          <ul class=brief>
-           <li><p><var>byte</var> is less than 0x21 (!)
-           <li><p><var>byte</var> is greater than 0x7E (~)
-           <li><p><var>byte</var> is 0x22 ("), 0x23 (#), 0x3C (&lt;), or 0x3E (>)
-           <li><p><var>byte</var> is 0x27 (') and <var>url</var> <a>is special</a>
-          </ul>
-          <!-- Do not change this without double checking QUERY-UNITS -->
-
-          <p>then append <var>byte</var>, <a for=byte>percent-encoded</a>, to
-          <var>url</var>'s <a for=url>query</a>.
-
-         <li><p>Otherwise, append a code point whose value is <var>byte</var> to
-         <var>url</var>'s <a for=url>query</a>.
-        </ol>
+       <li><p><a for="code point">Percent-encode after encoding</a>, with <var>encoding</var>,
+       <a>c</a>, and <var>queryPercentEncodeSet</var>, and append the result to <var>url</var>'s
+       <a for=url>query</a>.
       </ol>
     </ol>
 
@@ -2717,50 +2750,6 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 <h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
 <p>The
-<dfn id=concept-urlencoded-byte-serializer lt="urlencoded byte serializer"><code>application/x-www-form-urlencoded</code> byte serializer</dfn>
-takes a byte sequence <var>input</var> and then runs these steps:
-
-<ol>
- <li><p>Let <var>output</var> be the empty string.
- <li>
-  <p>For each byte in <var>input</var>, depending on
-  <var>byte</var>:
-
-  <dl>
-   <dt>0x20 (SP)
-   <dd><p>Append U+002B (+) to <var>output</var>.
-
-   <dt>0x2A (*)
-   <dt>0x2D (-)
-   <dt>0x2E (.)
-   <dt>0x30 (0) to 0x39 (9)
-   <dt>0x41 (A) to 0x5A (Z)
-   <dt>0x5F (_)
-   <dt>0x61 (a) to 0x7A (z)
-   <dd><p>Append a code point whose value is <var>byte</var> to
-   <var>output</var>.
-
-   <dt>Otherwise
-   <dd><p>Append <var>byte</var>,
-   <a for=byte>percent-encoded</a>, to
-   <var>output</var>.
-  </dl>
- <li><p>Return <var>output</var>.
-</ol>
-<!-- The inverse of the above byte set is all bytes
-     less than 0x20 SP,
-     0x21 (!) to 0x29 (right parenthesis),
-     0x2B (+),
-     0x2C (,),
-     0x2F (/),
-     0x3A (:) to 0x40 (@),
-     0x5B ([) to 0x5E (^),
-     0x60 (`),
-     bytes greater than 0x7A (z). With a special case for 0x20 (SP).
-
-     Do not change this without double checking URLENCODED-UNITS -->
-
-<p>The
 <dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/>encoding</a>
 <var>encoding override</var>, and then runs these steps:
@@ -2768,27 +2757,30 @@ takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/
 <ol>
  <li><p>Let <var>encoding</var> be <a>UTF-8</a>.
 
- <li><p>If <var>encoding override</var> is given, set <var>encoding</var> to the result of
+ <li><p>If <var>encoding override</var> is given, then set <var>encoding</var> to the result of
  <a lt="get an output encoding">getting an output encoding</a> from <var>encoding override</var>.
 
  <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p><a for=list>For each</a> <var>tuple</var> in <var>tuples</var>:
+  <p><a for=list>For each</a> <var>tuple</var> of <var>tuples</var>:
 
   <ol>
-   <li><p>Let <var>name</var> be the result of <a lt="urlencoded byte serializer">serializing</a>
-   the result of <a lt=encode>encoding</a> <var>tuple</var>'s name, using <var>encoding</var>.
+   <li><p>Let <var>name</var> be the result of running
+   <a for=string>percent-encode after encoding</a> with <var>encoding</var>,
+   <var>tuple</var>'s name, the
+   <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
 
    <li><p>Let <var>value</var> be <var>tuple</var>'s value.
 
    <li><p>If <var>value</var> is a file, then set <var>value</var> to <var>value</var>'s filename.
 
-   <li><p>Set <var>value</var> to the result of <a lt="urlencoded byte serializer">serializing</a>
-   the result of <a lt=encode>encoding</a> <var>value</var>, using <var>encoding</var>.
+   <li><p>Set <var>value</var> to the result of running
+   <a for=string>percent-encode after encoding</a> with <var>encoding</var>, <var>value</var>, the
+   <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
 
-   <li><p>If <var>tuple</var> is not the first pair in <var>tuples</var>, then append
-   U+0026 (&amp;) to <var>output</var>.
+   <li><p>If <var>tuple</var> is not <var>tuples</var>[0], then append U+0026 (&amp;) to
+   <var>output</var>.
 
    <li>Append <var>name</var>, followed by U+003D (=), followed by <var>value</var>, to
    <var>output</var>.
@@ -3179,18 +3171,13 @@ console.log(url.search);                // "?a=~&b=%7E"
 console.log(url.searchParams.get('a')); // "~"
 console.log(url.searchParams.get('b')); // "~"</code></pre>
 
- <p>{{URLSearchParams}} objects will percent-encode: <a>C0 controls</a>, U+0021 (!) to
- U+0029 RIGHT PARENTHESIS, inclusive, U+002B (+), U+002C (,), U+002F (/), U+003A (:) to U+0040 (@),
- inclusive, U+005B ([) to U+005E (^), inclusive, U+0060 (`), and anything greater than U+007A (z).
- And will encode U+0020 SPACE as U+002B (+).
- <!-- From https://url.spec.whatwg.org/#concept-urlencoded-byte-serializer, inverted.
-      Do not change this without double checking URLENCODED-UNITS -->
+ <p>{{URLSearchParams}} objects will percent-encode anything in the
+ <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>. And will encode
+ U+0020 SPACE as U+002B (+).
 
- <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode U+0000 NULL to
- U+0020 SPACE, inclusive, U+0022 ("), U+0023 (#), U+0027 (') varying on <a>is special</a>,
- U+003C (&lt;), U+003E (>), and anything greater than U+007E (~).
- <!-- From https://url.spec.whatwg.org/#query-state.
-      Do not change this without double checking QUERY-UNITS -->
+ <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode anything in the
+ <a>query percent-encode set</a> or the <a>special-query percent-encode set</a> (depending on
+ whether or not the <a for=/>URL</a> <a>is special</a>).
 </div>
 
 <p>A {{URLSearchParams}} object has an associated:
@@ -3430,10 +3417,12 @@ Marijn Kruisselbrink,
 Martin Dürst,
 Mathias Bynens,
 Matt Falkenhagen,
+Matt Giuca,
 Michael Peick,
 Michael™ Smith,
 Michal Bukovský,
 Michel Suignard,
+Mikaël Geljić,
 Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
