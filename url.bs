@@ -268,8 +268,8 @@ of running <a for="code point">percent-encode after encoding</a> with <a for=/>U
 
 <p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>string</a> <var>input</var> using
 a <var>percentEncodeSet</var>, return the result of running
-<a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>, <var>input</var>, and
-<var>percentEncodeSet</var>.
+<a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>, <var>input</var>,
+<var>percentEncodeSet</var>, and false.
 
 <hr>
 
