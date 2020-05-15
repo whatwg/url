@@ -202,17 +202,15 @@ U+005B ([) to U+005E (^), inclusive, and U+007C (|).
 <a>userinfo percent-encode set</a> and U+0021 (!), U+0024 ($) to U+0029 RIGHT PARENTHESIS,
 inclusive, U+002B (+), U+002C (,), and U+007E (~).
 
-<p class=note>The <a>application/x-www-form-urlencoded percent-encode set</a> contains all code
-points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.), and U+005F (_).
+<p class=note>The <a><code>application/x-www-form-urlencoded</code> percent-encode set</a> contains
+all code points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.), and
+U+005F (_).
 
 <p>To <dfn for="code point">percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
 <var>encoding</var>, <a for=/>code point</a> <var>codePoint</var>, and a
 <var>percentEncodeSet</var>, run these steps:
 
 <ol>
- <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then return
- <var>codePoint</var>.
-
  <li><p>Let <var>bytes</var> be the result of <a lt=encode>encoding</a> <var>codePoint</var> using
  <var>encoding</var>.
 
@@ -233,8 +231,20 @@ points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.)
 
  <li><p>Let <var>output</var> be the empty string.</p></li>
 
- <li><p>For each <var>byte</var> of <var>bytes</var>, <a for=byte>percent-encode</a>
- <var>byte</var> and append the result to <var>output</var>.
+ <li>
+  <p>For each <var>byte</var> of <var>bytes</var>:
+
+  <ol>
+   <li><p>Let <var>codePoint</var> be a <a for=/>code point</a> whose <a for="code point">value</a>
+   is <var>byte</var>'s <a for=byte>value</a>.
+
+   <li><p>Assert: <var>percentEncodeSet</var> includes all non-<a>ASCII code points</a>.
+
+   <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then append
+   <var>codePoint</var> to <var>output</var>.
+
+   <li><p>Otherwise, <a for=byte>percent-encode</a> <var>byte</var> and append the result to
+   <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -3172,7 +3182,7 @@ console.log(url.searchParams.get('a')); // "~"
 console.log(url.searchParams.get('b')); // "~"</code></pre>
 
  <p>{{URLSearchParams}} objects will percent-encode anything in the
- <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>. And will encode
+ <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and will encode
  U+0020 SPACE as U+002B (+).
 
  <p>Ignoring encodings (use <a>UTF-8</a>), {{URL/search}} will percent-encode anything in the
