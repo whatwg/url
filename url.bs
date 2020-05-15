@@ -245,6 +245,7 @@ U+005F (_).
 
    <li><p>Otherwise, <a for=byte>percent-encode</a> <var>byte</var> and append the result to
    <var>output</var>.
+  </ol>
 
  <li><p>Return <var>output</var>.
 </ol>
