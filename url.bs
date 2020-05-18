@@ -1415,8 +1415,13 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <a>valid host string</a>, optionally followed by U+003A (:) and a <a>URL-port string</a>, optionally
 followed by a <a>path-absolute-URL string</a>.
 
-<p>A <dfn export oldids=syntax-url-port>URL-port string</dfn> must be zero or more
-<a>ASCII digits</a>.
+<p>A <dfn export oldids=syntax-url-port>URL-port string</dfn> must be one of the following:
+
+<ul class=brief>
+ <li><p>the empty string
+ <li><p>one or more <a>ASCII digits</a> representing a decimal number no greater than
+ 2<sup>16</sup>&nbsp;&minus;&nbsp;1.
+</ul>
 
 <p>A <dfn export oldids=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
 "<code>//</code>", followed by an <a>opaque-host-and-port string</a>, optionally followed by a
