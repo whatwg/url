@@ -235,13 +235,13 @@ U+005F (_).
   <p>For each <var>byte</var> of <var>bytes</var>:
 
   <ol>
-   <li><p>Let <var>codePoint</var> be a <a for=/>code point</a> whose <a for="code point">value</a>
+   <li><p>Let <var>isomorph</var> be a <a for=/>code point</a> whose <a for="code point">value</a>
    is <var>byte</var>'s <a for=byte>value</a>.
 
    <li><p>Assert: <var>percentEncodeSet</var> includes all non-<a>ASCII code points</a>.
 
-   <li><p>If <var>codePoint</var> is not in <var>percentEncodeSet</var>, then append
-   <var>codePoint</var> to <var>output</var>.
+   <li><p>If <var>isomorph</var> is not in <var>percentEncodeSet</var>, then append
+   <var>isomorph</var> to <var>output</var>.
 
    <li><p>Otherwise, <a for=byte>percent-encode</a> <var>byte</var> and append the result to
    <var>output</var>.
