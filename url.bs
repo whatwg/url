@@ -567,7 +567,7 @@ string <var>input</var> with an optional boolean <var>isNotSpecial</var>, and th
  <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
  <var>asciiDomain</var>.
 
- <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a> or failure, return
+ <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a>, return
  <var>ipv4Host</var>.
 
  <li><p>Return <var>asciiDomain</var>.
@@ -3418,6 +3418,7 @@ Jeffrey Yasskin,
 Joe Duarte,
 Joshua Bell,
 Jxck,
+Karl Wagner,
 田村健人 (Kent TAMURA),
 Kevin Grandon,
 Kornel Lesiński,
