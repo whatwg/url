@@ -290,8 +290,8 @@ a <var>percentEncodeSet</var>, return the result of running
  <table>
   <tr>
    <th>Operation
-   <th>Example input
-   <th>Example output
+   <th>Input
+   <th>Output
   <tr>
    <td><a for=byte>Percent-encode</a> <var>input</var>
    <td>0x7F
@@ -315,6 +315,11 @@ a <var>percentEncodeSet</var>, return the result of running
   <tr>
    <td>U+203D (‽)
    <td>"<code>%26%238253%3B</code>"
+  <tr>
+   <td><a for="code point">Percent-encode after encoding</a> with <a>ISO-2022-JP</a>,
+   <var>input</var>, and the <a>userinfo percent-encode set</a>
+   <td>U+00A5 (¥)
+   <td>"<code>%1B(J\%1B(B</code>"
   <tr>
    <td><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>, <var>input</var>, the
    <a>userinfo percent-encode set</a>, and true
