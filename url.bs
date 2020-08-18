@@ -3155,14 +3155,14 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 interface URLSearchParams {
   constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = "");
 
-  void append(USVString name, USVString value);
-  void delete(USVString name);
+  undefined append(USVString name, USVString value);
+  undefined delete(USVString name);
   USVString? get(USVString name);
   sequence&lt;USVString> getAll(USVString name);
   boolean has(USVString name);
-  void set(USVString name, USVString value);
+  undefined set(USVString name, USVString value);
 
-  void sort();
+  undefined sort();
 
   iterable&lt;USVString, USVString>;
   stringifier;
