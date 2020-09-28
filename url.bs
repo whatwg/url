@@ -2209,6 +2209,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         "<code>file</code>", then:
 
         <ol>
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>.
+
          <li>
           <p>If the substring from <var>pointer</var> in <var>input</var> does not
           <a>start with a Windows drive letter</a> and <var>base</var>'s <a for=url>path</a>[0] is a
@@ -2216,9 +2218,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
-          <var>url</var>'s <a for=url>host</a> is null under these conditions.
 
-         <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>.
         </ol>
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by 1.
