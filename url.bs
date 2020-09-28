@@ -302,9 +302,12 @@ a <var>percentEncodeSet</var>, return the result of running
    <th>Input
    <th>Output
   <tr>
-   <td><a for=byte>Percent-encode</a> <var>input</var>
-   <td>0x7F
+   <td rowspan=2><a for=byte>Percent-encode</a> <var>input</var>
+   <td>0x23
    <td>"<code>%23</code>"
+  <tr>
+   <td>0x7F
+   <td>"<code>%7F</code>"
   <tr>
    <td><a for="byte sequence">Percent-decode</a> <var>input</var>
    <td>`<code>%25%s%1G</code>`
@@ -3493,6 +3496,7 @@ Tristan Seligmann,
 Valentin Gosu,
 Vyacheslav Matva,
 Wei Wang,
+Wolf Lammen,
 山岸和利 (Yamagishi Kazutoshi),
 Yongsheng Zhang,
 成瀬ゆい (Yui Naruse), and
