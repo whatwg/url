@@ -2353,7 +2353,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          <li>
           <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>url</var>'s
           <a for=url>path</a> <a for=list>is empty</a>, and <var>buffer</var> is a
-          <a>Windows drive letter</a>, then replace the second code point in <var>buffer</var> with U+003A (:).
+          <a>Windows drive letter</a>, then replace the second code point in <var>buffer</var> with
+          U+003A (:).
+
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
          <li><p><a for=list>Append</a> <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
