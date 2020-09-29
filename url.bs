@@ -3,6 +3,7 @@ Group: WHATWG
 H1: URL
 Shortname: url
 Text Macro: TWITTER urlstandard
+Text Macro: LATESTRD 2020-08
 Abstract: The URL Standard defines URLs, domains, IP addresses, the <code>application/x-www-form-urlencoded</code> format, and their API.
 Translation: ja https://triple-underscore.github.io/URL-ja.html
 </pre>
@@ -10,6 +11,7 @@ Translation: ja https://triple-underscore.github.io/URL-ja.html
 <pre class=anchors>
 url: https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent; text: "encodeURIComponent() [sic]"; type: method; spec: ECMA-262
 </pre>
+
 
 
 <h2 id=goals class=no-num>Goals</h2>
