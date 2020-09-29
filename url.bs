@@ -13,6 +13,7 @@ url: https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent; text: "encode
 </pre>
 
 
+
 <h2 id=goals class=no-num>Goals</h2>
 
 <p>The URL standard takes the following approach towards making URLs fully interoperable:
