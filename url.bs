@@ -2180,8 +2180,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
           <ol>
            <li><p><a>Validation error</a>.
 
-           <li><p>Set <var>url</var>'s <a for=url>host</a> to null and <var>url</var>'s
-           <a for=url>path</a> to an empty list.
+           <li><p>Set <var>url</var>'s <a for=url>path</a> to an empty list.
           </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
@@ -2211,22 +2210,20 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
       <ol>
        <li>
-        <p>If <var>base</var> is non-null, <var>base</var>'s <a for=url>scheme</a> is
-        "<code>file</code>", and the substring from <var>pointer</var> in <var>input</var> does not
-        <a>start with a Windows drive letter</a>, then:
+        <p>If <var>base</var> is non-null and <var>base</var>'s <a for=url>scheme</a> is
+        "<code>file</code>", then:
 
         <ol>
+         <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>.
+
          <li>
-          <p>If <var>base</var>'s <a for=url>path</a>[0] is a
+          <p>If the substring from <var>pointer</var> in <var>input</var> does not
+          <a>start with a Windows drive letter</a> and <var>base</var>'s <a for=url>path</a>[0] is a
           <a>normalized Windows drive letter</a>, then <a for=list>append</a> <var>base</var>'s
           <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
 
-          <p class=note>This is a (platform-independent) Windows drive letter quirk. Both
-          <var>url</var>'s and <var>base</var>'s <a for=url>host</a> are null under these conditions
-          and therefore not copied.
+          <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
-         <li><p>Otherwise, set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s
-         <a for=url>host</a>.
         </ol>
 
        <li><p>Set <var>state</var> to <a>path state</a>, and decrease <var>pointer</var> by 1.
@@ -2361,14 +2358,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          <li>
           <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>url</var>'s
           <a for=url>path</a> <a for=list>is empty</a>, and <var>buffer</var> is a
-          <a>Windows drive letter</a>, then:
-
-          <ol>
-           <li><p>If <var>url</var>'s <a for=url>host</a> is neither the empty string nor null,
-           <a>validation error</a>, set <var>url</var>'s <a for=url>host</a> to the empty string.
-
-           <li><p>Replace the second code point in <var>buffer</var> with U+003A (:).
-          </ol>
+          <a>Windows drive letter</a>, then replace the second code point in <var>buffer</var> with
+          U+003A (:).
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
 
@@ -2376,12 +2367,6 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         </ol>
 
        <li><p>Set <var>buffer</var> to the empty string.
-
-       <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>" and <a>c</a> is the
-       <a>EOF code point</a>, U+003F (?), or U+0023 (#), then while <var>url</var>'s
-       <a for=url>path</a>'s <a for=list>size</a> is greater than 1 and <var>url</var>'s
-       <a for=url>path</a>[0] is the empty string, <a>validation error</a>, <a for=list>remove</a>
-       the first <a for=list>item</a> from <var>url</var>'s <a for=url>path</a>.
 
        <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
        string and <var>state</var> to <a>query state</a>.
@@ -3407,6 +3392,7 @@ Albert Wiersch,
 Alex Christensen,
 Alexandre Morgaut,
 Alexis Hunt,
+Alwin Blok,
 Andrew Sullivan,
 Arkadiusz Michalski,
 Behnam Esfahbod,
