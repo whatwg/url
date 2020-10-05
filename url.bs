@@ -2536,9 +2536,10 @@ then runs these steps, returning an <a>ASCII string</a>:
   <p>Otherwise:
 
   <ol>
-   <li><p>If <var>url</var>'s <a for=url>host</a> is null, <var>url</var>'s <a for=url>path</a>'s
-   <a for=list>size</a> is greater than 1, and <var>url</var>'s <a for=url>path</a>[0] is the empty
-   string, then append U+002F (/) followed by U+002E (.) to <var>output</var>.
+   <li><p>If <var>url</var>'s <a for=url>host</a> is null, <var>url</var> <a>is not special</a>,
+   <var>url</var>'s <a for=url>path</a>'s <a for=list>size</a> is greater than 1, and
+   <var>url</var>'s <a for=url>path</a>[0] is the empty string, then append U+002F (/) followed by
+   U+002E (.) to <var>output</var>.
 
    <li><p><a for=list>For each</a> <var>segment</var> of <var>url</var>'s <a for=url>path</a>:
    append U+002F (/) followed by <var>segment</var> to <var>output</var>.
