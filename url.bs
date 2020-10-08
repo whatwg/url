@@ -1260,7 +1260,7 @@ It is initially the empty string.
    <td>✅
    <td>❌
    <td>✅
-   <td>✅
+   <td>❌
   <tr>
    <td>Others
    <td>❌
@@ -1762,7 +1762,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
          and <var>buffer</var> is "<code>file</code>", then return.
 
          <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>" and its
-         <a for=url>host</a> is an <a>empty host</a> or null, then return.
+         <a for=url>host</a> is an <a>empty host</a>, then return.
         </ol>
 
        <li><p>Set <var>url</var>'s <a for=url>scheme</a> to <var>buffer</var>.
@@ -2138,6 +2138,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dd>
     <ol>
      <li><p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>".
+
+     <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
      <li>
       <p>If <a>c</a> is U+002F (/) or U+005C (\), then:
@@ -2524,10 +2526,6 @@ then runs these steps, returning an <a>ASCII string</a>:
    <var>url</var>'s <a for=url>port</a>, <a lt="serialize an integer">serialized</a>, to
    <var>output</var>.
   </ol>
-
- <li><p>Otherwise, if <var>url</var>'s <a for=url>host</a> is null and
- <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", append
- "<code>//</code>" to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append <var>url</var>'s
  <a for=url>path</a>[0] to <var>output</var>.
