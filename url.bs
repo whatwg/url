@@ -2432,9 +2432,33 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>then set <var>encoding</var> to <a>UTF-8</a>.
       <!-- https://simon.html5.org/test/url/url-encoding.html -->
 
-     <li><p>If <var>state override</var> is not given and <a>c</a> is U+0023 (#), then set
-     <var>url</var>'s <a for=url>fragment</a> to the empty string and state to
-     <a>fragment state</a>.
+     <li>
+      <p>If one of the following is true:
+
+      <ul class=brief>
+       <li><p><var>state override</var> is not given and <a>c</a> is U+0023 (#)
+       <li><p><a>c</a> is the <a>EOF code point</a>
+      </ul>
+
+      <p>then:
+
+      <ol>
+       <li><p>Let <var>queryPercentEncodeSet</var> be the <a>special-query percent-encode set</a> if
+       <var>url</var> <a>is special</a>; otherwise the <a>query percent-encode set</a>.
+
+       <li>
+        <p><a for=string>Percent-encode after encoding</a>, with <var>encoding</var>,
+        <var>buffer</var>, and <var>queryPercentEncodeSet</var>, and append the result to
+        <var>url</var>'s <a for=url>query</a>.
+
+        <p class=note>This operation cannot be invoked code-point-for-code-point due to the stateful
+        <a>ISO-2022-JP encoder</a>.
+
+       <li><p>Set <var>buffer</var> to the empty string.
+
+       <li><p>If <a>c</a> is U+0023 (#), then set <var>url</var>'s <a for=url>fragment</a> to
+       the empty string and state to <a>fragment state</a>.
+      </ol>
 
      <li>
       <p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>:
@@ -2446,12 +2470,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>validation error</a>.
 
-       <li><p>Let <var>queryPercentEncodeSet</var> be the <a>special-query percent-encode set</a> if
-       <var>url</var> <a>is special</a>; otherwise the <a>query percent-encode set</a>.
-
-       <li><p><a for="code point">Percent-encode after encoding</a>, with <var>encoding</var>,
-       <a>c</a>, and <var>queryPercentEncodeSet</var>, and append the result to <var>url</var>'s
-       <a for=url>query</a>.
+       <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
     </ol>
 
