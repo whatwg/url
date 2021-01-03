@@ -247,7 +247,7 @@ optional boolean <var>spaceAsPlus</var> (default false), run these steps:
 
     <ol>
      <li><p>If <var>spaceAsPlus</var> is true and <var>byte</var> is 0x20 (SP), then append
-     U+002B (+) to <var>output</var>.
+     U+002B (+) to <var>output</var> and continue.
 
      <li><p>Let <var>isomorph</var> be a <a for=/>code point</a> whose <a for="code point">value</a>
      is <var>byte</var>'s <a for=byte>value</a>.
