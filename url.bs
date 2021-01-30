@@ -525,7 +525,7 @@ decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same
 <h3 id=idna>IDNA</h3>
 
 <p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>string</a>
-<var>domain</var> and optionally a boolean <var>beStrict</var> (default false), runs these steps:
+<var>domain</var> and an optional boolean <var>beStrict</var> (default false), runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
@@ -1623,8 +1623,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 <h3 id=url-parsing>URL parsing</h3>
 
 <p>The <dfn export id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
-<var>input</var>, with an optional <a>base URL</a> <var>base</var> (default null) and an optional
-<a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), and then runs these steps:
+<var>input</var>, with an optional null or <a>base URL</a> <var>base</var> (default null) and an
+optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), and then runs these
+steps:
 
 <p class="note no-backref">Non-web-browser implementations only need to implement the
 <a>basic URL parser</a>.
@@ -1652,14 +1653,16 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 <hr>
 
 <p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
-string <var>input</var>, optionally with a <a>base URL</a> <var>base</var> (default null),
-optionally with an <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), optionally with
-a <a for=/>URL</a> <var>url</var> and a state override <var>state override</var>, and then runs
+string <var>input</var>, with an optional null or <a>base URL</a> <var>base</var> (default null), an
+optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), an optional
+<a for=/>URL</a> <dfn export for="basic URL parser"><var>url</var></dfn>, and an optional
+state override <dfn export for="basic URL parser"><var>state override</var></dfn>, and then runs
 these steps:
 
 <div class="note no-backref">
  <p>The <var>encoding</var> argument is a legacy concept only relevant for <cite>HTML</cite>. The
  <var>url</var> and <var>state override</var> arguments are only for use by various APIs. [[!HTML]]
+ <!-- HTMLHyperlinkElementUtils, Location, and URL -->
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
  <a>basic URL parser</a> returns either a new <a for=/>URL</a> or failure. If they are passed, the
@@ -2494,8 +2497,9 @@ these steps:
 <h3 id=url-serializing>URL serializing</h3>
 
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
-<a for=/>URL</a> <var>url</var>, an optional <i title>exclude fragment flag</i>, and
-then runs these steps, returning an <a>ASCII string</a>:
+<a for=/>URL</a> <var>url</var>, with an optional boolean
+<dfn export for="URL serializer"><var>exclude fragment</var></dfn> (default false), and then runs
+these steps. They return an <a>ASCII string</a>.
 
 <ol>
  <li><p>Let <var>output</var> be <var>url</var>'s <a for=url>scheme</a> and U+003A (:) concatenated.
@@ -2551,9 +2555,9 @@ then runs these steps, returning an <a>ASCII string</a>:
  U+003F (?), followed by <var>url</var>'s <a for=url>query</a>, to
  <var>output</var>.
 
- <li><p>If the <i title>exclude fragment flag</i> is unset and <var>url</var>'s
- <a for=url>fragment</a> is non-null, append U+0023 (#), followed by
- <var>url</var>'s <a for=url>fragment</a>, to <var>output</var>.
+ <li><p>If <var>exclude fragment</var> is false and <var>url</var>'s <a for=url>fragment</a> is
+ non-null, then append U+0023 (#), followed by <var>url</var>'s <a for=url>fragment</a>, to
+ <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -2562,20 +2566,20 @@ then runs these steps, returning an <a>ASCII string</a>:
 <h3 id=url-equivalence>URL equivalence</h3>
 
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
-<dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <var>B</var>, optionally with an
-<i>exclude fragments flag</i>, run these steps:
+<dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <var>B</var>, with an optional
+boolean with an <dfn export for="url/equals"><var>exclude fragments</var></dfn> (default false), run
+these steps:
 
 <ol>
  <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
- <var>A</var>, with the <i>exclude fragment flag</i> set if the
- <i>exclude fragments flag</i> is set.
+ <var>A</var>, with <a for="URL serializer"><var>exclude fragment</var></a> set to
+ <var>exclude fragments</var>.
 
  <li><p>Let <var>serializedB</var> be the result of <a lt="URL serializer">serializing</a>
- <var>B</var>, with the <i>exclude fragment flag</i> set if the
- <i>exclude fragments flag</i> is set.
+ <var>B</var>, with <a for="URL serializer"><var>exclude fragment</var></a> set to
+ <var>exclude fragments</var>.
 
- <li><p>Return true if <var>serializedA</var> is <var>serializedB</var>, and false
- otherwise.
+ <li><p>Return true if <var>serializedA</var> is <var>serializedB</var>; otherwise false.
 </ol>
 
 
@@ -2778,7 +2782,7 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 
 <p>The
 <dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
-takes a list of name-value tuples <var>tuples</var>, optionally with an <a for=/>encoding</a>
+takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>encoding</a>
 <var>encoding</var> (default <a>UTF-8</a>), and then runs these steps:
 
 <ol>
@@ -2967,8 +2971,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
 <p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
 <a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
-<a>this</a>'s <a for=URL>URL</a> as <var>url</var> and <a>scheme start state</a> as
-<var>state override</var>.
+<a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and
+<a>scheme start state</a> as <a for="basic URL parser"><var>state override</var></a>.
 
 <p>The <dfn attribute for=URL><code>username</code></dfn> getter steps are to return <a>this</a>'s
 <a for=URL>URL</a>'s <a for=url>username</a>.
@@ -3016,7 +3020,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <var>url</var> and <a>host state</a> as <var>state override</var>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>host state</a> as
+ <a for="basic URL parser"><var>state override</var></a>.
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
@@ -3041,7 +3046,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <var>url</var> and <a>hostname state</a> as <var>state override</var>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>hostname state</a> as
+ <a for="basic URL parser"><var>state override</var></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>port</code></dfn> getter steps are:
@@ -3064,8 +3070,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a for=url>port</a> to null.</p></li>
 
  <li><p>Otherwise, <a lt="basic URL parser">basic URL parse</a> the given value with
- <a>this</a>'s <a for=URL>URL</a> as <var>url</var> and <a>port state</a> as
- <var>state override</var>.
+ <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and
+ <a>port state</a> as <a for="basic URL parser"><var>state override</var></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
@@ -3090,7 +3096,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Empty <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <var>url</var> and <a>path start state</a> as <var>state override</var>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>path start state</a> as
+ <a for="basic URL parser"><var>state override</var></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>search</code></dfn> getter steps are:
@@ -3115,7 +3122,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Set <var>url</var>'s <a for=url>query</a> to the empty string.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <var>url</var> as
- <var>url</var> and <a>query state</a> as <var>state override</var>.
+ <a for="basic URL parser"><var>url</var></a> and <a>query state</a> as
+ <a for="basic URL parser"><var>state override</var></a>.
 
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
  result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
@@ -3144,7 +3152,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to the empty string.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <a>this</a>'s
- <a for=URL>URL</a> as <var>url</var> and <a>fragment state</a> as <var>state override</var>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>fragment state</a> as
+ <a for="basic URL parser"><var>state override</var></a>.
 </ol>
 
 
