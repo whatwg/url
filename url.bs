@@ -1689,8 +1689,8 @@ these steps:
  <li><p>Let <var>state</var> be <var>state override</var>
  if given, or <a>scheme start state</a> otherwise.
 
- <li><p>If <var>encoding</var> is not <a>UTF-8</a>, then set <var>encoding</var> to the result of
- <a>getting an output encoding</a> from <var>encoding</var>.
+ <li><p>Set <var>encoding</var> to the result of <a>getting an output encoding</a> from
+ <var>encoding</var>.
 
  <li><p>Let <var>buffer</var> be the empty string.
 
@@ -2572,11 +2572,11 @@ these steps:
 
 <ol>
  <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
- <var>A</var>, with <a for="URL serializer"><var>exclude fragment</var></a> set to
+ <var>A</var>, with <a for="URL serializer"><i>exclude fragment</i></a> set to
  <var>exclude fragments</var>.
 
  <li><p>Let <var>serializedB</var> be the result of <a lt="URL serializer">serializing</a>
- <var>B</var>, with <a for="URL serializer"><var>exclude fragment</var></a> set to
+ <var>B</var>, with <a for="URL serializer"><i>exclude fragment</i></a> set to
  <var>exclude fragments</var>.
 
  <li><p>Return true if <var>serializedA</var> is <var>serializedB</var>; otherwise false.
@@ -2786,8 +2786,8 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
 <var>encoding</var> (default <a>UTF-8</a>), and then runs these steps:
 
 <ol>
- <li><p>If <var>encoding</var> is not <a>UTF-8</a>, then set <var>encoding</var> to the result of
- <a>getting an output encoding</a> from <var>encoding</var>.
+ <li><p>Set <var>encoding</var> to the result of <a>getting an output encoding</a> from
+ <var>encoding</var>.
 
  <li><p>Let <var>output</var> be the empty string.
 
@@ -2971,8 +2971,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 
 <p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
 <a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
-<a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and
-<a>scheme start state</a> as <a for="basic URL parser"><var>state override</var></a>.
+<a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and
+<a>scheme start state</a> as <a for="basic URL parser"><i>state override</i></a>.
 
 <p>The <dfn attribute for=URL><code>username</code></dfn> getter steps are to return <a>this</a>'s
 <a for=URL>URL</a>'s <a for=url>username</a>.
@@ -3020,8 +3020,8 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>host state</a> as
- <a for="basic URL parser"><var>state override</var></a>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>host state</a> as
+ <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
 <p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
@@ -3046,8 +3046,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>hostname state</a> as
- <a for="basic URL parser"><var>state override</var></a>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>hostname state</a> as
+ <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>port</code></dfn> getter steps are:
@@ -3070,8 +3070,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a for=url>port</a> to null.</p></li>
 
  <li><p>Otherwise, <a lt="basic URL parser">basic URL parse</a> the given value with
- <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and
- <a>port state</a> as <a for="basic URL parser"><var>state override</var></a>.
+ <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and
+ <a>port state</a> as <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
@@ -3096,8 +3096,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Empty <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
- <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>path start state</a> as
- <a for="basic URL parser"><var>state override</var></a>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>path start state</a> as
+ <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
 <p>The <dfn attribute for=URL><code>search</code></dfn> getter steps are:
@@ -3122,8 +3122,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Set <var>url</var>'s <a for=url>query</a> to the empty string.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <var>url</var> as
- <a for="basic URL parser"><var>url</var></a> and <a>query state</a> as
- <a for="basic URL parser"><var>state override</var></a>.
+ <a for="basic URL parser"><i>url</i></a> and <a>query state</a> as
+ <a for="basic URL parser"><i>state override</i></a>.
 
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
  result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
@@ -3152,8 +3152,8 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to the empty string.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> <var>input</var> with <a>this</a>'s
- <a for=URL>URL</a> as <a for="basic URL parser"><var>url</var></a> and <a>fragment state</a> as
- <a for="basic URL parser"><var>state override</var></a>.
+ <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>fragment state</a> as
+ <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
 
