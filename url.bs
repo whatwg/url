@@ -1278,8 +1278,9 @@ null or an <a>ASCII string</a>. It is initially null.
 an <a>ASCII string</a> that can be used for further processing on the resource the
 <a for=/>URL</a>'s other components identify. It is initially null.
 
-<p id=non-relative-flag>A <a for=/>URL</a> also has an associated
-<dfn export for=url>cannot-be-a-base-URL flag</dfn>. It is initially unset.
+<p id=non-relative-flag>A <a for=/>URL</a> also has an associated boolean
+<dfn export for=url id=url-cannot-be-a-base-url-flag>cannot-be-a-base-URL</dfn>. It is initially
+false.
 
 <p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-blob-entry>blob URL entry</dfn> that is either null or a
@@ -1305,7 +1306,7 @@ need to succeed.
    <th><a for=url>Path</a>
    <th><a for=url>Query</a>
    <th><a for=url>Fragment</a>
-   <th><a for=url>Cannot-be-a-base-URL flag</a>
+   <th><a for=url>Cannot-be-a-base-URL</a>
   <tr>
    <td><code>https://example.com/</code>
    <td>"<code>https</code>"
@@ -1314,7 +1315,7 @@ need to succeed.
    <td>« the empty string »
    <td>null
    <td>null
-   <td>unset
+   <td>false
   <tr>
    <td><code>https://localhost:8000/search?q=text#hello</code>
    <td>"<code>https</code>"
@@ -1323,7 +1324,7 @@ need to succeed.
    <td>« "<code>search</code>" »
    <td>"<code>q=text</code>"
    <td>"<code>hello</code>"
-   <td>unset
+   <td>false
   <tr>
    <td><code>urn:isbn:9780307476463</code>
    <td>"<code>urn</code>"
@@ -1332,7 +1333,7 @@ need to succeed.
    <td>« "<code>isbn:9780307476463</code>" »
    <td>null
    <td>null
-   <td>set
+   <td>true
   <tr>
    <td><code>file:///ada/Analytical%20Engine/README.md
    <td>"<code>file</code>"
@@ -1341,7 +1342,7 @@ need to succeed.
    <td>« "<code>ada</code>", "<code>Analytical%20Engine</code>", "<code>README.md</code>" »
    <td>null
    <td>null
-   <td>unset
+   <td>false
  </table>
 </div>
 
@@ -1373,8 +1374,8 @@ not a <a>special scheme</a>.
 <!-- also used by Fetch -->
 
 <p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
-<a for=url>host</a> is null or the empty string, its <a for=url>cannot-be-a-base-URL flag</a> is
-set, or its <a for=url>scheme</a> is "<code>file</code>".
+<a for=url>host</a> is null or the empty string, its <a for=url>cannot-be-a-base-URL</a> is true, or
+its <a for=url>scheme</a> is "<code>file</code>".
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
@@ -1699,8 +1700,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
 
  <li><p>Let <var>buffer</var> be the empty string.
 
- <li><p>Let the <var>@ flag</var>, <var>[] flag</var>, and <var>passwordTokenSeenFlag</var> be
- unset.
+ <li><p>Let <var>atSignSeen</var>, <var>insideBrackets</var>, and <var>passwordTokenSeen</var> be
+ false.
 
  <li><p>Let <var>pointer</var> be a <a>pointer</a> for <var>input</var>.
 
@@ -1783,8 +1784,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
         <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s <a for=url>scheme</a>,
         set <var>state</var> to <a>special relative or authority state</a>.
 
-        <p class="note no-backref">This means that <var>base</var>'s
-        <a for=url>cannot-be-a-base-URL flag</a> is unset.
+        <p class=note>This means that <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is
+        false.
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
@@ -1792,7 +1793,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <li><p>Otherwise, if <a>remaining</a> starts with an U+002F (/), set <var>state</var> to
        <a>path or authority state</a> and increase <var>pointer</var> by 1.
 
-       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>,
+       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> to true,
        <a for=list>append</a> an empty string to <var>url</var>'s <a for=url>path</a>, and set
        <var>state</var> to <a>cannot-be-a-base-URL path state</a>.
       </ol>
@@ -1813,19 +1814,18 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
    <dt><dfn>no scheme state</dfn>
    <dd>
     <ol>
-     <li><p>If <var>base</var> is null, or <var>base</var>'s
-     <a for=url>cannot-be-a-base-URL flag</a> is set and <a>c</a> is not U+0023 (#),
-     <a>validation error</a>, return failure.
+     <li><p>If <var>base</var> is null, or <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is
+     true and <a>c</a> is not U+0023 (#), <a>validation error</a>, return failure.
 
-     <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set and
-     <a>c</a> is U+0023 (#), set <var>url</var>'s <a for=url>scheme</a> to
+     <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is true and <a>c</a>
+     is U+0023 (#), set <var>url</var>'s <a for=url>scheme</a> to
      <var>base</var>'s <a for=url>scheme</a>,
      <var>url</var>'s <a for=url>path</a> to a <a for=list>clone</a> of
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
      <var>url</var>'s <a for=url>fragment</a> to the empty string, set
-     <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>, and set <var>state</var> to
+     <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> to true, and set <var>state</var> to
      <a>fragment state</a>.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>scheme</a> is not "<code>file</code>", set
@@ -1957,24 +1957,24 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <ol>
        <li><p><a>Validation error</a>.
 
-       <li><p>If the <var>@ flag</var> is set, prepend "<code>%40</code>" to
+       <li><p>If <var>atSignSeen</var> is true, then prepend "<code>%40</code>" to
        <var>buffer</var>.
 
-       <li><p>Set the <var>@ flag</var>.
+       <li><p>Set <var>atSignSeen</var> to true.
 
        <li>
         <p>For each <var>codePoint</var> in <var>buffer</var>:
 
         <ol>
-         <li><p>If <var>codePoint</var> is U+003A (:) and <var>passwordTokenSeenFlag</var> is
-         unset, then set <var>passwordTokenSeenFlag</var> and <a for=iteration>continue</a>.
+         <li><p>If <var>codePoint</var> is U+003A (:) and <var>passwordTokenSeen</var> is false,
+         then set <var>passwordTokenSeen</var> to true and <a for=iteration>continue</a>.
 
          <li><p>Let <var>encodedCodePoints</var> be the result of running
          <a for="code point">UTF-8 percent-encode</a> <var>codePoint</var> using the
          <a>userinfo percent-encode set</a>.
 
-         <li><p>If <var>passwordTokenSeenFlag</var> is set, then append <var>encodedCodePoints</var>
-         to <var>url</var>'s <a for=url>password</a>.
+         <li><p>If <var>passwordTokenSeen</var> is true, then append <var>encodedCodePoints</var> to
+         <var>url</var>'s <a for=url>password</a>.
 
          <li><p>Otherwise, append <var>encodedCodePoints</var> to <var>url</var>'s
          <a for=url>username</a>.
@@ -1994,7 +1994,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>then:
 
       <ol>
-       <li><p>If <var>@ flag</var> is set and <var>buffer</var> is the empty string,
+       <li><p>If <var>atSignSeen</var> is true and <var>buffer</var> is the empty string,
        <a>validation error</a>, return failure.
        <!-- No URLs with userinfo, but without host. For special URLs it would also not be
             idempotent:
@@ -2017,7 +2017,7 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
      <a>file host state</a>.
 
      <li>
-      <p>Otherwise, if <a>c</a> is U+003A (:) and the <var>[] flag</var> is unset, then:
+      <p>Otherwise, if <a>c</a> is U+003A (:) and <var>insideBrackets</var> is false, then:
 
       <ol>
        <li><p>If <var>buffer</var> is the empty string, <a>validation error</a>, return failure.
@@ -2072,9 +2072,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
       <p>Otherwise:
 
       <ol>
-       <li><p>If <a>c</a> is U+005B ([), then set the <var>[] flag</var>.
+       <li><p>If <a>c</a> is U+005B ([), then set <var>insideBrackets</var> to true.
 
-       <li><p>If <a>c</a> is U+005D (]), then unset the <var>[] flag</var>.
+       <li><p>If <a>c</a> is U+005D (]), then set <var>insideBrackets</var> to false.
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
@@ -2535,8 +2535,8 @@ then runs these steps, returning an <a>ASCII string</a>:
    <var>output</var>.
   </ol>
 
- <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a> is set, append <var>url</var>'s
- <a for=url>path</a>[0] to <var>output</var>.
+ <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> is true, then append
+ <var>url</var>'s <a for=url>path</a>[0] to <var>output</var>.
 
  <li>
   <p>Otherwise:
@@ -3022,7 +3022,7 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 <p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
@@ -3047,7 +3047,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 <p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
  return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
@@ -3081,7 +3081,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
  return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>[0].
 
  <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a> <a for=list>is empty</a>, then
@@ -3094,7 +3094,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 <p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL flag</a> is set, then
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
  return.
 
  <li><p>Empty <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
