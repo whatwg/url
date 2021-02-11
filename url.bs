@@ -1309,7 +1309,7 @@ need to succeed.
    <td>"<code>https</code>"
    <td>"<code>example.com</code>"
    <td>null
-   <td>« the empty string »
+   <td>« »
    <td>null
    <td>null
    <td>false
