@@ -2298,6 +2298,10 @@ these steps:
 
        <li><p>If <a>c</a> is not U+002F (/), then decrease <var>pointer</var> by 1.
       </ol>
+
+     <li><p>Otherwise, if <var>state override</var> is given and <var>url</var>'s
+      <a for=url>host</a> is null, <a for=list>append</a> the empty string to <var>url</var>'s
+      <a for=url>path</a>
     </ol>
 
    <dt><dfn>path state</dfn>
@@ -3439,6 +3443,7 @@ Jeffrey Yasskin,
 Joe Duarte,
 Joshua Bell,
 Jxck,
+Karl Wagner,
 田村健人 (Kent TAMURA),
 Kevin Grandon,
 Kornel Lesiński,
