@@ -2800,15 +2800,11 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
    <var>tuple</var>'s name, the
    <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
 
-   <li><p>Let <var>value</var> be <var>tuple</var>'s value.
-
-   <li><p>If <var>value</var> is a file, then set <var>value</var> to <var>value</var>'s filename.
-
-   <li><p>Set <var>value</var> to the result of running
-   <a for=string>percent-encode after encoding</a> with <var>encoding</var>, <var>value</var>, the
+   <li><p>Let <var>value</var> be the result of running <a for=string>percent-encode after
+   encoding</a> with <var>encoding</var>, <var>value</var>, the
    <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
 
-   <li><p>If <var>tuple</var> is not <var>tuples</var>[0], then append U+0026 (&amp;) to
+   <li><p>If <var>output</var> is not the empty string, then append U+0026 (&amp;) to
    <var>output</var>.
 
    <li>Append <var>name</var>, followed by U+003D (=), followed by <var>value</var>, to
@@ -2817,8 +2813,6 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
 
  <li>Return <var>output</var>.
 </ol>
-
-<p class=note><cite>HTML</cite> invokes this algorithm with values that are files. [[HTML]]
 
 
 <h3 id=urlencoded-hooks>Hooks</h3>
