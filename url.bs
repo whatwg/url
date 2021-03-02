@@ -445,7 +445,7 @@ U+0040 (@), U+005B ([), U+005C (\), U+005D (]), or U+005E (^).
 </ol>
 
 <p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
-the most specific public suffix, along with the domain label immediately preceeding it, if any. To
+the most specific public suffix, along with the domain label immediately preceding it, if any. To
 obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
 
 <ol>
