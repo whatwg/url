@@ -2024,6 +2024,9 @@ these steps:
        <li><p>If <var>buffer</var> is the empty string, <a>validation error</a>, return failure.
        <!-- No URLs with port, but without host. -->
 
+       <li><p>If <var>state override</var> is given and <var>state override</var> is
+       <a>hostname state</a>, then return.
+
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
 
@@ -2032,9 +2035,6 @@ these steps:
        <li><p>Set <var>url</var>'s <a for=url>host</a> to
        <var>host</var>, <var>buffer</var> to the empty string,
        and <var>state</var> to <a>port state</a>.
-
-       <li><p>If <var>state override</var> is given and <var>state override</var> is
-       <a>hostname state</a>, then return.
       </ol>
 
      <li>
