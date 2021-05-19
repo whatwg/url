@@ -2055,7 +2055,7 @@ these steps:
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
-       <a for=url>port</a> is non-null, <a>validation error</a>, return.
+       <a for=url>port</a> is non-null, return.
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
