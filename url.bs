@@ -387,10 +387,10 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <h3 id=host-representation>Host representation</h3>
 
-<p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an
-<a>IPv4 address</a>, an <a>IPv6 address</a>, an <a>opaque host</a>, or an <a>empty host</a>.
-Typically a <a for=/>host</a> serves as a network address, but it is sometimes used as opaque
-identifier in <a for=/>URLs</a> where a network address is not necessary.
+<p>A <dfn export id=concept-host>host</dfn> is a <a>domain</a>, an <a>IP address</a>, an
+<a>opaque host</a>, or an <a>empty host</a>. Typically a <a for=/>host</a> serves as a network
+address, but it is sometimes used as opaque identifier in <a for=/>URLs</a> where a network address
+is not necessary.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
@@ -402,6 +402,8 @@ realm within a network.
 
 <p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
 not equivalent and typically treated as distinct.
+
+<p>An <dfn export>IP address</dfn> is an <a>IPv4 address</a> or an <a>IPv6 address</a>.
 
 <p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a 32-bit unsigned integer that identifies a
 network address.
