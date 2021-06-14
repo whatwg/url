@@ -1431,13 +1431,11 @@ if all of the following are true:
 <ol>
  <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
 
- <li><p>If <var>path</var> <a for=list>is empty</a>, then return.
-
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
  <a for=list>size</a> is 1, and <var>path</var>[0] is a <a>normalized Windows drive letter</a>, then
  return.
 
- <li><p><a for=list>Remove</a> <var>path</var>'s last item.
+ <li><p><a for=list>Remove</a> <var>path</var>'s last item, if any.
 </ol>
 
 
@@ -1861,6 +1859,8 @@ these steps:
    <dt><dfn>relative state</dfn>
    <dd>
     <ol>
+     <li><p>Assert: <var>base</var>'s <a for=url>scheme</a> is not "<code>file</code>".
+
      <li><p>Set <var>url</var>'s <a for=url>scheme</a> to <var>base</var>'s <a for=url>scheme</a>.
 
      <li><p>If <a>c</a> is U+002F (/), then set <var>state</var> to <a>relative slash state</a>.
@@ -1897,7 +1897,7 @@ these steps:
         <ol>
          <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
 
-         <li><p><a for=list>Remove</a> <var>url</var>'s <a for=url>path</a>'s last item, if any.
+         <li><p><a>Shorten</a> <var>url</var>'s <a for=url>path</a>.
 
          <li><p>Set <var>state</var> to <a>path state</a> and decrease <var>pointer</var> by 1.
         </ol>
