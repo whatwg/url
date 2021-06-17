@@ -2300,8 +2300,8 @@ these steps:
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is given and <var>url</var>'s
-      <a for=url>host</a> is null, <a for=list>append</a> the empty string to <var>url</var>'s
-      <a for=url>path</a>
+     <a for=url>host</a> is null, <a for=list>append</a> the empty string to <var>url</var>'s
+     <a for=url>path</a>.
     </ol>
 
    <dt><dfn>path state</dfn>
