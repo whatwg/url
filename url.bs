@@ -655,16 +655,39 @@ runs these steps:
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
  <a>validation error</a>, return failure.
 
- <li><p>Let <var>ipv4Host</var> be the result of <a lt="IPv4 parser">IPv4 parsing</a>
- <var>asciiDomain</var>.
-
- <li><p>If <var>ipv4Host</var> is an <a>IPv4 address</a> or failure, return
- <var>ipv4Host</var>.
+ <li><p>If <var>asciiDomain</var> <a lt="ends in a number"> ends in a numer, return
+ the result of <a lt="IPv4 parser">IPv4 parsing</a> <var>asciiDomain</var>.
 
  <li><p>Return <var>asciiDomain</var>.
 </ol>
 
 <hr>
+
+<p>The <dfn id=ends-in-a-number>ends in a number checker</dfn> takes a string <var>input</var> and
+then runs these steps:
+
+<ol>
+ <li><p>Let <var>parts</var> be the result of <a>strictly splitting</a> <var>input</var> on
+ U+002E (.).
+
+ <li>
+  <p>If the last <a for=list>item</a> in <var>parts</var> is the empty string, then:
+
+  <ol>
+   <li><p>If <var>parts</var>'s <a for=list>size</a> is 1, return false.
+
+   <li>Otherwise, <a for=list>remove</a> the last <a for=list>item</a> from <var>parts</var>.
+  </ol>
+
+ <li><p>Let <var>last</var> be the last <a for=list>item</a> from <var>parts</var>.
+
+ <li>If parsing <var>last</var> as an <a lt="IPv4 number parser">IPv4 number</a> does not
+ return failure, return true.
+
+ <li><p>If <var>last</var> is non-empty and contains only <a>ASCII digits</a>, return true.
+
+ <li><p>Return false.
+</ol>
 
 <p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then runs
 these steps:
@@ -692,7 +715,8 @@ these steps:
         but if it somehow is this conditional makes sure we can keep going. -->
   </ol>
 
- <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 4, then return <var>input</var>.
+ <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 4, then <a>validation error</a>,
+ return failure.
 
  <li><p>Let <var>numbers</var> be an empty <a for=/>list</a>.
 
@@ -700,16 +724,10 @@ these steps:
   <p><a for=list>For each</a> <var>part</var> of <var>parts</var>:
 
   <ol>
-   <li>
-    <p>If <var>part</var> is the empty string, then return <var>input</var>.
-
-    <p class="example no-backref" id=example-c2afe535><code>0..0x300</code> is a
-    <a>domain</a>, not an <a>IPv4 address</a>.
-
    <li><p>Let <var>result</var> be the result of <a lt="IPv4 number parser">parsing</a>
    <var>part</var>.
 
-   <li><p>If <var>result</var> is failure, then return <var>input</var>.
+   <li><p>If <var>result</var> is failure, then <a>validation error</a>, return failure.
 
    <li><p>If <var>result</var>[1] is true, then set <var>validationError</var> to true.
 
@@ -754,7 +772,9 @@ these steps:
 <p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these steps:
 
 <ol>
- <li><p>Let <var>validationError</var> be false.
+ <li><p>If <var>input</var> is the empty string, then return failure.
+
+<li><p>Let <var>validationError</var> be false.
 
  <li><p>Let <var>R</var> be 10.
 
