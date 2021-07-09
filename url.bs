@@ -655,7 +655,7 @@ runs these steps:
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
  <a>validation error</a>, return failure.
 
- <li><p>If <var>asciiDomain</var> <a lt="ends in a number"> ends in a numer, return
+ <li><p>If <var>asciiDomain</var> <a lt="ends in a number checker"> ends in a numer, return
  the result of <a lt="IPv4 parser">IPv4 parsing</a> <var>asciiDomain</var>.
 
  <li><p>Return <var>asciiDomain</var>.
