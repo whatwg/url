@@ -686,6 +686,10 @@ then runs these steps:
 
  <li><p>If <var>last</var> is non-empty and contains only <a>ASCII digits</a>, return true.
 
+ <p class="note no-backref">This can happen if <var>last</var> starts with "0" so the
+ <a lt="IPv4 number parser">IPv4 number parser</a> tries to parse it as octal, but it is not
+ a valid octal number, as is the case with, for example, "09".
+
  <li><p>Return false.
 </ol>
 
