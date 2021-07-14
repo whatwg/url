@@ -778,7 +778,7 @@ these steps:
 <ol>
  <li><p>If <var>input</var> is the empty string, then return failure.
 
-<li><p>Let <var>validationError</var> be false.
+ <li><p>Let <var>validationError</var> be false.
 
  <li><p>Let <var>R</var> be 10.
 
