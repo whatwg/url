@@ -676,7 +676,7 @@ then runs these steps:
   <ol>
    <li><p>If <var>parts</var>'s <a for=list>size</a> is 1, return false.
 
-   <li>Otherwise, <a for=list>remove</a> the last <a for=list>item</a> from <var>parts</var>.
+   <li><p><a for=list>remove</a> the last <a for=list>item</a> from <var>parts</var>.
   </ol>
 
  <li><p>Let <var>last</var> be the last <a for=list>item</a> from <var>parts</var>.
