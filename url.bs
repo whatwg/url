@@ -679,10 +679,10 @@ steps:
    <li><p><a for=list>Remove</a> the last <a for=list>item</a> from <var>parts</var>.
   </ol>
 
- <li><p>Let <var>last</var> be the last <a for=list>item</a> from <var>parts</var>.
+ <li><p>Let <var>last</var> be the last <a for=list>item</a> in <var>parts</var>.
 
  <li><p>If parsing <var>last</var> as an <a lt="IPv4 number parser">IPv4 number</a> does not
- return failure, return true.
+ return failure, then return true.
 
  <li>
   <p>If <var>last</var> is non-empty and contains only <a>ASCII digits</a>, then return true.
