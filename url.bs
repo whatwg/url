@@ -681,15 +681,14 @@ steps:
 
  <li><p>Let <var>last</var> be the last <a for=list>item</a> in <var>parts</var>.
 
- <li><p>If parsing <var>last</var> as an <a lt="IPv4 number parser">IPv4 number</a> does not
- return failure, then return true.
-
  <li>
   <p>If <var>last</var> is non-empty and contains only <a>ASCII digits</a>, then return true.
 
-  <p class=note>This can happen if <var>last</var> starts with "<code>0</code>" so the
-  <a lt="IPv4 number parser">IPv4 number parser</a> tries to parse it as octal, but it is not a
-  valid octal number, as is the case with, for example, "<code>09</code>".
+ <li><p>If parsing <var>last</var> as an <a lt="IPv4 number parser">IPv4 number</a> does not
+ return failure, then return true.
+
+  <p class=note>This is equivalent to checking that <var>last</var> starts with "<code>0X</code>"
+  or "<code>0x</code>", followed only by <a>ASCII hex digits</a>.
 
  <li><p>Return false.
 </ol>
