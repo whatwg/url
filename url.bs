@@ -101,9 +101,10 @@ code point stream.
 <a>pointer</a> points to as long as it does not point nowhere. When the <a>pointer</a> points to
 nowhere <a>c</a> cannot be used.
 
-<p>When a <a>pointer</a> is used, <dfn>remaining</dfn> references the substring after <a>c</a> as
-long as <a>c</a> is not the <a>EOF code point</a>. When <a>c</a> is the <a>EOF code point</a>
-<a>remaining</a> cannot be used.
+<p>When a <a>pointer</a> is used, <dfn>remaining</dfn> references the
+<a lt="code point substring to the end of the string">code point substring</a> from the
+<a>pointer</a> + 1 to the end of the string, as long as <a>c</a> is not the <a>EOF code point</a>.
+When <a>c</a> is the <a>EOF code point</a> <a>remaining</a> cannot be used.
 
 <p class=example id=example-12672b6a>If "<code>mailto:username@example</code>" is a <a>string</a>
 being processed and a <a>pointer</a> points to @, <a>c</a> is U+0040 (@) and <a>remaining</a> is
@@ -2189,7 +2190,9 @@ these steps:
         <ol>
          <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
 
-         <li><p>If the substring from <var>pointer</var> in <var>input</var> does not
+         <li><p>If the
+         <a lt="code point substring to the end of the string">code point substring</a> from
+         <var>pointer</var> to the end of <var>input</var> does not
          <a>start with a Windows drive letter</a>, then <a>shorten</a> <var>url</var>'s
          <a for=url>path</a>.
 
@@ -2236,7 +2239,8 @@ these steps:
          <li><p>Set <var>url</var>'s <a for=url>host</a> to <var>base</var>'s <a for=url>host</a>.
 
          <li>
-          <p>If the substring from <var>pointer</var> in <var>input</var> does not
+          <p>If the <a lt="code point substring to the end of the string">code point substring</a>
+          from <var>pointer</var> to the end of <var>input</var> does not
           <a>start with a Windows drive letter</a> and <var>base</var>'s <a for=url>path</a>[0] is a
           <a>normalized Windows drive letter</a>, then <a for=list>append</a> <var>base</var>'s
           <a for=url>path</a>[0] to <var>url</var>'s <a for=url>path</a>.
