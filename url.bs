@@ -1396,8 +1396,8 @@ not a <a>special scheme</a>.
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
 <!-- also used by Fetch -->
 
-<p>A <a for=/>URL</a> has a <dfn export>hierarchical path</dfn> if its <a for=url>path</a> is a
-<a for=/>list</a>.
+<p>A <a for=/>URL</a> has a <dfn export for=url>hierarchical path</dfn> if its <a for=url>path</a>
+is a <a for=/>list</a>.
 
 <p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
 <a for=url>host</a> is null or the empty string, it does not have a
