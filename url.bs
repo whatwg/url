@@ -1735,7 +1735,7 @@ these steps:
   <var>pointer</var> by 1 and continue with the state machine.
 
   <dl class=switch>
-   <dt><dfn>scheme start state</dfn>
+   <dt><dfn export for="basic URL parser" id=scheme-start-state>scheme start state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII alpha</a>,
@@ -1752,7 +1752,7 @@ these steps:
       {{Location/protocol}} setter.
     </ol>
 
-   <dt><dfn>scheme state</dfn>
+   <dt><dfn export for="basic URL parser" id=scheme-state>scheme state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII alphanumeric</a>, U+002B (+), U+002D (-), or U+002E (.),
@@ -1837,7 +1837,7 @@ these steps:
       is an intentional difference for defining that setter.
     </ol>
 
-   <dt><dfn>no scheme state</dfn>
+   <dt><dfn export for="basic URL parser" id=no-scheme-state>no scheme state</dfn>
    <dd>
     <ol>
      <li><p>If <var>base</var> is null, or <var>base</var> has an <a for=url>opaque path</a> and
@@ -1860,7 +1860,7 @@ these steps:
      by 1.
     </ol>
 
-   <dt><dfn>special relative or authority state</dfn>
+   <dt><dfn export for="basic URL parser" id=special-relative-or-authority-state>special relative or authority state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is U+002F (/) and <a>remaining</a> starts with U+002F (/), then set
@@ -1871,7 +1871,7 @@ these steps:
      decrease <var>pointer</var> by 1.
     </ol>
 
-   <dt><dfn>path or authority state</dfn>
+   <dt><dfn export for="basic URL parser" id=path-or-authority-state>path or authority state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is U+002F (/), then set <var>state</var> to <a>authority state</a>.
@@ -1880,7 +1880,7 @@ these steps:
      by 1.
     </ol>
 
-   <dt><dfn>relative state</dfn>
+   <dt><dfn export for="basic URL parser" id=relative-state>relative state</dfn>
    <dd>
     <ol>
      <li><p>Assert: <var>base</var>'s <a for=url>scheme</a> is not "<code>file</code>".
@@ -1928,7 +1928,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>relative slash state</dfn>
+   <dt><dfn export for="basic URL parser" id=relative-slash-state>relative slash state</dfn>
    <dd>
     <ol>
      <li>
@@ -1955,7 +1955,7 @@ these steps:
      <var>state</var> to <a>path state</a>, and then, decrease <var>pointer</var> by 1.
     </ol>
 
-   <dt><dfn>special authority slashes state</dfn>
+   <dt><dfn export for="basic URL parser" id=special-authority-slashes-state>special authority slashes state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is U+002F (/) and <a>remaining</a> starts with U+002F (/), then set
@@ -1966,7 +1966,7 @@ these steps:
      <a>special authority ignore slashes state</a> and decrease <var>pointer</var> by 1.
     </ol>
 
-   <dt><dfn>special authority ignore slashes state</dfn>
+   <dt><dfn export for="basic URL parser" id=special-authority-ignore-slashes-state>special authority ignore slashes state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is neither U+002F (/) nor U+005C (\), then set <var>state</var> to
@@ -1975,7 +1975,7 @@ these steps:
      <li><p>Otherwise, <a>validation error</a>.
     </ol>
 
-   <dt><dfn>authority state</dfn>
+   <dt><dfn export for="basic URL parser" id=authority-state>authority state</dfn>
    <dd>
     <ol>
      <li>
@@ -2035,8 +2035,8 @@ these steps:
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
-   <dt><dfn>host state</dfn>
-   <dt><dfn>hostname state</dfn>
+   <dt><dfn export for="basic URL parser" id=host-state>host state</dfn>
+   <dt><dfn export for="basic URL parser" id=hostname-state>hostname state</dfn>
    <dd>
     <ol>
      <li><p>If <var>state override</var> is given and <var>url</var>'s <a for=url>scheme</a> is
@@ -2107,7 +2107,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>port state</dfn>
+   <dt><dfn export for="basic URL parser" id=port-state>port state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is an <a>ASCII digit</a>, append <a>c</a> to <var>buffer</var>.
@@ -2150,7 +2150,7 @@ these steps:
      <li><p>Otherwise, <a>validation error</a>, return failure.
     </ol>
 
-   <dt><dfn>file state</dfn>
+   <dt><dfn export for="basic URL parser" id=file-state>file state</dfn>
    <dd>
     <ol>
      <li><p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>".
@@ -2213,7 +2213,7 @@ these steps:
      by 1.
     </ol>
 
-   <dt><dfn>file slash state</dfn>
+   <dt><dfn export for="basic URL parser" id=file-slash-state>file slash state</dfn>
    <dd>
     <ol>
      <li>
@@ -2251,7 +2251,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>file host state</dfn>
+   <dt><dfn export for="basic URL parser" id=file-host-state>file host state</dfn>
    <dd>
     <ol>
      <li>
@@ -2302,7 +2302,7 @@ these steps:
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
     </ol>
 
-   <dt><dfn>path start state</dfn>
+   <dt><dfn export for="basic URL parser" id=path-start-state>path start state</dfn>
    <dd>
     <ol>
      <li>
@@ -2339,7 +2339,7 @@ these steps:
      <a for=url>path</a>.
     </ol>
 
-   <dt><dfn>path state</dfn>
+   <dt><dfn export for="basic URL parser" id=path-state>path state</dfn>
    <dd>
     <ol>
      <li>
@@ -2441,7 +2441,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>query state</dfn>
+   <dt><dfn export for="basic URL parser" id=query-state>query state</dfn>
    <dd>
     <ol>
      <li>
@@ -2497,7 +2497,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>fragment state</dfn>
+   <dt><dfn export for="basic URL parser" id=fragment-state>fragment state</dfn>
    <dd>
     <ol>
      <li>
