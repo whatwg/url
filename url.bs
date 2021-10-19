@@ -1372,13 +1372,14 @@ need to succeed.
 
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
-<p>A <dfn export>special scheme</dfn> is a <a for=url>scheme</a> listed in the first column of
-the following table. A <dfn>default port</dfn> is a <a>special scheme</a>'s corresponding
-<a for=url>port</a> and is listed in the second column on the same row.
+<p>A <dfn export>special scheme</dfn> is an <a>ASCII string</a> that is listed in the first column
+of the following table. The <dfn export>default port</dfn> for a <a>special scheme</a> is listed in
+the second column on the same row. The <a>default port</a> for any other <a>ASCII string</a> is
+null.
 
 <table>
- <tr><th><a for=url>scheme</a>
-     <th><a for=url>port</a>
+ <tr><th><a>Special scheme</a>
+     <th><a>Default port</a>
  <tr><td>"<code>ftp</code>"<td>21
  <tr><td>"<code>file</code>"<td>null
  <tr><td>"<code>http</code>"<td>80
@@ -2136,8 +2137,7 @@ these steps:
          <a>validation error</a>, return failure.
 
          <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
-         <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>, and to
-         <var>port</var> otherwise.
+         <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>; otherwise to <var>port</var>.
 
          <li><p>Set <var>buffer</var> to the empty string.
         </ol>
