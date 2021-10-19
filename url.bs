@@ -1300,8 +1300,8 @@ null or a 16-bit unsigned integer that identifies a networking port. It is initi
 is either an <a>ASCII string</a> or a <a for=/>list</a> of zero or more <a>ASCII strings</a>,
 usually identifying a location. It is initially « ».
 
-<p class=note>A <a lt="is special">special</a> <a for=/>URL</a> never has an
-<a for=url>opaque path</a>.
+<p class=note>A <a lt="is special">special</a> <a for=/>URL</a>'s <a for=url>path</a> is always a
+<a for=/>list</a>, i.e., it is never <a for=url lt="opaque path">opaque</a>.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a>. It is initially null.
