@@ -385,6 +385,49 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
  that was <a lt="host serializer">serialized</a>.)
 </ul>
 
+<div class=example id=example-host-parsing>
+ <table>
+  <tr>
+   <th>Input
+   <th>Output
+  <tr>
+   <td><code>EXAMPLE.COM</code>
+   <td rowspan=2><code>example.com</code> (<a for=/>domain</a>)
+  <tr>
+   <td><code>example%2Ecom</code>
+  <tr>
+   <td><code>faß.example</code>
+   <td><code>xn--fa-hia.example</code> (<a for=/>domain</a>)
+  <tr>
+   <td><code>0</code>
+   <td rowspan=3><code>0.0.0.0</code> (<a for=/ lt="IPv4 address">IPv4</a>)
+  <tr>
+   <td><code>%30</code>
+  <tr>
+   <td><code>0x</code>
+  <tr>
+   <td><code>0xffffffff</code>
+   <td><code>255.255.255.255</code> (<a for=/ lt="IPv4 address">IPv4</a>)
+  <tr>
+   <td><code>[0:0::1]</code>
+   <td><code>[::1]</code> (<a for=/ lt="IPv6 address">IPv6</a>)
+  <tr>
+   <td><code>[0:0::1%5D</code>
+   <td rowspan=5>Failure
+  <tr>
+   <td><code>[0:0::%31]</code>
+  <tr>
+   <td><code>09</code>
+  <tr>
+   <td><code>example.255</code>
+  <tr>
+   <td><code>example^example</code>
+ </table>
+
+ <p>The output <a for=/>hosts</a> are represented in <a lt="host serializer">serialized</a> form for
+ simplicity.
+</div>
+
 
 <h3 id=host-representation>Host representation</h3>
 
