@@ -1295,12 +1295,13 @@ It is initially the empty string.
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a for=/>list</a> of
-zero or more <a>ASCII strings</a>, usually identifying a location in hierarchical form. It is
-initially empty.
+<p>A <a for=/>URL</a>'s
+<dfn export for=url id=concept-url-path oldids=non-relative-flag,url-cannot-be-a-base-url-flag>path</dfn>
+is either an <a>ASCII string</a> or a <a for=/>list</a> of zero or more <a>ASCII strings</a>,
+usually identifying a location. It is initially « ».
 
-<p class="note no-backref">A <a lt="is special">special</a> <a for=/>URL</a> always has a
-<a for=list lt="is empty">non-empty</a> <a for=url>path</a>.
+<p class=note>A <a lt="is special">special</a> <a for=/>URL</a>'s <a for=url>path</a> is always a
+<a for=/>list</a>, i.e., it is never <a for=url lt="opaque path">opaque</a>.
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a>. It is initially null.
@@ -1308,10 +1309,6 @@ null or an <a>ASCII string</a>. It is initially null.
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-fragment>fragment</dfn> is either null or
 an <a>ASCII string</a> that can be used for further processing on the resource the
 <a for=/>URL</a>'s other components identify. It is initially null.
-
-<p id=non-relative-flag>A <a for=/>URL</a> also has an associated boolean
-<dfn export for=url id=url-cannot-be-a-base-url-flag>cannot-be-a-base-URL</dfn>. It is initially
-false.
 
 <p>A <a for=/>URL</a> also has an associated
 <dfn export for=url id=concept-url-blob-entry>blob URL entry</dfn> that is either null or a
@@ -1337,7 +1334,6 @@ need to succeed.
    <th><a for=url>Path</a>
    <th><a for=url>Query</a>
    <th><a for=url>Fragment</a>
-   <th><a for=url>Cannot-be-a-base-URL</a>
   <tr>
    <td><code>https://example.com/</code>
    <td>"<code>https</code>"
@@ -1346,7 +1342,6 @@ need to succeed.
    <td>« the empty string »
    <td>null
    <td>null
-   <td>false
   <tr>
    <td><code>https://localhost:8000/search?q=text#hello</code>
    <td>"<code>https</code>"
@@ -1355,16 +1350,14 @@ need to succeed.
    <td>« "<code>search</code>" »
    <td>"<code>q=text</code>"
    <td>"<code>hello</code>"
-   <td>false
   <tr>
    <td><code>urn:isbn:9780307476463</code>
    <td>"<code>urn</code>"
    <td>null
    <td>null
-   <td>« "<code>isbn:9780307476463</code>" »
+   <td>"<code>isbn:9780307476463</code>"
    <td>null
    <td>null
-   <td>true
   <tr>
    <td><code>file:///ada/Analytical%20Engine/README.md
    <td>"<code>file</code>"
@@ -1373,7 +1366,6 @@ need to succeed.
    <td>« "<code>ada</code>", "<code>Analytical%20Engine</code>", "<code>README.md</code>" »
    <td>null
    <td>null
-   <td>false
  </table>
 </div>
 
@@ -1404,9 +1396,12 @@ not a <a>special scheme</a>.
 <a for=url>username</a> or <a for=url>password</a> is not the empty string.
 <!-- also used by Fetch -->
 
+<p>A <a for=/>URL</a> has an <dfn export for=url>opaque path</dfn> if its <a for=url>path</a> is a
+<a for=/>string</a>.
+
 <p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
-<a for=url>host</a> is null or the empty string, its <a for=url>cannot-be-a-base-URL</a> is true, or
-its <a for=url>scheme</a> is "<code>file</code>".
+<a for=url>host</a> is null or the empty string, it has an <a for=url>opaque path</a>, or its
+<a for=url>scheme</a> is "<code>file</code>".
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
@@ -1455,6 +1450,8 @@ if all of the following are true:
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
 
 <ol>
+ <li><p><a for=/>Assert</a>: <var>url</var> does not have an <a for=url>opaque path</a>.
+
  <li><p>Let <var>path</var> be <var>url</var>'s <a for=url>path</a>.
 
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>path</var>'s
@@ -1808,11 +1805,14 @@ these steps:
 
        <li>
         <p>Otherwise, if <var>url</var> <a>is special</a>, <var>base</var> is non-null, and
-        <var>base</var>'s <a for=url>scheme</a> is equal to <var>url</var>'s <a for=url>scheme</a>,
-        set <var>state</var> to <a>special relative or authority state</a>.
+        <var>base</var>'s <a for=url>scheme</a> is <var>url</var>'s <a for=url>scheme</a>:
 
-        <p class=note>This means that <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is
-        false.
+        <ol>
+         <li><p><a for=/>Assert</a>: <var>base</var> is <a>is special</a> (and therefore does not
+         have an <a for=url>opaque path</a>).
+
+         <li><p>Set <var>state</var> to <a>special relative or authority state</a>.
+        </ol>
 
        <li><p>Otherwise, if <var>url</var> <a>is special</a>, set <var>state</var> to
        <a>special authority slashes state</a>.
@@ -1820,9 +1820,8 @@ these steps:
        <li><p>Otherwise, if <a>remaining</a> starts with an U+002F (/), set <var>state</var> to
        <a>path or authority state</a> and increase <var>pointer</var> by 1.
 
-       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> to true,
-       <a for=list>append</a> an empty string to <var>url</var>'s <a for=url>path</a>, and set
-       <var>state</var> to <a>cannot-be-a-base-URL path state</a>.
+       <li><p>Otherwise, set <var>url</var>'s <a for=url>path</a> to the empty string and set
+       <var>state</var> to <a>opaque path state</a>.
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is not given, set
@@ -1841,18 +1840,17 @@ these steps:
    <dt><dfn>no scheme state</dfn>
    <dd>
     <ol>
-     <li><p>If <var>base</var> is null, or <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is
-     true and <a>c</a> is not U+0023 (#), <a>validation error</a>, return failure.
+     <li><p>If <var>base</var> is null, or <var>base</var> has an <a for=url>opaque path</a> and
+     <a>c</a> is not U+0023 (#), <a>validation error</a>, return failure.
 
-     <li><p>Otherwise, if <var>base</var>'s <a for=url>cannot-be-a-base-URL</a> is true and <a>c</a>
-     is U+0023 (#), set <var>url</var>'s <a for=url>scheme</a> to
+     <li><p>Otherwise, if <var>base</var> has an <a for=url>opaque path</a> and <a>c</a> is
+     U+0023 (#), set <var>url</var>'s <a for=url>scheme</a> to
      <var>base</var>'s <a for=url>scheme</a>,
-     <var>url</var>'s <a for=url>path</a> to a <a for=list>clone</a> of
+     <var>url</var>'s <a for=url>path</a> to
      <var>base</var>'s <a for=url>path</a>,
      <var>url</var>'s <a for=url>query</a> to
      <var>base</var>'s <a for=url>query</a>,
-     <var>url</var>'s <a for=url>fragment</a> to the empty string, set
-     <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> to true, and set <var>state</var> to
+     <var>url</var>'s <a for=url>fragment</a> to the empty string, and set <var>state</var> to
      <a>fragment state</a>.
 
      <li><p>Otherwise, if <var>base</var>'s <a for=url>scheme</a> is not "<code>file</code>", set
@@ -2417,7 +2415,7 @@ these steps:
       </ol>
     </ol>
 
-   <dt><dfn>cannot-be-a-base-URL path state</dfn>
+   <dt><dfn export for="basic URL parser" id=cannot-be-a-base-url-path-state>opaque path state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
@@ -2439,7 +2437,7 @@ these steps:
        <li><p>If <a>c</a> is not the <a>EOF code point</a>,
        <a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
        <a>C0 control percent-encode set</a> and append the result to <var>url</var>'s
-       <a for=url>path</a>[0].
+       <a for=url>path</a>.
       </ol>
     </ol>
 
@@ -2572,25 +2570,18 @@ these steps. They return an <a>ASCII string</a>.
    <var>output</var>.
   </ol>
 
- <li><p>If <var>url</var>'s <a for=url>cannot-be-a-base-URL</a> is true, then append
- <var>url</var>'s <a for=url>path</a>[0] to <var>output</var>.
-
  <li>
-  <p>Otherwise:
-
-  <ol>
-   <li><p>If <var>url</var>'s <a for=url>host</a> is null, <var>url</var>'s <a for=url>path</a>'s
-   <a for=list>size</a> is greater than 1, and <var>url</var>'s <a for=url>path</a>[0] is the empty
-   string, then append U+002F (/) followed by U+002E (.) to <var>output</var>.
-
-   <li><p><a for=list>For each</a> <var>segment</var> of <var>url</var>'s <a for=url>path</a>:
-   append U+002F (/) followed by <var>segment</var> to <var>output</var>.
-  </ol>
+  <p>If <var>url</var>'s <a for=url>host</a> is null, <var>url</var> does not have an
+  <a for=url>opaque path</a>, <var>url</var>'s <a for=url>path</a>'s <a for=list>size</a> is greater
+  than 1, and <var>url</var>'s <a for=url>path</a>[0] is the empty string, then append U+002F (/)
+  followed by U+002E (.) to <var>output</var>.
 
   <p class=note>This prevents <code>web+demo:/.//not-a-host/</code> or
   <code>web+demo:/path/..//not-a-host/</code>, when <a lt="URL parser">parsed</a> and then
   <a lt="URL serializer">serialized</a>, from ending up as <code>web+demo://not-a-host/</code> (they
   end up as <code>web+demo:/.//not-a-host/</code>).
+
+ <li><p>Append the result of <a>URL path serializing</a> <var>url</var> to <var>output</var>.
 
  <li><p>If <var>url</var>'s <a for=url>query</a> is non-null, append
  U+003F (?), followed by <var>url</var>'s <a for=url>query</a>, to
@@ -2602,6 +2593,21 @@ these steps. They return an <a>ASCII string</a>.
 
  <li><p>Return <var>output</var>.
 </ol>
+
+<p>The <dfn export lt="URL path serializer|URL path serializing">URL path serializer</dfn> takes a
+<a for=/>URL</a> <var>url</var> and then runs these steps. They return an <a>ASCII string</a>.
+
+<ul>
+ <li><p>If <var>url</var> has an <a for=url>opaque path</a>, then return <var>url</var>'s
+ <a for=url>path</a>.
+
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p><a for=list>For each</a> <var>segment</var> of <var>url</var>'s <a for=url>path</a>: append
+ U+002F (/) followed by <var>segment</var> to <var>output</var>.
+
+ <li><p>Return <var>output</var>.
+</ul>
 
 
 <h3 id=url-equivalence>URL equivalence</h3>
@@ -2642,8 +2648,8 @@ information. [[HTML]]
    <a for=/>URL</a>'s <a for=url>blob URL entry</a>'s <a for="blob URL entry">environment</a>'s
    <a for="environment settings object">origin</a>.
 
-   <li><p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a>
-   <a for=/>URL</a>'s <a for=url>path</a>[0].
+   <li><p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the result of
+   <a>URL path serializing</a> <a for=/>URL</a>.
 
    <li><p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
    <a for=url>origin</a> otherwise.
@@ -3051,8 +3057,7 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 <p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
- return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> has an <a for=url>opaque path</a>, then return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>host state</a> as
@@ -3077,8 +3082,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 <p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
- return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> has an <a for=url>opaque path</a>, then return.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>hostname state</a> as
@@ -3109,26 +3113,15 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
  <a>port state</a> as <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
-<p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are:
-
-<ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
- return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>[0].
-
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a> <a for=list>is empty</a>, then
- return the empty string.
-
- <li><p>Return U+002F (/), followed by the strings in <a>this</a>'s <a for=URL>URL</a>'s
- <a for=url>path</a> (including empty strings), if any, separated from each other by U+002F (/).
-</ol>
+<p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are to return the result of
+<a>URL path serializing</a> <a>this</a>'s <a for=URL>URL</a>.
 
 <p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>cannot-be-a-base-URL</a> is true, then
- return.
+ <li><p>If <a>this</a>'s <a for=URL>URL</a> has an <a for=url>opaque path</a>, then return.
 
- <li><p>Empty <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
+ <li><p><a for=list>Empty</a> <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>.
 
  <li><p><a lt="basic URL parser">Basic URL parse</a> the given value with <a>this</a>'s
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>path start state</a> as
