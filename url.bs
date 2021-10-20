@@ -852,7 +852,7 @@ these steps:
    <li><p>Set <var>R</var> to 8.
   </ol>
 
- <li><p>If <var>input</var> is the empty string, then return 0.
+ <li><p>If <var>input</var> is the empty string, then return (0, true).
  <!-- 0x/0X is an IPv4 number apparently -->
 
  <li><p>If <var>input</var> contains a code point that is not a radix-<var>R</var> digit, then
