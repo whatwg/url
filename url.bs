@@ -638,9 +638,9 @@ decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same
 <p>A <dfn export oldids=syntax-host-domain>valid domain string</dfn> must be a string that is a
 <a>valid domain</a>.
 
-<p>A <dfn export oldids=syntax-host-ipv4>valid IPv4-address string</dfn> must be four sequences of
-up to three <a>ASCII digits</a> per sequence, each representing a decimal number no greater than
-255, and separated from each other by U+002E (.).
+<p>A <dfn export oldids=syntax-host-ipv4>valid IPv4-address string</dfn> must be four shortest
+possible strings of <a>ASCII digits</a>, representing a decimal number in the range 0 to 255,
+inclusive, separated from each other by U+002E (.).
 
 <p>A <dfn export oldids=syntax-host-ipv6>valid IPv6-address string</dfn> is defined in the
 <a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
