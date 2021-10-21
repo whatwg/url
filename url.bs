@@ -691,8 +691,8 @@ steps:
   <p>If parsing <var>last</var> as an <a lt="IPv4 number parser">IPv4 number</a> does not return
   failure, then return true.
 
-  <p class=note>This is equivalent to checking that <var>last</var> starts with "<code>0X</code>"
-  or "<code>0x</code>", followed by zero or more <a>ASCII hex digits</a>.
+  <p class=note>This is equivalent to checking that <var>last</var> is "<code>0X</code>" or
+  "<code>0x</code>", followed by zero or more <a>ASCII hex digits</a>.
 
  <li><p>Return false.
 </ol>
