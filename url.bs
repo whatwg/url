@@ -2694,8 +2694,9 @@ is the <a for=/>origin</a> returned by running these steps, switching on <var>ur
    <li><p>Let <var>pathURL</var> be the result of <a lt="basic URL parser">parsing</a> the result of
    <a>URL path serializing</a> <var>url</var>.
 
-   <li><p>Return a new <a>opaque origin</a>, if <var>pathURL</var> is failure; otherwise
-   <var>pathURL</var>'s <a for=url>origin</a>.
+   <li><p>If <var>pathURL</var> is failure, then return a new <a>opaque origin</a>.
+
+   <li><p>Return <var>pathURL</var>'s <a for=url>origin</a>.
    <!-- Did you mean: recursion -->
   </ol>
 
