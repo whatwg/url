@@ -2682,37 +2682,38 @@ these steps:
 <p class=note>See <a for=/>origin</a>'s definition in <cite>HTML</cite> for the necessary background
 information. [[HTML]]
 
-<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-origin>origin</dfn> is the
-<a for=/>origin</a> returned by running these steps, switching on
-<a for=/>URL</a>'s <a for=url>scheme</a>:
+<p>The <dfn export for=url id=concept-url-origin>origin</dfn> of a <a for=/>URL</a> <var>url</var>
+is the <a for=/>origin</a> returned by running these steps, switching on <var>url</var>'s
+<a for=url>scheme</a>:
 
 <dl class=switch>
  <dt>"<code>blob</code>"
  <dd>
   <ol>
-   <li><p>If <a for=/>URL</a>'s <a for=url>blob URL entry</a> is non-null, then return
-   <a for=/>URL</a>'s <a for=url>blob URL entry</a>'s <a for="blob URL entry">environment</a>'s
+   <li><p>If <var>url</var>'s <a for=url>blob URL entry</a> is non-null, then return
+   <var>url</var>'s <a for=url>blob URL entry</a>'s <a for="blob URL entry">environment</a>'s
    <a for="environment settings object">origin</a>.
 
-   <li><p>Let <var>url</var> be the result of <a lt="basic URL parser">parsing</a> the result of
-   <a>URL path serializing</a> <a for=/>URL</a>.
+   <li><p>Let <var>pathURL</var> be the result of <a lt="basic URL parser">parsing</a> the result of
+   <a>URL path serializing</a> <var>url</var>.
 
-   <li><p>Return a new <a>opaque origin</a>, if <var>url</var> is failure, and <var>url</var>'s
-   <a for=url>origin</a> otherwise.
+   <li><p>If <var>pathURL</var> is failure, then return a new <a>opaque origin</a>.
+
+   <li><p>Return <var>pathURL</var>'s <a for=url>origin</a>.
    <!-- Did you mean: recursion -->
   </ol>
 
   <p class="example no-backref" id=example-43b5cea5>The <a for=url>origin</a> of
-  <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the tuple
-  (<code>https</code>, <code>whatwg.org</code>, null, null).
+  <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the
+  <a for=/>tuple origin</a> ("<code>https</code>", "<code>whatwg.org</code>", null, null).
 
  <dt>"<code>ftp</code>"
  <dt>"<code>http</code>"
  <dt>"<code>https</code>"
  <dt>"<code>ws</code>"
  <dt>"<code>wss</code>"
- <dd><p>Return a tuple consisting of <a for=/>URL</a>'s <a for=url>scheme</a>,
- <a for=/>URL</a>'s <a for=url>host</a>, <a for=/>URL</a>'s <a for=url>port</a>, and null.
+ <dd><p>Return the <a for=/>tuple origin</a> (<var>url</var>'s <a for=url>scheme</a>,
+ <var>url</var>'s <a for=url>host</a>, <var>url</var>'s <a for=url>port</a>, null).
 
  <dt>"<code>file</code>"
  <dd><p>Unfortunate as it is, this is left as an exercise to the reader. When in doubt,
