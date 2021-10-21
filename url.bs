@@ -1279,8 +1279,9 @@ unified model would be, please file an issue.
 
 <h3 id=url-representation>URL representation</h3>
 
-<p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a universal identifier. To
-disambiguate from a <a>valid URL string</a> it can also be referred to as a <a for=/>URL record</a>.
+<p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a <a for=/>struct</a> that
+represents a universal identifier. To disambiguate from a <a>valid URL string</a> it can also be
+referred to as a <a for=/>URL record</a>.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
