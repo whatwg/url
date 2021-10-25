@@ -1448,8 +1448,8 @@ not a <a>special scheme</a>.
 <a for=/>string</a>.
 
 <p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
-<a for=url>host</a> is null or the empty string, it has an <a for=url>opaque path</a>, or its
-<a for=url>scheme</a> is "<code>file</code>".
+<a for=url>host</a> is null or the empty string, or its <a for=url>scheme</a> is
+"<code>file</code>".
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
