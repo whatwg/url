@@ -196,6 +196,9 @@ U+0027 (').
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
 <a>query percent-encode set</a> and U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
 
+<p>The <dfn>opaque-host percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
+the <a>forbidden host code points</a>.
+
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
 U+005B ([) to U+005E (^), inclusive, and U+007C (|).
@@ -470,9 +473,9 @@ processing.
 
 <h3 id=host-miscellaneous>Host miscellaneous</h3>
 
-<p>A <dfn export>forbidden host code point</dfn> is U+0000 NULL, U+0009 TAB, U+000A LF, U+000D CR,
-U+0020 SPACE, U+0023 (#), U+0025 (%), U+002F (/), U+003A (:), U+003C (&lt;), U+003E (>), U+003F (?),
-U+0040 (@), U+005B ([), U+005C (\), U+005D (]), U+005E (^), or U+007C (|).
+<p>A <dfn export>forbidden host code point</dfn> is a <a>C0 control or space</a>, or
+U+0023 (#), U+002F (/), U+003A (:), U+003C (&lt;), U+003E (>), U+003F (?),
+U+0040 (@), U+005B ([), U+005C (\), U+005D (]), U+005E (^), U+007C (|), or U+007F DELETE.
 
 <p>A <a for=/>host</a>'s <dfn for=host export>public suffix</dfn> is the portion of a
 <a for=/>host</a> which is included on the <cite>Public Suffix List</cite>. To obtain
@@ -696,7 +699,7 @@ runs these steps:
 
  <li><p>If <var>asciiDomain</var> is failure, <a>validation error</a>, return failure.
 
- <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a>,
+ <li><p>If <var>asciiDomain</var> contains a <a>forbidden host code point</a> or U+0025 (%),
  <a>validation error</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> <a lt="ends in a number checker">ends in a number</a>, then return
@@ -1027,8 +1030,8 @@ then runs these steps:
 <var>input</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding U+0025 (%),
- <a>validation error</a>, return failure.
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a>,
+ <a>validation error</a>.
 
  <li><p>If <var>input</var> contains a <a>code point</a> that is not a <a>URL code point</a> and not
  U+0025 (%), <a>validation error</a>.
@@ -1037,7 +1040,7 @@ then runs these steps:
  not <a>ASCII hex digits</a>, <a>validation error</a>.
 
  <li><p>Return the result of running <a for=string>UTF-8 percent-encode</a> on <var>input</var>
- using the <a>C0 control percent-encode set</a>.
+ using the <a>opaque-host percent-encode set</a>.
 </ol>
 
 
