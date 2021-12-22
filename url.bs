@@ -583,8 +583,8 @@ decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same
 
   <p class=note>If <var>beStrict</var> is false, <var>domain</var> is an <a>ASCII string</a>, and
   <a>strictly splitting</a> <var>domain</var> on U+002E (.) does not produce any
-  <a for=list>item</a> that <a for=string>starts with</a> "<code>xn--</code>", this step is
-  equivalent to <a>ASCII lowercasing</a> <var>domain</var>.
+  <a for=list>item</a> that <a for=string>starts with</a> an <a>ASCII case-insensitive</a> match for
+  "<code>xn--</code>", this step is equivalent to <a>ASCII lowercasing</a> <var>domain</var>.
 
  <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
 
