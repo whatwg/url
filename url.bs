@@ -2925,7 +2925,7 @@ takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the r
 <h3 id=url-class>URL class</h3>
 
 <pre class=idl>
-[Exposed=(Window,Worker),
+[Exposed=*,
  LegacyWindowAlias=webkitURL]
 interface URL {
   constructor(USVString url, optional USVString base);
@@ -3236,7 +3236,7 @@ does return a <a>URL-port string</a> so one might have assumed the setter to alw
 <h3 id=interface-urlsearchparams>URLSearchParams class</h3>
 
 <pre class=idl>
-[Exposed=(Window,Worker)]
+[Exposed=*]
 interface URLSearchParams {
   constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = "");
 
