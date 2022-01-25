@@ -471,11 +471,11 @@ processing.
 <h3 id=host-miscellaneous>Host miscellaneous</h3>
 
 <p>A <dfn export>forbidden host code point</dfn> is U+0000 NULL, U+0009 TAB, U+000A LF, U+000D CR,
-U+0020 SPACE, U+0023 (#), U+0025 (%), U+002F (/), U+003A (:), U+003C (&lt;), U+003E (>), U+003F (?),
-U+0040 (@), U+005B ([), U+005C (\), U+005D (]), U+005E (^), or U+007C (|).
+U+0020 SPACE, U+0023 (#), U+002F (/), U+003A (:), U+003C (&lt;), U+003E (>), U+003F (?), U+0040 (@),
+U+005B ([), U+005C (\), U+005D (]), U+005E (^), or U+007C (|).
 
 <p>A <dfn export>forbidden domain code point</dfn> is a <a>forbidden host code point</a>,
-a <a>C0 control</a>, or U+007F DELETE.
+a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 
 <p>A <a for=/>host</a>'s <dfn for=host export>public suffix</dfn> is the portion of a
 <a for=/>host</a> which is included on the <cite>Public Suffix List</cite>. To obtain
@@ -1030,7 +1030,7 @@ then runs these steps:
 <var>input</var>, and then runs these steps:
 
 <ol>
- <li><p>If <var>input</var> contains a <a>forbidden host code point</a> excluding U+0025 (%),
+ <li><p>If <var>input</var> contains a <a>forbidden host code point</a>,
  <a>validation error</a>, return failure.
 
  <li><p>If <var>input</var> contains a <a>code point</a> that is not a <a>URL code point</a> and not
