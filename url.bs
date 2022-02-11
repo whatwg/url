@@ -2664,8 +2664,8 @@ these steps. They return an <a>ASCII string</a>.
 
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
 <dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <a for=/>URL</a> <var>B</var>, with
-an optional boolean with an <dfn export for="url/equals"><var>exclude fragments</var></dfn>
-(default false), run these steps:
+an optional boolean <dfn export for="url/equals"><var>exclude fragments</var></dfn> (default false),
+run these steps:
 
 <ol>
  <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
