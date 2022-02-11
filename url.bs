@@ -1141,9 +1141,9 @@ A Recommendation for IPv6 Address Text Representation.
 
 <h3 id=host-equivalence>Host equivalence</h3>
 
-To determine whether a <a for=/>host</a> <var>A</var>
-<dfn export for=host id=concept-host-equals lt=equal>equals</dfn> <var>B</var>, return true if
-<var>A</var> is <var>B</var>, and false otherwise.
+<p>To determine whether a <a for=/>host</a> <var>A</var>
+<dfn export for=host id=concept-host-equals lt=equal>equals</dfn> <a for=/>host</a> <var>B</var>,
+return true if <var>A</var> is <var>B</var>, and false otherwise.
 
 <p class=XXX>Certificate comparison requires a host equivalence check that ignores the
 trailing dot of a domain (if any). However, those hosts have also various other facets
@@ -2663,9 +2663,9 @@ these steps. They return an <a>ASCII string</a>.
 <h3 id=url-equivalence>URL equivalence</h3>
 
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
-<dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <var>B</var>, with an optional
-boolean with an <dfn export for="url/equals"><var>exclude fragments</var></dfn> (default false), run
-these steps:
+<dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <a for=/>URL</a> <var>B</var>, with
+an optional boolean with an <dfn export for="url/equals"><var>exclude fragments</var></dfn>
+(default false), run these steps:
 
 <ol>
  <li><p>Let <var>serializedA</var> be the result of <a lt="URL serializer">serializing</a>
@@ -2707,7 +2707,7 @@ is the <a for=/>origin</a> returned by running these steps, switching on <var>ur
    <!-- Did you mean: recursion -->
   </ol>
 
-  <p class="example no-backref" id=example-43b5cea5>The <a for=url>origin</a> of
+  <p class=example id=example-43b5cea5>The <a for=url>origin</a> of
   <code>blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f</code> is the
   <a for=/>tuple origin</a> ("<code>https</code>", "<code>whatwg.org</code>", null, null).
 
@@ -2727,8 +2727,8 @@ is the <a for=/>origin</a> returned by running these steps, switching on <var>ur
  <dd>
   <p>Return a new <a>opaque origin</a>.
 
-  <p class="note no-backref">This does indeed mean that these <a for=/>URLs</a> cannot be
-  <a lt="same origin">same-origin</a> with themselves.
+  <p class=note>This does indeed mean that these <a for=/>URLs</a> cannot be <a>same origin</a> with
+  themselves.
 </dl>
 
 
