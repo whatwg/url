@@ -386,46 +386,58 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 </ul>
 
 <div class=example id=example-host-parsing>
+ <p>A <a lt="host parser">parse</a>-<a lt="host serializer">serialize</a> roundtrip gives the
+ following results, depending on the <var>isNotSpecial</var> argument to the <a>host parser</a>:
+
  <table>
   <tr>
    <th>Input
-   <th>Output
+   <th>Output (<var ignore>isNotSpecial</var> = false)
+   <th>Output (<var ignore>isNotSpecial</var> = true)
   <tr>
    <td><code>EXAMPLE.COM</code>
    <td rowspan=2><code>example.com</code> (<a for=/>domain</a>)
+   <td><code>EXAMPLE.COM</code> (<a>opaque host</a>)
   <tr>
    <td><code>example%2Ecom</code>
+   <td><code>example%2Ecom</code> (<a>opaque host</a>)
   <tr>
    <td><code>faß.example</code>
    <td><code>xn--fa-hia.example</code> (<a for=/>domain</a>)
+   <td><code>fa%C3%9F.example</code> (<a>opaque host</a>)
   <tr>
    <td><code>0</code>
    <td rowspan=3><code>0.0.0.0</code> (<a for=/ lt="IPv4 address">IPv4</a>)
+   <td><code>0</code> (<a>opaque host</a>)
   <tr>
    <td><code>%30</code>
+   <td><code>%30</code> (<a>opaque host</a>)
   <tr>
    <td><code>0x</code>
+   <td><code>0x</code> (<a>opaque host</a>)
   <tr>
    <td><code>0xffffffff</code>
    <td><code>255.255.255.255</code> (<a for=/ lt="IPv4 address">IPv4</a>)
+   <td><code>0xffffffff</code> (<a>opaque host</a>)
   <tr>
    <td><code>[0:0::1]</code>
-   <td><code>[::1]</code> (<a for=/ lt="IPv6 address">IPv6</a>)
+   <td colspan=2><code>[::1]</code> (<a for=/ lt="IPv6 address">IPv6</a>)
   <tr>
    <td><code>[0:0::1%5D</code>
-   <td rowspan=5>Failure
+   <td colspan=2 rowspan=2>Failure
   <tr>
    <td><code>[0:0::%31]</code>
   <tr>
    <td><code>09</code>
+   <td rowspan=3>Failure
+   <td><code>09</code> (<a>opaque host</a>)
   <tr>
    <td><code>example.255</code>
+   <td><code>example.255</code> (<a>opaque host</a>)
   <tr>
    <td><code>example^example</code>
+   <td>Failure
  </table>
-
- <p>The output <a for=/>hosts</a> are represented in <a lt="host serializer">serialized</a> form for
- simplicity.
 </div>
 
 
@@ -435,6 +447,9 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 <a>opaque host</a>, or an <a>empty host</a>. Typically a <a for=/>host</a> serves as a network
 address, but it is sometimes used as opaque identifier in <a for=/>URLs</a> where a network address
 is not necessary.
+
+<p class=example id=example-opaque-host-url>A typical <a for=/>URL</a> whose <a for=url>host</a> is
+an <a>opaque host</a> is <code>git://github.com/whatwg/url.git</code>.
 
 <p class=note>The RFCs referenced in the paragraphs below are for informative purposes only. They
 have no influence on <a for=/>host</a> writing, parsing, and serialization. Unless stated otherwise
