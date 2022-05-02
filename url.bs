@@ -499,13 +499,17 @@ a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
 
+ <li><p>Let <var>trailingDot</var> be "<code>.</code>" if <var>host</var>
+ <a for=string>ends with</a> "<code>.</code>"; otherwise the empty string.
+
  <li><p>Let <var>publicSuffix</var> be the public suffix determined by running the
- <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
- domain. [[!PSL]]
+ <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
+ with <var>host</var> as domain. [[!PSL]]
 
- <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a>.
+ <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a> that does not
+ <a for=string>end with</a> "<code>.</code>".
 
- <li><p>Return <var>publicSuffix</var>.
+ <li><p>Return <var>publicSuffix</var> and <var>trailingDot</var> concatenated.
 </ol>
 
 <p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
@@ -516,13 +520,17 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
  <a for=host>public suffix</a> <a for=host>equals</a> <var>host</var>, then return null.
 
+ <li><p>Let <var>trailingDot</var> be "<code>.</code>" if <var>host</var>
+ <a for=string>ends with</a> "<code>.</code>"; otherwise the empty string.
+
  <li><p>Let <var>registrableDomain</var> be the registrable domain determined by running the
- <a href="https://publicsuffix.org/list/">Public Suffix List algorithm</a> with <var>host</var> as
- domain. [[!PSL]]
+ <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
+ with <var>host</var> as domain. [[!PSL]]
 
- <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a>.
+ <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a> that does not
+ <a for=string>end with</a> "<code>.</code>".
 
- <li><p>Return <var>registrableDomain</var>.
+ <li><p>Return <var>registrableDomain</var> and <var>trailingDot</var> concatenated.
 </ol>
 
 <div class=example id=example-host-psl>
@@ -551,6 +559,10 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
    <td><code>EXAMPLE.COM</code>
    <td><code>com</code>
    <td><code>example.com</code>
+  <tr>
+   <td><code>example.com.</code>
+   <td><code>com.</code>
+   <td><code>example.com.</code>
   <tr>
    <td><code>github.io</code>
    <td><code>github.io</code>
