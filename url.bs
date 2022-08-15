@@ -595,7 +595,8 @@ for security decisions. The notion of "<a for=host>public suffix</a>" and
 "<a for=host>registrable domain</a>" cannot be relied-upon to provide a hard security boundary, as
 the public suffix list will diverge from client to client. Specifications which ignore this advice
 are encouraged to carefully consider whether URLs' schemes ought to be incorporated into any
-decisions made, i.e. whether to use the <a>same site</a> or <a>schemelessly same site</a> concepts.
+decisions made, i.e. whether to use the <a for=/>same site</a> or <a>schemelessly same site</a>
+concepts.
 
 
 <h3 id=idna>IDNA</h3>
