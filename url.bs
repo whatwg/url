@@ -9,7 +9,18 @@ Translation: ja https://triple-underscore.github.io/URL-ja.html
 </pre>
 
 <pre class=anchors>
-url: https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent; text: "encodeURIComponent() [sic]"; type: method; spec: ECMA-262
+spec: ECMA-262; url: https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent; text: "encodeURIComponent() [sic]"; type: method
+spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
+    type: interface; text: MediaSource
+spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
+    type: abstract-op; text: ToASCII; url: #ToASCII
+    type: abstract-op; text: ToUnicode; url: #ToUnicode
+</pre>
+
+<pre class=link-defaults>
+spec:infra; type:dfn;
+    text:code point
+    text:string
 </pre>
 
 
@@ -3604,21 +3615,5 @@ Yongsheng Zhang,
 zealousidealroll
 for being awesome!
 
-<p>This standard is written by
-<a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
-(<a href=https://www.mozilla.org/>Mozilla</a>,
-<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
-
-<pre class=anchors>
-spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
-    type: interface; text: MediaSource
-spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
-    type: abstract-op; text: ToASCII; url: #ToASCII
-    type: abstract-op; text: ToUnicode; url: #ToUnicode
-</pre>
-
-<pre class=link-defaults>
-spec:infra; type:dfn;
-    text:code point
-    text:string
-</pre>
+<p>This standard is written by <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
+(<a href=https://www.apple.com/>Apple</a>, <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
