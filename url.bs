@@ -88,7 +88,7 @@ number.
 <p>A <dfn oldids=syntax-violation>validation error</dfn> indicates a mismatch between input and
 valid input. User agents, especially conformance checkers, are encouraged to report them somewhere.
 
-<div class="note no-backref">
+<div class=note>
  <p>A <a>validation error</a> does not mean that the parser terminates. Termination of a parser is
  always stated explicitly, e.g., through a return statement.
 
@@ -278,7 +278,7 @@ optional boolean <var>spaceAsPlus</var> (default false), run these steps:
     shortest sequence of <a for=/>ASCII digits</a> representing <var>potentialError</var> in base
     ten, followed by "<code>%3B</code>", to <var>output</var>.
 
-    <p class="note no-backref">This can happen when <var>encoding</var> is not <a>UTF-8</a>.
+    <p class=note>This can happen when <var>encoding</var> is not <a>UTF-8</a>.
   </ol>
 
  <li><p>Return <var>output</var>.
@@ -699,8 +699,8 @@ inclusive, separated from each other by U+002E (.).
  <li><p>U+005B ([), followed by a <a>valid IPv6-address string</a>, followed by U+005D (]).
 </ul>
 
-<p class="note no-backref">This is not part of the definition of <a>valid host string</a> as it
-requires context to be distinguished.
+<p class=note>This is not part of the definition of <a>valid host string</a> as it requires context
+to be distinguished.
 
 
 <h3 id=host-parsing>Host parsing</h3>
@@ -729,9 +729,8 @@ runs these steps:
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
   <a for=string>percent-decoding</a> of <var>input</var>.
 
-  <p class="note no-backref">Alternatively <a>UTF-8 decode without BOM or fail</a> can be used,
-  coupled with an early return for failure, as <a>domain to ASCII</a> fails on
-  U+FFFD REPLACEMENT CHARACTER.
+  <p class=note>Alternatively <a>UTF-8 decode without BOM or fail</a> can be used, coupled with an
+  early return for failure, as <a>domain to ASCII</a> fails on U+FFFD (�).
 
  <li><p>Let <var>asciiDomain</var> be the result of running
  <a>domain to ASCII</a> on <var>domain</var>.
@@ -790,9 +789,9 @@ these steps:
  <li>
   <p>Let <var>validationError</var> be false.
 
-  <p class="note no-backref">This uses <var>validationError</var> to track <a>validation errors</a>
-  to avoid reporting them before we are confident we want to parse <var>input</var> as an IPv4
-  address as the <a>host parser</a> almost always invokes the <a>IPv4 parser</a>.
+  <p class=note>This uses <var>validationError</var> to track <a>validation errors</a> to avoid
+  reporting them before we are confident we want to parse <var>input</var> as an IPv4 address as the
+  <a>host parser</a> almost always invokes the <a>IPv4 parser</a>.
 
  <li><p>Let <var>parts</var> be the result of <a>strictly splitting</a> <var>input</var> on
  U+002E (.).
@@ -1403,10 +1402,9 @@ an <a>ASCII string</a> that can be used for further processing on the resource t
 <dfn export for=url id=concept-url-blob-entry>blob URL entry</dfn> that is either null or a
 <a for=/>blob URL entry</a>. It is initially null.
 
-<p class="note no-backref">This is used to support caching the object a "<code>blob</code>" URL
-refers to as well as its origin. It is important that these are cached as the <a for=/>URL</a> might
-be removed from the <a>blob URL store</a> between parsing and fetching, while fetching will still
-need to succeed.
+<p class=note>This is used to support caching the object a "<code>blob</code>" URL refers to as well
+as its origin. It is important that these are cached as the <a for=/>URL</a> might be removed from
+the <a>blob URL store</a> between parsing and fetching, while fetching will still need to succeed.
 
 <div class=example id=example-url-components>
  <p>The following table lists how <a>valid URL strings</a>, when <a lt="URL parser">parsed</a>, map
@@ -1495,8 +1493,8 @@ not a <a>special scheme</a>.
 
 <p>A <a for=/>URL</a> can be designated as <dfn id=concept-base-url>base URL</dfn>.
 
-<p class="note no-backref">A <a>base URL</a> is useful for the <a>URL parser</a> when the
-input might be a <a>relative-URL string</a>.
+<p class=note>A <a>base URL</a> is useful for the <a>URL parser</a> when the input might be a
+<a>relative-URL string</a>.
 
 <hr>
 
@@ -1611,8 +1609,8 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
 <p>any optionally followed by U+003F (?) and a <a>URL-query string</a>.
 
-<p class="note no-backref">A non-null <a>base URL</a> is necessary when
-<a lt="URL parser">parsing</a> a <a>relative-URL string</a>.
+<p class=note>A non-null <a>base URL</a> is necessary when <a lt="URL parser">parsing</a> a
+<a>relative-URL string</a>.
 
 <p>A <dfn export>scheme-relative-special-URL string</dfn> must be "<code>//</code>", followed by a
 <a>valid host string</a>, optionally followed by U+003A (:) and a <a>URL-port string</a>, optionally
@@ -1736,8 +1734,8 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<p class="note no-backref">There is no way to express a <a for=url>username</a> or
-<a for=url>password</a> of a <a for=/>URL record</a> within a <a>valid URL string</a>.
+<p class=note>There is no way to express a <a for=url>username</a> or <a for=url>password</a> of a
+<a for=/>URL record</a> within a <a>valid URL string</a>.
 
 
 <h3 id=url-parsing>URL parsing</h3>
@@ -1747,10 +1745,9 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), and then runs these
 steps:
 
-<p class="note no-backref">Non-web-browser implementations only need to implement the
-<a>basic URL parser</a>.
+<p class=note>Non-web-browser implementations only need to implement the <a>basic URL parser</a>.
 
-<p class="note no-backref">How user input in the web browser's address bar is converted to a
+<p class=note>How user input in the web browser's address bar is converted to a
 <a for=/>URL record</a> is out-of-scope of this standard. This standard does include
 <a href="#url-rendering">URL rendering requirements</a> as they pertain trust decisions.
 
@@ -1779,7 +1776,7 @@ optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), an op
 state override <dfn export for="basic URL parser"><var>state override</var></dfn>, and then runs
 these steps:
 
-<div class="note no-backref">
+<div class=note>
  <p>The <var>encoding</var> argument is a legacy concept only relevant for <cite>HTML</cite>. The
  <var>url</var> and <var>state override</var> arguments are only for use by various APIs. [[!HTML]]
  <!-- HTMLHyperlinkElementUtils, Location, and URL -->
@@ -2457,8 +2454,8 @@ these steps:
           U+005C (\), <a for=list>append</a> the empty string to <var>url</var>'s
           <a for=url>path</a>.
 
-          <p class="note no-backref">This means that for input <code>/usr/..</code> the result is
-          <code>/</code> and not a lack of a path.
+          <p class=note>This means that for input <code>/usr/..</code> the result is <code>/</code>
+          and not a lack of a path.
         </ol>
 
        <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if neither
@@ -2827,8 +2824,8 @@ handled with care to prevent spoofing:
  <li>
   <p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using <a>domain to Unicode</a>.
 
-  <p class="note no-backref">Note that various characters can be used in homograph spoofing attacks.
-  Consider detecting confusable characters and warning when they are in use. [[IDNFAQ]] [[UTS39]]
+  <p class=note>Various characters can be used in homograph spoofing attacks. Consider detecting
+  confusable characters and warning when they are in use. [[IDNFAQ]] [[UTS39]]
 
  <li><p>URLs are particularly prone to confusion between host and path when they contain
  bidirectional text, so in this case it is particularly advisable to only render a URL's
@@ -2841,10 +2838,10 @@ handled with care to prevent spoofing:
  <li>
   <p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
 
-  <p class="note no-backref">Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear
-  anywhere, a specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide
-  adoption. Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause
-  the rendering to be different from the model. Users of bidirectional languages can come to expect
+  <p class=note>Unfortunately, as rendered <a for=/>URLs</a> are strings and can appear anywhere, a
+  specific bidirectional algorithm for rendered <a for=/>URLs</a> would not see wide adoption.
+  Bidirectional text interacts with the parts of a <a for=/>URL</a> in ways that can cause the
+  rendering to be different from the model. Users of bidirectional languages can come to expect
   this, particularly in plain text environments.
 </ul>
 
@@ -2855,21 +2852,19 @@ handled with care to prevent spoofing:
 <p>The <dfn export id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format
 provides a way to encode name-value pairs.
 
-<p class="note no-backref">The <code>application/x-www-form-urlencoded</code> format is in many ways
-an aberrant monstrosity, the result of many years of implementation accidents and compromises
-leading to a set of requirements necessary for interoperability, but in no way representing good
-design practices. In particular, readers are cautioned to pay close attention to the twisted details
-involving repeated (and in some cases nested) conversions between character encodings and byte
-sequences. Unfortunately the format is in widespread use due to the prevalence of HTML forms.
-[[HTML]]
+<p class=note>The <code>application/x-www-form-urlencoded</code> format is in many ways an aberrant
+monstrosity, the result of many years of implementation accidents and compromises leading to a set
+of requirements necessary for interoperability, but in no way representing good design practices. In
+particular, readers are cautioned to pay close attention to the twisted details involving repeated
+(and in some cases nested) conversions between character encodings and byte sequences. Unfortunately
+the format is in widespread use due to the prevalence of HTML forms. [[HTML]]
 
 
 <h3 id=urlencoded-parsing><code>application/x-www-form-urlencoded</code> parsing</h3>
 
-<p class="note no-backref">A legacy server-oriented implementation might have to support
-<a for=/>encodings</a> other than <a>UTF-8</a> as well as have special logic for tuples of which the
-name is `<code>_charset</code>`. Such logic is not described here as only <a>UTF-8</a> is
-conforming.
+<p class=note>A legacy server-oriented implementation might have to support <a for=/>encodings</a>
+other than <a>UTF-8</a> as well as have special logic for tuples of which the name is
+`<code>_charset</code>`. Such logic is not described here as only <a>UTF-8</a> is conforming.
 
 <p>The
 <dfn export id=concept-urlencoded-parser lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
@@ -3035,7 +3030,7 @@ constructor steps are:
  <a>this</a>.
 </ol>
 
-<div class="example no-backref" id=example-5434421b>
+<div class=example id=example-5434421b>
  <p>To <a lt="basic URL parser">parse</a> a string into a <a for=/>URL</a> without using a
  <a>base URL</a>, invoke the {{URL}} constructor with a single argument:
 
@@ -3154,10 +3149,10 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
 
-<p class="note no-backref">If the given value for the <code><a attribute for=URL>host</a></code>
-setter lacks a <a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s
-<a for=url>port</a> will not change. This can be unexpected as <code>host</code> getter
-does return a <a>URL-port string</a> so one might have assumed the setter to always "reset" both.
+<p class=note>If the given value for the <code><a attribute for=URL>host</a></code> setter lacks a
+<a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a> will not
+change. This can be unexpected as <code>host</code> getter does return a <a>URL-port string</a> so
+one might have assumed the setter to always "reset" both.
 
 <p>The <dfn attribute for=URL><code>hostname</code></dfn> getter steps are:
 
@@ -3503,9 +3498,9 @@ examples of proper naming. [[!HTML]]
 
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
-<p>There have been a lot of people that have helped make <a for=/ class=no-backref>URLs</a>
-more interoperable over the years and thereby furthered the goals of this standard. Likewise many
-people have helped making this standard what it is today.
+<p>There have been a lot of people that have helped make <a for=/>URLs</a> more interoperable over
+the years and thereby furthered the goals of this standard. Likewise many people have helped making
+this standard what it is today.
 
 <p>With that, many thanks to
 100の人,<!-- https://twitter.com/esperecyan -->
