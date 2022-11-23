@@ -1745,13 +1745,11 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), and then runs these
 steps:
 
-<div class=note>
- <p>Non-web-browser implementations only need to implement the <a>basic URL parser</a>.
+<p class=note>Non-web-browser implementations only need to implement the <a>basic URL parser</a>.
 
- <p>How user input in the web browser's address bar is converted to a <a for=/>URL record</a> is
- out-of-scope of this standard. This standard does include
- <a href="#url-rendering">URL rendering requirements</a> as they pertain trust decisions.
-</div>
+<p class=note>How user input in the web browser's address bar is converted to a
+<a for=/>URL record</a> is out-of-scope of this standard. This standard does include
+<a href="#url-rendering">URL rendering requirements</a> as they pertain trust decisions.
 
 <ol>
  <li><p>Let <var>url</var> be the result of running the <a>basic URL parser</a> on <var>input</var>
