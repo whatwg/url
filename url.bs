@@ -2850,7 +2850,8 @@ handled with care to prevent spoofing:
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
 <p>The <dfn export id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format
-provides a way to encode name-value <a for=/>tuples</a>.
+provides a way to encode a <a for=/>list</a> of <a for=/>tuples</a>, each consisting of a name and a
+value.
 
 <p class=note>The <code>application/x-www-form-urlencoded</code> format is in many ways an aberrant
 monstrosity, the result of many years of implementation accidents and compromises leading to a set
