@@ -175,8 +175,8 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
  <li><p>Return <var>output</var>.
 </ol>
 
-<p>To <dfn export for=string>percent-decode</dfn> a <a for=/>string</a> <var>input</var>, run these
-steps:
+<p>To <dfn export for=string>percent-decode</dfn> a <a for=/>scalar value string</a>
+<var>input</var>:
 
 <ol>
  <li><p>Let <var>bytes</var> be the <a>UTF-8 encoding</a> of <var>input</var>.
@@ -230,8 +230,8 @@ all code points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U
 U+005F (_).
 
 <p>To <dfn for=string>percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
-<var>encoding</var>, <a for=/>string</a> <var>input</var>, a <var>percentEncodeSet</var>, and an
-optional boolean <var>spaceAsPlus</var> (default false), run these steps:
+<var>encoding</var>, <a for=/>scalar value string</a> <var>input</var>, a
+<var>percentEncodeSet</var>, and an optional boolean <var>spaceAsPlus</var> (default false):
 
 <ol>
  <li><p>Let <var>encoder</var> be the result of <a>getting an encoder</a> from <var>encoding</var>.
@@ -289,8 +289,8 @@ optional boolean <var>spaceAsPlus</var> (default false), run these steps:
 of running <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>,
 <var>codePoint</var> as a <a for=/>string</a>, and <var>percentEncodeSet</var>.
 
-<p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>string</a> <var>input</var> using
-a <var>percentEncodeSet</var>, return the result of running
+<p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>scalar value string</a>
+<var>input</var> using a <var>percentEncodeSet</var>, return the result of running
 <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>, <var>input</var>, and
 <var>percentEncodeSet</var>.
 
@@ -382,8 +382,8 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 <a>host serializer</a> relate as follows:
 
 <ul>
- <li><p>The <a>host parser</a> takes an arbitrary string and returns either failure or a
- <a for=/>host</a>.
+ <li><p>The <a>host parser</a> takes an arbitrary <a>scalar value string</a> and returns either
+ failure or a <a for=/>host</a>.
 
  <li><p>A <a for=/>host</a> can be seen as the in-memory representation.
 
@@ -391,9 +391,9 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
  or failure when given to the <a>host parser</a>. I.e., input that would be considered conforming or
  valid.
 
- <li><p>The <a>host serializer</a> takes a <a for=/>host</a> and returns a string. (If that string
- is then <a lt="host parser">parsed</a>, the result will <a for=host>equal</a> the <a for=/>host</a>
- that was <a lt="host serializer">serialized</a>.)
+ <li><p>The <a>host serializer</a> takes a <a for=/>host</a> and returns an <a>ASCII string</a>. (If
+ that string is then <a lt="host parser">parsed</a>, the result will <a for=host>equal</a> the
+ <a for=/>host</a> that was <a lt="host serializer">serialized</a>.)
 </ul>
 
 <div class=example id=example-host-parsing>
@@ -706,8 +706,8 @@ to be distinguished.
 <h3 id=host-parsing>Host parsing</h3>
 
 <p>The <dfn export id=concept-host-parser lt="host parser|host parsing">host parser</dfn> takes a
-string <var>input</var> with an optional boolean <var>isNotSpecial</var> (default false), and then
-runs these steps:
+<a>scalar value string</a> <var>input</var> with an optional boolean <var>isNotSpecial</var>
+(default false), and then runs these steps:
 
 <ol>
  <li>
@@ -748,8 +748,8 @@ runs these steps:
 
 <hr>
 
-<p>The <dfn>ends in a number checker</dfn> takes a string <var>input</var> and then runs these
-steps:
+<p>The <dfn>ends in a number checker</dfn> takes an <a>ASCII string</a> <var>input</var> and then
+runs these steps:
 
 <ol>
  <li><p>Let <var>parts</var> be the result of <a>strictly splitting</a> <var>input</var> on
@@ -782,8 +782,8 @@ steps:
  <li><p>Return false.
 </ol>
 
-<p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes a string <var>input</var> and then runs
-these steps:
+<p>The <dfn id=concept-ipv4-parser>IPv4 parser</dfn> takes an <a>ASCII string</a> <var>input</var>
+and then runs these steps:
 
 <ol>
  <li>
@@ -862,7 +862,8 @@ these steps:
  <li><p>Return <var>ipv4</var>.
 </ol>
 
-<p>The <dfn>IPv4 number parser</dfn> takes a string <var>input</var> and then runs these steps:
+<p>The <dfn>IPv4 number parser</dfn> takes an <a>ASCII string</a> <var>input</var> and then runs
+these steps:
 
 <ol>
  <li><p>If <var>input</var> is the empty string, then return failure.
@@ -914,8 +915,8 @@ these steps:
 
 <hr>
 
-<p>The <dfn id=concept-ipv6-parser>IPv6 parser</dfn> takes a string <var>input</var> and
-then runs these steps:
+<p>The <dfn id=concept-ipv6-parser>IPv6 parser</dfn> takes a <a>scalar value string</a>
+<var>input</var> and then runs these steps:
 
 <ol>
  <li><p>Let <var>address</var> be a new <a>IPv6 address</a> whose <a>IPv6 pieces</a> are all 0.
@@ -1064,8 +1065,8 @@ then runs these steps:
 
 <hr>
 
-<p>The <dfn export id=concept-opaque-host-parser>opaque-host parser</dfn> takes a string
-<var>input</var>, and then runs these steps:
+<p>The <dfn export id=concept-opaque-host-parser>opaque-host parser</dfn> takes a
+<a>scalar value string</a> <var>input</var>, and then runs these steps:
 
 <ol>
  <li><p>If <var>input</var> contains a <a>forbidden host code point</a>,
@@ -1085,7 +1086,7 @@ then runs these steps:
 <h3 id=host-serializing>Host serializing</h3>
 
 <p>The <dfn id=concept-host-serializer lt="host serializer">host serializer</dfn> takes a
-<a for=/>host</a> <var>host</var> and then runs these steps:
+<a for=/>host</a> <var>host</var> and then runs these steps. They return an <a>ASCII string</a>.
 
 <ol>
  <li><p>If <var>host</var> is an <a>IPv4 address</a>, return the result of
@@ -1098,8 +1099,8 @@ then runs these steps:
  return <var>host</var>.
 </ol>
 
-The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
-<a>IPv4 address</a> <var>address</var> and then runs these steps:
+The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an <a>IPv4 address</a>
+<var>address</var> and then runs these steps. They return an <a>ASCII string</a>.
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.
@@ -1121,8 +1122,8 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an
  <li><p>Return <var>output</var>.
 </ol>
 
-<p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an
-<a>IPv6 address</a> <var>address</var> and then runs these steps:
+<p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an <a>IPv6 address</a>
+<var>address</var> and then runs these steps. They return an <a>ASCII string</a>.
 
 <ol>
  <li><p>Let <var>output</var> be the empty string.
@@ -1200,8 +1201,8 @@ unified model would be, please file an issue.
 <a>URL serializer</a> relate as follows:
 
 <ul>
- <li><p>The <a>URL parser</a> takes an arbitrary string and returns either failure or a
- <a for=/>URL</a>.
+ <li><p>The <a>URL parser</a> takes an arbitrary <a>scalar value string</a> and returns either
+ failure or a <a for=/>URL</a>.
 
  <li><p>A <a for=/>URL</a> can be seen as the in-memory representation.
 
@@ -1740,10 +1741,10 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <h3 id=url-parsing>URL parsing</h3>
 
-<p>The <dfn export id=concept-url-parser lt="URL parser">URL parser</dfn> takes a string
-<var>input</var>, with an optional null or <a>base URL</a> <var>base</var> (default null) and an
-optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), and then runs these
-steps:
+<p>The <dfn export id=concept-url-parser lt="URL parser">URL parser</dfn> takes a
+<a>scalar value string</a> <var>input</var>, with an optional null or <a>base URL</a>
+<var>base</var> (default null) and an optional <a for=/>encoding</a> <var>encoding</var> (default
+<a>UTF-8</a>), and then runs these steps:
 
 <p class=note>Non-web-browser implementations only need to implement the <a>basic URL parser</a>.
 
@@ -1770,11 +1771,11 @@ steps:
 <hr>
 
 <p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
-string <var>input</var>, with an optional null or <a>base URL</a> <var>base</var> (default null), an
-optional <a for=/>encoding</a> <var>encoding</var> (default <a>UTF-8</a>), an optional
-<a for=/>URL</a> <dfn export for="basic URL parser"><var>url</var></dfn>, and an optional
-state override <dfn export for="basic URL parser"><var>state override</var></dfn>, and then runs
-these steps:
+<a>scalar value string</a> <var>input</var>, with an optional null or <a>base URL</a>
+<var>base</var> (default null), an optional <a for=/>encoding</a> <var>encoding</var> (default
+<a>UTF-8</a>), an optional <a for=/>URL</a> <dfn export for="basic URL parser"><var>url</var></dfn>,
+and an optional state override <dfn export for="basic URL parser"><var>state override</var></dfn>,
+and then runs these steps:
 
 <div class=note>
  <p>The <var>encoding</var> argument is a legacy concept only relevant for <cite>HTML</cite>. The
@@ -2915,7 +2916,8 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 <p>The
 <dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>encoding</a>
-<var>encoding</var> (default <a>UTF-8</a>), and then runs these steps:
+<var>encoding</var> (default <a>UTF-8</a>), and then runs these steps. They return an
+<a>ASCII string</a>.
 
 <ol>
  <li><p>Set <var>encoding</var> to the result of <a>getting an output encoding</a> from
@@ -2951,8 +2953,8 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
 
 <p>The
 <dfn id=concept-urlencoded-string-parser lt="urlencoded string parser"><code>application/x-www-form-urlencoded</code> string parser</dfn>
-takes a string <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the result of
-<a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
+takes a <a>scalar value string</a> <var>input</var>, <a>UTF-8 encodes</a> it, and then returns the
+result of <a lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parsing</a> it.
 
 
 
@@ -3506,6 +3508,7 @@ this standard what it is today.
 100の人,<!-- https://twitter.com/esperecyan -->
 Adam Barth,
 Addison Phillips,
+Adrián Chaves<!-- Gallaecio; GitHub -->,
 Albert Wiersch,
 Alex Christensen,
 Alexandre Morgaut,
