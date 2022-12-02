@@ -613,7 +613,7 @@ concepts.
 <h3 id=idna>IDNA</h3>
 
 <p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>string</a>
-<var>domain</var> and an optional boolean <var>beStrict</var> (default false), runs these steps:
+<var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
  <li>
@@ -636,13 +636,14 @@ concepts.
 </ol>
 
 <p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> algorithm, given a <a>domain</a>
-<var>domain</var>, runs these steps:
+<var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
  <li><p>Let <var>result</var> be the result of running
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>domain</var>,
  <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
- <i>UseSTD3ASCIIRules</i> set to false, and <i>Transitional_Processing</i> set to false.
+ <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, and <i>Transitional_Processing</i> set to
+ false.
 
  <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
  <var>result</var>.
@@ -663,10 +664,8 @@ concepts.
 
  <li><p>If <var>result</var> is failure, then return failure.
 
- <li><p>Set <var>result</var> to the result of running
- <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>result</var>,
- <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
- <i>UseSTD3ASCIIRules</i> set to true, and <i>Transitional_Processing</i> set to false.
+ <li><p>Set <var>result</var> to the result of running <a>domain to Unicode</a> with
+ <var>result</var> and true.
 
  <li><p>If <var>result</var> contains any errors, return failure.
 
@@ -732,8 +731,8 @@ runs these steps:
   <p class=note>Alternatively <a>UTF-8 decode without BOM or fail</a> can be used, coupled with an
   early return for failure, as <a>domain to ASCII</a> fails on U+FFFD (�).
 
- <li><p>Let <var>asciiDomain</var> be the result of running
- <a>domain to ASCII</a> on <var>domain</var>.
+ <li><p>Let <var>asciiDomain</var> be the result of running <a>domain to ASCII</a> with
+ <var>domain</var> and false.
 
  <li><p>If <var>asciiDomain</var> is failure, <a>validation error</a>, return failure.
 
@@ -2822,7 +2821,8 @@ handled with care to prevent spoofing:
 
 <ul>
  <li>
-  <p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> using <a>domain to Unicode</a>.
+  <p>Browsers should render a <a for=/>URL</a>'s <a for=url>host</a> by running
+  <a>domain to Unicode</a> with the <a for=/>URL</a>'s <a for=url>host</a> and false.
 
   <p class=note>Various characters can be used in homograph spoofing attacks. Consider detecting
   confusable characters and warning when they are in use. [[IDNFAQ]] [[UTS39]]
