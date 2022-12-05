@@ -3341,14 +3341,15 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
 
 <ol>
  <li>
-  <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>tuple</var> of
-  <var>init</var>:
+  <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>innerSequence</var>
+  of <var>init</var>:
 
   <ol>
-   <li><p>If <var>tuple</var>'s <a for=list>size</a> is not 2, then <a>throw</a> a {{TypeError}}.
+   <li><p>If <var>innerSequence</var>'s <a for=list>size</a> is not 2, then <a>throw</a> a
+   {{TypeError}}.
 
-   <li><p><a for=list>Append</a> (<var>tuple</var>[0], <var>tuple</var>[1]) to <var>query</var>'s
-   <a for=URLSearchParams>list</a>.
+   <li><p><a for=list>Append</a> (<var>innerSequence</var>[0], <var>innerSequence</var>[1]) to
+   <var>query</var>'s <a for=URLSearchParams>list</a>.
   </ol>
 
  <li><p>Otherwise, if <var>init</var> is a <a for=/>record</a>, then <a for=map>for each</a>
