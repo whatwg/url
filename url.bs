@@ -2850,7 +2850,8 @@ handled with care to prevent spoofing:
 <h2 id="application/x-www-form-urlencoded"><code>application/x-www-form-urlencoded</code></h2>
 
 <p>The <dfn export id=concept-urlencoded><code>application/x-www-form-urlencoded</code></dfn> format
-provides a way to encode name-value pairs.
+provides a way to encode a <a for=/>list</a> of <a for=/>tuples</a>, each consisting of a name and a
+value.
 
 <p class=note>The <code>application/x-www-form-urlencoded</code> format is in many ways an aberrant
 monstrosity, the result of many years of implementation accidents and compromises leading to a set
@@ -3330,7 +3331,7 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
 
 <ul class=brief>
  <li><dfn export for=URLSearchParams id=concept-urlsearchparams-list>list</dfn>: a <a for=/>list</a>
- of name-value pairs, initially empty.
+ of <a for=/>tuples</a> each consisting of a name and a value, initially empty.
  <li><dfn export for=URLSearchParams id=concept-urlsearchparams-url-object>URL object</dfn>: null or
  a {{URL}} object, initially null.
 </ul>
@@ -3340,20 +3341,20 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
 
 <ol>
  <li>
-  <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>pair</var> in
-  <var>init</var>:
+  <p>If <var>init</var> is a <a>sequence</a>, then <a for=list>for each</a> <var>innerSequence</var>
+  of <var>init</var>:
 
   <ol>
-   <li><p>If <var>pair</var> does not contain exactly two items, then <a>throw</a> a {{TypeError}}.
+   <li><p>If <var>innerSequence</var>'s <a for=list>size</a> is not 2, then <a>throw</a> a
+   {{TypeError}}.
 
-   <li><p>Append a new name-value pair whose name is <var>pair</var>'s first item, and value is
-   <var>pair</var>'s second item, to <var>query</var>'s <a for=URLSearchParams>list</a>.
+   <li><p><a for=list>Append</a> (<var>innerSequence</var>[0], <var>innerSequence</var>[1]) to
+   <var>query</var>'s <a for=URLSearchParams>list</a>.
   </ol>
 
  <li><p>Otherwise, if <var>init</var> is a <a for=/>record</a>, then <a for=map>for each</a>
- <var>name</var> → <var>value</var> of <var>init</var>, <a for=list>append</a> a new name-value pair
- whose name is <var>name</var> and value is <var>value</var>, to <var>query</var>'s
- <a for=URLSearchParams>list</a>.
+ <var>name</var> → <var>value</var> of <var>init</var>, <a for=list>append</a> (<var>name</var>,
+ <var>value</var>) to <var>query</var>'s <a for=URLSearchParams>list</a>.
 
  <li>
   <p>Otherwise:
@@ -3397,7 +3398,7 @@ constructor steps are:</p>
 method steps are:
 
 <ol>
- <li><p>Append a new name-value pair whose name is <var>name</var> and value is <var>value</var>, to
+ <li><p><a for=list>Append</a> (<var>name</var>, <var>value</var>) to <a>this</a>'s
  <a for=URLSearchParams>list</a>.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
@@ -3406,34 +3407,34 @@ method steps are:
 <p>The <dfn method for=URLSearchParams><code>delete(<var>name</var>)</code></dfn> method steps are:
 
 <ol>
- <li><p>Remove all name-value pairs whose name is <var>name</var> from
- <a for=URLSearchParams>list</a>.
+ <li><p><a for=list>Remove</a> all <a for=/>tuples</a> whose name is <var>name</var> from
+ <a>this</a>'s <a for=URLSearchParams>list</a>.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
 
 <p>The <dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn> method steps are to
-return the value of the first name-value pair whose name is <var>name</var> in <a>this</a>'s
-<a for=URLSearchParams>list</a>, if there is such a pair, and null otherwise.
+return the value of the first <a for=/>tuple</a> whose name is <var>name</var> in <a>this</a>'s
+<a for=URLSearchParams>list</a>, if there is such a <a for=/>tuple</a>; otherwise null.
 
 <p>The <dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn> method steps are
-to return the values of all name-value pairs whose name is <var>name</var>, in <a>this</a>'s
-<a for=URLSearchParams>list</a>, in list order, and the empty sequence otherwise.
+to return the values of all <a for=/>tuples</a> whose name is <var>name</var> in <a>this</a>'s
+<a for=URLSearchParams>list</a>, in list order; otherwise the empty sequence.
 
 <p>The <dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn> method steps are to
-return true if there is a name-value pair whose name is <var>name</var> in <a>this</a>'s
-<a for=URLSearchParams>list</a>, and false otherwise.
+return true if there is a <a for=/>tuple</a> whose name is <var>name</var> in <a>this</a>'s
+<a for=URLSearchParams>list</a>; otherwise false.
 
 <p>The <dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URLSearchParams>list</a> <a for=list>contains</a> any name-value
- pairs whose name is <var>name</var>, then set the value of the first such name-value pair to
- <var>value</var> and remove the others.
+ <li><p>If <a>this</a>'s <a for=URLSearchParams>list</a> <a for=list>contains</a> any
+ <a for=/>tuples</a> whose name is <var>name</var>, then set the value of the first such
+ <a for=/>tuple</a> to <var>value</var> and <a for=list>remove</a> the others.
 
- <li><p>Otherwise, append a new name-value pair whose name is <var>name</var> and value is
- <var>value</var>, to <a>this</a>'s <a for=URLSearchParams>list</a>.
+ <li><p>Otherwise, <a for=list>append</a> (<var>name</var>, <var>value</var>) to <a>this</a>'s
+ <a for=URLSearchParams>list</a>.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
@@ -3441,7 +3442,7 @@ method steps are:
 <hr>
 
 <div class=example id=example-searchparams-sort>
- <p>It can be useful to sort the name-value pairs in a {{URLSearchParams}} object, in particular to
+ <p>It can be useful to sort the name-value tuples in a {{URLSearchParams}} object, in particular to
  increase cache hits. This can be accomplished through invoking the
  {{URLSearchParams/sort()}} method:
 
@@ -3461,8 +3462,9 @@ sorted.sort()</code></pre>
 <p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method steps are:
 
 <ol>
- <li><p>Sort all name-value pairs, if any, by their names. Sorting must be done by comparison of
- code units. The relative order between name-value pairs with equal names must be preserved.
+ <li><p>Sort all <a for=/>tuples</a> in <a>this</a>'s <a for=URLSearchParams>list</a>, if any, by
+ their names. Sorting must be done by comparison of code units. The relative order between
+ <a for=/>tuples</a> with equal names must be preserved.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
@@ -3470,7 +3472,7 @@ sorted.sort()</code></pre>
 <hr>
 
 <p>The <a>value pairs to iterate over</a> are <a>this</a>'s <a for=URLSearchParams>list</a>'s
-name-value pairs with the key being the name and the value being the value.
+<a for=/>tuples</a> with the key being the name and the value being the value.
 
 <p>The <dfn for=URLSearchParams>stringification behavior</dfn> steps are to return the
 <a lt="urlencoded serializer">serialization</a> of <a>this</a>'s <a for=URLSearchParams>list</a>.
