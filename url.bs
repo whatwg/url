@@ -285,9 +285,9 @@ U+005F (_).
 </ol>
 
 <p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
-<a for=/>code point</a> <var>codePoint</var> using a <var>percentEncodeSet</var>, return the result
-of running <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>,
-<var>codePoint</var> as a <a for=/>string</a>, and <var>percentEncodeSet</var>.
+<a for=/>scalar value</a> <var>scalarValue</var> using a <var>percentEncodeSet</var>, return the
+result of running <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>,
+<var>scalarValue</var> as a <a for=/>string</a>, and <var>percentEncodeSet</var>.
 
 <p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>scalar value string</a>
 <var>input</var> using a <var>percentEncodeSet</var>, return the result of running
@@ -2831,10 +2831,10 @@ handled with care to prevent spoofing:
  <li><p>URLs are particularly prone to confusion between host and path when they contain
  bidirectional text, so in this case it is particularly advisable to only render a URL's
  <a for=url>host</a>. For readability, other parts of the <a for=/>URL</a>, if rendered, should have
- their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from
- <a for=string>percent-decoding</a> those sequences converted to bytes, unless that renders those
- sequences invisible. Browsers may choose to not decode certain sequences that present spoofing
- risks (e.g., U+1F512 (🔒)).
+ their sequences of <a>percent-encoded bytes</a> replaced with code points resulting from running
+ <a>UTF-8 decode without BOM</a> on the <a for=string>percent-decoding</a> of those sequences,
+ unless that renders those sequences invisible. Browsers may choose to not decode certain sequences
+ that present spoofing risks (e.g., U+1F512 (🔒)).
 
  <li>
   <p>Browsers should render bidirectional text as if it were in a left-to-right embedding. [[!BIDI]]
@@ -2929,6 +2929,9 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
   <p><a for=list>For each</a> <var>tuple</var> of <var>tuples</var>:
 
   <ol>
+   <li><p><a for=/>Assert</a>: <var>tuple</var>'s name and <var>tuple</var>'s value are
+   <a for=/>scalar value strings</a>.
+
    <li><p>Let <var>name</var> be the result of running
    <a for=string>percent-encode after encoding</a> with <var>encoding</var>,
    <var>tuple</var>'s name, the
