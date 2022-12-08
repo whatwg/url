@@ -31,7 +31,7 @@ spec:infra; type:dfn;
 
 <ul>
  <li><p>Align RFC 3986 and RFC 3987 with contemporary implementations and
- obsolete them in the process. (E.g., spaces, other "illegal" code points,
+ obsolete the RFCs in the process. (E.g., spaces, other "illegal" code points,
  query encoding, equality, canonicalization, are all concepts not entirely
  shared, or defined.) URL parsing needs to become as solid as HTML parsing.
  [[RFC3986]]
