@@ -3528,7 +3528,7 @@ are:
 
  <li><p>If <var>host</var> is failure, then <a>throw</a> a {{TypeError}}.
 
- <li><p>Return a new {{URLHost}} object whose <a for=URLHost>host</a> is <var>host</var>.
+ <li><p>Set <a>this</a>'s <a for=URLHost>host</a> to <var>host</var>.
 </ol>
 
 <p>The <dfn attribute for=URLHost><code>type</code></dfn> getter steps are:
