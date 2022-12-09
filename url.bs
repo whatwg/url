@@ -10,17 +10,9 @@ Translation: ja https://triple-underscore.github.io/URL-ja.html
 
 <pre class=anchors>
 spec: ECMA-262; url: https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent; text: "encodeURIComponent() [sic]"; type: method
-spec: MEDIA-SOURCE; urlPrefix: https://w3c.github.io/media-source/#idl-def-
-    type: interface; text: MediaSource
 spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToASCII; url: #ToASCII
     type: abstract-op; text: ToUnicode; url: #ToUnicode
-</pre>
-
-<pre class=link-defaults>
-spec:infra; type:dfn;
-    text:code point
-    text:string
 </pre>
 
 
@@ -68,11 +60,9 @@ might increase in scope somewhat.
 <p>Some terms used in this specification are defined in the following standards and specifications:
 
 <ul class=brief>
- <li>DOM Standard [[!DOM]]
  <li>Encoding Standard [[!ENCODING]]
  <li>File API [[!FILEAPI]]
  <li>HTML Standard [[!HTML]]
- <li>Media Source Extensions [[!MEDIA-SOURCE]]
  <li>Unicode IDNA Compatibility Processing [[!UTS46]]
  <li>Web IDL [[!WEBIDL]]
 </ul>
@@ -1784,7 +1774,7 @@ and then runs these steps:
 
 <div class=note>
  <p>The <var>encoding</var> argument is a legacy concept only relevant for <cite>HTML</cite>. The
- <var>url</var> and <var>state override</var> arguments are only for use by various APIs. [[!HTML]]
+ <var>url</var> and <var>state override</var> arguments are only for use by various APIs. [[HTML]]
  <!-- HTMLHyperlinkElementUtils, Location, and URL -->
 
  <p>When the <var>url</var> and <var>state override</var> arguments are not passed, the
@@ -3505,7 +3495,7 @@ such a feature "url" (i.e., lowercase and with an "l" at the end). Names such as
 e.g., "newURL" and "oldURL".
 
 <p class=note>The {{EventSource}} and {{HashChangeEvent}} interfaces in <cite>HTML</cite> are
-examples of proper naming. [[!HTML]]
+examples of proper naming. [[HTML]]
 
 
 
