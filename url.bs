@@ -1212,8 +1212,7 @@ unified model would be, please file an issue.
  <li><p>The <a>URL serializer</a> takes a <a for=/>URL</a> and returns an <a>ASCII string</a>. (If
  that string is then <a lt="URL parser">parsed</a>, the result will <a for=url>equal</a> the <a
  for=/>URL</a> that was <a lt="URL serializer">serialized</a>.) The output of the
- <a>URL serializer</a> is not always a <a>valid URL string</a>. I.e., not all <a for=/>URLs</a> are
- valid.
+ <a>URL serializer</a> is not always a <a>valid URL string</a>.
 </ul>
 
 <div class=example id=example-url-parsing>
