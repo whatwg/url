@@ -3057,8 +3057,8 @@ var input = "/🍣🍺",
     url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 
- <p>A {{URL}} object can be used as a <a>base URL</a> (while <cite>Web IDL</cite> requires a string
- as argument, a {{URL}} object stringifies to its {{URL/href}} getter return value):</p>
+ <p>A {{URL}} object can be used as a <a>base URL</a> (as the IDL requires a string as argument, a
+ {{URL}} object stringifies to its {{URL/href}} getter return value):</p>
 
  <pre><code class="lang-javascript">
 var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
