@@ -3041,7 +3041,7 @@ var input = "https://example.org/💩",
     url = new URL(input)
 url.pathname // "/%F0%9F%92%A9"</code></pre>
 
- <p>This throws an exception if the input is not an <a>absolute-URL-with-fragment string</a>:
+ <p>This throws an exception if the input is a <a>relative-URL string</a>:
 
  <pre><code class="lang-javascript">
 try {
@@ -3050,14 +3050,14 @@ try {
   // that happened
 }</code></pre>
 
- <p>A <a>base URL</a> is necessary if the input is a <a>relative-URL string</a>:
+ <p>For those cases a <a>base URL</a> is necessary:
 
  <pre><code class="lang-javascript">
 var input = "/🍣🍺",
     url = new URL(input, document.baseURI)
 url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 
- <p>A {{URL}} object can be used as <a>base URL</a> (while IDL requires a string as argument, a
+ <p>A {{URL}} object can be used as a <a>base URL</a> (as the IDL requires a string as argument, a
  {{URL}} object stringifies to its {{URL/href}} getter return value):</p>
 
  <pre><code class="lang-javascript">
