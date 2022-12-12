@@ -611,7 +611,7 @@ concepts.
   with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
   <var>beStrict</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
   <i>CheckJoiners</i> set to true, <i>Transitional_Processing</i> set to false,
-  and <i>VerifyDnsLength</i> set to <var>beStrict</var>.
+  and <i>VerifyDnsLength</i> set to <var>beStrict</var>. [[!UTS46]]
 
   <p class=note>If <var>beStrict</var> is false, <var>domain</var> is an <a>ASCII string</a>, and
   <a>strictly splitting</a> <var>domain</var> on U+002E (.) does not produce any
@@ -625,6 +625,10 @@ concepts.
  <li><p>Return <var>result</var>.
 </ol>
 
+<p class=note>This document and the web platform at large use
+<cite>Unicode IDNA Compatibility Processing</cite> and not IDNA2008. For instance,
+<code>☕.example</code> becomes <code>xn--53h.example</code> and not failure. [[UTS46]] [[RFC5890]]
+
 <p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> algorithm, given a <a>domain</a>
 <var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
@@ -633,7 +637,7 @@ concepts.
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>domain</var>,
  <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
  <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, and <i>Transitional_Processing</i> set to
- false.
+ false. [[!UTS46]]
 
  <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
  <var>result</var>.
