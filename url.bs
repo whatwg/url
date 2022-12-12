@@ -636,7 +636,7 @@ concepts.
 </ol>
 
 <p class=note>This document and the web platform at large use
-<cite>Unicode IDNA Compatibility Processing</cite> and not <cite>IDNA2008</cite>. For instance,
+<cite>Unicode IDNA Compatibility Processing</cite> and not IDNA2008. For instance,
 <code>☕.example</code> becomes <code>xn--53h.example</code> and not failure. [[UTS46]] [[RFC5890]]
 
 <p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> algorithm, given a <a>domain</a>
