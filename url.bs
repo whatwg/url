@@ -2998,6 +2998,20 @@ interface URL {
  object.
 </ul>
 
+<p>To <dfn>potentially strip trailing spaces from an opaque path</dfn> given a {{URL}} object
+<var>url</var>:
+
+<ol>
+ <li><p>If <var>url</var>'s <a for=URL>URL</a> does not have an <a for=url>opaque path</a>, then
+ return.
+
+ <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>fragment</a> is non-null, then return.
+
+ <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>query</a> is non-null, then return.
+
+ <li><p>Remove all trailing U+0020 from <var>url</var>'s <a for=URL>URL</a>'s <a for=url>path</a>.
+</ol>
+
 <hr>
 
 <p id=constructors>The
@@ -3233,8 +3247,19 @@ one might have assumed the setter to always "reset" both.
 <ol>
  <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
 
- <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
- empty <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>, and then return.
+ <li>
+  <p>If the given value is the empty string:
+
+  <ol>
+   <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
+
+   <li><p><a for=list>Empty</a> <a>this</a>'s <a for=URL>query object</a>'s
+   <a for=URLSearchParams>list</a>.
+
+   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
+
+   <li><p>Return.
+  </ol>
 
  <li><p>Let <var>input</var> be the given value with a single leading U+003F (?) removed, if any.
 
@@ -3263,8 +3288,16 @@ one might have assumed the setter to always "reset" both.
 <p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
- <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
- <a for=url>fragment</a> to null and return.
+ <li>
+  <p>If the given value is the empty string:
+
+  <ol>
+   <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to null.
+
+   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
+
+   <li><p>Return.
+  </ol>
 
  <li><p>Let <var>input</var> be the given value with a single leading U+0023 (#) removed, if any.
 
@@ -3386,6 +3419,10 @@ object <var>query</var>, run these steps:
 
  <li><p>Set <var>query</var>'s <a for=URLSearchParams>URL object</a>'s <a for=URL>URL</a>'s
  <a for=url>query</a> to <var>serializedQuery</var>.
+
+ <li><p>If <var>serializedQuery</var> is null, then
+ <a>potentially strip trailing spaces from an opaque path</a> with <var>query</var>'s
+ <a for=URLSearchParams>URL object</a>.
 </ol>
 
 <p>The
