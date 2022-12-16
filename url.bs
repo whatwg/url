@@ -119,9 +119,13 @@ error.
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
 <p>A <dfn>percent-encoded byte</dfn> is U+0025 (%), followed by two <a>ASCII hex digits</a>.
-Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>,
-<a for=string>percent-decoded</a>, should not cause <a>UTF-8 decode without BOM or fail</a> to
-return failure.
+
+<p class=note>It is generally a good idea for sequences of <a>percent-encoded bytes</a> to be such
+that, when <a for=string>percent-decoded</a> and then passed to
+<a>UTF-8 decode without BOM or fail</a>, they do not end up as failure. How important this is
+depends on where the <a>percent-encoded bytes</a> are used. E.g., for the <a>host parser</a> not
+following this advice is fatal, whereas for <a href="#url-rendering-i18n">URL rendering</a> the
+<a>percent-encoded bytes</a> would not be rendered <a for=string>percent-decoded</a>.
 
 <div algorithm>
 <p>To <dfn for=byte id=percent-encode>percent-encode</dfn> a <a for=/>byte</a> <var>byte</var>,
