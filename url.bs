@@ -283,8 +283,12 @@ U+005F (_).
 
 <p class=note>Of the possible values for the <var>percentEncodeSet</var> argument only two end up
 encoding U+0025 (%) and thus give “roundtripable data”: <a>component percent-encode set</a> and
-<a><code>application/x-www-form-urlencoded</code> percent-encode set</a>. Unfortunately the
-<a>URL parser</a> uses neither.
+<a><code>application/x-www-form-urlencoded</code> percent-encode set</a>. The other values for the
+<var>percentEncodeSet</var> argument — which happen to be used by the <a>URL parser</a> — leave
+U+0025 (%) untouched and as such it needs to be
+<a for="code point" lt="UTF-8 percent-encode">percent-encoded</a> first in order to be properly
+represented.
+
 </div>
 
 <div algorithm>
@@ -1328,6 +1332,16 @@ unified model would be, please file an issue.
    <td>
    <td>❌
    <td><code>https://example.com/[]?[]#[]</code>
+  <tr>
+   <td><code>https://example/%?%#%</code>
+   <td>
+   <td>❌
+   <td><code>https://example/%?%#%</code>
+  <tr>
+   <td><code>https://example/%25?%25#%25</code>
+   <td>
+   <td>✅
+   <td><code>https://example/%25?%25#%25</code>
  </table>
 
  <p>The base and output <a lt="URL record">URL</a> are represented in
