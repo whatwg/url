@@ -123,10 +123,13 @@ Sequences of <a lt="percent-encoded byte">percent-encoded bytes</a>,
 <a for=string>percent-decoded</a>, should not cause <a>UTF-8 decode without BOM or fail</a> to
 return failure.
 
+<div algorithm>
 <p>To <dfn for=byte id=percent-encode>percent-encode</dfn> a <a for=/>byte</a> <var>byte</var>,
 return a <a for=/>string</a> consisting of U+0025 (%), followed by two <a>ASCII upper hex digits</a>
 representing <var>byte</var>.
+</div>
 
+<div algorithm>
 <p>To <dfn export for="byte sequence" id=percent-decode>percent-decode</dfn> a
 <a for=/>byte sequence</a> <var>input</var>, run these steps:
 
@@ -164,7 +167,9 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
  <li><p>Return <var>output</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>To <dfn export for=string>percent-decode</dfn> a <a for=/>scalar value string</a>
 <var>input</var>:
 
@@ -176,6 +181,7 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
 <p class=note>In general, percent-encoding results in a string with more U+0025 (%) code points than
 the input, and percent-decoding results in a byte sequence with less 0x25 (%) bytes than the input.
+</div>
 
 <hr>
 
@@ -219,6 +225,7 @@ inclusive, and U+007E (~).
 all code points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.), and
 U+005F (_).
 
+<div algorithm>
 <p>To <dfn for=string>percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
 <var>encoding</var>, <a for=/>scalar value string</a> <var>input</var>, a
 <var>percentEncodeSet</var>, and an optional boolean <var>spaceAsPlus</var> (default false):
@@ -274,15 +281,29 @@ U+005F (_).
  <li><p>Return <var>output</var>.
 </ol>
 
+<p class=note>Of the possible values for the <var>percentEncodeSet</var> argument only two end up
+encoding U+0025 (%) and thus give “roundtripable data”: <a>component percent-encode set</a> and
+<a><code>application/x-www-form-urlencoded</code> percent-encode set</a>. The other values for the
+<var>percentEncodeSet</var> argument — which happen to be used by the <a>URL parser</a> — leave
+U+0025 (%) untouched and as such it needs to be
+<a for="code point" lt="UTF-8 percent-encode">percent-encoded</a> first in order to be properly
+represented.
+
+</div>
+
+<div algorithm>
 <p>To <dfn for="code point" id=utf-8-percent-encode>UTF-8 percent-encode</dfn> a
 <a for=/>scalar value</a> <var>scalarValue</var> using a <var>percentEncodeSet</var>, return the
 result of running <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>,
 <var>scalarValue</var> as a <a for=/>string</a>, and <var>percentEncodeSet</var>.
+</div>
 
+<div algorithm>
 <p>To <dfn export for=string>UTF-8 percent-encode</dfn> a <a for=/>scalar value string</a>
 <var>input</var> using a <var>percentEncodeSet</var>, return the result of running
 <a for=string>percent-encode after encoding</a> with <a for=/>UTF-8</a>, <var>input</var>, and
 <var>percentEncodeSet</var>.
+</div>
 
 <hr>
 
@@ -1311,6 +1332,16 @@ unified model would be, please file an issue.
    <td>
    <td>❌
    <td><code>https://example.com/[]?[]#[]</code>
+  <tr>
+   <td><code>https://example/%?%#%</code>
+   <td>
+   <td>❌
+   <td><code>https://example/%?%#%</code>
+  <tr>
+   <td><code>https://example/%25?%25#%25</code>
+   <td>
+   <td>✅
+   <td><code>https://example/%25?%25#%25</code>
  </table>
 
  <p>The base and output <a lt="URL record">URL</a> are represented in
