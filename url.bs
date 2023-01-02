@@ -3033,6 +3033,21 @@ interface URL {
  object.
 </ul>
 
+<p>To <dfn>potentially strip trailing spaces from an opaque path</dfn> given a {{URL}} object
+<var>url</var>:
+
+<ol>
+ <li><p>If <var>url</var>'s <a for=URL>URL</a> does not have an <a for=url>opaque path</a>, then
+ return.
+
+ <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>fragment</a> is non-null, then return.
+
+ <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>query</a> is non-null, then return.
+
+ <li><p>Remove all trailing U+0020 SPACE <a for=/>code points</a> from <var>url</var>'s
+ <a for=URL>URL</a>'s <a for=url>path</a>.
+</ol>
+
 <hr>
 
 <p id=constructors>The
@@ -3268,8 +3283,19 @@ one might have assumed the setter to always "reset" both.
 <ol>
  <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
 
- <li><p>If the given value is the empty string, set <var>url</var>'s <a for=url>query</a> to null,
- empty <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a>, and then return.
+ <li>
+  <p>If the given value is the empty string:
+
+  <ol>
+   <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
+
+   <li><p><a for=list>Empty</a> <a>this</a>'s <a for=URL>query object</a>'s
+   <a for=URLSearchParams>list</a>.
+
+   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
+
+   <li><p>Return.
+  </ol>
 
  <li><p>Let <var>input</var> be the given value with a single leading U+003F (?) removed, if any.
 
@@ -3282,6 +3308,11 @@ one might have assumed the setter to always "reset" both.
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
  result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
 </ol>
+
+<p class=note>The {{URL/search}} setter has the potential to remove trailing U+0020 SPACE
+<a for=/>code points</a> from <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>. It does this
+so that running the <a>URL parser</a> on the output of running the <a>URL serializer</a> on
+<a>this</a>'s <a for=URL>URL</a> does not yield a <a for=/>URL</a> that is not <a for=url>equal</a>.
 
 <p>The <dfn attribute for=URL><code>searchParams</code></dfn> getter steps are to return
 <a>this</a>'s <a for=URL>query object</a>.
@@ -3298,8 +3329,16 @@ one might have assumed the setter to always "reset" both.
 <p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
- <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
- <a for=url>fragment</a> to null and return.
+ <li>
+  <p>If the given value is the empty string:
+
+  <ol>
+   <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to null.
+
+   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
+
+   <li><p>Return.
+  </ol>
 
  <li><p>Let <var>input</var> be the given value with a single leading U+0023 (#) removed, if any.
 
@@ -3309,6 +3348,9 @@ one might have assumed the setter to always "reset" both.
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>fragment state</a> as
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
+
+<p class=note>The {{URL/hash}} setter has the potential to change <a>this</a>'s <a for=URL>URL</a>'s
+<a for=url>path</a> in a manner equivalent to the {{URL/search}} setter.
 
 
 <h3 id=interface-urlsearchparams>URLSearchParams class</h3>
@@ -3376,6 +3418,10 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
  a {{URL}} object, initially null.
 </ul>
 
+<p class=note>A {{URLSearchParams}} object with a non-null <a for=URLSearchParams>URL object</a> has
+the potential to change that object's <a for=url>path</a> in a manner equivalent to the {{URL}}
+object's {{URL/search}} and {{URL/hash}} setters.
+
 <p>To <dfn for=URLSearchParams oldids=concept-urlsearchparams-new>initialize</dfn> a
 {{URLSearchParams}} object <var>query</var> with <var>init</var>, run these steps:
 
@@ -3421,6 +3467,10 @@ object <var>query</var>, run these steps:
 
  <li><p>Set <var>query</var>'s <a for=URLSearchParams>URL object</a>'s <a for=URL>URL</a>'s
  <a for=url>query</a> to <var>serializedQuery</var>.
+
+ <li><p>If <var>serializedQuery</var> is null, then
+ <a>potentially strip trailing spaces from an opaque path</a> with <var>query</var>'s
+ <a for=URLSearchParams>URL object</a>.
 </ol>
 
 <p>The
