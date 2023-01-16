@@ -3360,6 +3360,8 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
 interface URLSearchParams {
   constructor(optional (sequence&lt;sequence&lt;USVString>> or record&lt;USVString, USVString> or USVString) init = "");
 
+  readonly attribute unsigned long size;
+
   undefined append(USVString name, USVString value);
   undefined delete(USVString name);
   USVString? get(USVString name);
@@ -3483,6 +3485,9 @@ constructor steps are:</p>
 
  <li><p><a for=URLSearchParams>Initialize</a> <a>this</a> with <var>init</var>.
 </ol>
+
+<p>The <dfn attribute for=URLSearchParams><code>size</code></dfn> getter steps are to return
+<a>this</a>'s <a for=URLSearchParams>list</a>'s <a for=list>size</a>.
 
 <p>The <dfn method for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 method steps are:
