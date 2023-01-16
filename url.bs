@@ -1420,7 +1420,7 @@ null or a 16-bit unsigned integer that identifies a networking port. It is initi
 
 <p>A <a for=/>URL</a>'s
 <dfn export for=url id=concept-url-path oldids=non-relative-flag,url-cannot-be-a-base-url-flag>path</dfn>
-is either an <a>ASCII string</a> or a <a for=/>list</a> of zero or more <a>ASCII strings</a>,
+is either a <a>URL path segment</a> or a <a for=/>list</a> of zero or more <a>URL path segments</a>,
 usually identifying a location. It is initially « ».
 
 <p class=note>A <a lt="is special">special</a> <a for=/>URL</a>'s <a for=url>path</a> is always a
@@ -1491,6 +1491,23 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
  </table>
 </div>
 
+<hr>
+
+<p>A <dfn export>URL path segment</dfn> is an <a for=/>ASCII string</a>. It commonly refers to a
+directory or a file, but has no predefined meaning.
+
+<p>A
+<dfn export id=single-dot-path-segment oldids=syntax-url-path-segment-dot>single-dot URL path segment</dfn>
+is a <a for=/>URL path segment</a> that is "<code>.</code>" or an <a>ASCII case-insensitive</a>
+match for "<code>%2e</code>".
+<!-- "." is not a code point here -->
+
+<p>A
+<dfn export id=double-dot-path-segment oldids=syntax-url-path-segment-dotdot>double-dot URL path segment</dfn>
+is a <a for=/>URL path segment</a> that is "<code>..</code>" or an <a>ASCII case-insensitive</a>
+match for "<code>.%2e</code>", "<code>%2e.</code>", or "<code>%2e%2e</code>".
+<!-- Referenced by EPUB. -->
+
 
 <h3 id=url-miscellaneous>URL miscellaneous</h3>
 
@@ -1520,7 +1537,7 @@ not a <a>special scheme</a>.
 <!-- also used by Fetch -->
 
 <p>A <a for=/>URL</a> has an <dfn export for=url>opaque path</dfn> if its <a for=url>path</a> is a
-<a for=/>string</a>.
+<a for=/>URL path segment</a>.
 
 <p>A <a for=/>URL</a> <dfn export>cannot have a username/password/port</dfn> if its
 <a for=url>host</a> is null or the empty string, or its <a for=url>scheme</a> is
@@ -1696,18 +1713,10 @@ following:
 
 <ul class=brief>
  <li><p>zero or more <a>URL units</a> excluding U+002F (/) and U+003F (?), that together are not a
- <a>single-dot path segment</a> or a <a>double-dot path segment</a>.
- <li><p>a <a>single-dot path segment</a>
- <li><p>a <a>double-dot path segment</a>.
+ <a>single-dot URL path segment</a> or a <a>double-dot URL path segment</a>.
+ <li><p>a <a>single-dot URL path segment</a>
+ <li><p>a <a>double-dot URL path segment</a>.
 </ul>
-
-<p>A <dfn export oldids=syntax-url-path-segment-dot>single-dot path segment</dfn> must be
-"<code>.</code>" or an <a>ASCII case-insensitive</a> match for "<code>%2e</code>".
-<!-- "." is not a code point here -->
-
-<p>A <dfn export oldids=syntax-url-path-segment-dotdot>double-dot path segment</dfn> must be
-"<code>..</code>" or an <a>ASCII case-insensitive</a> match for "<code>.%2e</code>",
-"<code>%2e.</code>", or "<code>%2e%2e</code>".
 
 <p>A <dfn export oldids=syntax-url-query>URL-query string</dfn> must be zero or more <a>URL units</a>.
 
@@ -2321,7 +2330,7 @@ and then runs these steps:
           <ol>
            <li><p><a>Validation error</a>.
 
-           <li><p>Set <var>url</var>'s <a for=url>path</a> to an empty list.
+           <li><p>Set <var>url</var>'s <a for=url>path</a> to « ».
           </ol>
 
           <p class=note>This is a (platform-independent) Windows drive letter quirk.
@@ -2479,7 +2488,7 @@ and then runs these steps:
        <a>validation error</a>.
 
        <li>
-        <p>If <var>buffer</var> is a <a>double-dot path segment</a>, then:
+        <p>If <var>buffer</var> is a <a>double-dot URL path segment</a>, then:
 
         <ol>
          <li><p><a>Shorten</a> <var>url</var>'s <a for=url>path</a>.
@@ -2493,12 +2502,12 @@ and then runs these steps:
           and not a lack of a path.
         </ol>
 
-       <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot path segment</a> and if neither
+       <li><p>Otherwise, if <var>buffer</var> is a <a>single-dot URL path segment</a> and if neither
        <a>c</a> is U+002F (/), nor <var>url</var> <a>is special</a> and <a>c</a> is U+005C (\),
        <a for=list>append</a> the empty string to <var>url</var>'s <a for=url>path</a>.
 
        <li>
-        <p>Otherwise, if <var>buffer</var> is not a <a>single-dot path segment</a>, then:
+        <p>Otherwise, if <var>buffer</var> is not a <a>single-dot URL path segment</a>, then:
 
         <ol>
          <li>
