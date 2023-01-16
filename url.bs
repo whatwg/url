@@ -3700,10 +3700,10 @@ interface URLSearchParams {
   readonly attribute unsigned long size;
 
   undefined append(USVString name, USVString value);
-  undefined delete(USVString name);
+  undefined delete(USVString name, optional USVString value);
   USVString? get(USVString name);
   sequence&lt;USVString> getAll(USVString name);
-  boolean has(USVString name);
+  boolean has(USVString name, optional USVString value);
   undefined set(USVString name, USVString value);
 
   undefined sort();
@@ -3761,8 +3761,9 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
 the potential to change that object's <a for=url>path</a> in a manner equivalent to the {{URL}}
 object's {{URL/search}} and {{URL/hash}} setters.
 
+<div algorithm>
 <p>To <dfn for=URLSearchParams oldids=concept-urlsearchparams-new>initialize</dfn> a
-{{URLSearchParams}} object <var>query</var> with <var>init</var>, run these steps:
+{{URLSearchParams}} object <var>query</var> with <var>init</var>:
 
 <ol>
  <li>
@@ -3791,9 +3792,11 @@ object's {{URL/search}} and {{URL/hash}} setters.
    <a lt="urlencoded string parser">parsing</a> <var>init</var>.
   </ol>
 </ol>
+</div>
 
+<div algorithm>
 <p>To <dfn for=URLSearchParams id=concept-urlsearchparams-update>update</dfn> a {{URLSearchParams}}
-object <var>query</var>, run these steps:
+object <var>query</var>:
 
 <ol>
  <li><p>If <var>query</var>'s <a for=URLSearchParams>URL object</a> is null, then return.
@@ -3811,7 +3814,9 @@ object <var>query</var>, run these steps:
  <a>potentially strip trailing spaces from an opaque path</a> with <var>query</var>'s
  <a for=URLSearchParams>URL object</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The
 <dfn constructor for=URLSearchParams lt="URLSearchParams(init)"><code>new URLSearchParams(<var>init</var>)</code></dfn>
 constructor steps are:</p>
@@ -3822,10 +3827,14 @@ constructor steps are:</p>
 
  <li><p><a for=URLSearchParams>Initialize</a> <a>this</a> with <var>init</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URLSearchParams><code>size</code></dfn> getter steps are to return
 <a>this</a>'s <a for=URLSearchParams>list</a>'s <a for=list>size</a>.
+</div>
 
+<div algorithm>
 <p>The <dfn method for=URLSearchParams><code>append(<var>name</var>, <var>value</var>)</code></dfn>
 method steps are:
 
@@ -3835,28 +3844,52 @@ method steps are:
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
+</div>
 
-<p>The <dfn method for=URLSearchParams><code>delete(<var>name</var>)</code></dfn> method steps are:
+<div algorithm>
+<p>The <dfn method for=URLSearchParams><code>delete(<var>name</var>, <var>value</var>)</code></dfn>
+method steps are:
 
 <ol>
- <li><p><a for=list>Remove</a> all <a for=/>tuples</a> whose name is <var>name</var> from
+ <li><p>If <var>value</var> is given, then <a for=list>remove</a> all <a for=/>tuples</a> whose name
+ is <var>name</var> and value is <var>value</var> from <a>this</a>'s
+ <a for=URLSearchParams>list</a>.
+
+ <li><p>Otherwise, <a for=list>remove</a> all <a for=/>tuples</a> whose name is <var>name</var> from
  <a>this</a>'s <a for=URLSearchParams>list</a>.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn method for=URLSearchParams><code>get(<var>name</var>)</code></dfn> method steps are to
 return the value of the first <a for=/>tuple</a> whose name is <var>name</var> in <a>this</a>'s
 <a for=URLSearchParams>list</a>, if there is such a <a for=/>tuple</a>; otherwise null.
+</div>
 
+<div algorithm>
 <p>The <dfn method for=URLSearchParams><code>getAll(<var>name</var>)</code></dfn> method steps are
 to return the values of all <a for=/>tuples</a> whose name is <var>name</var> in <a>this</a>'s
 <a for=URLSearchParams>list</a>, in list order; otherwise the empty sequence.
+</div>
 
-<p>The <dfn method for=URLSearchParams><code>has(<var>name</var>)</code></dfn> method steps are to
-return true if there is a <a for=/>tuple</a> whose name is <var>name</var> in <a>this</a>'s
-<a for=URLSearchParams>list</a>; otherwise false.
+<div algorithm>
+<p>The <dfn method for=URLSearchParams><code>has(<var>name</var>, <var>value</var>)</code></dfn>
+method steps are:
 
+<ol>
+ <li><p>If <var>value</var> is given and there is a <a for=/>tuple</a> whose name is <var>name</var>
+ and value is <var>value</var> in <a>this</a>'s <a for=URLSearchParams>list</a>, then return true.
+
+ <li><p>If <var>value</var> is not given and there is a <a for=/>tuple</a> whose name is
+ <var>name</var> in <a>this</a>'s <a for=URLSearchParams>list</a>, then return true.
+
+ <li><p>Return false.
+</ol>
+</div>
+
+<div algorithm>
 <p>The <dfn method for=URLSearchParams><code>set(<var>name</var>, <var>value</var>)</code></dfn>
 method steps are:
 
@@ -3870,6 +3903,7 @@ method steps are:
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
+</div>
 
 <hr>
 
@@ -3891,6 +3925,7 @@ const sorted = new URLSearchParams(url.search)
 sorted.sort()</code></pre>
 </div>
 
+<div algorithm>
 <p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method steps are:
 
 <ol>
@@ -3900,6 +3935,7 @@ sorted.sort()</code></pre>
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
+</div>
 
 <hr>
 
@@ -3954,6 +3990,7 @@ Bobby Holley,
 Boris Zbarsky,
 Brad Hill,
 Brandon Ross,
+Cailyn Hansen,
 Chris Dumez,
 Chris Rebert,
 Corey Farwell,
