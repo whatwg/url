@@ -523,7 +523,7 @@ a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 
 <div algorithm>
 <p>To obtain the <dfn export for=host>public suffix</dfn> of a <a for=/>host</a> <var>host</var>,
-run these steps. They return null or a <a for=/>domain</a> representing a portion of <var>host</va>
+run these steps. They return null or a <a for=/>domain</a> representing a portion of <var>host</var>
 that is included on the <cite>Public Suffix List</cite>. [[!PSL]]
 
 <ol>
