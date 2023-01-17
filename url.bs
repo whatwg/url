@@ -413,7 +413,8 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <div class=example id=example-host-parsing>
  <p>A <a lt="host parser">parse</a>-<a lt="host serializer">serialize</a> roundtrip gives the
- following results, depending on the <var>isNotSpecial</var> argument to the <a>host parser</a>:
+ following results, depending on the <var ignore>isNotSpecial</var> argument to the
+ <a>host parser</a>:
 
  <table>
   <tr>
