@@ -485,6 +485,9 @@ in the sections that follow.
 realm within a network.
 [[RFC1034]]
 
+<p>The <dfn export lt="domain label">domain labels</dfn> of a <a>domain</a> <var>domain</var> are
+the result of <a>strictly splitting</a> <var>domain</var> on U+002E (.).
+
 <p class=note>The <code>example.com</code> and <code>example.com.</code> <a for=/>domains</a> are
 not equivalent and typically treated as distinct.
 
@@ -518,9 +521,10 @@ U+005B ([), U+005C (\), U+005D (]), U+005E (^), or U+007C (|).
 <p>A <dfn export>forbidden domain code point</dfn> is a <a>forbidden host code point</a>,
 a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 
-<p>A <a for=/>host</a>'s <dfn for=host export>public suffix</dfn> is the portion of a
-<a for=/>host</a> which is included on the <cite>Public Suffix List</cite>. To obtain
-<var>host</var>'s <a for=host>public suffix</a>, run these steps: [[!PSL]]
+<div algorithm>
+<p>To obtain the <a for=host>public suffix</a> of a <a for=/>host</a> <var>host</var>, run these
+steps. They return null or a <a for=/>domain</a> representing a portion of <var>host</va> that is
+included on the <cite>Public Suffix List</cite>. [[!PSL]]
 
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
@@ -537,10 +541,12 @@ a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 
  <li><p>Return <var>publicSuffix</var> and <var>trailingDot</var> concatenated.
 </ol>
+</div>
 
-<p>A <a for=/>host</a>'s <dfn for=host export>registrable domain</dfn> is a <a>domain</a> formed by
-the most specific public suffix, along with the domain label immediately preceding it, if any. To
-obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
+<div algorithm>
+<p>To obtain the <a for=host>registrable domain</a> of a <a for=/>host</a> <var>host</var>, run
+these steps. They return null or a <a for=/>domain</a> formed by <var>host</var>'s
+<a for=host>public suffix</a> and the <a for=/>domain label</a> preceding it, if any.
 
 <ol>
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
@@ -558,6 +564,7 @@ obtain <var>host</var>'s <a for=host>registrable domain</a>, run these steps:
 
  <li><p>Return <var>registrableDomain</var> and <var>trailingDot</var> concatenated.
 </ol>
+</div>
 
 <div class=example id=example-host-psl>
  <table>
@@ -2826,12 +2833,13 @@ rendered in the browser address bar.
 information:
 
 <ul>
- <li><p>Browsers may render only a URL's <a for=url>host</a> in places where it is important for
- users to distinguish between the host and other parts of the URL such as the
- <a for=url>path</a>. Browsers may consider simplifying the host further to draw attention to its
+ <li><p>Browsers may render only a URL's <a for=url>host</a> in places where it is important for end
+ users to distinguish between the host and other parts of the URL such as the <a for=url>path</a>.
+ Browsers may consider simplifying the host further to draw attention to its
  <a for=host>registrable domain</a>. For example, browsers may omit a leading <code>www</code> or
- <code>m</code> domain label to simplify the host, or display its registrable domain only to remove
- spoofing opportunities posted by subdomains (e.g., <code>https://examplecorp.attacker.com/</code>).
+ <code>m</code> <a for=/>domain label</a> to simplify the host, or display its registrable domain
+ only to remove spoofing opportunities posted by subdomains (e.g.,
+ <code>https://examplecorp.attacker.com/</code>).
 
  <li><p>Browsers should not render a <a for=/>URL</a>'s <a for=url>username</a> and <a
  for=url>password</a>, as they can be mistaken for a <a for=/>URL</a>'s <a for=url>host</a> (e.g.,
@@ -2853,10 +2861,11 @@ making a security decision:
  when the URL is rendered (to avoid showing, e.g., <code>...examplecorp.com</code> when loading
  <code>https://not-really-examplecorp.com/</code>).
 
- <li><p>When the full <a for=url>host</a> cannot be rendered, browsers should elide domain labels
- starting from the lowest-level domain label. For example, <code>examplecorp.com.evil.com</code>
- should be elided as <code>...com.evil.com</code>, not <code>examplecorp.com...</code>. (Note that
- bidirectional text means that the lowest-level domain label may not appear on the left.)
+ <li><p>When the full <a for=url>host</a> cannot be rendered, browsers should elide
+ <a for=/>domain labels</a> starting from the lowest-level domain label. For example,
+ <code>examplecorp.com.evil.com</code> should be elided as <code>...com.evil.com</code>, not
+ <code>examplecorp.com...</code>. (Note that bidirectional text means that the lowest-level domain
+ label may not appear on the left.)
 </ul>
 
 <h4 id=url-rendering-i18n>Internationalization and special characters</h4>
