@@ -55,16 +55,16 @@ might increase in scope somewhat.
 
 <h2 id=infrastructure>Infrastructure</h2>
 
-<p>This specification depends on the Infra Standard. [[!INFRA]]
+<p>This specification depends on <cite>Infra</cite>. [[!INFRA]]
 
 <p>Some terms used in this specification are defined in the following standards and specifications:
 
 <ul class=brief>
- <li>Encoding Standard [[!ENCODING]]
- <li>File API [[!FILEAPI]]
- <li>HTML Standard [[!HTML]]
- <li>Unicode IDNA Compatibility Processing [[!UTS46]]
- <li>Web IDL [[!WEBIDL]]
+ <li><cite>Encoding</cite> [[!ENCODING]]
+ <li><cite>File API</cite> [[!FILEAPI]]
+ <li><cite>HTML</cite> [[!HTML]]
+ <li><cite>Unicode IDNA Compatibility Processing</cite> [[!UTS46]]
+ <li><cite>Web IDL</cite> [[!WEBIDL]]
 </ul>
 
 <hr>
@@ -3008,6 +3008,10 @@ result of <a lt="urlencoded parser"><code>application/x-www-form-urlencoded</cod
 
 <h2 id=api>API</h2>
 
+<p>This section uses terminology from <cite>Web IDL</cite>. Browser user agents must support this
+API. JavaScript implementations should support this API. Other user agents or programming languages
+are encouraged to use an API suitable to their needs, which might not be this one. [[!WEBIDL]]
+
 
 <h3 id=url-class>URL class</h3>
 
@@ -3607,9 +3611,10 @@ this standard what it is today.
 100の人,<!-- https://twitter.com/esperecyan -->
 Adam Barth,
 Addison Phillips,
-Adrián Chaves<!-- Gallaecio; GitHub -->,
+Adrián Chaves,<!-- Gallaecio; GitHub -->
 Albert Wiersch,
 Alex Christensen,
+Alexis Hunt,<!-- alercah; GitHub -->
 Alexandre Morgaut,
 Alexis Hunt,
 Alwin Blok,
