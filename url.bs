@@ -522,9 +522,9 @@ U+005B ([), U+005C (\), U+005D (]), U+005E (^), or U+007C (|).
 a <a>C0 control</a>, U+0025 (%), or U+007F DELETE.
 
 <div algorithm>
-<p>To obtain the <a for=host>public suffix</a> of a <a for=/>host</a> <var>host</var>, run these
-steps. They return null or a <a for=/>domain</a> representing a portion of <var>host</va> that is
-included on the <cite>Public Suffix List</cite>. [[!PSL]]
+<p>To obtain the <dfn export for=host>public suffix</dfn> of a <a for=/>host</a> <var>host</var>,
+run these steps. They return null or a <a for=/>domain</a> representing a portion of <var>host</va>
+that is included on the <cite>Public Suffix List</cite>. [[!PSL]]
 
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
@@ -544,9 +544,10 @@ included on the <cite>Public Suffix List</cite>. [[!PSL]]
 </div>
 
 <div algorithm>
-<p>To obtain the <a for=host>registrable domain</a> of a <a for=/>host</a> <var>host</var>, run
-these steps. They return null or a <a for=/>domain</a> formed by <var>host</var>'s
-<a for=host>public suffix</a> and the <a for=/>domain label</a> preceding it, if any.
+<p>To obtain the <dfn export for=host>registrable domain</dfn> of a <a for=/>host</a>
+<var>host</var>, run these steps. They return null or a <a for=/>domain</a> formed by
+<var>host</var>'s <a for=host>public suffix</a> and the <a for=/>domain label</a> preceding it, if
+any.
 
 <ol>
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
