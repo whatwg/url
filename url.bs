@@ -2173,9 +2173,9 @@ and then runs these steps:
             idempotent:
             https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
 
-       <li><p>Decrease <var>pointer</var> by the number of code points in <var>buffer</var> plus
-       one, set <var>buffer</var> to the empty string, and set <var>state</var> to
-       <a>host state</a>.
+       <li><p>Decrease <var>pointer</var> by <var>buffer</var>'s
+       <a for=string>code point length</a> + 1, set <var>buffer</var> to the empty string, and set
+       <var>state</var> to <a>host state</a>.
       </ol>
 
      <li><p>Otherwise, append <a>c</a> to <var>buffer</var>.
