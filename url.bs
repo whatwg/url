@@ -1342,7 +1342,7 @@ actually doing that with the editors of this document first.
           <p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
           <var>number</var>.
 
-         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>IPv4-in-IPv6-part-out-of-range</a>
+         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>IPv4-in-IPv6-out-of-range-part</a>
          <a>validation error</a>, return failure.
 
          <li><p>Increase <var>pointer</var> by 1.
