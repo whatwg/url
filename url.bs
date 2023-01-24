@@ -100,28 +100,15 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
   <tr>
    <td><dfn id=validation-error-domain-to-ascii>domain-to-ASCII</dfn>
    <td>
-    <p>The result of <a abstract-op lt=ToASCII>Unicode ToASCII</a> records an error while processing
-    the input domain.
-    <p class=note>[[!UTS46]] conformance does not require the reporting of precise errors, only that
-    an error has occurred. If the [[!UTS46]] implementation reports precise error codes, user agents
-    are encouraged pass those codes along.
-   <td>Yes
-  <tr>
-   <td><dfn>domain-to-ASCII-empty</dfn>
-   <td>
-    <p>The result of <a abstract-op lt=ToASCII>Unicode ToASCII</a> returns an empty string. This
-    could have been caused by:
-    <ul>
-     <li>Input consists of all ignorable code points.
-     <li>Input is the string "<code>xn--</code>".
-     <li>Input is the empty string and the <i>VerifyDnsLength</i> parameter is false.
-    </ul>
+    <p><a abstract-op lt=ToASCII>Unicode ToASCII</a> records an error or returns the empty string.
+    [[UTS46]]
+    <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
+    recorded, user agents are encouraged to pass those along.
    <td>Yes
   <tr>
    <td><dfn>domain-to-Unicode</dfn>
    <td>
-    <p>The result of <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> returns an error while
-    processing the input domain.
+    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
     <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
    <td>·
  <tbody>
@@ -951,8 +938,8 @@ concepts.
  <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
  return failure.
 
- <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII-empty</a>
- <a>validation error</a>, return failure.
+ <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
+ return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
