@@ -1820,7 +1820,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  "<code>blob</code>", return <var>url</var>.
 
  <li><p>Set <var>url</var>'s <a for=url>blob URL entry</a> to the result of
- <a for="blob URL" lt="resolve">resolving the blob URL</a> <var>url</var>, if that did not return
+ <a lt="resolve a blob URL">resolving the blob URL</a> <var>url</var>, if that did not return
  failure, and null otherwise.
 
  <li><p>Return <var>url</var>.
