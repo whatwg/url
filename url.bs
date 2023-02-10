@@ -183,13 +183,6 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <p class=example id=example-ipv6-multiple-compression>"<code>https://[1::1::1]</code>"
    <td>Yes
   <tr>
-   <td><dfn>IPv4-in-IPv6-empty-part</dfn>
-   <td>
-    <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: an empty part in the
-    IPv4 address.
-    <p class=example id=example-ipv4-in-ipv6-empty-part>"<code>https://[ffff::.0.0.1]</code>"
-   <td>Yes
-  <tr>
    <td><dfn>IPv4-in-IPv6-too-many-pieces</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: the IPv6 address has more
@@ -206,6 +199,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
      <li>There are too many IPv4 parts.
     </ul>
     <div class=example id=example-ipv4-in-ipv6-invalid-code-point>
+     <p>"<code>https://[ffff::.0.0.1]</code>"
      <p>"<code>https://[ffff::127.0.xyz.1]</code>"
      <p>"<code>https://[ffff::127.0xyz]</code>"
      <p>"<code>https://[ffff::127.00.0.1]</code>"
@@ -226,17 +220,14 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <p class=example id=example-ipv4-in-ipv6-too-few-parts>"<code>https://[ffff::127.0.0]</code>"
    <td>Yes
   <tr>
-   <td><dfn>IPv6-unexpected-EOF</dfn>
-   <td>
-    <p>An <a for=/>IPv6 address</a> unexpectedly ends.
-    <p class=example id=example-ipv6-unexpected-eof>"<code>https://[1:2:3:]</code>"
-   <td>Yes
-  <tr>
    <td><dfn>IPv6-invalid-code-point</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> contains a code point that is neither an <a>ASCII hex digit</a>
-    nor a U+003A (:).
-    <p class=example id=example-ipv6-invalid-code-point>"<code>https://[1:2:3!:4]</code>"
+    nor a U+003A (:). Or it unexpectedly ends.
+    <div class=example id=example-ipv6-invalid-code-point>
+     <p>"<code>https://[1:2:3!:4]</code>"
+     <p>"<code>https://[1:2:3:]</code>"
+    </div>
    <td>Yes
   <tr>
    <td><dfn>IPv6-too-few-pieces</dfn>
@@ -255,20 +246,29 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#url-parsing>URL parsing</a>
+  <!-- invalid-URL-unit is also present in the opaque-host parser, but this is a more logical place.
+       -->
   <tr>
-   <td><dfn>scheme-invalid-code-point</dfn>
+   <td><dfn>invalid-URL-unit</dfn>
    <td>
-    <p>The URL's <a for=url>scheme</a> contains an invalid code point.
-    <div class=example id=example-scheme-invalid-code-point>
-     TODO: actual setter examples as prior examples were wrong
+    <p>A code point is found that is not a <a>URL unit</a>.
+    <div class=example id=example-invalid-url-unit>
+     <p>"<code>https://example.org/></code>"
+     <p>"<code> https://example.org </code>"
+     <p>"<code>ht<br>tps://example.org</code>"
+     <p>"<code>https://example.org/%s</code>"
     </div>
-   <td>Yes
+   <td>·
   <tr>
-   <td><dfn>file-scheme-missing-following-solidus</dfn>
+   <td><dfn>special-scheme-missing-following-solidus</dfn>
    <td>
-    <p>The URL parser encounters a URL with a "<code>file</code>" <a for=url>scheme</a> that is not
-    followed by "<code>//</code>".
-    <p class=example id=example-file-scheme-missing-following-solidus>"<code>file:c:/my-secret-folder</code>"
+    <p>The input's scheme is not followed by "<code>//</code>".
+    <div class=example id=example-special-scheme-missing-following-solidus>
+     <p>"<code>file:c:/my-secret-folder</code>"
+     <p>"<code>https:example.org</code>"
+     <pre><code class="lang-javascript">
+const url = new URL("https:foo.html", "https://example.org/");</code></pre>
+    </div>
    <td>·
   <tr>
    <td><dfn>missing-scheme-non-relative-URL</dfn>
@@ -279,20 +279,13 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <div class=example id=example-missing-scheme-non-relative-url>
      <p>Input's <a for=url>scheme</a> is missing and no <a>base URL</a> is given:
      <pre><code class=lang-javascript>
-let url = new URL("💩");</code></pre>
+const url = new URL("💩");</code></pre>
      <p>Input's <a for=url>scheme</a> is missing, but the <a>base URL</a> has an
      <a for=url>opaque path</a>.
      <pre><code class=lang-javascript>
-let url = new URL("💩", "mailto:user@example.org");</code></pre>
+const url = new URL("💩", "mailto:user@example.org");</code></pre>
     </div>
    <td>Yes
-  <tr>
-   <td><dfn>relative-URL-missing-beginning-solidus</dfn>
-   <td>
-    <p>The input is a <a>relative-URL string</a> that does not begin with U+002F (/).
-    <pre class=example id=example-relative-url-missing-beginning-solidus><code class="lang-javascript">
-let url = new URL("foo.html", "https://example.org/");</code></pre>
-   <td>·
   <tr>
    <td><dfn>invalid-reverse-solidus</dfn>
    <td>
@@ -300,32 +293,21 @@ let url = new URL("foo.html", "https://example.org/");</code></pre>
     <p class=example id=example-invalid-reverse-solidus>"<code>https://example.org\path\to\file</code>"
    <td>·
   <tr>
-   <td><dfn>host-missing-solidus</dfn>
-   <td>
-    <p>The URL's <a for=url>host</a> is not preceded by "<code>//</code>".
-    <p class=example id=example-host-missing-solidus>"<code>https:example.org</code>"
-   <td>·
-  <tr>
    <td><dfn>invalid-credentials</dfn>
    <td>
-    <p>The URL <a>includes credentials</a>.
+    <p>The input <a>includes credentials</a>.
     <div class=example id=example-invalid-credentials>
      <p>"<code>https://user@example.org</code>"
      <p>"<code>https://user:pass@</code>"
     </div>
    <td>Yes (only if there is no host)
   <tr>
-   <td><dfn>host-empty</dfn>
+   <td><dfn>host-missing</dfn>
    <td>
-    <p>The URL has a <a>special scheme</a>, but does not contain a <a for=url>host</a>. Or the
-    <a for=url>host</a> portion of the URL is an empty string when it <a>includes credentials</a> or
-    a <a>port</a> and the <a>basic URL parser</a>'s state is overridden.
-    <div class=example id=example-host-empty>
+    <p>The input has a <a>special scheme</a>, but does not contain a <a for=/>host</a>.
+    <div class=example id=example-host-missing>
      <p>"<code>https://#fragment</code>"
      <p>"<code>https://:443</code>"
-     <pre><code class=lang-javascript>
-const url = new URL("https://example:9000");
-url.hostname = "";</code></pre>
     </div>
    <td>·
   <tr>
@@ -346,27 +328,13 @@ url.hostname = "";</code></pre>
     <p>The input is a <a>relative-URL string</a> that <a>starts with a Windows drive letter</a> and
     the <a>base URL</a>'s <a for=url>scheme</a> is "<code>file</code>".
     <pre class=example id=example-file-invalid-windows-drive-letter><code class=lang-javascript>
-let url = new URL("/c:/path/to/file", "file:///c:/");</code></pre>
+const url = new URL("/c:/path/to/file", "file:///c:/");</code></pre>
    <td>·
   <tr>
    <td><dfn>file-invalid-Windows-drive-letter-host</dfn>
    <td>
     <p>A <code>file:</code> URL's host is a Windows drive letter.
     <p class=example id=example-file-invalid-windows-drive-letter-host>"<code>file://c:</code>"
-   <td>·
- <tbody>
-  <tr>
-   <th colspan=3 scope=rowgroup>URL parsing and <a>opaque-host parser</a>
-  <tr>
-   <td><dfn>invalid-URL-unit</dfn>
-   <td>
-    <p>A code point is found that is not a <a>URL unit</a>.
-    <div class=example id=example-invalid-url-unit>
-     <p>"<code>https://example.org/></code>"
-     <p>"<code> https://example.org </code>"
-     <p>"<code>ht<br>tps://example.org</code>"
-     <p>"<code>https://example.org/%s</code>"
-    </div>
    <td>·
 </table>
 
@@ -1283,8 +1251,8 @@ actually doing that with the editors of this document first.
     <p>If <a>c</a> is U+002E (.), then:
 
     <ol>
-     <li><p>If <var>length</var> is 0, <a>IPv4-in-IPv6-empty-part</a> <a>validation error</a>,
-     return failure.
+     <li><p>If <var>length</var> is 0, <a>IPv4-in-IPv6-invalid-code-point</a>
+     <a>validation error</a>, return failure.
 
      <li><p>Decrease <var>pointer</var> by <var>length</var>.
 
@@ -1355,7 +1323,7 @@ actually doing that with the editors of this document first.
     <ol>
      <li><p>Increase <var>pointer</var> by 1.
 
-     <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>IPv6-unexpected-EOF</a>
+     <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>IPv6-invalid-code-point</a>
      <a>validation error</a>, return failure.
     </ol>
 
@@ -2188,7 +2156,8 @@ and then runs these steps:
      <a>no scheme state</a> and decrease <var>pointer</var> by 1.
 
      <li>
-      <p>Otherwise, <a>scheme-invalid-code-point</a> <a>validation error</a>, return failure.
+      <p>Otherwise, return failure.
+      <!-- API validation error -->
 
       <p class=note>This indication of failure is used exclusively by the {{Location}} object's
       {{Location/protocol}} setter.
@@ -2240,7 +2209,7 @@ and then runs these steps:
 
         <ol>
          <li><p>If <a>remaining</a> does not start with "<code>//</code>",
-         <a>file-scheme-missing-following-solidus</a> <a>validation error</a>.
+         <a>special-scheme-missing-following-solidus</a> <a>validation error</a>.
 
          <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
@@ -2272,7 +2241,8 @@ and then runs these steps:
      in <var>input</var>).
 
      <li>
-      <p>Otherwise, <a>scheme-invalid-code-point</a> <a>validation error</a>, return failure.
+      <p>Otherwise, return failure.
+      <!-- API validation error -->
 
       <p class=note>This indication of failure is used exclusively by the {{Location}} object's
       {{Location/protocol}} setter. Furthermore, the non-failure termination earlier in this state
@@ -2310,7 +2280,7 @@ and then runs these steps:
      <var>state</var> to <a>special authority ignore slashes state</a> and increase
      <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>relative-URL-missing-beginning-solidus</a> <a>validation error</a>, set
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>, set
      <var>state</var> to <a>relative state</a> and decrease <var>pointer</var> by 1.
     </ol>
 
@@ -2407,8 +2377,9 @@ and then runs these steps:
      <var>state</var> to <a>special authority ignore slashes state</a> and increase
      <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>host-missing-solidus</a> <a>validation error</a>, set <var>state</var> to
-     <a>special authority ignore slashes state</a> and decrease <var>pointer</var> by 1.
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>, set
+     <var>state</var> to <a>special authority ignore slashes state</a> and decrease
+     <var>pointer</var> by 1.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=special-authority-ignore-slashes-state>special authority ignore slashes state</dfn>
@@ -2417,7 +2388,7 @@ and then runs these steps:
      <li><p>If <a>c</a> is neither U+002F (/) nor U+005C (\), then set <var>state</var> to
      <a>authority state</a> and decrease <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>host-missing-solidus</a> <a>validation error</a>.
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=authority-state>authority state</dfn>
@@ -2492,7 +2463,7 @@ and then runs these steps:
       <p>Otherwise, if <a>c</a> is U+003A (:) and <var>insideBrackets</var> is false, then:
 
       <ol>
-       <li><p>If <var>buffer</var> is the empty string, <a>host-empty</a> <a>validation error</a>,
+       <li><p>If <var>buffer</var> is the empty string, <a>host-missing</a> <a>validation error</a>,
        return failure.
        <!-- No URLs with port, but without host. -->
 
@@ -2521,13 +2492,14 @@ and then runs these steps:
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
-       <a>host-empty</a> <a>validation error</a>, return failure.
+       <a>host-missing</a> <a>validation error</a>, return failure.
        <!-- http://? -> failure
             test://? -> test://? -->
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
-       <a for=url>port</a> is non-null, <a>host-empty</a> <a>validation error</a>, return.
+       <a for=url>port</a> is non-null, return.
+       <!-- API validation error -->
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
