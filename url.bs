@@ -118,13 +118,13 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
   <tr>
    <td><dfn>IPv6-unclosed</dfn>
    <td>
-    <p>An IPv6 address is missing the closing U+005D (]).
+    <p>An <a for=/>IPv6 address</a> is missing the closing U+005D (]).
     <p class=example id=example-ipv6-unclosed"<code>https://[::1</code>"
    <td>Yes
   <tr>
    <td><dfn>domain-invalid-code-point</dfn>
    <td>
-    <p>The input's host contains a <a>forbidden domain code point</a>.
+    <p>The input's <a for=/>host</a> contains a <a>forbidden domain code point</a>.
     <div class=example id=example-domain-invalid-code-point>
      <p>Hosts are <a for=string>percent-decoded</a> before being processed when the URL
      <a>is special</a>, which would result in the following host portion becoming
@@ -136,7 +136,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
   <tr>
    <td><dfn>IPv4-empty-part</dfn>
    <td>
-    <p>Input to the <a>IPv4 parser</a> ends with a U+002E.
+    <p>An <a for=/>IPv4 address</a> ends with a U+002E (.).
     <p class=example id=example-ipv4-empty-part>"<code>https://127.0.0.1./</code>"
    <td>·
   <tr>
