@@ -887,7 +887,7 @@ return value of the <a for=/>host parser</a> is an <a for=/>IPv4 address</a>.
 
 <div algorithm>
 <p>The <dfn>IPv4 number parser</dfn> takes an <a>ASCII string</a> <var>input</var> and then runs
-these steps:
+these steps. They return failure or a <a for=/>tuple</a> of a number and a boolean.
 
 <ol>
  <li><p>If <var>input</var> is the empty string, then return failure.
