@@ -17,7 +17,7 @@ spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
 </pre>
 
 <style>
-.yesno .yes { background: yellow; }
+.yesno .yes { background: papayawhip; }
 .yesno .yes, .yesno .no { text-align: center; }
 </style>
 
@@ -103,8 +103,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
       groupings exist those override that sorting:
       - domain- and host- stay together
       - IPv6- stays together
-      - IPv4-in-IPv6- stays together
- -->
+      - IPv4-in-IPv6- stays together -->
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#idna>IDNA</a>
@@ -175,7 +174,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
    <td>
     <p>An <a for=/>IPv4 address</a> part exceeds 255.
     <p class=example id=example-ipv4-out-of-range-part>"<code>https://255.255.4000.1</code>"
-   <td class=yes>Yes (only if applicable to the last part)
+   <td class=yes>Yes<br>(only if applicable to the last part)
   <!-- host parser, but grouped with IPv6- -->
   <tr>
    <td><dfn>IPv6-unclosed</dfn>
@@ -312,7 +311,7 @@ const url = new URL("💩", "mailto:user@example.org");</code></pre>
      <p>"<code>https://user@example.org</code>"
      <p>"<code>https://user:pass@</code>"
     </div>
-   <td class=yes>Yes (only if there is no host)
+   <td class=yes>Yes<br>(only if there is no host)
   <tr>
    <td><dfn>host-missing</dfn>
    <td>
