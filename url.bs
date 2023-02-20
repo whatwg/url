@@ -16,6 +16,11 @@ spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
 
+<style>
+.yesno .yes { background: papayawhip; }
+.yesno .yes, .yesno .no { text-align: center; }
+</style>
+
 
 
 <h2 id=goals class=no-num>Goals</h2>
@@ -87,6 +92,262 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
  user agents might not implement correct error-handling, and the intent of what is written might be
  unclear to other developers.
 </div>
+
+<table class=yesno>
+ <thead>
+  <tr>
+   <th>Error type
+   <th>Error description
+   <th>Failure
+ <!-- The rows inside the <tbody>s are generally sorted by first occurrence. However, where logical
+      groupings exist those override that sorting:
+      - domain- and host- stay together
+      - IPv6- stays together
+      - IPv4-in-IPv6- stays together -->
+ <tbody>
+  <tr>
+   <th colspan=3 scope=rowgroup><a href=#idna>IDNA</a>
+  <tr>
+   <td><dfn id=validation-error-domain-to-ascii>domain-to-ASCII</dfn>
+   <td>
+    <p><a abstract-op lt=ToASCII>Unicode ToASCII</a> records an error or returns the empty string.
+    [[UTS46]]
+    <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
+    recorded, user agents are encouraged to pass those along.
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>domain-to-Unicode</dfn>
+   <td>
+    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
+    <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
+   <td class=no>·
+ <tbody>
+  <tr>
+   <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
+  <!-- host parser -->
+  <tr>
+   <td><dfn>domain-invalid-code-point</dfn>
+   <td>
+    <p>The input's <a for=/>host</a> contains a <a>forbidden domain code point</a>.
+    <div class=example id=example-domain-invalid-code-point>
+     <p>Hosts are <a for=string>percent-decoded</a> before being processed when the URL
+     <a>is special</a>, which would result in the following host portion becoming
+     "<code>exa#mple.org</code>" and thus triggering this error.
+     <p>"<code>https://exa%23mple.org</code>"
+    </div>
+   <td class=yes>Yes
+  <!-- opaque-host parser -->
+  <tr>
+   <td><dfn>host-invalid-code-point</dfn>
+   <td>
+    <p>An <a>opaque host</a> (in a URL that <a>is not special</a>) contains a
+    <a>forbidden host code point</a>.
+    <p class=example id=example-host-invalid-code-point>"<code>foo://exa[mple.org</code>"
+   <td class=yes>Yes
+  <!-- IPv4 parser -->
+  <tr>
+   <td><dfn>IPv4-empty-part</dfn>
+   <td>
+    <p>An <a for=/>IPv4 address</a> ends with a U+002E (.).
+    <p class=example id=example-ipv4-empty-part>"<code>https://127.0.0.1./</code>"
+   <td class=no>·
+  <tr>
+   <td><dfn>IPv4-too-many-parts</dfn>
+   <td>
+    <p>An <a for=/>IPv4 address</a> does not consist of exactly 4 parts.
+    <p class=example id=example-ipv4-too-many-parts>"<code>https://1.2.3.4.5/</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-non-numeric-part</dfn>
+   <td>
+    <p>An <a for=/>IPv4 address</a> part is not numeric.
+    <p class=example id=example-ipv4-non-numeric-part>"<code>https://test.42</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-non-decimal-part</dfn>
+   <td>
+    <p>The <a for=/>IPv4 address</a> contains numbers expressed using hexadecimal or octal digits.
+    <p class=example id=example-ipv4-non-decimal-part>"<code>https://127.0.0x0.1</code>"
+   <td class=no>·
+  <tr>
+   <td><dfn>IPv4-out-of-range-part</dfn>
+   <td>
+    <p>An <a for=/>IPv4 address</a> part exceeds 255.
+    <p class=example id=example-ipv4-out-of-range-part>"<code>https://255.255.4000.1</code>"
+   <td class=yes>Yes<br>(only if applicable to the last part)
+  <!-- host parser, but grouped with IPv6- -->
+  <tr>
+   <td><dfn>IPv6-unclosed</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> is missing the closing U+005D (]).
+    <p class=example id=example-ipv6-unclosed"<code>https://[::1</code>"
+   <td class=yes>Yes
+  <!-- IPv6 parser -->
+  <tr>
+   <td><dfn>IPv6-invalid-compression</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> begins with improper compression.
+    <p class=example id=example-ipv6-invalid-compression>"<code>https://[:1]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv6-too-many-pieces</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> contains more than 8 pieces.
+    <p class=example id=example-ipv6-too-many-pieces>"<code>https://[1:2:3:4:5:6:7:8:9]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv6-multiple-compression</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> is compressed in more than one spot.
+    <p class=example id=example-ipv6-multiple-compression>"<code>https://[1::1::1]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv6-invalid-code-point</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> contains a code point that is neither an <a>ASCII hex digit</a>
+    nor a U+003A (:). Or it unexpectedly ends.
+    <div class=example id=example-ipv6-invalid-code-point>
+     <p>"<code>https://[1:2:3!:4]</code>"
+     <p>"<code>https://[1:2:3:]</code>"
+    </div>
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv6-too-few-pieces</dfn>
+   <td>
+    <p>An uncompressed <a for=/>IPv6 address</a> contains fewer than 8 pieces.
+    <p class=example id=example-ipv6-too-few-pieces>"<code>https://[1:2:3]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-in-IPv6-too-many-pieces</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: the IPv6 address has more
+    than 6 pieces.
+    <p class=example id=example-ipv4-in-ipv6-too-many-pieces>"<code>https://[1:1:1:1:1:1:1:127.0.0.1]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-in-IPv6-invalid-code-point</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax:
+    <ul>
+     <li>An IPv4 part is empty or contains a non-<a>ASCII digit</a>.
+     <li>An IPv4 part contains a leading 0.
+     <li>There are too many IPv4 parts.
+    </ul>
+    <div class=example id=example-ipv4-in-ipv6-invalid-code-point>
+     <p>"<code>https://[ffff::.0.0.1]</code>"
+     <p>"<code>https://[ffff::127.0.xyz.1]</code>"
+     <p>"<code>https://[ffff::127.0xyz]</code>"
+     <p>"<code>https://[ffff::127.00.0.1]</code>"
+     <p>"<code>https://[ffff::127.0.0.1.2]</code>"
+    </div>
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-in-IPv6-out-of-range-part</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: an IPv4 part exceeds 255.
+    <p class=example id=example-ipv4-in-ipv6-out-of-range-part>"<code>https://[ffff::127.0.0.4000]</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>IPv4-in-IPv6-too-few-parts</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: an IPv4 address contains
+    too few parts.
+    <p class=example id=example-ipv4-in-ipv6-too-few-parts>"<code>https://[ffff::127.0.0]</code>"
+   <td class=yes>Yes
+ <tbody>
+  <tr>
+   <th colspan=3 scope=rowgroup><a href=#url-parsing>URL parsing</a>
+  <!-- invalid-URL-unit is also present in the opaque-host parser, but this is a more logical place.
+       -->
+  <tr>
+   <td><dfn>invalid-URL-unit</dfn>
+   <td>
+    <p>A code point is found that is not a <a>URL unit</a>.
+    <div class=example id=example-invalid-url-unit>
+     <p>"<code>https://example.org/></code>"
+     <p>"<code> https://example.org </code>"
+     <p>"<code>ht<br>tps://example.org</code>"
+     <p>"<code>https://example.org/%s</code>"
+    </div>
+   <td class=no>·
+  <tr>
+   <td><dfn>special-scheme-missing-following-solidus</dfn>
+   <td>
+    <p>The input's scheme is not followed by "<code>//</code>".
+    <div class=example id=example-special-scheme-missing-following-solidus>
+     <p>"<code>file:c:/my-secret-folder</code>"
+     <p>"<code>https:example.org</code>"
+     <pre><code class="lang-javascript">
+const url = new URL("https:foo.html", "https://example.org/");</code></pre>
+    </div>
+   <td class=no>·
+  <tr>
+   <td><dfn>missing-scheme-non-relative-URL</dfn>
+   <td>
+    <p>The input is missing a <a for=url>scheme</a>, because it does not begin with an
+    <a>ASCII alpha</a>, and either no <a>base URL</a> was provided or the <a>base URL</a> cannot be
+    used as a <a>base URL</a> because it has an <a for=url>opaque path</a>.
+    <div class=example id=example-missing-scheme-non-relative-url>
+     <p>Input's <a for=url>scheme</a> is missing and no <a>base URL</a> is given:
+     <pre><code class=lang-javascript>
+const url = new URL("💩");</code></pre>
+     <p>Input's <a for=url>scheme</a> is missing, but the <a>base URL</a> has an
+     <a for=url>opaque path</a>.
+     <pre><code class=lang-javascript>
+const url = new URL("💩", "mailto:user@example.org");</code></pre>
+    </div>
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>invalid-reverse-solidus</dfn>
+   <td>
+    <p>The URL has a <a>special scheme</a> and it uses U+005C (\) instead of U+002F (/).
+    <p class=example id=example-invalid-reverse-solidus>"<code>https://example.org\path\to\file</code>"
+   <td class=no>·
+  <tr>
+   <td><dfn>invalid-credentials</dfn>
+   <td>
+    <p>The input <a>includes credentials</a>.
+    <div class=example id=example-invalid-credentials>
+     <p>"<code>https://user@example.org</code>"
+     <p>"<code>https://user:pass@</code>"
+    </div>
+   <td class=yes>Yes<br>(only if there is no host)
+  <tr>
+   <td><dfn>host-missing</dfn>
+   <td>
+    <p>The input has a <a>special scheme</a>, but does not contain a <a for=/>host</a>.
+    <div class=example id=example-host-missing>
+     <p>"<code>https://#fragment</code>"
+     <p>"<code>https://:443</code>"
+    </div>
+   <td class=no>·
+  <tr>
+   <td><dfn>port-out-of-range</dfn>
+   <td>
+    <p>The input's port is too big.
+    <p class=example id=example-port-out-of-range>"<code>https://example.org:70000</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>port-invalid</dfn>
+   <td>
+    <p>The input's port is invalid.
+    <p class=example id=example-port-invalid>"<code>https://example.org:7z</code>"
+   <td class=yes>Yes
+  <tr>
+   <td><dfn>file-invalid-Windows-drive-letter</dfn>
+   <td>
+    <p>The input is a <a>relative-URL string</a> that <a>starts with a Windows drive letter</a> and
+    the <a>base URL</a>'s <a for=url>scheme</a> is "<code>file</code>".
+    <pre class=example id=example-file-invalid-windows-drive-letter><code class=lang-javascript>
+const url = new URL("/c:/path/to/file", "file:///c:/");</code></pre>
+   <td class=no>·
+  <tr>
+   <td><dfn>file-invalid-Windows-drive-letter-host</dfn>
+   <td>
+    <p>A <code>file:</code> URL's host is a Windows drive letter.
+    <p class=example id=example-file-invalid-windows-drive-letter-host>"<code>file://c:</code>"
+   <td class=no>·
+</table>
 
 
 <h3 id=parsers>Parsers</h3>
@@ -653,9 +914,11 @@ concepts.
   <a for=list>item</a> that <a for=string>starts with</a> an <a>ASCII case-insensitive</a> match for
   "<code>xn--</code>", this step is equivalent to <a>ASCII lowercasing</a> <var>domain</var>.
 
- <li><p>If <var>result</var> is a failure value, <a>validation error</a>, return failure.
+ <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
+ return failure.
 
- <li><p>If <var>result</var> is the empty string, <a>validation error</a>, return failure.
+ <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
+ return failure.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -674,8 +937,8 @@ concepts.
  <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, and <i>Transitional_Processing</i> set to
  false. [[!UTS46]]
 
- <li><p>Signify <a>validation errors</a> for any returned errors, and then, return
- <var>result</var>.
+ <li><p>Signify <a>domain-to-Unicode</a> <a>validation errors</a> for any returned errors, and then,
+ return <var>result</var>.
 </ol>
 
 
@@ -743,7 +1006,8 @@ to be distinguished.
   <p>If <var>input</var> starts with U+005B ([), then:
 
   <ol>
-   <li><p>If <var>input</var> does not end with U+005D (]), <a>validation error</a>, return failure.
+   <li><p>If <var>input</var> does not end with U+005D (]), <a>IPv6-unclosed</a>
+   <a>validation error</a>, return failure.
 
    <li><p>Return the result of <a lt="IPv6 parser">IPv6 parsing</a> <var>input</var> with its
    leading U+005B ([) and trailing U+005D (]) removed.
@@ -764,10 +1028,10 @@ to be distinguished.
  <li><p>Let <var>asciiDomain</var> be the result of running <a>domain to ASCII</a> with
  <var>domain</var> and false.
 
- <li><p>If <var>asciiDomain</var> is failure, <a>validation error</a>, return failure.
+ <li><p>If <var>asciiDomain</var> is failure, then return failure.
 
  <li><p>If <var>asciiDomain</var> contains a <a>forbidden domain code point</a>,
- <a>validation error</a>, return failure.
+ <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> <a lt="ends in a number checker">ends in a number</a>, then return
  the result of <a lt="IPv4 parser">IPv4 parsing</a> <var>asciiDomain</var>.
@@ -829,7 +1093,7 @@ return value of the <a for=/>host parser</a> is an <a for=/>IPv4 address</a>.
   <p>If the last <a for=list>item</a> in <var>parts</var> is the empty string, then:
 
   <ol>
-   <li><p><a>Validation error</a>.
+   <li><p><a>IPv4-empty-part</a> <a>validation error</a>.
 
    <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 1, then <a for=list>remove</a>
    the last <a for=list>item</a> from <var>parts</var>.
@@ -837,8 +1101,8 @@ return value of the <a for=/>host parser</a> is an <a for=/>IPv4 address</a>.
         but if it somehow is this conditional makes sure we can keep going. -->
   </ol>
 
- <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 4, <a>validation error</a>,
- return failure.
+ <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 4, <a>IPv4-too-many-parts</a>
+ <a>validation error</a>, return failure.
 
  <li><p>Let <var>numbers</var> be an empty <a for=/>list</a>.
 
@@ -849,21 +1113,22 @@ return value of the <a for=/>host parser</a> is an <a for=/>IPv4 address</a>.
    <li><p>Let <var>result</var> be the result of <a lt="IPv4 number parser">parsing</a>
    <var>part</var>.
 
-   <li><p>If <var>result</var> is failure, <a>validation error</a>, return failure.
+   <li><p>If <var>result</var> is failure, <a>IPv4-non-numeric-part</a> <a>validation error</a>,
+   return failure.
 
-   <li><p>If <var>result</var>[1] is true, <a>validation error</a>.
+   <li><p>If <var>result</var>[1] is true, <a>IPv4-non-decimal-part</a> <a>validation error</a>.
 
    <li><p><a for=list>Append</a> <var>result</var>[0] to <var>numbers</var>.
   </ol>
 
- <li><p>If any item in <var>numbers</var> is greater than 255, <a>validation error</a>.
+ <li><p>If any item in <var>numbers</var> is greater than 255, <a>IPv4-out-of-range-part</a>
+ <a>validation error</a>.
 
  <li><p>If any but the last <a for=list>item</a> in <var>numbers</var> is greater than 255, then
  return failure.
 
  <li><p>If the last <a for=list>item</a> in <var>numbers</var> is greater than or equal to
- 256<sup>(5 &minus; <var>numbers</var>'s <a for=list>size</a>)</sup>, <a>validation error</a>,
- return failure.
+ 256<sup>(5 &minus; <var>numbers</var>'s <a for=list>size</a>)</sup>, then return failure.
 
  <li><p>Let <var>ipv4</var> be the last <a for=list>item</a> in <var>numbers</var>.
 
@@ -960,8 +1225,8 @@ actually doing that with the editors of this document first.
   <p>If <a>c</a> is U+003A (:), then:
 
   <ol>
-   <li><p>If <a>remaining</a> does not start with U+003A (:), <a>validation error</a>, return
-   failure.
+   <li><p>If <a>remaining</a> does not start with U+003A (:), <a>IPv6-invalid-compression</a>
+   <a>validation error</a>, return failure.
 
    <li><p>Increase <var>pointer</var> by 2.
 
@@ -973,13 +1238,15 @@ actually doing that with the editors of this document first.
   <p>While <a>c</a> is not the <a>EOF code point</a>:
 
   <ol>
-   <li><p>If <var>pieceIndex</var> is 8, <a>validation error</a>, return failure.
+   <li><p>If <var>pieceIndex</var> is 8, <a>IPv6-too-many-pieces</a> <a>validation error</a>, return
+   failure.
 
    <li>
     <p>If <a>c</a> is U+003A (:), then:
 
     <ol>
-     <li><p>If <var>compress</var> is non-null, <a>validation error</a>, return failure.
+     <li><p>If <var>compress</var> is non-null, <a>IPv6-multiple-compression</a>
+     <a>validation error</a>, return failure.
 
      <li>Increase <var>pointer</var> and <var>pieceIndex</var> by 1, set <var>compress</var> to
      <var>pieceIndex</var>, and then <a for=iteration>continue</a>.
@@ -995,11 +1262,13 @@ actually doing that with the editors of this document first.
     <p>If <a>c</a> is U+002E (.), then:
 
     <ol>
-     <li><p>If <var>length</var> is 0, <a>validation error</a>, return failure.
+     <li><p>If <var>length</var> is 0, <a>IPv4-in-IPv6-invalid-code-point</a>
+     <a>validation error</a>, return failure.
 
      <li><p>Decrease <var>pointer</var> by <var>length</var>.
 
-     <li><p>If <var>pieceIndex</var> is greater than 6, <a>validation error</a>, return failure.
+     <li><p>If <var>pieceIndex</var> is greater than 6, <a>IPv4-in-IPv6-too-many-pieces</a>
+     <a>validation error</a>, return failure.
 
      <li><p>Let <var>numbersSeen</var> be 0.
 
@@ -1016,10 +1285,12 @@ actually doing that with the editors of this document first.
          <li><p>If <a>c</a> is a U+002E (.) and <var>numbersSeen</var> is less than 4, then increase
          <var>pointer</var> by 1.
 
-         <li>Otherwise, <a>validation error</a>, return failure.
+         <li>Otherwise, <a>IPv4-in-IPv6-invalid-code-point</a> <a>validation error</a>, return
+         failure.
         </ol>
 
-       <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>validation error</a>, return failure.
+       <li><p>If <a>c</a> is not an <a>ASCII digit</a>, <a>IPv4-in-IPv6-invalid-code-point</a>
+       <a>validation error</a>, return failure.
        <!-- prevent the empty string -->
 
        <li>
@@ -1031,13 +1302,14 @@ actually doing that with the editors of this document first.
          <li>
           <p>If <var>ipv4Piece</var> is null, then set <var>ipv4Piece</var> to <var>number</var>.
 
-          <p>Otherwise, if <var>ipv4Piece</var> is 0, <a>validation error</a>, return failure.
+          <p>Otherwise, if <var>ipv4Piece</var> is 0, <a>IPv4-in-IPv6-invalid-code-point</a>
+          <a>validation error</a>, return failure.
 
           <p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
           <var>number</var>.
 
-         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>validation error</a>, return
-         failure.
+         <li><p>If <var>ipv4Piece</var> is greater than 255, <a>IPv4-in-IPv6-out-of-range-part</a>
+         <a>validation error</a>, return failure.
 
          <li><p>Increase <var>pointer</var> by 1.
         </ol>
@@ -1050,7 +1322,8 @@ actually doing that with the editors of this document first.
        <li><p>If <var>numbersSeen</var> is 2 or 4, then increase <var>pieceIndex</var> by 1.
       </ol>
 
-     <li><p>If <var>numbersSeen</var> is not 4, <a>validation error</a>, return failure.
+     <li><p>If <var>numbersSeen</var> is not 4, <a>IPv4-in-IPv6-too-few-parts</a>
+     <a>validation error</a>, return failure.
 
      <li><p><a for=iteration>Break</a>.
     </ol>
@@ -1061,11 +1334,12 @@ actually doing that with the editors of this document first.
     <ol>
      <li><p>Increase <var>pointer</var> by 1.
 
-     <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>validation error</a>, return failure.
+     <li><p>If <a>c</a> is the <a>EOF code point</a>, <a>IPv6-invalid-code-point</a>
+     <a>validation error</a>, return failure.
     </ol>
 
-   <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>validation error</a>, return
-   failure.
+   <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>IPv6-invalid-code-point</a>
+   <a>validation error</a>, return failure.
 
    <li><p>Set <var>address</var>[<var>pieceIndex</var>] to <var>value</var>.
 
@@ -1087,7 +1361,7 @@ actually doing that with the editors of this document first.
   </ol>
 
  <li><p>Otherwise, if <var>compress</var> is null and <var>pieceIndex</var> is not 8,
- <a>validation error</a>, return failure.
+ <a>IPv6-too-few-pieces</a> <a>validation error</a>, return failure.
 
  <li><p>Return <var>address</var>.
 </ol>
@@ -1102,13 +1376,13 @@ actually doing that with the editors of this document first.
 
 <ol>
  <li><p>If <var>input</var> contains a <a>forbidden host code point</a>,
- <a>validation error</a>, return failure.
+ <a>host-invalid-code-point</a> <a>validation error</a>, return failure.
 
  <li><p>If <var>input</var> contains a <a>code point</a> that is not a <a>URL code point</a> and not
- U+0025 (%), <a>validation error</a>.
+ U+0025 (%), <a>invalid-URL-unit</a> <a>validation error</a>.
 
  <li><p>If <var>input</var> contains a U+0025 (%) and the two <a>code points</a> following it are
- not <a>ASCII hex digits</a>, <a>validation error</a>.
+ not <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
  <li><p>Return the result of running <a for=string>UTF-8 percent-encode</a> on <var>input</var>
  using the <a>C0 control percent-encode set</a>.
@@ -1853,12 +2127,13 @@ and then runs these steps:
    <li><p>Set <var>url</var> to a new <a for=/>URL</a>.
 
    <li><p>If <var>input</var> contains any leading or trailing <a>C0 control or space</a>,
-   <a>validation error</a>.
+   <a>invalid-URL-unit</a> <a>validation error</a>.
 
    <li><p>Remove any leading and trailing <a>C0 control or space</a> from <var>input</var>.
   </ol>
 
- <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>validation error</a>.
+ <li><p>If <var>input</var> contains any <a>ASCII tab or newline</a>, <a>invalid-URL-unit</a>
+ <a>validation error</a>.
 
  <li><p>Remove all <a>ASCII tab or newline</a> from <var>input</var>.
 
@@ -1892,7 +2167,8 @@ and then runs these steps:
      <a>no scheme state</a> and decrease <var>pointer</var> by 1.
 
      <li>
-      <p>Otherwise, <a>validation error</a>, return failure.
+      <p>Otherwise, return failure.
+      <!-- API validation error -->
 
       <p class=note>This indication of failure is used exclusively by the {{Location}} object's
       {{Location/protocol}} setter.
@@ -1944,7 +2220,7 @@ and then runs these steps:
 
         <ol>
          <li><p>If <a>remaining</a> does not start with "<code>//</code>",
-         <a>validation error</a>.
+         <a>special-scheme-missing-following-solidus</a> <a>validation error</a>.
 
          <li><p>Set <var>state</var> to <a>file state</a>.
         </ol>
@@ -1976,7 +2252,8 @@ and then runs these steps:
      in <var>input</var>).
 
      <li>
-      <p>Otherwise, <a>validation error</a>, return failure.
+      <p>Otherwise, return failure.
+      <!-- API validation error -->
 
       <p class=note>This indication of failure is used exclusively by the {{Location}} object's
       {{Location/protocol}} setter. Furthermore, the non-failure termination earlier in this state
@@ -1987,7 +2264,8 @@ and then runs these steps:
    <dd>
     <ol>
      <li><p>If <var>base</var> is null, or <var>base</var> has an <a for=url>opaque path</a> and
-     <a>c</a> is not U+0023 (#), <a>validation error</a>, return failure.
+     <a>c</a> is not U+0023 (#), <a>missing-scheme-non-relative-URL</a> <a>validation error</a>,
+     return failure.
 
      <li><p>Otherwise, if <var>base</var> has an <a for=url>opaque path</a> and <a>c</a> is
      U+0023 (#), set <var>url</var>'s <a for=url>scheme</a> to
@@ -2013,8 +2291,8 @@ and then runs these steps:
      <var>state</var> to <a>special authority ignore slashes state</a> and increase
      <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>validation error</a>, set <var>state</var> to <a>relative state</a> and
-     decrease <var>pointer</var> by 1.
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>, set
+     <var>state</var> to <a>relative state</a> and decrease <var>pointer</var> by 1.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=path-or-authority-state>path or authority state</dfn>
@@ -2036,7 +2314,8 @@ and then runs these steps:
      <li><p>If <a>c</a> is U+002F (/), then set <var>state</var> to <a>relative slash state</a>.
 
      <li><p>Otherwise, if <var>url</var> <a>is special</a> and <a>c</a> is U+005C (\),
-     <a>validation error</a>, set <var>state</var> to <a>relative slash state</a>.
+     <a>invalid-reverse-solidus</a> <a>validation error</a>, set <var>state</var> to
+     <a>relative slash state</a>.
 
      <li>
       <p>Otherwise:
@@ -2081,7 +2360,8 @@ and then runs these steps:
       <p>If <var>url</var> <a>is special</a> and <a>c</a> is U+002F (/) or U+005C (\), then:
 
       <ol>
-       <li><p>If <a>c</a> is U+005C (\), <a>validation error</a>.
+       <li><p>If <a>c</a> is U+005C (\), <a>invalid-reverse-solidus</a>
+       <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
@@ -2108,8 +2388,9 @@ and then runs these steps:
      <var>state</var> to <a>special authority ignore slashes state</a> and increase
      <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>validation error</a>, set <var>state</var> to
-     <a>special authority ignore slashes state</a> and decrease <var>pointer</var> by 1.
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>, set
+     <var>state</var> to <a>special authority ignore slashes state</a> and decrease
+     <var>pointer</var> by 1.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=special-authority-ignore-slashes-state>special authority ignore slashes state</dfn>
@@ -2118,7 +2399,7 @@ and then runs these steps:
      <li><p>If <a>c</a> is neither U+002F (/) nor U+005C (\), then set <var>state</var> to
      <a>authority state</a> and decrease <var>pointer</var> by 1.
 
-     <li><p>Otherwise, <a>validation error</a>.
+     <li><p>Otherwise, <a>special-scheme-missing-following-solidus</a> <a>validation error</a>.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=authority-state>authority state</dfn>
@@ -2128,7 +2409,7 @@ and then runs these steps:
       <p>If <a>c</a> is U+0040 (@), then:
 
       <ol>
-       <li><p><a>Validation error</a>.
+       <li><p><a>Invalid-credentials</a> <a>validation error</a>.
 
        <li><p>If <var>atSignSeen</var> is true, then prepend "<code>%40</code>" to
        <var>buffer</var>.
@@ -2168,7 +2449,7 @@ and then runs these steps:
 
       <ol>
        <li><p>If <var>atSignSeen</var> is true and <var>buffer</var> is the empty string,
-       <a>validation error</a>, return failure.
+       <a>invalid-credentials</a> <a>validation error</a>, return failure.
        <!-- No URLs with userinfo, but without host. For special URLs it would also not be
             idempotent:
             https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
@@ -2193,7 +2474,8 @@ and then runs these steps:
       <p>Otherwise, if <a>c</a> is U+003A (:) and <var>insideBrackets</var> is false, then:
 
       <ol>
-       <li><p>If <var>buffer</var> is the empty string, <a>validation error</a>, return failure.
+       <li><p>If <var>buffer</var> is the empty string, <a>host-missing</a> <a>validation error</a>,
+       return failure.
        <!-- No URLs with port, but without host. -->
 
        <li><p>If <var>state override</var> is given and <var>state override</var> is
@@ -2221,13 +2503,14 @@ and then runs these steps:
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
-       <a>validation error</a>, return failure.
+       <a>host-missing</a> <a>validation error</a>, return failure.
        <!-- http://? -> failure
             test://? -> test://? -->
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
        <a for=url>port</a> is non-null, return.
+       <!-- API validation error -->
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
@@ -2279,7 +2562,7 @@ and then runs these steps:
          0 through 9.
 
          <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
-         <a>validation error</a>, return failure.
+         <a>port-out-of-range</a> <a>validation error</a>, return failure.
 
          <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
          <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>; otherwise to <var>port</var>.
@@ -2292,7 +2575,7 @@ and then runs these steps:
        <li><p>Set <var>state</var> to <a>path start state</a> and decrease <var>pointer</var> by 1.
       </ol>
 
-     <li><p>Otherwise, <a>validation error</a>, return failure.
+     <li><p>Otherwise, <a>port-invalid</a> <a>validation error</a>, return failure.
     </ol>
 
    <dt><dfn export for="basic URL parser" id=file-state>file state</dfn>
@@ -2306,7 +2589,7 @@ and then runs these steps:
       <p>If <a>c</a> is U+002F (/) or U+005C (\), then:
 
       <ol>
-       <li><p>If <a>c</a> is U+005C (\), <a>validation error</a>.
+       <li><p>If <a>c</a> is U+005C (\), <a>invalid-reverse-solidus</a> <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>file slash state</a>.
       </ol>
@@ -2343,7 +2626,7 @@ and then runs these steps:
           <p>Otherwise:
 
           <ol>
-           <li><p><a>Validation error</a>.
+           <li><p><a>File-invalid-Windows-drive-letter</a> <a>validation error</a>.
 
            <li><p>Set <var>url</var>'s <a for=url>path</a> to « ».
           </ol>
@@ -2365,7 +2648,7 @@ and then runs these steps:
       <p>If <a>c</a> is U+002F (/) or U+005C (\), then:
 
       <ol>
-       <li><p>If <a>c</a> is U+005C (\), <a>validation error</a>.
+       <li><p>If <a>c</a> is U+005C (\), <a>invalid-reverse-solidus</a> <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>file host state</a>.
       </ol>
@@ -2406,8 +2689,8 @@ and then runs these steps:
       <ol>
        <li>
         <p>If <var>state override</var> is not given and <var>buffer</var> is a
-        <a>Windows drive letter</a>, <a>validation error</a>, set <var>state</var> to
-        <a>path state</a>.
+        <a>Windows drive letter</a>, <a>file-invalid-Windows-drive-letter-host</a>
+        <a>validation error</a>, set <var>state</var> to <a>path state</a>.
 
         <p class=note>This is a (platform-independent) Windows drive letter quirk. <var>buffer</var>
         is not reset here and instead used in the <a>path state</a>.
@@ -2454,7 +2737,7 @@ and then runs these steps:
       <p>If <var>url</var> <a>is special</a>, then:
 
       <ol>
-       <li><p>If <a>c</a> is U+005C (\), <a>validation error</a>.
+       <li><p>If <a>c</a> is U+005C (\), <a>invalid-reverse-solidus</a> <a>validation error</a>.
 
        <li><p>Set <var>state</var> to <a>path state</a>.
 
@@ -2500,7 +2783,7 @@ and then runs these steps:
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <a>c</a> is U+005C (\),
-       <a>validation error</a>.
+       <a>invalid-reverse-solidus</a> <a>validation error</a>.
 
        <li>
         <p>If <var>buffer</var> is a <a>double-dot URL path segment</a>, then:
@@ -2550,10 +2833,10 @@ and then runs these steps:
 
       <ol>
        <li><p>If <a>c</a> is not a <a>URL code point</a> and not U+0025 (%),
-       <a>validation error</a>.
+       <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
-       <a>ASCII hex digits</a>, <a>validation error</a>.
+       <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
        <a>path percent-encode set</a> and append the result to <var>buffer</var>.
@@ -2574,10 +2857,10 @@ and then runs these steps:
 
       <ol>
        <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a <a>URL code point</a>, and not
-       U+0025 (%), <a>validation error</a>.
+       U+0025 (%), <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
-       <a>ASCII hex digits</a>, <a>validation error</a>.
+       <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>If <a>c</a> is not the <a>EOF code point</a>,
        <a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
@@ -2633,10 +2916,10 @@ and then runs these steps:
 
       <ol>
        <li><p>If <a>c</a> is not a <a>URL code point</a> and not U+0025 (%),
-       <a>validation error</a>.
+       <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
-       <a>ASCII hex digits</a>, <a>validation error</a>.
+       <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>Append <a>c</a> to <var>buffer</var>.
       </ol>
@@ -2650,10 +2933,10 @@ and then runs these steps:
 
       <ol>
        <li><p>If <a>c</a> is not a <a>URL code point</a> and not U+0025 (%),
-       <a>validation error</a>.
+       <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
-       <a>ASCII hex digits</a>, <a>validation error</a>.
+       <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
        <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
        <a>fragment percent-encode set</a> and append the result to <var>url</var>'s
