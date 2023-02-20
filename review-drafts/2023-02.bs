@@ -1,5 +1,7 @@
 <pre class=metadata>
 Group: WHATWG
+Status: RD
+Date: 2023-02-20
 H1: URL
 Shortname: url
 Text Macro: TWITTER urlstandard
