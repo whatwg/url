@@ -320,7 +320,7 @@ const url = new URL("💩", "mailto:user@example.org");</code></pre>
      <p>"<code>https://#fragment</code>"
      <p>"<code>https://:443</code>"
     </div>
-   <td class=no>·
+   <td class=yes>Yes
   <tr>
    <td><dfn>port-out-of-range</dfn>
    <td>
