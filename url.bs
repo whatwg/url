@@ -180,7 +180,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
    <td><dfn>IPv6-unclosed</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> is missing the closing U+005D (]).
-    <p class=example id=example-ipv6-unclosed"<code>https://[::1</code>"
+    <p class=example id=example-ipv6-unclosed>"<code>https://[::1</code>"
    <td class=yes>Yes
   <!-- IPv6 parser -->
   <tr>
@@ -3321,6 +3321,8 @@ are encouraged to use an API suitable to their needs, which might not be this on
 interface URL {
   constructor(USVString url, optional USVString base);
 
+  static boolean canParse(USVString url, optional USVString base);
+
   stringifier attribute USVString href;
   readonly attribute USVString origin;
            attribute USVString protocol;
@@ -3361,6 +3363,26 @@ interface URL {
  <a for=URL>URL</a>'s <a for=url>path</a>.
 </ol>
 
+<p>The <dfn>API URL parser</dfn> takes a <a>scalar value string</a> <var>url</var> and an optional
+null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs these steps:
+
+<ol>
+ <li><p>Let <var>parsedBase</var> be null.
+
+ <li>
+  <p>If <var>base</var> is non-null:
+
+  <ol>
+   <li><p>Set <var>parsedBase</var> to the result of running the <a>basic URL parser</a> on
+   <var>base</var>.
+
+   <li><p>If <var>parsedBase</var> is failure, then return failure.
+  </ol>
+
+ <li><p>Return the result of running the <a>basic URL parser</a> on <var>url</var> with
+ <var>parsedBase</var>.
+</ol>
+
 <hr>
 
 <p id=constructors>The
@@ -3368,20 +3390,8 @@ interface URL {
 constructor steps are:
 
 <ol>
- <li><p>Let <var>parsedBase</var> be null.
-
- <li>
-  <p>If <var>base</var> is given, then:
-
-  <ol>
-   <li><p>Let <var>parsedBase</var> be the result of running the <a>basic URL parser</a> on
-   <var>base</var>.
-
-   <li><p>If <var>parsedBase</var> is failure, then <a>throw</a> a {{TypeError}}.
-  </ol>
-
- <li><p>Let <var>parsedURL</var> be the result of running the <a>basic URL parser</a> on
- <var>url</var> with <var>parsedBase</var>.
+ <li><p>Let <var>parsedURL</var> be the result of running the <a>API URL parser</a> on
+ <var>url</var> with <var>base</var>, if given.
 
  <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a {{TypeError}}.
 
@@ -3431,6 +3441,20 @@ url.href // "https://url.spec.whatwg.org/%F0%9F%8D%A3%F0%9F%8D%BA"</code></pre>
 var url = new URL("🏳️‍🌈", new URL("https://pride.example/hello-world"))
 url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </div>
+
+<hr>
+
+<p>The static <dfn method for=URL><code>canParse(<var>url</var>, <var>base</var>)</code></dfn>
+method steps are:
+
+<ol>
+ <li><p>Let <var>parsedURL</var> be the result of running the <a>API URL parser</a> on
+ <var>url</var> with <var>base</var>, if given.
+
+ <li><p>If <var>parsedURL</var> is failure, then return false.
+
+ <li><p>Return true.
+</ol>
 
 <hr id=urlutils-members>
 
@@ -3950,6 +3974,7 @@ Gavin Carothers,
 Geoff Richards,
 Glenn Maynard,
 Gordon P. Hemsley,
+hemanth,<!-- GitHub -->
 Henri Sivonen,
 Ian Hickson,
 Ilya Grigorik,
