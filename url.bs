@@ -3081,11 +3081,12 @@ is the <a for=/>origin</a> returned by running these steps, switching on <var>ur
 
    <li><p>If <var>pathURL</var> is failure, then return a new <a>opaque origin</a>.
 
-   <li><p>If <var>pathURL</var>'s <a for=url>scheme</a> is not "<code>http</code>" and not
-   "<code>https</code>", then return a new <a>opaque origin</a>.
-
-   <li><p>Return <var>pathURL</var>'s <a for=url>origin</a>.
+   <li><p>If <var>pathURL</var>'s <a for=url>scheme</a> is "<code>http</code>",
+   "<code>https</code>", or "<code>file</code>", then return <var>pathURL</var>'s
+   <a for=url>origin</a>.
    <!-- Did you mean: recursion -->
+
+   <li><p>Return a new <a>opaque origin</a>.
   </ol>
 
   <p class=example id=example-43b5cea5>The <a for=url>origin</a> of
