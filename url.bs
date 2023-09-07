@@ -2846,6 +2846,14 @@ and then runs these steps:
    <dt><dfn export for="basic URL parser" id=cannot-be-a-base-url-path-state>opaque path state</dfn>
    <dd>
     <ol>
+     <li><p>If <a>c</a> is U+003F (?), U+0023 (#), or the <a>EOF code point</a>:
+       <ol>
+         <li><p>Let <var>n</var> be the number of U+0020 SPACE code points at the end of <var>url</var>'s
+         <a for=url>path</a>.
+         <li><p>Replace the last <var>n</var> code points in <var>url</var>'s <a for=url>path</a>
+         with <var>n</var> repetitions of the string "%20".
+       </ol>
+
      <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
      string and <var>state</var> to <a>query state</a>.
 
@@ -3352,21 +3360,6 @@ interface URL {
  object.
 </ul>
 
-<p>To <dfn>potentially strip trailing spaces from an opaque path</dfn> given a {{URL}} object
-<var>url</var>:
-
-<ol>
- <li><p>If <var>url</var>'s <a for=URL>URL</a> does not have an <a for=url>opaque path</a>, then
- return.
-
- <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>fragment</a> is non-null, then return.
-
- <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>query</a> is non-null, then return.
-
- <li><p>Remove all trailing U+0020 SPACE <a for=/>code points</a> from <var>url</var>'s
- <a for=URL>URL</a>'s <a for=url>path</a>.
-</ol>
-
 <p>The <dfn>API URL parser</dfn> takes a <a>scalar value string</a> <var>url</var> and an optional
 null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs these steps:
 
@@ -3633,8 +3626,6 @@ one might have assumed the setter to always "reset" both.
    <li><p><a for=list>Empty</a> <a>this</a>'s <a for=URL>query object</a>'s
    <a for=URLSearchParams>list</a>.
 
-   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
-
    <li><p>Return.
   </ol>
 
@@ -3649,11 +3640,6 @@ one might have assumed the setter to always "reset" both.
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
  result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
 </ol>
-
-<p class=note>The {{URL/search}} setter has the potential to remove trailing U+0020 SPACE
-<a for=/>code points</a> from <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>. It does this
-so that running the <a>URL parser</a> on the output of running the <a>URL serializer</a> on
-<a>this</a>'s <a for=URL>URL</a> does not yield a <a for=/>URL</a> that is not <a for=url>equal</a>.
 
 <p>The <dfn attribute for=URL><code>searchParams</code></dfn> getter steps are to return
 <a>this</a>'s <a for=URL>query object</a>.
@@ -3676,8 +3662,6 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
   <ol>
    <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to null.
 
-   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
-
    <li><p>Return.
   </ol>
 
@@ -3689,9 +3673,6 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>fragment state</a> as
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
-
-<p class=note>The {{URL/hash}} setter has the potential to change <a>this</a>'s <a for=URL>URL</a>'s
-<a for=url>path</a> in a manner equivalent to the {{URL/search}} setter.
 
 
 <h3 id=interface-urlsearchparams>URLSearchParams class</h3>
@@ -3813,10 +3794,6 @@ object <var>query</var>:
 
  <li><p>Set <var>query</var>'s <a for=URLSearchParams>URL object</a>'s <a for=URL>URL</a>'s
  <a for=url>query</a> to <var>serializedQuery</var>.
-
- <li><p>If <var>serializedQuery</var> is null, then
- <a>potentially strip trailing spaces from an opaque path</a> with <var>query</var>'s
- <a for=URLSearchParams>URL object</a>.
 </ol>
 </div>
 
