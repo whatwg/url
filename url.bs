@@ -675,14 +675,13 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
 
 <div class=example id=example-host-parsing>
  <p>A <a lt="host parser">parse</a>-<a lt="host serializer">serialize</a> roundtrip gives the
- following results, depending on the <var ignore>isNotSpecial</var> argument to the
- <a>host parser</a>:
+ following results, depending on the <var ignore>isOpaque</var> argument to the <a>host parser</a>:
 
  <table>
   <tr>
    <th>Input
-   <th>Output (<var ignore>isNotSpecial</var> = false)
-   <th>Output (<var ignore>isNotSpecial</var> = true)
+   <th>Output (<var ignore>isOpaque</var> = false)
+   <th>Output (<var ignore>isOpaque</var> = true)
   <tr>
    <td><code>EXAMPLE.COM</code>
    <td rowspan=2><code>example.com</code> (<a for=/>domain</a>)
@@ -998,8 +997,8 @@ to be distinguished.
 
 <div algorithm>
 <p>The <dfn export id=concept-host-parser lt="host parser|host parsing">host parser</dfn> takes a
-<a>scalar value string</a> <var>input</var> with an optional boolean <var>isNotSpecial</var>
-(default false), and then runs these steps. They return failure or a <a for=/>host</a>.
+<a>scalar value string</a> <var>input</var> with an optional boolean <var>isOpaque</var> (default
+false), and then runs these steps. They return failure or a <a for=/>host</a>.
 
 <ol>
  <li>
@@ -1013,7 +1012,7 @@ to be distinguished.
    leading U+005B ([) and trailing U+005D (]) removed.
   </ol>
 
- <li><p>If <var>isNotSpecial</var> is true, then return the result of
+ <li><p>If <var>isOpaque</var> is true, then return the result of
  <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
 
  <li><p>Assert: <var>input</var> is not the empty string.
