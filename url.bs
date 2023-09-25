@@ -2229,8 +2229,8 @@ and then runs these steps:
         <var>base</var>'s <a for=url>scheme</a> is <var>url</var>'s <a for=url>scheme</a>:
 
         <ol>
-         <li><p><a for=/>Assert</a>: <var>base</var> is <a>is special</a> (and therefore does not
-         have an <a for=url>opaque path</a>).
+         <li><p><a for=/>Assert</a>: <var>base</var> <a>is special</a> (and therefore does not have
+         an <a for=url>opaque path</a>).
 
          <li><p>Set <var>state</var> to <a>special relative or authority state</a>.
         </ol>
@@ -3980,6 +3980,7 @@ this standard what it is today.
 Adam Barth,
 Addison Phillips,
 Adrián Chaves,<!-- Gallaecio; GitHub -->
+Adrien Ricciardi,
 Albert Wiersch,
 Alex Christensen,
 Alexis Hunt,<!-- alercah; GitHub -->
