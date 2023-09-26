@@ -2448,7 +2448,7 @@ and then runs these steps:
 
       <ol>
        <li><p>If <var>atSignSeen</var> is true and <var>buffer</var> is the empty string,
-       <a>invalid-credentials</a> <a>validation error</a>, return failure.
+       <a>host-missing</a> <a>validation error</a>, return failure.
        <!-- No URLs with userinfo, but without host. For special URLs it would also not be
             idempotent:
             https://@/example.org/ -> https:///example.org/ -> https://example.org/ -->
