@@ -309,9 +309,9 @@ const url = new URL("💩", "mailto:user@example.org");</code></pre>
     <p>The input <a>includes credentials</a>.
     <div class=example id=example-invalid-credentials>
      <p>"<code>https://user@example.org</code>"
-     <p>"<code>https://user:pass@</code>"
+     <p>"<code>ssh://user@example.org</code>"
     </div>
-   <td class=yes>Yes<br>(only if there is no host)
+   <td class=no>·
   <tr>
    <td><dfn>host-missing</dfn>
    <td>
@@ -319,6 +319,7 @@ const url = new URL("💩", "mailto:user@example.org");</code></pre>
     <div class=example id=example-host-missing>
      <p>"<code>https://#fragment</code>"
      <p>"<code>https://:443</code>"
+     <p>"<code>https://user:pass@</code>"
     </div>
    <td class=yes>Yes
   <tr>
