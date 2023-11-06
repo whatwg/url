@@ -2038,8 +2038,8 @@ and <a>code points</a> in the range U+00A0 to U+10FFFD, inclusive, excluding <a>
 <!-- IRI also excludes the ranges U+E000 to U+F8FF, U+FFF0 to U+FFFD, and U+E0000 to U+E09FF, all
      inclusive. We don't to align with HTML. -->
 
-<p class=note>For historical reasons, rather than storing codepoints and [=percent-encoding=] to
-ASCII for serialization, URLs instead store their value as ASCII internally, eagerly converting
+<p class=note>For historical reasons, rather than storing codepoints and [=byte/percent-encoding=]
+to ASCII for serialization, URLs instead store their value as ASCII internally, eagerly converting
 code points greater than U+007F DELETE to [=percent-encoded bytes=] during [=URL parser|parsing=].
 
 <p class=note>In HTML, when the document encoding is a legacy encoding, code points in the
