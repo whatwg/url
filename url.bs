@@ -3738,8 +3738,8 @@ url.searchParams.sort();
 console.log(url.href);   // "https://example.com/?a=b+%7E"</code></pre>
 
  <pre><code class="lang-javascript">
-const url = new URL('https://example.com/?a=~&b=%7E');
-console.log(url.search);                // "?a=~&b=%7E"
+const url = new URL('https://example.com/?a=~&amp;b=%7E');
+console.log(url.search);                // "?a=~&amp;b=%7E"
 console.log(url.searchParams.get('a')); // "~"
 console.log(url.searchParams.get('b')); // "~"</code></pre>
 
