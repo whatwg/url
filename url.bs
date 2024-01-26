@@ -1709,8 +1709,7 @@ null or a 16-bit unsigned integer that identifies a networking port. It is initi
 
 <p>A <a for=/>URL</a>'s
 <dfn export for=url id=concept-url-path oldids=non-relative-flag,url-cannot-be-a-base-url-flag>path</dfn>
-is either a <a>URL path segment</a> or a <a for=/>list</a> of zero or more <a>URL path segments</a>,
-usually identifying a location. It is initially « ».
+is a <a for=/>URL path</a>, usually identifying a location. It is initially « ».
 
 <p class=note>A <a lt="is special">special</a> <a for=/>URL</a>'s <a for=url>path</a> is always a
 <a for=/>list</a>, i.e., it is never <a for=url lt="opaque path">opaque</a>.
@@ -1781,6 +1780,9 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
 </div>
 
 <hr>
+
+<p>A <dfn export>URL path</dfn> is either a <a>URL path segment</a> or a <a for=/>list</a> of zero
+or more <a>URL path segments</a>.
 
 <p>A <dfn export>URL path segment</dfn> is an <a for=/>ASCII string</a>. It commonly refers to a
 directory or a file, but has no predefined meaning.
