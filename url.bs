@@ -1781,8 +1781,8 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
 
 <hr>
 
-<p>A <dfn export for=/>URL path</dfn> is either a <a>URL path segment</a> or a <a for=/>list</a> of
-zero or more <a>URL path segments</a>.
+<p>A <dfn export>URL path</dfn> is either a <a>URL path segment</a> or a <a for=/>list</a> of zero
+or more <a>URL path segments</a>.
 
 <p>A <dfn export>URL path segment</dfn> is an <a for=/>ASCII string</a>. It commonly refers to a
 directory or a file, but has no predefined meaning.
