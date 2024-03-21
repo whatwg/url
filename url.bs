@@ -3472,7 +3472,7 @@ steps are:
 
  <li><p>If <var>parsedURL</var> is failure, then return null.
 
- <li><p>Let <var>url</var> be a new <code>URL</code> object.
+ <li><p>Let <var>url</var> be a new {{URL}} object.
 
  <li><p><a for=URL>Initialize</a> <var>url</var> with <var>parsedURL</var>.
 
