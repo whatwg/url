@@ -3327,6 +3327,7 @@ are encouraged to use an API suitable to their needs, which might not be this on
 interface URL {
   constructor(USVString url, optional USVString base);
 
+  static URL? parse(USVString url, optional USVString base);
   static boolean canParse(USVString url, optional USVString base);
 
   stringifier attribute USVString href;
@@ -3389,8 +3390,29 @@ null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs
  <var>parsedBase</var>.
 </ol>
 
+<div algorithm>
+<p>To <dfn for=URL>initialize</dfn> a {{URL}} object <var>url</var> with a <a for=/>URL</a>
+<var>urlRecord</var>:
+
+<ol>
+ <li><p>Let <var>query</var> be <var>urlRecord</var>'s <a for=url>query</a>, if that is non-null;
+ otherwise the empty string.
+
+ <li><p>Set <var>url</var>'s <a for=URL>URL</a> to <var>urlRecord</var>.
+
+ <li><p>Set <var>url</var>'s <a for=URL>query object</a> to a new {{URLSearchParams}} object.
+
+ <li><p><a for=URLSearchParams>Initialize</a> <var>url</var>'s <a for=URL>query object</a> with
+ <var>query</var>.
+
+ <li><p>Set <var>url</var>'s <a for=URL>query object</a>'s <a for=URLSearchParams>URL object</a> to
+ <var>url</var>.
+</ol>
+</div>
+
 <hr>
 
+<div algorithm>
 <p id=constructors>The
 <dfn constructor for=URL lt="URL(url, base)"><code>new URL(<var>url</var>, <var>base</var>)</code></dfn>
 constructor steps are:
@@ -3401,19 +3423,9 @@ constructor steps are:
 
  <li><p>If <var>parsedURL</var> is failure, then <a>throw</a> a {{TypeError}}.
 
- <li><p>Let <var>query</var> be <var>parsedURL</var>'s <a for=url>query</a>, if that is non-null,
- and the empty string otherwise.
-
- <li><p>Set <a>this</a>'s <a for=URL>URL</a> to <var>parsedURL</var>.
-
- <li><p>Set <a>this</a>'s <a for=URL>query object</a> to a new {{URLSearchParams}} object.
-
- <li><p><a for=URLSearchParams>Initialize</a> <a>this</a>'s <a for=URL>query object</a> with
- <var>query</var>.
-
- <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>URL object</a> to
- <a>this</a>.
+ <li><p><a for=URL>Initialize</a> <a>this</a> with <var>parsedURL</var>.
 </ol>
+</div>
 
 <div class=example id=example-5434421b>
  <p>To <a lt="basic URL parser">parse</a> a string into a <a for=/>URL</a> without using a
@@ -3449,6 +3461,24 @@ url.pathname // "/%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"</code></pre>
 </div>
 
 <hr>
+
+<div algorithm>
+<p>The static <dfn method for=URL><code>parse(<var>url</var>, <var>base</var>)</code></dfn> method
+steps are:
+
+<ol>
+ <li><p>Let <var>parsedURL</var> be the result of running the <a>API URL parser</a> on
+ <var>url</var> with <var>base</var>, if given.
+
+ <li><p>If <var>parsedURL</var> is failure, then return null.
+
+ <li><p>Let <var>url</var> be a new <code>URL</code> object.
+
+ <li><p><a for=URL>Initialize</a> <var>url</var> with <var>parsedURL</var>.
+
+ <li><p>Return <var>url</var>.
+</ol>
+</div>
 
 <p>The static <dfn method for=URL><code>canParse(<var>url</var>, <var>base</var>)</code></dfn>
 method steps are:
