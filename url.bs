@@ -3568,7 +3568,7 @@ method steps are:
 <a for=URL>URL</a>'s <a for=url>scheme</a>, followed by U+003A (:).
 </div>
 
-<div algorithm>
+<div algorithm="protocol setter">
 <p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
 <a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
 <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and
