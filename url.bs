@@ -555,7 +555,6 @@ encoding U+0025 (%) and thus give “roundtripable data”: <a>component percent
 U+0025 (%) untouched and as such it needs to be
 <a for="code point" lt="UTF-8 percent-encode">percent-encoded</a> first in order to be properly
 represented.
-
 </div>
 
 <div algorithm>
@@ -898,6 +897,7 @@ concepts.
 
 <h3 id=idna>IDNA</h3>
 
+<div algorithm>
 <p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>string</a>
 <var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
@@ -926,7 +926,9 @@ concepts.
 <p class=note>This document and the web platform at large use
 <cite>Unicode IDNA Compatibility Processing</cite> and not IDNA2008. For instance,
 <code>☕.example</code> becomes <code>xn--53h.example</code> and not failure. [[UTS46]] [[RFC5890]]
+</div>
 
+<div algorithm>
 <p>The <dfn id=concept-domain-to-unicode>domain to Unicode</dfn> algorithm, given a <a>domain</a>
 <var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
@@ -940,6 +942,7 @@ concepts.
  <li><p>Signify <a>domain-to-Unicode</a> <a>validation errors</a> for any returned errors, and then,
  return <var>result</var>.
 </ol>
+</div>
 
 
 <h3 id=host-writing oldids=host-syntax>Host writing</h3>
@@ -1392,6 +1395,7 @@ actually doing that with the editors of this document first.
 
 <h3 id=host-serializing>Host serializing</h3>
 
+<div algorithm>
 <p>The <dfn id=concept-host-serializer lt="host serializer">host serializer</dfn> takes a
 <a for=/>host</a> <var>host</var> and then runs these steps. They return an <a>ASCII string</a>.
 
@@ -1405,8 +1409,10 @@ actually doing that with the editors of this document first.
  <li><p>Otherwise, <var>host</var> is a <a>domain</a>, <a>opaque host</a>, or <a>empty host</a>,
  return <var>host</var>.
 </ol>
+</div>
 
-The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an <a>IPv4 address</a>
+<div algorithm>
+<p>The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an <a>IPv4 address</a>
 <var>address</var> and then runs these steps. They return an <a>ASCII string</a>.
 
 <ol>
@@ -1428,7 +1434,9 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an <a>IPv4 addre
 
  <li><p>Return <var>output</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn id=concept-ipv6-serializer>IPv6 serializer</dfn> takes an <a>IPv6 address</a>
 <var>address</var> and then runs these steps. They return an <a>ASCII string</a>.
 
@@ -1480,16 +1488,16 @@ The <dfn id=concept-ipv4-serializer>IPv4 serializer</dfn> takes an <a>IPv4 addre
 <p class=note>This algorithm requires the recommendation from
 A Recommendation for IPv6 Address Text Representation.
 [[RFC5952]]
-
-<!-- Safari/Gecko/Opera do not normalize IPv6. Chrome does. This algorithm
-     follows Chrome because we normalize domains too. -->
+</div>
 
 
 <h3 id=host-equivalence>Host equivalence</h3>
 
+<div algorithm>
 <p>To determine whether a <a for=/>host</a> <var>A</var>
 <dfn export for=host id=concept-host-equals lt=equal>equals</dfn> <a for=/>host</a> <var>B</var>,
 return true if <var>A</var> is <var>B</var>, and false otherwise.
+</div>
 
 <p class=XXX>Certificate comparison requires a host equivalence check that ignores the
 trailing dot of a domain (if any). However, those hosts have also various other facets
@@ -1878,6 +1886,7 @@ if all of the following are true:
  </table>
 </div>
 
+<div algorithm>
 <p id=pop-a-urls-path>To <dfn local-lt=shorten>shorten a <var>url</var>'s path</dfn>:
 
 <ol>
@@ -1891,6 +1900,7 @@ if all of the following are true:
 
  <li><p><a for=list>Remove</a> <var>path</var>'s last item, if any.
 </ol>
+</div>
 
 
 <h3 id=url-writing oldids=url-syntax>URL writing</h3>
@@ -2075,6 +2085,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <h3 id=url-parsing>URL parsing</h3>
 
+<div algorithm>
 <p>The <dfn export id=concept-url-parser lt="URL parser">URL parser</dfn> takes a
 <a>scalar value string</a> <var>input</var>, with an optional null or <a>base URL</a>
 <var>base</var> (default null) and an optional <a for=/>encoding</a> <var>encoding</var> (default
@@ -2101,9 +2112,11 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
  <li><p>Return <var>url</var>.
 </ol>
+</div>
 
 <hr>
 
+<div algorithm>
 <p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
 <a>scalar value string</a> <var>input</var>, with an optional null or <a>base URL</a>
 <var>base</var> (default null), an optional <a for=/>encoding</a> <var>encoding</var> (default
@@ -2949,22 +2962,28 @@ and then runs these steps:
 
  <li><p>Return <var>url</var>.
 </ol>
+</div>
 
 <hr>
 
+<div algorithm>
 <p>To <dfn export id=set-the-username for=url>set the username</dfn> given a <var>url</var> and
 <var>username</var>, set <var>url</var>'s <a for=url>username</a> to the result of running
 <a for=string>UTF-8 percent-encode</a> on <var>username</var> using the
 <a>userinfo percent-encode set</a>.
+</div>
 
+<div algorithm>
 <p>To <dfn export id=set-the-password for=url>set the password</dfn> given a <var>url</var> and
 <var>password</var>, set <var>url</var>'s <a for=url>password</a> to the result of running
 <a for=string>UTF-8 percent-encode</a> on <var>password</var> using the
 <a>userinfo percent-encode set</a>.
+</div>
 
 
 <h3 id=url-serializing>URL serializing</h3>
 
+<div algorithm>
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
 <a for=/>URL</a> <var>url</var>, with an optional boolean
 <dfn export for="URL serializer"><var>exclude fragment</var></dfn> (default false), and then runs
@@ -3023,7 +3042,9 @@ these steps. They return an <a>ASCII string</a>.
 
  <li><p>Return <var>output</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn export lt="URL path serializer|URL path serializing">URL path serializer</dfn> takes a
 <a for=/>URL</a> <var>url</var> and then runs these steps. They return an <a>ASCII string</a>.
 
@@ -3038,10 +3059,12 @@ these steps. They return an <a>ASCII string</a>.
 
  <li><p>Return <var>output</var>.
 </ol>
+</div>
 
 
 <h3 id=url-equivalence>URL equivalence</h3>
 
+<div algorithm>
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
 <dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <a for=/>URL</a> <var>B</var>, with
 an optional boolean <dfn export for="url/equals"><var>exclude fragments</var></dfn> (default false),
@@ -3058,6 +3081,7 @@ run these steps:
 
  <li><p>Return true if <var>serializedA</var> is <var>serializedB</var>; otherwise false.
 </ol>
+</div>
 
 
 <h3 id=origin>Origin</h3>
@@ -3066,6 +3090,7 @@ run these steps:
 <p class=note>See <a for=/>origin</a>'s definition in <cite>HTML</cite> for the necessary background
 information. [[HTML]]
 
+<div algorithm>
 <p>The <dfn export for=url id=concept-url-origin>origin</dfn> of a <a for=/>URL</a> <var>url</var>
 is the <a for=/>origin</a> returned by running these steps, switching on <var>url</var>'s
 <a for=url>scheme</a>:
@@ -3114,6 +3139,7 @@ is the <a for=/>origin</a> returned by running these steps, switching on <var>ur
   <p class=note>This does indeed mean that these <a for=/>URLs</a> cannot be <a>same origin</a> with
   themselves.
 </dl>
+</div>
 
 
 <h3 id=url-rendering>URL rendering</h3>
@@ -3218,6 +3244,7 @@ the format is in widespread use due to the prevalence of HTML forms. [[HTML]]
 other than <a>UTF-8</a> as well as have special logic for tuples of which the name is
 `<code>_charset</code>`. Such logic is not described here as only <a>UTF-8</a> is conforming.
 
+<div algorithm>
 <p>The
 <dfn export id=concept-urlencoded-parser lt="urlencoded parser"><code>application/x-www-form-urlencoded</code> parser</dfn>
 takes a byte sequence <var>input</var>, and then runs these steps:
@@ -3260,10 +3287,12 @@ takes a byte sequence <var>input</var>, and then runs these steps:
 
  <li><p>Return <var>output</var>.
 </ol>
+</div>
 
 
 <h3 id=urlencoded-serializing><code>application/x-www-form-urlencoded</code> serializing</h3>
 
+<div algorithm>
 <p>The
 <dfn export id=concept-urlencoded-serializer lt="urlencoded serializer"><code>application/x-www-form-urlencoded</code> serializer</dfn>
 takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>encoding</a>
@@ -3301,6 +3330,7 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
 
  <li>Return <var>output</var>.
 </ol>
+</div>
 
 
 <h3 id=urlencoded-hooks>Hooks</h3>
@@ -3355,6 +3385,7 @@ interface URL {
  object.
 </ul>
 
+<div algorithm>
 <p>To <dfn>potentially strip trailing spaces from an opaque path</dfn> given a {{URL}} object
 <var>url</var>:
 
@@ -3369,7 +3400,9 @@ interface URL {
  <li><p>Remove all trailing U+0020 SPACE <a for=/>code points</a> from <var>url</var>'s
  <a for=URL>URL</a>'s <a for=url>path</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn>API URL parser</dfn> takes a <a>scalar value string</a> <var>url</var> and an optional
 null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs these steps:
 
@@ -3389,6 +3422,7 @@ null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs
  <li><p>Return the result of running the <a>basic URL parser</a> on <var>url</var> with
  <var>parsedBase</var>.
 </ol>
+</div>
 
 <div algorithm>
 <p>To <dfn for=URL>initialize</dfn> a {{URL}} object <var>url</var> with a <a for=/>URL</a>
@@ -3480,6 +3514,7 @@ steps are:
 </ol>
 </div>
 
+<div algorithm>
 <p>The static <dfn method for=URL><code>canParse(<var>url</var>, <var>base</var>)</code></dfn>
 method steps are:
 
@@ -3491,6 +3526,7 @@ method steps are:
 
  <li><p>Return true.
 </ol>
+</div>
 
 <hr id=urlutils-members>
 
@@ -3498,6 +3534,7 @@ method steps are:
 <dfn method for=URL><code>toJSON()</code></dfn> method steps are to return the
 <a lt="URL serializer">serialization</a> of <a>this</a>'s <a for=URL>URL</a>.
 
+<div algorithm>
 <p>The <code><a attribute for=URL>href</a></code> setter steps are:
 
 <ol>
@@ -3516,22 +3553,32 @@ method steps are:
  <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the result of
  <a lt="urlencoded string parser">parsing</a> <var>query</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>origin</code></dfn> getter steps are to return the
 <a lt="serialization of an origin">serialization</a> of <a>this</a>'s <a for=URL>URL</a>'s
 <a for=url>origin</a>. [[!HTML]]
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>protocol</code></dfn> getter steps are to return <a>this</a>'s
 <a for=URL>URL</a>'s <a for=url>scheme</a>, followed by U+003A (:).
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>protocol</a></code> setter steps are to
 <a lt="basic URL parser">basic URL parse</a> the given value, followed by U+003A (:), with
 <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and
 <a>scheme start state</a> as <a for="basic URL parser"><i>state override</i></a>.
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>username</code></dfn> getter steps are to return <a>this</a>'s
 <a for=URL>URL</a>'s <a for=url>username</a>.
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>username</a></code> setter steps are:
 
 <ol>
@@ -3540,10 +3587,14 @@ method steps are:
 
  <li><p><a for=url>Set the username</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>password</code></dfn> getter steps are to return <a>this</a>'s
 <a for=URL>URL</a>'s <a for=url>password</a>.
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>password</a></code> setter steps are:
 
 <ol>
@@ -3552,7 +3603,9 @@ method steps are:
 
  <li><p><a for=url>Set the password</a> given <a>this</a>'s <a for=URL>URL</a> and the given value.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>host</code></dfn> getter steps are:
 
 <ol>
@@ -3567,7 +3620,9 @@ method steps are:
  followed by U+003A (:) and <var>url</var>'s <a for=url>port</a>,
  <a lt="serialize an integer">serialized</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
@@ -3582,7 +3637,9 @@ method steps are:
 <a lt="URL-port string">port</a>, <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a> will not
 change. This can be unexpected as <code>host</code> getter does return a <a>URL-port string</a> so
 one might have assumed the setter to always "reset" both.
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>hostname</code></dfn> getter steps are:
 
 <ol>
@@ -3592,7 +3649,9 @@ one might have assumed the setter to always "reset" both.
  <li><p>Return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>host</a>,
  <a lt="host serializer">serialized</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
@@ -3602,7 +3661,9 @@ one might have assumed the setter to always "reset" both.
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>hostname state</a> as
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>port</code></dfn> getter steps are:
 
 <ol>
@@ -3612,7 +3673,9 @@ one might have assumed the setter to always "reset" both.
  <li><p>Return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>port</a>,
  <a lt="serialize an integer">serialized</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>port</a></code> setter steps are:
 
 <ol>
@@ -3626,10 +3689,14 @@ one might have assumed the setter to always "reset" both.
  <a>this</a>'s <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and
  <a>port state</a> as <a for="basic URL parser"><i>state override</i></a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>pathname</code></dfn> getter steps are to return the result of
 <a>URL path serializing</a> <a>this</a>'s <a for=URL>URL</a>.
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
@@ -3641,7 +3708,9 @@ one might have assumed the setter to always "reset" both.
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>path start state</a> as
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>search</code></dfn> getter steps are:
 
 <ol>
@@ -3650,7 +3719,9 @@ one might have assumed the setter to always "reset" both.
 
  <li><p>Return U+003F (?), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>query</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>search</a></code> setter steps are:
 
 <ol>
@@ -3686,10 +3757,14 @@ one might have assumed the setter to always "reset" both.
 <a for=/>code points</a> from <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>. It does this
 so that running the <a>URL parser</a> on the output of running the <a>URL serializer</a> on
 <a>this</a>'s <a for=URL>URL</a> does not yield a <a for=/>URL</a> that is not <a for=url>equal</a>.
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>searchParams</code></dfn> getter steps are to return
 <a>this</a>'s <a for=URL>query object</a>.
+</div>
 
+<div algorithm>
 <p>The <dfn attribute for=URL><code>hash</code></dfn> getter steps are:
 
 <ol>
@@ -3698,7 +3773,9 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
 
  <li><p>Return U+0023 (#), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
@@ -3724,6 +3801,7 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
 
 <p class=note>The {{URL/hash}} setter has the potential to change <a>this</a>'s <a for=URL>URL</a>'s
 <a for=url>path</a> in a manner equivalent to the {{URL/search}} setter.
+</div>
 
 
 <h3 id=interface-urlsearchparams>URLSearchParams class</h3>
