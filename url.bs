@@ -2116,7 +2116,7 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
 
 <hr>
 
-<div algorithm>
+<div algorithm="basic URL parser">
 <p>The <dfn export id=concept-basic-url-parser lt="basic URL parser">basic URL parser</dfn> takes a
 <a>scalar value string</a> <var>input</var>, with an optional null or <a>base URL</a>
 <var>base</var> (default null), an optional <a for=/>encoding</a> <var>encoding</var> (default
@@ -2983,7 +2983,7 @@ and then runs these steps:
 
 <h3 id=url-serializing>URL serializing</h3>
 
-<div algorithm>
+<div algorithm="URL serializer">
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
 <a for=/>URL</a> <var>url</var>, with an optional boolean
 <dfn export for="URL serializer"><var>exclude fragment</var></dfn> (default false), and then runs
@@ -3064,7 +3064,7 @@ these steps. They return an <a>ASCII string</a>.
 
 <h3 id=url-equivalence>URL equivalence</h3>
 
-<div algorithm>
+<div algorithm="equal">
 <p>To determine whether a <a for=/>URL</a> <var>A</var>
 <dfn export for=url id=concept-url-equals lt=equal>equals</dfn> <a for=/>URL</a> <var>B</var>, with
 an optional boolean <dfn export for="url/equals"><var>exclude fragments</var></dfn> (default false),
@@ -3530,11 +3530,13 @@ method steps are:
 
 <hr id=urlutils-members>
 
+<div algorithm="href getter">
 <p>The <dfn attribute for=URL><code>href</code></dfn> getter steps and the
 <dfn method for=URL><code>toJSON()</code></dfn> method steps are to return the
 <a lt="URL serializer">serialization</a> of <a>this</a>'s <a for=URL>URL</a>.
+</div>
 
-<div algorithm>
+<div algorithm="href setter">
 <p>The <code><a attribute for=URL>href</a></code> setter steps are:
 
 <ol>
@@ -3578,7 +3580,7 @@ method steps are:
 <a for=URL>URL</a>'s <a for=url>username</a>.
 </div>
 
-<div algorithm>
+<div algorithm="username setter">
 <p>The <code><a attribute for=URL>username</a></code> setter steps are:
 
 <ol>
@@ -3594,7 +3596,7 @@ method steps are:
 <a for=URL>URL</a>'s <a for=url>password</a>.
 </div>
 
-<div algorithm>
+<div algorithm="password setter">
 <p>The <code><a attribute for=URL>password</a></code> setter steps are:
 
 <ol>
@@ -3622,7 +3624,7 @@ method steps are:
 </ol>
 </div>
 
-<div algorithm>
+<div algorithm="host setter">
 <p>The <code><a attribute for=URL>host</a></code> setter steps are:
 
 <ol>
@@ -3651,7 +3653,7 @@ one might have assumed the setter to always "reset" both.
 </ol>
 </div>
 
-<div algorithm>
+<div algorithm="hostname setter">
 <p>The <code><a attribute for=URL>hostname</a></code> setter steps are:
 
 <ol>
@@ -3675,7 +3677,7 @@ one might have assumed the setter to always "reset" both.
 </ol>
 </div>
 
-<div algorithm>
+<div algorithm="port setter">
 <p>The <code><a attribute for=URL>port</a></code> setter steps are:
 
 <ol>
@@ -3696,7 +3698,7 @@ one might have assumed the setter to always "reset" both.
 <a>URL path serializing</a> <a>this</a>'s <a for=URL>URL</a>.
 </div>
 
-<div algorithm>
+<div algorithm="pathname setter">
 <p>The <code><a attribute for=URL>pathname</a></code> setter steps are:
 
 <ol>
@@ -3721,7 +3723,7 @@ one might have assumed the setter to always "reset" both.
 </ol>
 </div>
 
-<div algorithm>
+<div algorithm="search setter">
 <p>The <code><a attribute for=URL>search</a></code> setter steps are:
 
 <ol>
@@ -3775,7 +3777,7 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
 </ol>
 </div>
 
-<div algorithm>
+<div algorithm="hash setter">
 <p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
