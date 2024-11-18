@@ -756,14 +756,14 @@ not equivalent and typically treated as distinct.
 
 <p>An <dfn export>IP address</dfn> is an <a>IPv4 address</a> or an <a>IPv6 address</a>.
 
-<p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a 32-bit unsigned integer that identifies a
-network address.
+<p>An <dfn export id=concept-ipv4>IPv4 address</dfn> is a <a for=/>32-bit unsigned integer</a> that
+identifies a network address.
 [[RFC791]]
 
-<p>An <dfn export id=concept-ipv6>IPv6 address</dfn> is a 128-bit unsigned integer that identifies a
-network address. For the purposes of this standard it is represented as a <a for=/>list</a> of eight
-16-bit unsigned integers, also known as
-<dfn export lt="IPv6 piece" id=concept-ipv6-piece>IPv6 pieces</dfn>.
+<p>An <dfn export id=concept-ipv6>IPv6 address</dfn> is a <a for=/>128-bit unsigned integer</a> that
+identifies a network address. For the purposes of this standard it is defined as of a
+<a for=/>list</a> of 8 <a for=/>16-bit unsigned integers</a>, also known as its
+<dfn export for="IPv6 address" id=concept-ipv6-piece>pieces</dfn>.
 [[RFC4291]]
 
 <p class="note">Support for <code>&lt;zone_id></code> is
@@ -1217,7 +1217,8 @@ these steps. They return failure or a <a for=/>tuple</a> of a number and a boole
 actually doing that with the editors of this document first.
 
 <ol>
- <li><p>Let <var>address</var> be a new <a>IPv6 address</a> whose <a>IPv6 pieces</a> are all 0.
+ <li><p>Let <var>address</var> be a new <a>IPv6 address</a> whose <a for="IPv6 address">pieces</a>
+ are all 0.
 
  <li><p>Let <var>pieceIndex</var> be 0.
 
@@ -1445,14 +1446,14 @@ actually doing that with the editors of this document first.
  <li><p>Let <var>output</var> be the empty string.
 
  <li>
-  <p>Let <var>compress</var> be an index to the first <a>IPv6 piece</a> in the first longest
-  sequences of <var>address</var>'s <a>IPv6 pieces</a> that are 0.
+  <p>Let <var>compress</var> be an index to the first item in the first longest sequences of
+  <var>address</var>'s <a for="IPv6 address">pieces</a> that are 0.
 
   <p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to
   the second 0.
 
- <li><p>If there is no sequence of <var>address</var>'s <a>IPv6 pieces</a> that are 0 that is
- longer than 1, then set <var>compress</var> to null.
+ <li><p>If there is no sequence of <var>address</var>'s <a for="IPv6 address">pieces</a> that are 0
+ that is longer than 1, then set <var>compress</var> to null.
 
  <li><p>Let <var>ignore0</var> be false.
 
@@ -1713,8 +1714,8 @@ It is initially the empty string.
  </table>
 </div>
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
-null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
+<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either null or a
+<a for=/>16-bit unsigned integer</a> that identifies a networking port. It is initially null.
 
 <p>A <a for=/>URL</a>'s
 <dfn export for=url id=concept-url-path oldids=non-relative-flag,url-cannot-be-a-base-url-flag>path</dfn>
@@ -1974,8 +1975,8 @@ followed by a <a>path-absolute-URL string</a>.
 
 <ul class=brief>
  <li><p>the empty string
- <li><p>one or more <a>ASCII digits</a> representing a decimal number no greater than
- 2<sup>16</sup>&nbsp;&minus;&nbsp;1.
+ <li><p>one or more <a>ASCII digits</a> representing a decimal number that is a
+ <a for=/>16-bit unsigned integer</a>.
 </ul>
 
 <p>A <dfn export oldids=syntax-url-scheme-relative>scheme-relative-URL string</dfn> must be
@@ -2577,7 +2578,7 @@ and then runs these steps:
          by <var>buffer</var> in radix-10 using <a>ASCII digits</a> for digits with values
          0 through 9.
 
-         <li><p>If <var>port</var> is greater than 2<sup>16</sup>&nbsp;&minus;&nbsp;1,
+         <li><p>If <var>port</var> is not a <a for=/>16-bit unsigned integer</a>,
          <a>port-out-of-range</a> <a>validation error</a>, return failure.
 
          <li><p>Set <var>url</var>'s <a for=url>port</a> to null, if <var>port</var> is
