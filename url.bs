@@ -761,8 +761,8 @@ identifies a network address.
 [[RFC791]]
 
 <p>An <dfn export id=concept-ipv6>IPv6 address</dfn> is a <a for=/>128-bit unsigned integer</a> that
-identifies a network address. For the purposes of this standard it is defined as of a
-<a for=/>list</a> of 8 <a for=/>16-bit unsigned integers</a>, also known as its
+identifies a network address. This integer is composed of a <a for=/>list</a> of 8
+<a for=/>16-bit unsigned integers</a>, also known as an <a for=/>IPv6 address</a>'s
 <dfn export for="IPv6 address" id=concept-ipv6-piece>pieces</dfn>.
 [[RFC4291]]
 
@@ -1445,15 +1445,15 @@ actually doing that with the editors of this document first.
 <ol>
  <li><p>Let <var>output</var> be the empty string.
 
+ <li><p>Let <var>compress</var> be null.
+
  <li>
-  <p>Let <var>compress</var> be an index to the first item in the first longest sequences of
+  <p>If multiple <var>address</var>'s <a for="IPv6 address">pieces</a> are 0 sequentially, then set
+  <var>compress</var> to the index of the first item of the first of the longest sequences of
   <var>address</var>'s <a for="IPv6 address">pieces</a> that are 0.
 
   <p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to
   the second 0.
-
- <li><p>If there is no sequence of <var>address</var>'s <a for="IPv6 address">pieces</a> that are 0
- that is longer than 1, then set <var>compress</var> to null.
 
  <li><p>Let <var>ignore0</var> be false.
 
