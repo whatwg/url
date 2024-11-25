@@ -1445,20 +1445,14 @@ actually doing that with the editors of this document first.
 <ol>
  <li><p>Let <var>output</var> be the empty string.
 
- <li><p>Let <var>compress</var> be null.
-
- <li>
-  <p>If multiple <var>address</var>'s <a for="IPv6 address">pieces</a> are 0 sequentially, then set
-  <var>compress</var> to the index of the first item of the first of the longest sequences of
-  <var>address</var>'s <a for="IPv6 address">pieces</a> that are 0.
-
-  <p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to
-  the second 0.
+ <li><p>Let <var>compress</var> be the result of
+ <a for=/>finding the IPv6 address compressed piece index</a> given <var>address</var>.
 
  <li><p>Let <var>ignore0</var> be false.
 
  <li>
-  <p><a for=set>For each</a> <var>pieceIndex</var> in the range 0 to 7, inclusive:
+  <p><a for=set>For each</a> <var>pieceIndex</var> of <var>address</var>'s
+  <a for="IPv6 address">pieces</a>'s <a for=list>indices</a>:
 
   <ol>
    <li><p>If <var>ignore0</var> is true and <var>address</var>[<var>pieceIndex</var>] is 0, then
@@ -1470,8 +1464,8 @@ actually doing that with the editors of this document first.
     <p>If <var>compress</var> is <var>pieceIndex</var>, then:
 
     <ol>
-     <li><p>Let <var>separator</var> be "<code>::</code>" if <var>pieceIndex</var> is 0, and
-     U+003A (:) otherwise.
+     <li><p>Let <var>separator</var> be "<code>::</code>" if <var>pieceIndex</var> is 0; otherwise
+     U+003A (:).
 
      <li><p>Append <var>separator</var> to <var>output</var>.
 
@@ -1490,6 +1484,57 @@ actually doing that with the editors of this document first.
 <p class=note>This algorithm requires the recommendation from
 A Recommendation for IPv6 Address Text Representation.
 [[RFC5952]]
+</div>
+
+<div algorithm>
+<p>To <dfn>find the IPv6 address compressed piece index</dfn> given an <a for=/>IPv6 address</a>
+<var>address</var>:
+
+<ol>
+ <li><p>Let <var>longestIndex</var> be null.
+
+ <li><p>Let <var>longestSize</var> be 1.
+
+ <li><p>Let <var>foundIndex</var> be null.
+
+ <li><p>Let <var>foundSize</var> be 0.
+
+ <li>
+  <p><a for=list>For each</a> <var>pieceIndex</var> of <var>address</var>'s
+  <a for="IPv6 address">pieces</a>'s <a for=list>indices</a>:
+
+  <ol>
+   <li>
+    <p>If <var>address</var>'s <a for="IPv6 address">pieces</a>[<var>pieceIndex</var>] is not 0:
+
+    <ol>
+     <li><p>If <var>foundSize</var> is greater than <var>longestSize</var>, then set
+     <var>longestIndex</var> to <var>foundIndex</var> and <var>longestSize</var> to
+     <var>foundSize</var>.
+
+     <li>Set <var>foundIndex</var> to null.
+
+     <li>Set <var>foundSize</var> to 0.
+    </ol>
+
+   <li>
+    <p>Otherwise:
+
+    <ol>
+     <li><p>If <var>foundIndex</var> is null, then set <var>foundIndex</var> to
+     <var>pieceIndex</var>.
+
+     <li><p>Increment <var>foundSize</var> by 1.
+    </ol>
+  </ol>
+
+ <li><p>If <var>foundSize</var> is greater than <var>longestSize</var>, then return
+ <var>foundIndex</var>.
+
+ <li><p>Return <var>longestIndex</var>.
+</ol>
+
+<p class=example id=example-e2b3492e>In <code>0:f:0:0:f:f:0:0</code> it would point to the second 0.
 </div>
 
 
