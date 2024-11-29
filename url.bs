@@ -905,10 +905,10 @@ concepts.
 <ol>
  <li>
   <p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
-  with <i>domain_name</i> set to <var>domain</var>, <i>UseSTD3ASCIIRules</i> set to
-  <var>beStrict</var>, <i>CheckHyphens</i> set to <var>beStrict</var>, <i>CheckBidi</i> set to true,
-  <i>CheckJoiners</i> set to true, <i>Transitional_Processing</i> set to false,
-  and <i>VerifyDnsLength</i> set to <var>beStrict</var>. [[!UTS46]]
+  with <i>domain_name</i> set to <var>domain</var>, <i>CheckHyphens</i> set to <var>beStrict</var>,
+  <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to
+  <var>beStrict</var>, <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to
+  <var>beStrict</var>, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
 
   <p class=note>If <var>beStrict</var> is false, <var>domain</var> is an <a>ASCII string</a>, and
   <a>strictly splitting</a> <var>domain</var> on U+002E (.) does not produce any
@@ -937,8 +937,8 @@ concepts.
  <li><p>Let <var>result</var> be the result of running
  <a abstract-op lt=ToUnicode>Unicode ToUnicode</a> with <i>domain_name</i> set to <var>domain</var>,
  <i>CheckHyphens</i> set to <var>beStrict</var>, <i>CheckBidi</i> set to true, <i>CheckJoiners</i>
- set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, and
- <i>Transitional_Processing</i> set to false. [[!UTS46]]
+ set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, <i>Transitional_Processing</i>
+ set to false, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
 
  <li><p>Signify <a>domain-to-Unicode</a> <a>validation errors</a> for any returned errors, and then,
  return <var>result</var>.
