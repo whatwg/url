@@ -952,20 +952,13 @@ concepts.
 <a>valid IPv4-address string</a>, or: U+005B ([), followed by a
 <a>valid IPv6-address string</a>, followed by U+005D (]).
 
-<p>A <var>domain</var> is a <dfn>valid domain</dfn> if these steps return success:
+<p>A <a for=/>string</a> <var>input</var> is a <dfn>valid domain</dfn> if these steps return true:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running <a>domain to ASCII</a> with <var>domain</var>
+ <li><p>Let <var>domain</var> be the result of running <a>domain to ASCII</a> with <var>input</var>
  and true.
 
- <li><p>If <var>result</var> is failure, then return failure.
-
- <li><p>Set <var>result</var> to the result of running <a>domain to Unicode</a> with
- <var>result</var> and true.
-
- <li><p>If <var>result</var> contains any errors, return failure.
-
- <li><p>Return success.
+ <li><p>Return false if <var>domain</var> is failure; otherwise true.
 </ol>
 
 <p class=XXX>Ideally we define this in terms of a sequence of code points that make up a
