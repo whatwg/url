@@ -117,16 +117,6 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     recorded, user agents are encouraged to pass those along.
    <td class=yes>Yes
   <tr>
-   <td><dfn>domain-to-Unicode</dfn>
-   <td>
-    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
-    <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
-   <td class=no>·
- <tbody>
-  <tr>
-   <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
-  <!-- host parser -->
-  <tr>
    <td><dfn>domain-invalid-code-point</dfn>
    <td>
     <p>The input's <a for=/>host</a> contains a <a>forbidden domain code point</a>.
@@ -137,6 +127,15 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
      <p>"<code>https://exa%23mple.org</code>"
     </div>
    <td class=yes>Yes
+  <tr>
+   <td><dfn>domain-to-Unicode</dfn>
+   <td>
+    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
+    <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
+   <td class=no>·
+ <tbody>
+  <tr>
+   <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
   <!-- opaque-host parser -->
   <tr>
    <td><dfn>host-invalid-code-point</dfn>
@@ -899,7 +898,7 @@ concepts.
 <h3 id=idna>IDNA</h3>
 
 <div algorithm>
-<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a>string</a>
+<p>The <dfn id=concept-domain-to-ascii>domain to ASCII</dfn> algorithm, given a <a for=/>string</a>
 <var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
@@ -920,6 +919,18 @@ concepts.
 
  <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
  return failure.
+
+ <li>
+  <p>If <var>beStrict</var> is false and <var>result</var> contains a
+  <a>forbidden domain code point</a>, <a>domain-invalid-code-point</a> <a>validation error</a>,
+  return failure.
+
+  <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
+  <a>forbidden domain code points</a> are a subset of those disallowed when <i>UseSTD3ASCIIRules</i>
+  is true. See also <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
+
+ <li><p><a for=/>Assert</a>: <var>result</var> does not contain a
+ <a>forbidden domain code point</a>.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -1033,9 +1044,6 @@ false), and then runs these steps. They return failure or a <a for=/>host</a>.
  <var>domain</var> and false.
 
  <li><p>If <var>asciiDomain</var> is failure, then return failure.
-
- <li><p>If <var>asciiDomain</var> contains a <a>forbidden domain code point</a>,
- <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
 
  <li><p>If <var>asciiDomain</var> <a lt="ends in a number checker">ends in a number</a>, then return
  the result of <a lt="IPv4 parser">IPv4 parsing</a> <var>asciiDomain</var>.
