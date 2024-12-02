@@ -917,20 +917,29 @@ concepts.
  <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
  return failure.
 
- <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
- return failure.
+ <li>
+  <p>If <var>beStrict</var> is false:
+
+  <ol>
+   <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
+   return failure.
+
+   <li>
+    <p>If <var>result</var> contains a <a>forbidden domain code point</a>,
+    <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
+
+    <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
+    <a>forbidden domain code points</a> are a subset of those disallowed when
+    <i>UseSTD3ASCIIRules</i> is true. See also
+    <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
+  </ol>
 
  <li>
-  <p>If <var>beStrict</var> is false and <var>result</var> contains a
-  <a>forbidden domain code point</a>, <a>domain-invalid-code-point</a> <a>validation error</a>,
-  return failure.
+  <p><a for=/>Assert</a>: <var>result</var> is not the empty string and does not contain a
+  <a>forbidden domain code point</a>.
 
-  <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
-  <a>forbidden domain code points</a> are a subset of those disallowed when <i>UseSTD3ASCIIRules</i>
-  is true. See also <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
-
- <li><p><a for=/>Assert</a>: <var>result</var> does not contain a
- <a>forbidden domain code point</a>.
+  <p class=note><cite>Unicode IDNA Compatibility Processing</cite> guarantees this holds when
+  <var>beStrict</var> is true. [[UTS46]]
 
  <li><p>Return <var>result</var>.
 </ol>
