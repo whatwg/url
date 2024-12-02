@@ -934,8 +934,12 @@ concepts.
     <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
   </ol>
 
- <li><p><a for=/>Assert</a>: <var>result</var> is not the empty string and does not contain a
- <a>forbidden domain code point</a>.
+ <li>
+  <p><a for=/>Assert</a>: <var>result</var> is not the empty string and does not contain a
+  <a>forbidden domain code point</a>.
+
+  <p class=note><cite>Unicode IDNA Compatibility Processing</cite> guarantees this holds when
+  <var>beStrict</var> is true. [[UTS46]]
 
  <li><p>Return <var>result</var>.
 </ol>
