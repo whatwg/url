@@ -468,11 +468,11 @@ U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and U+003E (>).
 U+0027 (').
 
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
-<a>query percent-encode set</a> and U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
+<a>query percent-encode set</a> and U+003F (?), U+005E (^), U+0060 (`), U+007B ({), and U+007D (}).
 
 <p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
 <a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
-U+005B ([) to U+005E (^), inclusive, and U+007C (|).
+U+005B ([) to U+005D (]), inclusive, and U+007C (|).
 
 <p>The <dfn export>component percent-encode set</dfn> is the <a>userinfo percent-encode set</a> and
 U+0024 ($) to U+0026 (&amp;), inclusive, U+002B (+), and U+002C (,).
