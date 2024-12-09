@@ -2435,6 +2435,9 @@ and then runs these steps:
        <li><p>If <a>c</a> is U+005C (\), <a>invalid-reverse-solidus</a>
        <a>validation error</a>.
 
+       <li><p>If <a>c</a> is U+002F (/) and <a>c</a> is the last character in the state machine, then,
+       set <var>url</var>'s <var>path</var> to U+002F (/) and return <var>output</var>.
+
        <li><p>Set <var>state</var> to <a>special authority ignore slashes state</a>.
       </ol>
 
