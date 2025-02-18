@@ -180,14 +180,14 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
    <td><dfn>IPv6-unclosed</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> is missing the closing U+005D (]).
-    <p class=example id=example-ipv6-unclosed>"<code>https://[::1</code>"
+    <p class=example id=example-ipv6-unclosed>"<code>https://\[::1</code>"
    <td class=yes>Yes
   <!-- IPv6 parser -->
   <tr>
    <td><dfn>IPv6-invalid-compression</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> begins with improper compression.
-    <p class=example id=example-ipv6-invalid-compression>"<code>https://[:1]</code>"
+    <p class=example id=example-ipv6-invalid-compression>"<code>https://\[:1]</code>"
    <td class=yes>Yes
   <tr>
    <td><dfn>IPv6-too-many-pieces</dfn>
@@ -709,7 +709,7 @@ point <a for=/>URLs</a> from <var>A</var> can come from untrusted sources.
    <td><code>0xffffffff</code> (<a>opaque host</a>)
   <tr>
    <td><code>[0:0::1]</code>
-   <td colspan=2><code>[::1]</code> (<a for=/ lt="IPv6 address">IPv6</a>)
+   <td colspan=2><code>\[::1]</code> (<a for=/ lt="IPv6 address">IPv6</a>)
   <tr>
    <td><code>[0:0::1%5D</code>
    <td colspan=2 rowspan=2>Failure
@@ -1834,7 +1834,7 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
    <td>null
    <td>null
   <tr>
-   <td><code>file:///ada/Analytical%20Engine/README.md
+   <td><code>file:///ada/Analytical%20Engine/README.md</code>
    <td>"<code>file</code>"
    <td>null
    <td>null
