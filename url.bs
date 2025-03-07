@@ -17,11 +17,6 @@ spec: UTS46; urlPrefix: https://www.unicode.org/reports/tr46/
     type: abstract-op; text: ToUnicode; url: #ToUnicode
 </pre>
 
-<style>
-.yesno .yes { background: papayawhip; }
-.yesno .yes, .yesno .no { text-align: center; }
-</style>
-
 
 
 <h2 id=goals class=no-num>Goals</h2>
