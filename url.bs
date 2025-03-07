@@ -2913,24 +2913,31 @@ and then runs these steps:
    <dt><dfn export for="basic URL parser" id=cannot-be-a-base-url-path-state>opaque path state</dfn>
    <dd>
     <ol>
-     <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
-     string and <var>state</var> to <a>query state</a>.
+     <li><p>If <a>c</a> is U+003F (?), then set <var>buffer</var> to the empty string,
+     <var>url</var>'s <a for=url>query</a> to the empty string, and <var>state</var> to
+     <a>query state</a>.
 
-     <li><p>Otherwise, if <a>c</a> is U+0023 (#), then set <var>url</var>'s <a for=url>fragment</a>
-     to the empty string and <var>state</var> to <a>fragment state</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0023 (#), then set <var>buffer</var> to the empty string,
+     <var>url</var>'s <a for=url>fragment</a> to the empty string, and <var>state</var> to
+     <a>fragment state</a>.
+
+     <li><p>Otherwise, if <a>c</a> is U+0020 SPACE, then append <a>c</a> to <var>buffer</var>.
 
      <li>
-      <p>Otherwise:
+      <p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>:
 
       <ol>
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>, not a <a>URL code point</a>, and not
-       U+0025 (%), <a>invalid-URL-unit</a> <a>validation error</a>.
+       <li><p>If <a>c</a> is not a <a>URL code point</a> and not U+0025 (%), <a>invalid-URL-unit</a>
+       <a>validation error</a>.
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
 
-       <li><p>If <a>c</a> is not the <a>EOF code point</a>,
-       <a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
+       <li><p>Append <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
+
+       <li><p>Set <var>buffer</var> to the empty string.
+
+       <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
        <a>C0 control percent-encode set</a> and append the result to <var>url</var>'s
        <a for=url>path</a>.
       </ol>
@@ -3438,23 +3445,6 @@ interface URL {
 </ul>
 
 <div algorithm>
-<p>To <dfn>potentially strip trailing spaces from an opaque path</dfn> given a {{URL}} object
-<var>url</var>:
-
-<ol>
- <li><p>If <var>url</var>'s <a for=URL>URL</a> does not have an <a for=url>opaque path</a>, then
- return.
-
- <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>fragment</a> is non-null, then return.
-
- <li><p>If <var>url</var>'s <a for=URL>URL</a>'s <a for=url>query</a> is non-null, then return.
-
- <li><p>Remove all trailing U+0020 SPACE <a for=/>code points</a> from <var>url</var>'s
- <a for=URL>URL</a>'s <a for=url>path</a>.
-</ol>
-</div>
-
-<div algorithm>
 <p>The <dfn>API URL parser</dfn> takes a <a>scalar value string</a> <var>url</var> and an optional
 null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs these steps:
 
@@ -3781,19 +3771,9 @@ one might have assumed the setter to always "reset" both.
 <ol>
  <li><p>Let <var>url</var> be <a>this</a>'s <a for=URL>URL</a>.
 
- <li>
-  <p>If the given value is the empty string:
-
-  <ol>
-   <li><p>Set <var>url</var>'s <a for=url>query</a> to null.
-
-   <li><p><a for=list>Empty</a> <a>this</a>'s <a for=URL>query object</a>'s
-   <a for=URLSearchParams>list</a>.
-
-   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
-
-   <li><p>Return.
-  </ol>
+ <li><p>If the given value is the empty string, then set <var>url</var>'s <a for=url>query</a> to
+ null, <a for=list>empty</a> <a>this</a>'s <a for=URL>query object</a>'s
+ <a for=URLSearchParams>list</a>, and return.
 
  <li><p>Let <var>input</var> be the given value with a single leading U+003F (?) removed, if any.
 
@@ -3806,11 +3786,6 @@ one might have assumed the setter to always "reset" both.
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
  result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
 </ol>
-
-<p class=note>The {{URL/search}} setter has the potential to remove trailing U+0020 SPACE
-<a for=/>code points</a> from <a>this</a>'s <a for=URL>URL</a>'s <a for=url>path</a>. It does this
-so that running the <a>URL parser</a> on the output of running the <a>URL serializer</a> on
-<a>this</a>'s <a for=URL>URL</a> does not yield a <a for=/>URL</a> that is not <a for=url>equal</a>.
 </div>
 
 <div algorithm>
@@ -3833,16 +3808,8 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
 <p>The <code><a attribute for=URL>hash</a></code> setter steps are:
 
 <ol>
- <li>
-  <p>If the given value is the empty string:
-
-  <ol>
-   <li><p>Set <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> to null.
-
-   <li><p><a>Potentially strip trailing spaces from an opaque path</a> with <a>this</a>.
-
-   <li><p>Return.
-  </ol>
+ <li><p>If the given value is the empty string, then set <a>this</a>'s <a for=URL>URL</a>'s
+ <a for=url>fragment</a> to null and return.
 
  <li><p>Let <var>input</var> be the given value with a single leading U+0023 (#) removed, if any.
 
@@ -3852,9 +3819,6 @@ so that running the <a>URL parser</a> on the output of running the <a>URL serial
  <a for=URL>URL</a> as <a for="basic URL parser"><i>url</i></a> and <a>fragment state</a> as
  <a for="basic URL parser"><i>state override</i></a>.
 </ol>
-
-<p class=note>The {{URL/hash}} setter has the potential to change <a>this</a>'s <a for=URL>URL</a>'s
-<a for=url>path</a> in a manner equivalent to the {{URL/search}} setter.
 </div>
 
 
@@ -3925,10 +3889,6 @@ console.log(url.searchParams.get('b')); // "~"</code></pre>
  a {{URL}} object, initially null.
 </ul>
 
-<p class=note>A {{URLSearchParams}} object with a non-null <a for=URLSearchParams>URL object</a> has
-the potential to change that object's <a for=url>path</a> in a manner equivalent to the {{URL}}
-object's {{URL/search}} and {{URL/hash}} setters.
-
 <div algorithm>
 <p>To <dfn for=URLSearchParams oldids=concept-urlsearchparams-new>initialize</dfn> a
 {{URLSearchParams}} object <var>query</var> with <var>init</var>:
@@ -3977,10 +3937,6 @@ object <var>query</var>:
 
  <li><p>Set <var>query</var>'s <a for=URLSearchParams>URL object</a>'s <a for=URL>URL</a>'s
  <a for=url>query</a> to <var>serializedQuery</var>.
-
- <li><p>If <var>serializedQuery</var> is null, then
- <a>potentially strip trailing spaces from an opaque path</a> with <var>query</var>'s
- <a for=URLSearchParams>URL object</a>.
 </ol>
 </div>
 
