@@ -2913,15 +2913,21 @@ and then runs these steps:
    <dt><dfn export for="basic URL parser" id=cannot-be-a-base-url-path-state>opaque path state</dfn>
    <dd>
     <ol>
-     <li><p>If <a>c</a> is U+003F (?), then set <var>buffer</var> to the empty string,
-     <var>url</var>'s <a for=url>query</a> to the empty string, and <var>state</var> to
-     <a>query state</a>.
+     <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
+     string and <var>state</var> to <a>query state</a>.
 
-     <li><p>Otherwise, if <a>c</a> is U+0023 (#), then set <var>buffer</var> to the empty string,
-     <var>url</var>'s <a for=url>fragment</a> to the empty string, and <var>state</var> to
-     <a>fragment state</a>.
+     <li><p>Otherwise, if <a>c</a> is U+0023 (#), then set <var>url</var>'s <a for=url>fragment</a>
+     to the empty string and <var>state</var> to <a>fragment state</a>.
 
-     <li><p>Otherwise, if <a>c</a> is U+0020 SPACE, then append <a>c</a> to <var>buffer</var>.
+     <li>
+      <p>Otherwise, if <a>c</a> is U+0020 SPACE:
+
+      <ol>
+       <li><p>If <a>remaining</a> starts with U+003F (?) or U+003F (#), then append
+       "<code>%20</code>" to <var>url</var>'s <a for=url>path</a>.
+
+       <li><p>Otherwise, append U+0020 SPACE to <var>url</var>'s <a for=url>path</a>.
+      </ol>
 
      <li>
       <p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>:
@@ -2932,10 +2938,6 @@ and then runs these steps:
 
        <li><p>If <a>c</a> is U+0025 (%) and <a>remaining</a> does not start with two
        <a>ASCII hex digits</a>, <a>invalid-URL-unit</a> <a>validation error</a>.
-
-       <li><p>Append <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
-
-       <li><p>Set <var>buffer</var> to the empty string.
 
        <li><p><a for="code point">UTF-8 percent-encode</a> <a>c</a> using the
        <a>C0 control percent-encode set</a> and append the result to <var>url</var>'s
