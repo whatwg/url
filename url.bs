@@ -2538,7 +2538,7 @@ and then runs these steps:
      <a>file host state</a>.
 
      <li>
-      <p>Otherwise, if <a>c</a> is U+003A (:) and <var>insideBrackets</var> is false, then:
+      <p>Otherwise, if <a>c</a> is U+003A (:) and <var>insideBrackets</var> is false:
 
       <ol>
        <li><p>If <var>buffer</var> is the empty string, <a>host-missing</a> <a>validation error</a>,
@@ -2546,7 +2546,7 @@ and then runs these steps:
        <!-- No URLs with port, but without host. -->
 
        <li><p>If <var>state override</var> is given and <var>state override</var> is
-       <a>hostname state</a>, then return.
+       <a>hostname state</a>, then return failure.
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
@@ -2566,7 +2566,7 @@ and then runs these steps:
        <li><p><var>url</var> <a>is special</a> and <a>c</a> is U+005C (\)
       </ul>
 
-      <p>then decrease <var>pointer</var> by 1, and then:
+      <p>then decrease <var>pointer</var> by 1, and:
 
       <ol>
        <li><p>If <var>url</var> <a>is special</a> and <var>buffer</var> is the empty string,
@@ -2576,7 +2576,7 @@ and then runs these steps:
 
        <li><p>Otherwise, if <var>state override</var> is given, <var>buffer</var> is the empty
        string, and either <var>url</var> <a>includes credentials</a> or <var>url</var>'s
-       <a for=url>port</a> is non-null, return.
+       <a for=url>port</a> is non-null, then return failure.
        <!-- API validation error -->
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
