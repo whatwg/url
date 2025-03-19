@@ -2547,6 +2547,7 @@ and then runs these steps:
 
        <li><p>If <var>state override</var> is given and <var>state override</var> is
        <a>hostname state</a>, then return failure.
+       <!-- API validation error -->
 
        <li><p>Let <var>host</var> be the result of <a>host parsing</a> <var>buffer</var> with
        <var>url</var> <a>is not special</a>.
