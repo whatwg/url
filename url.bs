@@ -2613,16 +2613,16 @@ and then runs these steps:
       <p>Otherwise, if one of the following is true:
 
       <ul class=brief>
-       <li><p><a>c</a> is the <a>EOF code point</a>, U+002F (/), U+003F (?), or U+0023 (#)
-       <li><p><var>url</var> <a>is special</a> and <a>c</a> is U+005C (\)
-       <li><p><var>state override</var> is given
+       <li><p><a>c</a> is the <a>EOF code point</a>, U+002F (/), U+003F (?), or U+0023 (#);
+       <li><p><var>url</var> <a>is special</a> and <a>c</a> is U+005C (\); or
+       <li><p><var>state override</var> is given,
       </ul>
 
       <p>then:
 
       <ol>
        <li>
-        <p>If <var>buffer</var> is not the empty string, then:
+        <p>If <var>buffer</var> is not the empty string:
 
         <ol>
          <li><p>Let <var>port</var> be the mathematical integer value that is represented
@@ -2636,9 +2636,14 @@ and then runs these steps:
          <var>url</var>'s <a for=url>scheme</a>'s <a>default port</a>; otherwise to <var>port</var>.
 
          <li><p>Set <var>buffer</var> to the empty string.
+
+         <li><p>If <var>state override</var> is given, then return.
+         <!-- API validation error: we'd have to check what c is at this point if we cared about
+              this. In particular when it's not EOF it's a bit dodgy. -->
         </ol>
 
-       <li><p>If <var>state override</var> is given, then return.
+       <li><p>If <var>state override</var> is given, then return failure.
+       <!-- API validation error -->
 
        <li><p>Set <var>state</var> to <a>path start state</a> and decrease <var>pointer</var> by 1.
       </ol>
@@ -4188,6 +4193,7 @@ Sam Ruby,
 Sam Sneddon,
 Santiago M. Mola,
 Sebastian Mayr,
+Shannon Booth,<!-- shannonbooth; GitHub -->
 Simon Pieters,
 Simon Sapin,
 Steven Vachon,
