@@ -4062,8 +4062,8 @@ sorted.sort()</code></pre>
 
 <ol>
  <li><p>Sort all <a for=/>tuples</a> in <a>this</a>'s <a for=URLSearchParams>list</a>, if any, by
- their names. Sorting must be done by comparison of code units. The relative order between
- <a for=/>tuples</a> with equal names must be preserved.
+ their names. Sorting must be done using the <a>code unit less than</a> algorithm. The relative
+ order between <a for=/>tuples</a> with equal names must be preserved.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
