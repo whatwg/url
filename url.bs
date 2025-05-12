@@ -4061,9 +4061,9 @@ sorted.sort()</code></pre>
 <p>The <dfn method for=URLSearchParams><code>sort()</code></dfn> method steps are:
 
 <ol>
- <li><p>Sort all <a for=/>tuples</a> in <a>this</a>'s <a for=URLSearchParams>list</a>, if any, by
- their names. Sorting must be done by comparison of code units. The relative order between
- <a for=/>tuples</a> with equal names must be preserved.
+ <li><p>Set <a>this</a>'s <a for=URLSearchParams>list</a> to the result of
+ <a for=list>sorting in ascending order</a> <a>this</a>'s <a for=URLSearchParams>list</a>,
+ with |a| being less than |b| if |a|'s name is <a>code unit less than</a> |b|'s name.
 
  <li><p><a for=URLSearchParams>Update</a> <a>this</a>.
 </ol>
