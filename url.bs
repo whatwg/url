@@ -2917,7 +2917,7 @@ and then runs these steps:
       </ol>
     </ol>
 
-   <dt><dfn export for="basic URL parser" id=cannot-be-a-base-url-path-state>opaque path state</dfn>
+   <dt><dfn export for="basic URL parser" id=opaque-path-state>opaque path state</dfn>
    <dd>
     <ol>
      <li><p>If <a>c</a> is U+003F (?), then set <var>url</var>'s <a for=url>query</a> to the empty
