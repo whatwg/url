@@ -787,17 +787,9 @@ that is included on the <cite>Public Suffix List</cite>. [[!PSL]]
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
 
- <li><p>Let <var>trailingDot</var> be "<code>.</code>" if <var>host</var>
- <a for=string>ends with</a> "<code>.</code>"; otherwise the empty string.
-
- <li><p>Let <var>publicSuffix</var> be the public suffix determined by running the
+ <li><p>Return the public suffix determined by running the
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
-
- <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a> that does not
- <a for=string>end with</a> "<code>.</code>".
-
- <li><p>Return <var>publicSuffix</var> and <var>trailingDot</var> concatenated.
 </ol>
 </div>
 
@@ -811,17 +803,9 @@ any.
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
  <a for=host>public suffix</a> <a for=host>equals</a> <var>host</var>, then return null.
 
- <li><p>Let <var>trailingDot</var> be "<code>.</code>" if <var>host</var>
- <a for=string>ends with</a> "<code>.</code>"; otherwise the empty string.
-
- <li><p>Let <var>registrableDomain</var> be the registrable domain determined by running the
+ <li><p>Return the registrable domain determined by running the
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
-
- <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a> that does not
- <a for=string>end with</a> "<code>.</code>".
-
- <li><p>Return <var>registrableDomain</var> and <var>trailingDot</var> concatenated.
 </ol>
 </div>
 
