@@ -787,9 +787,13 @@ that is included on the <cite>Public Suffix List</cite>. [[!PSL]]
 <ol>
  <li><p>If <var>host</var> is not a <a>domain</a>, then return null.
 
- <li><p>Return the public suffix determined by running the
+ <li><p>Let <var>publicSuffix</var> be the public suffix determined by running the
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
+
+ <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a>.
+
+ <li><p>Return <var>publicSuffix</var>.
 </ol>
 </div>
 
@@ -803,9 +807,13 @@ any.
  <li><p>If <var>host</var>'s <a for=host>public suffix</a> is null or <var>host</var>'s
  <a for=host>public suffix</a> <a for=host>equals</a> <var>host</var>, then return null.
 
- <li><p>Return the registrable domain determined by running the
+ <li><p>Let <var>registrableDomain</var> be the registrable domain determined by running the
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
+
+ <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a>.
+
+ <li><p>Return <var>registrableDomain</var>.
 </ol>
 </div>
 
