@@ -2249,6 +2249,21 @@ and then runs these steps:
      append <a>c</a>, <a lt="ASCII lowercase">lowercased</a>, to <var>buffer</var>.
 
      <li>
+      <p>Otherwise, if <a>c</a> is U+003A (:), <var>buffer</var>'s <a for=string>length</a> is 1,
+      <var>buffer</var> contains only an <a>ASCII alpha</a>, and <a>remaining</a> starts with
+      U+005C (\):
+
+      <ol>
+       <li><p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>".
+
+       <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
+
+       <li><p>Set <var>buffer</var> to <var>buffer</var>, followed by U+003A (:).
+
+       <li><p>Set <var>state</var> to <a>path state</a>.
+      </ol>
+
+     <li>
       <p>Otherwise, if <a>c</a> is U+003A (:), then:
 
       <ol>
