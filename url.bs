@@ -794,7 +794,7 @@ that is included on the <cite>Public Suffix List</cite>. [[!PSL]]
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
 
- <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a> that ends with
+ <li><p>Assert: <var>publicSuffix</var> is an <a>ASCII string</a> that <a for=string>ends with</a>
  <var>trailingDot</var>.
 
  <li><p>Return <var>publicSuffix</var>.
@@ -818,8 +818,8 @@ any.
  <a href="https://github.com/publicsuffix/list/wiki/Format#formal-algorithm">Public Suffix List algorithm</a>
  with <var>host</var> as domain. [[!PSL]]
 
- <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a> that ends with
- <var>trailingDot</var>.
+ <li><p>Assert: <var>registrableDomain</var> is an <a>ASCII string</a> that
+ <a for=string>ends with</a> <var>trailingDot</var>.
 
  <li><p>Return <var>registrableDomain</var>.
 </ol>
