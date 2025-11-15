@@ -2258,7 +2258,7 @@ and then runs these steps:
 
        <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
-       <li><p>Set <var>buffer</var> to <var>input</var>'s <a for=string>code point</a> at <var>pointer</var> - 1, followed by U+003A (:).
+       <li><p>Set <var>buffer</var> to <a>c</a>, followed by U+003A (:).
 
        <li><p>Set <var>state</var> to <a>path state</a>.
       </ol>
