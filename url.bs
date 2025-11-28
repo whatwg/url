@@ -2258,7 +2258,7 @@ and then runs these steps:
 
        <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
 
-       <li><p>Let <var>driveLetter</var> be the first code point in <var>buffer</var>.
+       <li><p>Let <var>driveLetter</var> be the code point at position <var>pointer</var> − 1 in <var>input</var>.
 
        <li><p>Set <var>buffer</var> to <var>driveLetter</var>, followed by U+003A (:).
 
