@@ -3497,7 +3497,7 @@ null-or-<a>scalar value string</a> <var>base</var> (default null), and then runs
 
 <div algorithm>
 <p>Objects implementing the {{URL}} interface's <a for="platform object">extract an origin</a> steps are
-to return <a>this</a>'s <a>this</a>'s <a for=URL>URL</a>'s <a for=url>origin</a>. [[!HTML]]
+to return <a>this</a>'s <a for=URL>URL</a>'s <a for=url>origin</a>. [[!HTML]]
 </div>
 
 <hr>
