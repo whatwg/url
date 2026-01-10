@@ -1313,10 +1313,10 @@ actually doing that with the editors of this document first.
          <li><p>If <var>ipv4Piece</var> is null, then set <var>ipv4Piece</var> to <var>number</var>.
 
          <li><p>Otherwise, if <var>ipv4Piece</var> is 0, <a>IPv4-in-IPv6-invalid-code-point</a>
-          <a>validation error</a>, return failure.
+         <a>validation error</a>, return failure.
 
          <li><p>Otherwise, set <var>ipv4Piece</var> to <var>ipv4Piece</var> &times; 10 +
-          <var>number</var>.
+         <var>number</var>.
 
          <li><p>If <var>ipv4Piece</var> is greater than 255, <a>IPv4-in-IPv6-out-of-range-part</a>
          <a>validation error</a>, return failure.
