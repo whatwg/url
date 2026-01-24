@@ -448,30 +448,37 @@ the input, and percent-decoding results in a byte sequence with less 0x25 (%) by
 
 <hr>
 
-<p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> are the <a>C0 controls</a>
-and all <a>code points</a> greater than U+007E (~).
+<p>A <dfn>percent-encode set</dfn> is a <a for=/>set</a> of <a for=/>code points</a>.
 
-<p>The <dfn>fragment percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and U+0060 (`).
+<p>The <dfn oldids=simple-encode-set>C0 control percent-encode set</dfn> is a
+<a>percent-encode set</a> consisting of <a>C0 controls</a> and all <a>code points</a> greater than
+U+007E (~).
 
-<p>The <dfn>query percent-encode set</dfn> is the <a>C0 control percent-encode set</a> and
-U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and U+003E (>).
+<p>The <dfn>fragment percent-encode set</dfn> is a <a>percent-encode set</a> consisting of the
+<a>C0 control percent-encode set</a> and U+0020 SPACE, U+0022 ("), U+003C (&lt;), U+003E (>), and
+U+0060 (`).
+
+<p>The <dfn>query percent-encode set</dfn> is a <a>percent-encode set</a> consisting of the
+<a>C0 control percent-encode set</a> and U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (&lt;), and
+U+003E (>).
 
 <p class=note>The <a>query percent-encode set</a> cannot be defined in terms of the
 <a>fragment percent-encode set</a> due to the omission of U+0060 (`).
 
-<p>The <dfn>special-query percent-encode set</dfn> is the <a>query percent-encode set</a> and
-U+0027 (').
+<p>The <dfn>special-query percent-encode set</dfn> is is a <a>percent-encode set</a> consisting of
+the <a>query percent-encode set</a> and U+0027 (').
 
-<p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is the
-<a>query percent-encode set</a> and U+003F (?), U+005E (^), U+0060 (`), U+007B ({), and U+007D (}).
+<p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is a <a>percent-encode set</a>
+consisting of the <a>query percent-encode set</a> and U+003F (?), U+005E (^), U+0060 (`),
+U+007B ({), and U+007D (}).
 
-<p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is the
-<a>path percent-encode set</a> and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
-U+005B ([) to U+005D (]), inclusive, and U+007C (|).
+<p>The <dfn oldids=userinfo-encode-set>userinfo percent-encode set</dfn> is a
+<a>percent-encode set</a> consisting of the <a>path percent-encode set</a> and U+002F (/),
+U+003A (:), U+003B (;), U+003D (=), U+0040 (@), U+005B ([) to U+005D (]), inclusive, and U+007C (|).
 
-<p>The <dfn export>component percent-encode set</dfn> is the <a>userinfo percent-encode set</a> and
-U+0024 ($) to U+0026 (&amp;), inclusive, U+002B (+), and U+002C (,).
+<p>The <dfn export>component percent-encode set</dfn> is a <a>percent-encode set</a> consisting of
+the <a>userinfo percent-encode set</a> and U+0024 ($) to U+0026 (&amp;), inclusive, U+002B (+), and
+U+002C (,).
 
 <p class=note>This is used by <cite>HTML</cite> for
 {{NavigatorContentUtils/registerProtocolHandler()}}, and could also be used by other standards to
@@ -480,9 +487,9 @@ percent-encode data that can then be embedded in a <a for=/>URL</a>'s <a for=url
 <a for=string>UTF-8 percent-encode</a> gives identical results to JavaScript's
 <a method><code>encodeURIComponent()</code> [sic]</a>. [[HTML]] [[ECMA-262]]
 
-<p>The <dfn><code>application/x-www-form-urlencoded</code> percent-encode set</dfn> is the
-<a>component percent-encode set</a> and U+0021 (!), U+0027 (') to U+0029 RIGHT PARENTHESIS,
-inclusive, and U+007E (~).
+<p>The <dfn><code>application/x-www-form-urlencoded</code> percent-encode set</dfn> is a
+<a>percent-encode set</a> consisting of the <a>component percent-encode set</a> and U+0021 (!),
+U+0027 (') to U+0029 RIGHT PARENTHESIS, inclusive, and U+007E (~).
 
 <p class=note>The <a><code>application/x-www-form-urlencoded</code> percent-encode set</a> contains
 all code points, except the <a>ASCII alphanumeric</a>, U+002A (*), U+002D (-), U+002E (.), and
@@ -490,10 +497,17 @@ U+005F (_).
 
 <div algorithm>
 <p>To <dfn for=string>percent-encode after encoding</dfn>, given an <a for=/>encoding</a>
-<var>encoding</var>, <a for=/>scalar value string</a> <var>input</var>, a
-<var>percentEncodeSet</var>, and an optional boolean <var>spaceAsPlus</var> (default false):
+<var>encoding</var>, <a for=/>scalar value string</a> <var>input</var>, and a
+<a>percent-encode set</a> <var>percentEncodeSet</var>:
 
 <ol>
+ <li><p><a for=/>Assert</a>: <var>encoding</var> is <a for=/>UTF-8</a> or
+ <var>percentEncodeSet</var> is <a>special-query percent-encode set</a> or
+ <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>.
+
+ <li><p>Let <var>spaceAsPlus</var> be true if <var>percentEncodeSet</var> is
+ <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>; otherwise false.
+
  <li><p>Let <var>encoder</var> be the result of <a>getting an encoder</a> from <var>encoding</var>.
 
  <li><p>Let <var>inputQueue</var> be <var>input</var> converted to an <a for=/>I/O queue</a>.
@@ -594,7 +608,7 @@ result of running <a for=string>percent-encode after encoding</a> with <a for=/>
    <td>0xE2 0x80 0xBD 0x25 0x2E
   <tr>
    <td rowspan=3><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>,
-   <var>input</var>, and the <a>userinfo percent-encode set</a>
+   <var>input</var>, and the <a>special-query percent-encode set</a>
    <td>"<code> </code>"
    <td>"<code>%20</code>"
   <tr>
@@ -605,12 +619,12 @@ result of running <a for=string>percent-encode after encoding</a> with <a for=/>
    <td>"<code>%26%238253%3B</code>"
   <tr>
    <td><a for=string>Percent-encode after encoding</a> with <a>ISO-2022-JP</a>, <var>input</var>,
-   and the <a>userinfo percent-encode set</a>
+   and the <a>special-query percent-encode set</a>
    <td>"<code>¥</code>"
    <td>"<code>%1B(J\%1B(B</code>"
   <tr>
-   <td><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>, <var>input</var>, the
-   <a>userinfo percent-encode set</a>, and true
+   <td><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>, <var>input</var>, and
+   the <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>
    <td>"<code>1+1 ≡ 2%20‽</code>"
    <td>"<code>1+1+%81%DF+2%20%26%238253%3B</code>"
   <tr>
@@ -3380,13 +3394,12 @@ takes a list of name-value tuples <var>tuples</var>, with an optional <a for=/>e
    <a for=/>scalar value strings</a>.
 
    <li><p>Let <var>name</var> be the result of running
-   <a for=string>percent-encode after encoding</a> with <var>encoding</var>,
-   <var>tuple</var>'s name, the
-   <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
+   <a for=string>percent-encode after encoding</a> with <var>encoding</var>, <var>tuple</var>'s
+   name, and the <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>.
 
    <li><p>Let <var>value</var> be the result of running
    <a for=string>percent-encode after encoding</a> with <var>encoding</var>, <var>tuple</var>'s
-   value, the <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>, and true.
+   value, and the <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>.
 
    <li><p>If <var>output</var> is not the empty string, then append U+0026 (&amp;) to
    <var>output</var>.
@@ -4184,6 +4197,7 @@ Michael™ Smith,
 Michal Bukovský,
 Michel Suignard,
 Mikaël Geljić,
+Nikita Skovoroda,<!-- ChALkeR; GitHub -->
 Noah Levitt,
 Peter Occil,
 Philip Jägenstedt,
