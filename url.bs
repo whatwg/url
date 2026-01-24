@@ -465,7 +465,7 @@ U+003E (>).
 <p class=note>The <a>query percent-encode set</a> cannot be defined in terms of the
 <a>fragment percent-encode set</a> due to the omission of U+0060 (`).
 
-<p>The <dfn>special-query percent-encode set</dfn> is is a <a>percent-encode set</a> consisting of
+<p>The <dfn>special-query percent-encode set</dfn> is a <a>percent-encode set</a> consisting of
 the <a>query percent-encode set</a> and U+0027 (').
 
 <p>The <dfn oldids=default-encode-set>path percent-encode set</dfn> is a <a>percent-encode set</a>
