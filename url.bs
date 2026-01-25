@@ -626,7 +626,7 @@ result of running <a for=string>percent-encode after encoding</a> with <a for=/>
    <td><a for=string>Percent-encode after encoding</a> with <a>Shift_JIS</a>, <var>input</var>, and
    the <a><code>application/x-www-form-urlencoded</code> percent-encode set</a>
    <td>"<code>1+1 ≡ 2%20‽</code>"
-   <td>"<code>1+1+%81%DF+2%20%26%238253%3B</code>"
+   <td>"<code>1%2B1+%81%DF+2%2520%26%238253%3B</code>"
   <tr>
    <td rowspan=2><a for="code point">UTF-8 percent-encode</a> <var>input</var> using the
    <a>userinfo percent-encode set</a>
