@@ -2248,6 +2248,26 @@ and then runs these steps:
      append <a>c</a>, <a lt="ASCII lowercase">lowercased</a>, to <var>buffer</var>.
 
      <li>
+      <p>Otherwise, if <a>c</a> is U+003A (:), <var>buffer</var>'s <a for=string>length</a> is 1,
+      <var>buffer</var> contains only an <a>ASCII alpha</a>, and <a>remaining</a> starts with
+      U+005C (\):
+
+      <ol>
+       <li><p>Set <var>url</var>'s <a for=url>scheme</a> to "<code>file</code>".
+
+       <li><p>Set <var>url</var>'s <a for=url>host</a> to the empty string.
+
+       <li><p>Let <var>driveLetter</var> be the code point at position <var>pointer</var> − 1 in <var>input</var>.
+
+       <li><p>Set <var>buffer</var> to <var>driveLetter</var>, followed by U+003A (:).
+
+       <p class=note>This is a (platform-independent) Windows drive letter quirk. This preserves
+       the case of the drive letter.
+
+       <li><p>Set <var>state</var> to <a>path state</a>.
+      </ol>
+
+     <li>
       <p>Otherwise, if <a>c</a> is U+003A (:), then:
 
       <ol>
@@ -2884,10 +2904,16 @@ and then runs these steps:
          <li>
           <p>If <var>url</var>'s <a for=url>scheme</a> is "<code>file</code>", <var>url</var>'s
           <a for=url>path</a> <a for=list>is empty</a>, and <var>buffer</var> is a
-          <a>Windows drive letter</a>, then replace the second code point in <var>buffer</var> with
-          U+003A (:).
+          <a>Windows drive letter</a>, then:
 
-          <p class=note>This is a (platform-independent) Windows drive letter quirk.
+          <ol>
+           <li><p>Let <var>driveLetter</var> be the first code point in <var>buffer</var>.
+
+           <li><p>Set <var>buffer</var> to <var>driveLetter</var>, followed by U+003A (:).
+          </ol>
+
+          <p class=note>This is a (platform-independent) Windows drive letter quirk. This preserves
+          the case of the drive letter while normalizing the second code point to U+003A (:).
 
          <li><p><a for=list>Append</a> <var>buffer</var> to <var>url</var>'s <a for=url>path</a>.
         </ol>
