@@ -418,7 +418,7 @@ bytes that are not <a>ASCII bytes</a> might be insecure and is not recommended.
 
     <ol>
      <li><p>Let <var>bytePoint</var> be the two bytes after <var>byte</var> in <var>input</var>,
-     <a lt="isomorphic decode">decoded</a>, and then interpreted as hexadecimal number.
+     <a lt="isomorphic decode">decoded</a>, and then interpreted as a hexadecimal number.
      <!-- We should have a better definition for this. -->
 
      <li><p>Append a byte whose value is <var>bytePoint</var> to
@@ -1280,7 +1280,7 @@ actually doing that with the editors of this document first.
    <li><p>Let <var>value</var> and <var>length</var> be 0.
 
    <li><p>While <var>length</var> is less than 4 and <a>c</a> is an <a>ASCII hex digit</a>, set
-   <var>value</var> to <var>value</var> &times; 0x10 + <a>c</a> interpreted as hexadecimal number,
+   <var>value</var> to <var>value</var> &times; 0x10 + <a>c</a> interpreted as a hexadecimal number,
    and increase <var>pointer</var> and <var>length</var> by 1.
 
    <li>
