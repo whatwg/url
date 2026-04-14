@@ -107,8 +107,8 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
   <tr>
    <td><dfn id=validation-error-domain-to-ascii>domain-to-ASCII</dfn>
    <td>
-    <p><a abstract-op lt=ToASCII>Unicode ToASCII</a> records an error or returns the empty string.
-    [[UTS46]]
+    <p><a abstract-op lt=ToASCII>Unicode ToASCII</a> records an error when <i>CheckHyphens</i>,
+    <i>UseSTD3ASCIIRules</i>, and <i>VerifyDnsLength</i> are all set to true. [[UTS46]]
     <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
     recorded, user agents are encouraged to pass those along.
    <td class=yes>Yes<br>(unless <var>domain</var> is an <a>ASCII string</a>)
@@ -126,6 +126,14 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
+  <!-- domain host -->
+  <tr>
+   <td><dfn>domain-percent-encoded</dfn>
+   <td>
+    <p>The input's <a for=/>host</a> to be processed as a domain contains a
+    <a>percent-encoded byte</a>.
+    <p class=example id=example-domain-percent-encoded>"<code>https://exam%70le.org</code>"
+   <td class=no>·
   <!-- opaque-host parser -->
   <tr>
    <td><dfn>host-invalid-code-point</dfn>
@@ -907,61 +915,45 @@ concepts.
 steps. They return failure or a <a for=/>domain</a>.
 
 <ol>
+ <li><p>Let <var>strictResult</var> be the result of running <a>domain parser ToASCII</a> with
+ <var>domain</var> and true.
+
+ <li><p>If <var>strictResult</var> is a failure value, <a>domain-to-ASCII</a>
+ <a>validation error</a>. <span class=note>This step does not return.</span>
+
  <li>
   <p>If <var>beStrict</var> is true:
 
   <ol>
-   <li><p>Let <var>result</var> be the result of running
-   <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
-   <i>CheckHyphens</i> set to true, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
-   <i>UseSTD3ASCIIRules</i> set to true, <i>Transitional_Processing</i> set to false,
-   <i>VerifyDnsLength</i> set to true, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
+   <li><p>If <var>strictResult</var> is a failure value, then return failure.
 
-   <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
-   return failure.
-
-   <li><p>Return <var>result</var>.
+   <li><p>Return <var>strictResult</var>.
   </ol>
 
  <li><p>Let <var>result</var> be null.
 
  <li>
-  <p>If <var>domain</var> is an <a>ASCII string</a>:
-
-  <ol>
-   <li><p>If running <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to
-   <var>domain</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
-   <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to false,
-   <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to false, and
-   <i>IgnoreInvalidPunycode</i> set to false is a failure value, <a>domain-to-ASCII</a>
-   <a>validation error</a>. [[!UTS46]]
-
-   <li><p>Set <var>result</var> to <var>domain</var>, <a lt="ASCII lowercase">lowercased</a>.
-  </ol>
+  <p>If <var>domain</var> is an <a>ASCII string</a>, then set <var>result</var> to
+  <var>domain</var>, <a lt="ASCII lowercase">lowercased</a>.
 
   <p class=note>When <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>,
-  <a abstract-op lt=ToASCII>Unicode ToASCII</a> failures only result in <a>validation errors</a>
-  (instead of failing the whole algorithm) due to web compatibility. <i>IgnoreInvalidPunycode</i>
-  is not sufficient on its own, as Punycode can decode successfully yet still fail validity
-  criteria. E.g., <code>xn--8i7caa</code> decodes to <code>ｗｗｗ</code>, whose code points have
-  status "mapped". [[UTS46]]
+  the algorithm returns <var>domain</var> <a lt="ASCII lowercase">lowercased</a> regardless of
+  <a abstract-op lt=ToASCII>Unicode ToASCII</a>'s outcome, due to web compatibility.
+  <i>IgnoreInvalidPunycode</i> is not sufficient on its own, as Punycode can decode successfully
+  yet still fail validity criteria. E.g., <code>xn--8i7caa</code> decodes to <code>ｗｗｗ</code>,
+  whose code points have status "mapped". [[UTS46]]
 
  <li>
   <p>Otherwise:
 
   <ol>
-   <li><p>Set <var>result</var> to the result of running
-   <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
-   <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
-   <i>UseSTD3ASCIIRules</i> set to false, <i>Transitional_Processing</i> set to false,
-   <i>VerifyDnsLength</i> set to false, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
+   <li><p>Set <var>result</var> to the result of running <a>domain parser ToASCII</a> with
+   <var>domain</var> and false.
 
-   <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
-   return failure.
+   <li><p>If <var>result</var> is a failure value, then return failure.
   </ol>
 
- <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
- return failure.
+ <li><p>If <var>result</var> is the empty string, then return failure.
 
  <li>
   <p>If <var>result</var> contains a <a>forbidden domain code point</a>,
@@ -977,6 +969,16 @@ steps. They return failure or a <a for=/>domain</a>.
 <p class=note>This document and the web platform at large use
 <cite>Unicode IDNA Compatibility Processing</cite> and not IDNA2008. For instance,
 <code>☕.example</code> becomes <code>xn--53h.example</code> and not failure. [[UTS46]] [[RFC5890]]
+</div>
+
+<div algorithm>
+<p>The <dfn>domain parser ToASCII</dfn> algorithm, given a <a for=/>scalar value string</a>
+<var>domain</var> and a boolean <var>beStrict</var>, returns the result of running
+<a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
+<i>CheckHyphens</i> set to <var>beStrict</var>, <i>CheckBidi</i> set to true, <i>CheckJoiners</i>
+set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, <i>Transitional_Processing</i>
+set to false, <i>VerifyDnsLength</i> set to <var>beStrict</var>, and <i>IgnoreInvalidPunycode</i>
+set to false. [[!UTS46]]
 </div>
 
 <div algorithm>
@@ -1071,6 +1073,9 @@ false), and then runs these steps. They return failure or a <a for=/>host</a>.
  <a lt="opaque-host parser">opaque-host parsing</a> <var>input</var>.
 
  <li><p>Assert: <var>input</var> is not the empty string.
+
+ <li><p>If <var>input</var> contains a <a>percent-encoded byte</a>,
+ <a>domain-percent-encoded</a> <a>validation error</a>.
 
  <li>
   <p>Let <var>domain</var> be the result of running <a>UTF-8 decode without BOM</a> on the
@@ -1677,9 +1682,14 @@ unified model would be, please file an issue.
    <td>✅
    <td><code>file:///C:/</code>
   <tr>
-   <td><code>file://loc%61lhost/</code>
+   <td><code>file://localhost/</code>
    <td>
    <td>✅
+   <td><code>file:///</code>
+  <tr>
+   <td><code>file://loc%61lhost/</code>
+   <td>
+   <td>❌
    <td><code>file:///</code>
   <tr>
    <td><code>https://user:password@example.org/</code>
@@ -2014,7 +2024,8 @@ an <a>absolute-URL string</a>, optionally followed by U+0023 (#) and a <a>URL-fr
  <a>special scheme</a> and not an <a>ASCII case-insensitive</a> match for "<code>file</code>",
  followed by U+003A (:) and a <a>scheme-relative-special-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a>ASCII case-insensitive</a> match for a
- <a>special scheme</a>, followed by U+003A (:) and a <a>relative-URL string</a>
+ <a>special scheme</a>, followed by U+003A (:) and one of: a <a>scheme-relative-URL string</a>, a
+ <a>path-absolute-URL string</a>, or zero or more <a>URL units</a>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for
  "<code>file</code>", followed by U+003A (:) and a <a>scheme-relative-file-URL string</a>
 </ul>
@@ -2970,6 +2981,8 @@ and then runs these steps:
       <p>Otherwise, if <a>c</a> is U+0020 SPACE:
 
       <ol>
+       <li><p><a>Invalid-URL-unit</a> <a>validation error</a>.
+
        <li><p>If <a>remaining</a> starts with U+003F (?) or U+0023 (#), then append
        "<code>%20</code>" to <var>url</var>'s <a for=url>path</a>.
 
