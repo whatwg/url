@@ -1778,7 +1778,7 @@ It is initially the empty string.
  </table>
 </div>
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either null or a
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either null or a
 <a for=/>16-bit unsigned integer</a> that identifies a networking port. It is initially null.
 
 <p>A <a for=/>URL</a>'s
@@ -1845,7 +1845,7 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
   <tr>
    <td><code>file:///ada/Analytical%20Engine/README.md</code>
    <td>"<code>file</code>"
-   <td>null
+   <td>the empty string
    <td>null
    <td>« "<code>ada</code>", "<code>Analytical%20Engine</code>", "<code>README.md</code>" »
    <td>null
@@ -1935,7 +1935,7 @@ if all of the following are true:
  U+003F (?), or U+0023 (#).
 </ul>
 
-<div class=example id=example-start-with-a-widows-drive-letter>
+<div class=example id=example-start-with-a-windows-drive-letter>
  <table>
   <tr>
    <th>String
@@ -2943,7 +2943,7 @@ and then runs these steps:
       <p>Otherwise, if <a>c</a> is U+0020 SPACE:
 
       <ol>
-       <li><p>If <a>remaining</a> starts with U+003F (?) or U+003F (#), then append
+       <li><p>If <a>remaining</a> starts with U+003F (?) or U+0023 (#), then append
        "<code>%20</code>" to <var>url</var>'s <a for=url>path</a>.
 
        <li><p>Otherwise, append U+0020 SPACE to <var>url</var>'s <a for=url>path</a>.
@@ -3823,7 +3823,7 @@ one might have assumed the setter to always "reset" both.
 <p>The <dfn attribute for=URL><code>hash</code></dfn> getter steps are:
 
 <ol>
- <li><p>If <a>this</a>'s <a for=URL>URL</a>'s  <a for=url>fragment</a> is either null or the empty
+ <li><p>If <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a> is either null or the empty
  string, then return the empty string.
 
  <li><p>Return U+0023 (#), followed by <a>this</a>'s <a for=URL>URL</a>'s <a for=url>fragment</a>.
