@@ -4130,9 +4130,8 @@ Adrián Chaves,<!-- Gallaecio; GitHub -->
 Adrien Ricciardi,
 Albert Wiersch,
 Alex Christensen,
-Alexis Hunt,<!-- alercah; GitHub -->
 Alexandre Morgaut,
-Alexis Hunt,
+Alexis Hunt,<!-- alercah; GitHub -->
 Alwin Blok,
 Andrew Sullivan,
 Arkadiusz Michalski,
