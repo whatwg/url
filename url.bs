@@ -4132,7 +4132,6 @@ Albert Wiersch,
 Alex Christensen,
 Alexis Hunt,<!-- alercah; GitHub -->
 Alexandre Morgaut,
-Alexis Hunt,
 Alwin Blok,
 Andrew Sullivan,
 Arkadiusz Michalski,
