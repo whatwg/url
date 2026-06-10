@@ -912,23 +912,38 @@ concepts.
 <var>domain</var> and a boolean <var>beStrict</var>, runs these steps:
 
 <ol>
- <li><p>Let <var>result</var> be the result of running
- <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
- <i>CheckHyphens</i> set to <var>beStrict</var>, <i>CheckBidi</i> set to true, <i>CheckJoiners</i>
- set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, <i>Transitional_Processing</i>
- set to false, <i>VerifyDnsLength</i> set to <var>beStrict</var>, and <i>IgnoreInvalidPunycode</i>
- set to false. [[!UTS46]]
+ <li><p>Let <var>result</var> be null.
 
  <li>
-  <p>If <var>result</var> is a failure value:
+  <p>If <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>:
 
   <ol>
-   <li><p><a>domain-to-ASCII</a> <a>validation error</a>.
+   <li><p>If running <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to
+   <var>domain</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
+   <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to false,
+   <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to false, and
+   <i>IgnoreInvalidPunycode</i> set to false is a failure value, <a>domain-to-ASCII</a>
+   <a>validation error</a>. [[!UTS46]]
 
-   <li><p>If <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>, then set
-   <var>result</var> to <var>domain</var>, <a lt="ASCII lowercase">lowercased</a>.
+   <li><p>Set <var>result</var> to <var>domain</var>, <a lt="ASCII lowercase">lowercased</a>.
+  </ol>
 
-   <li><p>Otherwise, return failure.
+  <p class=note>Due to web compatibility <a abstract-op lt=ToASCII>Unicode ToASCII</a> only records
+  <a>validation errors</a> when <var>domain</var> is an <a>ASCII string</a>.
+
+ <li>
+  <p>Otherwise:
+
+  <ol>
+   <li><p>Set <var>result</var> to the result of running
+   <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
+   <i>CheckHyphens</i> set to <var>beStrict</var>, <i>CheckBidi</i> set to true,
+   <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>,
+   <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to <var>beStrict</var>,
+   and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
+
+   <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
+   return failure.
   </ol>
 
  <li>
@@ -957,10 +972,6 @@ concepts.
 
  <li><p>Return <var>result</var>.
 </ol>
-
-<p class=note>If <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>, this
-algorithm is effectively <a lt="ASCII lowercase">ASCII lowercasing</a> <var>domain</var> and
-checking the result for <a>forbidden domain code points</a>. This is done for web compatibility.
 
 <p class=note>This document and the web platform at large use
 <cite>Unicode IDNA Compatibility Processing</cite> and not IDNA2008. For instance,
