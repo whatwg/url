@@ -946,7 +946,10 @@ concepts.
 
   <p class=note>When <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>,
   <a abstract-op lt=ToASCII>Unicode ToASCII</a> failures only result in <a>validation errors</a>
-  (instead of failing the whole algorithm) due to web compatibility.
+  (instead of failing the whole algorithm) due to web compatibility. <i>IgnoreInvalidPunycode</i>
+  is not sufficient on its own, as Punycode can decode successfully yet still fail validity
+  criteria. E.g., <code>xn--8i7caa</code> decodes to <code>ｗｗｗ</code>, whose code points have
+  status "mapped". [[UTS46]]
 
  <li>
   <p>Otherwise:
