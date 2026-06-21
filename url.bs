@@ -994,8 +994,8 @@ concepts.
 
   <p class=note>Because <var>domain</var> can only result from the <a>host parser</a>, any recorded
   errors will already have been signified as <a>validation errors</a>. Returning <var>domain</var>
-  as-is therefore is sound and ensures <a>domain to ASCII</a> and <a>domain to Unicode</a> roundtrip
-  on input such as <code>xn--8i7caa</code>.
+  ensures <a>domain to ASCII</a> and <a>domain to Unicode</a> roundtrip on input such as
+  <code>xn--8i7caa</code>.
 
  <li><p>Return <var>result</var>.
 </ol>
