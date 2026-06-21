@@ -123,12 +123,6 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
      <p>"<code>https://exa%23mple.org</code>"
     </div>
    <td class=yes>Yes
-  <tr>
-   <td><dfn>domain-to-Unicode</dfn>
-   <td>
-    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
-    <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
-   <td class=no>·
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
@@ -995,8 +989,15 @@ concepts.
  set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, <i>Transitional_Processing</i>
  set to false, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
 
- <li><p>Signify <a>domain-to-Unicode</a> <a>validation errors</a> for any returned errors, and then,
- return <var>result</var>.
+ <li>
+  <p>If an error was recorded, then return <var>domain</var>.
+
+  <p class=note>Because <var>domain</var> can only result from the <a>host parser</a>, any recorded
+  errors will already have been signified as <a>validation errors</a>. Returning <var>domain</var>
+  as-is therefore is sound and ensures <a>domain to ASCII</a> and <a>domain to Unicode</a> roundtrip
+  on input such as <code>xn--8i7caa</code>.
+
+ <li><p>Return <var>result</var>.
 </ol>
 </div>
 
@@ -4192,6 +4193,7 @@ Ian Hickson,
 Ilya Grigorik,
 Italo A. Casas,
 Jakub Gieryluk,
+James C. Wise,<!-- Scripter17; GitHub -->
 James Graham,
 James Manger,
 James Ross,
