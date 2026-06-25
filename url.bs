@@ -111,7 +111,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     [[UTS46]]
     <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
     recorded, user agents are encouraged to pass those along.
-   <td class=yes>Yes
+   <td class=yes>Yes<br>(unless <var>domain</var> is an <a>ASCII string</a>)
   <tr>
    <td><dfn>domain-invalid-code-point</dfn>
    <td>
@@ -123,12 +123,6 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
      <p>"<code>https://exa%23mple.org</code>"
     </div>
    <td class=yes>Yes
-  <tr>
-   <td><dfn>domain-to-Unicode</dfn>
-   <td>
-    <p><a abstract-op lt=ToUnicode>Unicode ToUnicode</a> records an error. [[UTS46]]
-    <p class=note>The same considerations as with <a>domain-to-ASCII</a> apply.
-   <td class=no>·
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
@@ -913,43 +907,68 @@ concepts.
 
 <ol>
  <li>
-  <p>Let <var>result</var> be the result of running <a abstract-op lt=ToASCII>Unicode ToASCII</a>
-  with <i>domain_name</i> set to <var>domain</var>, <i>CheckHyphens</i> set to <var>beStrict</var>,
-  <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to
-  <var>beStrict</var>, <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to
-  <var>beStrict</var>, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
+  <p>If <var>beStrict</var> is true:
 
-  <p class=note>If <var>beStrict</var> is false, <var>domain</var> is an <a>ASCII string</a>, and
-  <a>strictly splitting</a> <var>domain</var> on U+002E (.) does not produce any
-  <a for=list>item</a> that <a for=string>starts with</a> an <a>ASCII case-insensitive</a> match for
-  "<code>xn--</code>", this step is equivalent to <a>ASCII lowercasing</a> <var>domain</var>.
+  <ol>
+   <li><p>Let <var>result</var> be the result of running
+   <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
+   <i>CheckHyphens</i> set to true, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
+   <i>UseSTD3ASCIIRules</i> set to true, <i>Transitional_Processing</i> set to false,
+   <i>VerifyDnsLength</i> set to true, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
 
- <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
+   <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
+   return failure.
+
+   <li><p>Return <var>result</var>.
+  </ol>
+
+ <li><p>Let <var>result</var> be null.
+
+ <li>
+  <p>If <var>domain</var> is an <a>ASCII string</a>:
+
+  <ol>
+   <li><p>If running <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to
+   <var>domain</var>, <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true,
+   <i>CheckJoiners</i> set to true, <i>UseSTD3ASCIIRules</i> set to false,
+   <i>Transitional_Processing</i> set to false, <i>VerifyDnsLength</i> set to false, and
+   <i>IgnoreInvalidPunycode</i> set to false is a failure value, <a>domain-to-ASCII</a>
+   <a>validation error</a>. [[!UTS46]]
+
+   <li><p>Set <var>result</var> to <var>domain</var>, <a lt="ASCII lowercase">lowercased</a>.
+  </ol>
+
+  <p class=note>When <var>beStrict</var> is false and <var>domain</var> is an <a>ASCII string</a>,
+  <a abstract-op lt=ToASCII>Unicode ToASCII</a> failures only result in <a>validation errors</a>
+  (instead of failing the whole algorithm) due to web compatibility. <i>IgnoreInvalidPunycode</i>
+  is not sufficient on its own, as Punycode can decode successfully yet still fail validity
+  criteria. E.g., <code>xn--8i7caa</code> decodes to <code>ｗｗｗ</code>, whose code points have
+  status "mapped". [[UTS46]]
+
+ <li>
+  <p>Otherwise:
+
+  <ol>
+   <li><p>Set <var>result</var> to the result of running
+   <a abstract-op lt=ToASCII>Unicode ToASCII</a> with <i>domain_name</i> set to <var>domain</var>,
+   <i>CheckHyphens</i> set to false, <i>CheckBidi</i> set to true, <i>CheckJoiners</i> set to true,
+   <i>UseSTD3ASCIIRules</i> set to false, <i>Transitional_Processing</i> set to false,
+   <i>VerifyDnsLength</i> set to false, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
+
+   <li><p>If <var>result</var> is a failure value, <a>domain-to-ASCII</a> <a>validation error</a>,
+   return failure.
+  </ol>
+
+ <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
  return failure.
 
  <li>
-  <p>If <var>beStrict</var> is false:
+  <p>If <var>result</var> contains a <a>forbidden domain code point</a>,
+  <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
 
-  <ol>
-   <li><p>If <var>result</var> is the empty string, <a>domain-to-ASCII</a> <a>validation error</a>,
-   return failure.
-
-   <li>
-    <p>If <var>result</var> contains a <a>forbidden domain code point</a>,
-    <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
-
-    <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
-    <a>forbidden domain code points</a> are a subset of those disallowed when
-    <i>UseSTD3ASCIIRules</i> is true. See also
-    <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
-  </ol>
-
- <li>
-  <p><a for=/>Assert</a>: <var>result</var> is not the empty string and does not contain a
-  <a>forbidden domain code point</a>.
-
-  <p class=note><cite>Unicode IDNA Compatibility Processing</cite> guarantees this holds when
-  <var>beStrict</var> is true. [[UTS46]]
+  <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
+  <a>forbidden domain code points</a> are a subset of those disallowed when <i>UseSTD3ASCIIRules</i>
+  is true. See also <a href="https://github.com/whatwg/url/issues/397">issue #397</a>.
 
  <li><p>Return <var>result</var>.
 </ol>
@@ -970,8 +989,15 @@ concepts.
  set to true, <i>UseSTD3ASCIIRules</i> set to <var>beStrict</var>, <i>Transitional_Processing</i>
  set to false, and <i>IgnoreInvalidPunycode</i> set to false. [[!UTS46]]
 
- <li><p>Signify <a>domain-to-Unicode</a> <a>validation errors</a> for any returned errors, and then,
- return <var>result</var>.
+ <li>
+  <p>If an error was recorded, then return <var>domain</var>.
+
+  <p class=note>Because <var>domain</var> can only result from the <a>host parser</a>, any recorded
+  errors will already have been signified as <a>validation errors</a>. Returning <var>domain</var>
+  ensures <a>domain to ASCII</a> and <a>domain to Unicode</a> roundtrip on input such as
+  <code>xn--8i7caa</code>.
+
+ <li><p>Return <var>result</var>.
 </ol>
 </div>
 
@@ -4167,6 +4193,7 @@ Ian Hickson,
 Ilya Grigorik,
 Italo A. Casas,
 Jakub Gieryluk,
+James C. Wise,<!-- Scripter17; GitHub -->
 James Graham,
 James Manger,
 James Ross,
