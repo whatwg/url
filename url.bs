@@ -111,9 +111,9 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <i>UseSTD3ASCIIRules</i>, and <i>VerifyDnsLength</i> are all set to true. [[UTS46]]
     <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
     recorded, user agents are encouraged to pass those along.
-   <td class=yes>Yes<br>(when <var>beStrict</var> is true, or <var>domain</var> is not an
-   <a>ASCII string</a> and <a abstract-op lt=ToASCII>Unicode ToASCII</a> with relaxed parameters
-   also fails)
+   <td class=yes>Yes<br>(when <var ignore>beStrict</var> is true, or <var ignore>domain</var> is
+   not an <a>ASCII string</a> and <a abstract-op lt=ToASCII>Unicode ToASCII</a> with relaxed
+   parameters also fails)
   <tr>
    <td><dfn>domain-invalid-code-point</dfn>
    <td>
