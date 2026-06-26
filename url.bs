@@ -111,20 +111,15 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <i>UseSTD3ASCIIRules</i>, and <i>VerifyDnsLength</i> are all set to true. [[UTS46]]
     <p class=note>If details about <a abstract-op lt=ToASCII>Unicode ToASCII</a> errors are
     recorded, user agents are encouraged to pass those along.
-   <td class=yes>Yes<br>(when <var ignore>beStrict</var> is true, or <var ignore>domain</var> is
-   not an <a>ASCII string</a> and <a abstract-op lt=ToASCII>Unicode ToASCII</a> with relaxed
-   parameters also fails)
-  <tr>
-   <td><dfn>domain-invalid-code-point</dfn>
-   <td>
-    <p>The input's <a for=/>host</a> contains a <a>forbidden domain code point</a>.
     <div class=example id=example-domain-invalid-code-point>
      <p>Hosts are <a for=string>percent-decoded</a> before being processed when the URL
      <a>is special</a>, which would result in the following host portion becoming
      "<code>exa#mple.org</code>" and thus triggering this error.
      <p>"<code>https://exa%23mple.org</code>"
     </div>
-   <td class=yes>Yes
+   <td class=yes>Yes<br>(when <var ignore>beStrict</var> is true, or <var ignore>domain</var> is
+   not an <a>ASCII string</a> and <a abstract-op lt=ToASCII>Unicode ToASCII</a> with relaxed
+   parameters also fails)
  <tbody>
   <tr>
    <th colspan=3 scope=rowgroup><a href=#host-parsing>Host parsing</a>
@@ -958,8 +953,7 @@ steps. They return failure or a <a for=/>domain</a>.
  <li><p>If <var>result</var> is the empty string, then return failure.
 
  <li>
-  <p>If <var>result</var> contains a <a>forbidden domain code point</a>,
-  <a>domain-invalid-code-point</a> <a>validation error</a>, return failure.
+  <p>If <var>result</var> contains a <a>forbidden domain code point</a>, then return failure.
 
   <p class=note>Due to web compatibility and compatibility with non-DNS-based systems the
   <a>forbidden domain code points</a> are a subset of those disallowed when <i>UseSTD3ASCIIRules</i>
