@@ -2036,8 +2036,14 @@ followed by zero or more of <a>ASCII alphanumeric</a>, U+002B (+), U+002D (-), a
 [[RFC7595]]
 
 <p>A <dfn export oldids=syntax-url-relative-with-fragment>relative-URL-with-fragment string</dfn>
-must be a <a>relative-URL string</a>, optionally followed by U+0023 (#) and a
-<a>URL-fragment string</a>.
+must be:
+
+<ul class=brief>
+ <li><p>the empty string, if <a>base URL</a> has an <a for=url>opaque path</a>;
+ <li><p>otherwise, a <a>relative-URL string</a>,
+</ul>
+
+<p>optionally followed by U+0023 (#) and a <a>URL-fragment string</a>.
 
 <p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be one of the following,
 switching on <a>base URL</a>'s <a for=url>scheme</a>:
@@ -2063,7 +2069,7 @@ switching on <a>base URL</a>'s <a for=url>scheme</a>:
 <p>any optionally followed by U+003F (?) and a <a>URL-query string</a>.
 
 <p class=note>A non-null <a>base URL</a> is necessary when <a lt="URL parser">parsing</a> a
-<a>relative-URL string</a>.
+<a>relative-URL-with-fragment string</a>.
 
 <p>A <dfn export>scheme-relative-special-URL string</dfn> must be "<code>//</code>", followed by a
 <a>valid host string</a>, optionally followed by U+003A (:) and a <a>URL-port string</a>, optionally
