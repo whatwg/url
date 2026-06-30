@@ -2085,7 +2085,7 @@ followed by a <a>path-absolute-URL string</a>.
 <a>valid opaque-host string</a>, optionally followed by U+003A (:) and a <a>URL-port string</a>.
 
 <p>A <dfn export oldids=syntax-url-file-scheme-relative>scheme-relative-file-URL string</dfn> must
-be "<code>//</code>", followed by one of the following:
+be "<code>//</code>", optionally followed by one of the following:
 
 <ul class=brief>
  <li><p>a <a>valid host string</a>, optionally followed by a
@@ -2093,8 +2093,8 @@ be "<code>//</code>", followed by one of the following:
  <li><p>a <a>path-absolute-URL string</a>.
 </ul>
 
-<p>A <dfn export oldids=syntax-url-path-absolute>path-absolute-URL string</dfn> must be U+002F (/)
-followed by a <a>path-relative-URL string</a>.
+<p>A <dfn export oldids=syntax-url-path-absolute>path-absolute-URL string</dfn> must be U+002F (/),
+followed by zero or more <a>URL-path-segment strings</a>, separated from each other by U+002F (/).
 
 <p>A <dfn export oldids=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
 must be a <a>path-absolute-URL string</a> that does not start with: U+002F (/), followed by a
