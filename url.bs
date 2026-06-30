@@ -146,9 +146,15 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <p class=example id=example-ipv4-empty-part>"<code>https://127.0.0.1./</code>"
    <td class=no>·
   <tr>
+   <td><dfn>IPv4-too-few-parts</dfn>
+   <td>
+    <p>An <a for=/>IPv4 address</a> has fewer than 4 parts.
+    <p class=example id=example-ipv4-too-few-parts>"<code>https://1.2.3/</code>"
+   <td class=no>·
+  <tr>
    <td><dfn>IPv4-too-many-parts</dfn>
    <td>
-    <p>An <a for=/>IPv4 address</a> does not consist of exactly 4 parts.
+    <p>An <a for=/>IPv4 address</a> has more than 4 parts.
     <p class=example id=example-ipv4-too-many-parts>"<code>https://1.2.3.4.5/</code>"
    <td class=yes>Yes
   <tr>
@@ -1013,7 +1019,12 @@ set to false. [[!UTS46]]
  <li><p>Let <var>domain</var> be the result of running <a>domain parser</a> with <var>input</var>
  and true.
 
- <li><p>Return false if <var>domain</var> is failure; otherwise true.
+ <li><p>If <var>domain</var> is failure, then return false.
+
+ <li><p>If running the <a>ends in a number checker</a> on <var>domain</var> returns true, then
+ return false.
+
+ <li><p>Return true.
 </ol>
 
 <p class=XXX>Ideally we define this in terms of a sequence of code points that make up a
@@ -1152,6 +1163,9 @@ return value of the <a for=/>host parser</a> is an <a for=/>IPv4 address</a>.
    <!-- Since the IPv4 parser is not to be invoked directly the input cannot be the empty string,
         but if it somehow is this conditional makes sure we can keep going. -->
   </ol>
+
+ <li><p>If <var>parts</var>'s <a for=list>size</a> is less than 4, <a>IPv4-too-few-parts</a>
+ <a>validation error</a>.
 
  <li><p>If <var>parts</var>'s <a for=list>size</a> is greater than 4, <a>IPv4-too-many-parts</a>
  <a>validation error</a>, return failure.
