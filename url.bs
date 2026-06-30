@@ -1099,22 +1099,19 @@ false), and then runs these steps. They return failure or a <a for=/>host</a>.
 runs these steps. They return a boolean.
 
 <ol>
+ <li><p>Assert: <var>input</var> is not the empty string.
+
  <li><p>Let <var>parts</var> be the result of <a>strictly splitting</a> <var>input</var> on
  U+002E (.).
 
- <li>
-  <p>If the last <a for=list>item</a> in <var>parts</var> is the empty string, then:
-
-  <ol>
-   <li><p>If <var>parts</var>'s <a for=list>size</a> is 1, then return false.
-
-   <li><p><a for=list>Remove</a> the last <a for=list>item</a> from <var>parts</var>.
-  </ol>
+ <li><p>If the last <a for=list>item</a> in <var>parts</var> is the empty string, then
+ <a for=list>remove</a> the last <a for=list>item</a> from <var>parts</var>.
 
  <li><p>Let <var>last</var> be the last <a for=list>item</a> in <var>parts</var>.
 
  <li>
-  <p>If <var>last</var> is non-empty and contains only <a>ASCII digits</a>, then return true.
+  <p>If <var>last</var> is not the empty string and contains only <a>ASCII digits</a>, then return
+  true.
 
   <p class=note>The erroneous input "<code>09</code>" will be caught by the <a>IPv4 parser</a> at a
   later stage.
