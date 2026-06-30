@@ -215,7 +215,7 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
    <td><dfn>IPv6-piece-leading-zero</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> <a for="IPv6 address">piece</a> contains a leading U+0030 (0).
-    <p class=example id=example-ipv6-piece-leading-zero>"<code>https://[::01]</code>"
+    <p class=example id=example-ipv6-piece-leading-zero>"<code>https://\[::01]</code>"
    <td class=no>·
   <tr>
    <td><dfn>IPv4-in-IPv6-too-many-pieces</dfn>
