@@ -375,7 +375,8 @@ error.
 
 <h3 id=percent-encoded-bytes>Percent-encoded bytes</h3>
 
-<p>A <dfn>percent-encoded byte</dfn> is U+0025 (%), followed by two <a>ASCII hex digits</a>.
+<p>A <dfn>percent-encoded byte</dfn> is a string consisting of U+0025 (%) followed by two
+<a>ASCII hex digits</a>.
 
 <p class=note>It is generally a good idea for sequences of <a>percent-encoded bytes</a> to be such
 that, when <a for=string>percent-decoded</a> and then passed to
