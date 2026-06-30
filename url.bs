@@ -2021,7 +2021,7 @@ an <a>absolute-URL string</a>, optionally followed by U+0023 (#) and a <a>URL-fr
  followed by U+003A (:) and a <a>scheme-relative-special-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a>ASCII case-insensitive</a> match for a
  <a>special scheme</a>, followed by U+003A (:) and one of: a <a>scheme-relative-URL string</a>, a
- <a>path-absolute-URL string</a>, or zero or more <a>URL units</a>
+ <a>path-absolute-URL string</a>, or an <a>opaque-path-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for
  "<code>file</code>", followed by U+003A (:) and a <a>scheme-relative-file-URL string</a>
 </ul>
@@ -2108,6 +2108,9 @@ U+002F (/).
 <dfn export oldids=syntax-url-path-relative-scheme-less>path-relative-scheme-less-URL string</dfn>
 must be a <a>path-relative-URL string</a> that does not start with: a <a>URL-scheme string</a>,
 followed by U+003A (:).
+
+<p>An <dfn export>opaque-path-URL string</dfn> must be zero or more <a>URL units</a> excluding
+U+003F (?), the first of which (if any) is not U+002F (/).
 
 <p>A <dfn export oldids=syntax-url-path-segment>URL-path-segment string</dfn> must be one of the
 following:
