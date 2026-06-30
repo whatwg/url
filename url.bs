@@ -212,6 +212,12 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
     <p class=example id=example-ipv6-too-few-pieces>"<code>https://[1:2:3]</code>"
    <td class=yes>Yes
   <tr>
+   <td><dfn>IPv6-piece-leading-zero</dfn>
+   <td>
+    <p>An <a for=/>IPv6 address</a> <a for="IPv6 address">piece</a> contains a leading U+0030 (0).
+    <p class=example id=example-ipv6-piece-leading-zero>"<code>https://[::01]</code>"
+   <td class=no>·
+  <tr>
    <td><dfn>IPv4-in-IPv6-too-many-pieces</dfn>
    <td>
     <p>An <a for=/>IPv6 address</a> with <a for=/>IPv4 address</a> syntax: the IPv6 address has more
@@ -1027,13 +1033,36 @@ set to false. [[!UTS46]]
 possible strings of <a>ASCII digits</a>, representing a decimal number in the range 0 to 255,
 inclusive, separated from each other by U+002E (.).
 
-<p>A <dfn export oldids=syntax-host-ipv6>valid IPv6-address string</dfn> is defined in the
-<a href="https://tools.ietf.org/html/rfc4291#section-2.2">"Text Representation of Addresses" chapter of IP Version 6 Addressing Architecture</a>.
-[[!RFC4291]]
-<!-- https://tools.ietf.org/html/rfc5952 updates that RFC, but it seems as
-     far as what developers can do we should be liberal
+<p>A <dfn export oldids=syntax-host-ipv6>valid IPv6-address string</dfn> must be one of the
+following:
 
-     XXX should we define the format inline instead just like STD 66? -->
+<ul class=brief>
+ <li><p>a <a>valid IPv6-pieces string</a> with <a>effective piece length</a> 8.
+ <li><p>a <a>valid IPv6-pieces-and-IPv4 string</a> with <a>effective piece length</a> 8.
+ <li><p>U+003A U+003A (::), optionally preceded by a <a>valid IPv6-pieces string</a>, and
+ optionally followed by either a <a>valid IPv6-pieces string</a> or a
+ <a>valid IPv6-pieces-and-IPv4 string</a>, such that the sum of the <a>effective piece lengths</a>
+ of the preceding and following strings is at most 7.
+</ul>
+
+<p>A <dfn>valid IPv6-pieces-and-IPv4 string</dfn> is either a <a>valid IPv6-pieces string</a>,
+followed by U+003A (:), followed by a <a>valid IPv4-address string</a>; or a
+<a>valid IPv4-address string</a> alone.
+
+<p>A <dfn>valid IPv6-pieces string</dfn> is one or more <a>valid IPv6-piece strings</a>, separated
+from each other by U+003A (:).
+
+<p>A <dfn>valid IPv6-piece string</dfn> is a shortest possible string of <a>ASCII hex digits</a>,
+representing a hexadecimal number in the range 0 to 0xFFFF, inclusive.
+
+<p>The <dfn>effective piece length</dfn> of a <a>valid IPv6-pieces string</a> is the number of
+<a>valid IPv6-piece strings</a> it contains. The <a>effective piece length</a> of a
+<a>valid IPv6-pieces-and-IPv4 string</a> is the number of <a>valid IPv6-piece strings</a> it
+contains, plus 2.
+
+<p class=note>This is derived from
+<cite>A Recommendation for IPv6 Address Text Representation</cite>. For consistency with IPv4
+leading zeros are not allowed. [[RFC5952]]
 
 <p>A <dfn export>valid opaque-host string</dfn> must be one of the following:
 
@@ -1392,6 +1421,10 @@ actually doing that with the editors of this document first.
 
    <li><p>Otherwise, if <a>c</a> is not the <a>EOF code point</a>, <a>IPv6-invalid-code-point</a>
    <a>validation error</a>, return failure.
+
+   <li><p>If <var>length</var> is greater than 1 and <var>value</var> is less than
+   0x10<sup><var>length</var> &minus; 1</sup>, <a>IPv6-piece-leading-zero</a> <a>validation
+   error</a>.
 
    <li><p>Set <var>address</var>[<var>pieceIndex</var>] to <var>value</var>.
 
