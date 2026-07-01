@@ -2065,7 +2065,7 @@ an <a>absolute-URL string</a>, optionally followed by U+0023 (#) and a <a>URL-fr
  followed by U+003A (:) and a <a>scheme-relative-special-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is <em>not</em> an <a>ASCII case-insensitive</a> match for a
  <a>special scheme</a>, followed by U+003A (:) and one of: a <a>scheme-relative-URL string</a>, a
- <a>path-absolute-URL string</a>, or an <a>opaque-path-URL string</a>
+ <a>path-absolute-non-authority-URL string</a>, or an <a>opaque-path-URL string</a>
  <li><p>a <a>URL-scheme string</a> that is an <a>ASCII case-insensitive</a> match for
  "<code>file</code>", followed by U+003A (:) and a <a>scheme-relative-file-URL string</a>
 </ul>
@@ -2080,34 +2080,21 @@ followed by zero or more of <a>ASCII alphanumeric</a>, U+002B (+), U+002D (-), a
 [[RFC7595]]
 
 <p>A <dfn export oldids=syntax-url-relative-with-fragment>relative-URL-with-fragment string</dfn>
-must be:
+must be U+0023 (#) followed by a <a>URL-fragment string</a>, if <a>base URL</a> has an
+<a for=url>opaque path</a>; otherwise, a <a>relative-URL string</a>, optionally followed by U+0023
+(#) and a <a>URL-fragment string</a>.
 
-<ul class=brief>
- <li><p>the empty string, if <a>base URL</a> has an <a for=url>opaque path</a>;
- <li><p>otherwise, a <a>relative-URL string</a>,
-</ul>
-
-<p>optionally followed by U+0023 (#) and a <a>URL-fragment string</a>.
-
-<p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be one of the following,
-switching on <a>base URL</a>'s <a for=url>scheme</a>:
+<p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be a
+<a>path-absolute-non-authority-URL string</a>, a <a>path-relative-scheme-less-URL string</a>, or one
+of the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
 
 <dl class=switch>
  <dt>A <a>special scheme</a> that is not "<code>file</code>"
  <dd><p>a <a>scheme-relative-special-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a>
- <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>"<code>file</code>"
  <dd><p>a <a>scheme-relative-file-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a> if <a>base URL</a>'s <a for=url>host</a> is an
- <a>empty host</a>
- <dd><p>a <a>path-absolute-non-Windows-file-URL string</a> if <a>base URL</a>'s <a for=url>host</a>
- is not an <a>empty host</a>
- <dd><p>a <a>path-relative-scheme-less-URL string</a>
  <dt>Otherwise
  <dd><p>a <a>scheme-relative-URL string</a>
- <dd><p>a <a>path-absolute-URL string</a>
- <dd><p>a <a>path-relative-scheme-less-URL string</a>
 </dl>
 
 <p>any optionally followed by U+003F (?) and a <a>URL-query string</a>.
@@ -2138,17 +2125,15 @@ followed by a <a>path-absolute-URL string</a>.
 be "<code>//</code>", optionally followed by one of the following:
 
 <ul class=brief>
- <li><p>a <a>valid host string</a>, optionally followed by a
- <a>path-absolute-non-Windows-file-URL string</a>
+ <li><p>a <a>valid host string</a>, optionally followed by a <a>path-absolute-URL string</a>
  <li><p>a <a>path-absolute-URL string</a>.
 </ul>
 
 <p>A <dfn export oldids=syntax-url-path-absolute>path-absolute-URL string</dfn> must be U+002F (/),
 followed by zero or more <a>URL-path-segment strings</a>, separated from each other by U+002F (/).
 
-<p>A <dfn export oldids=syntax-url-file-path-absolute>path-absolute-non-Windows-file-URL string</dfn>
-must be a <a>path-absolute-URL string</a> that does not start with: U+002F (/), followed by a
-<a>Windows drive letter</a>, followed by U+002F (/).
+<p>A <dfn>path-absolute-non-authority-URL string</dfn> must be a <a>path-absolute-URL string</a>
+that does not start with two U+002F (/) code points.
 
 <p>A <dfn export oldids=syntax-url-path-relative>path-relative-URL string</dfn> must be zero or more
 <a>URL-path-segment strings</a>, separated from each other by U+002F (/), and not start with
