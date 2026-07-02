@@ -4195,6 +4195,117 @@ examples of proper naming. [[HTML]]
 
 
 
+<h2 id=uri-iri-differences class=no-num>Differences from RFC 3986 and RFC 3987</h2>
+
+<p>This appendix is non-normative. It highlights how this standard differs from RFC 3986 and
+RFC 3987, and assumes familiarity with all three. [[RFC3986]] [[RFC3987]]
+
+<p>Most of these differences also produce a <a>validation error</a>, though in practice those are
+seldom reported.
+<!-- file://localhost/ and percent-encoded dot segments are exceptions at least. -->
+
+
+<h3 id=uri-iri-differences-parsers class=no-num>Different parsers</h3>
+
+<p>Under this standard, the following inputs parse differently than under RFC 3986 or RFC 3987:
+
+<ul>
+ <li><p>Non-ASCII input is percent-encoded rather than rejected.
+ <code>https://example.com/café</code> → <code>https://example.com/caf%C3%A9</code>.
+
+ <li><p><a>Special schemes</a> treat U+005C (\) as U+002F (/),
+ tolerate any number of slashes after the scheme, and mandate an authority (though for
+ <code>file:</code> the host may be empty).
+ <code>http:\\example.com\foo</code> → <code>http://example.com/foo</code>;
+ <code>http:example.com/</code> → <code>http://example.com/</code>.
+
+ <li><p>Because non-<code>file</code> special schemes reject an empty host, extra slashes can
+ consume the input meant to be the path. <code>http:///path</code> → <code>http://path/</code>.
+ By contrast, <code>file:///path</code> parses as expected (empty host, path
+ "<code>/path</code>").
+
+ <li><p>Domain hosts of special URLs go through UTS #46 ToASCII, which converts Unicode labels
+ to Punycode and lowercases ASCII labels. <code>https://☕.EXAMPLE/</code> →
+ <code>https://xn--53h.example/</code>. Non-special hosts are preserved verbatim.
+
+ <li><p>IPv4 addresses accept octal, hexadecimal, and fewer-than-four parts, and are always
+ serialized as dotted-decimal. <code>http://0x7f.1</code> → <code>http://127.0.0.1/</code>;
+ <code>http://1.2.3</code> → <code>http://1.2.0.3/</code>.
+
+ <li><p>Whether a host is IPv4 or a domain is decided by whether it ends in a numeric-looking
+ label. <code>http://255.example</code> parses as a domain; <code>http://example.255</code>
+ fails.
+
+ <li><p>The <code>IPvFuture</code> production is not recognized.
+ <code>http://[v1.fe80]/</code> fails.
+
+ <li><p>RFC 6874 IPv6 zone identifiers are not recognized.
+ <code>http://[fe80::a%25eth0]/</code> fails.
+
+ <li><p>A <code>file:</code> URL with host "<code>localhost</code>" normalizes to an empty host.
+ <code>file://localhost/</code> → <code>file:///</code>.
+
+ <li><p><code>file:</code> URLs recognize Windows drive letters (normalizing U+007C (|) to
+ U+003A (:)) and preserve them across <code>..</code>. <code>file:///C|/demo</code> →
+ <code>file:///C:/demo</code>; <code>..</code> against <code>file:///C:/demo</code> →
+ <code>file:///C:/</code>.
+
+ <li><p>Percent-encoded dot segments always collapse as "<code>.</code>"/"<code>..</code>".
+ <code>/a/%2E%2E/b</code> against <code>http://example.com/</code> →
+ <code>http://example.com/b</code>. RFC 3986 only reaches the same result with optional
+ percent-encoding normalization.
+
+ <li><p><code>http://example.com/%61</code> and <code>http://example.com/a</code> parse as
+ distinct URLs; RFC 3986's optional percent-encoding normalization would treat them as the
+ same.
+
+ <li><p>A <a>base URL</a> with an <a for=url>opaque path</a> supports only fragment-only
+ relative references. <code>?foo</code> against <code>bar:opaque</code> fails; <code>#foo</code>
+ against the same yields <code>bar:opaque#foo</code>.
+
+ <li><p>RFC 3986 non-strict reference resolution is used for special schemes only.
+ <code>https:example.org</code> against <code>https://example.com/</code> →
+ <code>https://example.com/example.org</code>.
+
+ <li><p>In an HTML document with a non-UTF-8 legacy encoding, the query of a special URL (other
+ than <code>ws:</code> or <code>wss:</code>) is percent-encoded using that encoding.
+ <code>?smörgåsbord</code> in a <code>windows-1252</code> document → query
+ <code>sm%F6rg%E5sbord</code>.
+
+ <li><p>Leading and trailing <a>C0 control or space</a> are stripped from the input; interior
+ U+0009, U+000A, and U+000D are silently removed.
+ <code>https://exa&#x9;mp&#x0A;le.com/</code> (with a U+0009 between "<code>exa</code>" and
+ "<code>mp</code>" and a U+000A between "<code>mp</code>" and "<code>le.com/</code>") →
+ <code>https://example.com/</code>.
+
+ <li><p>Out-of-grammar code points in the path, query, or fragment are percent-encoded rather
+ than rejected, and a bare U+0025 (%) is preserved.
+ <code>https://example.org/foo bar</code> → <code>https://example.org/foo%20bar</code>;
+ <code>https://example.com/%</code> parses distinctly from <code>https://example.com/%25</code>.
+</ul>
+
+
+<h3 id=uri-iri-differences-model class=no-num>Different model</h3>
+
+<p>This standard can produce a <a for=/>URL</a> whose serialization is not parseable as a URI or
+IRI. The parser (and API) can leave several ASCII code points in components where RFC 3986 would
+reject them.
+
+<p>Depending on the component, a bare U+0025 (%), U+0022 ("), U+005B ([), U+005C (\), U+005D (]),
+U+005E (^), U+0060 (`), U+007B ({), U+007C (|), or U+007D (}) can survive parsing, and
+U+0023 (#) can survive inside a fragment. Any URL that carries such a code point serializes to a
+string RFC 3986 does not accept.
+
+<div class=example id=example-uri-model-non-grammar>
+ <p>Parsing <code>http://example.com/[foo]?{bar}#p^q</code> or <code>http://foo{bar}/</code>
+ succeeds and round-trips verbatim; RFC 3986 rejects all of U+005B ([), U+005D (]),
+ U+007B ({), U+007D (}), and U+005E (^) in those positions.
+
+ <p>A path segment "<code>%</code>" ends up distinct from a path segment "<code>%25</code>".
+</div>
+
+
+
 <h2 id=acknowledgments class=no-num>Acknowledgments</h2>
 
 <p>There have been a lot of people that have helped make <a for=/>URLs</a> more interoperable over
