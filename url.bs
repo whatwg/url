@@ -2084,18 +2084,23 @@ must be U+0023 (#) followed by a <a>URL-fragment string</a>, if <a>base URL</a> 
 <a for=url>opaque path</a>; otherwise, a <a>relative-URL string</a>, optionally followed by U+0023
 (#) and a <a>URL-fragment string</a>.
 
-<p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be a
-<a>path-absolute-non-authority-URL string</a>, a <a>path-relative-scheme-less-URL string</a>, or one
-of the following, switching on <a>base URL</a>'s <a for=url>scheme</a>:
+<p>A <dfn export oldids=syntax-url-relative>relative-URL string</dfn> must be:
 
-<dl class=switch>
- <dt>A <a>special scheme</a> that is not "<code>file</code>"
- <dd><p>a <a>scheme-relative-special-URL string</a>
- <dt>"<code>file</code>"
- <dd><p>a <a>scheme-relative-file-URL string</a>
- <dt>Otherwise
- <dd><p>a <a>scheme-relative-URL string</a>
-</dl>
+<ul>
+ <li><p>a <a>path-absolute-non-authority-URL string</a>,
+ <li><p>a <a>path-relative-scheme-less-URL string</a>,
+ <li>
+  <p>or, switching on <a>base URL</a>'s <a for=url>scheme</a>:
+
+  <dl class=switch>
+   <dt>A <a>special scheme</a> that is not "<code>file</code>"
+   <dd><p>a <a>scheme-relative-special-URL string</a>
+   <dt>"<code>file</code>"
+   <dd><p>a <a>scheme-relative-file-URL string</a>
+   <dt>Otherwise
+   <dd><p>a <a>scheme-relative-URL string</a>
+  </dl>
+</ul>
 
 <p>any optionally followed by U+003F (?) and a <a>URL-query string</a>.
 
