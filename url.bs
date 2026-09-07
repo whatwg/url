@@ -1947,10 +1947,17 @@ the <a>blob URL store</a> between parsing and fetching, while fetching will stil
 <hr>
 
 <p>A <dfn export>URL path</dfn> is either a <a>URL path segment</a> or a <a for=/>list</a> of zero
-or more <a>URL path segments</a>.
+or more <a>URL path segments</a>. In the latter case the <a>URL path segments</a> never contain
+U+002F (/).
 
 <p>A <dfn export>URL path segment</dfn> is an <a for=/>ASCII string</a>. It commonly refers to a
-directory or a file, but has no predefined meaning. It never contains U+002F (/).
+directory or a file, but has no predefined meaning.
+
+<p class=note>A <a for=/>URL path</a> that is a <a>URL path segment</a> is
+<a for=url lt="opaque path">opaque</a> and can contain U+002F (/), as with
+<code>web+demo:a/b</code>. The <a>URL parser</a> never produces one that starts with U+002F (/), but
+<cite>URL Pattern</cite> does while canonicalizing patterns, so that is not an invariant.
+[[URLPATTERN]]
 
 <p>A
 <dfn export id=single-dot-path-segment oldids=syntax-url-path-segment-dot>single-dot URL path segment</dfn>
@@ -3220,19 +3227,19 @@ these steps. They return an <a>ASCII string</a>.
 
 <div algorithm>
 <p>The <dfn export lt="URL path serializer|URL path serializing">URL path serializer</dfn> takes a
-<a for=/>URL</a> or <a for=/>URL path</a> <var>urlOrPath</var> and then runs these steps. They return
-an <a>ASCII string</a>.
+<a for=/>URL</a> or <a for=/>URL path</a> <var>urlOrPath</var> and then runs these steps. They
+return an <a>ASCII string</a>.
 
 <ol>
- <li><p>Let <var>path</var> be <var>urlOrPath</var>'s <a for=url>path</a> if <var>urlOrPath</var> is a
- <a for=/>URL</a>; otherwise <var>urlOrPath</var>.
+ <li><p>Let <var>path</var> be <var>urlOrPath</var>'s <a for=url>path</a> if <var>urlOrPath</var> is
+ a <a for=/>URL</a>; otherwise <var>urlOrPath</var>.
 
  <li><p>If <var>path</var> is a <a for=/>URL path segment</a>, then return <var>path</var>.
 
  <li><p>Let <var>output</var> be the empty string.
 
- <li><p><a for=list>For each</a> <var>segment</var> of <var>path</var>: append
- U+002F (/) followed by <var>segment</var> to <var>output</var>.
+ <li><p><a for=list>For each</a> <var>segment</var> of <var>path</var>: append U+002F (/) followed
+ by <var>segment</var> to <var>output</var>.
 
  <li><p>Return <var>output</var>.
 </ol>
@@ -3262,12 +3269,12 @@ run these steps:
 
 <div algorithm="path equal">
 <p>To determine whether a <a for=/>URL path</a> <var>A</var>
-<dfn export for="URL path" lt=equal>equals</dfn> <a for=/>URL path</a> <var>B</var>, run these steps.
-They return a boolean.
+<dfn export for="URL path" lt=equal>equals</dfn> <a for=/>URL path</a> <var>B</var>, run these
+steps. They return a boolean.
 
 <ol>
  <li><p>If <var>A</var> is a <a for=/>URL path segment</a> or <var>B</var> is a
- <a for=/>URL path segment</a>, then return whether <var>A</var> is <var>B</var>.
+ <a for=/>URL path segment</a>, then return whether <var>A</var> <a for=string>is</a> <var>B</var>.
 
  <li><p>If <var>A</var>'s <a for=list>size</a> is not <var>B</var>'s <a for=list>size</a>, then
  return false.
@@ -3278,16 +3285,16 @@ They return a boolean.
  <li><p>Return true.
 </ol>
 
-<p class=note>Comparing <a for=/>URL path segments</a> rather than serializations matters for
-<a for=/>URL paths</a> that were not produced by the <a>URL parser</a>: the serialization of an
-<a for=url>opaque path</a> can be identical to that of a <a for=/>list</a> of
-<a for=/>URL path segments</a>.
+<p class=note>Comparing <a for=/>URL path segments</a> rather than serializations can matter as
+distinct <a for=/>URL paths</a> can <a lt="URL path serializer">serialize</a> identically. E.g.,
+<code>web+demo:</code>'s <a for=url>path</a> is the empty string, whereas
+<code>web+demo://host</code>'s <a for=url>path</a> is « », and both serialize to the empty string.
 </div>
 
 <div algorithm="path starts with">
 <p>To determine whether a <a for=/>URL path</a> <var>A</var>
-<dfn export for="URL path" lt="start with|starts with">starts with</dfn> <a for=/>URL path</a> <var>B</var>, run
-these steps. They return a boolean.
+<dfn export for="URL path" lt="start with|starts with">starts with</dfn> <a for=/>URL path</a>
+<var>B</var>, run these steps. They return a boolean.
 
 <ol>
  <li><p>If <var>A</var> is a <a for=/>URL path segment</a> or <var>B</var> is a
@@ -3302,10 +3309,18 @@ these steps. They return a boolean.
  <li><p>Return true.
 </ol>
 
-<p class=note>As <a for=/>URL path segments</a> never contain U+002F (/), this can only be true when
-<var>B</var> covers whole segments of <var>A</var>. That makes it suitable for deciding whether one
-<a for=/>URL path</a> is contained by another, which comparing serializations is not: the
-serialization of « "<code>foo</code>" » is a prefix of that of « "<code>foobar</code>" ».
+<p class=note>As <a for=/>URL path segments</a> in a <a for=/>list</a> never contain U+002F (/),
+<var>A</var> starts with <var>B</var> only when <var>B</var> covers whole segments of <var>A</var>.
+This makes it suitable for deciding whether one <a for=/>URL path</a> is "contained" by another.
+Comparing <a lt="URL path serializer">serializations</a> cannot be done naïvely: the serialization
+of « "<code>foobar</code>" » <a for=string>starts with</a> the serialization of
+« "<code>foo</code>" », but a <a for=/>URL</a> with the latter <a for=url>path</a> does not
+contain a <a for=/>URL</a> with the former.
+
+<p class=warning>Specifications should prefer the <a for=/>origin</a> concept for security
+decisions. Treating a <a for=/>URL path</a> as covering the <a for=/>URL paths</a> it contains is a
+form of path-based authority that is discordant with the rest of the web platform. It is needed for
+legacy features, such as cookies, and is best avoided elsewhere.
 </div>
 
 
