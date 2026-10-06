@@ -1648,7 +1648,7 @@ A Recommendation for IPv6 Address Text Representation.
 <div algorithm>
 <p>To determine whether a <a for=/>host</a> <var>A</var>
 <dfn export for=host id=concept-host-equals lt=equal>equals</dfn> <a for=/>host</a> <var>B</var>,
-return true if <var>A</var> is <var>B</var>, and false otherwise.
+return true if <var>A</var> and <var>B</var> are <a for=/>equal</a>; otherwise false.
 </div>
 
 <p class=XXX>Certificate comparison requires a host equivalence check that ignores the
@@ -1812,6 +1812,9 @@ unified model would be, please file an issue.
 <p>A <dfn export id=concept-url lt="URL|URL record">URL</dfn> is a <a for=/>struct</a> that
 represents a universal identifier. To disambiguate from a <a>valid URL string</a> it can also be
 referred to as a <a for=/>URL record</a>.
+
+<p>A <a for=/>URL</a>'s <a>equality</a>, given <a for=/>URLs</a> <var>A</var> and <var>B</var>,
+returns true if <var>A</var> <a for=url>equals</a> <var>B</var>; otherwise false.
 
 <p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-scheme>scheme</dfn> is an
 <a>ASCII string</a> that identifies the type of <a for=/>URL</a> and can be used to
@@ -3269,21 +3272,8 @@ run these steps:
 
 <div algorithm="path equal">
 <p>To determine whether a <a for=/>URL path</a> <var>A</var>
-<dfn export for="URL path" lt=equal>equals</dfn> <a for=/>URL path</a> <var>B</var>, run these
-steps. They return a boolean.
-
-<ol>
- <li><p>If <var>A</var> is a <a for=/>URL path segment</a> or <var>B</var> is a
- <a for=/>URL path segment</a>, then return whether <var>A</var> <a for=string>is</a> <var>B</var>.
-
- <li><p>If <var>A</var>'s <a for=list>size</a> is not <var>B</var>'s <a for=list>size</a>, then
- return false.
-
- <li><p><a for=list>For each</a> <var>index</var> of <var>A</var>'s <a for=list>indices</a>: if
- <var>A</var>[<var>index</var>] is not <var>B</var>[<var>index</var>], then return false.
-
- <li><p>Return true.
-</ol>
+<dfn export for="URL path" lt=equal>equals</dfn> <a for=/>URL path</a> <var>B</var>, return true
+if <var>A</var> and <var>B</var> are <a for=/>equal</a>; otherwise false.
 
 <p class=note>Comparing <a for=/>URL path segments</a> rather than serializations can matter as
 distinct <a for=/>URL paths</a> can <a lt="URL path serializer">serialize</a> identically. E.g.,
