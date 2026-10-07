@@ -3959,7 +3959,7 @@ one might have assumed the setter to always "reset" both.
  <a for="basic URL parser"><i>state override</i></a>.
 
  <li><p>Set <a>this</a>'s <a for=URL>query object</a>'s <a for=URLSearchParams>list</a> to the
- result of <a lt="urlencoded string parser">parsing</a> <var>input</var>.
+ result of <a lt="urlencoded string parser">parsing</a> <var>url</var>'s <a for=url>query</a>.
 </ol>
 </div>
 
