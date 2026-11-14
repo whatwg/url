@@ -174,7 +174,8 @@ valid input. User agents, especially conformance checkers, are encouraged to rep
    <td>
     <p>An <a for=/>IPv4 address</a> part exceeds 255.
     <p class=example id=example-ipv4-out-of-range-part>"<code>https://255.255.4000.1</code>"
-   <td class=yes>Yes<br>(only if applicable to the last part)
+   <td class=yes>Yes<br>(if a non-final part exceeds 255, or the final part exceeds the range
+   allowed by the number of parts)
   <tr>
    <td><dfn>IPv4-non-ASCII-input</dfn>
    <td>
