@@ -350,10 +350,10 @@ const url = new URL("💩", "mailto:user@example.org");</code></pre>
   <tr>
    <td><dfn>file-invalid-Windows-drive-letter</dfn>
    <td>
-    <p>The input is a <a>relative-URL string</a> that <a>starts with a Windows drive letter</a> and
-    the <a>base URL</a>'s <a for=url>scheme</a> is "<code>file</code>".
+    <p>In the <a>file state</a>, the remaining input <a>starts with a Windows drive letter</a>
+    and the <a>base URL</a>'s <a for=url>scheme</a> is "<code>file</code>".
     <pre class=example id=example-file-invalid-windows-drive-letter><code class=lang-javascript>
-const url = new URL("/c:/path/to/file", "file:///c:/");</code></pre>
+const url = new URL("c|/path/to/file", "file:///d:/");</code></pre>
    <td class=no>·
   <tr>
    <td><dfn>file-invalid-Windows-drive-letter-host</dfn>
