@@ -3171,11 +3171,15 @@ and then runs these steps:
 <div algorithm="URL serializer">
 <p>The <dfn export id=concept-url-serializer lt="URL serializer">URL serializer</dfn> takes a
 <a for=/>URL</a> <var>url</var>, with an optional boolean
-<dfn export for="URL serializer"><var>exclude fragment</var></dfn> (default false), and then runs
-these steps. They return an <a>ASCII string</a>.
+<dfn export for="URL serializer"><var>exclude scheme</var></dfn> (default false) and an optional
+boolean <dfn export for="URL serializer"><var>exclude fragment</var></dfn> (default false), and then
+runs these steps. They return an <a>ASCII string</a>.
 
 <ol>
- <li><p>Let <var>output</var> be <var>url</var>'s <a for=url>scheme</a> and U+003A (:) concatenated.
+ <li><p>Let <var>output</var> be the empty string.
+
+ <li><p>If <var>exclude scheme</var> is false, then append <var>url</var>'s <a for=url>scheme</a>,
+ followed by U+003A (:), to <var>output</var>.
 
  <li>
   <p>If <var>url</var>'s <a for=url>host</a> is non-null:
@@ -3227,6 +3231,23 @@ these steps. They return an <a>ASCII string</a>.
 
  <li><p>Return <var>output</var>.
 </ol>
+
+<div class=note>
+ <p>Some schemes, such as "<code>data</code>" and "<code>javascript</code>", carry their data in
+ everything after the scheme. Specifications are encouraged to process a <a for=/>URL</a> of such a
+ scheme by checking its <a for=url>scheme</a> and then running the <a>URL serializer</a> on it with
+ <a for="URL serializer"><i>exclude scheme</i></a> set to true, rather than by using its individual
+ components, as such a <a for=/>URL</a> can have a <a for=url>query</a>, a <a for=url>fragment</a>,
+ and even a <a for=url>host</a>.
+
+ <p>It is up to the scheme whether the <a for=url>fragment</a> is part of the data and whether to
+ <a for=string>percent-decode</a> the result. E.g., <cite>Fetch</cite> sets
+ <a for="URL serializer"><i>exclude fragment</i></a> to true for "<code>data</code>" URLs and only
+ percent-decodes their body. <cite>HTML</cite> includes the <a for=url>fragment</a> of
+ "<code>javascript</code>" URLs and percent-decodes the result in full, which turns
+ <code>javascript://example.com/%0Aalert(1)</code> into a comment followed by a statement.
+ [[FETCH]] [[HTML]]
+</div>
 </div>
 
 <div algorithm>
